@@ -1,0 +1,35 @@
+{
+  "name": "trello.ts",
+  "version": "1.0.0",
+  "description": "Simple Trello API Client",
+  "author": "Vladislav Tupikin <mrrefactoring@yandex.ru>",
+  "license": "MIT",
+  "main": "out/index.js",
+  "types": "out/index.d.ts",
+  "scripts": {
+    "compile": "tsc",
+    "prepublishOnly": "npm run compile",
+    "lint": "tslint src/**/*.ts",
+    "lint:fix": "npm run lint -- --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MrRefactoring/trello.git"
+  },
+  "files": [
+    "out"
+  ],
+  "keywords": [
+    "trello",
+    "client",
+    "rest",
+    "api"
+  ],
+  "devDependencies": {
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
+}
