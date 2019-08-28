@@ -1,1 +1,1 @@
-export const joinUrl = (...urls: string[]): string => urls.join('/');
+export const joinUrl = (...urls: string[]): string => encodeURI(urls.join('/'));
