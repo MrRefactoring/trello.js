@@ -1,4 +1,5 @@
 export interface PostTokensTokenWebhooks {
+  token: string;
   /** A description to be displayed when retrieving information about the webhook. */
   description?: string;
   /** The URL that the webhook should POST information to. */

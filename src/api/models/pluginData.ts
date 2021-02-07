@@ -1,8 +1,10 @@
+import { TrelloID } from './trelloID';
+
 export interface PluginData {
-  id?: string;
-  idPlugin?: string;
+  id?: TrelloID;
+  idPlugin?: TrelloID;
   scope?: string;
-  idModel?: string;
+  idModel?: TrelloID;
   value?: string;
   access?: string;
 }

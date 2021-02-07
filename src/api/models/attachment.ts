@@ -1,11 +1,12 @@
+import { TrelloID } from './trelloID';
 import { Color } from './color';
 
 export interface Attachment {
-  id?: string;
+  id?: TrelloID;
   bytes?: string;
   date?: string;
   edgeColor?: Color;
-  idMember?: string;
+  idMember?: TrelloID;
   isUpload?: boolean;
   mimeType?: string;
   name?: string;

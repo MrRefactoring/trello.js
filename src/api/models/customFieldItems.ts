@@ -1,9 +1,11 @@
+import { TrelloID } from './trelloID';
+
 export interface CustomFieldItems {
-  id?: string;
+  id?: TrelloID;
   value?: {
     checked?: string;
   };
-  idCustomField?: string;
-  idModel?: string;
+  idCustomField?: TrelloID;
+  idModel?: TrelloID;
   modelType?: string;
 }

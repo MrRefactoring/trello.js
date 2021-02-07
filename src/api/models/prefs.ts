@@ -1,3 +1,5 @@
+import { TrelloID } from './trelloID';
+
 export interface Prefs {
   permissionLevel?: string;
   hideVotes?: boolean;
@@ -9,7 +11,7 @@ export interface Prefs {
   isTemplate?: boolean;
   cardAging?: string;
   calendarFeedEnabled?: boolean;
-  background?: string;
+  background?: TrelloID;
   backgroundImage?: string;
   backgroundImageScaled?: string;
 }

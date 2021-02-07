@@ -1,5 +1,7 @@
+import { TrelloID } from './trelloID';
+
 export interface Enterprise {
-  id?: string;
+  id?: TrelloID;
   name?: string;
   displayName?: string;
   logoHash?: string;

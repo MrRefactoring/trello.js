@@ -1,21 +1,23 @@
+import { TrelloID } from './trelloID';
+
 export interface Action {
-  id?: string;
-  idMemberCreator?: string;
+  id?: TrelloID;
+  idMemberCreator?: TrelloID;
   data?: {
     text?: string;
     card?: {
-      id?: string;
+      id?: TrelloID;
       name?: string;
       idShort?: number;
       shortLink?: string;
     };
     board?: {
-      id?: string;
+      id?: TrelloID;
       name?: string;
       shortLink?: string;
     };
     list?: {
-      id?: string;
+      id?: TrelloID;
       name?: string;
     };
   };
@@ -42,12 +44,12 @@ export interface Action {
         type?: string;
         translationKey?: string;
         hideIfContext?: boolean;
-        idContext?: string;
+        idContext?: TrelloID;
       };
       card?: {
         type?: string;
         hideIfContext?: boolean;
-        id?: string;
+        id?: TrelloID;
         shortLink?: string;
         text?: string;
       };
@@ -57,19 +59,19 @@ export interface Action {
       };
       memberCreator?: {
         type?: string;
-        id?: string;
+        id?: TrelloID;
         username?: string;
         text?: string;
       };
     };
   };
   memberCreator?: {
-    id?: string;
+    id?: TrelloID;
     activityBlocked?: boolean;
     avatarHash?: string;
     avatarUrl?: string;
     fullName?: string;
-    idMemberReferrer?: string;
+    idMemberReferrer?: TrelloID;
     initials?: string;
     username?: string;
   };

@@ -7,4 +7,5 @@ export interface TokenWebhooks {
   callbackURL?: string;
   /** ID of the object that the webhook is on. */
   idModel?: string;
+  token: string;
 }

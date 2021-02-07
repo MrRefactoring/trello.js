@@ -1,5 +1,7 @@
+import { TrelloID } from './trelloID';
+
 export interface CustomField {
-  id?: string;
+  id?: TrelloID;
   idModel?: string;
   modelType?: string;
   fieldGroup?: string;
@@ -8,8 +10,8 @@ export interface CustomField {
     name?: string;
     pos?: string;
     options?: {
-      id?: string;
-      idCustomField?: string;
+      id?: TrelloID;
+      idCustomField?: TrelloID;
       value?: {
         text?: string;
       };

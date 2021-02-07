@@ -1,3 +1,5 @@
+import { TrelloID } from './trelloID';
+
 export interface Organization {
-  id?: string;
+  id?: TrelloID;
 }

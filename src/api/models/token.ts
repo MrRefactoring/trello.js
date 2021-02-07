@@ -1,9 +1,10 @@
+import { TrelloID } from './trelloID';
 import { TokenPermission } from './tokenPermission';
 
 export interface Token {
-  id?: string;
+  id?: TrelloID;
   identifier?: string;
-  idMember?: string;
+  idMember?: TrelloID;
   dateCreated?: string;
   dateExpires?: string;
   permissions?: TokenPermission[];

@@ -1,7 +1,9 @@
+import { TrelloID } from './trelloID';
+
 export interface CustomSticker {
-  id?: string;
+  id?: TrelloID;
   url?: string;
   scaled?: {
-    id?: string;
+    id?: TrelloID;
   }[];
 }

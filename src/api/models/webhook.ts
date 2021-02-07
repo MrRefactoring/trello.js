@@ -1,7 +1,9 @@
+import { TrelloID } from './trelloID';
+
 export interface Webhook {
-  id?: string;
+  id?: TrelloID;
   description?: string;
-  idModel?: string;
+  idModel?: TrelloID;
   callbackURL?: string;
   active?: boolean;
   consecutiveFailures?: number;

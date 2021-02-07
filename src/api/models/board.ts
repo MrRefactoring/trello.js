@@ -1,13 +1,14 @@
+import { TrelloID } from './trelloID';
 import { Prefs } from './prefs';
 import { Limits } from './limits';
 
 export interface Board {
-  id: string;
+  id: TrelloID;
   desc?: string;
   descData?: string;
   closed?: boolean;
-  idMemberCreator?: string;
-  idOrganization?: string;
+  idMemberCreator?: TrelloID;
+  idOrganization?: TrelloID;
   pinned?: boolean;
   url?: string;
   shortUrl?: string;
