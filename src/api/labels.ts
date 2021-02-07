@@ -1,118 +1,100 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Labels {
-  private readonly prefix = 'labels';
-
-  constructor(private readonly client: TrelloClient) { }
-
-  public async getLabel(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  constructor(private client: Client) { }
+  /**
+     * Get information about a single Label. */
+  async getLabelsId<T = any>(parameters: Parameters.GetLabelsId, callback: Callback<T>): Promise<void>;
+  /**
+     * Get information about a single Label. */
+  async getLabelsId<T = any>(parameters: Parameters.GetLabelsId, callback?: undefined): Promise<T>;
+  async getLabelsId<T = any>(parameters: Parameters.GetLabelsId, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/labels/${parameters.id}`,
       method: 'GET',
       params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getLabelsId' });
   }
-
-  public async updateLabel(
-    options: {
-      id: string;
-      name?: string;
-      color?: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  /**
+     * Update a label by ID. */
+  async putLabelsId<T = any>(parameters: Parameters.PutLabelsId, callback: Callback<T>): Promise<void>;
+  /**
+     * Update a label by ID. */
+  async putLabelsId<T = any>(parameters: Parameters.PutLabelsId, callback?: undefined): Promise<T>;
+  async putLabelsId<T = any>(parameters: Parameters.PutLabelsId, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/labels/${parameters.id}`,
       method: 'PUT',
       params: {
-        name: options.name,
-        color: options.color
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        name: parameters.name,
+        color: parameters.color,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'putLabelsId' });
   }
+  /**
+     * Delete a label by ID. */
+  async deleteLabelsId<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Delete a label by ID. */
+  async deleteLabelsId<T = any>(callback?: undefined): Promise<T>;
+  async deleteLabelsId<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/labels/${parameters.id}`,
+      method: 'DELETE',
+    } as RequestConfig);
 
-  public async updateColor(
-    options: {
-      id: string;
-      value: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'color'),
+    return this.client.sendRequest(config, callback, { methodName: 'deleteLabelsId' });
+  }
+  /**
+     * Update a field on a label. */
+  async putLabelsIdField<T = any>(parameters: Parameters.PutLabelsIdField, callback: Callback<T>): Promise<void>;
+  /**
+     * Update a field on a label. */
+  async putLabelsIdField<T = any>(parameters: Parameters.PutLabelsIdField, callback?: undefined): Promise<T>;
+  async putLabelsIdField<T = any>(parameters: Parameters.PutLabelsIdField, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/labels/${parameters.id}/${parameters.field}`,
       method: 'PUT',
       params: {
-        value: options.value
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        value: parameters.value,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'putLabelsIdField' });
   }
-
-  public async updateName(
-    options: {
-      id: string;
-      value: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'name'),
-      method: 'PUT',
-      params: {
-        value: options.value
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async addLabel(
-    options: {
-      idBoard: string;
-      name: string;
-      color: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix),
+  /**
+     * Create a new Label on a Board. */
+  async postLabels<T = any>(parameters: Parameters.PostLabels, callback: Callback<T>): Promise<void>;
+  /**
+     * Create a new Label on a Board. */
+  async postLabels<T = any>(parameters: Parameters.PostLabels, callback?: undefined): Promise<T>;
+  async postLabels<T = any>(parameters: Parameters.PostLabels, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: '/labels',
       method: 'POST',
       params: {
-        idBoard: options.idBoard,
-        name: options.name,
-        color: options.color
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        name: parameters.name,
+        color: parameters.color,
+        idBoard: parameters.idBoard,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async deleteLabel(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
-      method: 'DELETE'
-    };
-
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'postLabels' });
   }
 }

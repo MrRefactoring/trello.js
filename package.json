@@ -1,24 +1,18 @@
 {
-  "name": "trello.ts",
-  "version": "1.0.3",
+  "name": "trello.js",
+  "version": "1.0.0",
   "description": "Simple Trello API Client",
   "author": "Vladislav Tupikin <mrrefactoring@yandex.ru>",
   "license": "MIT",
   "main": "out/index.js",
   "types": "out/index.d.ts",
   "scripts": {
-    "compile": "tsc",
-    "prepublishOnly": "npm run compile",
-    "lint": "tslint src/**/*.ts",
+    "build": "tsc",
+    "prepublishOnly": "npm run build && npm run lint",
+    "lint": "eslint src --ext .ts",
     "lint:fix": "npm run lint -- --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MrRefactoring/trello.ts.git"
-  },
-  "files": [
-    "out"
-  ],
+  "repository": "https://github.com/MrRefactoring/trello.js",
   "keywords": [
     "trello",
     "client",
@@ -26,8 +20,13 @@
     "api"
   ],
   "devDependencies": {
-    "tslint": "^5.19.0",
-    "typescript": "^3.5.3"
+    "@typescript-eslint/eslint-plugin": "^4.14.2",
+    "@typescript-eslint/parser": "^4.14.2",
+    "eslint": "^7.19.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "typescript": "^4.1.3"
   },
   "dependencies": {
     "axios": "^0.21.1"

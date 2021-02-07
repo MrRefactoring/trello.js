@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
     "outDir": "out",
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["dom", "es2015", "scripthost"],
     "declaration": true,
     "strict": true
   },
-  "include": [
-    "./src/**/*"
+  "exclude": [
+    "node_modules",
+    "out"
   ]
 }

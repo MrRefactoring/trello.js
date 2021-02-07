@@ -1,272 +1,297 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
+import * as Models from './models';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Enterprises {
-  private readonly prefix = 'enterprises';
-
-  constructor(private readonly client: TrelloClient) { }
-
-  public async getEnterprize(
-    options: {
-      id: string;
-      fields?: string[];
-      members?: string;
-      memberFields?: string[];
-      memberFilter?: string;
-      memberSort?: string;
-      memberSortBy?: string;
-      memberSortOrder?: string;
-      memberStartIndex?: number;
-      memberCount?: number;
-      organizations?: string;
-      organizationFields?: string | any;
-      organizationPaidAccounts?: boolean;
-      organizationMemberships?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  constructor(private client: Client) { }
+  /**
+     * Get an enterprise by its ID. */
+  async getEnterprisesId<T = any>(parameters: Parameters.GetEnterprisesId, callback: Callback<T>): Promise<void>;
+  /**
+     * Get an enterprise by its ID. */
+  async getEnterprisesId<T = any>(parameters: Parameters.GetEnterprisesId, callback?: undefined): Promise<T>;
+  async getEnterprisesId<T = any>(parameters: Parameters.GetEnterprisesId, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}`,
       method: 'GET',
       params: {
-        fields: options.fields && options.fields.join(','),
-        members: options.members,
-        memberFields: options.memberFields && options.memberFields.join(','),
-        memberFilter: options.memberFilter,
-        memberSort: options.memberSort,
-        memberSortBy: options.memberSortBy,
-        memberSortOrder: options.memberSortOrder,
-        memberStartIndex: options.memberStartIndex,
-        memberCount: options.memberCount,
-        organizations: options.organizations,
-        organizationFields: options.organizationFields,
-        organizationPaidAccounts: options.organizationPaidAccounts,
-        organizationMemberships: options.organizationMemberships && options.organizationMemberships.join(',')
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+        members: parameters.members,
+        member_fields: parameters.member_fields,
+        member_filter: parameters.member_filter,
+        member_sort: parameters.member_sort,
+        member_sortBy: parameters.member_sortBy,
+        member_sortOrder: parameters.member_sortOrder,
+        member_startIndex: parameters.member_startIndex,
+        member_count: parameters.member_count,
+        organizations: parameters.organizations,
+        organization_fields: parameters.organization_fields,
+        organization_paid_accounts: parameters.organization_paid_accounts,
+        organization_memberships: parameters.organization_memberships,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesId' });
   }
-
-  public async getAdmins(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'admins'),
+  /**
+     * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from an Enterprise's audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is required for this route. */
+  async getEnterprisesIdAuditlog<T = any>(parameters: Parameters.GetEnterprisesIdAuditlog, callback: Callback<T>): Promise<void>;
+  /**
+     * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from an Enterprise's audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is required for this route. */
+  async getEnterprisesIdAuditlog<T = any>(parameters: Parameters.GetEnterprisesIdAuditlog, callback?: undefined): Promise<T>;
+  async getEnterprisesIdAuditlog<T = any>(parameters: Parameters.GetEnterprisesIdAuditlog, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/auditlog`,
       method: 'GET',
       params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdAuditlog' });
   }
-
-  public async getSignUpUrl(
-    options: {
-      id: string;
-      authenticate?: boolean;
-      confirmationAccepted?: boolean;
-      returnUrl?: string;
-      tosAccepted?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'signupUrl'),
+  /**
+     * Get an enterprise's admin members. */
+  async getEnterprisesIdAdmins<T = Models.Enterprise>(parameters: Parameters.GetEnterprisesIdAdmins, callback: Callback<T>): Promise<void>;
+  /**
+     * Get an enterprise's admin members. */
+  async getEnterprisesIdAdmins<T = Models.Enterprise>(parameters: Parameters.GetEnterprisesIdAdmins, callback?: undefined): Promise<T>;
+  async getEnterprisesIdAdmins<T = Models.Enterprise>(parameters: Parameters.GetEnterprisesIdAdmins, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/admins`,
       method: 'GET',
       params: {
-        authenticate: options.authenticate,
-        confirmationAccepted: options.confirmationAccepted,
-        returnUrl: options.returnUrl,
-        tosAccepted: options.tosAccepted
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdAdmins' });
   }
-
-  public async getMembers(
-    options: {
-      id: string;
-      fields?: string[];
-      filter?: string;
-      sort?: string;
-      sortBy?: string;
-      sortOrder?: string;
-      startIndex?: number;
-      count?: string | number;
-      organizationFields?: any;
-      boardFields?: any;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'members'),
+  /**
+     * Get the signup URL for an enterprise. */
+  async getEnterprisesIdSignupurl<T = any>(parameters: Parameters.GetEnterprisesIdSignupurl, callback: Callback<T>): Promise<void>;
+  /**
+     * Get the signup URL for an enterprise. */
+  async getEnterprisesIdSignupurl<T = any>(parameters: Parameters.GetEnterprisesIdSignupurl, callback?: undefined): Promise<T>;
+  async getEnterprisesIdSignupurl<T = any>(parameters: Parameters.GetEnterprisesIdSignupurl, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/signupUrl`,
       method: 'GET',
       params: {
-        fields: options.fields && options.fields.join(','),
-        filter: options.filter,
-        sort: options.sort,
-        sortBy: options.sortBy,
-        sortOrder: options.sortOrder,
-        startIndex: options.startIndex,
-        count: options.count,
-        organization_fields: options.organizationFields,
-        board_fields: options.boardFields
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        authenticate: parameters.authenticate,
+        confirmationAccepted: parameters.confirmationAccepted,
+        returnUrl: parameters.returnUrl,
+        tosAccepted: parameters.tosAccepted,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdSignupurl' });
   }
-
-  public async getMember(
-    options: {
-      id: string;
-      idMember: string;
-      fields?: string[];
-      organizationFields?: any;
-      boardFields?: any;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'members', options.idMember),
+  /**
+     * Get the members of an enterprise. */
+  async getEnterprisesIdMembers<T = any>(parameters: Parameters.GetEnterprisesIdMembers, callback: Callback<T>): Promise<void>;
+  /**
+     * Get the members of an enterprise. */
+  async getEnterprisesIdMembers<T = any>(parameters: Parameters.GetEnterprisesIdMembers, callback?: undefined): Promise<T>;
+  async getEnterprisesIdMembers<T = any>(parameters: Parameters.GetEnterprisesIdMembers, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/members`,
       method: 'GET',
       params: {
-        idMember: options.idMember,
-        fields: options.fields && options.fields.join(','),
-        organization_fields: options.organizationFields,
-        board_fields: options.boardFields
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+        filter: parameters.filter,
+        sort: parameters.sort,
+        sortBy: parameters.sortBy,
+        sortOrder: parameters.sortOrder,
+        startIndex: parameters.startIndex,
+        count: parameters.count,
+        organization_fields: parameters.organization_fields,
+        board_fields: parameters.board_fields,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdMembers' });
   }
-
-  public async getOrganization(
-    options: {
-      id: string;
-      idOrganization: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'transferrable', 'organization', options.idOrganization),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async deactivateMember(
-    options: {
-      id: string;
-      idMember: string;
-      value: boolean;
-      fields?: string[];
-      organizationFields?: any;
-      boardFields?: any;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'members', options.idMember, 'deactivated'),
-      method: 'PUT',
+  /**
+     * Get a specific member of an enterprise by ID. */
+  async getEnterprisesIdMembersIdmember<T = Models.Member>(parameters: Parameters.GetEnterprisesIdMembersIdmember, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a specific member of an enterprise by ID. */
+  async getEnterprisesIdMembersIdmember<T = Models.Member>(parameters: Parameters.GetEnterprisesIdMembersIdmember, callback?: undefined): Promise<T>;
+  async getEnterprisesIdMembersIdmember<T = Models.Member>(parameters: Parameters.GetEnterprisesIdMembersIdmember, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/members/${parameters.idMember}`,
+      method: 'GET',
       params: {
-        value: options.value,
-        fields: options.fields && options.fields.join(','),
-        organization_fields: options.organizationFields,
-        board_fields: options.boardFields
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+        organization_fields: parameters.organization_fields,
+        board_fields: parameters.board_fields,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdMembersIdmember' });
   }
-
-  public async transferOrganization(
-    options: {
-      id: string;
-      idOrganization: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'organizations'),
-      method: 'PUT',
+  /**
+     * Get whether an organization can be transferred to an enterprise. */
+  async getEnterprisesIdTransferrableOrganizationIdOrganization<T = Models.Organization>(parameters: Parameters.GetEnterprisesIdTransferrableOrganizationIdOrganization, callback: Callback<T>): Promise<void>;
+  /**
+     * Get whether an organization can be transferred to an enterprise. */
+  async getEnterprisesIdTransferrableOrganizationIdOrganization<T = Models.Organization>(parameters: Parameters.GetEnterprisesIdTransferrableOrganizationIdOrganization, callback?: undefined): Promise<T>;
+  async getEnterprisesIdTransferrableOrganizationIdOrganization<T = Models.Organization>(parameters: Parameters.GetEnterprisesIdTransferrableOrganizationIdOrganization, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/transferrable/organization/${parameters.idOrganization}`,
+      method: 'GET',
       params: {
-        idOrganization: options.idOrganization
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdTransferrableOrganizationIdOrganization' });
   }
-
-  public async setAdmin(
-    options: {
-      id: string;
-      idMember: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'admins', options.idMember),
-      method: 'PUT'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async createToken(
-    options: {
-      id: string;
-      expiration?: string | '1hour' | '1day' | '30days' | 'never';
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'tokens'),
+  /**
+     * Create an auth Token for an Enterprise. */
+  async postEnterprisesIdTokens<T = any>(parameters: Parameters.PostEnterprisesIdTokens, callback: Callback<T>): Promise<void>;
+  /**
+     * Create an auth Token for an Enterprise. */
+  async postEnterprisesIdTokens<T = any>(parameters: Parameters.PostEnterprisesIdTokens, callback?: undefined): Promise<T>;
+  async postEnterprisesIdTokens<T = any>(parameters: Parameters.PostEnterprisesIdTokens, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/tokens`,
       method: 'POST',
       params: {
-        expiration: options.expiration
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        expiration: parameters.expiration,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'postEnterprisesIdTokens' });
   }
+  /**
+     * Transfer an organization to an enterprise. */
+  async putEnterprisesIdOrganizations<T = any>(parameters: Parameters.PutEnterprisesIdOrganizations, callback: Callback<T>): Promise<void>;
+  /**
+     * Transfer an organization to an enterprise. */
+  async putEnterprisesIdOrganizations<T = any>(parameters: Parameters.PutEnterprisesIdOrganizations, callback?: undefined): Promise<T>;
+  async putEnterprisesIdOrganizations<T = any>(parameters: Parameters.PutEnterprisesIdOrganizations, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/organizations`,
+      method: 'PUT',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        idOrganization: parameters.idOrganization,
+      },
+    } as RequestConfig);
 
-  public async deleteOrganization(
-    options: {
-      id: string;
-      idMember: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'organizations', options.idMember),
-      method: 'DELETE'
-    };
-
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'putEnterprisesIdOrganizations' });
   }
+  /**
+     * This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or not. */
+  async putEnterprisesIdMembersIdmemberLicensed<T = Models.Member>(parameters: Parameters.PutEnterprisesIdMembersIdmemberLicensed, callback: Callback<T>): Promise<void>;
+  /**
+     * This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or not. */
+  async putEnterprisesIdMembersIdmemberLicensed<T = Models.Member>(parameters: Parameters.PutEnterprisesIdMembersIdmemberLicensed, callback?: undefined): Promise<T>;
+  async putEnterprisesIdMembersIdmemberLicensed<T = Models.Member>(parameters: Parameters.PutEnterprisesIdMembersIdmemberLicensed, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/members/${parameters.idMember}/licensed`,
+      method: 'PUT',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        Values: parameters.Values,
+      },
+    } as RequestConfig);
 
-  public async deleteAdmin(
-    options: {
-      id: string;
-      idMember: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'admins', options.idMember),
-      method: 'DELETE'
-    };
+    return this.client.sendRequest(config, callback, { methodName: 'putEnterprisesIdMembersIdmemberLicensed' });
+  }
+  /**
+     * Deactivate a Member of an Enterprise. */
+  async enterprisesIdMembersIdMemberDeactivated<T = any>(parameters: Parameters.EnterprisesIdMembersIdMemberDeactivated, callback: Callback<T>): Promise<void>;
+  /**
+     * Deactivate a Member of an Enterprise. */
+  async enterprisesIdMembersIdMemberDeactivated<T = any>(parameters: Parameters.EnterprisesIdMembersIdMemberDeactivated, callback?: undefined): Promise<T>;
+  async enterprisesIdMembersIdMemberDeactivated<T = any>(parameters: Parameters.EnterprisesIdMembersIdMemberDeactivated, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/members/${parameters.idMember}/deactivated`,
+      method: 'PUT',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        value: parameters.value,
+        fields: parameters.fields,
+        organization_fields: parameters.organization_fields,
+        board_fields: parameters.board_fields,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'enterprisesIdMembersIdMemberDeactivated' });
+  }
+  /**
+     * Make Member an admin of Enterprise. */
+  async putEnterprisesIdAdminsIdmember<T = any>(parameters: Parameters.PutEnterprisesIdAdminsIdmember, callback: Callback<T>): Promise<void>;
+  /**
+     * Make Member an admin of Enterprise. */
+  async putEnterprisesIdAdminsIdmember<T = any>(parameters: Parameters.PutEnterprisesIdAdminsIdmember, callback?: undefined): Promise<T>;
+  async putEnterprisesIdAdminsIdmember<T = any>(parameters: Parameters.PutEnterprisesIdAdminsIdmember, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
+      method: 'PUT',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'putEnterprisesIdAdminsIdmember' });
+  }
+  /**
+     * Remove an organization from an enterprise. */
+  async deleteEnterprisesIdOrganizationsIdorg<T = any>(parameters: Parameters.DeleteEnterprisesIdOrganizationsIdorg, callback: Callback<T>): Promise<void>;
+  /**
+     * Remove an organization from an enterprise. */
+  async deleteEnterprisesIdOrganizationsIdorg<T = any>(parameters: Parameters.DeleteEnterprisesIdOrganizationsIdorg, callback?: undefined): Promise<T>;
+  async deleteEnterprisesIdOrganizationsIdorg<T = any>(parameters: Parameters.DeleteEnterprisesIdOrganizationsIdorg, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/organizations/${parameters.idOrg}`,
+      method: 'DELETE',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'deleteEnterprisesIdOrganizationsIdorg' });
+  }
+  /**
+     * Remove an member as admin from an enterprise. */
+  async enterprisesIdOrganizationsIdmember<T = any>(parameters: Parameters.EnterprisesIdOrganizationsIdmember, callback: Callback<T>): Promise<void>;
+  /**
+     * Remove an member as admin from an enterprise. */
+  async enterprisesIdOrganizationsIdmember<T = any>(parameters: Parameters.EnterprisesIdOrganizationsIdmember, callback?: undefined): Promise<T>;
+  async enterprisesIdOrganizationsIdmember<T = any>(parameters: Parameters.EnterprisesIdOrganizationsIdmember, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/enterprises/${parameters.id}/organizations/${parameters.idMember}`,
+      method: 'DELETE',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'enterprisesIdOrganizationsIdmember' });
   }
 }

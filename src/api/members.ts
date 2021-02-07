@@ -1,810 +1,756 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
+import * as Models from './models';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Members {
-  private readonly prefix = 'members';
-
-  constructor(private readonly client: TrelloClient) { }
-
-  public async getMember(
-    options: {
-      id: string;
-      actions?: string;
-      boards?: string;
-      boardBackgrounds?: string;
-      boardsInvited?: string[];
-      boardsInvitedFields?: string[];
-      boardStars?: boolean;
-      cards?: string;
-      customBoardBackgrounds?: string;
-      customEmoji?: string;
-      customStickers?: string;
-      fields?: string[];
-      notifications?: string;
-      organizations?: string;
-      organizationFields?: string[];
-      organizationPaidAccount?: boolean;
-      organizationInvited?: string;
-      organizationInvitedFields?: string[];
-      paidAccount?: boolean;
-      savedSearches?: boolean;
-      tokens?: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  constructor(private client: Client) { }
+  /**
+     * Get a member */
+  async getMembersId<T = any>(parameters: Parameters.GetMembersId, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a member */
+  async getMembersId<T = any>(parameters: Parameters.GetMembersId, callback?: undefined): Promise<T>;
+  async getMembersId<T = any>(parameters: Parameters.GetMembersId, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}`,
       method: 'GET',
       params: {
-        actions: options.actions,
-        boards: options.boards,
-        boardBackgrounds: options.boardBackgrounds,
-        boardsInvited: options.boardsInvited,
-        boardsInvited_fields: options.boardsInvitedFields && options.boardsInvitedFields.join(','),
-        boardStars: options.boardStars,
-        cards: options.cards,
-        customBoardBackgrounds: options.customBoardBackgrounds,
-        customEmoji: options.customEmoji,
-        customStickers: options.customStickers,
-        fields: options.fields && options.fields.join(','),
-        notifications: options.notifications,
-        organizations: options.organizations,
-        organization_fields: options.organizationFields && options.organizationFields.join(','),
-        organization_paid_account: options.organizationPaidAccount,
-        organizationInvited: options.organizationInvited,
-        organizationInvited_fields: options.organizationInvitedFields && options.organizationInvitedFields.join(','),
-        paid_account: options.paidAccount,
-        savedSearches: options.savedSearches,
-        tokens: options.tokens
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        actions: parameters.actions,
+        boards: parameters.boards,
+        boardBackgrounds: parameters.boardBackgrounds,
+        boardsInvited: parameters.boardsInvited,
+        boardsInvited_fields: parameters.boardsInvited_fields,
+        boardStars: parameters.boardStars,
+        cards: parameters.cards,
+        customBoardBackgrounds: parameters.customBoardBackgrounds,
+        customEmoji: parameters.customEmoji,
+        customStickers: parameters.customStickers,
+        fields: parameters.fields,
+        notifications: parameters.notifications,
+        organizations: parameters.organizations,
+        organization_fields: parameters.organization_fields,
+        organization_paid_account: parameters.organization_paid_account,
+        organizationsInvited: parameters.organizationsInvited,
+        organizationsInvited_fields: parameters.organizationsInvited_fields,
+        paid_account: parameters.paid_account,
+        savedSearches: parameters.savedSearches,
+        tokens: parameters.tokens,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersId' });
   }
-
-  public async getField(
-    options: {
-      id: string;
-      field: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, options.field),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getActions(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'actions'),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getBoards(
-    options: {
-      id: string;
-      filter?: string;
-      fields?: string[];
-      lists?: string[];
-      memberships?: string[];
-      organization?: boolean;
-      organizationFields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boards'),
-      method: 'GET',
-      params: {
-        filter: options.filter,
-        fields: options.fields && options.fields.join(','),
-        lists: options.lists && options.lists.join(','),
-        memberships: options.memberships && options.memberships.join(','),
-        organization: options.organization,
-        organization_fields: options.organizationFields && options.organizationFields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getBoardBackgrounds(
-    options: {
-      id: string;
-      filter?: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardBackgrounds'),
-      method: 'GET',
-      params: {
-        filter: options.filter
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getBoardBackground(
-    options: {
-      id: string;
-      idBackground: string;
-      filter?: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardBackgrounds', options.idBackground),
-      method: 'GET',
-      params: {
-        filter: options.filter
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getBoardStars(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardStars'),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getBoardStar(
-    options: {
-      id: string;
-      idStar: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardStars', options.idStar),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getBoardsInvited(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardsInvited'),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getCards(
-    options: {
-      id: string;
-      filter?: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'cards'),
-      method: 'GET',
-      params: {
-        filter: options.filter
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getCustomBoardBackgrounds(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customBoardBackgrounds'),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getCustomBoardBackground(
-    options: {
-      id: string;
-      idBackground: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customBoardBackgrounds', options.idBackground),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getCustomEmojis(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customEmoji'),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getCustomEmoji(
-    options: {
-      id: string;
-      idEmoji: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customEmoji', options.idEmoji),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getCustomStickers(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customStickers'),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getCustomSticker(
-    options: {
-      id: string;
-      idSticker: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customEmoji', options.idSticker),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getEnterprises(
-    options: {
-      id: string;
-      idSticker: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'enterprises'),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getNotifications(
-    options: {
-      id: string;
-      entities?: boolean;
-      display?: boolean;
-      filter?: string;
-      readFilter?: string;
-      fields?: string[];
-      limit?: number;
-      page?: number;
-      before?: string;
-      since?: string;
-      memberCreator?: boolean;
-      memberCreatorFields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'notifications'),
-      method: 'GET',
-      params: {
-        entities: options.entities,
-        display: options.display,
-        filter: options.filter,
-        read_filter: options.readFilter,
-        fields: options.fields && options.fields.join(','),
-        limit: options.limit,
-        page: options.page,
-        before: options.before,
-        since: options.since,
-        memberCreator: options.memberCreator,
-        memberCreator_fields: options.memberCreatorFields && options.memberCreatorFields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getOrganizations(
-    options: {
-      id: string;
-      filter?: string;
-      fields?: string[];
-      paidAccount?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'organizations'),
-      method: 'GET',
-      params: {
-        filter: options.filter,
-        fields: options.fields && options.fields.join(','),
-        paid_account: options.paidAccount
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getOrganizationInvited(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'organizationsInvited'),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getSavedSearchers(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'savedSearches'),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getSavedSearch(
-    options: {
-      id: string;
-      idSearch: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'savedSearches', options.idSearch),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getToken(
-    options: {
-      id: string;
-      webhooks?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'tokens'),
-      method: 'GET',
-      params: {
-        webhooks: options.webhooks
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async updateMember(
-    options: {
-      id: string;
-      fullName?: string;
-      initials?: string;
-      username?: string;
-      bio?: string;
-      avatarSource?: string;
-      colorBlind?: boolean;
-      locale?: string;
-      minutesBetweenSummaries?: number;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  /**
+     * Update a Member */
+  async putMembersId<T = any>(parameters: Parameters.PutMembersId, callback: Callback<T>): Promise<void>;
+  /**
+     * Update a Member */
+  async putMembersId<T = any>(parameters: Parameters.PutMembersId, callback?: undefined): Promise<T>;
+  async putMembersId<T = any>(parameters: Parameters.PutMembersId, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}`,
       method: 'PUT',
       params: {
-        fullName: options.fullName,
-        initials: options.initials,
-        username: options.username,
-        bio: options.bio,
-        avatarSource: options.avatarSource,
-        'prefs/colorBlind': options.colorBlind,
-        'prefs/locale': options.locale,
-        'prefs/minutesBetweenSummaries': options.minutesBetweenSummaries
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        fullName: parameters.fullName,
+        initials: parameters.initials,
+        username: parameters.username,
+        bio: parameters.bio,
+        avatarSource: parameters.avatarSource,
+        'prefs/colorBlind': parameters.colorBlind,
+        'prefs/locale': parameters.locale,
+        'prefs/minutesBetweenSummaries': parameters.minutesBetweenSummaries,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'putMembersId' });
   }
+  /**
+     * Get a particular property of a member */
+  async getMembersIdField<T = any>(parameters: Parameters.GetMembersIdField, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a particular property of a member */
+  async getMembersIdField<T = any>(parameters: Parameters.GetMembersIdField, callback?: undefined): Promise<T>;
+  async getMembersIdField<T = any>(parameters: Parameters.GetMembersIdField, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/${parameters.field}`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+      },
+    } as RequestConfig);
 
-  public async updateBoardBackground(
-    options: {
-      id: string;
-      idBackground: string;
-      brightness?: string;
-      tile?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardBackgrounds', options.idBackground),
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdField' });
+  }
+  /**
+     * List the actions for a member */
+  async getMembersIdActions<T = any>(parameters: Parameters.GetMembersIdActions, callback: Callback<T>): Promise<void>;
+  /**
+     * List the actions for a member */
+  async getMembersIdActions<T = any>(parameters: Parameters.GetMembersIdActions, callback?: undefined): Promise<T>;
+  async getMembersIdActions<T = any>(parameters: Parameters.GetMembersIdActions, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/actions`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        filter: parameters.filter,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdActions' });
+  }
+  /**
+     * Get a member's custom board backgrounds */
+  async getMembersIdBoardbackgrounds<T = any>(parameters: Parameters.GetMembersIdBoardbackgrounds, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a member's custom board backgrounds */
+  async getMembersIdBoardbackgrounds<T = any>(parameters: Parameters.GetMembersIdBoardbackgrounds, callback?: undefined): Promise<T>;
+  async getMembersIdBoardbackgrounds<T = any>(parameters: Parameters.GetMembersIdBoardbackgrounds, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardBackgrounds`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        filter: parameters.filter,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdBoardbackgrounds' });
+  }
+  /**
+     * Upload a new boardBackground */
+  async postMembersIdBoardbackgrounds1<T = any>(parameters: Parameters.PostMembersIdBoardbackgrounds1, callback: Callback<T>): Promise<void>;
+  /**
+     * Upload a new boardBackground */
+  async postMembersIdBoardbackgrounds1<T = any>(parameters: Parameters.PostMembersIdBoardbackgrounds1, callback?: undefined): Promise<T>;
+  async postMembersIdBoardbackgrounds1<T = any>(parameters: Parameters.PostMembersIdBoardbackgrounds1, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardBackgrounds`,
+      method: 'POST',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        file: parameters.file,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'postMembersIdBoardbackgrounds1' });
+  }
+  /**
+     * Get a member's board background */
+  async getMembersIdBoardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.GetMembersIdBoardbackgroundsIdbackground, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a member's board background */
+  async getMembersIdBoardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.GetMembersIdBoardbackgroundsIdbackground, callback?: undefined): Promise<T>;
+  async getMembersIdBoardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.GetMembersIdBoardbackgroundsIdbackground, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdBoardbackgroundsIdbackground' });
+  }
+  /**
+     * Update a board background */
+  async putMembersIdBoardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.PutMembersIdBoardbackgroundsIdbackground, callback: Callback<T>): Promise<void>;
+  /**
+     * Update a board background */
+  async putMembersIdBoardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.PutMembersIdBoardbackgroundsIdbackground, callback?: undefined): Promise<T>;
+  async putMembersIdBoardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.PutMembersIdBoardbackgroundsIdbackground, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
       method: 'PUT',
       params: {
-        brightness: options.brightness,
-        tile: options.tile
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        brightness: parameters.brightness,
+        tile: parameters.tile,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'putMembersIdBoardbackgroundsIdbackground' });
   }
+  /**
+     * Delete a board background */
+  async deleteMembersIdBoardbackgroundsIdbackground<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Delete a board background */
+  async deleteMembersIdBoardbackgroundsIdbackground<T = any>(callback?: undefined): Promise<T>;
+  async deleteMembersIdBoardbackgroundsIdbackground<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
+      method: 'DELETE',
+    } as RequestConfig);
 
-  public async updateBoardStar(
-    options: {
-      id: string;
-      idStar: string;
-      pos?: string | number;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardStars', options.idStar),
+    return this.client.sendRequest(config, callback, { methodName: 'deleteMembersIdBoardbackgroundsIdbackground' });
+  }
+  /**
+     * List a member's board stars */
+  async getMembersIdBoardstars<T = any>(parameters: Parameters.GetMembersIdBoardstars, callback: Callback<T>): Promise<void>;
+  /**
+     * List a member's board stars */
+  async getMembersIdBoardstars<T = any>(parameters: Parameters.GetMembersIdBoardstars, callback?: undefined): Promise<T>;
+  async getMembersIdBoardstars<T = any>(parameters: Parameters.GetMembersIdBoardstars, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardStars`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdBoardstars' });
+  }
+  /**
+     * Star a new board on behalf of a Member */
+  async postMembersIdBoardstars<T = any>(parameters: Parameters.PostMembersIdBoardstars, callback: Callback<T>): Promise<void>;
+  /**
+     * Star a new board on behalf of a Member */
+  async postMembersIdBoardstars<T = any>(parameters: Parameters.PostMembersIdBoardstars, callback?: undefined): Promise<T>;
+  async postMembersIdBoardstars<T = any>(parameters: Parameters.PostMembersIdBoardstars, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardStars`,
+      method: 'POST',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        idBoard: parameters.idBoard,
+        pos: parameters.pos,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'postMembersIdBoardstars' });
+  }
+  /**
+     * Get a specific boardStar */
+  async getMembersIdBoardstarsIdstar<T = Models.BoardStars>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Get a specific boardStar */
+  async getMembersIdBoardstarsIdstar<T = Models.BoardStars>(callback?: undefined): Promise<T>;
+  async getMembersIdBoardstarsIdstar<T = Models.BoardStars>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
+      method: 'GET',
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdBoardstarsIdstar' });
+  }
+  /**
+     * Update the position of a starred board */
+  async putMembersIdBoardstarsIdstar<T = any>(parameters: Parameters.PutMembersIdBoardstarsIdstar, callback: Callback<T>): Promise<void>;
+  /**
+     * Update the position of a starred board */
+  async putMembersIdBoardstarsIdstar<T = any>(parameters: Parameters.PutMembersIdBoardstarsIdstar, callback?: undefined): Promise<T>;
+  async putMembersIdBoardstarsIdstar<T = any>(parameters: Parameters.PutMembersIdBoardstarsIdstar, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
       method: 'PUT',
       params: {
-        pos: options.pos
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        pos: parameters.pos,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'putMembersIdBoardstarsIdstar' });
   }
+  /**
+     * Unstar a board */
+  async deleteMembersIdBoardstarsIdstar<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Unstar a board */
+  async deleteMembersIdBoardstarsIdstar<T = any>(callback?: undefined): Promise<T>;
+  async deleteMembersIdBoardstarsIdstar<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
+      method: 'DELETE',
+    } as RequestConfig);
 
-  public async updateCustomBackground(
-    options: {
-      id: string;
-      idBackground: string;
-      brightness?: string;
-      tile?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customBoardBackgrounds', options.idBackground),
+    return this.client.sendRequest(config, callback, { methodName: 'deleteMembersIdBoardstarsIdstar' });
+  }
+  /**
+     * Lists the boards that the user is a member of. */
+  async getMembersIdBoards<T = any>(parameters: Parameters.GetMembersIdBoards, callback: Callback<T>): Promise<void>;
+  /**
+     * Lists the boards that the user is a member of. */
+  async getMembersIdBoards<T = any>(parameters: Parameters.GetMembersIdBoards, callback?: undefined): Promise<T>;
+  async getMembersIdBoards<T = any>(parameters: Parameters.GetMembersIdBoards, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boards`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        filter: parameters.filter,
+        fields: parameters.fields,
+        lists: parameters.lists,
+        organization: parameters.organization,
+        organization_fields: parameters.organization_fields,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdBoards' });
+  }
+  /**
+     * Get the boards the member has been invited to */
+  async getMembersIdBoardsinvited<T = any>(parameters: Parameters.GetMembersIdBoardsinvited, callback: Callback<T>): Promise<void>;
+  /**
+     * Get the boards the member has been invited to */
+  async getMembersIdBoardsinvited<T = any>(parameters: Parameters.GetMembersIdBoardsinvited, callback?: undefined): Promise<T>;
+  async getMembersIdBoardsinvited<T = any>(parameters: Parameters.GetMembersIdBoardsinvited, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/boardsInvited`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdBoardsinvited' });
+  }
+  /**
+     * Gets the cards a member is on */
+  async getMembersIdCards<T = any>(parameters: Parameters.GetMembersIdCards, callback: Callback<T>): Promise<void>;
+  /**
+     * Gets the cards a member is on */
+  async getMembersIdCards<T = any>(parameters: Parameters.GetMembersIdCards, callback?: undefined): Promise<T>;
+  async getMembersIdCards<T = any>(parameters: Parameters.GetMembersIdCards, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/cards`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        filter: parameters.filter,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdCards' });
+  }
+  /**
+     * Get a member's custom board backgrounds */
+  async getMembersIdCustomboardbackgrounds<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Get a member's custom board backgrounds */
+  async getMembersIdCustomboardbackgrounds<T = any>(callback?: undefined): Promise<T>;
+  async getMembersIdCustomboardbackgrounds<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customBoardBackgrounds`,
+      method: 'GET',
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdCustomboardbackgrounds' });
+  }
+  /**
+     * Upload a new custom board background */
+  async membersidcustomboardbackgrounds1<T = Models.BoardBackground>(parameters: Parameters.Membersidcustomboardbackgrounds1, callback: Callback<T>): Promise<void>;
+  /**
+     * Upload a new custom board background */
+  async membersidcustomboardbackgrounds1<T = Models.BoardBackground>(parameters: Parameters.Membersidcustomboardbackgrounds1, callback?: undefined): Promise<T>;
+  async membersidcustomboardbackgrounds1<T = Models.BoardBackground>(parameters: Parameters.Membersidcustomboardbackgrounds1, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customBoardBackgrounds`,
+      method: 'POST',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        file: parameters.file,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'membersidcustomboardbackgrounds1' });
+  }
+  /**
+     * Get a specific custom board background */
+  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Get a specific custom board background */
+  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(callback?: undefined): Promise<T>;
+  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
+      method: 'GET',
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdCustomboardbackgroundsIdbackground' });
+  }
+  /**
+     * Update a specific custom board background */
+  async putMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.PutMembersIdCustomboardbackgroundsIdbackground, callback: Callback<T>): Promise<void>;
+  /**
+     * Update a specific custom board background */
+  async putMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.PutMembersIdCustomboardbackgroundsIdbackground, callback?: undefined): Promise<T>;
+  async putMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.PutMembersIdCustomboardbackgroundsIdbackground, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
       method: 'PUT',
       params: {
-        brightness: options.brightness,
-        tile: options.tile
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        brightness: parameters.brightness,
+        tile: parameters.tile,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'putMembersIdCustomboardbackgroundsIdbackground' });
   }
+  /**
+     * Delete a specific custom board background */
+  async deleteMembersIdCustomboardbackgroundsIdbackground<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Delete a specific custom board background */
+  async deleteMembersIdCustomboardbackgroundsIdbackground<T = any>(callback?: undefined): Promise<T>;
+  async deleteMembersIdCustomboardbackgroundsIdbackground<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
+      method: 'DELETE',
+    } as RequestConfig);
 
-  public async updateSavedSearch(
-    options: {
-      id: string;
-      idSearch: string;
-      name?: string;
-      query?: string;
-      pos?: string | number;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'savedSearches', options.idSearch),
+    return this.client.sendRequest(config, callback, { methodName: 'deleteMembersIdCustomboardbackgroundsIdbackground' });
+  }
+  /**
+     * Get a Member's uploaded custom Emojis */
+  async getMembersIdCustomemoji<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Get a Member's uploaded custom Emojis */
+  async getMembersIdCustomemoji<T = any>(callback?: undefined): Promise<T>;
+  async getMembersIdCustomemoji<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customEmoji`,
+      method: 'GET',
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdCustomemoji' });
+  }
+  /**
+     * Create a new custom Emoji */
+  async postMembersIdCustomemoji<T = Models.CustomEmoji>(parameters: Parameters.PostMembersIdCustomemoji, callback: Callback<T>): Promise<void>;
+  /**
+     * Create a new custom Emoji */
+  async postMembersIdCustomemoji<T = Models.CustomEmoji>(parameters: Parameters.PostMembersIdCustomemoji, callback?: undefined): Promise<T>;
+  async postMembersIdCustomemoji<T = Models.CustomEmoji>(parameters: Parameters.PostMembersIdCustomemoji, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customEmoji`,
+      method: 'POST',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        file: parameters.file,
+        name: parameters.name,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'postMembersIdCustomemoji' });
+  }
+  /**
+     * Get a Member's custom Emoji */
+  async membersidcustomemojiidemoji<T = Models.CustomEmoji>(parameters: Parameters.Membersidcustomemojiidemoji, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a Member's custom Emoji */
+  async membersidcustomemojiidemoji<T = Models.CustomEmoji>(parameters: Parameters.Membersidcustomemojiidemoji, callback?: undefined): Promise<T>;
+  async membersidcustomemojiidemoji<T = Models.CustomEmoji>(parameters: Parameters.Membersidcustomemojiidemoji, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customEmoji/${parameters.idEmoji}`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'membersidcustomemojiidemoji' });
+  }
+  /**
+     * Get a Member's uploaded stickers */
+  async getMembersIdCustomstickers<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Get a Member's uploaded stickers */
+  async getMembersIdCustomstickers<T = any>(callback?: undefined): Promise<T>;
+  async getMembersIdCustomstickers<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customStickers`,
+      method: 'GET',
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdCustomstickers' });
+  }
+  /**
+     * Upload a new custom sticker */
+  async postMembersIdCustomstickers<T = Models.CustomSticker>(parameters: Parameters.PostMembersIdCustomstickers, callback: Callback<T>): Promise<void>;
+  /**
+     * Upload a new custom sticker */
+  async postMembersIdCustomstickers<T = Models.CustomSticker>(parameters: Parameters.PostMembersIdCustomstickers, callback?: undefined): Promise<T>;
+  async postMembersIdCustomstickers<T = Models.CustomSticker>(parameters: Parameters.PostMembersIdCustomstickers, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customStickers`,
+      method: 'POST',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        file: parameters.file,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'postMembersIdCustomstickers' });
+  }
+  /**
+     * Get a Member's custom Sticker */
+  async getMembersIdCustomstickersIdsticker<T = Models.CustomSticker>(parameters: Parameters.GetMembersIdCustomstickersIdsticker, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a Member's custom Sticker */
+  async getMembersIdCustomstickersIdsticker<T = Models.CustomSticker>(parameters: Parameters.GetMembersIdCustomstickersIdsticker, callback?: undefined): Promise<T>;
+  async getMembersIdCustomstickersIdsticker<T = Models.CustomSticker>(parameters: Parameters.GetMembersIdCustomstickersIdsticker, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdCustomstickersIdsticker' });
+  }
+  /**
+     * Delete a Member's custom Sticker */
+  async deleteMembersIdCustomstickersIdsticker<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Delete a Member's custom Sticker */
+  async deleteMembersIdCustomstickersIdsticker<T = any>(callback?: undefined): Promise<T>;
+  async deleteMembersIdCustomstickersIdsticker<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
+      method: 'DELETE',
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'deleteMembersIdCustomstickersIdsticker' });
+  }
+  /**
+     * Get a member's notifications */
+  async getMembersIdNotifications<T = any>(parameters: Parameters.GetMembersIdNotifications, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a member's notifications */
+  async getMembersIdNotifications<T = any>(parameters: Parameters.GetMembersIdNotifications, callback?: undefined): Promise<T>;
+  async getMembersIdNotifications<T = any>(parameters: Parameters.GetMembersIdNotifications, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/notifications`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        entities: parameters.entities,
+        display: parameters.display,
+        filter: parameters.filter,
+        read_filter: parameters.read_filter,
+        fields: parameters.fields,
+        limit: parameters.limit,
+        page: parameters.page,
+        before: parameters.before,
+        since: parameters.since,
+        memberCreator: parameters.memberCreator,
+        memberCreator_fields: parameters.memberCreator_fields,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdNotifications' });
+  }
+  /**
+     * Get a member's teams */
+  async getMembersIdOrganizations<T = any>(parameters: Parameters.GetMembersIdOrganizations, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a member's teams */
+  async getMembersIdOrganizations<T = any>(parameters: Parameters.GetMembersIdOrganizations, callback?: undefined): Promise<T>;
+  async getMembersIdOrganizations<T = any>(parameters: Parameters.GetMembersIdOrganizations, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/organizations`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        filter: parameters.filter,
+        fields: parameters.fields,
+        paid_account: parameters.paid_account,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdOrganizations' });
+  }
+  /**
+     * Get a member's teams they have been invited to */
+  async getMembersIdOrganizationsinvited<T = any>(parameters: Parameters.GetMembersIdOrganizationsinvited, callback: Callback<T>): Promise<void>;
+  /**
+     * Get a member's teams they have been invited to */
+  async getMembersIdOrganizationsinvited<T = any>(parameters: Parameters.GetMembersIdOrganizationsinvited, callback?: undefined): Promise<T>;
+  async getMembersIdOrganizationsinvited<T = any>(parameters: Parameters.GetMembersIdOrganizationsinvited, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/organizationsInvited`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        fields: parameters.fields,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdOrganizationsinvited' });
+  }
+  /**
+     * List the saved searches of a Member */
+  async getMembersIdSavedsearches<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * List the saved searches of a Member */
+  async getMembersIdSavedsearches<T = any>(callback?: undefined): Promise<T>;
+  async getMembersIdSavedsearches<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/savedSearches`,
+      method: 'GET',
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdSavedsearches' });
+  }
+  /**
+     * Create a saved search */
+  async postMembersIdSavedsearches<T = Models.SavedSearch>(parameters: Parameters.PostMembersIdSavedsearches, callback: Callback<T>): Promise<void>;
+  /**
+     * Create a saved search */
+  async postMembersIdSavedsearches<T = Models.SavedSearch>(parameters: Parameters.PostMembersIdSavedsearches, callback?: undefined): Promise<T>;
+  async postMembersIdSavedsearches<T = Models.SavedSearch>(parameters: Parameters.PostMembersIdSavedsearches, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/savedSearches`,
+      method: 'POST',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        name: parameters.name,
+        query: parameters.query,
+        pos: parameters.pos,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'postMembersIdSavedsearches' });
+  }
+  /**
+     * Get a saved search */
+  async getMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Get a saved search */
+  async getMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(callback?: undefined): Promise<T>;
+  async getMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
+      method: 'GET',
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdSavedsearchesIdsearch' });
+  }
+  /**
+     * Update a saved search */
+  async putMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(parameters: Parameters.PutMembersIdSavedsearchesIdsearch, callback: Callback<T>): Promise<void>;
+  /**
+     * Update a saved search */
+  async putMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(parameters: Parameters.PutMembersIdSavedsearchesIdsearch, callback?: undefined): Promise<T>;
+  async putMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(parameters: Parameters.PutMembersIdSavedsearchesIdsearch, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
       method: 'PUT',
       params: {
-        name: options.name,
-        query: options.query,
-        pos: options.pos
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        name: parameters.name,
+        query: parameters.query,
+        pos: parameters.pos,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'putMembersIdSavedsearchesIdsearch' });
   }
+  /**
+     * Delete a saved search */
+  async deleteMembersIdSavedsearchesIdsearch<T = any>(callback?: Callback<T>): Promise<void>;
+  /**
+     * Delete a saved search */
+  async deleteMembersIdSavedsearchesIdsearch<T = any>(callback?: undefined): Promise<T>;
+  async deleteMembersIdSavedsearchesIdsearch<T = any>(callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
+      method: 'DELETE',
+    } as RequestConfig);
 
-  public async addAvatar(
-    options: {
-      id: string;
-      file: string | any;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'avatar'),
+    return this.client.sendRequest(config, callback, { methodName: 'deleteMembersIdSavedsearchesIdsearch' });
+  }
+  /**
+     * List a members app tokens */
+  async getMembersIdTokens<T = any>(parameters: Parameters.GetMembersIdTokens, callback: Callback<T>): Promise<void>;
+  /**
+     * List a members app tokens */
+  async getMembersIdTokens<T = any>(parameters: Parameters.GetMembersIdTokens, callback?: undefined): Promise<T>;
+  async getMembersIdTokens<T = any>(parameters: Parameters.GetMembersIdTokens, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/tokens`,
+      method: 'GET',
+      params: {
+        key: parameters.key,
+        token: parameters.token,
+        webhooks: parameters.webhooks,
+      },
+    } as RequestConfig);
+
+    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdTokens' });
+  }
+  /**
+     * Create a new avatar for a member */
+  async membersidavatar<T = any>(parameters: Parameters.Membersidavatar, callback: Callback<T>): Promise<void>;
+  /**
+     * Create a new avatar for a member */
+  async membersidavatar<T = any>(parameters: Parameters.Membersidavatar, callback?: undefined): Promise<T>;
+  async membersidavatar<T = any>(parameters: Parameters.Membersidavatar, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/avatar`,
       method: 'POST',
       params: {
-        file: options.file
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        file: parameters.file,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'membersidavatar' });
   }
-
-  public async uploadBoardBackground(
-    options: {
-      id: string;
-      file: any;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardBackgrounds'),
+  /**
+     * Dismiss a message */
+  async postMembersIdOnetimemessagesdismissed<T = any>(parameters: Parameters.PostMembersIdOnetimemessagesdismissed, callback: Callback<T>): Promise<void>;
+  /**
+     * Dismiss a message */
+  async postMembersIdOnetimemessagesdismissed<T = any>(parameters: Parameters.PostMembersIdOnetimemessagesdismissed, callback?: undefined): Promise<T>;
+  async postMembersIdOnetimemessagesdismissed<T = any>(parameters: Parameters.PostMembersIdOnetimemessagesdismissed, callback?: Callback<T>): Promise<void | T> {
+    const config = ({
+      url: `/members/${parameters.id}/oneTimeMessagesDismissed`,
       method: 'POST',
       params: {
-        file: options.file
-      }
-    };
+        key: parameters.key,
+        token: parameters.token,
+        value: parameters.value,
+      },
+    } as RequestConfig);
 
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async starBoard(
-    options: {
-      id: string;
-      idBoard: string;
-      pos: string | number;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardStars'),
-      method: 'POST',
-      params: {
-        idBoard: options.idBoard,
-        pos: options.pos
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async uploadCustomBoardBackground(
-    options: {
-      id: string;
-      file: any;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customBoardBackgrounds'),
-      method: 'POST',
-      params: {
-        file: options.file
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async uploadCustomEmoji(
-    options: {
-      id: string;
-      file: any;
-      name: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customEmoji'),
-      method: 'POST',
-      params: {
-        file: options.file,
-        name: options.name
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async uploadCustomSticker(
-    options: {
-      id: string;
-      file: any;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customSticker'),
-      method: 'POST',
-      params: {
-        file: options.file
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async dismissMessage(
-    options: {
-      id: string;
-      value: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'oneTimeMessagesDismissed'),
-      method: 'POST',
-      params: {
-        value: options.value
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async createSavedSearch(
-    options: {
-      id: string;
-      name: string;
-      query: string;
-      pos: string | number;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'savedSearches'),
-      method: 'POST',
-      params: {
-        name: options.name,
-        query: options.query,
-        pos: options.pos
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async deleteBoardBackground(
-    options: {
-      id: string;
-      idBackground: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardBackgrounds', options.idBackground),
-      method: 'DELETE'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async deleteBoardStar(
-    options: {
-      id: string;
-      idStar: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'boardStars', options.idStar),
-      method: 'DELETE'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async deleteCustomBoardBackground(
-    options: {
-      id: string;
-      idBackground: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customBoardBackgrounds', options.idBackground),
-      method: 'DELETE'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async deleteCustomSticker(
-    options: {
-      id: string;
-      idSticker: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'customStickers', options.idSticker),
-      method: 'DELETE'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async deleteSavedSearch(
-    options: {
-      id: string;
-      idSearch: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'savedSearches', options.idSearch),
-      method: 'DELETE'
-    };
-
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'postMembersIdOnetimemessagesdismissed' });
   }
 }
