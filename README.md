@@ -1,17 +1,17 @@
-# Trello.ts
+# Trello.js
 
 NodeJS/JS Module which provides easy-to-use access to the Trello REST API.
 
 # Installation
 
 ```bash
-npm i trello.ts
+npm i trello.js
 ```
 
 # Usage
 
 ```typescript
-import { TrelloClient } from "trello.ts";
+import { TrelloClient } from "trello.js";
 
 const client = new TrelloClient({
   key: "",
