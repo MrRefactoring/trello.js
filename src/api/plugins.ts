@@ -5,11 +5,12 @@ import { Callback, RequestConfig } from '../types';
 
 export class Plugins {
   constructor(private client: Client) { }
+
   /**
-     * Get plugins */
+   * Get plugins */
   async getPluginsId<T = Models.Plugin>(parameters: Parameters.GetPluginsId, callback: Callback<T>): Promise<void>;
   /**
-     * Get plugins */
+   * Get plugins */
   async getPluginsId<T = Models.Plugin>(parameters: Parameters.GetPluginsId, callback?: undefined): Promise<T>;
   async getPluginsId<T = Models.Plugin>(parameters: Parameters.GetPluginsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
@@ -19,11 +20,12 @@ export class Plugins {
 
     return this.client.sendRequest(config, callback, { methodName: 'getPluginsId' });
   }
+
   /**
-     * Update a Plugin */
+   * Update a Plugin */
   async putPluginsId<T = Models.Plugin>(parameters: Parameters.PutPluginsId, callback: Callback<T>): Promise<void>;
   /**
-     * Update a Plugin */
+   * Update a Plugin */
   async putPluginsId<T = Models.Plugin>(parameters: Parameters.PutPluginsId, callback?: undefined): Promise<T>;
   async putPluginsId<T = Models.Plugin>(parameters: Parameters.PutPluginsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
@@ -33,11 +35,12 @@ export class Plugins {
 
     return this.client.sendRequest(config, callback, { methodName: 'putPluginsId' });
   }
+
   /**
-     * Create a new listing for a given locale for your Power-Up */
+   * Create a new listing for a given locale for your Power-Up */
   async postPluginsIdpluginListing<T = Models.PluginListing>(parameters: Parameters.PostPluginsIdpluginListing, callback: Callback<T>): Promise<void>;
   /**
-     * Create a new listing for a given locale for your Power-Up */
+   * Create a new listing for a given locale for your Power-Up */
   async postPluginsIdpluginListing<T = Models.PluginListing>(parameters: Parameters.PostPluginsIdpluginListing, callback?: undefined): Promise<T>;
   async postPluginsIdpluginListing<T = Models.PluginListing>(parameters: Parameters.PostPluginsIdpluginListing, callback?: Callback<T>): Promise<void | T> {
     const config = ({
@@ -53,6 +56,7 @@ export class Plugins {
 
     return this.client.sendRequest(config, callback, { methodName: 'postPluginsIdpluginListing' });
   }
+
   async getPluginsIdComplianceMemberprivacy<T = any>(parameters: Parameters.GetPluginsIdComplianceMemberprivacy, callback: Callback<T>): Promise<void>;
   async getPluginsIdComplianceMemberprivacy<T = any>(parameters: Parameters.GetPluginsIdComplianceMemberprivacy, callback?: undefined): Promise<T>;
   async getPluginsIdComplianceMemberprivacy<T = any>(parameters: Parameters.GetPluginsIdComplianceMemberprivacy, callback?: Callback<T>): Promise<void | T> {
@@ -63,11 +67,12 @@ export class Plugins {
 
     return this.client.sendRequest(config, callback, { methodName: 'getPluginsIdComplianceMemberprivacy' });
   }
+
   /**
-     * Update an existing listing for your Power-Up */
+   * Update an existing listing for your Power-Up */
   async putPluginsIdpluginListingsIdlisting<T = Models.PluginListing>(parameters: Parameters.PutPluginsIdpluginListingsIdlisting, callback: Callback<T>): Promise<void>;
   /**
-     * Update an existing listing for your Power-Up */
+   * Update an existing listing for your Power-Up */
   async putPluginsIdpluginListingsIdlisting<T = Models.PluginListing>(parameters: Parameters.PutPluginsIdpluginListingsIdlisting, callback?: undefined): Promise<T>;
   async putPluginsIdpluginListingsIdlisting<T = Models.PluginListing>(parameters: Parameters.PutPluginsIdpluginListingsIdlisting, callback?: Callback<T>): Promise<void | T> {
     const config = ({

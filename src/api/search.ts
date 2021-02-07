@@ -4,11 +4,12 @@ import { Callback, RequestConfig } from '../types';
 
 export class Search {
   constructor(private client: Client) { }
+
   /**
-     * Find what you're looking for in Trello */
+   * Find what you're looking for in Trello */
   async getSearch<T = any>(parameters: Parameters.GetSearch, callback: Callback<T>): Promise<void>;
   /**
-     * Find what you're looking for in Trello */
+   * Find what you're looking for in Trello */
   async getSearch<T = any>(parameters: Parameters.GetSearch, callback?: undefined): Promise<T>;
   async getSearch<T = any>(parameters: Parameters.GetSearch, callback?: Callback<T>): Promise<void | T> {
     const config = ({
@@ -40,11 +41,12 @@ export class Search {
 
     return this.client.sendRequest(config, callback, { methodName: 'getSearch' });
   }
+
   /**
-     * Search for Trello members. */
+   * Search for Trello members. */
   async getSearchMembers<T = any>(parameters: Parameters.GetSearchMembers, callback: Callback<T>): Promise<void>;
   /**
-     * Search for Trello members. */
+   * Search for Trello members. */
   async getSearchMembers<T = any>(parameters: Parameters.GetSearchMembers, callback?: undefined): Promise<T>;
   async getSearchMembers<T = any>(parameters: Parameters.GetSearchMembers, callback?: Callback<T>): Promise<void | T> {
     const config = ({

@@ -4,6 +4,7 @@ import { Callback, RequestConfig } from '../types';
 
 export class Applications {
   constructor(private client: Client) { }
+
   async applicationsKeyCompliance<T = any>(parameters: Parameters.ApplicationsKeyCompliance, callback: Callback<T>): Promise<void>;
   async applicationsKeyCompliance<T = any>(parameters: Parameters.ApplicationsKeyCompliance, callback?: undefined): Promise<T>;
   async applicationsKeyCompliance<T = any>(parameters: Parameters.ApplicationsKeyCompliance, callback?: Callback<T>): Promise<void | T> {

@@ -4,8 +4,7 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Enterprises {
-  constructor(private client: Client) {
-  }
+  constructor(private client: Client) { }
 
   /**
    * Get an enterprise by its ID. */
