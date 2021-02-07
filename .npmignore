@@ -1,0 +1,7 @@
+.idea/
+.github/
+node_modules/
+
+.editorconfig
+.eslintrc
+.DS_Store
