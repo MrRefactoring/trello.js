@@ -1,8 +1,6 @@
 export interface PostMembersIdSavedsearches {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID or username of the member */
+  id: string;
   /** The name for the saved search */
   name: string;
   /** The search query */

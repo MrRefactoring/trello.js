@@ -1,8 +1,8 @@
 export interface PutCardsIdCheckitemIdcheckitem {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the Card */
+  id: string;
+  /** The ID of the checkitem */
+  idCheckItem: string;
   /** The new name for the checklist item */
   name?: string;
   /** One of: `complete`, `incomplete` */

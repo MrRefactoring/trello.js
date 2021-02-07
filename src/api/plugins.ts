@@ -15,10 +15,6 @@ export class Plugins {
     const config = ({
       url: `/plugins/${parameters.id}/`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getPluginsId' });
@@ -33,10 +29,6 @@ export class Plugins {
     const config = ({
       url: `/plugins/${parameters.id}/`,
       method: 'PUT',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'putPluginsId' });
@@ -51,10 +43,6 @@ export class Plugins {
     const config = ({
       url: `/plugins/${parameters.idPlugin}/listing`,
       method: 'POST',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
       data: {
         description: parameters.description,
         locale: parameters.locale,
@@ -71,10 +59,6 @@ export class Plugins {
     const config = ({
       url: `/plugins/${parameters.id}/compliance/memberPrivacy`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getPluginsIdComplianceMemberprivacy' });
@@ -89,10 +73,6 @@ export class Plugins {
     const config = ({
       url: `/plugins/${parameters.idPlugin}/listings/${parameters.idListing}`,
       method: 'PUT',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
       data: {
         description: parameters.description,
         locale: parameters.locale,

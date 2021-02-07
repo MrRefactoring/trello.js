@@ -1,7 +1,5 @@
-import { TrelloID } from './trelloID';
-
 export interface PluginListing {
-  id?: TrelloID;
+  id?: string;
   name?: string;
   locale?: string;
   description?: string;

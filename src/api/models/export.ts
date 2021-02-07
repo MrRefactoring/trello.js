@@ -1,7 +1,5 @@
-import { TrelloID } from './trelloID';
-
 export interface Export {
-  id?: TrelloID;
+  id?: string;
   status?: {
     attempts?: number;
     finished?: boolean;

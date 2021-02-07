@@ -16,8 +16,6 @@ export class Members {
       url: `/members/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         actions: parameters.actions,
         boards: parameters.boards,
         boardBackgrounds: parameters.boardBackgrounds,
@@ -54,8 +52,6 @@ export class Members {
       url: `/members/${parameters.id}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fullName: parameters.fullName,
         initials: parameters.initials,
         username: parameters.username,
@@ -79,10 +75,6 @@ export class Members {
     const config = ({
       url: `/members/${parameters.id}/${parameters.field}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getMembersIdField' });
@@ -98,8 +90,6 @@ export class Members {
       url: `/members/${parameters.id}/actions`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
       },
     } as RequestConfig);
@@ -117,8 +107,6 @@ export class Members {
       url: `/members/${parameters.id}/boardBackgrounds`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
       },
     } as RequestConfig);
@@ -136,8 +124,6 @@ export class Members {
       url: `/members/${parameters.id}/boardBackgrounds`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         file: parameters.file,
       },
     } as RequestConfig);
@@ -155,8 +141,6 @@ export class Members {
       url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -174,8 +158,6 @@ export class Members {
       url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         brightness: parameters.brightness,
         tile: parameters.tile,
       },
@@ -185,11 +167,11 @@ export class Members {
   }
   /**
      * Delete a board background */
-  async deleteMembersIdBoardbackgroundsIdbackground<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteMembersIdBoardbackgroundsIdbackground<T = any>(parameters: Parameters.DeleteMembersIdBoardbackgroundsIdbackground, callback: Callback<T>): Promise<void>;
   /**
      * Delete a board background */
-  async deleteMembersIdBoardbackgroundsIdbackground<T = any>(callback?: undefined): Promise<T>;
-  async deleteMembersIdBoardbackgroundsIdbackground<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteMembersIdBoardbackgroundsIdbackground<T = any>(parameters: Parameters.DeleteMembersIdBoardbackgroundsIdbackground, callback?: undefined): Promise<T>;
+  async deleteMembersIdBoardbackgroundsIdbackground<T = any>(parameters: Parameters.DeleteMembersIdBoardbackgroundsIdbackground, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
       method: 'DELETE',
@@ -207,10 +189,6 @@ export class Members {
     const config = ({
       url: `/members/${parameters.id}/boardStars`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getMembersIdBoardstars' });
@@ -226,8 +204,6 @@ export class Members {
       url: `/members/${parameters.id}/boardStars`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         idBoard: parameters.idBoard,
         pos: parameters.pos,
       },
@@ -237,11 +213,11 @@ export class Members {
   }
   /**
      * Get a specific boardStar */
-  async getMembersIdBoardstarsIdstar<T = Models.BoardStars>(callback?: Callback<T>): Promise<void>;
+  async getMembersIdBoardstarsIdstar<T = Models.BoardStars>(parameters: Parameters.GetMembersIdBoardstarsIdstar, callback: Callback<T>): Promise<void>;
   /**
      * Get a specific boardStar */
-  async getMembersIdBoardstarsIdstar<T = Models.BoardStars>(callback?: undefined): Promise<T>;
-  async getMembersIdBoardstarsIdstar<T = Models.BoardStars>(callback?: Callback<T>): Promise<void | T> {
+  async getMembersIdBoardstarsIdstar<T = Models.BoardStars>(parameters: Parameters.GetMembersIdBoardstarsIdstar, callback?: undefined): Promise<T>;
+  async getMembersIdBoardstarsIdstar<T = Models.BoardStars>(parameters: Parameters.GetMembersIdBoardstarsIdstar, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
       method: 'GET',
@@ -260,8 +236,6 @@ export class Members {
       url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         pos: parameters.pos,
       },
     } as RequestConfig);
@@ -270,11 +244,11 @@ export class Members {
   }
   /**
      * Unstar a board */
-  async deleteMembersIdBoardstarsIdstar<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteMembersIdBoardstarsIdstar<T = any>(parameters: Parameters.DeleteMembersIdBoardstarsIdstar, callback: Callback<T>): Promise<void>;
   /**
      * Unstar a board */
-  async deleteMembersIdBoardstarsIdstar<T = any>(callback?: undefined): Promise<T>;
-  async deleteMembersIdBoardstarsIdstar<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteMembersIdBoardstarsIdstar<T = any>(parameters: Parameters.DeleteMembersIdBoardstarsIdstar, callback?: undefined): Promise<T>;
+  async deleteMembersIdBoardstarsIdstar<T = any>(parameters: Parameters.DeleteMembersIdBoardstarsIdstar, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
       method: 'DELETE',
@@ -293,8 +267,6 @@ export class Members {
       url: `/members/${parameters.id}/boards`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
         fields: parameters.fields,
         lists: parameters.lists,
@@ -316,8 +288,6 @@ export class Members {
       url: `/members/${parameters.id}/boardsInvited`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -335,8 +305,6 @@ export class Members {
       url: `/members/${parameters.id}/cards`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
       },
     } as RequestConfig);
@@ -345,11 +313,11 @@ export class Members {
   }
   /**
      * Get a member's custom board backgrounds */
-  async getMembersIdCustomboardbackgrounds<T = any>(callback?: Callback<T>): Promise<void>;
+  async getMembersIdCustomboardbackgrounds<T = any>(parameters: Parameters.GetMembersIdCustomboardbackgrounds, callback: Callback<T>): Promise<void>;
   /**
      * Get a member's custom board backgrounds */
-  async getMembersIdCustomboardbackgrounds<T = any>(callback?: undefined): Promise<T>;
-  async getMembersIdCustomboardbackgrounds<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getMembersIdCustomboardbackgrounds<T = any>(parameters: Parameters.GetMembersIdCustomboardbackgrounds, callback?: undefined): Promise<T>;
+  async getMembersIdCustomboardbackgrounds<T = any>(parameters: Parameters.GetMembersIdCustomboardbackgrounds, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/customBoardBackgrounds`,
       method: 'GET',
@@ -368,8 +336,6 @@ export class Members {
       url: `/members/${parameters.id}/customBoardBackgrounds`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         file: parameters.file,
       },
     } as RequestConfig);
@@ -378,11 +344,11 @@ export class Members {
   }
   /**
      * Get a specific custom board background */
-  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(callback?: Callback<T>): Promise<void>;
+  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.GetMembersIdCustomboardbackgroundsIdbackground, callback: Callback<T>): Promise<void>;
   /**
      * Get a specific custom board background */
-  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(callback?: undefined): Promise<T>;
-  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(callback?: Callback<T>): Promise<void | T> {
+  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.GetMembersIdCustomboardbackgroundsIdbackground, callback?: undefined): Promise<T>;
+  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.GetMembersIdCustomboardbackgroundsIdbackground, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
       method: 'GET',
@@ -401,8 +367,6 @@ export class Members {
       url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         brightness: parameters.brightness,
         tile: parameters.tile,
       },
@@ -412,11 +376,11 @@ export class Members {
   }
   /**
      * Delete a specific custom board background */
-  async deleteMembersIdCustomboardbackgroundsIdbackground<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteMembersIdCustomboardbackgroundsIdbackground<T = any>(parameters: Parameters.DeleteMembersIdCustomboardbackgroundsIdbackground, callback: Callback<T>): Promise<void>;
   /**
      * Delete a specific custom board background */
-  async deleteMembersIdCustomboardbackgroundsIdbackground<T = any>(callback?: undefined): Promise<T>;
-  async deleteMembersIdCustomboardbackgroundsIdbackground<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteMembersIdCustomboardbackgroundsIdbackground<T = any>(parameters: Parameters.DeleteMembersIdCustomboardbackgroundsIdbackground, callback?: undefined): Promise<T>;
+  async deleteMembersIdCustomboardbackgroundsIdbackground<T = any>(parameters: Parameters.DeleteMembersIdCustomboardbackgroundsIdbackground, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
       method: 'DELETE',
@@ -426,11 +390,11 @@ export class Members {
   }
   /**
      * Get a Member's uploaded custom Emojis */
-  async getMembersIdCustomemoji<T = any>(callback?: Callback<T>): Promise<void>;
+  async getMembersIdCustomemoji<T = any>(parameters: Parameters.GetMembersIdCustomemoji, callback: Callback<T>): Promise<void>;
   /**
      * Get a Member's uploaded custom Emojis */
-  async getMembersIdCustomemoji<T = any>(callback?: undefined): Promise<T>;
-  async getMembersIdCustomemoji<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getMembersIdCustomemoji<T = any>(parameters: Parameters.GetMembersIdCustomemoji, callback?: undefined): Promise<T>;
+  async getMembersIdCustomemoji<T = any>(parameters: Parameters.GetMembersIdCustomemoji, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/customEmoji`,
       method: 'GET',
@@ -449,8 +413,6 @@ export class Members {
       url: `/members/${parameters.id}/customEmoji`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         file: parameters.file,
         name: parameters.name,
       },
@@ -469,8 +431,6 @@ export class Members {
       url: `/members/${parameters.id}/customEmoji/${parameters.idEmoji}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -479,11 +439,11 @@ export class Members {
   }
   /**
      * Get a Member's uploaded stickers */
-  async getMembersIdCustomstickers<T = any>(callback?: Callback<T>): Promise<void>;
+  async getMembersIdCustomstickers<T = any>(parameters: Parameters.GetMembersIdCustomstickers, callback: Callback<T>): Promise<void>;
   /**
      * Get a Member's uploaded stickers */
-  async getMembersIdCustomstickers<T = any>(callback?: undefined): Promise<T>;
-  async getMembersIdCustomstickers<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getMembersIdCustomstickers<T = any>(parameters: Parameters.GetMembersIdCustomstickers, callback?: undefined): Promise<T>;
+  async getMembersIdCustomstickers<T = any>(parameters: Parameters.GetMembersIdCustomstickers, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/customStickers`,
       method: 'GET',
@@ -502,8 +462,6 @@ export class Members {
       url: `/members/${parameters.id}/customStickers`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         file: parameters.file,
       },
     } as RequestConfig);
@@ -521,8 +479,6 @@ export class Members {
       url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -531,11 +487,11 @@ export class Members {
   }
   /**
      * Delete a Member's custom Sticker */
-  async deleteMembersIdCustomstickersIdsticker<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteMembersIdCustomstickersIdsticker<T = any>(parameters: Parameters.DeleteMembersIdCustomstickersIdsticker, callback: Callback<T>): Promise<void>;
   /**
      * Delete a Member's custom Sticker */
-  async deleteMembersIdCustomstickersIdsticker<T = any>(callback?: undefined): Promise<T>;
-  async deleteMembersIdCustomstickersIdsticker<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteMembersIdCustomstickersIdsticker<T = any>(parameters: Parameters.DeleteMembersIdCustomstickersIdsticker, callback?: undefined): Promise<T>;
+  async deleteMembersIdCustomstickersIdsticker<T = any>(parameters: Parameters.DeleteMembersIdCustomstickersIdsticker, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
       method: 'DELETE',
@@ -554,8 +510,6 @@ export class Members {
       url: `/members/${parameters.id}/notifications`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         entities: parameters.entities,
         display: parameters.display,
         filter: parameters.filter,
@@ -583,8 +537,6 @@ export class Members {
       url: `/members/${parameters.id}/organizations`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
         fields: parameters.fields,
         paid_account: parameters.paid_account,
@@ -604,8 +556,6 @@ export class Members {
       url: `/members/${parameters.id}/organizationsInvited`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -614,11 +564,11 @@ export class Members {
   }
   /**
      * List the saved searches of a Member */
-  async getMembersIdSavedsearches<T = any>(callback?: Callback<T>): Promise<void>;
+  async getMembersIdSavedsearches<T = any>(parameters: Parameters.GetMembersIdSavedsearches, callback: Callback<T>): Promise<void>;
   /**
      * List the saved searches of a Member */
-  async getMembersIdSavedsearches<T = any>(callback?: undefined): Promise<T>;
-  async getMembersIdSavedsearches<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getMembersIdSavedsearches<T = any>(parameters: Parameters.GetMembersIdSavedsearches, callback?: undefined): Promise<T>;
+  async getMembersIdSavedsearches<T = any>(parameters: Parameters.GetMembersIdSavedsearches, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/savedSearches`,
       method: 'GET',
@@ -637,8 +587,6 @@ export class Members {
       url: `/members/${parameters.id}/savedSearches`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         query: parameters.query,
         pos: parameters.pos,
@@ -649,11 +597,11 @@ export class Members {
   }
   /**
      * Get a saved search */
-  async getMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(callback?: Callback<T>): Promise<void>;
+  async getMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(parameters: Parameters.GetMembersIdSavedsearchesIdsearch, callback: Callback<T>): Promise<void>;
   /**
      * Get a saved search */
-  async getMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(callback?: undefined): Promise<T>;
-  async getMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(callback?: Callback<T>): Promise<void | T> {
+  async getMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(parameters: Parameters.GetMembersIdSavedsearchesIdsearch, callback?: undefined): Promise<T>;
+  async getMembersIdSavedsearchesIdsearch<T = Models.SavedSearch>(parameters: Parameters.GetMembersIdSavedsearchesIdsearch, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
       method: 'GET',
@@ -672,8 +620,6 @@ export class Members {
       url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         query: parameters.query,
         pos: parameters.pos,
@@ -684,11 +630,11 @@ export class Members {
   }
   /**
      * Delete a saved search */
-  async deleteMembersIdSavedsearchesIdsearch<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteMembersIdSavedsearchesIdsearch<T = any>(parameters: Parameters.DeleteMembersIdSavedsearchesIdsearch, callback: Callback<T>): Promise<void>;
   /**
      * Delete a saved search */
-  async deleteMembersIdSavedsearchesIdsearch<T = any>(callback?: undefined): Promise<T>;
-  async deleteMembersIdSavedsearchesIdsearch<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteMembersIdSavedsearchesIdsearch<T = any>(parameters: Parameters.DeleteMembersIdSavedsearchesIdsearch, callback?: undefined): Promise<T>;
+  async deleteMembersIdSavedsearchesIdsearch<T = any>(parameters: Parameters.DeleteMembersIdSavedsearchesIdsearch, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
       method: 'DELETE',
@@ -707,8 +653,6 @@ export class Members {
       url: `/members/${parameters.id}/tokens`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         webhooks: parameters.webhooks,
       },
     } as RequestConfig);
@@ -726,8 +670,6 @@ export class Members {
       url: `/members/${parameters.id}/avatar`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         file: parameters.file,
       },
     } as RequestConfig);
@@ -745,8 +687,6 @@ export class Members {
       url: `/members/${parameters.id}/oneTimeMessagesDismissed`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);

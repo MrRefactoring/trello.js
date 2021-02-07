@@ -1,8 +1,8 @@
 export interface PutCardsIdActionsIdactionComments {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the Card */
+  id: string;
+  /** The ID of the comment action to update */
+  idAction: string;
   /** The new text for the comment */
   text: string;
 }

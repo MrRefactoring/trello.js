@@ -1,8 +1,4 @@
 export interface PostPluginsIdpluginListing {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** The ID of the Power-Up for which you are creating a new listing. */
   idPlugin: Record<string, any>;
   /** The description to show for the given locale */

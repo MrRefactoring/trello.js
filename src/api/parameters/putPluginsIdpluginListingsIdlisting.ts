@@ -1,8 +1,4 @@
 export interface PutPluginsIdpluginListingsIdlisting {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** The ID of the Power-Up whose listing is being updated. */
   idPlugin: Record<string, any>;
   /** The ID of the existing listing for the Power-Up that is being updated. */

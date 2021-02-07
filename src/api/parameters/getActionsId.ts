@@ -1,9 +1,6 @@
 export interface GetActionsId {
+  /** The ID of the Action */
   id: string;
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   display?: boolean;
   entities?: boolean;
   /** `all` or a comma-separated list of action [fields](/cloud/trello/guides/rest-api/object-definitions/#action-object) */

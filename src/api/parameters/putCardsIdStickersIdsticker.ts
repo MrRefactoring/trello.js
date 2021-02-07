@@ -1,8 +1,8 @@
 export interface PutCardsIdStickersIdsticker {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the Card */
+  id: string;
+  /** The ID of the sticker */
+  idSticker: string;
   /** The top position of the sticker, from -60 to 100 */
   top: number;
   /** The left position of the sticker, from -60 to 100 */

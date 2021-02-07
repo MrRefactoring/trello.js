@@ -7,41 +7,35 @@ export class Tokens {
   constructor(private client: Client) { }
   /**
      * Retrieve information about a token. */
-  async getTokensToken<T = Models.Token>(parameters: Parameters.GetTokensToken, callback: Callback<T>): Promise<void>;
+  async getTokensToken<T = Models.Token>(parameters?: Parameters.GetTokensToken, callback?: Callback<T>): Promise<void>;
   /**
      * Retrieve information about a token. */
-  async getTokensToken<T = Models.Token>(parameters: Parameters.GetTokensToken, callback?: undefined): Promise<T>;
-  async getTokensToken<T = Models.Token>(parameters: Parameters.GetTokensToken, callback?: Callback<T>): Promise<void | T> {
+  async getTokensToken<T = Models.Token>(parameters?: Parameters.GetTokensToken, callback?: undefined): Promise<T>;
+  async getTokensToken<T = Models.Token>(parameters?: Parameters.GetTokensToken, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/tokens/${parameters.token}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
-        fields: parameters.fields,
-        webhooks: parameters.webhooks,
+        fields: parameters?.fields,
+        webhooks: parameters?.webhooks,
       },
-      data: parameters.body,
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getTokensToken' });
   }
   /**
      * Retrieve information about a token's owner by token. */
-  async getTokensTokenMember<T = Models.Member>(parameters: Parameters.GetTokensTokenMember, callback: Callback<T>): Promise<void>;
+  async getTokensTokenMember<T = Models.Member>(parameters?: Parameters.GetTokensTokenMember, callback?: Callback<T>): Promise<void>;
   /**
      * Retrieve information about a token's owner by token. */
-  async getTokensTokenMember<T = Models.Member>(parameters: Parameters.GetTokensTokenMember, callback?: undefined): Promise<T>;
-  async getTokensTokenMember<T = Models.Member>(parameters: Parameters.GetTokensTokenMember, callback?: Callback<T>): Promise<void | T> {
+  async getTokensTokenMember<T = Models.Member>(parameters?: Parameters.GetTokensTokenMember, callback?: undefined): Promise<T>;
+  async getTokensTokenMember<T = Models.Member>(parameters?: Parameters.GetTokensTokenMember, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/tokens/${parameters.token}/member`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
-        fields: parameters.fields,
+        fields: parameters?.fields,
       },
-      data: parameters.body,
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getTokensTokenMember' });
@@ -71,8 +65,6 @@ export class Tokens {
       url: `/tokens/${parameters.token}/webhooks`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         description: parameters.description,
         callbackURL: parameters.callbackURL,
         idModel: parameters.idModel,
@@ -83,11 +75,11 @@ export class Tokens {
   }
   /**
      * Retrieve a webhook created with a Token. */
-  async getTokensTokenWebhooksIdwebhook<T = Models.Webhook>(callback?: Callback<T>): Promise<void>;
+  async getTokensTokenWebhooksIdwebhook<T = Models.Webhook>(parameters: Parameters.GetTokensTokenWebhooksIdwebhook, callback: Callback<T>): Promise<void>;
   /**
      * Retrieve a webhook created with a Token. */
-  async getTokensTokenWebhooksIdwebhook<T = Models.Webhook>(callback?: undefined): Promise<T>;
-  async getTokensTokenWebhooksIdwebhook<T = Models.Webhook>(callback?: Callback<T>): Promise<void | T> {
+  async getTokensTokenWebhooksIdwebhook<T = Models.Webhook>(parameters: Parameters.GetTokensTokenWebhooksIdwebhook, callback?: undefined): Promise<T>;
+  async getTokensTokenWebhooksIdwebhook<T = Models.Webhook>(parameters: Parameters.GetTokensTokenWebhooksIdwebhook, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
       method: 'GET',
@@ -97,17 +89,15 @@ export class Tokens {
   }
   /**
      * Update a Webhook created by Token */
-  async tokenstokenwebhooks1<T = any>(parameters: Parameters.Tokenstokenwebhooks1, callback: Callback<T>): Promise<void>;
+  async tokenstokenwebhooks1<T = any>(parameters: Parameters.TokenWebhooks, callback: Callback<T>): Promise<void>;
   /**
      * Update a Webhook created by Token */
-  async tokenstokenwebhooks1<T = any>(parameters: Parameters.Tokenstokenwebhooks1, callback?: undefined): Promise<T>;
-  async tokenstokenwebhooks1<T = any>(parameters: Parameters.Tokenstokenwebhooks1, callback?: Callback<T>): Promise<void | T> {
+  async tokenstokenwebhooks1<T = any>(parameters: Parameters.TokenWebhooks, callback?: undefined): Promise<T>;
+  async tokenstokenwebhooks1<T = any>(parameters: Parameters.TokenWebhooks, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         description: parameters.description,
         callbackURL: parameters.callbackURL,
         idModel: parameters.idModel,
@@ -118,11 +108,11 @@ export class Tokens {
   }
   /**
      * Delete a webhook created with given token. */
-  async deleteTokensTokenWebhooksIdwebhook<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteTokensTokenWebhooksIdwebhook<T = any>(parameters: Parameters.DeleteTokensTokenWebhooksIdwebhook, callback: Callback<T>): Promise<void>;
   /**
      * Delete a webhook created with given token. */
-  async deleteTokensTokenWebhooksIdwebhook<T = any>(callback?: undefined): Promise<T>;
-  async deleteTokensTokenWebhooksIdwebhook<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteTokensTokenWebhooksIdwebhook<T = any>(parameters: Parameters.DeleteTokensTokenWebhooksIdwebhook, callback?: undefined): Promise<T>;
+  async deleteTokensTokenWebhooksIdwebhook<T = any>(parameters: Parameters.DeleteTokensTokenWebhooksIdwebhook, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
       method: 'DELETE',
@@ -132,19 +122,14 @@ export class Tokens {
   }
   /**
      * Delete a token. */
-  async deleteToken<T = any>(parameters: Parameters.DeleteToken, callback: Callback<T>): Promise<void>;
+  async deleteToken<T = any>(callback?: Callback<T>): Promise<void>;
   /**
      * Delete a token. */
-  async deleteToken<T = any>(parameters: Parameters.DeleteToken, callback?: undefined): Promise<T>;
-  async deleteToken<T = any>(parameters: Parameters.DeleteToken, callback?: Callback<T>): Promise<void | T> {
+  async deleteToken<T = any>(callback?: undefined): Promise<T>;
+  async deleteToken<T = any>(callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/tokens/${parameters.token}/`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
-      data: parameters.body,
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteToken' });

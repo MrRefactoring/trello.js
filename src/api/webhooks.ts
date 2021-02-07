@@ -16,8 +16,6 @@ export class Webhooks {
       url: '/webhooks/',
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         description: parameters.description,
         callbackURL: parameters.callbackURL,
         idModel: parameters.idModel,
@@ -29,11 +27,11 @@ export class Webhooks {
   }
   /**
      * Get a webhook by ID. */
-  async getWebhooksId<T = Models.Webhook>(callback?: Callback<T>): Promise<void>;
+  async getWebhooksId<T = Models.Webhook>(parameters: Parameters.GetWebhooksId, callback: Callback<T>): Promise<void>;
   /**
      * Get a webhook by ID. */
-  async getWebhooksId<T = Models.Webhook>(callback?: undefined): Promise<T>;
-  async getWebhooksId<T = Models.Webhook>(callback?: Callback<T>): Promise<void | T> {
+  async getWebhooksId<T = Models.Webhook>(parameters: Parameters.GetWebhooksId, callback?: undefined): Promise<T>;
+  async getWebhooksId<T = Models.Webhook>(parameters: Parameters.GetWebhooksId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/webhooks/${parameters.id}`,
       method: 'GET',
@@ -52,8 +50,6 @@ export class Webhooks {
       url: `/webhooks/${parameters.id}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         description: parameters.description,
         callbackURL: parameters.callbackURL,
         idModel: parameters.idModel,
@@ -65,11 +61,11 @@ export class Webhooks {
   }
   /**
      * Delete a webhook by ID. */
-  async deleteWebhooksId<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteWebhooksId<T = any>(parameters: Parameters.DeleteWebhooksId, callback: Callback<T>): Promise<void>;
   /**
      * Delete a webhook by ID. */
-  async deleteWebhooksId<T = any>(callback?: undefined): Promise<T>;
-  async deleteWebhooksId<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteWebhooksId<T = any>(parameters: Parameters.DeleteWebhooksId, callback?: undefined): Promise<T>;
+  async deleteWebhooksId<T = any>(parameters: Parameters.DeleteWebhooksId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/webhooks/${parameters.id}`,
       method: 'DELETE',
@@ -87,10 +83,6 @@ export class Webhooks {
     const config = ({
       url: `/webhooks/${parameters.id}/${parameters.field}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'webhooksidfield' });

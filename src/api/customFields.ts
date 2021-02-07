@@ -7,34 +7,30 @@ export class CustomFields {
   constructor(private client: Client) { }
   /**
      * Create a new Custom Field on a board. */
-  async postCustomfields<T = Models.CustomField>(parameters: Parameters.PostCustomfields, callback: Callback<T>): Promise<void>;
+  async postCustomfields<T = Models.CustomField>(parameters?: Parameters.PostCustomfields, callback?: Callback<T>): Promise<void>;
   /**
      * Create a new Custom Field on a board. */
-  async postCustomfields<T = Models.CustomField>(parameters: Parameters.PostCustomfields, callback?: undefined): Promise<T>;
-  async postCustomfields<T = Models.CustomField>(parameters: Parameters.PostCustomfields, callback?: Callback<T>): Promise<void | T> {
+  async postCustomfields<T = Models.CustomField>(parameters?: Parameters.PostCustomfields, callback?: undefined): Promise<T>;
+  async postCustomfields<T = Models.CustomField>(parameters?: Parameters.PostCustomfields, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: '/customFields',
       method: 'POST',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
       data: {
-        idModel: parameters.idModel,
-        modelType: parameters.modelType,
-        name: parameters.name,
-        type: parameters.type,
-        options: parameters.options,
-        pos: parameters.pos,
-        display_cardFront: parameters.display_cardFront,
+        idModel: parameters?.idModel,
+        modelType: parameters?.modelType,
+        name: parameters?.name,
+        type: parameters?.type,
+        options: parameters?.options,
+        pos: parameters?.pos,
+        display_cardFront: parameters?.display_cardFront,
       },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'postCustomfields' });
   }
-  async getCustomfieldsId<T = Models.CustomField>(callback?: Callback<T>): Promise<void>;
-  async getCustomfieldsId<T = Models.CustomField>(callback?: undefined): Promise<T>;
-  async getCustomfieldsId<T = Models.CustomField>(callback?: Callback<T>): Promise<void | T> {
+  async getCustomfieldsId<T = Models.CustomField>(parameters: Parameters.GetCustomfieldsId, callback: Callback<T>): Promise<void>;
+  async getCustomfieldsId<T = Models.CustomField>(parameters: Parameters.GetCustomfieldsId, callback?: undefined): Promise<T>;
+  async getCustomfieldsId<T = Models.CustomField>(parameters: Parameters.GetCustomfieldsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/customFields/${parameters.id}`,
       method: 'GET',
@@ -44,18 +40,18 @@ export class CustomFields {
   }
   /**
      * Update a Custom Field definition. */
-  async putCustomfieldsId<T = Models.CustomField>(parameters?: Parameters.PutCustomfieldsId, callback?: Callback<T>): Promise<void>;
+  async putCustomfieldsId<T = Models.CustomField>(parameters: Parameters.PutCustomfieldsId, callback: Callback<T>): Promise<void>;
   /**
      * Update a Custom Field definition. */
-  async putCustomfieldsId<T = Models.CustomField>(parameters?: Parameters.PutCustomfieldsId, callback?: undefined): Promise<T>;
-  async putCustomfieldsId<T = Models.CustomField>(parameters?: Parameters.PutCustomfieldsId, callback?: Callback<T>): Promise<void | T> {
+  async putCustomfieldsId<T = Models.CustomField>(parameters: Parameters.PutCustomfieldsId, callback?: undefined): Promise<T>;
+  async putCustomfieldsId<T = Models.CustomField>(parameters: Parameters.PutCustomfieldsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/customFields/${parameters.id}`,
       method: 'PUT',
       data: {
-        name: parameters?.name,
-        pos: parameters?.pos,
-        'display/cardFront': parameters?.cardFront,
+        name: parameters.name,
+        pos: parameters.pos,
+        'display/cardFront': parameters.cardFront,
       },
     } as RequestConfig);
 
@@ -63,11 +59,11 @@ export class CustomFields {
   }
   /**
      * Delete a Custom Field from a board. */
-  async deleteCustomfieldsId<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteCustomfieldsId<T = any>(parameters: Parameters.DeleteCustomfieldsId, callback: Callback<T>): Promise<void>;
   /**
      * Delete a Custom Field from a board. */
-  async deleteCustomfieldsId<T = any>(callback?: undefined): Promise<T>;
-  async deleteCustomfieldsId<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteCustomfieldsId<T = any>(parameters: Parameters.DeleteCustomfieldsId, callback?: undefined): Promise<T>;
+  async deleteCustomfieldsId<T = any>(parameters: Parameters.DeleteCustomfieldsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/customFields/${parameters.id}`,
       method: 'DELETE',
@@ -77,11 +73,11 @@ export class CustomFields {
   }
   /**
      * Get the options of a drop down Custom Field */
-  async postCustomfieldsIdOptions<T = any>(callback?: Callback<T>): Promise<void>;
+  async postCustomfieldsIdOptions<T = any>(parameters: Parameters.PostCustomfieldsIdOptions, callback: Callback<T>): Promise<void>;
   /**
      * Get the options of a drop down Custom Field */
-  async postCustomfieldsIdOptions<T = any>(callback?: undefined): Promise<T>;
-  async postCustomfieldsIdOptions<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async postCustomfieldsIdOptions<T = any>(parameters: Parameters.PostCustomfieldsIdOptions, callback?: undefined): Promise<T>;
+  async postCustomfieldsIdOptions<T = any>(parameters: Parameters.PostCustomfieldsIdOptions, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/customFields/${parameters.id}/options`,
       method: 'GET',
@@ -91,11 +87,11 @@ export class CustomFields {
   }
   /**
      * Add an option to a dropdown Custom Field */
-  async getCustomfieldsIdOptions<T = any>(callback?: Callback<T>): Promise<void>;
+  async getCustomfieldsIdOptions<T = any>(parameters: Parameters.GetCustomfieldsIdOptions, callback: Callback<T>): Promise<void>;
   /**
      * Add an option to a dropdown Custom Field */
-  async getCustomfieldsIdOptions<T = any>(callback?: undefined): Promise<T>;
-  async getCustomfieldsIdOptions<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getCustomfieldsIdOptions<T = any>(parameters: Parameters.GetCustomfieldsIdOptions, callback?: undefined): Promise<T>;
+  async getCustomfieldsIdOptions<T = any>(parameters: Parameters.GetCustomfieldsIdOptions, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/customFields/${parameters.id}/options`,
       method: 'POST',
@@ -105,11 +101,11 @@ export class CustomFields {
   }
   /**
      * Retrieve a specific, existing Option on a given dropdown-type Custom Field */
-  async getCustomfieldsOptionsIdcustomfieldoption<T = any>(callback?: Callback<T>): Promise<void>;
+  async getCustomfieldsOptionsIdcustomfieldoption<T = any>(parameters: Parameters.GetCustomfieldsOptionsIdcustomfieldoption, callback: Callback<T>): Promise<void>;
   /**
      * Retrieve a specific, existing Option on a given dropdown-type Custom Field */
-  async getCustomfieldsOptionsIdcustomfieldoption<T = any>(callback?: undefined): Promise<T>;
-  async getCustomfieldsOptionsIdcustomfieldoption<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getCustomfieldsOptionsIdcustomfieldoption<T = any>(parameters: Parameters.GetCustomfieldsOptionsIdcustomfieldoption, callback?: undefined): Promise<T>;
+  async getCustomfieldsOptionsIdcustomfieldoption<T = any>(parameters: Parameters.GetCustomfieldsOptionsIdcustomfieldoption, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/customFields/${parameters.id}/options/${parameters.idCustomFieldOption}`,
       method: 'GET',
@@ -119,11 +115,11 @@ export class CustomFields {
   }
   /**
      * Delete an option from a Custom Field dropdown. */
-  async deleteCustomfieldsOptionsIdcustomfieldoption<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteCustomfieldsOptionsIdcustomfieldoption<T = any>(parameters: Parameters.DeleteCustomfieldsOptionsIdcustomfieldoption, callback: Callback<T>): Promise<void>;
   /**
      * Delete an option from a Custom Field dropdown. */
-  async deleteCustomfieldsOptionsIdcustomfieldoption<T = any>(callback?: undefined): Promise<T>;
-  async deleteCustomfieldsOptionsIdcustomfieldoption<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteCustomfieldsOptionsIdcustomfieldoption<T = any>(parameters: Parameters.DeleteCustomfieldsOptionsIdcustomfieldoption, callback?: undefined): Promise<T>;
+  async deleteCustomfieldsOptionsIdcustomfieldoption<T = any>(parameters: Parameters.DeleteCustomfieldsOptionsIdcustomfieldoption, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/customFields/${parameters.id}/options/${parameters.idCustomFieldOption}`,
       method: 'DELETE',

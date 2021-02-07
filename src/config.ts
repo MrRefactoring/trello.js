@@ -1,4 +1,4 @@
 export interface Config {
   apiKey: string;
-  apiSecret: string;
+  apiToken: string;
 }

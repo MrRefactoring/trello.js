@@ -1,8 +1,6 @@
 export interface PostCardsIdAttachments {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the Card */
+  id: string;
   /** The name of the attachment. Max length 256. */
   name?: string;
   /** The file to attach, as multipart/form-data */

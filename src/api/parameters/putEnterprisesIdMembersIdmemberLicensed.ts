@@ -1,8 +1,4 @@
 export interface PutEnterprisesIdMembersIdmemberLicensed {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use. Note: This must be an Enterprise admin's token. */
-  token: Record<string, any>;
   /** ID of the Enterprise. */
   id: Record<string, any>;
   /** The ID of the Member */

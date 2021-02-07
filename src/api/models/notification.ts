@@ -1,6 +1,5 @@
 import { Card } from './card';
 import { Board } from './board';
-import { TrelloID } from './trelloID';
 
 export interface Notification {
   id?: string;
@@ -11,7 +10,7 @@ export interface Notification {
   data?: string;
   card?: Card;
   board?: Board;
-  idMemberCreator?: TrelloID;
-  idAction?: TrelloID;
+  idMemberCreator?: string;
+  idAction?: string;
   reactions?: any[];
 }

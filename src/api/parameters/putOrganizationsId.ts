@@ -1,8 +1,6 @@
 export interface PutOrganizationsId {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID or name of the Organization */
+  id: string;
   /** A new name for the organization. At least 3 lowercase letters, underscores, and numbers. Must be unique */
   name?: string;
   /** A new displayName for the organization. Must be at least 1 character long and not begin or end with a space. */

@@ -1,8 +1,8 @@
 export interface PutMembersIdSavedsearchesIdsearch {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID or username of the member */
+  id: string;
+  /** The ID of the saved search to delete */
+  idSearch: string;
   /** The new name for the saved search */
   name?: string;
   /** The new search query */

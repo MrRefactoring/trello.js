@@ -1,8 +1,5 @@
 export interface GetBoardsId {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  id: string;
   /** This is a nested resource. Read more about actions as nested resources [here](/cloud/trello/guides/rest-api/nested-resources/). */
   actions?: string;
   /** Valid values are one of: `mine` or `none`. */

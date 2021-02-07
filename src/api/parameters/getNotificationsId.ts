@@ -1,8 +1,4 @@
 export interface GetNotificationsId {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** The ID of the notification */
   id: Record<string, any>;
   /** Whether to include the board object */

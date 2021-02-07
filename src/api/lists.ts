@@ -15,8 +15,6 @@ export class Lists {
       url: `/lists/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -34,8 +32,6 @@ export class Lists {
       url: `/lists/${parameters.id}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         closed: parameters.closed,
         idBoard: parameters.idBoard,
@@ -57,8 +53,6 @@ export class Lists {
       url: '/lists',
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         idBoard: parameters.idBoard,
         idListSource: parameters.idListSource,
@@ -78,10 +72,6 @@ export class Lists {
     const config = ({
       url: `/lists/${parameters.id}/archiveAllCards`,
       method: 'POST',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'postListsIdArchiveallcards' });
@@ -97,8 +87,6 @@ export class Lists {
       url: `/lists/${parameters.id}/moveAllCards`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         idBoard: parameters.idBoard,
         idList: parameters.idList,
       },
@@ -117,8 +105,6 @@ export class Lists {
       url: `/lists/${parameters.id}/closed`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -136,8 +122,6 @@ export class Lists {
       url: `/lists/${parameters.id}/idBoard`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -155,8 +139,6 @@ export class Lists {
       url: `/lists/${parameters.id}/${parameters.field}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -174,8 +156,6 @@ export class Lists {
       url: `/lists/${parameters.id}/actions`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
       },
     } as RequestConfig);
@@ -193,8 +173,6 @@ export class Lists {
       url: `/lists/${parameters.id}/board`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -211,10 +189,6 @@ export class Lists {
     const config = ({
       url: `/lists/${parameters.id}/cards`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getListsIdCards' });

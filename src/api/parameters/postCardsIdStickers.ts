@@ -1,8 +1,6 @@
 export interface PostCardsIdStickers {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the Card */
+  id: string;
   /** For custom stickers, the id of the sticker. For default stickers, the string identifier (like 'taco-cool', see below) */
   image: string;
   /** The top position of the sticker, from -60 to 100 */

@@ -16,8 +16,6 @@ export class Organizations {
       url: '/organizations',
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         displayName: parameters.displayName,
         desc: parameters.desc,
         name: parameters.name,
@@ -27,9 +25,9 @@ export class Organizations {
 
     return this.client.sendRequest(config, callback, { methodName: 'postOrganizations' });
   }
-  async getOrganizationsId<T = Models.Organization>(callback?: Callback<T>): Promise<void>;
-  async getOrganizationsId<T = Models.Organization>(callback?: undefined): Promise<T>;
-  async getOrganizationsId<T = Models.Organization>(callback?: Callback<T>): Promise<void | T> {
+  async getOrganizationsId<T = Models.Organization>(parameters: Parameters.GetOrganizationsId, callback: Callback<T>): Promise<void>;
+  async getOrganizationsId<T = Models.Organization>(parameters: Parameters.GetOrganizationsId, callback?: undefined): Promise<T>;
+  async getOrganizationsId<T = Models.Organization>(parameters: Parameters.GetOrganizationsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/organizations/${parameters.id}`,
       method: 'GET',
@@ -48,8 +46,6 @@ export class Organizations {
       url: `/organizations/${parameters.id}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         displayName: parameters.displayName,
         desc: parameters.desc,
@@ -57,9 +53,9 @@ export class Organizations {
         'prefs/associatedDomain': parameters.associatedDomain,
         'prefs/externalMembersDisabled': parameters.externalMembersDisabled,
         'prefs/googleAppsVersion': parameters.googleAppsVersion,
-        'prefs/boardVisibilityRestrict/org': parameters.boardVisibilityRestrict / org,
-        'prefs/boardVisibilityRestrict/private': parameters.boardVisibilityRestrict / private,
-        'prefs/boardVisibilityRestrict/public': parameters.boardVisibilityRestrict / public,
+        'prefs/boardVisibilityRestrict/org': parameters.org,
+        'prefs/boardVisibilityRestrict/private': parameters.private,
+        'prefs/boardVisibilityRestrict/public': parameters.public,
         'prefs/orgInviteRestrict': parameters.orgInviteRestrict,
         'prefs/permissionLevel': parameters.permissionLevel,
       },
@@ -69,11 +65,11 @@ export class Organizations {
   }
   /**
      * Delete an Organization */
-  async deleteOrganizationsId<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteOrganizationsId<T = any>(parameters: Parameters.DeleteOrganizationsId, callback: Callback<T>): Promise<void>;
   /**
      * Delete an Organization */
-  async deleteOrganizationsId<T = any>(callback?: undefined): Promise<T>;
-  async deleteOrganizationsId<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteOrganizationsId<T = any>(parameters: Parameters.DeleteOrganizationsId, callback?: undefined): Promise<T>;
+  async deleteOrganizationsId<T = any>(parameters: Parameters.DeleteOrganizationsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/organizations/${parameters.id}`,
       method: 'DELETE',
@@ -87,10 +83,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/${parameters.field}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdField' });
@@ -105,10 +97,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/actions`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdActions' });
@@ -124,8 +112,6 @@ export class Organizations {
       url: `/organizations/${parameters.id}/boards`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
         fields: parameters.fields,
       },
@@ -135,11 +121,11 @@ export class Organizations {
   }
   /**
      * Retrieve the exports that exist for the given organization */
-  async getOrganizationsIdExports<T = any>(callback?: Callback<T>): Promise<void>;
+  async getOrganizationsIdExports<T = any>(parameters: Parameters.GetOrganizationsIdExports, callback: Callback<T>): Promise<void>;
   /**
      * Retrieve the exports that exist for the given organization */
-  async getOrganizationsIdExports<T = any>(callback?: undefined): Promise<T>;
-  async getOrganizationsIdExports<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getOrganizationsIdExports<T = any>(parameters: Parameters.GetOrganizationsIdExports, callback?: undefined): Promise<T>;
+  async getOrganizationsIdExports<T = any>(parameters: Parameters.GetOrganizationsIdExports, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/organizations/${parameters.id}/exports`,
       method: 'GET',
@@ -158,8 +144,6 @@ export class Organizations {
       url: `/organizations/${parameters.id}/exports`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         attachments: parameters.attachments,
       },
     } as RequestConfig);
@@ -176,10 +160,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/members`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdMembers' });
@@ -191,8 +171,6 @@ export class Organizations {
       url: `/organizations/${parameters.id}/members`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         email: parameters.email,
         fullName: parameters.fullName,
         type: parameters.type,
@@ -212,8 +190,6 @@ export class Organizations {
       url: `/organizations/${parameters.id}/memberships`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
         member: parameters.member,
       },
@@ -232,8 +208,6 @@ export class Organizations {
       url: `/organizations/${parameters.id}/memberships/${parameters.idMembership}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         member: parameters.member,
       },
     } as RequestConfig);
@@ -250,21 +224,17 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/pluginData`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdPlugindata' });
   }
   /**
      * List the organization's collections */
-  async getOrganizationsIdTags<T = any>(callback?: Callback<T>): Promise<void>;
+  async getOrganizationsIdTags<T = any>(parameters: Parameters.GetOrganizationsIdTags, callback: Callback<T>): Promise<void>;
   /**
      * List the organization's collections */
-  async getOrganizationsIdTags<T = any>(callback?: undefined): Promise<T>;
-  async getOrganizationsIdTags<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getOrganizationsIdTags<T = any>(parameters: Parameters.GetOrganizationsIdTags, callback?: undefined): Promise<T>;
+  async getOrganizationsIdTags<T = any>(parameters: Parameters.GetOrganizationsIdTags, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/organizations/${parameters.id}/tags`,
       method: 'GET',
@@ -274,11 +244,11 @@ export class Organizations {
   }
   /**
      * Create a Tag in an Organization */
-  async postOrganizationsIdTags<T = any>(callback?: Callback<T>): Promise<void>;
+  async postOrganizationsIdTags<T = any>(parameters: Parameters.PostOrganizationsIdTags, callback: Callback<T>): Promise<void>;
   /**
      * Create a Tag in an Organization */
-  async postOrganizationsIdTags<T = any>(callback?: undefined): Promise<T>;
-  async postOrganizationsIdTags<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async postOrganizationsIdTags<T = any>(parameters: Parameters.PostOrganizationsIdTags, callback?: undefined): Promise<T>;
+  async postOrganizationsIdTags<T = any>(parameters: Parameters.PostOrganizationsIdTags, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/organizations/${parameters.id}/tags`,
       method: 'POST',
@@ -297,8 +267,6 @@ export class Organizations {
       url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         type: parameters.type,
       },
     } as RequestConfig);
@@ -315,10 +283,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdMembers' });
@@ -334,8 +298,6 @@ export class Organizations {
       url: `/organizations/${parameters.id}/members/${parameters.idMember}/deactivated`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -353,8 +315,6 @@ export class Organizations {
       url: `/organizations/${parameters.id}/logo`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         file: parameters.file,
       },
     } as RequestConfig);
@@ -371,10 +331,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/logo`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdLogo' });
@@ -389,10 +345,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/members/${parameters.idMember}/all`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'organizationsIdMembersIdmemberAll' });
@@ -407,10 +359,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/prefs/associatedDomain`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdPrefsAssociateddomain' });
@@ -425,10 +373,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/prefs/orgInviteRestrict`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdPrefsOrginviterestrict' });
@@ -443,10 +387,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/tags/${parameters.idTag}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdTagsIdtag' });
@@ -461,10 +401,6 @@ export class Organizations {
     const config = ({
       url: `/organizations/${parameters.id}/newBillableGuests/${parameters.idBoard}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdNewbillableguestsIdboard' });

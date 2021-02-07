@@ -1,8 +1,4 @@
 export interface PostLists {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** Name for the list */
   name: string;
   /** The long ID of the board the list should be created on */

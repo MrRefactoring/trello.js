@@ -11,8 +11,6 @@ export class Checklists {
       url: '/checklists',
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         idCard: parameters.idCard,
         name: parameters.name,
         pos: parameters.pos,
@@ -29,8 +27,6 @@ export class Checklists {
       url: `/checklists/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         cards: parameters.cards,
         checkItems: parameters.checkItems,
         checkItem_fields: parameters.checkItem_fields,
@@ -51,8 +47,6 @@ export class Checklists {
       url: `/checklists/${parameters.id}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         pos: parameters.pos,
       },
@@ -62,11 +56,11 @@ export class Checklists {
   }
   /**
      * Delete a checklist */
-  async deleteChecklistsId<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteChecklistsId<T = any>(parameters: Parameters.DeleteChecklistsId, callback: Callback<T>): Promise<void>;
   /**
      * Delete a checklist */
-  async deleteChecklistsId<T = any>(callback?: undefined): Promise<T>;
-  async deleteChecklistsId<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteChecklistsId<T = any>(parameters: Parameters.DeleteChecklistsId, callback?: undefined): Promise<T>;
+  async deleteChecklistsId<T = any>(parameters: Parameters.DeleteChecklistsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/checklists/${parameters.id}`,
       method: 'DELETE',
@@ -74,9 +68,9 @@ export class Checklists {
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteChecklistsId' });
   }
-  async getChecklistsIdField<T = any>(callback?: Callback<T>): Promise<void>;
-  async getChecklistsIdField<T = any>(callback?: undefined): Promise<T>;
-  async getChecklistsIdField<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getChecklistsIdField<T = any>(parameters: Parameters.GetChecklistsIdField, callback: Callback<T>): Promise<void>;
+  async getChecklistsIdField<T = any>(parameters: Parameters.GetChecklistsIdField, callback?: undefined): Promise<T>;
+  async getChecklistsIdField<T = any>(parameters: Parameters.GetChecklistsIdField, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/checklists/${parameters.id}/${parameters.field}`,
       method: 'GET',
@@ -91,8 +85,6 @@ export class Checklists {
       url: `/checklists/${parameters.id}/${parameters.field}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -106,8 +98,6 @@ export class Checklists {
       url: `/checklists/${parameters.id}/board`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -120,10 +110,6 @@ export class Checklists {
     const config = ({
       url: `/checklists/${parameters.id}/cards`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getChecklistsIdCards' });
@@ -135,8 +121,6 @@ export class Checklists {
       url: `/checklists/${parameters.id}/checkItems`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
         fields: parameters.fields,
       },
@@ -151,8 +135,6 @@ export class Checklists {
       url: `/checklists/${parameters.id}/checkItems`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         pos: parameters.pos,
         checked: parameters.checked,
@@ -168,8 +150,6 @@ export class Checklists {
       url: `/checklists/${parameters.id}/checkItems/${parameters.idCheckItem}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -178,11 +158,11 @@ export class Checklists {
   }
   /**
      * Remove an item from a checklist */
-  async deleteChecklistsIdCheckitemsIdcheckitem<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteChecklistsIdCheckitemsIdcheckitem<T = any>(parameters: Parameters.DeleteChecklistsIdCheckitemsIdcheckitem, callback: Callback<T>): Promise<void>;
   /**
      * Remove an item from a checklist */
-  async deleteChecklistsIdCheckitemsIdcheckitem<T = any>(callback?: undefined): Promise<T>;
-  async deleteChecklistsIdCheckitemsIdcheckitem<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteChecklistsIdCheckitemsIdcheckitem<T = any>(parameters: Parameters.DeleteChecklistsIdCheckitemsIdcheckitem, callback?: undefined): Promise<T>;
+  async deleteChecklistsIdCheckitemsIdcheckitem<T = any>(parameters: Parameters.DeleteChecklistsIdCheckitemsIdcheckitem, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/checklists/${parameters.id}/checkItems/${parameters.idCheckItem}`,
       method: 'DELETE',

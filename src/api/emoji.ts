@@ -7,19 +7,17 @@ export class Emoji {
   constructor(private client: Client) { }
   /**
      * List available Emoji */
-  async emoji<T = Models.Emoji>(parameters: Parameters.Emoji, callback: Callback<T>): Promise<void>;
+  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: Callback<T>): Promise<void>;
   /**
      * List available Emoji */
-  async emoji<T = Models.Emoji>(parameters: Parameters.Emoji, callback?: undefined): Promise<T>;
-  async emoji<T = Models.Emoji>(parameters: Parameters.Emoji, callback?: Callback<T>): Promise<void | T> {
+  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: undefined): Promise<T>;
+  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: '/emoji',
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
-        locale: parameters.locale,
-        spritesheets: parameters.spritesheets,
+        locale: parameters?.locale,
+        spritesheets: parameters?.spritesheets,
       },
     } as RequestConfig);
 

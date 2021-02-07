@@ -1,8 +1,4 @@
 export interface PostWebhooks {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** A string with a length from `0` to `16384`. */
   description?: string;
   /** A valid URL that is reachable with a `HEAD` and `POST` request. */

@@ -1,6 +1,4 @@
-import { TrelloID } from './trelloID';
-
 export interface Tag {
-  id?: TrelloID;
+  id?: string;
   name?: string;
 }

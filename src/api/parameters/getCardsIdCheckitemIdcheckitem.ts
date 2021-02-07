@@ -1,8 +1,8 @@
 export interface GetCardsIdCheckitemIdcheckitem {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the Card */
+  id: string;
+  /** The ID of the checkitem */
+  idCheckItem: string;
   /** `all` or a comma-separated list of `name,nameData,pos,state,type` */
   fields?: string;
 }

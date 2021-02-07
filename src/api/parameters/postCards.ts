@@ -1,8 +1,4 @@
 export interface PostCards {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** The name for the card */
   name?: string;
   /** The description for the card */

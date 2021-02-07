@@ -11,8 +11,6 @@ export class Notifications {
       url: `/notifications/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         board: parameters.board,
         board_fields: parameters.board_fields,
         card: parameters.card,
@@ -43,8 +41,6 @@ export class Notifications {
       url: `/notifications/${parameters.id}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         unread: parameters.unread,
       },
     } as RequestConfig);
@@ -61,29 +57,23 @@ export class Notifications {
     const config = ({
       url: `/notifications/${parameters.id}/${parameters.field}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getNotificationsIdField' });
   }
   /**
      * Mark all notifications as read */
-  async postNotificationsAllRead<T = any>(parameters: Parameters.PostNotificationsAllRead, callback: Callback<T>): Promise<void>;
+  async postNotificationsAllRead<T = any>(parameters?: Parameters.PostNotificationsAllRead, callback?: Callback<T>): Promise<void>;
   /**
      * Mark all notifications as read */
-  async postNotificationsAllRead<T = any>(parameters: Parameters.PostNotificationsAllRead, callback?: undefined): Promise<T>;
-  async postNotificationsAllRead<T = any>(parameters: Parameters.PostNotificationsAllRead, callback?: Callback<T>): Promise<void | T> {
+  async postNotificationsAllRead<T = any>(parameters?: Parameters.PostNotificationsAllRead, callback?: undefined): Promise<T>;
+  async postNotificationsAllRead<T = any>(parameters?: Parameters.PostNotificationsAllRead, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: '/notifications/all/read',
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
-        read: parameters.read,
-        ids: parameters.ids,
+        read: parameters?.read,
+        ids: parameters?.ids,
       },
     } as RequestConfig);
 
@@ -100,8 +90,6 @@ export class Notifications {
       url: `/notifications/${parameters.id}/unread`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -119,8 +107,6 @@ export class Notifications {
       url: `/notifications/${parameters.id}/board`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -138,8 +124,6 @@ export class Notifications {
       url: `/notifications/${parameters.id}/card`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -157,8 +141,6 @@ export class Notifications {
       url: `/notifications/${parameters.id}/list`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -176,8 +158,6 @@ export class Notifications {
       url: `/notifications/${parameters.id}/member`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -195,8 +175,6 @@ export class Notifications {
       url: `/notifications/${parameters.id}/memberCreator`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -214,8 +192,6 @@ export class Notifications {
       url: `/notifications/${parameters.id}/organization`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);

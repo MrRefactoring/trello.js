@@ -10,10 +10,6 @@ export class Applications {
     const config = ({
       url: `/applications/${parameters.key}/compliance`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'applicationsKeyCompliance' });

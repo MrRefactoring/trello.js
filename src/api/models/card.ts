@@ -1,9 +1,8 @@
-import { TrelloID } from './trelloID';
 import { Limits } from './limits';
 import { Color } from './color';
 
 export interface Card {
-  id?: TrelloID;
+  id?: string;
   address?: string;
   badges?: {
     attachmentsByType?: {
@@ -37,14 +36,14 @@ export interface Card {
   due?: string;
   dueReminder?: string;
   email?: string;
-  idBoard?: TrelloID;
+  idBoard?: string;
   idChecklists?: Record<string, any>[];
   idLabels?: Record<string, any>[];
-  idList?: TrelloID;
+  idList?: string;
   idMembers?: Record<string, any>[];
   idMembersVoted?: Record<string, any>[];
   idShort?: number;
-  idAttachmentCover?: TrelloID;
+  idAttachmentCover?: string;
   labels?: Record<string, any>[];
   limits?: Limits;
   locationName?: string;
@@ -56,7 +55,7 @@ export interface Card {
   subscribed?: boolean;
   url?: string;
   cover?: {
-    idAttachment?: TrelloID;
+    idAttachment?: string;
     color?: Color;
     idUploadedBackground?: boolean;
     size?: string;

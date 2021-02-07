@@ -1,4 +1,5 @@
 export interface PostActionsIdactionReactions {
+  /** The ID of the action */
   idAction: string;
   /** The primary `shortName` of the emoji to add. See [/emoji](#emoji) */
   shortName?: string;

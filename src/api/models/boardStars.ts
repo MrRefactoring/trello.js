@@ -1,7 +1,5 @@
-import { TrelloID } from './trelloID';
-
 export interface BoardStars {
-  id?: TrelloID;
-  idBoard?: TrelloID;
+  id?: string;
+  idBoard?: string;
   pos?: number;
 }

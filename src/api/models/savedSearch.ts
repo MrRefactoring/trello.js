@@ -1,9 +1,6 @@
-import { TrelloID } from './trelloID';
-import { posStringOrNumber } from './posStringOrNumber';
-
 export interface SavedSearch {
-  id?: TrelloID;
+  id?: string;
   name?: string;
   query?: string;
-  pos?: posStringOrNumber;
+  pos?: string | number;
 }

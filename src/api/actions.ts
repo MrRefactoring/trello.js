@@ -16,8 +16,6 @@ export class Actions {
       url: `/actions/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         display: parameters.display,
         entities: parameters.entities,
         fields: parameters.fields,
@@ -42,8 +40,6 @@ export class Actions {
       method: 'PUT',
       params: {
         text: parameters.text,
-        key: parameters.key,
-        token: parameters.token,
       },
     } as RequestConfig);
 
@@ -51,11 +47,11 @@ export class Actions {
   }
   /**
      * Delete a specific action. Only comment actions can be deleted. */
-  async deleteActionsId<T = any>(parameters: { id: string; }, callback?: Callback<T>): Promise<void>;
+  async deleteActionsId<T = any>(parameters: Parameters.DeleteActionsId, callback: Callback<T>): Promise<void>;
   /**
      * Delete a specific action. Only comment actions can be deleted. */
-  async deleteActionsId<T = any>(parameters: { id: string; }, callback?: undefined): Promise<T>;
-  async deleteActionsId<T = any>(parameters: { id: string; }, callback?: Callback<T>): Promise<void | T> {
+  async deleteActionsId<T = any>(parameters: Parameters.DeleteActionsId, callback?: undefined): Promise<T>;
+  async deleteActionsId<T = any>(parameters: Parameters.DeleteActionsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/actions/${parameters.id}`,
       method: 'DELETE',
@@ -73,10 +69,6 @@ export class Actions {
     const config = ({
       url: `/actions/${parameters.id}/${parameters.field}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getActionsIdField' });
@@ -92,8 +84,6 @@ export class Actions {
       url: `/actions/${parameters.id}/board`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -111,8 +101,6 @@ export class Actions {
       url: `/actions/${parameters.id}/card`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -130,8 +118,6 @@ export class Actions {
       url: `/actions/${parameters.id}/list`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -149,8 +135,6 @@ export class Actions {
       url: `/actions/${parameters.id}/member`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -168,8 +152,6 @@ export class Actions {
       url: `/actions/${parameters.id}/memberCreator`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -187,8 +169,6 @@ export class Actions {
       url: `/actions/${parameters.id}/organization`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -206,8 +186,6 @@ export class Actions {
       url: `/actions/${parameters.id}/text`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -225,8 +203,6 @@ export class Actions {
       url: `/actions/${parameters.idAction}/reactions`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         member: parameters.member,
         emoji: parameters.emoji,
       },
@@ -236,7 +212,7 @@ export class Actions {
   }
   /**
      * Adds a new reaction to an action */
-  async postActionsIdactionReactions<T = any>(parameters: Parameters.PostActionsIdactionReactions, callback?: Callback<T>): Promise<void>;
+  async postActionsIdactionReactions<T = any>(parameters: Parameters.PostActionsIdactionReactions, callback: Callback<T>): Promise<void>;
   /**
      * Adds a new reaction to an action */
   async postActionsIdactionReactions<T = any>(parameters: Parameters.PostActionsIdactionReactions, callback?: undefined): Promise<T>;
@@ -245,10 +221,10 @@ export class Actions {
       url: `/actions/${parameters.idAction}/reactions`,
       method: 'POST',
       data: {
-        shortName: parameters?.shortName,
-        skinVariation: parameters?.skinVariation,
-        native: parameters?.native,
-        unified: parameters?.unified,
+        shortName: parameters.shortName,
+        skinVariation: parameters.skinVariation,
+        native: parameters.native,
+        unified: parameters.unified,
       },
     } as RequestConfig);
 
@@ -265,8 +241,6 @@ export class Actions {
       url: `/actions/${parameters.idAction}/reactions/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         member: parameters.member,
         emoji: parameters.emoji,
       },
@@ -276,11 +250,11 @@ export class Actions {
   }
   /**
      * Deletes a reaction */
-  async deleteActionsIdactionReactionsId<T = any>(parameters: { id: string; idAction: string; }, callback?: Callback<T>): Promise<void>;
+  async deleteActionsIdactionReactionsId<T = any>(parameters: Parameters.DeleteActionsIdactionReactionsId, callback: Callback<T>): Promise<void>;
   /**
      * Deletes a reaction */
-  async deleteActionsIdactionReactionsId<T = any>(parameters: { id: string; idAction: string; }, callback?: undefined): Promise<T>;
-  async deleteActionsIdactionReactionsId<T = any>(parameters: { id: string; idAction: string; }, callback?: Callback<T>): Promise<void | T> {
+  async deleteActionsIdactionReactionsId<T = any>(parameters: Parameters.DeleteActionsIdactionReactionsId, callback?: undefined): Promise<T>;
+  async deleteActionsIdactionReactionsId<T = any>(parameters: Parameters.DeleteActionsIdactionReactionsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/actions/${parameters.idAction}/reactions/${parameters.id}`,
       method: 'DELETE',
@@ -298,10 +272,6 @@ export class Actions {
     const config = ({
       url: `/actions/${parameters.idAction}/reactionsSummary`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getActionsIdactionReactionsummary' });

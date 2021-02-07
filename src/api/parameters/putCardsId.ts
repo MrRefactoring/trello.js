@@ -1,8 +1,6 @@
 export interface PutCardsId {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the Card */
+  id: string;
   /** The new name for the card */
   name?: string;
   /** The new description for the card */

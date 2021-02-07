@@ -16,8 +16,6 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
         members: parameters.members,
         member_fields: parameters.member_fields,
@@ -38,18 +36,14 @@ export class Enterprises {
   }
   /**
      * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from an Enterprise's audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is required for this route. */
-  async getEnterprisesIdAuditlog<T = any>(parameters: Parameters.GetEnterprisesIdAuditlog, callback: Callback<T>): Promise<void>;
+  async getEnterprisesIdAuditlog<T = any>(callback?: Callback<T>): Promise<void>;
   /**
      * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from an Enterprise's audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is required for this route. */
-  async getEnterprisesIdAuditlog<T = any>(parameters: Parameters.GetEnterprisesIdAuditlog, callback?: undefined): Promise<T>;
-  async getEnterprisesIdAuditlog<T = any>(parameters: Parameters.GetEnterprisesIdAuditlog, callback?: Callback<T>): Promise<void | T> {
+  async getEnterprisesIdAuditlog<T = any>(callback?: undefined): Promise<T>;
+  async getEnterprisesIdAuditlog<T = any>(callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/enterprises/${parameters.id}/auditlog`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdAuditlog' });
@@ -65,8 +59,6 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/admins`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -84,8 +76,6 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/signupUrl`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         authenticate: parameters.authenticate,
         confirmationAccepted: parameters.confirmationAccepted,
         returnUrl: parameters.returnUrl,
@@ -106,8 +96,6 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/members`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
         filter: parameters.filter,
         sort: parameters.sort,
@@ -133,8 +121,6 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/members/${parameters.idMember}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
         organization_fields: parameters.organization_fields,
         board_fields: parameters.board_fields,
@@ -153,10 +139,6 @@ export class Enterprises {
     const config = ({
       url: `/enterprises/${parameters.id}/transferrable/organization/${parameters.idOrganization}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdTransferrableOrganizationIdOrganization' });
@@ -172,8 +154,6 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/tokens`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         expiration: parameters.expiration,
       },
     } as RequestConfig);
@@ -191,8 +171,6 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/organizations`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         idOrganization: parameters.idOrganization,
       },
     } as RequestConfig);
@@ -210,8 +188,6 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/members/${parameters.idMember}/licensed`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         Values: parameters.Values,
       },
     } as RequestConfig);
@@ -229,8 +205,6 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/members/${parameters.idMember}/deactivated`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
         fields: parameters.fields,
         organization_fields: parameters.organization_fields,
@@ -250,10 +224,6 @@ export class Enterprises {
     const config = ({
       url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
       method: 'PUT',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'putEnterprisesIdAdminsIdmember' });
@@ -268,10 +238,6 @@ export class Enterprises {
     const config = ({
       url: `/enterprises/${parameters.id}/organizations/${parameters.idOrg}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteEnterprisesIdOrganizationsIdorg' });
@@ -286,10 +252,6 @@ export class Enterprises {
     const config = ({
       url: `/enterprises/${parameters.id}/organizations/${parameters.idMember}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'enterprisesIdOrganizationsIdmember' });

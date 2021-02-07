@@ -1,9 +1,8 @@
-import { TrelloID } from './trelloID';
 import { LimitsObject } from './limitsObject';
 import { MemberPrefs } from './memberPrefs';
 
 export interface Member {
-  id?: TrelloID;
+  id?: string;
   activityBlocked?: boolean;
   avatarHash?: string;
   avatarUrl?: string;
@@ -13,10 +12,10 @@ export interface Member {
   };
   confirmed?: boolean;
   fullName?: string;
-  idEnterprise?: TrelloID;
+  idEnterprise?: string;
   idEnterprisesDeactivated?: string[];
-  idMemberReferrer?: TrelloID;
-  idPremOrgsAdmin?: TrelloID[];
+  idMemberReferrer?: string;
+  idPremOrgsAdmin?: string[];
   initials?: string;
   memberType?: string;
   nonPublic?: {};
@@ -31,9 +30,9 @@ export interface Member {
   avatarSource?: string;
   email?: string;
   gravatarHash?: string;
-  idBoards?: TrelloID[];
-  idOrganizations?: TrelloID[];
-  idEnterprisesAdmin?: TrelloID[];
+  idBoards?: string[];
+  idOrganizations?: string[];
+  idEnterprisesAdmin?: string[];
   limits?: LimitsObject;
   loginTypes?: string[];
   marketingOptIn?: {
@@ -44,7 +43,7 @@ export interface Member {
     name?: string;
     count?: string;
     lastDismissed?: string;
-    _id?: TrelloID;
+    _id?: string;
   };
   oneTimeMessagesDismissed?: string[];
   prefs?: MemberPrefs;
@@ -54,5 +53,5 @@ export interface Member {
   premiumFeatures?: string[];
   isAaMastered?: boolean;
   ixUpdate?: number;
-  idBoardsPinned?: TrelloID[];
+  idBoardsPinned?: string[];
 }

@@ -16,8 +16,6 @@ export class Boards {
       url: `/boards/${parameters.id}/memberships`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
         activity: parameters.activity,
         orgMemberType: parameters.orgMemberType,
@@ -39,8 +37,6 @@ export class Boards {
       url: `/boards/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         actions: parameters.actions,
         boardStars: parameters.boardStars,
         cards: parameters.cards,
@@ -73,8 +69,6 @@ export class Boards {
       url: `/boards/${parameters.id}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         desc: parameters.desc,
         closed: parameters.closed,
@@ -111,10 +105,7 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
+      data: parameters.body,
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteBoardsId' });
@@ -129,10 +120,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/${parameters.field}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getBoardsIdField' });
@@ -144,8 +131,6 @@ export class Boards {
       url: `/boards/${parameters.boardId}/actions`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
       },
     } as RequestConfig);
@@ -162,10 +147,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/cards/${parameters.idCard}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getBoardsIdCardsIdcard' });
@@ -176,10 +157,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.boardId}/boardStars`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getBoardsIdBoardstars' });
@@ -194,10 +171,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/checklists`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'boardsIdChecklists' });
@@ -213,8 +186,6 @@ export class Boards {
       url: `/boards/${parameters.id}/checklists`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
       },
     } as RequestConfig);
@@ -231,10 +202,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/cards`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getBoardsIdCards' });
@@ -249,10 +216,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/cards/${parameters.filter}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getBoardsIdCardsFilter' });
@@ -267,10 +230,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/customFields`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getBoardsIdCustomfields' });
@@ -286,8 +245,6 @@ export class Boards {
       url: `/boards/${parameters.id}/labels`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
         limit: parameters.limit,
       },
@@ -306,8 +263,6 @@ export class Boards {
       url: `/boards/${parameters.id}/labels`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         color: parameters.color,
       },
@@ -326,8 +281,6 @@ export class Boards {
       url: `/boards/${parameters.id}/lists`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         cards: parameters.cards,
         card_fields: parameters.card_fields,
         filter: parameters.filter,
@@ -348,8 +301,6 @@ export class Boards {
       url: `/boards/${parameters.id}/lists`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         pos: parameters.pos,
       },
@@ -363,21 +314,17 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/lists/${parameters.filter}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getBoardsIdListsFilter' });
   }
   /**
      * Get the Members for a board */
-  async getBoardsIdMembers<T = any>(callback?: Callback<T>): Promise<void>;
+  async getBoardsIdMembers<T = any>(parameters: Parameters.GetBoardsIdMembers, callback: Callback<T>): Promise<void>;
   /**
      * Get the Members for a board */
-  async getBoardsIdMembers<T = any>(callback?: undefined): Promise<T>;
-  async getBoardsIdMembers<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getBoardsIdMembers<T = any>(parameters: Parameters.GetBoardsIdMembers, callback?: undefined): Promise<T>;
+  async getBoardsIdMembers<T = any>(parameters: Parameters.GetBoardsIdMembers, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/boards/${parameters.id}/members`,
       method: 'GET',
@@ -396,8 +343,6 @@ export class Boards {
       url: `/boards/${parameters.id}/members`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         email: parameters.email,
         type: parameters.type,
       },
@@ -419,8 +364,6 @@ export class Boards {
       url: `/boards/${parameters.id}/members/${parameters.idMember}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         type: parameters.type,
         allowBillableGuest: parameters.allowBillableGuest,
       },
@@ -428,9 +371,9 @@ export class Boards {
 
     return this.client.sendRequest(config, callback, { methodName: 'putBoardsIdMembersIdmember' });
   }
-  async boardsidmembersidmember<T = any>(callback?: Callback<T>): Promise<void>;
-  async boardsidmembersidmember<T = any>(callback?: undefined): Promise<T>;
-  async boardsidmembersidmember<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async boardsidmembersidmember<T = any>(parameters: Parameters.Boardsidmembersidmember, callback: Callback<T>): Promise<void>;
+  async boardsidmembersidmember<T = any>(parameters: Parameters.Boardsidmembersidmember, callback?: undefined): Promise<T>;
+  async boardsidmembersidmember<T = any>(parameters: Parameters.Boardsidmembersidmember, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/boards/${parameters.id}/members/${parameters.idMember}`,
       method: 'DELETE',
@@ -449,8 +392,6 @@ export class Boards {
       url: `/boards/${parameters.id}/memberships/${parameters.idMembership}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         type: parameters.type,
         member_fields: parameters.member_fields,
       },
@@ -469,8 +410,6 @@ export class Boards {
       url: `/boards/${parameters.id}/myPrefs/emailPosition`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -488,8 +427,6 @@ export class Boards {
       url: `/boards/${parameters.id}/myPrefs/idEmailList`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -503,8 +440,6 @@ export class Boards {
       url: `/boards/${parameters.id}/myPrefs/showListGuide`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -518,8 +453,6 @@ export class Boards {
       url: `/boards/${parameters.id}/myPrefs/showSidebar`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -533,8 +466,6 @@ export class Boards {
       url: `/boards/${parameters.id}/myPrefs/showSidebarActivity`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -548,8 +479,6 @@ export class Boards {
       url: `/boards/${parameters.id}/myPrefs/showSidebarBoardActions`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -563,8 +492,6 @@ export class Boards {
       url: `/boards/${parameters.id}/myPrefs/showSidebarMembers`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -582,8 +509,6 @@ export class Boards {
       url: '/boards/',
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         defaultLabels: parameters.defaultLabels,
         defaultLists: parameters.defaultLists,
@@ -615,10 +540,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/calendarKey/generate`,
       method: 'POST',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'postBoardsIdCalendarkeyGenerate' });
@@ -629,10 +550,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/emailKey/generate`,
       method: 'POST',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'postBoardsIdEmailkeyGenerate' });
@@ -644,8 +561,6 @@ export class Boards {
       url: `/boards/${parameters.id}/idTags`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -658,10 +573,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/markedAsViewed`,
       method: 'POST',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'postBoardsIdMarkedasviewed' });
@@ -673,8 +584,6 @@ export class Boards {
       url: `/boards/${parameters.id}/powerUps`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -687,21 +596,17 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/powerUps/${parameters.powerUp}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteBoardsIdPowerups' });
   }
   /**
      * Get the enabled Power-Ups on a board */
-  async getBoardsIdBoardplugins<T = any>(callback?: Callback<T>): Promise<void>;
+  async getBoardsIdBoardplugins<T = any>(parameters: Parameters.GetBoardsIdBoardplugins, callback: Callback<T>): Promise<void>;
   /**
      * Get the enabled Power-Ups on a board */
-  async getBoardsIdBoardplugins<T = any>(callback?: undefined): Promise<T>;
-  async getBoardsIdBoardplugins<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async getBoardsIdBoardplugins<T = any>(parameters: Parameters.GetBoardsIdBoardplugins, callback?: undefined): Promise<T>;
+  async getBoardsIdBoardplugins<T = any>(parameters: Parameters.GetBoardsIdBoardplugins, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/boards/${parameters.id}/boardPlugins`,
       method: 'GET',
@@ -720,8 +625,6 @@ export class Boards {
       url: `/boards/${parameters.id}/boardPlugins`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         idPlugin: parameters.idPlugin,
       },
     } as RequestConfig);
@@ -738,10 +641,6 @@ export class Boards {
     const config = ({
       url: `/boards/${parameters.id}/boardPlugins/${parameters.idPlugin}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteBoardsIdBoardplugins' });
@@ -757,8 +656,6 @@ export class Boards {
       url: `/boards/${parameters.id}/plugins`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
       },
     } as RequestConfig);

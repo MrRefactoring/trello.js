@@ -15,8 +15,6 @@ export class Labels {
       url: `/labels/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -34,8 +32,6 @@ export class Labels {
       url: `/labels/${parameters.id}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         color: parameters.color,
       },
@@ -45,11 +41,11 @@ export class Labels {
   }
   /**
      * Delete a label by ID. */
-  async deleteLabelsId<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteLabelsId<T = any>(parameters: Parameters.DeleteLabelsId, callback: Callback<T>): Promise<void>;
   /**
      * Delete a label by ID. */
-  async deleteLabelsId<T = any>(callback?: undefined): Promise<T>;
-  async deleteLabelsId<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteLabelsId<T = any>(parameters: Parameters.DeleteLabelsId, callback?: undefined): Promise<T>;
+  async deleteLabelsId<T = any>(parameters: Parameters.DeleteLabelsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/labels/${parameters.id}`,
       method: 'DELETE',
@@ -68,8 +64,6 @@ export class Labels {
       url: `/labels/${parameters.id}/${parameters.field}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -87,8 +81,6 @@ export class Labels {
       url: '/labels',
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         color: parameters.color,
         idBoard: parameters.idBoard,

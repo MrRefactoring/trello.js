@@ -1,8 +1,6 @@
 export interface PutListsId {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the list */
+  id: string;
   /** New name for the list */
   name?: string;
   /** Whether the list should be closed (archived) */

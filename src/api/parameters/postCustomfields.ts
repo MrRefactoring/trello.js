@@ -1,8 +1,4 @@
 export interface PostCustomfields {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** The ID of the model for which the Custom Field is being defined. This should always be the ID of a board. */
   idModel?: Record<string, any>;
   /** The type of model that the Custom Field is being defined on. This should always be `board`. */

@@ -1,8 +1,8 @@
 export interface GetChecklistsIdCheckitemsIdcheckitem {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** ID of a checklist. */
+  id: string;
+  /** ID of the check item to retrieve. */
+  idCheckItem: string;
   /** One of: `all`, `name`, `nameData`, `pos`, `state`, `type`. */
   fields?: string;
 }

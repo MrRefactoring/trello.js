@@ -1,8 +1,4 @@
 export interface GetSearch {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** The search query with a length of 1 to 16384 characters */
   query: string;
   /** `mine` or a comma-separated list of Board IDs */

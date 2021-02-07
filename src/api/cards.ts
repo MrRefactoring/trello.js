@@ -16,8 +16,6 @@ export class Cards {
       url: '/cards',
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         desc: parameters.desc,
         pos: parameters.pos,
@@ -49,8 +47,6 @@ export class Cards {
       url: `/cards/${parameters.id}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
         actions: parameters.actions,
         attachments: parameters.attachments,
@@ -85,8 +81,6 @@ export class Cards {
       url: `/cards/${parameters.id}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         desc: parameters.desc,
         closed: parameters.closed,
@@ -110,11 +104,11 @@ export class Cards {
   }
   /**
      * Delete a Card */
-  async deleteCardsId<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteCardsId<T = any>(parameters: Parameters.DeleteCardsId, callback: Callback<T>): Promise<void>;
   /**
      * Delete a Card */
-  async deleteCardsId<T = any>(callback?: undefined): Promise<T>;
-  async deleteCardsId<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteCardsId<T = any>(parameters: Parameters.DeleteCardsId, callback?: undefined): Promise<T>;
+  async deleteCardsId<T = any>(parameters: Parameters.DeleteCardsId, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/cards/${parameters.id}`,
       method: 'DELETE',
@@ -132,10 +126,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/${parameters.field}`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getCardsIdField' });
@@ -151,8 +141,6 @@ export class Cards {
       url: `/cards/${parameters.id}/actions`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         filter: parameters.filter,
       },
     } as RequestConfig);
@@ -169,10 +157,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/attachments`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getCardsIdAttachments' });
@@ -188,8 +172,6 @@ export class Cards {
       url: `/cards/${parameters.id}/attachments`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         file: parameters.file,
         mimeType: parameters.mimeType,
@@ -211,8 +193,6 @@ export class Cards {
       url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -229,10 +209,7 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
+      data: parameters.body,
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deletedCardsIdAttachmentsIdattachment' });
@@ -248,8 +225,6 @@ export class Cards {
       url: `/cards/${parameters.id}/board`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -267,8 +242,6 @@ export class Cards {
       url: `/cards/${parameters.id}/checkItemStates`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -286,8 +259,6 @@ export class Cards {
       url: `/cards/${parameters.id}/checklists`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         checkItems: parameters.checkItems,
         checkItem_fields: parameters.checkItem_fields,
         filter: parameters.filter,
@@ -308,8 +279,6 @@ export class Cards {
       url: `/cards/${parameters.id}/checklists`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         idChecklistSource: parameters.idChecklistSource,
         pos: parameters.pos,
@@ -329,8 +298,6 @@ export class Cards {
       url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -348,8 +315,6 @@ export class Cards {
       url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         name: parameters.name,
         state: parameters.state,
         idChecklist: parameters.idChecklist,
@@ -361,11 +326,11 @@ export class Cards {
   }
   /**
      * Delete a checklist item */
-  async deleteCardsIdCheckitemIdcheckitem<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.DeleteCardsIdCheckitemIdcheckitem, callback: Callback<T>): Promise<void>;
   /**
      * Delete a checklist item */
-  async deleteCardsIdCheckitemIdcheckitem<T = any>(callback?: undefined): Promise<T>;
-  async deleteCardsIdCheckitemIdcheckitem<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.DeleteCardsIdCheckitemIdcheckitem, callback?: undefined): Promise<T>;
+  async deleteCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.DeleteCardsIdCheckitemIdcheckitem, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
       method: 'DELETE',
@@ -384,8 +349,6 @@ export class Cards {
       url: `/cards/${parameters.id}/list`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -403,8 +366,6 @@ export class Cards {
       url: `/cards/${parameters.id}/members`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -422,8 +383,6 @@ export class Cards {
       url: `/cards/${parameters.id}/membersVoted`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -441,8 +400,6 @@ export class Cards {
       url: `/cards/${parameters.id}/membersVoted`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -459,10 +416,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/pluginData`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getCardsIdPlugindata' });
@@ -478,10 +431,9 @@ export class Cards {
       url: `/cards/${parameters.id}/stickers`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
+      data: parameters.body,
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getCardsIdStickers' });
@@ -497,8 +449,6 @@ export class Cards {
       url: `/cards/${parameters.id}/stickers`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         image: parameters.image,
         top: parameters.top,
         left: parameters.left,
@@ -520,8 +470,6 @@ export class Cards {
       url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         fields: parameters.fields,
       },
     } as RequestConfig);
@@ -539,8 +487,6 @@ export class Cards {
       url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         top: parameters.top,
         left: parameters.left,
         zIndex: parameters.zIndex,
@@ -552,11 +498,11 @@ export class Cards {
   }
   /**
      * Remove a sticker from the card */
-  async deleteCardsIdStickersIdsticker<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteCardsIdStickersIdsticker<T = any>(parameters: Parameters.DeleteCardsIdStickersIdsticker, callback: Callback<T>): Promise<void>;
   /**
      * Remove a sticker from the card */
-  async deleteCardsIdStickersIdsticker<T = any>(callback?: undefined): Promise<T>;
-  async deleteCardsIdStickersIdsticker<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteCardsIdStickersIdsticker<T = any>(parameters: Parameters.DeleteCardsIdStickersIdsticker, callback?: undefined): Promise<T>;
+  async deleteCardsIdStickersIdsticker<T = any>(parameters: Parameters.DeleteCardsIdStickersIdsticker, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
       method: 'DELETE',
@@ -575,8 +521,6 @@ export class Cards {
       url: `/cards/${parameters.id}/actions/${parameters.idAction}/comments`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         text: parameters.text,
       },
     } as RequestConfig);
@@ -585,11 +529,11 @@ export class Cards {
   }
   /**
      * Delete a comment */
-  async deleteCardsIdActionsIdComments<T = any>(callback?: Callback<T>): Promise<void>;
+  async deleteCardsIdActionsIdComments<T = any>(parameters: Parameters.DeleteCardsIdActionsIdComments, callback: Callback<T>): Promise<void>;
   /**
      * Delete a comment */
-  async deleteCardsIdActionsIdComments<T = any>(callback?: undefined): Promise<T>;
-  async deleteCardsIdActionsIdComments<T = any>(callback?: Callback<T>): Promise<void | T> {
+  async deleteCardsIdActionsIdComments<T = any>(parameters: Parameters.DeleteCardsIdActionsIdComments, callback?: undefined): Promise<T>;
+  async deleteCardsIdActionsIdComments<T = any>(parameters: Parameters.DeleteCardsIdActionsIdComments, callback?: Callback<T>): Promise<void | T> {
     const config = ({
       url: `/cards/${parameters.id}/actions/${parameters.idAction}/comments`,
       method: 'DELETE',
@@ -607,10 +551,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.idCard}/customField/${parameters.idCustomField}/item`,
       method: 'PUT',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'putCardsIdcardCustomfieldIdcustomfieldItem' });
@@ -625,10 +565,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/customFieldItems`,
       method: 'GET',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'getCardsIdCustomfielditems' });
@@ -644,8 +580,6 @@ export class Cards {
       url: `/cards/${parameters.id}/actions/comments`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         text: parameters.text,
       },
     } as RequestConfig);
@@ -663,8 +597,6 @@ export class Cards {
       url: `/cards/${parameters.id}/idLabels`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -682,8 +614,6 @@ export class Cards {
       url: `/cards/${parameters.id}/idMembers`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         value: parameters.value,
       },
     } as RequestConfig);
@@ -701,8 +631,6 @@ export class Cards {
       url: `/cards/${parameters.id}/labels`,
       method: 'POST',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         color: parameters.color,
         name: parameters.name,
       },
@@ -720,10 +648,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/markAssociatedNotificationsRead`,
       method: 'POST',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'postCardsIdMarkassociatednotificationsread' });
@@ -738,10 +662,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/idLabels/${parameters.idLabel}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteCardsIdIdlabelsIdlabel' });
@@ -756,10 +676,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/idMembers/${parameters.idMember}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteIdIdmembersIdmember' });
@@ -774,10 +690,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/membersVoted/${parameters.idMember}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteCardsIdMembersvotedIdmember' });
@@ -793,8 +705,6 @@ export class Cards {
       url: `/cards/${parameters.idCard}/checklist/${parameters.idChecklist}/checkItem/${parameters.idCheckItem}`,
       method: 'PUT',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         pos: parameters.pos,
       },
     } as RequestConfig);
@@ -811,10 +721,6 @@ export class Cards {
     const config = ({
       url: `/cards/${parameters.id}/checklists/${parameters.idChecklist}`,
       method: 'DELETE',
-      params: {
-        key: parameters.key,
-        token: parameters.token,
-      },
     } as RequestConfig);
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteCardsIdChecklistsIdchecklist' });

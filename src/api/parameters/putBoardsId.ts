@@ -1,9 +1,5 @@
 export interface PutBoardsId {
   id: string;
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** The new name for the board. 1 to 16384 characters long. */
   name?: string;
   /** A new description for the board, 0 to 16384 characters long */

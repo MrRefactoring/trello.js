@@ -1,8 +1,4 @@
 export interface GetEnterprisesIdMembers {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
   /** ID of the Enterprise to retrieve. */
   id: Record<string, any>;
   /** A comma-seperated list of valid [member fields](member). */

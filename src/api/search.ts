@@ -15,8 +15,6 @@ export class Search {
       url: '/search',
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         query: parameters.query,
         idBoards: parameters.idBoards,
         idOrganizations: parameters.idOrganizations,
@@ -53,8 +51,6 @@ export class Search {
       url: '/search/members/',
       method: 'GET',
       params: {
-        key: parameters.key,
-        token: parameters.token,
         query: parameters.query,
         limit: parameters.limit,
         idBoard: parameters.idBoard,

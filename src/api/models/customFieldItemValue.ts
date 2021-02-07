@@ -1,3 +1,0 @@
-export interface CustomFieldItemValue {
-  value?: {};
-}

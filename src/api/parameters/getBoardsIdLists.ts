@@ -1,8 +1,6 @@
 export interface GetBoardsIdLists {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the board */
+  id: string;
   /** Filter to apply to Cards. */
   cards?: Record<string, any>;
   /** `all` or a comma-separated list of card [fields](/cloud/trello/guides/rest-api/object-definitions/#card-object) */

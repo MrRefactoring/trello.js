@@ -1,9 +1,7 @@
-import { TrelloID } from './trelloID';
-
 export interface CheckItem {
-  idChecklist?: TrelloID;
+  idChecklist?: string;
   state?: string;
-  id?: TrelloID;
+  id?: string;
   name?: string;
   nameData?: string;
   pos?: string;

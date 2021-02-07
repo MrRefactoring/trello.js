@@ -1,8 +1,6 @@
 export interface PutBoardsIdMembers {
-  /** The API key to use */
-  key: Record<string, any>;
-  /** The API token to use */
-  token: Record<string, any>;
+  /** The ID of the board */
+  id: string;
   /** The email address of a user to add as a member of the board. */
   email: string;
   /** Valid values: admin, normal, observer. Determines what type of member the user being added should be of the board. */
