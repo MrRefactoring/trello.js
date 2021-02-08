@@ -14,13 +14,13 @@ export class Batch {
    */
   async getBatch<T = any>(parameters: Parameters.GetBatch, callback?: undefined): Promise<T>;
   async getBatch<T = any>(parameters: Parameters.GetBatch, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: '/batch',
       method: 'GET',
       params: {
         urls: parameters.urls,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getBatch' });
   }

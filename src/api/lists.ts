@@ -12,13 +12,13 @@ export class Lists {
    * Get information about a List */
   async getListsId<T = any>(parameters: Parameters.GetListsId, callback?: undefined): Promise<T>;
   async getListsId<T = any>(parameters: Parameters.GetListsId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}`,
       method: 'GET',
       params: {
         fields: parameters.fields,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getListsId' });
   }
@@ -30,7 +30,7 @@ export class Lists {
    * Update the properties of a List */
   async putListsId<T = any>(parameters: Parameters.PutListsId, callback?: undefined): Promise<T>;
   async putListsId<T = any>(parameters: Parameters.PutListsId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}`,
       method: 'PUT',
       params: {
@@ -40,7 +40,7 @@ export class Lists {
         pos: parameters.pos,
         subscribed: parameters.subscribed,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putListsId' });
   }
@@ -52,7 +52,7 @@ export class Lists {
    * Create a new List on a Board */
   async postLists<T = any>(parameters: Parameters.PostLists, callback?: undefined): Promise<T>;
   async postLists<T = any>(parameters: Parameters.PostLists, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: '/lists',
       method: 'POST',
       params: {
@@ -61,7 +61,7 @@ export class Lists {
         idListSource: parameters.idListSource,
         pos: parameters.pos,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'postLists' });
   }
@@ -73,10 +73,10 @@ export class Lists {
    * Archive all cards in a list */
   async postListsIdArchiveallcards<T = any>(parameters: Parameters.PostListsIdArchiveallcards, callback?: undefined): Promise<T>;
   async postListsIdArchiveallcards<T = any>(parameters: Parameters.PostListsIdArchiveallcards, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}/archiveAllCards`,
       method: 'POST',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'postListsIdArchiveallcards' });
   }
@@ -88,14 +88,14 @@ export class Lists {
    * Move all Cards in a List */
   async postListsIdMoveallcards<T = any>(parameters: Parameters.PostListsIdMoveallcards, callback?: undefined): Promise<T>;
   async postListsIdMoveallcards<T = any>(parameters: Parameters.PostListsIdMoveallcards, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}/moveAllCards`,
       method: 'POST',
       params: {
         idBoard: parameters.idBoard,
         idList: parameters.idList,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'postListsIdMoveallcards' });
   }
@@ -107,13 +107,13 @@ export class Lists {
    * Archive or unarchive a list */
   async putListsIdClosed<T = any>(parameters: Parameters.PutListsIdClosed, callback?: undefined): Promise<T>;
   async putListsIdClosed<T = any>(parameters: Parameters.PutListsIdClosed, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}/closed`,
       method: 'PUT',
       params: {
         value: parameters.value,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putListsIdClosed' });
   }
@@ -125,13 +125,13 @@ export class Lists {
    * Move a List to a different Board */
   async putIdIdboard<T = any>(parameters: Parameters.PutIdIdboard, callback?: undefined): Promise<T>;
   async putIdIdboard<T = any>(parameters: Parameters.PutIdIdboard, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}/idBoard`,
       method: 'PUT',
       params: {
         value: parameters.value,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putIdIdboard' });
   }
@@ -143,13 +143,13 @@ export class Lists {
    * Rename a list */
   async putListsIdField<T = any>(parameters: Parameters.PutListsIdField, callback?: undefined): Promise<T>;
   async putListsIdField<T = any>(parameters: Parameters.PutListsIdField, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}/${parameters.field}`,
       method: 'PUT',
       params: {
         value: parameters.value,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putListsIdField' });
   }
@@ -161,13 +161,13 @@ export class Lists {
    * Get the Actions on a List */
   async getListsIdActions<T = any>(parameters: Parameters.GetListsIdActions, callback?: undefined): Promise<T>;
   async getListsIdActions<T = any>(parameters: Parameters.GetListsIdActions, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}/actions`,
       method: 'GET',
       params: {
         filter: parameters.filter,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getListsIdActions' });
   }
@@ -179,13 +179,13 @@ export class Lists {
    * Get the board a list is on */
   async getListsIdBoard<T = any>(parameters: Parameters.GetListsIdBoard, callback?: undefined): Promise<T>;
   async getListsIdBoard<T = any>(parameters: Parameters.GetListsIdBoard, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}/board`,
       method: 'GET',
       params: {
         fields: parameters.fields,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getListsIdBoard' });
   }
@@ -197,10 +197,10 @@ export class Lists {
    * List the cards in a list */
   async getListsIdCards<T = any>(parameters: Parameters.GetListsIdCards, callback?: undefined): Promise<T>;
   async getListsIdCards<T = any>(parameters: Parameters.GetListsIdCards, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/lists/${parameters.id}/cards`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getListsIdCards' });
   }

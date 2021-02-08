@@ -8,10 +8,10 @@ export class Applications {
   async applicationsKeyCompliance<T = any>(parameters: Parameters.ApplicationsKeyCompliance, callback: Callback<T>): Promise<void>;
   async applicationsKeyCompliance<T = any>(parameters: Parameters.ApplicationsKeyCompliance, callback?: undefined): Promise<T>;
   async applicationsKeyCompliance<T = any>(parameters: Parameters.ApplicationsKeyCompliance, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/applications/${parameters.key}/compliance`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'applicationsKeyCompliance' });
   }

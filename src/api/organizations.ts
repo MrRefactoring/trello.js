@@ -13,7 +13,7 @@ export class Organizations {
    * Create a new team */
   async postOrganizations<T = any>(parameters: Parameters.PostOrganizations, callback?: undefined): Promise<T>;
   async postOrganizations<T = any>(parameters: Parameters.PostOrganizations, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: '/organizations',
       method: 'POST',
       params: {
@@ -22,7 +22,7 @@ export class Organizations {
         name: parameters.name,
         website: parameters.website,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'postOrganizations' });
   }
@@ -30,10 +30,10 @@ export class Organizations {
   async getOrganizationsId<T = Models.Organization>(parameters: Parameters.GetOrganizationsId, callback: Callback<T>): Promise<void>;
   async getOrganizationsId<T = Models.Organization>(parameters: Parameters.GetOrganizationsId, callback?: undefined): Promise<T>;
   async getOrganizationsId<T = Models.Organization>(parameters: Parameters.GetOrganizationsId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsId' });
   }
@@ -45,7 +45,7 @@ export class Organizations {
    * Update an organization */
   async putOrganizationsId<T = Models.Organization>(parameters: Parameters.PutOrganizationsId, callback?: undefined): Promise<T>;
   async putOrganizationsId<T = Models.Organization>(parameters: Parameters.PutOrganizationsId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}`,
       method: 'PUT',
       params: {
@@ -62,7 +62,7 @@ export class Organizations {
         'prefs/orgInviteRestrict': parameters.orgInviteRestrict,
         'prefs/permissionLevel': parameters.permissionLevel,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putOrganizationsId' });
   }
@@ -74,10 +74,10 @@ export class Organizations {
    * Delete an Organization */
   async deleteOrganizationsId<T = any>(parameters: Parameters.DeleteOrganizationsId, callback?: undefined): Promise<T>;
   async deleteOrganizationsId<T = any>(parameters: Parameters.DeleteOrganizationsId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}`,
       method: 'DELETE',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsId' });
   }
@@ -85,10 +85,10 @@ export class Organizations {
   async getOrganizationsIdField<T = Models.Organization>(parameters: Parameters.GetOrganizationsIdField, callback: Callback<T>): Promise<void>;
   async getOrganizationsIdField<T = Models.Organization>(parameters: Parameters.GetOrganizationsIdField, callback?: undefined): Promise<T>;
   async getOrganizationsIdField<T = Models.Organization>(parameters: Parameters.GetOrganizationsIdField, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/${parameters.field}`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdField' });
   }
@@ -100,10 +100,10 @@ export class Organizations {
    * List the actions on a team */
   async getOrganizationsIdActions<T = any>(parameters: Parameters.GetOrganizationsIdActions, callback?: undefined): Promise<T>;
   async getOrganizationsIdActions<T = any>(parameters: Parameters.GetOrganizationsIdActions, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/actions`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdActions' });
   }
@@ -115,14 +115,14 @@ export class Organizations {
    * List the boards in a team */
   async getOrganizationsIdBoards<T = any>(parameters: Parameters.GetOrganizationsIdBoards, callback?: undefined): Promise<T>;
   async getOrganizationsIdBoards<T = any>(parameters: Parameters.GetOrganizationsIdBoards, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/boards`,
       method: 'GET',
       params: {
         filter: parameters.filter,
         fields: parameters.fields,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdBoards' });
   }
@@ -134,10 +134,10 @@ export class Organizations {
    * Retrieve the exports that exist for the given organization */
   async getOrganizationsIdExports<T = any>(parameters: Parameters.GetOrganizationsIdExports, callback?: undefined): Promise<T>;
   async getOrganizationsIdExports<T = any>(parameters: Parameters.GetOrganizationsIdExports, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/exports`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdExports' });
   }
@@ -149,13 +149,13 @@ export class Organizations {
    * Kick off CSV export for an organization */
   async postOrganizationsIdExports<T = Models.Export>(parameters: Parameters.PostOrganizationsIdExports, callback?: undefined): Promise<T>;
   async postOrganizationsIdExports<T = Models.Export>(parameters: Parameters.PostOrganizationsIdExports, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/exports`,
       method: 'POST',
       params: {
         attachments: parameters.attachments,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'postOrganizationsIdExports' });
   }
@@ -167,10 +167,10 @@ export class Organizations {
    * List the members in a team */
   async getOrganizationsIdMembers<T = any>(parameters: Parameters.GetOrganizationsIdMembers, callback?: undefined): Promise<T>;
   async getOrganizationsIdMembers<T = any>(parameters: Parameters.GetOrganizationsIdMembers, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/members`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdMembers' });
   }
@@ -178,7 +178,7 @@ export class Organizations {
   async putOrganizationsIdMembers<T = any>(parameters: Parameters.PutOrganizationsIdMembers, callback: Callback<T>): Promise<void>;
   async putOrganizationsIdMembers<T = any>(parameters: Parameters.PutOrganizationsIdMembers, callback?: undefined): Promise<T>;
   async putOrganizationsIdMembers<T = any>(parameters: Parameters.PutOrganizationsIdMembers, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/members`,
       method: 'PUT',
       params: {
@@ -186,7 +186,7 @@ export class Organizations {
         fullName: parameters.fullName,
         type: parameters.type,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putOrganizationsIdMembers' });
   }
@@ -198,14 +198,14 @@ export class Organizations {
    * List the memberships of a team */
   async getOrganizationsIdMemberships<T = any>(parameters: Parameters.GetOrganizationsIdMemberships, callback?: undefined): Promise<T>;
   async getOrganizationsIdMemberships<T = any>(parameters: Parameters.GetOrganizationsIdMemberships, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/memberships`,
       method: 'GET',
       params: {
         filter: parameters.filter,
         member: parameters.member,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdMemberships' });
   }
@@ -217,13 +217,13 @@ export class Organizations {
    * Get a single Membership for an Organization */
   async getOrganizationsIdMembershipsIdmembership<T = any>(parameters: Parameters.GetOrganizationsIdMembershipsIdmembership, callback?: undefined): Promise<T>;
   async getOrganizationsIdMembershipsIdmembership<T = any>(parameters: Parameters.GetOrganizationsIdMembershipsIdmembership, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/memberships/${parameters.idMembership}`,
       method: 'GET',
       params: {
         member: parameters.member,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdMembershipsIdmembership' });
   }
@@ -235,10 +235,10 @@ export class Organizations {
    * Get organization scoped pluginData on this team */
   async getOrganizationsIdPlugindata<T = any>(parameters: Parameters.GetOrganizationsIdPlugindata, callback?: undefined): Promise<T>;
   async getOrganizationsIdPlugindata<T = any>(parameters: Parameters.GetOrganizationsIdPlugindata, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/pluginData`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdPlugindata' });
   }
@@ -250,10 +250,10 @@ export class Organizations {
    * List the organization's collections */
   async getOrganizationsIdTags<T = any>(parameters: Parameters.GetOrganizationsIdTags, callback?: undefined): Promise<T>;
   async getOrganizationsIdTags<T = any>(parameters: Parameters.GetOrganizationsIdTags, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/tags`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdTags' });
   }
@@ -265,10 +265,10 @@ export class Organizations {
    * Create a Tag in an Organization */
   async postOrganizationsIdTags<T = any>(parameters: Parameters.PostOrganizationsIdTags, callback?: undefined): Promise<T>;
   async postOrganizationsIdTags<T = any>(parameters: Parameters.PostOrganizationsIdTags, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/tags`,
       method: 'POST',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'postOrganizationsIdTags' });
   }
@@ -280,13 +280,13 @@ export class Organizations {
    * Add a member to a team or update their member type. */
   async putOrganizationsIdMembersIdmember<T = any>(parameters: Parameters.PutOrganizationsIdMembersIdmember, callback?: undefined): Promise<T>;
   async putOrganizationsIdMembersIdmember<T = any>(parameters: Parameters.PutOrganizationsIdMembersIdmember, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
       method: 'PUT',
       params: {
         type: parameters.type,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putOrganizationsIdMembersIdmember' });
   }
@@ -298,10 +298,10 @@ export class Organizations {
    * Remove a member from a team */
   async deleteOrganizationsIdMembers<T = any>(parameters: Parameters.DeleteOrganizationsIdMembers, callback?: undefined): Promise<T>;
   async deleteOrganizationsIdMembers<T = any>(parameters: Parameters.DeleteOrganizationsIdMembers, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
       method: 'DELETE',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdMembers' });
   }
@@ -313,13 +313,13 @@ export class Organizations {
    * Deactivate or reactivate a member of a team */
   async putOrganizationsIdMembersIdmemberDeactivated<T = any>(parameters: Parameters.PutOrganizationsIdMembersIdmemberDeactivated, callback?: undefined): Promise<T>;
   async putOrganizationsIdMembersIdmemberDeactivated<T = any>(parameters: Parameters.PutOrganizationsIdMembersIdmemberDeactivated, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/members/${parameters.idMember}/deactivated`,
       method: 'PUT',
       params: {
         value: parameters.value,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putOrganizationsIdMembersIdmemberDeactivated' });
   }
@@ -331,13 +331,13 @@ export class Organizations {
    * Set the logo image for a team */
   async postOrganizationsIdLogo<T = any>(parameters: Parameters.PostOrganizationsIdLogo, callback?: undefined): Promise<T>;
   async postOrganizationsIdLogo<T = any>(parameters: Parameters.PostOrganizationsIdLogo, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/logo`,
       method: 'POST',
       params: {
         file: parameters.file,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'postOrganizationsIdLogo' });
   }
@@ -349,10 +349,10 @@ export class Organizations {
    * Delete a the logo from a team */
   async deleteOrganizationsIdLogo<T = any>(parameters: Parameters.DeleteOrganizationsIdLogo, callback?: undefined): Promise<T>;
   async deleteOrganizationsIdLogo<T = any>(parameters: Parameters.DeleteOrganizationsIdLogo, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/logo`,
       method: 'DELETE',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdLogo' });
   }
@@ -364,10 +364,10 @@ export class Organizations {
    * Remove a member from a team and from all team boards */
   async organizationsIdMembersIdmemberAll<T = any>(parameters: Parameters.OrganizationsIdMembersIdmemberAll, callback?: undefined): Promise<T>;
   async organizationsIdMembersIdmemberAll<T = any>(parameters: Parameters.OrganizationsIdMembersIdmemberAll, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/members/${parameters.idMember}/all`,
       method: 'DELETE',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'organizationsIdMembersIdmemberAll' });
   }
@@ -379,10 +379,10 @@ export class Organizations {
    * Remove the associated Google Apps domain from a team */
   async deleteOrganizationsIdPrefsAssociateddomain<T = any>(parameters: Parameters.DeleteOrganizationsIdPrefsAssociateddomain, callback?: undefined): Promise<T>;
   async deleteOrganizationsIdPrefsAssociateddomain<T = any>(parameters: Parameters.DeleteOrganizationsIdPrefsAssociateddomain, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/prefs/associatedDomain`,
       method: 'DELETE',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdPrefsAssociateddomain' });
   }
@@ -394,10 +394,10 @@ export class Organizations {
    * Remove the email domain restriction on who can be invited to the team */
   async deleteOrganizationsIdPrefsOrginviterestrict<T = any>(parameters: Parameters.DeleteOrganizationsIdPrefsOrginviterestrict, callback?: undefined): Promise<T>;
   async deleteOrganizationsIdPrefsOrginviterestrict<T = any>(parameters: Parameters.DeleteOrganizationsIdPrefsOrginviterestrict, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/prefs/orgInviteRestrict`,
       method: 'DELETE',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdPrefsOrginviterestrict' });
   }
@@ -409,10 +409,10 @@ export class Organizations {
    * Delete an organization's tag */
   async deleteOrganizationsIdTagsIdtag<T = any>(parameters: Parameters.DeleteOrganizationsIdTagsIdtag, callback?: undefined): Promise<T>;
   async deleteOrganizationsIdTagsIdtag<T = any>(parameters: Parameters.DeleteOrganizationsIdTagsIdtag, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/tags/${parameters.idTag}`,
       method: 'DELETE',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationsIdTagsIdtag' });
   }
@@ -424,10 +424,10 @@ export class Organizations {
    * Used to check whether the given board has new billable guests on it. */
   async getOrganizationsIdNewbillableguestsIdboard<T = any>(parameters: Parameters.GetOrganizationsIdNewbillableguestsIdboard, callback?: undefined): Promise<T>;
   async getOrganizationsIdNewbillableguestsIdboard<T = any>(parameters: Parameters.GetOrganizationsIdNewbillableguestsIdboard, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/organizations/${parameters.id}/newBillableGuests/${parameters.idBoard}`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getOrganizationsIdNewbillableguestsIdboard' });
   }

@@ -12,13 +12,13 @@ export class Labels {
    * Get information about a single Label. */
   async getLabelsId<T = any>(parameters: Parameters.GetLabelsId, callback?: undefined): Promise<T>;
   async getLabelsId<T = any>(parameters: Parameters.GetLabelsId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'GET',
       params: {
         fields: parameters.fields,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getLabelsId' });
   }
@@ -30,14 +30,14 @@ export class Labels {
    * Update a label by ID. */
   async putLabelsId<T = any>(parameters: Parameters.PutLabelsId, callback?: undefined): Promise<T>;
   async putLabelsId<T = any>(parameters: Parameters.PutLabelsId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'PUT',
       params: {
         name: parameters.name,
         color: parameters.color,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putLabelsId' });
   }
@@ -49,10 +49,10 @@ export class Labels {
    * Delete a label by ID. */
   async deleteLabelsId<T = any>(parameters: Parameters.DeleteLabelsId, callback?: undefined): Promise<T>;
   async deleteLabelsId<T = any>(parameters: Parameters.DeleteLabelsId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'DELETE',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteLabelsId' });
   }
@@ -64,13 +64,13 @@ export class Labels {
    * Update a field on a label. */
   async putLabelsIdField<T = any>(parameters: Parameters.PutLabelsIdField, callback?: undefined): Promise<T>;
   async putLabelsIdField<T = any>(parameters: Parameters.PutLabelsIdField, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/labels/${parameters.id}/${parameters.field}`,
       method: 'PUT',
       params: {
         value: parameters.value,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'putLabelsIdField' });
   }
@@ -82,7 +82,7 @@ export class Labels {
    * Create a new Label on a Board. */
   async postLabels<T = any>(parameters: Parameters.PostLabels, callback?: undefined): Promise<T>;
   async postLabels<T = any>(parameters: Parameters.PostLabels, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: '/labels',
       method: 'POST',
       params: {
@@ -90,7 +90,7 @@ export class Labels {
         color: parameters.color,
         idBoard: parameters.idBoard,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'postLabels' });
   }

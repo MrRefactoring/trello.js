@@ -34,10 +34,10 @@ export class Webhooks {
    * Get a webhook by ID. */
   async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhooksId, callback?: undefined): Promise<T>;
   async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhooksId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/webhooks/${parameters.id}`,
       method: 'GET',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getWebhook' });
   }
@@ -49,7 +49,7 @@ export class Webhooks {
    * Update a webhook by ID. */
   async updateWebhook<T = Models.Webhook>(parameters: Parameters.PutWebhooksId, callback?: undefined): Promise<T>;
   async updateWebhook<T = Models.Webhook>(parameters: Parameters.PutWebhooksId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/webhooks/${parameters.id}`,
       method: 'PUT',
       params: {
@@ -58,7 +58,7 @@ export class Webhooks {
         idModel: parameters.idModel,
         active: parameters.active,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'updateWebhook' });
   }
@@ -70,10 +70,10 @@ export class Webhooks {
    * Delete a webhook by ID. */
   async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhooksId, callback?: undefined): Promise<T>;
   async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhooksId, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: `/webhooks/${parameters.id}`,
       method: 'DELETE',
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'deleteWebhook' });
   }

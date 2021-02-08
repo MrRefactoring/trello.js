@@ -12,7 +12,7 @@ export class Search {
    * Find what you're looking for in Trello */
   async getSearch<T = any>(parameters: Parameters.GetSearch, callback?: undefined): Promise<T>;
   async getSearch<T = any>(parameters: Parameters.GetSearch, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: '/search',
       method: 'GET',
       params: {
@@ -37,7 +37,7 @@ export class Search {
         members_limit: parameters.members_limit,
         partial: parameters.partial,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getSearch' });
   }
@@ -49,7 +49,7 @@ export class Search {
    * Search for Trello members. */
   async getSearchMembers<T = any>(parameters: Parameters.GetSearchMembers, callback?: undefined): Promise<T>;
   async getSearchMembers<T = any>(parameters: Parameters.GetSearchMembers, callback?: Callback<T>): Promise<void | T> {
-    const config = ({
+    const config: RequestConfig = {
       url: '/search/members/',
       method: 'GET',
       params: {
@@ -59,7 +59,7 @@ export class Search {
         idOrganization: parameters.idOrganization,
         onlyOrgMembers: parameters.onlyOrgMembers,
       },
-    } as RequestConfig);
+    };
 
     return this.client.sendRequest(config, callback, { methodName: 'getSearchMembers' });
   }
