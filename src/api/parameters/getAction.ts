@@ -1,4 +1,4 @@
-export interface GetActionsId {
+export interface GetAction {
   /** The ID of the Action */
   id: string;
   display?: boolean;

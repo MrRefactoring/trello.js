@@ -1,4 +1,4 @@
-export interface GetActionsIdList {
+export interface GetActionList {
   /** The ID of the action */
   id: Record<string, any>;
   /** `all` or a comma-separated list of list fields */

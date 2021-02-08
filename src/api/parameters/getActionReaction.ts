@@ -1,4 +1,4 @@
-export interface GetActionsIdactionReactionsId {
+export interface GetActionReaction {
   /** The ID of the Action */
   idAction: string;
   /** The ID of the reaction */
