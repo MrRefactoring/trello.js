@@ -188,11 +188,11 @@ export class Actions {
 
   /**
    * Update a comment action */
-  async updateActionText<T = any>(parameters: Parameters.CreateActionText, callback: Callback<T>): Promise<void>;
+  async updateActionText<T = any>(parameters: Parameters.UpdateActionText, callback: Callback<T>): Promise<void>;
   /**
    * Update a comment action */
-  async updateActionText<T = any>(parameters: Parameters.CreateActionText, callback?: undefined): Promise<T>;
-  async updateActionText<T = any>(parameters: Parameters.CreateActionText, callback?: Callback<T>): Promise<void | T> {
+  async updateActionText<T = any>(parameters: Parameters.UpdateActionText, callback?: undefined): Promise<T>;
+  async updateActionText<T = any>(parameters: Parameters.UpdateActionText, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/text`,
       method: 'PUT',
