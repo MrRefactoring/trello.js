@@ -1,4 +1,4 @@
-export interface PutChecklistsIdField {
+export interface UpdateChecklistField {
   /** ID of a checklist. */
   id: string;
   /** Field to update. */

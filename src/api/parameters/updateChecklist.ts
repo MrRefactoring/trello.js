@@ -1,4 +1,4 @@
-export interface PutCheclistsId {
+export interface UpdateChecklist {
   /** ID of a checklist. */
   id: string;
   /** Name of the new checklist being created. Should be length of 1 to 16384. */

@@ -8,11 +8,11 @@ export class Webhooks {
 
   /**
    * Create a new webhook. */
-  async createWebhook<T = Models.Webhook>(parameters: Parameters.PostWebhooks, callback: Callback<T>): Promise<void>;
+  async createWebhook<T = Models.Webhook>(parameters: Parameters.CreateWebhook, callback: Callback<T>): Promise<void>;
   /**
    * Create a new webhook. */
-  async createWebhook<T = Models.Webhook>(parameters: Parameters.PostWebhooks, callback?: undefined): Promise<T>;
-  async createWebhook<T = Models.Webhook>(parameters: Parameters.PostWebhooks, callback?: Callback<T>): Promise<void | T> {
+  async createWebhook<T = Models.Webhook>(parameters: Parameters.CreateWebhook, callback?: undefined): Promise<T>;
+  async createWebhook<T = Models.Webhook>(parameters: Parameters.CreateWebhook, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/webhooks/',
       method: 'POST',
@@ -29,11 +29,11 @@ export class Webhooks {
 
   /**
    * Get a webhook by ID. */
-  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhooksId, callback: Callback<T>): Promise<void>;
+  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhook, callback: Callback<T>): Promise<void>;
   /**
    * Get a webhook by ID. */
-  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhooksId, callback?: undefined): Promise<T>;
-  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhooksId, callback?: Callback<T>): Promise<void | T> {
+  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhook, callback?: undefined): Promise<T>;
+  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhook, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/webhooks/${parameters.id}`,
       method: 'GET',
@@ -44,11 +44,11 @@ export class Webhooks {
 
   /**
    * Update a webhook by ID. */
-  async updateWebhook<T = Models.Webhook>(parameters: Parameters.PutWebhooksId, callback: Callback<T>): Promise<void>;
+  async updateWebhook<T = Models.Webhook>(parameters: Parameters.UpdateWebhook, callback: Callback<T>): Promise<void>;
   /**
    * Update a webhook by ID. */
-  async updateWebhook<T = Models.Webhook>(parameters: Parameters.PutWebhooksId, callback?: undefined): Promise<T>;
-  async updateWebhook<T = Models.Webhook>(parameters: Parameters.PutWebhooksId, callback?: Callback<T>): Promise<void | T> {
+  async updateWebhook<T = Models.Webhook>(parameters: Parameters.UpdateWebhook, callback?: undefined): Promise<T>;
+  async updateWebhook<T = Models.Webhook>(parameters: Parameters.UpdateWebhook, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/webhooks/${parameters.id}`,
       method: 'PUT',
@@ -65,11 +65,11 @@ export class Webhooks {
 
   /**
    * Delete a webhook by ID. */
-  async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhooksId, callback: Callback<T>): Promise<void>;
+  async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhook, callback: Callback<T>): Promise<void>;
   /**
    * Delete a webhook by ID. */
-  async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhooksId, callback?: undefined): Promise<T>;
-  async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhooksId, callback?: Callback<T>): Promise<void | T> {
+  async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhook, callback?: undefined): Promise<T>;
+  async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhook, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/webhooks/${parameters.id}`,
       method: 'DELETE',
@@ -80,11 +80,11 @@ export class Webhooks {
 
   /**
    * Get a field on a Webhook */
-  async getWebhookField<T = any>(parameters: Parameters.Webhooksidfield, callback: Callback<T>): Promise<void>;
+  async getWebhookField<T = any>(parameters: Parameters.GetWebhookField, callback: Callback<T>): Promise<void>;
   /**
    * Get a field on a Webhook */
-  async getWebhookField<T = any>(parameters: Parameters.Webhooksidfield, callback?: undefined): Promise<T>;
-  async getWebhookField<T = any>(parameters: Parameters.Webhooksidfield, callback?: Callback<T>): Promise<void | T> {
+  async getWebhookField<T = any>(parameters: Parameters.GetWebhookField, callback?: undefined): Promise<T>;
+  async getWebhookField<T = any>(parameters: Parameters.GetWebhookField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/webhooks/${parameters.id}/${parameters.field}`,
       method: 'GET',

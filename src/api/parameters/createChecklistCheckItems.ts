@@ -1,4 +1,4 @@
-export interface PostChecklistsIdCheckitems {
+export interface CreateChecklistCheckItems {
   /** ID of a checklist. */
   id: string;
   /** The name of the new check item on the checklist. Should be a string of length 1 to 16384. */

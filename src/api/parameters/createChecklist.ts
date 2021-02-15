@@ -1,4 +1,4 @@
-export interface PostChecklists {
+export interface CreateChecklist {
   /** The ID of the Card that the checklist should be added to. */
   idCard: Record<string, any>;
   /** The name of the checklist. Should be a string of length 1 to 16384. */

@@ -1,4 +1,4 @@
-export interface GetChecklistsId {
+export interface GetChecklist {
   /** ID of a checklist. */
   id: string;
   /** Valid values: `all`, `closed`, `none`, `open`, `visible`. Cards is a nested resource. The additional query params available are documented at [Cards Nested Resource](ref:cards-nested-resource). */
