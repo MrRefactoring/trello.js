@@ -8,11 +8,11 @@ export class Cards {
 
   /**
    * Create a new card */
-  async postCards<T = any>(parameters: Parameters.PostCards, callback: Callback<T>): Promise<void>;
+  async createCard<T = any>(parameters: Parameters.CreateCard, callback: Callback<T>): Promise<void>;
   /**
    * Create a new card */
-  async postCards<T = any>(parameters: Parameters.PostCards, callback?: undefined): Promise<T>;
-  async postCards<T = any>(parameters: Parameters.PostCards, callback?: Callback<T>): Promise<void | T> {
+  async createCard<T = any>(parameters: Parameters.CreateCard, callback?: undefined): Promise<T>;
+  async createCard<T = any>(parameters: Parameters.CreateCard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/cards',
       method: 'POST',
@@ -35,16 +35,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postCards' });
+    return this.client.sendRequest(config, callback, { methodName: 'createCard' });
   }
 
   /**
    * Get a card by its ID */
-  async getCardsId<T = Models.Card>(parameters: Parameters.GetCardsId, callback: Callback<T>): Promise<void>;
+  async getCard<T = Models.Card>(parameters: Parameters.GetCard, callback: Callback<T>): Promise<void>;
   /**
    * Get a card by its ID */
-  async getCardsId<T = Models.Card>(parameters: Parameters.GetCardsId, callback?: undefined): Promise<T>;
-  async getCardsId<T = Models.Card>(parameters: Parameters.GetCardsId, callback?: Callback<T>): Promise<void | T> {
+  async getCard<T = Models.Card>(parameters: Parameters.GetCard, callback?: undefined): Promise<T>;
+  async getCard<T = Models.Card>(parameters: Parameters.GetCard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}`,
       method: 'GET',
@@ -70,16 +70,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsId' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCard' });
   }
 
   /**
    * Update a card */
-  async putCardsId<T = Models.Card>(parameters: Parameters.PutCardsId, callback: Callback<T>): Promise<void>;
+  async updateCard<T = Models.Card>(parameters: Parameters.UpdateCard, callback: Callback<T>): Promise<void>;
   /**
    * Update a card */
-  async putCardsId<T = Models.Card>(parameters: Parameters.PutCardsId, callback?: undefined): Promise<T>;
-  async putCardsId<T = Models.Card>(parameters: Parameters.PutCardsId, callback?: Callback<T>): Promise<void | T> {
+  async updateCard<T = Models.Card>(parameters: Parameters.UpdateCard, callback?: undefined): Promise<T>;
+  async updateCard<T = Models.Card>(parameters: Parameters.UpdateCard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}`,
       method: 'PUT',
@@ -103,46 +103,46 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putCardsId' });
+    return this.client.sendRequest(config, callback, { methodName: 'updateCard' });
   }
 
   /**
    * Delete a Card */
-  async deleteCardsId<T = any>(parameters: Parameters.DeleteCardsId, callback: Callback<T>): Promise<void>;
+  async deleteCard<T = any>(parameters: Parameters.DeleteCard, callback: Callback<T>): Promise<void>;
   /**
    * Delete a Card */
-  async deleteCardsId<T = any>(parameters: Parameters.DeleteCardsId, callback?: undefined): Promise<T>;
-  async deleteCardsId<T = any>(parameters: Parameters.DeleteCardsId, callback?: Callback<T>): Promise<void | T> {
+  async deleteCard<T = any>(parameters: Parameters.DeleteCard, callback?: undefined): Promise<T>;
+  async deleteCard<T = any>(parameters: Parameters.DeleteCard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteCardsId' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteCard' });
   }
 
   /**
    * Get a specific property of a card */
-  async getCardsIdField<T = Models.Card>(parameters: Parameters.GetCardsIdField, callback: Callback<T>): Promise<void>;
+  async getCardField<T = Models.Card>(parameters: Parameters.GetCardField, callback: Callback<T>): Promise<void>;
   /**
    * Get a specific property of a card */
-  async getCardsIdField<T = Models.Card>(parameters: Parameters.GetCardsIdField, callback?: undefined): Promise<T>;
-  async getCardsIdField<T = Models.Card>(parameters: Parameters.GetCardsIdField, callback?: Callback<T>): Promise<void | T> {
+  async getCardField<T = Models.Card>(parameters: Parameters.GetCardField, callback?: undefined): Promise<T>;
+  async getCardField<T = Models.Card>(parameters: Parameters.GetCardField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/${parameters.field}`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdField' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardField' });
   }
 
   /**
    * List the Actions on a Card */
-  async getCardsIdActions<T = any>(parameters: Parameters.GetCardsIdActions, callback: Callback<T>): Promise<void>;
+  async getCardActions<T = any>(parameters: Parameters.GetCardActions, callback: Callback<T>): Promise<void>;
   /**
    * List the Actions on a Card */
-  async getCardsIdActions<T = any>(parameters: Parameters.GetCardsIdActions, callback?: undefined): Promise<T>;
-  async getCardsIdActions<T = any>(parameters: Parameters.GetCardsIdActions, callback?: Callback<T>): Promise<void | T> {
+  async getCardActions<T = any>(parameters: Parameters.GetCardActions, callback?: undefined): Promise<T>;
+  async getCardActions<T = any>(parameters: Parameters.GetCardActions, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/actions`,
       method: 'GET',
@@ -151,31 +151,31 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdActions' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardActions' });
   }
 
   /**
    * List the attachments on a card */
-  async getCardsIdAttachments<T = any>(parameters: Parameters.GetCardsIdAttachments, callback: Callback<T>): Promise<void>;
+  async getCardAttachments<T = any>(parameters: Parameters.GetCardAttachments, callback: Callback<T>): Promise<void>;
   /**
    * List the attachments on a card */
-  async getCardsIdAttachments<T = any>(parameters: Parameters.GetCardsIdAttachments, callback?: undefined): Promise<T>;
-  async getCardsIdAttachments<T = any>(parameters: Parameters.GetCardsIdAttachments, callback?: Callback<T>): Promise<void | T> {
+  async getCardAttachments<T = any>(parameters: Parameters.GetCardAttachments, callback?: undefined): Promise<T>;
+  async getCardAttachments<T = any>(parameters: Parameters.GetCardAttachments, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdAttachments' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardAttachments' });
   }
 
   /**
    * Create an Attachment to a Card */
-  async postCardsIdAttachments<T = any>(parameters: Parameters.PostCardsIdAttachments, callback: Callback<T>): Promise<void>;
+  async createCardAttachment<T = any>(parameters: Parameters.CreateCardAttachment, callback: Callback<T>): Promise<void>;
   /**
    * Create an Attachment to a Card */
-  async postCardsIdAttachments<T = any>(parameters: Parameters.PostCardsIdAttachments, callback?: undefined): Promise<T>;
-  async postCardsIdAttachments<T = any>(parameters: Parameters.PostCardsIdAttachments, callback?: Callback<T>): Promise<void | T> {
+  async createCardAttachment<T = any>(parameters: Parameters.CreateCardAttachment, callback?: undefined): Promise<T>;
+  async createCardAttachment<T = any>(parameters: Parameters.CreateCardAttachment, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments`,
       method: 'POST',
@@ -188,16 +188,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postCardsIdAttachments' });
+    return this.client.sendRequest(config, callback, { methodName: 'createCardAttachment' });
   }
 
   /**
    * Get a specific Attachment on a Card. */
-  async getCardsIdAttachmentsIdattachment<T = any>(parameters: Parameters.GetCardsIdAttachmentsIdattachment, callback: Callback<T>): Promise<void>;
+  async getCardAttachment<T = any>(parameters: Parameters.GetCardAttachment, callback: Callback<T>): Promise<void>;
   /**
    * Get a specific Attachment on a Card. */
-  async getCardsIdAttachmentsIdattachment<T = any>(parameters: Parameters.GetCardsIdAttachmentsIdattachment, callback?: undefined): Promise<T>;
-  async getCardsIdAttachmentsIdattachment<T = any>(parameters: Parameters.GetCardsIdAttachmentsIdattachment, callback?: Callback<T>): Promise<void | T> {
+  async getCardAttachment<T = any>(parameters: Parameters.GetCardAttachment, callback?: undefined): Promise<T>;
+  async getCardAttachment<T = any>(parameters: Parameters.GetCardAttachment, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
       method: 'GET',
@@ -206,32 +206,32 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdAttachmentsIdattachment' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardAttachment' });
   }
 
   /**
    * Delete an Attachment */
-  async deletedCardsIdAttachmentsIdattachment<T = any>(parameters: Parameters.DeletedCardsIdAttachmentsIdattachment, callback: Callback<T>): Promise<void>;
+  async deleteCardAttachment<T = any>(parameters: Parameters.DeleteCardAttachment, callback: Callback<T>): Promise<void>;
   /**
    * Delete an Attachment */
-  async deletedCardsIdAttachmentsIdattachment<T = any>(parameters: Parameters.DeletedCardsIdAttachmentsIdattachment, callback?: undefined): Promise<T>;
-  async deletedCardsIdAttachmentsIdattachment<T = any>(parameters: Parameters.DeletedCardsIdAttachmentsIdattachment, callback?: Callback<T>): Promise<void | T> {
+  async deleteCardAttachment<T = any>(parameters: Parameters.DeleteCardAttachment, callback?: undefined): Promise<T>;
+  async deleteCardAttachment<T = any>(parameters: Parameters.DeleteCardAttachment, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
       method: 'DELETE',
       data: parameters.body,
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deletedCardsIdAttachmentsIdattachment' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteCardAttachment' });
   }
 
   /**
    * Get the board a card is on */
-  async getCardsIdBoard<T = any>(parameters: Parameters.GetCardsIdBoard, callback: Callback<T>): Promise<void>;
+  async getCardBoard<T = any>(parameters: Parameters.GetCardBoard, callback: Callback<T>): Promise<void>;
   /**
    * Get the board a card is on */
-  async getCardsIdBoard<T = any>(parameters: Parameters.GetCardsIdBoard, callback?: undefined): Promise<T>;
-  async getCardsIdBoard<T = any>(parameters: Parameters.GetCardsIdBoard, callback?: Callback<T>): Promise<void | T> {
+  async getCardBoard<T = any>(parameters: Parameters.GetCardBoard, callback?: undefined): Promise<T>;
+  async getCardBoard<T = any>(parameters: Parameters.GetCardBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/board`,
       method: 'GET',
@@ -240,16 +240,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdBoard' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardBoard' });
   }
 
   /**
    * Get the completed checklist items on a card */
-  async getCardsIdCheckitemstates<T = any>(parameters: Parameters.GetCardsIdCheckitemstates, callback: Callback<T>): Promise<void>;
+  async getCardCompletedChecklists<T = any>(parameters: Parameters.GetCardCompletedChecklists, callback: Callback<T>): Promise<void>;
   /**
    * Get the completed checklist items on a card */
-  async getCardsIdCheckitemstates<T = any>(parameters: Parameters.GetCardsIdCheckitemstates, callback?: undefined): Promise<T>;
-  async getCardsIdCheckitemstates<T = any>(parameters: Parameters.GetCardsIdCheckitemstates, callback?: Callback<T>): Promise<void | T> {
+  async getCardCompletedChecklists<T = any>(parameters: Parameters.GetCardCompletedChecklists, callback?: undefined): Promise<T>;
+  async getCardCompletedChecklists<T = any>(parameters: Parameters.GetCardCompletedChecklists, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/checkItemStates`,
       method: 'GET',
@@ -258,16 +258,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdCheckitemstates' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardCompletedChecklists' });
   }
 
   /**
    * Get the checklists on a card */
-  async getCardsIdChecklists<T = any>(parameters: Parameters.GetCardsIdChecklists, callback: Callback<T>): Promise<void>;
+  async getCardChecklists<T = any>(parameters: Parameters.GetCardChecklists, callback: Callback<T>): Promise<void>;
   /**
    * Get the checklists on a card */
-  async getCardsIdChecklists<T = any>(parameters: Parameters.GetCardsIdChecklists, callback?: undefined): Promise<T>;
-  async getCardsIdChecklists<T = any>(parameters: Parameters.GetCardsIdChecklists, callback?: Callback<T>): Promise<void | T> {
+  async getCardChecklists<T = any>(parameters: Parameters.GetCardChecklists, callback?: undefined): Promise<T>;
+  async getCardChecklists<T = any>(parameters: Parameters.GetCardChecklists, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/checklists`,
       method: 'GET',
@@ -279,16 +279,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdChecklists' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardChecklists' });
   }
 
   /**
    * Create a new checklist on a card */
-  async postCardsIdChecklists<T = any>(parameters: Parameters.PostCardsIdChecklists, callback: Callback<T>): Promise<void>;
+  async createCardChecklist<T = any>(parameters: Parameters.CreateCardChecklist, callback: Callback<T>): Promise<void>;
   /**
    * Create a new checklist on a card */
-  async postCardsIdChecklists<T = any>(parameters: Parameters.PostCardsIdChecklists, callback?: undefined): Promise<T>;
-  async postCardsIdChecklists<T = any>(parameters: Parameters.PostCardsIdChecklists, callback?: Callback<T>): Promise<void | T> {
+  async createCardChecklist<T = any>(parameters: Parameters.CreateCardChecklist, callback?: undefined): Promise<T>;
+  async createCardChecklist<T = any>(parameters: Parameters.CreateCardChecklist, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/checklists`,
       method: 'POST',
@@ -299,16 +299,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postCardsIdChecklists' });
+    return this.client.sendRequest(config, callback, { methodName: 'createCardChecklist' });
   }
 
   /**
    * Get a specific checkItem on a card */
-  async getCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.GetCardsIdCheckitemIdcheckitem, callback: Callback<T>): Promise<void>;
+  async getCardChecklistItem<T = any>(parameters: Parameters.GetCardChecklistItem, callback: Callback<T>): Promise<void>;
   /**
    * Get a specific checkItem on a card */
-  async getCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.GetCardsIdCheckitemIdcheckitem, callback?: undefined): Promise<T>;
-  async getCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.GetCardsIdCheckitemIdcheckitem, callback?: Callback<T>): Promise<void | T> {
+  async getCardChecklistItem<T = any>(parameters: Parameters.GetCardChecklistItem, callback?: undefined): Promise<T>;
+  async getCardChecklistItem<T = any>(parameters: Parameters.GetCardChecklistItem, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
       method: 'GET',
@@ -317,16 +317,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdCheckitemIdcheckitem' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardChecklistItem' });
   }
 
   /**
    * Update an item in a checklist on a card. */
-  async putCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.PutCardsIdCheckitemIdcheckitem, callback: Callback<T>): Promise<void>;
+  async updateCardCheckItem<T = any>(parameters: Parameters.UpdateCardCheckItem, callback: Callback<T>): Promise<void>;
   /**
    * Update an item in a checklist on a card. */
-  async putCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.PutCardsIdCheckitemIdcheckitem, callback?: undefined): Promise<T>;
-  async putCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.PutCardsIdCheckitemIdcheckitem, callback?: Callback<T>): Promise<void | T> {
+  async updateCardCheckItem<T = any>(parameters: Parameters.UpdateCardCheckItem, callback?: undefined): Promise<T>;
+  async updateCardCheckItem<T = any>(parameters: Parameters.UpdateCardCheckItem, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
       method: 'PUT',
@@ -338,31 +338,31 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putCardsIdCheckitemIdcheckitem' });
+    return this.client.sendRequest(config, callback, { methodName: 'updateCardCheckItem' });
   }
 
   /**
    * Delete a checklist item */
-  async deleteCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.DeleteCardsIdCheckitemIdcheckitem, callback: Callback<T>): Promise<void>;
+  async deleteCardChecklistItem<T = any>(parameters: Parameters.DeleteCardChecklistItem, callback: Callback<T>): Promise<void>;
   /**
    * Delete a checklist item */
-  async deleteCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.DeleteCardsIdCheckitemIdcheckitem, callback?: undefined): Promise<T>;
-  async deleteCardsIdCheckitemIdcheckitem<T = any>(parameters: Parameters.DeleteCardsIdCheckitemIdcheckitem, callback?: Callback<T>): Promise<void | T> {
+  async deleteCardChecklistItem<T = any>(parameters: Parameters.DeleteCardChecklistItem, callback?: undefined): Promise<T>;
+  async deleteCardChecklistItem<T = any>(parameters: Parameters.DeleteCardChecklistItem, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteCardsIdCheckitemIdcheckitem' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteCardChecklistItem' });
   }
 
   /**
    * Get the list a card is in */
-  async getCardsIdList<T = any>(parameters: Parameters.GetCardsIdList, callback: Callback<T>): Promise<void>;
+  async getCardList<T = any>(parameters: Parameters.GetCardList, callback: Callback<T>): Promise<void>;
   /**
    * Get the list a card is in */
-  async getCardsIdList<T = any>(parameters: Parameters.GetCardsIdList, callback?: undefined): Promise<T>;
-  async getCardsIdList<T = any>(parameters: Parameters.GetCardsIdList, callback?: Callback<T>): Promise<void | T> {
+  async getCardList<T = any>(parameters: Parameters.GetCardList, callback?: undefined): Promise<T>;
+  async getCardList<T = any>(parameters: Parameters.GetCardList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/list`,
       method: 'GET',
@@ -371,16 +371,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdList' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardList' });
   }
 
   /**
    * Get the members on a card */
-  async getCardsIdMembers<T = any>(parameters: Parameters.GetCardsIdMembers, callback: Callback<T>): Promise<void>;
+  async getCardMembers<T = any>(parameters: Parameters.GetCardMembers, callback: Callback<T>): Promise<void>;
   /**
    * Get the members on a card */
-  async getCardsIdMembers<T = any>(parameters: Parameters.GetCardsIdMembers, callback?: undefined): Promise<T>;
-  async getCardsIdMembers<T = any>(parameters: Parameters.GetCardsIdMembers, callback?: Callback<T>): Promise<void | T> {
+  async getCardMembers<T = any>(parameters: Parameters.GetCardMembers, callback?: undefined): Promise<T>;
+  async getCardMembers<T = any>(parameters: Parameters.GetCardMembers, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/members`,
       method: 'GET',
@@ -389,16 +389,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdMembers' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardMembers' });
   }
 
   /**
    * Get the members who have voted on a card */
-  async getCardsIdMembersvoted<T = any>(parameters: Parameters.GetCardsIdMembersvoted, callback: Callback<T>): Promise<void>;
+  async getCardMembersVoted<T = any>(parameters: Parameters.GetCardMembersVoted, callback: Callback<T>): Promise<void>;
   /**
    * Get the members who have voted on a card */
-  async getCardsIdMembersvoted<T = any>(parameters: Parameters.GetCardsIdMembersvoted, callback?: undefined): Promise<T>;
-  async getCardsIdMembersvoted<T = any>(parameters: Parameters.GetCardsIdMembersvoted, callback?: Callback<T>): Promise<void | T> {
+  async getCardMembersVoted<T = any>(parameters: Parameters.GetCardMembersVoted, callback?: undefined): Promise<T>;
+  async getCardMembersVoted<T = any>(parameters: Parameters.GetCardMembersVoted, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/membersVoted`,
       method: 'GET',
@@ -407,16 +407,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdMembersvoted' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardMembersVoted' });
   }
 
   /**
    * Vote on the card for a given member. */
-  async cardsidmembersvoted1<T = any>(parameters: Parameters.Cardsidmembersvoted1, callback: Callback<T>): Promise<void>;
+  async voteOnCardForGivenMember<T = any>(parameters: Parameters.VoteOnCardForGivenMember, callback: Callback<T>): Promise<void>;
   /**
    * Vote on the card for a given member. */
-  async cardsidmembersvoted1<T = any>(parameters: Parameters.Cardsidmembersvoted1, callback?: undefined): Promise<T>;
-  async cardsidmembersvoted1<T = any>(parameters: Parameters.Cardsidmembersvoted1, callback?: Callback<T>): Promise<void | T> {
+  async voteOnCardForGivenMember<T = any>(parameters: Parameters.VoteOnCardForGivenMember, callback?: undefined): Promise<T>;
+  async voteOnCardForGivenMember<T = any>(parameters: Parameters.VoteOnCardForGivenMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/membersVoted`,
       method: 'POST',
@@ -425,31 +425,31 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'cardsidmembersvoted1' });
+    return this.client.sendRequest(config, callback, { methodName: 'voteOnCardForGivenMember' });
   }
 
   /**
    * Get any shared pluginData on a card. */
-  async getCardsIdPlugindata<T = any>(parameters: Parameters.GetCardsIdPlugindata, callback: Callback<T>): Promise<void>;
+  async getCardPluginData<T = any>(parameters: Parameters.GetCardPluginData, callback: Callback<T>): Promise<void>;
   /**
    * Get any shared pluginData on a card. */
-  async getCardsIdPlugindata<T = any>(parameters: Parameters.GetCardsIdPlugindata, callback?: undefined): Promise<T>;
-  async getCardsIdPlugindata<T = any>(parameters: Parameters.GetCardsIdPlugindata, callback?: Callback<T>): Promise<void | T> {
+  async getCardPluginData<T = any>(parameters: Parameters.GetCardPluginData, callback?: undefined): Promise<T>;
+  async getCardPluginData<T = any>(parameters: Parameters.GetCardPluginData, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/pluginData`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdPlugindata' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardPluginData' });
   }
 
   /**
    * Get the stickers on a card */
-  async getCardsIdStickers<T = any>(parameters: Parameters.GetCardsIdStickers, callback: Callback<T>): Promise<void>;
+  async getCardStickers<T = any>(parameters: Parameters.GetCardStickers, callback: Callback<T>): Promise<void>;
   /**
    * Get the stickers on a card */
-  async getCardsIdStickers<T = any>(parameters: Parameters.GetCardsIdStickers, callback?: undefined): Promise<T>;
-  async getCardsIdStickers<T = any>(parameters: Parameters.GetCardsIdStickers, callback?: Callback<T>): Promise<void | T> {
+  async getCardStickers<T = any>(parameters: Parameters.GetCardStickers, callback?: undefined): Promise<T>;
+  async getCardStickers<T = any>(parameters: Parameters.GetCardStickers, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/stickers`,
       method: 'GET',
@@ -459,16 +459,16 @@ export class Cards {
       data: parameters.body,
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdStickers' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardStickers' });
   }
 
   /**
    * Add a sticker to a card */
-  async postCardsIdStickers<T = any>(parameters: Parameters.PostCardsIdStickers, callback: Callback<T>): Promise<void>;
+  async addStickerToCard<T = any>(parameters: Parameters.AddStickerToCard, callback: Callback<T>): Promise<void>;
   /**
    * Add a sticker to a card */
-  async postCardsIdStickers<T = any>(parameters: Parameters.PostCardsIdStickers, callback?: undefined): Promise<T>;
-  async postCardsIdStickers<T = any>(parameters: Parameters.PostCardsIdStickers, callback?: Callback<T>): Promise<void | T> {
+  async addStickerToCard<T = any>(parameters: Parameters.AddStickerToCard, callback?: undefined): Promise<T>;
+  async addStickerToCard<T = any>(parameters: Parameters.AddStickerToCard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/stickers`,
       method: 'POST',
@@ -481,16 +481,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postCardsIdStickers' });
+    return this.client.sendRequest(config, callback, { methodName: 'addStickerToCard' });
   }
 
   /**
    * Get a specific sticker on a card */
-  async getCardsIdStickersIdsticker<T = any>(parameters: Parameters.GetCardsIdStickersIdsticker, callback: Callback<T>): Promise<void>;
+  async getCardSticker<T = any>(parameters: Parameters.GetCardSticker, callback: Callback<T>): Promise<void>;
   /**
    * Get a specific sticker on a card */
-  async getCardsIdStickersIdsticker<T = any>(parameters: Parameters.GetCardsIdStickersIdsticker, callback?: undefined): Promise<T>;
-  async getCardsIdStickersIdsticker<T = any>(parameters: Parameters.GetCardsIdStickersIdsticker, callback?: Callback<T>): Promise<void | T> {
+  async getCardSticker<T = any>(parameters: Parameters.GetCardSticker, callback?: undefined): Promise<T>;
+  async getCardSticker<T = any>(parameters: Parameters.GetCardSticker, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
       method: 'GET',
@@ -499,16 +499,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdStickersIdsticker' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardSticker' });
   }
 
   /**
    * Update a sticker on a card */
-  async putCardsIdStickersIdsticker<T = any>(parameters: Parameters.PutCardsIdStickersIdsticker, callback: Callback<T>): Promise<void>;
+  async updateCardSticker<T = any>(parameters: Parameters.UpdateCardSticker, callback: Callback<T>): Promise<void>;
   /**
    * Update a sticker on a card */
-  async putCardsIdStickersIdsticker<T = any>(parameters: Parameters.PutCardsIdStickersIdsticker, callback?: undefined): Promise<T>;
-  async putCardsIdStickersIdsticker<T = any>(parameters: Parameters.PutCardsIdStickersIdsticker, callback?: Callback<T>): Promise<void | T> {
+  async updateCardSticker<T = any>(parameters: Parameters.UpdateCardSticker, callback?: undefined): Promise<T>;
+  async updateCardSticker<T = any>(parameters: Parameters.UpdateCardSticker, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
       method: 'PUT',
@@ -520,31 +520,31 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putCardsIdStickersIdsticker' });
+    return this.client.sendRequest(config, callback, { methodName: 'updateCardSticker' });
   }
 
   /**
    * Remove a sticker from the card */
-  async deleteCardsIdStickersIdsticker<T = any>(parameters: Parameters.DeleteCardsIdStickersIdsticker, callback: Callback<T>): Promise<void>;
+  async deleteCardSticker<T = any>(parameters: Parameters.DeleteCardSticker, callback: Callback<T>): Promise<void>;
   /**
    * Remove a sticker from the card */
-  async deleteCardsIdStickersIdsticker<T = any>(parameters: Parameters.DeleteCardsIdStickersIdsticker, callback?: undefined): Promise<T>;
-  async deleteCardsIdStickersIdsticker<T = any>(parameters: Parameters.DeleteCardsIdStickersIdsticker, callback?: Callback<T>): Promise<void | T> {
+  async deleteCardSticker<T = any>(parameters: Parameters.DeleteCardSticker, callback?: undefined): Promise<T>;
+  async deleteCardSticker<T = any>(parameters: Parameters.DeleteCardSticker, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteCardsIdStickersIdsticker' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteCardSticker' });
   }
 
   /**
    * Update an existing comment */
-  async putCardsIdActionsIdactionComments<T = any>(parameters: Parameters.PutCardsIdActionsIdactionComments, callback: Callback<T>): Promise<void>;
+  async updateCardComment<T = any>(parameters: Parameters.UpdateCardComment, callback: Callback<T>): Promise<void>;
   /**
    * Update an existing comment */
-  async putCardsIdActionsIdactionComments<T = any>(parameters: Parameters.PutCardsIdActionsIdactionComments, callback?: undefined): Promise<T>;
-  async putCardsIdActionsIdactionComments<T = any>(parameters: Parameters.PutCardsIdActionsIdactionComments, callback?: Callback<T>): Promise<void | T> {
+  async updateCardComment<T = any>(parameters: Parameters.UpdateCardComment, callback?: undefined): Promise<T>;
+  async updateCardComment<T = any>(parameters: Parameters.UpdateCardComment, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/actions/${parameters.idAction}/comments`,
       method: 'PUT',
@@ -553,61 +553,61 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putCardsIdActionsIdactionComments' });
+    return this.client.sendRequest(config, callback, { methodName: 'updateCardComment' });
   }
 
   /**
    * Delete a comment */
-  async deleteCardsIdActionsIdComments<T = any>(parameters: Parameters.DeleteCardsIdActionsIdComments, callback: Callback<T>): Promise<void>;
+  async deleteCardComment<T = any>(parameters: Parameters.DeleteCardComment, callback: Callback<T>): Promise<void>;
   /**
    * Delete a comment */
-  async deleteCardsIdActionsIdComments<T = any>(parameters: Parameters.DeleteCardsIdActionsIdComments, callback?: undefined): Promise<T>;
-  async deleteCardsIdActionsIdComments<T = any>(parameters: Parameters.DeleteCardsIdActionsIdComments, callback?: Callback<T>): Promise<void | T> {
+  async deleteCardComment<T = any>(parameters: Parameters.DeleteCardComment, callback?: undefined): Promise<T>;
+  async deleteCardComment<T = any>(parameters: Parameters.DeleteCardComment, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/actions/${parameters.idAction}/comments`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteCardsIdActionsIdComments' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteCardComment' });
   }
 
   /**
    * Setting, updating, and removing the value for a Custom Field on a card. For more details on updating custom fields check out the [Getting Started With Custom Fields](/cloud/trello/guides/rest-api/getting-started-with-custom-fields/) */
-  async putCardsIdcardCustomfieldIdcustomfieldItem<T = any>(parameters: Parameters.PutCardsIdcardCustomfieldIdcustomfieldItem, callback: Callback<T>): Promise<void>;
+  async updateCardCustomField<T = any>(parameters: Parameters.UpdateCardCustomField, callback: Callback<T>): Promise<void>;
   /**
    * Setting, updating, and removing the value for a Custom Field on a card. For more details on updating custom fields check out the [Getting Started With Custom Fields](/cloud/trello/guides/rest-api/getting-started-with-custom-fields/) */
-  async putCardsIdcardCustomfieldIdcustomfieldItem<T = any>(parameters: Parameters.PutCardsIdcardCustomfieldIdcustomfieldItem, callback?: undefined): Promise<T>;
-  async putCardsIdcardCustomfieldIdcustomfieldItem<T = any>(parameters: Parameters.PutCardsIdcardCustomfieldIdcustomfieldItem, callback?: Callback<T>): Promise<void | T> {
+  async updateCardCustomField<T = any>(parameters: Parameters.UpdateCardCustomField, callback?: undefined): Promise<T>;
+  async updateCardCustomField<T = any>(parameters: Parameters.UpdateCardCustomField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.idCard}/customField/${parameters.idCustomField}/item`,
       method: 'PUT',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putCardsIdcardCustomfieldIdcustomfieldItem' });
+    return this.client.sendRequest(config, callback, { methodName: 'updateCardCustomField' });
   }
 
   /**
    * Get the custom field items for a card. */
-  async getCardsIdCustomfielditems<T = any>(parameters: Parameters.GetCardsIdCustomfielditems, callback: Callback<T>): Promise<void>;
+  async getCardCustomFields<T = any>(parameters: Parameters.GetCardCustomFields, callback: Callback<T>): Promise<void>;
   /**
    * Get the custom field items for a card. */
-  async getCardsIdCustomfielditems<T = any>(parameters: Parameters.GetCardsIdCustomfielditems, callback?: undefined): Promise<T>;
-  async getCardsIdCustomfielditems<T = any>(parameters: Parameters.GetCardsIdCustomfielditems, callback?: Callback<T>): Promise<void | T> {
+  async getCardCustomFields<T = any>(parameters: Parameters.GetCardCustomFields, callback?: undefined): Promise<T>;
+  async getCardCustomFields<T = any>(parameters: Parameters.GetCardCustomFields, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/customFieldItems`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCardsIdCustomfielditems' });
+    return this.client.sendRequest(config, callback, { methodName: 'getCardCustomFields' });
   }
 
   /**
    * Add a new comment to a card */
-  async postCardsIdActionsComments<T = any>(parameters: Parameters.PostCardsIdActionsComments, callback: Callback<T>): Promise<void>;
+  async addCardComment<T = any>(parameters: Parameters.AddCardComment, callback: Callback<T>): Promise<void>;
   /**
    * Add a new comment to a card */
-  async postCardsIdActionsComments<T = any>(parameters: Parameters.PostCardsIdActionsComments, callback?: undefined): Promise<T>;
-  async postCardsIdActionsComments<T = any>(parameters: Parameters.PostCardsIdActionsComments, callback?: Callback<T>): Promise<void | T> {
+  async addCardComment<T = any>(parameters: Parameters.AddCardComment, callback?: undefined): Promise<T>;
+  async addCardComment<T = any>(parameters: Parameters.AddCardComment, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/actions/comments`,
       method: 'POST',
@@ -616,16 +616,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postCardsIdActionsComments' });
+    return this.client.sendRequest(config, callback, { methodName: 'addCardComment' });
   }
 
   /**
    * Add a label to a card */
-  async postCardsIdIdlabels<T = any>(parameters: Parameters.PostCardsIdIdlabels, callback: Callback<T>): Promise<void>;
+  async addCardLabel<T = any>(parameters: Parameters.AddCardLabel, callback: Callback<T>): Promise<void>;
   /**
    * Add a label to a card */
-  async postCardsIdIdlabels<T = any>(parameters: Parameters.PostCardsIdIdlabels, callback?: undefined): Promise<T>;
-  async postCardsIdIdlabels<T = any>(parameters: Parameters.PostCardsIdIdlabels, callback?: Callback<T>): Promise<void | T> {
+  async addCardLabel<T = any>(parameters: Parameters.AddCardLabel, callback?: undefined): Promise<T>;
+  async addCardLabel<T = any>(parameters: Parameters.AddCardLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/idLabels`,
       method: 'POST',
@@ -634,16 +634,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postCardsIdIdlabels' });
+    return this.client.sendRequest(config, callback, { methodName: 'addCardLabel' });
   }
 
   /**
    * Add a member to a card */
-  async postCardsIdIdmembers<T = any>(parameters: Parameters.PostCardsIdIdmembers, callback: Callback<T>): Promise<void>;
+  async addCardMember<T = any>(parameters: Parameters.AddCardMember, callback: Callback<T>): Promise<void>;
   /**
    * Add a member to a card */
-  async postCardsIdIdmembers<T = any>(parameters: Parameters.PostCardsIdIdmembers, callback?: undefined): Promise<T>;
-  async postCardsIdIdmembers<T = any>(parameters: Parameters.PostCardsIdIdmembers, callback?: Callback<T>): Promise<void | T> {
+  async addCardMember<T = any>(parameters: Parameters.AddCardMember, callback?: undefined): Promise<T>;
+  async addCardMember<T = any>(parameters: Parameters.AddCardMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/idMembers`,
       method: 'POST',
@@ -652,16 +652,16 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postCardsIdIdmembers' });
+    return this.client.sendRequest(config, callback, { methodName: 'addCardMember' });
   }
 
   /**
    * Create a new label for the board and add it to the given card. */
-  async postCardsIdLabels<T = any>(parameters: Parameters.PostCardsIdLabels, callback: Callback<T>): Promise<void>;
+  async createCardLabel<T = any>(parameters: Parameters.CreateCardLabel, callback: Callback<T>): Promise<void>;
   /**
    * Create a new label for the board and add it to the given card. */
-  async postCardsIdLabels<T = any>(parameters: Parameters.PostCardsIdLabels, callback?: undefined): Promise<T>;
-  async postCardsIdLabels<T = any>(parameters: Parameters.PostCardsIdLabels, callback?: Callback<T>): Promise<void | T> {
+  async createCardLabel<T = any>(parameters: Parameters.CreateCardLabel, callback?: undefined): Promise<T>;
+  async createCardLabel<T = any>(parameters: Parameters.CreateCardLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/labels`,
       method: 'POST',
@@ -671,76 +671,76 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postCardsIdLabels' });
+    return this.client.sendRequest(config, callback, { methodName: 'createCardLabel' });
   }
 
   /**
    * Mark notifications about this card as read */
-  async postCardsIdMarkassociatednotificationsread<T = any>(parameters: Parameters.PostCardsIdMarkassociatednotificationsread, callback: Callback<T>): Promise<void>;
+  async markCardNotificationAsRead<T = any>(parameters: Parameters.MarkCardNotificationAsRead, callback: Callback<T>): Promise<void>;
   /**
    * Mark notifications about this card as read */
-  async postCardsIdMarkassociatednotificationsread<T = any>(parameters: Parameters.PostCardsIdMarkassociatednotificationsread, callback?: undefined): Promise<T>;
-  async postCardsIdMarkassociatednotificationsread<T = any>(parameters: Parameters.PostCardsIdMarkassociatednotificationsread, callback?: Callback<T>): Promise<void | T> {
+  async markCardNotificationAsRead<T = any>(parameters: Parameters.MarkCardNotificationAsRead, callback?: undefined): Promise<T>;
+  async markCardNotificationAsRead<T = any>(parameters: Parameters.MarkCardNotificationAsRead, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/markAssociatedNotificationsRead`,
       method: 'POST',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postCardsIdMarkassociatednotificationsread' });
+    return this.client.sendRequest(config, callback, { methodName: 'markCardNotificationAsRead' });
   }
 
   /**
    * Remove a label from a card */
-  async deleteCardsIdIdlabelsIdlabel<T = any>(parameters: Parameters.DeleteCardsIdIdlabelsIdlabel, callback: Callback<T>): Promise<void>;
+  async deleteCardLabel<T = any>(parameters: Parameters.DeleteCardLabel, callback: Callback<T>): Promise<void>;
   /**
    * Remove a label from a card */
-  async deleteCardsIdIdlabelsIdlabel<T = any>(parameters: Parameters.DeleteCardsIdIdlabelsIdlabel, callback?: undefined): Promise<T>;
-  async deleteCardsIdIdlabelsIdlabel<T = any>(parameters: Parameters.DeleteCardsIdIdlabelsIdlabel, callback?: Callback<T>): Promise<void | T> {
+  async deleteCardLabel<T = any>(parameters: Parameters.DeleteCardLabel, callback?: undefined): Promise<T>;
+  async deleteCardLabel<T = any>(parameters: Parameters.DeleteCardLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/idLabels/${parameters.idLabel}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteCardsIdIdlabelsIdlabel' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteCardLabel' });
   }
 
   /**
    * Remove a member from a card */
-  async deleteIdIdmembersIdmember<T = any>(parameters: Parameters.DeleteIdIdmembersIdmember, callback: Callback<T>): Promise<void>;
+  async deleteCardMember<T = any>(parameters: Parameters.DeleteCardMember, callback: Callback<T>): Promise<void>;
   /**
    * Remove a member from a card */
-  async deleteIdIdmembersIdmember<T = any>(parameters: Parameters.DeleteIdIdmembersIdmember, callback?: undefined): Promise<T>;
-  async deleteIdIdmembersIdmember<T = any>(parameters: Parameters.DeleteIdIdmembersIdmember, callback?: Callback<T>): Promise<void | T> {
+  async deleteCardMember<T = any>(parameters: Parameters.DeleteCardMember, callback?: undefined): Promise<T>;
+  async deleteCardMember<T = any>(parameters: Parameters.DeleteCardMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/idMembers/${parameters.idMember}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteIdIdmembersIdmember' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteCardMember' });
   }
 
   /**
    * Remove a member's vote from a card */
-  async deleteCardsIdMembersvotedIdmember<T = any>(parameters: Parameters.DeleteCardsIdMembersvotedIdmember, callback: Callback<T>): Promise<void>;
+  async deleteCardMemberVote<T = any>(parameters: Parameters.DeleteCardMemberVote, callback: Callback<T>): Promise<void>;
   /**
    * Remove a member's vote from a card */
-  async deleteCardsIdMembersvotedIdmember<T = any>(parameters: Parameters.DeleteCardsIdMembersvotedIdmember, callback?: undefined): Promise<T>;
-  async deleteCardsIdMembersvotedIdmember<T = any>(parameters: Parameters.DeleteCardsIdMembersvotedIdmember, callback?: Callback<T>): Promise<void | T> {
+  async deleteCardMemberVote<T = any>(parameters: Parameters.DeleteCardMemberVote, callback?: undefined): Promise<T>;
+  async deleteCardMemberVote<T = any>(parameters: Parameters.DeleteCardMemberVote, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/membersVoted/${parameters.idMember}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteCardsIdMembersvotedIdmember' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteCardMemberVote' });
   }
 
   /**
    * Update an item in a checklist on a card. */
-  async putCardsIdcardChecklistIdchecklistCheckitemIdcheckitem<T = Models.CheckItem>(parameters: Parameters.PutCardsIdcardChecklistIdchecklistCheckitemIdcheckitem, callback: Callback<T>): Promise<void>;
+  async updateCardChecklistItem<T = Models.CheckItem>(parameters: Parameters.UpdateCardChecklistItem, callback: Callback<T>): Promise<void>;
   /**
    * Update an item in a checklist on a card. */
-  async putCardsIdcardChecklistIdchecklistCheckitemIdcheckitem<T = Models.CheckItem>(parameters: Parameters.PutCardsIdcardChecklistIdchecklistCheckitemIdcheckitem, callback?: undefined): Promise<T>;
-  async putCardsIdcardChecklistIdchecklistCheckitemIdcheckitem<T = Models.CheckItem>(parameters: Parameters.PutCardsIdcardChecklistIdchecklistCheckitemIdcheckitem, callback?: Callback<T>): Promise<void | T> {
+  async updateCardChecklistItem<T = Models.CheckItem>(parameters: Parameters.UpdateCardChecklistItem, callback?: undefined): Promise<T>;
+  async updateCardChecklistItem<T = Models.CheckItem>(parameters: Parameters.UpdateCardChecklistItem, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.idCard}/checklist/${parameters.idChecklist}/checkItem/${parameters.idCheckItem}`,
       method: 'PUT',
@@ -749,21 +749,21 @@ export class Cards {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putCardsIdcardChecklistIdchecklistCheckitemIdcheckitem' });
+    return this.client.sendRequest(config, callback, { methodName: 'updateCardChecklistItem' });
   }
 
   /**
    * Delete a checklist from a card */
-  async deleteCardsIdChecklistsIdchecklist<T = any>(parameters: Parameters.DeleteCardsIdChecklistsIdchecklist, callback: Callback<T>): Promise<void>;
+  async deleteCardChecklist<T = any>(parameters: Parameters.DeleteCardChecklist, callback: Callback<T>): Promise<void>;
   /**
    * Delete a checklist from a card */
-  async deleteCardsIdChecklistsIdchecklist<T = any>(parameters: Parameters.DeleteCardsIdChecklistsIdchecklist, callback?: undefined): Promise<T>;
-  async deleteCardsIdChecklistsIdchecklist<T = any>(parameters: Parameters.DeleteCardsIdChecklistsIdchecklist, callback?: Callback<T>): Promise<void | T> {
+  async deleteCardChecklist<T = any>(parameters: Parameters.DeleteCardChecklist, callback?: undefined): Promise<T>;
+  async deleteCardChecklist<T = any>(parameters: Parameters.DeleteCardChecklist, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/checklists/${parameters.idChecklist}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteCardsIdChecklistsIdchecklist' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteCardChecklist' });
   }
 }
