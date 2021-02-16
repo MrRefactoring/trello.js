@@ -21,9 +21,9 @@ export class Actions {
         entities: parameters.entities,
         fields: parameters.fields,
         member: parameters.member,
-        member_fields: parameters.member_fields,
+        member_fields: parameters.memberFields,
         memberCreator: parameters.memberCreator,
-        memberCreator_fields: parameters.memberCreator_fields,
+        memberCreator_fields: parameters.memberCreatorFields,
       },
     };
 

@@ -16,19 +16,19 @@ export interface CreateBoard {
   /** The Power-Ups that should be enabled on the new board. One of: `all`, `calendar`, `cardAging`, `recap`, `voting`. */
   powerUps?: string;
   /** The permissions level of the board. One of: `org`, `private`, `public`. */
-  prefs_permissionLevel?: string;
+  prefsPermissionLevel?: string;
   /** Who can vote on this board. One of `disabled`, `members`, `observers`, `org`, `public`. */
-  prefs_voting?: string;
+  prefsVoting?: string;
   /** Who can comment on cards on this board. One of: `disabled`, `members`, `observers`, `org`, `public`. */
-  prefs_comments?: string;
+  prefsComments?: string;
   /** Determines what types of members can invite users to join. One of: `admins`, `members`. */
-  prefs_invitations?: string;
+  prefsInvitations?: string;
   /** Determines whether users can join the boards themselves or whether they have to be invited. */
-  prefs_selfJoin?: boolean;
+  prefsSelfJoin?: boolean;
   /** Determines whether card covers are enabled. */
-  prefs_cardCovers?: boolean;
+  prefsCardCovers?: boolean;
   /** The id of a custom background or one of: `blue`, `orange`, `green`, `red`, `purple`, `pink`, `lime`, `sky`, `grey`. */
-  prefs_background?: string;
+  prefsBackground?: string;
   /** Determines the type of card aging that should take place on the board if card aging is enabled. One of: `pirate`, `regular`. */
-  prefs_cardAging?: string;
+  prefsCardAging?: string;
 }

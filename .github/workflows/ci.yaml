@@ -18,6 +18,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
+      - name: Create .env file
+        run: |
+          touch .env
+          echo TRELLO_API_KEY=${{ secrets.TRELLO_API_KEY }} >> .env
+          echo TRELLO_API_TOKEN=${{ secrets.TRELLO_API_TOKEN }} >> .env
       - run: npm run build
       - run: npm run test
       - run: npm run lint

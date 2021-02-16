@@ -19,17 +19,17 @@ export class Enterprises {
       params: {
         fields: parameters.fields,
         members: parameters.members,
-        member_fields: parameters.member_fields,
-        member_filter: parameters.member_filter,
-        member_sort: parameters.member_sort,
-        member_sortBy: parameters.member_sortBy,
-        member_sortOrder: parameters.member_sortOrder,
-        member_startIndex: parameters.member_startIndex,
-        member_count: parameters.member_count,
+        member_fields: parameters.memberFields,
+        member_filter: parameters.memberFilter,
+        member_sort: parameters.memberSort,
+        member_sortBy: parameters.memberSortBy,
+        member_sortOrder: parameters.memberSortOrder,
+        member_startIndex: parameters.memberStartIndex,
+        member_count: parameters.memberCount,
         organizations: parameters.organizations,
-        organization_fields: parameters.organization_fields,
-        organization_paid_accounts: parameters.organization_paid_accounts,
-        organization_memberships: parameters.organization_memberships,
+        organization_fields: parameters.organizationFields,
+        organization_paid_accounts: parameters.organizationPaidAccounts,
+        organization_memberships: parameters.organizationMemberships,
       },
     };
 
@@ -108,8 +108,8 @@ export class Enterprises {
         sortOrder: parameters.sortOrder,
         startIndex: parameters.startIndex,
         count: parameters.count,
-        organization_fields: parameters.organization_fields,
-        board_fields: parameters.board_fields,
+        organization_fields: parameters.organizationFields,
+        board_fields: parameters.boardFields,
       },
     };
 
@@ -128,8 +128,8 @@ export class Enterprises {
       method: 'GET',
       params: {
         fields: parameters.fields,
-        organization_fields: parameters.organization_fields,
-        board_fields: parameters.board_fields,
+        organization_fields: parameters.organizationFields,
+        board_fields: parameters.boardFields,
       },
     };
 
@@ -198,7 +198,7 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/members/${parameters.idMember}/licensed`,
       method: 'PUT',
       params: {
-        Values: parameters.Values,
+        Values: parameters.values,
       },
     };
 
@@ -218,8 +218,8 @@ export class Enterprises {
       params: {
         value: parameters.value,
         fields: parameters.fields,
-        organization_fields: parameters.organization_fields,
-        board_fields: parameters.board_fields,
+        organization_fields: parameters.organizationFields,
+        board_fields: parameters.boardFields,
       },
     };
 

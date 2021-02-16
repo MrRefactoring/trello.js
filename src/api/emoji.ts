@@ -18,7 +18,7 @@ export class Emoji {
       method: 'GET',
       params: {
         locale: parameters?.locale,
-        spritesheets: parameters?.spritesheets,
+        spritesheets: parameters?.spriteSheets,
       },
     };
 

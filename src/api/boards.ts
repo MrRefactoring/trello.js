@@ -21,7 +21,7 @@ export class Boards {
         activity: parameters.activity,
         orgMemberType: parameters.orgMemberType,
         member: parameters.member,
-        member_fields: parameters.member_fields,
+        member_fields: parameters.memberFields,
       },
     };
 
@@ -42,7 +42,7 @@ export class Boards {
         actions: parameters.actions,
         boardStars: parameters.boardStars,
         cards: parameters.cards,
-        card_pluginData: parameters.card_pluginData,
+        card_pluginData: parameters.cardPluginData,
         checklists: parameters.checklists,
         customFields: parameters.customFields,
         fields: parameters.fields,
@@ -52,7 +52,7 @@ export class Boards {
         memberships: parameters.memberships,
         pluginData: parameters.pluginData,
         organization: parameters.organization,
-        organization_pluginData: parameters.organization_pluginData,
+        organization_pluginData: parameters.organizationPluginData,
         myPrefs: parameters.myPrefs,
         tags: parameters.tags,
       },
@@ -310,7 +310,7 @@ export class Boards {
       method: 'GET',
       params: {
         cards: parameters.cards,
-        card_fields: parameters.card_fields,
+        card_fields: parameters.cardFields,
         filter: parameters.filter,
         fields: parameters.fields,
       },
@@ -428,7 +428,7 @@ export class Boards {
       method: 'PUT',
       params: {
         type: parameters.type,
-        member_fields: parameters.member_fields,
+        member_fields: parameters.memberFields,
       },
     };
 
@@ -560,14 +560,14 @@ export class Boards {
         idBoardSource: parameters.idBoardSource,
         keepFromSource: parameters.keepFromSource,
         powerUps: parameters.powerUps,
-        prefs_permissionLevel: parameters.prefs_permissionLevel,
-        prefs_voting: parameters.prefs_voting,
-        prefs_comments: parameters.prefs_comments,
-        prefs_invitations: parameters.prefs_invitations,
-        prefs_selfJoin: parameters.prefs_selfJoin,
-        prefs_cardCovers: parameters.prefs_cardCovers,
-        prefs_background: parameters.prefs_background,
-        prefs_cardAging: parameters.prefs_cardAging,
+        prefs_permissionLevel: parameters.prefsPermissionLevel,
+        prefs_voting: parameters.prefsVoting,
+        prefs_comments: parameters.prefsComments,
+        prefs_invitations: parameters.prefsInvitations,
+        prefs_selfJoin: parameters.prefsSelfJoin,
+        prefs_cardCovers: parameters.prefsCardCovers,
+        prefs_background: parameters.prefsBackground,
+        prefs_cardAging: parameters.prefsCardAging,
       },
     };
 

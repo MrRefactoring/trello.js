@@ -24,7 +24,6 @@ Usability, consistency, and performance are key focuses of trello.js, and it als
 - [Usage](#usage)
   - [Key and token pair issuing](#key-and-token-pair-issuing)
   - [Client creation and first request](#client-creation-and-first-request)
-- [Contributes](#contributors)
 - [License](#license)
 
 ## Installation
@@ -58,7 +57,7 @@ The following tracking parameters can be configured:
 - Request timings
 - Timeout information
 
-##### Customizing telemetry collection data example
+#### Customizing telemetry collection data example
 
 ```typescript
 import { Config } from 'trello.js';
@@ -77,7 +76,7 @@ const config: Config = {
 
 If you want to disable telemetry, set the `telemetry` field to `false`.
 
-##### Disabling telemetry collection example
+#### Disabling telemetry collection example
 
 ```typescript
 import { Config } from 'trello.js';
@@ -91,12 +90,12 @@ const config: Config = {
 
 ## Usage
 
-##### Key and token pair issuing
+#### Key and token pair issuing
 
 To interact with the Trello API, you must first get API Key and API Token.
 The [official documentation](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#authentication-and-authorization) does a good job of describing how to issue a Key and Token pair to work.
 
-##### Client creation and first request
+#### Client creation and first request
 
 Take the key and token obtained in the previous step and pass them to `TrelloClient`, then call to create a new board.
 
@@ -140,6 +139,8 @@ main();
 //   limits: {}
 // }
 ```
+
+## Decrease Webpack bundle size
 
 ## License
 

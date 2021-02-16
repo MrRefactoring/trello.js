@@ -5,8 +5,8 @@ export interface GetEnterpriseMember {
   idMember: string;
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
   fields?: string;
-  /** Any valid value that the [nested organization field resource](/cloud/trello/guides/rest-api/nested-resources/) accepts. */
-  organization_fields?: string;
-  /** Any valid value that the [nested board resource](/cloud/trello/guides/rest-api/nested-resources/) accepts. */
-  board_fields?: string;
+  /** Any valid value that the [nested organization field resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+  organizationFields?: string;
+  /** Any valid value that the [nested board resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+  boardFields?: string;
 }

@@ -4,5 +4,5 @@ export interface UpdateEnterpriseMemberLicense {
   /** The ID of the Member */
   idMember: string;
   /** Boolean value to determine whether the user should be given an Enterprise license (true) or not (false). */
-  Values: boolean;
+  values: boolean;
 }

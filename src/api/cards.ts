@@ -52,20 +52,20 @@ export class Cards {
         fields: parameters.fields,
         actions: parameters.actions,
         attachments: parameters.attachments,
-        attachment_fields: parameters.attachment_fields,
+        attachment_fields: parameters.attachmentFields,
         members: parameters.members,
-        member_fields: parameters.member_fields,
+        member_fields: parameters.memberFields,
         membersVoted: parameters.membersVoted,
-        memberVoted_fields: parameters.memberVoted_fields,
+        memberVoted_fields: parameters.memberVotedFields,
         checkItemStates: parameters.checkItemStates,
         checklists: parameters.checklists,
-        checklist_fields: parameters.checklist_fields,
+        checklist_fields: parameters.checklistFields,
         board: parameters.board,
-        board_fields: parameters.board_fields,
+        board_fields: parameters.boardFields,
         list: parameters.list,
         pluginData: parameters.pluginData,
         stickers: parameters.stickers,
-        sticker_fields: parameters.sticker_fields,
+        sticker_fields: parameters.stickerFields,
         customFieldItems: parameters.customFieldItems,
       },
     };
@@ -273,7 +273,7 @@ export class Cards {
       method: 'GET',
       params: {
         checkItems: parameters.checkItems,
-        checkItem_fields: parameters.checkItem_fields,
+        checkItem_fields: parameters.checkItemFields,
         filter: parameters.filter,
         fields: parameters.fields,
       },
@@ -572,10 +572,10 @@ export class Cards {
   }
 
   /**
-   * Setting, updating, and removing the value for a Custom Field on a card. For more details on updating custom fields check out the [Getting Started With Custom Fields](/cloud/trello/guides/rest-api/getting-started-with-custom-fields/) */
+   * Setting, updating, and removing the value for a Custom Field on a card. For more details on updating custom fields check out the [Getting Started With Custom Fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/getting-started-with-custom-fields/) */
   async updateCardCustomField<T = any>(parameters: Parameters.UpdateCardCustomField, callback: Callback<T>): Promise<void>;
   /**
-   * Setting, updating, and removing the value for a Custom Field on a card. For more details on updating custom fields check out the [Getting Started With Custom Fields](/cloud/trello/guides/rest-api/getting-started-with-custom-fields/) */
+   * Setting, updating, and removing the value for a Custom Field on a card. For more details on updating custom fields check out the [Getting Started With Custom Fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/getting-started-with-custom-fields/) */
   async updateCardCustomField<T = any>(parameters: Parameters.UpdateCardCustomField, callback?: undefined): Promise<T>;
   async updateCardCustomField<T = any>(parameters: Parameters.UpdateCardCustomField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {

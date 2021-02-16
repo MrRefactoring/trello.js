@@ -4,7 +4,7 @@ export interface GetCardChecklists {
   /** `all` or `none` */
   checkItems?: string;
   /** `all` or a comma-separated list of: `name,nameData,pos,state,type` */
-  checkItem_fields?: string;
+  checkItemFields?: string;
   /** `all` or `none` */
   filter?: string;
   /** `all` or a comma-separated list of: `idBoard,idCard,name,pos` */

@@ -21,7 +21,7 @@ export class Members {
         boards: parameters.boards,
         boardBackgrounds: parameters.boardBackgrounds,
         boardsInvited: parameters.boardsInvited,
-        boardsInvited_fields: parameters.boardsInvited_fields,
+        boardsInvited_fields: parameters.boardsInvitedFields,
         boardStars: parameters.boardStars,
         cards: parameters.cards,
         customBoardBackgrounds: parameters.customBoardBackgrounds,
@@ -30,11 +30,11 @@ export class Members {
         fields: parameters.fields,
         notifications: parameters.notifications,
         organizations: parameters.organizations,
-        organization_fields: parameters.organization_fields,
-        organization_paid_account: parameters.organization_paid_account,
+        organization_fields: parameters.organizationFields,
+        organization_paid_account: parameters.organizationPaidAccount,
         organizationsInvited: parameters.organizationsInvited,
-        organizationsInvited_fields: parameters.organizationsInvited_fields,
-        paid_account: parameters.paid_account,
+        organizationsInvited_fields: parameters.organizationsInvitedFields,
+        paid_account: parameters.paidAccount,
         savedSearches: parameters.savedSearches,
         tokens: parameters.tokens,
       },
@@ -286,7 +286,7 @@ export class Members {
         fields: parameters.fields,
         lists: parameters.lists,
         organization: parameters.organization,
-        organization_fields: parameters.organization_fields,
+        organization_fields: parameters.organizationFields,
       },
     };
 
@@ -543,14 +543,14 @@ export class Members {
         entities: parameters.entities,
         display: parameters.display,
         filter: parameters.filter,
-        read_filter: parameters.read_filter,
+        read_filter: parameters.readFilter,
         fields: parameters.fields,
         limit: parameters.limit,
         page: parameters.page,
         before: parameters.before,
         since: parameters.since,
         memberCreator: parameters.memberCreator,
-        memberCreator_fields: parameters.memberCreator_fields,
+        memberCreator_fields: parameters.memberCreatorFields,
       },
     };
 
@@ -570,7 +570,7 @@ export class Members {
       params: {
         filter: parameters.filter,
         fields: parameters.fields,
-        paid_account: parameters.paid_account,
+        paid_account: parameters.paidAccount,
       },
     };
 

@@ -44,10 +44,10 @@ export interface UpdateCard {
      `brightness` can be sent alongside any of the other parameters, but all of the other parameters are mutually exclusive; you can not have the cover be a `color` and an `idAttachment` at the same time.
 
      On the brightness options, setting it to light will make the text on the card cover dark:
-     ![](/cloud/trello/images/rest/cards/cover-brightness-dark.png)
+     ![](https://developer.atlassian.com/cloud/trello/images/rest/cards/cover-brightness-dark.png)
 
      And vice versa, setting it to dark will make the text on the card cover light:
-     ![](/cloud/trello/images/rest/cards/cover-brightness-light.png) */
+     ![](https://developer.atlassian.com/cloud/trello/images/rest/cards/cover-brightness-light.png) */
   cover?: {
     /** An object containing information regarding the card's cover
          `brightness` can be sent alongside any of the other parameters, but all of the other parameters are mutually exclusive; you can not have the cover be a color and an `idAttachment` at the same time. */

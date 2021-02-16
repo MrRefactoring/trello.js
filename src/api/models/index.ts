@@ -6,7 +6,7 @@ export * from './board';
 export * from './boardBackground';
 export * from './boardFields';
 export * from './boardStars';
-export * from './cFValue';
+export * from './CFValue';
 export * from './card';
 export * from './cardFields';
 export * from './checkItem';

@@ -7,8 +7,8 @@ export interface DeactivateEnterpriseMember {
   value: boolean;
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
   fields?: string[];
-  /** Any valid value that the [nested organization resource](/cloud/trello/guides/rest-api/nested-resources/) accepts. */
-  organization_fields?: string[];
-  /** Any valid value that the [nested board resource](/cloud/trello/guides/rest-api/nested-resources/) accepts. */
-  board_fields?: string[];
+  /** Any valid value that the [nested organization resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+  organizationFields?: string[];
+  /** Any valid value that the [nested board resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+  boardFields?: string[];
 }

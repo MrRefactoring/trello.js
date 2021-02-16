@@ -31,7 +31,7 @@ export class Checklists {
       params: {
         cards: parameters.cards,
         checkItems: parameters.checkItems,
-        checkItem_fields: parameters.checkItem_fields,
+        checkItem_fields: parameters.checkItemFields,
         fields: parameters.fields,
       },
     };

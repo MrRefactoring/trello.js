@@ -1,4 +1,4 @@
-export interface PostCustomfields {
+export interface CreateCustomField {
   /** The ID of the model for which the Custom Field is being defined. This should always be the ID of a board. */
   idModel?: string;
   /** The type of model that the Custom Field is being defined on. This should always be `board`. */
@@ -11,5 +11,5 @@ export interface PostCustomfields {
   options?: string;
   pos?: 'top' | 'bottom' | number;
   /** Whether this Custom Field should be shown on the front of Cards */
-  display_cardFront?: boolean;
+  displayCardFront?: boolean;
 }
