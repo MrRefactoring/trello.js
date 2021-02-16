@@ -7,11 +7,11 @@ export class Labels {
 
   /**
    * Get information about a single Label. */
-  async getLabelsId<T = any>(parameters: Parameters.GetLabelsId, callback: Callback<T>): Promise<void>;
+  async getLabel<T = any>(parameters: Parameters.GetLabel, callback: Callback<T>): Promise<void>;
   /**
    * Get information about a single Label. */
-  async getLabelsId<T = any>(parameters: Parameters.GetLabelsId, callback?: undefined): Promise<T>;
-  async getLabelsId<T = any>(parameters: Parameters.GetLabelsId, callback?: Callback<T>): Promise<void | T> {
+  async getLabel<T = any>(parameters: Parameters.GetLabel, callback?: undefined): Promise<T>;
+  async getLabel<T = any>(parameters: Parameters.GetLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'GET',
@@ -20,16 +20,16 @@ export class Labels {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getLabelsId' });
+    return this.client.sendRequest(config, callback, { methodName: 'getLabel' });
   }
 
   /**
    * Update a label by ID. */
-  async putLabelsId<T = any>(parameters: Parameters.PutLabelsId, callback: Callback<T>): Promise<void>;
+  async updateLabel<T = any>(parameters: Parameters.UpdateLabel, callback: Callback<T>): Promise<void>;
   /**
    * Update a label by ID. */
-  async putLabelsId<T = any>(parameters: Parameters.PutLabelsId, callback?: undefined): Promise<T>;
-  async putLabelsId<T = any>(parameters: Parameters.PutLabelsId, callback?: Callback<T>): Promise<void | T> {
+  async updateLabel<T = any>(parameters: Parameters.UpdateLabel, callback?: undefined): Promise<T>;
+  async updateLabel<T = any>(parameters: Parameters.UpdateLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'PUT',
@@ -39,31 +39,31 @@ export class Labels {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putLabelsId' });
+    return this.client.sendRequest(config, callback, { methodName: 'updateLabel' });
   }
 
   /**
    * Delete a label by ID. */
-  async deleteLabelsId<T = any>(parameters: Parameters.DeleteLabelsId, callback: Callback<T>): Promise<void>;
+  async deleteLabel<T = any>(parameters: Parameters.DeleteLabel, callback: Callback<T>): Promise<void>;
   /**
    * Delete a label by ID. */
-  async deleteLabelsId<T = any>(parameters: Parameters.DeleteLabelsId, callback?: undefined): Promise<T>;
-  async deleteLabelsId<T = any>(parameters: Parameters.DeleteLabelsId, callback?: Callback<T>): Promise<void | T> {
+  async deleteLabel<T = any>(parameters: Parameters.DeleteLabel, callback?: undefined): Promise<T>;
+  async deleteLabel<T = any>(parameters: Parameters.DeleteLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteLabelsId' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteLabel' });
   }
 
   /**
    * Update a field on a label. */
-  async putLabelsIdField<T = any>(parameters: Parameters.PutLabelsIdField, callback: Callback<T>): Promise<void>;
+  async updateLabelField<T = any>(parameters: Parameters.UpdateLabelField, callback: Callback<T>): Promise<void>;
   /**
    * Update a field on a label. */
-  async putLabelsIdField<T = any>(parameters: Parameters.PutLabelsIdField, callback?: undefined): Promise<T>;
-  async putLabelsIdField<T = any>(parameters: Parameters.PutLabelsIdField, callback?: Callback<T>): Promise<void | T> {
+  async updateLabelField<T = any>(parameters: Parameters.UpdateLabelField, callback?: undefined): Promise<T>;
+  async updateLabelField<T = any>(parameters: Parameters.UpdateLabelField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}/${parameters.field}`,
       method: 'PUT',
@@ -72,16 +72,16 @@ export class Labels {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putLabelsIdField' });
+    return this.client.sendRequest(config, callback, { methodName: 'updateLabelField' });
   }
 
   /**
    * Create a new Label on a Board. */
-  async postLabels<T = any>(parameters: Parameters.PostLabels, callback: Callback<T>): Promise<void>;
+  async createLabel<T = any>(parameters: Parameters.CreateLabel, callback: Callback<T>): Promise<void>;
   /**
    * Create a new Label on a Board. */
-  async postLabels<T = any>(parameters: Parameters.PostLabels, callback?: undefined): Promise<T>;
-  async postLabels<T = any>(parameters: Parameters.PostLabels, callback?: Callback<T>): Promise<void | T> {
+  async createLabel<T = any>(parameters: Parameters.CreateLabel, callback?: undefined): Promise<T>;
+  async createLabel<T = any>(parameters: Parameters.CreateLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/labels',
       method: 'POST',
@@ -92,6 +92,6 @@ export class Labels {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postLabels' });
+    return this.client.sendRequest(config, callback, { methodName: 'createLabel' });
   }
 }

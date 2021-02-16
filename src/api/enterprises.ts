@@ -8,11 +8,11 @@ export class Enterprises {
 
   /**
    * Get an enterprise by its ID. */
-  async getEnterprisesId<T = any>(parameters: Parameters.GetEnterprisesId, callback: Callback<T>): Promise<void>;
+  async getEnterprise<T = any>(parameters: Parameters.GetEnterprise, callback: Callback<T>): Promise<void>;
   /**
    * Get an enterprise by its ID. */
-  async getEnterprisesId<T = any>(parameters: Parameters.GetEnterprisesId, callback?: undefined): Promise<T>;
-  async getEnterprisesId<T = any>(parameters: Parameters.GetEnterprisesId, callback?: Callback<T>): Promise<void | T> {
+  async getEnterprise<T = any>(parameters: Parameters.GetEnterprise, callback?: undefined): Promise<T>;
+  async getEnterprise<T = any>(parameters: Parameters.GetEnterprise, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}`,
       method: 'GET',
@@ -33,31 +33,31 @@ export class Enterprises {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesId' });
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterprise' });
   }
 
   /**
    * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from an Enterprise's audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is required for this route. */
-  async getEnterprisesIdAuditLog<T = any>(parameters: Parameters.GetEnterprisesIdAuditLog, callback?: Callback<T>): Promise<void>;
+  async getEnterpriseAuditLog<T = any>(parameters: Parameters.GetEnterpriseAuditLog, callback?: Callback<T>): Promise<void>;
   /**
    * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from an Enterprise's audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is required for this route. */
-  async getEnterprisesIdAuditLog<T = any>(parameters: Parameters.GetEnterprisesIdAuditLog, callback?: undefined): Promise<T>;
-  async getEnterprisesIdAuditLog<T = any>(parameters: Parameters.GetEnterprisesIdAuditLog, callback?: Callback<T>): Promise<void | T> {
+  async getEnterpriseAuditLog<T = any>(parameters: Parameters.GetEnterpriseAuditLog, callback?: undefined): Promise<T>;
+  async getEnterpriseAuditLog<T = any>(parameters: Parameters.GetEnterpriseAuditLog, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/auditlog`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdAuditLog' });
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterpriseAuditLog' });
   }
 
   /**
    * Get an enterprise's admin members. */
-  async getEnterprisesIdAdmins<T = Models.Enterprise>(parameters: Parameters.GetEnterprisesIdAdmins, callback: Callback<T>): Promise<void>;
+  async getEnterpriseAdmins<T = Models.Enterprise>(parameters: Parameters.GetEnterpriseAdmins, callback: Callback<T>): Promise<void>;
   /**
    * Get an enterprise's admin members. */
-  async getEnterprisesIdAdmins<T = Models.Enterprise>(parameters: Parameters.GetEnterprisesIdAdmins, callback?: undefined): Promise<T>;
-  async getEnterprisesIdAdmins<T = Models.Enterprise>(parameters: Parameters.GetEnterprisesIdAdmins, callback?: Callback<T>): Promise<void | T> {
+  async getEnterpriseAdmins<T = Models.Enterprise>(parameters: Parameters.GetEnterpriseAdmins, callback?: undefined): Promise<T>;
+  async getEnterpriseAdmins<T = Models.Enterprise>(parameters: Parameters.GetEnterpriseAdmins, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/admins`,
       method: 'GET',
@@ -66,16 +66,16 @@ export class Enterprises {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdAdmins' });
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterpriseAdmins' });
   }
 
   /**
    * Get the signup URL for an enterprise. */
-  async getEnterprisesIdSignupurl<T = any>(parameters: Parameters.GetEnterprisesIdSignupurl, callback: Callback<T>): Promise<void>;
+  async getEnterpriseSignupUrl<T = any>(parameters: Parameters.GetEnterpriseSignupUrl, callback: Callback<T>): Promise<void>;
   /**
    * Get the signup URL for an enterprise. */
-  async getEnterprisesIdSignupurl<T = any>(parameters: Parameters.GetEnterprisesIdSignupurl, callback?: undefined): Promise<T>;
-  async getEnterprisesIdSignupurl<T = any>(parameters: Parameters.GetEnterprisesIdSignupurl, callback?: Callback<T>): Promise<void | T> {
+  async getEnterpriseSignupUrl<T = any>(parameters: Parameters.GetEnterpriseSignupUrl, callback?: undefined): Promise<T>;
+  async getEnterpriseSignupUrl<T = any>(parameters: Parameters.GetEnterpriseSignupUrl, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/signupUrl`,
       method: 'GET',
@@ -87,16 +87,16 @@ export class Enterprises {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdSignupurl' });
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterpriseSignupUrl' });
   }
 
   /**
    * Get the members of an enterprise. */
-  async getEnterprisesIdMembers<T = any>(parameters: Parameters.GetEnterprisesIdMembers, callback: Callback<T>): Promise<void>;
+  async getEnterpriseMembers<T = any>(parameters: Parameters.GetEnterpriseMembers, callback: Callback<T>): Promise<void>;
   /**
    * Get the members of an enterprise. */
-  async getEnterprisesIdMembers<T = any>(parameters: Parameters.GetEnterprisesIdMembers, callback?: undefined): Promise<T>;
-  async getEnterprisesIdMembers<T = any>(parameters: Parameters.GetEnterprisesIdMembers, callback?: Callback<T>): Promise<void | T> {
+  async getEnterpriseMembers<T = any>(parameters: Parameters.GetEnterpriseMembers, callback?: undefined): Promise<T>;
+  async getEnterpriseMembers<T = any>(parameters: Parameters.GetEnterpriseMembers, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/members`,
       method: 'GET',
@@ -113,16 +113,16 @@ export class Enterprises {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdMembers' });
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterpriseMembers' });
   }
 
   /**
    * Get a specific member of an enterprise by ID. */
-  async getEnterprisesIdMembersIdmember<T = Models.Member>(parameters: Parameters.GetEnterprisesIdMembersIdmember, callback: Callback<T>): Promise<void>;
+  async getEnterpriseMember<T = Models.Member>(parameters: Parameters.GetEnterpriseMember, callback: Callback<T>): Promise<void>;
   /**
    * Get a specific member of an enterprise by ID. */
-  async getEnterprisesIdMembersIdmember<T = Models.Member>(parameters: Parameters.GetEnterprisesIdMembersIdmember, callback?: undefined): Promise<T>;
-  async getEnterprisesIdMembersIdmember<T = Models.Member>(parameters: Parameters.GetEnterprisesIdMembersIdmember, callback?: Callback<T>): Promise<void | T> {
+  async getEnterpriseMember<T = Models.Member>(parameters: Parameters.GetEnterpriseMember, callback?: undefined): Promise<T>;
+  async getEnterpriseMember<T = Models.Member>(parameters: Parameters.GetEnterpriseMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/members/${parameters.idMember}`,
       method: 'GET',
@@ -133,31 +133,31 @@ export class Enterprises {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdMembersIdmember' });
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterpriseMember' });
   }
 
   /**
    * Get whether an organization can be transferred to an enterprise. */
-  async getEnterprisesIdTransferrableOrganizationIdOrganization<T = Models.Organization>(parameters: Parameters.GetEnterprisesIdTransferrableOrganizationIdOrganization, callback: Callback<T>): Promise<void>;
+  async getEnterpriseTransferrableOrganization<T = Models.Organization>(parameters: Parameters.GetEnterpriseTransferrableOrganization, callback: Callback<T>): Promise<void>;
   /**
    * Get whether an organization can be transferred to an enterprise. */
-  async getEnterprisesIdTransferrableOrganizationIdOrganization<T = Models.Organization>(parameters: Parameters.GetEnterprisesIdTransferrableOrganizationIdOrganization, callback?: undefined): Promise<T>;
-  async getEnterprisesIdTransferrableOrganizationIdOrganization<T = Models.Organization>(parameters: Parameters.GetEnterprisesIdTransferrableOrganizationIdOrganization, callback?: Callback<T>): Promise<void | T> {
+  async getEnterpriseTransferrableOrganization<T = Models.Organization>(parameters: Parameters.GetEnterpriseTransferrableOrganization, callback?: undefined): Promise<T>;
+  async getEnterpriseTransferrableOrganization<T = Models.Organization>(parameters: Parameters.GetEnterpriseTransferrableOrganization, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/transferrable/organization/${parameters.idOrganization}`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getEnterprisesIdTransferrableOrganizationIdOrganization' });
+    return this.client.sendRequest(config, callback, { methodName: 'getEnterpriseTransferrableOrganization' });
   }
 
   /**
    * Create an auth Token for an Enterprise. */
-  async postEnterprisesIdTokens<T = any>(parameters: Parameters.PostEnterprisesIdTokens, callback: Callback<T>): Promise<void>;
+  async createEnterpriseToken<T = any>(parameters: Parameters.CreateEnterpriseToken, callback: Callback<T>): Promise<void>;
   /**
    * Create an auth Token for an Enterprise. */
-  async postEnterprisesIdTokens<T = any>(parameters: Parameters.PostEnterprisesIdTokens, callback?: undefined): Promise<T>;
-  async postEnterprisesIdTokens<T = any>(parameters: Parameters.PostEnterprisesIdTokens, callback?: Callback<T>): Promise<void | T> {
+  async createEnterpriseToken<T = any>(parameters: Parameters.CreateEnterpriseToken, callback?: undefined): Promise<T>;
+  async createEnterpriseToken<T = any>(parameters: Parameters.CreateEnterpriseToken, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/tokens`,
       method: 'POST',
@@ -166,16 +166,16 @@ export class Enterprises {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postEnterprisesIdTokens' });
+    return this.client.sendRequest(config, callback, { methodName: 'createEnterpriseToken' });
   }
 
   /**
    * Transfer an organization to an enterprise. */
-  async putEnterprisesIdOrganizations<T = any>(parameters: Parameters.PutEnterprisesIdOrganizations, callback: Callback<T>): Promise<void>;
+  async transferOrganizationToEnterprise<T = any>(parameters: Parameters.TransferOrganizationToEnterprise, callback: Callback<T>): Promise<void>;
   /**
    * Transfer an organization to an enterprise. */
-  async putEnterprisesIdOrganizations<T = any>(parameters: Parameters.PutEnterprisesIdOrganizations, callback?: undefined): Promise<T>;
-  async putEnterprisesIdOrganizations<T = any>(parameters: Parameters.PutEnterprisesIdOrganizations, callback?: Callback<T>): Promise<void | T> {
+  async transferOrganizationToEnterprise<T = any>(parameters: Parameters.TransferOrganizationToEnterprise, callback?: undefined): Promise<T>;
+  async transferOrganizationToEnterprise<T = any>(parameters: Parameters.TransferOrganizationToEnterprise, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/organizations`,
       method: 'PUT',
@@ -184,16 +184,16 @@ export class Enterprises {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putEnterprisesIdOrganizations' });
+    return this.client.sendRequest(config, callback, { methodName: 'transferOrganizationToEnterprise' });
   }
 
   /**
    * This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or not. */
-  async putEnterprisesIdMembersIdmemberLicensed<T = Models.Member>(parameters: Parameters.PutEnterprisesIdMembersIdmemberLicensed, callback: Callback<T>): Promise<void>;
+  async updateEnterpriseMemberLicense<T = Models.Member>(parameters: Parameters.UpdateEnterpriseMemberLicense, callback: Callback<T>): Promise<void>;
   /**
    * This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or not. */
-  async putEnterprisesIdMembersIdmemberLicensed<T = Models.Member>(parameters: Parameters.PutEnterprisesIdMembersIdmemberLicensed, callback?: undefined): Promise<T>;
-  async putEnterprisesIdMembersIdmemberLicensed<T = Models.Member>(parameters: Parameters.PutEnterprisesIdMembersIdmemberLicensed, callback?: Callback<T>): Promise<void | T> {
+  async updateEnterpriseMemberLicense<T = Models.Member>(parameters: Parameters.UpdateEnterpriseMemberLicense, callback?: undefined): Promise<T>;
+  async updateEnterpriseMemberLicense<T = Models.Member>(parameters: Parameters.UpdateEnterpriseMemberLicense, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/members/${parameters.idMember}/licensed`,
       method: 'PUT',
@@ -202,16 +202,16 @@ export class Enterprises {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putEnterprisesIdMembersIdmemberLicensed' });
+    return this.client.sendRequest(config, callback, { methodName: 'updateEnterpriseMemberLicense' });
   }
 
   /**
    * Deactivate a Member of an Enterprise. */
-  async enterprisesIdMembersIdMemberDeactivated<T = any>(parameters: Parameters.EnterprisesIdMembersIdMemberDeactivated, callback: Callback<T>): Promise<void>;
+  async deactivateEnterpriseMember<T = any>(parameters: Parameters.DeactivateEnterpriseMember, callback: Callback<T>): Promise<void>;
   /**
    * Deactivate a Member of an Enterprise. */
-  async enterprisesIdMembersIdMemberDeactivated<T = any>(parameters: Parameters.EnterprisesIdMembersIdMemberDeactivated, callback?: undefined): Promise<T>;
-  async enterprisesIdMembersIdMemberDeactivated<T = any>(parameters: Parameters.EnterprisesIdMembersIdMemberDeactivated, callback?: Callback<T>): Promise<void | T> {
+  async deactivateEnterpriseMember<T = any>(parameters: Parameters.DeactivateEnterpriseMember, callback?: undefined): Promise<T>;
+  async deactivateEnterpriseMember<T = any>(parameters: Parameters.DeactivateEnterpriseMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/members/${parameters.idMember}/deactivated`,
       method: 'PUT',
@@ -223,51 +223,51 @@ export class Enterprises {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'enterprisesIdMembersIdMemberDeactivated' });
+    return this.client.sendRequest(config, callback, { methodName: 'deactivateEnterpriseMember' });
   }
 
   /**
    * Make Member an admin of Enterprise. */
-  async putEnterprisesIdAdminsIdmember<T = any>(parameters: Parameters.PutEnterprisesIdAdminsIdmember, callback: Callback<T>): Promise<void>;
+  async makeEnterpriseMemberAdmin<T = any>(parameters: Parameters.MakeEnterpriseMemberAdmin, callback: Callback<T>): Promise<void>;
   /**
    * Make Member an admin of Enterprise. */
-  async putEnterprisesIdAdminsIdmember<T = any>(parameters: Parameters.PutEnterprisesIdAdminsIdmember, callback?: undefined): Promise<T>;
-  async putEnterprisesIdAdminsIdmember<T = any>(parameters: Parameters.PutEnterprisesIdAdminsIdmember, callback?: Callback<T>): Promise<void | T> {
+  async makeEnterpriseMemberAdmin<T = any>(parameters: Parameters.MakeEnterpriseMemberAdmin, callback?: undefined): Promise<T>;
+  async makeEnterpriseMemberAdmin<T = any>(parameters: Parameters.MakeEnterpriseMemberAdmin, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
       method: 'PUT',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putEnterprisesIdAdminsIdmember' });
+    return this.client.sendRequest(config, callback, { methodName: 'makeEnterpriseMemberAdmin' });
   }
 
   /**
    * Remove an organization from an enterprise. */
-  async deleteEnterprisesIdOrganizationsIdorg<T = any>(parameters: Parameters.DeleteEnterprisesIdOrganizationsIdorg, callback: Callback<T>): Promise<void>;
+  async deleteEnterpriseOrganization<T = any>(parameters: Parameters.DeleteEnterpriseOrganization, callback: Callback<T>): Promise<void>;
   /**
    * Remove an organization from an enterprise. */
-  async deleteEnterprisesIdOrganizationsIdorg<T = any>(parameters: Parameters.DeleteEnterprisesIdOrganizationsIdorg, callback?: undefined): Promise<T>;
-  async deleteEnterprisesIdOrganizationsIdorg<T = any>(parameters: Parameters.DeleteEnterprisesIdOrganizationsIdorg, callback?: Callback<T>): Promise<void | T> {
+  async deleteEnterpriseOrganization<T = any>(parameters: Parameters.DeleteEnterpriseOrganization, callback?: undefined): Promise<T>;
+  async deleteEnterpriseOrganization<T = any>(parameters: Parameters.DeleteEnterpriseOrganization, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/organizations/${parameters.idOrg}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteEnterprisesIdOrganizationsIdorg' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteEnterpriseOrganization' });
   }
 
   /**
    * Remove an member as admin from an enterprise. */
-  async enterprisesIdOrganizationsIdmember<T = any>(parameters: Parameters.EnterprisesIdOrganizationsIdmember, callback: Callback<T>): Promise<void>;
+  async deleteEnterpriseMemberAdmin<T = any>(parameters: Parameters.DeleteEnterpriseMemberAdmin, callback: Callback<T>): Promise<void>;
   /**
    * Remove an member as admin from an enterprise. */
-  async enterprisesIdOrganizationsIdmember<T = any>(parameters: Parameters.EnterprisesIdOrganizationsIdmember, callback?: undefined): Promise<T>;
-  async enterprisesIdOrganizationsIdmember<T = any>(parameters: Parameters.EnterprisesIdOrganizationsIdmember, callback?: Callback<T>): Promise<void | T> {
+  async deleteEnterpriseMemberAdmin<T = any>(parameters: Parameters.DeleteEnterpriseMemberAdmin, callback?: undefined): Promise<T>;
+  async deleteEnterpriseMemberAdmin<T = any>(parameters: Parameters.DeleteEnterpriseMemberAdmin, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/enterprises/${parameters.id}/organizations/${parameters.idMember}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'enterprisesIdOrganizationsIdmember' });
+    return this.client.sendRequest(config, callback, { methodName: 'deleteEnterpriseMemberAdmin' });
   }
 }

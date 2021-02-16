@@ -8,41 +8,41 @@ export class Plugins {
 
   /**
    * Get plugins */
-  async getPluginsId<T = Models.Plugin>(parameters: Parameters.GetPluginsId, callback: Callback<T>): Promise<void>;
+  async getPlugin<T = Models.Plugin>(parameters: Parameters.GetPlugin, callback: Callback<T>): Promise<void>;
   /**
    * Get plugins */
-  async getPluginsId<T = Models.Plugin>(parameters: Parameters.GetPluginsId, callback?: undefined): Promise<T>;
-  async getPluginsId<T = Models.Plugin>(parameters: Parameters.GetPluginsId, callback?: Callback<T>): Promise<void | T> {
+  async getPlugin<T = Models.Plugin>(parameters: Parameters.GetPlugin, callback?: undefined): Promise<T>;
+  async getPlugin<T = Models.Plugin>(parameters: Parameters.GetPlugin, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/plugins/${parameters.id}/`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getPluginsId' });
+    return this.client.sendRequest(config, callback, { methodName: 'getPlugin' });
   }
 
   /**
    * Update a Plugin */
-  async putPluginsId<T = Models.Plugin>(parameters: Parameters.PutPluginsId, callback: Callback<T>): Promise<void>;
+  async updatePlugin<T = Models.Plugin>(parameters: Parameters.UpdatePlugin, callback: Callback<T>): Promise<void>;
   /**
    * Update a Plugin */
-  async putPluginsId<T = Models.Plugin>(parameters: Parameters.PutPluginsId, callback?: undefined): Promise<T>;
-  async putPluginsId<T = Models.Plugin>(parameters: Parameters.PutPluginsId, callback?: Callback<T>): Promise<void | T> {
+  async updatePlugin<T = Models.Plugin>(parameters: Parameters.UpdatePlugin, callback?: undefined): Promise<T>;
+  async updatePlugin<T = Models.Plugin>(parameters: Parameters.UpdatePlugin, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/plugins/${parameters.id}/`,
       method: 'PUT',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putPluginsId' });
+    return this.client.sendRequest(config, callback, { methodName: 'updatePlugin' });
   }
 
   /**
    * Create a new listing for a given locale for your Power-Up */
-  async postPluginsIdpluginListing<T = Models.PluginListing>(parameters: Parameters.PostPluginsIdpluginListing, callback: Callback<T>): Promise<void>;
+  async createPluginListing<T = Models.PluginListing>(parameters: Parameters.CreatePluginListing, callback: Callback<T>): Promise<void>;
   /**
    * Create a new listing for a given locale for your Power-Up */
-  async postPluginsIdpluginListing<T = Models.PluginListing>(parameters: Parameters.PostPluginsIdpluginListing, callback?: undefined): Promise<T>;
-  async postPluginsIdpluginListing<T = Models.PluginListing>(parameters: Parameters.PostPluginsIdpluginListing, callback?: Callback<T>): Promise<void | T> {
+  async createPluginListing<T = Models.PluginListing>(parameters: Parameters.CreatePluginListing, callback?: undefined): Promise<T>;
+  async createPluginListing<T = Models.PluginListing>(parameters: Parameters.CreatePluginListing, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/plugins/${parameters.idPlugin}/listing`,
       method: 'POST',
@@ -54,27 +54,27 @@ export class Plugins {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'postPluginsIdpluginListing' });
+    return this.client.sendRequest(config, callback, { methodName: 'createPluginListing' });
   }
 
-  async getPluginsIdComplianceMemberprivacy<T = any>(parameters: Parameters.GetPluginsIdComplianceMemberprivacy, callback: Callback<T>): Promise<void>;
-  async getPluginsIdComplianceMemberprivacy<T = any>(parameters: Parameters.GetPluginsIdComplianceMemberprivacy, callback?: undefined): Promise<T>;
-  async getPluginsIdComplianceMemberprivacy<T = any>(parameters: Parameters.GetPluginsIdComplianceMemberprivacy, callback?: Callback<T>): Promise<void | T> {
+  async getPluginComplianceMemberPrivacy<T = any>(parameters: Parameters.GetPluginComplianceMemberPrivacy, callback: Callback<T>): Promise<void>;
+  async getPluginComplianceMemberPrivacy<T = any>(parameters: Parameters.GetPluginComplianceMemberPrivacy, callback?: undefined): Promise<T>;
+  async getPluginComplianceMemberPrivacy<T = any>(parameters: Parameters.GetPluginComplianceMemberPrivacy, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/plugins/${parameters.id}/compliance/memberPrivacy`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getPluginsIdComplianceMemberprivacy' });
+    return this.client.sendRequest(config, callback, { methodName: 'getPluginComplianceMemberPrivacy' });
   }
 
   /**
    * Update an existing listing for your Power-Up */
-  async putPluginsIdpluginListingsIdlisting<T = Models.PluginListing>(parameters: Parameters.PutPluginsIdpluginListingsIdlisting, callback: Callback<T>): Promise<void>;
+  async updatePluginListing<T = Models.PluginListing>(parameters: Parameters.UpdatePluginListing, callback: Callback<T>): Promise<void>;
   /**
    * Update an existing listing for your Power-Up */
-  async putPluginsIdpluginListingsIdlisting<T = Models.PluginListing>(parameters: Parameters.PutPluginsIdpluginListingsIdlisting, callback?: undefined): Promise<T>;
-  async putPluginsIdpluginListingsIdlisting<T = Models.PluginListing>(parameters: Parameters.PutPluginsIdpluginListingsIdlisting, callback?: Callback<T>): Promise<void | T> {
+  async updatePluginListing<T = Models.PluginListing>(parameters: Parameters.UpdatePluginListing, callback?: undefined): Promise<T>;
+  async updatePluginListing<T = Models.PluginListing>(parameters: Parameters.UpdatePluginListing, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/plugins/${parameters.idPlugin}/listings/${parameters.idListing}`,
       method: 'PUT',
@@ -86,6 +86,6 @@ export class Plugins {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'putPluginsIdpluginListingsIdlisting' });
+    return this.client.sendRequest(config, callback, { methodName: 'updatePluginListing' });
   }
 }
