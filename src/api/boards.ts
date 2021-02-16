@@ -101,11 +101,11 @@ export class Boards {
 
   /**
    * Delete a board. */
-  async deleteBoard<T = any>(parameters: Parameters.DeleteBoard, callback: Callback<T>): Promise<void>;
+  async deleteBoard<T = void>(parameters: Parameters.DeleteBoard, callback: Callback<T>): Promise<void>;
   /**
    * Delete a board. */
-  async deleteBoard<T = any>(parameters: Parameters.DeleteBoard, callback?: undefined): Promise<T>;
-  async deleteBoard<T = any>(parameters: Parameters.DeleteBoard, callback?: Callback<T>): Promise<void | T> {
+  async deleteBoard<T = void>(parameters: Parameters.DeleteBoard, callback?: undefined): Promise<T>;
+  async deleteBoard<T = void>(parameters: Parameters.DeleteBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}`,
       method: 'DELETE',
@@ -543,11 +543,11 @@ export class Boards {
 
   /**
    * Create a new board. */
-  async createBoard<T = any>(parameters: Parameters.CreateBoard, callback: Callback<T>): Promise<void>;
+  async createBoard<T = Models.Board>(parameters: Parameters.CreateBoard, callback: Callback<T>): Promise<void>;
   /**
    * Create a new board. */
-  async createBoard<T = any>(parameters: Parameters.CreateBoard, callback?: undefined): Promise<T>;
-  async createBoard<T = any>(parameters: Parameters.CreateBoard, callback?: Callback<T>): Promise<void | T> {
+  async createBoard<T = Models.Board>(parameters: Parameters.CreateBoard, callback?: undefined): Promise<T>;
+  async createBoard<T = Models.Board>(parameters: Parameters.CreateBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/boards/',
       method: 'POST',

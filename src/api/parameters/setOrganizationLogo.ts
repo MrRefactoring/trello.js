@@ -1,6 +1,6 @@
 export interface SetOrganizationLogo {
   /** The ID or name of the team */
-  id: Record<string, any>;
+  id: string;
   /** Image file for the logo */
   file?: string;
 }

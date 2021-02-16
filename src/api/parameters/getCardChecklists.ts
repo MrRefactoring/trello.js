@@ -1,6 +1,6 @@
 export interface GetCardChecklists {
   /** The ID of the Card */
-  id: Record<string, any>;
+  id: string;
   /** `all` or `none` */
   checkItems?: string;
   /** `all` or a comma-separated list of: `name,nameData,pos,state,type` */

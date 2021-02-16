@@ -1,5 +1,5 @@
 export interface UpdateNotificationReadStatus {
   /** The ID of the notification */
-  id: Record<string, any>;
+  id: string;
   value?: string;
 }

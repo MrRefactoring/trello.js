@@ -5,7 +5,7 @@ export interface Prefs {
   hideVotes?: boolean;
   voting?: string;
   comments?: string;
-  invitations?: Record<string, any>;
+  invitations?: string[];
   selfJoin?: boolean;
   cardCovers?: boolean;
   isTemplate?: boolean;

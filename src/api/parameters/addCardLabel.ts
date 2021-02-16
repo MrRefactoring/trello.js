@@ -1,6 +1,6 @@
 export interface AddCardLabel {
   /** The ID of the Card */
-  id: Record<string, any>;
+  id: string;
   /** The ID of the label to add */
-  value?: Record<string, any>;
+  value?: string;
 }

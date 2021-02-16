@@ -1,6 +1,6 @@
 export interface GetWebhookField {
   /** ID of the webhook. */
-  id: Record<string, any>;
+  id: string;
   /** Field to retrieve. One of: `active`, `callbackURL`, `description`, `idModel` */
   field: string;
 }

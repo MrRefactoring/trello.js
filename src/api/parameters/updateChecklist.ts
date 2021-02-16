@@ -4,5 +4,5 @@ export interface UpdateChecklist {
   /** Name of the new checklist being created. Should be length of 1 to 16384. */
   name?: string;
   /** Determines the position of the checklist on the card. One of: `top`, `bottom`, or a positive number. */
-  pos?: Record<string, any>;
+  pos?: 'top' | 'bottom' | number;
 }

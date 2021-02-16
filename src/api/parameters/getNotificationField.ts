@@ -1,6 +1,6 @@
 export interface GetNotificationField {
   /** The ID of the notification */
-  id: Record<string, any>;
+  id: string;
   /** A notification [field](/cloud/trello/guides/rest-api/object-definitions/) */
-  field: Record<string, any>;
+  field: string;
 }

@@ -1,6 +1,6 @@
 export interface DisablePowerUp {
   /** The ID of the board */
-  id: Record<string, any>;
+  id: string;
   /** The ID of the Power-Up to disable */
-  idPlugin: Record<string, any>;
+  idPlugin: string;
 }

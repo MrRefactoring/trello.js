@@ -1,6 +1,6 @@
 export interface GetEnterpriseSignupUrl {
   /** ID of the enterprise to retrieve. */
-  id: Record<string, any>;
+  id: string;
   authenticate?: boolean;
   confirmationAccepted?: boolean;
   /** Any valid URL. */

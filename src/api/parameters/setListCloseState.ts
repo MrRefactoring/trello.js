@@ -1,6 +1,6 @@
 export interface SetListCloseState {
   /** The ID of the list */
-  id: Record<string, any>;
+  id: string;
   /** Set to true to close (archive) the list */
-  value?: Record<string, any>;
+  value?: boolean;
 }

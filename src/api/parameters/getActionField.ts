@@ -1,6 +1,6 @@
 export interface GetActionField {
   /** The ID of the Action */
-  id: Record<string, any>;
+  id: string;
   /** An action field */
-  field: Record<string, any>;
+  field: string;
 }

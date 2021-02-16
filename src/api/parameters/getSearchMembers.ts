@@ -3,7 +3,7 @@ export interface GetSearchMembers {
   query: string;
   /** The maximum number of results to return. Maximum of 20. */
   limit?: number;
-  idBoard?: Record<string, any>;
-  idOrganization?: Record<string, any>;
+  idBoard?: string;
+  idOrganization?: string;
   onlyOrgMembers?: boolean;
 }

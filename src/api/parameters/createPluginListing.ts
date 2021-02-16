@@ -1,6 +1,6 @@
 export interface CreatePluginListing {
   /** The ID of the Power-Up for which you are creating a new listing. */
-  idPlugin: Record<string, any>;
+  idPlugin: string;
   /** The description to show for the given locale */
   description?: string;
   /** The locale that this listing should be displayed for. */

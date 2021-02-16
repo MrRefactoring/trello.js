@@ -1,6 +1,6 @@
 export interface GetCardField {
   /** The ID of the Card */
-  id: Record<string, any>;
+  id: string;
   /** The desired field. */
-  field: Record<string, any>;
+  field: string;
 }

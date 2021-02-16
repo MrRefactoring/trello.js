@@ -2,19 +2,19 @@ export interface GetSearch {
   /** The search query with a length of 1 to 16384 characters */
   query: string;
   /** `mine` or a comma-separated list of Board IDs */
-  idBoards?: Record<string, any>;
+  idBoards?: 'mine' | string[];
   /** A comma-separated list of Organization IDs */
-  idOrganizations?: string;
+  idOrganizations?: string[];
   /** A comma-separated list of Card IDs */
-  idCards?: string;
+  idCards?: string[];
   /** What type or types of Trello objects you want to search. all or a comma-separated list of: `actions`, `boards`, `cards`, `members`, `organizations` */
-  modelTypes?: string;
+  modelTypes?: string[];
   /** all or a comma-separated list of: `closed`, `dateLastActivity`, `dateLastView`, `desc`, `descData`, `idOrganization`, `invitations`, `invited`, `labelNames`, `memberships`, `name`, `pinned`, `powerUps`, `prefs`, `shortLink`, `shortUrl`, `starred`, `subscribed`, `url` */
-  board_fields?: string;
+  board_fields?: 'all' | string[];
   /** The maximum number of boards returned. Maximum: 1000 */
   boards_limit?: number;
   /** all or a comma-separated list of: `badges`, `checkItemStates`, `closed`, `dateLastActivity`, `desc`, `descData`, `due`, `email`, `idAttachmentCover`, `idBoard`, `idChecklists`, `idLabels`, `idList`, `idMembers`, `idMembersVoted`, `idShort`, `labels`, `manualCoverAttachment`, `name`, `pos`, `shortLink`, `shortUrl`, `subscribed`, `url` */
-  card_fields?: string;
+  card_fields?: 'all' | string[];
   /** The maximum number of cards to return. Maximum: 1000 */
   cards_limit?: number;
   /** The page of results for cards. Maximum: 100 */

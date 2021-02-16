@@ -1,6 +1,6 @@
 export interface GetBoardMemberships {
   /** The ID of the board */
-  id: Record<string, any>;
+  id: string;
   /** One of `admins`, `all`, `none`, `normal` */
   filter?: string;
   /** Works for premium organizations only. */
@@ -10,5 +10,5 @@ export interface GetBoardMemberships {
   /** Determines whether to include a [nested member object](/cloud/trello/guides/rest-api/nested-resources/). */
   member?: boolean;
   /** Fields to show if `member=true`. Valid values: [nested member resource fields](/cloud/trello/guides/rest-api/nested-resources/). */
-  member_fields?: Record<string, any>;
+  member_fields?: string[];
 }

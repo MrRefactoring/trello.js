@@ -1,14 +1,14 @@
 export interface DeactivateEnterpriseMember {
   /** ID of the enterprise to retrieve. */
-  id: Record<string, any>;
+  id: string;
   /** ID of the Member to deactive. */
-  idMember: Record<string, any>;
+  idMember: string;
   /** Determines whether the user is deactivated or not. */
   value: boolean;
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
-  fields?: Record<string, any>;
+  fields?: string[];
   /** Any valid value that the [nested organization resource](/cloud/trello/guides/rest-api/nested-resources/) accepts. */
-  organization_fields?: Record<string, any>;
+  organization_fields?: string[];
   /** Any valid value that the [nested board resource](/cloud/trello/guides/rest-api/nested-resources/) accepts. */
-  board_fields?: Record<string, any>;
+  board_fields?: string[];
 }

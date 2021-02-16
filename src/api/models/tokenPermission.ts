@@ -1,5 +1,5 @@
 export interface TokenPermission {
-  idModel?: Record<string, any>;
+  idModel?: string;
   modelType?: string;
   read?: boolean;
   write?: boolean;

@@ -1,6 +1,6 @@
 export interface GetMemberNotifications {
   /** The ID or username of the member */
-  id: Record<string, any>;
+  id: string;
   entities?: boolean;
   display?: boolean;
   filter?: string;

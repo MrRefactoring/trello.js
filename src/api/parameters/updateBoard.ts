@@ -7,7 +7,7 @@ export interface UpdateBoard {
   /** Whether the board is closed */
   closed?: boolean;
   /** Whether the acting user is subscribed to the board */
-  subscribed?: Record<string, any>;
+  subscribed?: boolean;
   /** The id of the team the board should be moved to */
   idOrganization?: string;
   /** One of: org, private, public */

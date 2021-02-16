@@ -1,6 +1,6 @@
 export interface GetActionMember {
   /** The ID of the Action */
-  id: Record<string, any>;
+  id: string;
   /** `all` or a comma-separated list of member fields */
-  fields?: Record<string, any>;
+  fields?: 'all' | string[];
 }

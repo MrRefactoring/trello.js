@@ -1,6 +1,6 @@
 export interface GetEnterprise {
   /** ID of the enterprise to retrieve. */
-  id: Record<string, any>;
+  id: string;
   /** Comma-separated list of: `id`, `name`, `displayName`, `prefs`, `ssoActivationFailed`, `idAdmins`, `idMembers` (Note that the members array returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be controlled with member_startIndex, etc, but the API response will not contain the total available result count or pagination status data. Read the SCIM documentation [here]() for more information on filtering), `idOrganizations`, `products`, `userTypes`, `idMembers`, `idOrganizations` */
   fields?: string;
   /** One of: `none`, `normal`, `admins`, `owners`, `all` */

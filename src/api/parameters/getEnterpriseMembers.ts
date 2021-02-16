@@ -1,6 +1,6 @@
 export interface GetEnterpriseMembers {
   /** ID of the Enterprise to retrieve. */
-  id: Record<string, any>;
+  id: string;
   /** A comma-seperated list of valid [member fields](member). */
   fields?: string;
   /** Pass a [SCIM-style query](/cloud/trello/scim/) to filter members. This takes precedence over the all/normal/admins value of members. If any of the below member_* args are set, the member array will be paginated. */

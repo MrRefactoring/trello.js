@@ -4,5 +4,5 @@ export interface UpdateLabelField {
   /** The field on the Label to update. */
   field: string;
   /** The new value for the field. */
-  value: Record<string, any>;
+  value: string;
 }

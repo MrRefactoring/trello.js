@@ -1,6 +1,6 @@
 export interface DeleteEnterpriseMemberAdmin {
   /** ID of the Enterprise to retrieve. */
-  id: Record<string, any>;
+  id: string;
   /** ID of the member to be removed as an admin from enterprise. */
-  idMember: Record<string, any>;
+  idMember: string;
 }

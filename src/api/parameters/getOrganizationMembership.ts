@@ -1,8 +1,8 @@
 export interface GetOrganizationMembership {
   /** The ID or name of the organization */
-  id: Record<string, any>;
+  id: string;
   /** The ID of the membership to load */
-  idMembership: Record<string, any>;
+  idMembership: string;
   /** Whether to include the Member object in the response */
   member?: boolean;
 }

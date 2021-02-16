@@ -1,6 +1,6 @@
 export interface UpdateMember {
   /** The ID or username of the member */
-  id: Record<string, any>;
+  id: string;
   /** New name for the member. Cannot begin or end with a space. */
   fullName?: string;
   /** New initials for the member. 1-4 characters long. */

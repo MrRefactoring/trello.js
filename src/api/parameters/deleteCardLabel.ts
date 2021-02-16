@@ -1,6 +1,6 @@
 export interface DeleteCardLabel {
   /** The ID of the Card */
-  id: Record<string, any>;
+  id: string;
   /** The ID of the label to remove */
-  idLabel: Record<string, any>;
+  idLabel: string;
 }

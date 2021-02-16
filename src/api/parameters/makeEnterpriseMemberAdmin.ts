@@ -1,6 +1,6 @@
 export interface MakeEnterpriseMemberAdmin {
   /** ID of the enterprise to retrieve. */
-  id: Record<string, any>;
+  id: string;
   /** ID of member to be made an admin of enterprise. */
-  idMember: Record<string, any>;
+  idMember: string;
 }

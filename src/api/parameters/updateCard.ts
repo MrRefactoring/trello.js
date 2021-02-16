@@ -8,17 +8,17 @@ export interface UpdateCard {
   /** Whether the card should be archived (closed: true) */
   closed?: boolean;
   /** Comma-separated list of member IDs */
-  idMembers?: Record<string, any>;
+  idMembers?: string[];
   /** The ID of the image attachment the card should use as its cover, or null for none */
-  idAttachmentCover?: Record<string, any>;
+  idAttachmentCover?: string;
   /** The ID of the list the card should be in */
-  idList?: Record<string, any>;
+  idList?: string;
   /** Comma-separated list of label IDs */
-  idLabels?: Record<string, any>;
+  idLabels?: string[];
   /** The ID of the board the card should be on */
-  idBoard?: Record<string, any>;
+  idBoard?: string;
   /** The position of the card in its list. `top`, `bottom`, or a positive float */
-  pos?: Record<string, any>;
+  pos?: 'top' | 'bottom' | number;
   /** When the card is due, or `null` */
   due?: string;
   /** Whether the due date should be marked complete */

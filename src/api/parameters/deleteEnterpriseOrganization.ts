@@ -1,6 +1,6 @@
 export interface DeleteEnterpriseOrganization {
   /** ID of the enterprise to retrieve. */
-  id: Record<string, any>;
+  id: string;
   /** ID of the organization to be removed from the enterprise. */
-  idOrg: Record<string, any>;
+  idOrg: string;
 }

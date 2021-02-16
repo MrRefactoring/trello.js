@@ -167,7 +167,7 @@ export * from './getMemberBoardsInvited';
 export * from './getMemberCards';
 export * from './getMemberCustomBoardBackgrounds';
 export * from './uploadMemberCustomBoardBackground';
-export * from './getMembersIdCustomboardbackgroundsIdbackground';
+export * from './getMemberCustomBoardBackground';
 export * from './updateMemberCustomBoardBackground';
 export * from './deleteMemberCustomBoardBackground';
 export * from './getMemberCustomEmojis';

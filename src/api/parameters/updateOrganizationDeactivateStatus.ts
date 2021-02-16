@@ -1,7 +1,7 @@
 export interface UpdateOrganizationDeactivateStatus {
   /** The ID or name of the organization */
-  id: Record<string, any>;
+  id: string;
   /** The ID or username of the member to update */
-  idMember: Record<string, any>;
+  idMember: string;
   value?: string;
 }

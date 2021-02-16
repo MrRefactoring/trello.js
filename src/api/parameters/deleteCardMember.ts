@@ -1,6 +1,6 @@
 export interface DeleteCardMember {
   /** The ID of the Card */
-  id: Record<string, any>;
+  id: string;
   /** The ID of the member to remove from the card */
-  idMember: Record<string, any>;
+  idMember: string;
 }

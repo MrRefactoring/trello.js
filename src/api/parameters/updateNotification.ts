@@ -1,6 +1,6 @@
 export interface UpdateNotification {
   /** The ID of the notification */
-  id: Record<string, any>;
+  id: string;
   /** Whether the notification should be marked as read or not */
   unread?: boolean;
 }

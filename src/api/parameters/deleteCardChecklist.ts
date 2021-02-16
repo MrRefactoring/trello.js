@@ -1,6 +1,6 @@
 export interface DeleteCardChecklist {
   /** The ID of the Card */
-  id: Record<string, any>;
+  id: string;
   /** The ID of the checklist to delete */
-  idChecklist: Record<string, any>;
+  idChecklist: string;
 }

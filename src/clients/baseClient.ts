@@ -69,7 +69,7 @@ export class BaseClient implements Client {
 
       this.config.middlewares?.onError?.(e);
 
-      telemetry.requestStatusCode = e.status;
+      telemetry.requestStatusCode = e.response?.status ?? 0;
 
       return errorHandler(e);
     } finally {

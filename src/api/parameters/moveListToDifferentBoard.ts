@@ -1,6 +1,6 @@
 export interface MoveListToDifferentBoard {
   /** The ID of the list */
-  id: Record<string, any>;
+  id: string;
   /** The ID of the board to move the list to */
-  value: Record<string, any>;
+  value: string;
 }

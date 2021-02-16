@@ -8,9 +8,9 @@ export interface CreateBoard {
   /** A new description for the board, 0 to 16384 characters long */
   desc?: string;
   /** The id or name of the team the board should belong to. */
-  idOrganization?: Record<string, any>;
+  idOrganization?: string;
   /** The id of a board to copy into the new board. */
-  idBoardSource?: Record<string, any>;
+  idBoardSource?: string;
   /** To keep cards from the original board pass in the value `cards` */
   keepFromSource?: string;
   /** The Power-Ups that should be enabled on the new board. One of: `all`, `calendar`, `cardAging`, `recap`, `voting`. */

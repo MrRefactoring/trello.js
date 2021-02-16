@@ -6,5 +6,5 @@ export interface CreateMemberSavedSearch {
   /** The search query */
   query: string;
   /** The position of the saved search. `top`, `bottom`, or a positive float. */
-  pos: Record<string, any>;
+  pos: 'top' | 'bottom' | number;
 }

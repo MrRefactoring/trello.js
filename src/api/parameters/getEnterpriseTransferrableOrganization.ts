@@ -1,6 +1,6 @@
 export interface GetEnterpriseTransferrableOrganization {
   /** ID of the Enterprise to retrieve. */
-  id: Record<string, any>;
+  id: string;
   /** An ID of an Organization resource. */
-  idOrganization: Record<string, any>;
+  idOrganization: string;
 }

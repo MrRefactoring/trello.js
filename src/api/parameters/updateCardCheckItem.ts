@@ -8,7 +8,7 @@ export interface UpdateCardCheckItem {
   /** One of: `complete`, `incomplete` */
   state?: string;
   /** The ID of the checklist this item is in */
-  idChecklist?: Record<string, any>;
+  idChecklist?: string;
   /** `top`, `bottom`, or a positive float */
-  pos?: Record<string, any>;
+  pos?: 'top' | 'bottom' | number;
 }

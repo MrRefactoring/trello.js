@@ -1,10 +1,10 @@
 export interface UpdateCardChecklistItem {
   /** The ID of the Card */
-  idCard: Record<string, any>;
+  idCard: string;
   /** The ID of the checklist item to update */
-  idCheckItem: Record<string, any>;
+  idCheckItem: string;
   /** `top`, `bottom`, or a positive float */
-  pos?: Record<string, any>;
+  pos?: 'top' | 'bottom' | number;
   /** The ID of the item to update. */
-  idChecklist: Record<string, any>;
+  idChecklist: string;
 }

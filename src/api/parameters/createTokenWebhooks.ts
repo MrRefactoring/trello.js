@@ -5,5 +5,5 @@ export interface CreateTokenWebhooks {
   /** The URL that the webhook should POST information to. */
   callbackURL: string;
   /** ID of the object to create a webhook on. */
-  idModel: Record<string, any>;
+  idModel: string;
 }

@@ -4,5 +4,5 @@ export interface UpdateMemberBoardStar {
   /** The ID of the board star */
   idStar: string;
   /** New position for the starred board. `top`, `bottom`, or a positive float. */
-  pos?: Record<string, any>;
+  pos?: 'top' | 'bottom' | number;
 }

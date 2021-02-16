@@ -273,11 +273,11 @@ export class Members {
 
   /**
    * Lists the boards that the user is a member of. */
-  async getMemberBoards<T = any>(parameters: Parameters.GetMemberBoards, callback: Callback<T>): Promise<void>;
+  async getMemberBoards<T = Models.Board[]>(parameters: Parameters.GetMemberBoards, callback: Callback<T>): Promise<void>;
   /**
    * Lists the boards that the user is a member of. */
-  async getMemberBoards<T = any>(parameters: Parameters.GetMemberBoards, callback?: undefined): Promise<T>;
-  async getMemberBoards<T = any>(parameters: Parameters.GetMemberBoards, callback?: Callback<T>): Promise<void | T> {
+  async getMemberBoards<T = Models.Board[]>(parameters: Parameters.GetMemberBoards, callback?: undefined): Promise<T>;
+  async getMemberBoards<T = Models.Board[]>(parameters: Parameters.GetMemberBoards, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/members/${parameters.id}/boards`,
       method: 'GET',
@@ -364,17 +364,17 @@ export class Members {
 
   /**
    * Get a specific custom board background */
-  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.GetMembersIdCustomboardbackgroundsIdbackground, callback: Callback<T>): Promise<void>;
+  async getMemberCustomBoardBackground<T = Models.BoardBackground>(parameters: Parameters.GetMemberCustomBoardBackground, callback: Callback<T>): Promise<void>;
   /**
    * Get a specific custom board background */
-  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.GetMembersIdCustomboardbackgroundsIdbackground, callback?: undefined): Promise<T>;
-  async getMembersIdCustomboardbackgroundsIdbackground<T = Models.BoardBackground>(parameters: Parameters.GetMembersIdCustomboardbackgroundsIdbackground, callback?: Callback<T>): Promise<void | T> {
+  async getMemberCustomBoardBackground<T = Models.BoardBackground>(parameters: Parameters.GetMemberCustomBoardBackground, callback?: undefined): Promise<T>;
+  async getMemberCustomBoardBackground<T = Models.BoardBackground>(parameters: Parameters.GetMemberCustomBoardBackground, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMembersIdCustomboardbackgroundsIdbackground' });
+    return this.client.sendRequest(config, callback, { methodName: 'getMemberCustomBoardBackground' });
   }
 
   /**
