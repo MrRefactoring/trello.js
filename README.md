@@ -23,7 +23,7 @@ Usability, consistency, and performance are key focuses of trello.js, and it als
   - [Disabling telemetry collection example](#disabling-telemetry-collection-example)
 - [Usage](#usage)
   - [Key and token pair issuing](#key-and-token-pair-issuing)
-  - [Client creation and first request](#client-creation-and-first-request)
+  - [Client creation and first request](#client-creation-first-request-and-using-algorithm)
 - [License](#license)
 
 ## Installation
@@ -95,7 +95,7 @@ const config: Config = {
 To interact with the Trello API, you must first get API Key and API Token.
 The [official documentation](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#authentication-and-authorization) does a good job of describing how to issue a Key and Token pair to work.
 
-#### Client creation and first request
+#### Client creation, first request and using algorithm
 
 Take the key and token obtained in the previous step and pass them to `TrelloClient`, then call to create a new board.
 
@@ -139,6 +139,37 @@ main();
 //   limits: {}
 // }
 ```
+
+The algorithm for using the library:
+
+```typescript
+client.<group>.<methodName>(parametersObject);
+```
+
+Available groups:
+
+- [actions](https://developer.atlassian.com/cloud/trello/rest/api-group-actions/#api-group-actions)
+- [applications](https://developer.atlassian.com/cloud/trello/rest/api-group-applications/#api-group-applications)
+- [batch](https://developer.atlassian.com/cloud/trello/rest/api-group-batch/#api-group-batch)
+- [boards](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-group-boards)
+- [cards](https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-group-cards)
+- [checklists](https://developer.atlassian.com/cloud/trello/rest/api-group-checklists/#api-group-checklists)
+- [customFields](https://developer.atlassian.com/cloud/trello/rest/api-group-customfields/#api-group-customfields)
+- [emoji](https://developer.atlassian.com/cloud/trello/rest/api-group-emoji/#api-group-emoji)
+- [enterprises](https://developer.atlassian.com/cloud/trello/rest/api-group-enterprises/#api-group-enterprises)
+- [labels](https://developer.atlassian.com/cloud/trello/rest/api-group-labels/#api-group-labels)
+- [lists](https://developer.atlassian.com/cloud/trello/rest/api-group-lists/#api-group-lists)
+- [members](https://developer.atlassian.com/cloud/trello/rest/api-group-members/#api-group-members)
+- [notifications](https://developer.atlassian.com/cloud/trello/rest/api-group-notifications/#api-group-notifications)
+- [organizations](https://developer.atlassian.com/cloud/trello/rest/api-group-organizations/#api-group-organizations)
+- [plugins](https://developer.atlassian.com/cloud/trello/rest/api-group-plugins/#api-group-plugins)
+- [search](https://developer.atlassian.com/cloud/trello/rest/api-group-search/#api-group-search)
+- [tokens](https://developer.atlassian.com/cloud/trello/rest/api-group-tokens/#api-group-tokens)
+- [webhooks](https://developer.atlassian.com/cloud/trello/rest/api-group-webhooks/#api-group-webhooks)
+
+The name of the methods is the name of the endpoint in the group without spaces and in camelCase.
+
+The parameters depend on the specific endpoint. For more information, see http://localhost TODO
 
 ## Decrease Webpack bundle size
 

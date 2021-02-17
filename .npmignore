@@ -2,6 +2,8 @@
 .github/
 node_modules/
 tests/
+coverage/
+docs/
 
 .editorconfig
 .eslintrc
