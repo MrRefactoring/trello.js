@@ -1,0 +1,1252 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Trello.js</title>
+	<meta name="description" content="Documentation for Trello.js">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">Trello.js</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>Trello.js</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<div align="center">
+					<img alt="Trello.js logo" src="https://svgshare.com/i/U4A.svg"/>
+					<p><a href="https://www.npmjs.com/package/trello.js"><img alt="NPM version" src="https://img.shields.io/npm/v/trello.js.svg?maxAge=3600&style=flat-square" /></a>
+						<a href="https://www.npmjs.com/package/trello.js"><img alt="NPM downloads per month" src="https://img.shields.io/npm/dm/trello.js.svg?maxAge=3600&style=flat-square" /></a>
+						<a href="https://github.com/MrRefactoring/trello.js"><img alt="build status" src="https://img.shields.io/github/workflow/status/mrrefactoring/trello.js/ci?style=flat-square"></a>
+					<a href="https://github.com/mrrefactoring/trello.js/blob/develop/LICENSE"><img alt="license" src="https://img.shields.io/github/license/mrrefactoring/trello.js?color=green&style=flat-square"/></a></p>
+					<p><span>JavaScript / TypeScript library for Node.JS and browsers to easily interact with Atlassian Trello API</span></p>
+				</div>
+				<a href="#about" id="about" style="color: inherit; text-decoration: none;">
+					<h2>About</h2>
+				</a>
+				<p>trello.js is a powerful <a href="https://nodejs.org/">Node.JS</a> / Browser module that allows you to interact with the <a href="https://developer.atlassian.com/cloud/trello/rest/api-group-actions/">Trello API</a> very easily.</p>
+				<p>Usability, consistency, and performance are key focuses of trello.js, and it also has nearly 100% coverage of the Trello API. It receives new Trello features shortly after they arrive in the API.</p>
+				<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
+					<h2>Table of contents</h2>
+				</a>
+				<ul>
+					<li><a href="#installation">Installation</a></li>
+					<li><a href="#telemetry-information-collection-agreement">Telemetry information collection agreement</a><ul>
+							<li><a href="#customizing-telemetry-collection-data-example">Customizing telemetry collection data example</a></li>
+							<li><a href="#disabling-telemetry-collection-example">Disabling telemetry collection example</a></li>
+						</ul>
+					</li>
+					<li><a href="#usage">Usage</a><ul>
+							<li><a href="#key-and-token-pair-issuing">Key and token pair issuing</a></li>
+							<li><a href="#client-creation-first-request-and-using-algorithm">Client creation and first request</a></li>
+						</ul>
+					</li>
+					<li><a href="#decrease-webpack-bundle-size">Decrease Webpack bundle size</a></li>
+					<li><a href="#license">License</a></li>
+				</ul>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<p><strong>Node.js 10.0.0 or newer is required.</strong></p>
+				<p>Install with the npm:</p>
+				<pre><code class="language-bash"><span style="color: #000000">npm install trello.js</span>
+</code></pre>
+				<p>Install with the yarn:</p>
+				<pre><code class="language-bash"><span style="color: #000000">yarn add trello.js</span>
+</code></pre>
+				<a href="#telemetry-information-collection-agreement" id="telemetry-information-collection-agreement" style="color: inherit; text-decoration: none;">
+					<h2>Telemetry information collection agreement</h2>
+				</a>
+				<p>The use of this library may collect, record and transmit data about the operation of the library and related data, as well as potentially personal data, including ip address from which the request is made, user agent from the device from which the request is made, version of the library used, version of the telemetry sending library, name of the invoked method, authorization type information (can be configured), callback information, onResponse middleware usage information, onError middleware usage information, queries usage information, body usage information in queries, HTTP response code (can be configured), request start date and time and response receipt date and time (can be configured), timeout settings.</p>
+				<p>The type and amount of data may vary with the version of the libraries and can be changed at any time without notice.</p>
+				<p>Telemetry data collection is enabled by default.</p>
+				<p>The following tracking parameters can be configured:</p>
+				<ul>
+					<li>Authentication status</li>
+					<li>Request status code</li>
+					<li>Request timings</li>
+					<li>Timeout information</li>
+				</ul>
+				<a href="#customizing-telemetry-collection-data-example" id="customizing-telemetry-collection-data-example" style="color: inherit; text-decoration: none;">
+					<h4>Customizing telemetry collection data example</h4>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Config</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;trello.js&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000">: </span><span style="color: #267F99">Config</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">apiKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;YOUR_API_KEY&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">apiToken:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;YOUR_API_TOKEN&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">telemetry:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">allowedToPassAuthenticationStatus:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">,  </span><span style="color: #008000">// true by default</span>
+<span style="color: #000000">    </span><span style="color: #001080">allowedToPassRequestStatusCode:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,  </span><span style="color: #008000">// true by default</span>
+<span style="color: #000000">    </span><span style="color: #001080">allowedToPassRequestTimings:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">,  </span><span style="color: #008000">// true by default</span>
+<span style="color: #000000">    </span><span style="color: #001080">allowedToPassTimeout:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span><span style="color: #008000">// true by default</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">};</span>
+</code></pre>
+				<p>If you want to disable telemetry, set the <code>telemetry</code> field to <code>false</code>.</p>
+				<a href="#disabling-telemetry-collection-example" id="disabling-telemetry-collection-example" style="color: inherit; text-decoration: none;">
+					<h4>Disabling telemetry collection example</h4>
+				</a>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Config</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;trello.js&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">config</span><span style="color: #000000">: </span><span style="color: #267F99">Config</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">apiKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;YOUR_API_KEY&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">apiToken:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;YOUR_API_TOKEN&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">telemetry:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">, </span><span style="color: #008000">// Telemetry will not be collected</span>
+<span style="color: #000000">};</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<a href="#key-and-token-pair-issuing" id="key-and-token-pair-issuing" style="color: inherit; text-decoration: none;">
+					<h4>Key and token pair issuing</h4>
+				</a>
+				<p>To interact with the Trello API, you must first get API Key and API Token.
+				The <a href="https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#authentication-and-authorization">official documentation</a> does a good job of describing how to issue a Key and Token pair to work.</p>
+				<a href="#client-creation-first-request-and-using-algorithm" id="client-creation-first-request-and-using-algorithm" style="color: inherit; text-decoration: none;">
+					<h4>Client creation, first request and using algorithm</h4>
+				</a>
+				<p>Take the key and token obtained in the previous step and pass them to <code>TrelloClient</code>, then call to create a new board.</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">TrelloClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;trello.js&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">trelloClient</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">TrelloClient</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">apiKey:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;YOUR_API_KEY&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">apiToken:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;YOUR_API_TOKEN&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+
+<span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">main</span><span style="color: #000000">() {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">createdBoard</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">trelloClient</span><span style="color: #000000">.</span><span style="color: #001080">boards</span><span style="color: #000000">.</span><span style="color: #795E26">createBoard</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;My first board&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">desc:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;From trello.js with love&#039;</span>
+<span style="color: #000000">  });</span>
+
+<span style="color: #000000">  </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">createdBoard</span><span style="color: #000000">);</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #795E26">main</span><span style="color: #000000">();</span>
+
+<span style="color: #008000">// Expected output:</span>
+<span style="color: #008000">// {</span>
+<span style="color: #008000">//   id: &#039;562c56ea71b89509da09b802&#039;,</span>
+<span style="color: #008000">//   name: &#039;My first board&#039;,</span>
+<span style="color: #008000">//   desc: &#039;From trello.js with love&#039;,</span>
+<span style="color: #008000">//   descData: null,</span>
+<span style="color: #008000">//   closed: false,</span>
+<span style="color: #008000">//   idOrganization: &#039;134d3ee72b12a9636211247e&#039;,</span>
+<span style="color: #008000">//   idEnterprise: null,</span>
+<span style="color: #008000">//   pinned: false,</span>
+<span style="color: #008000">//   url: &#039;https://trello.com/b/hUdovbPJ/my-first-board&#039;,</span>
+<span style="color: #008000">//   shortUrl: &#039;https://trello.com/b/hUdovbPJ&#039;,</span>
+<span style="color: #008000">//   prefs: {</span>
+<span style="color: #008000">//     ...</span>
+<span style="color: #008000">//   },</span>
+<span style="color: #008000">//   labelNames: {</span>
+<span style="color: #008000">//     ...</span>
+<span style="color: #008000">//   },</span>
+<span style="color: #008000">//   limits: {}</span>
+<span style="color: #008000">// }</span>
+</code></pre>
+				<p>The algorithm for using the library:</p>
+				<pre><code class="language-typescript"><span style="color: #001080">client</span><span style="color: #000000">.&lt;</span><span style="color: #001080">group</span><span style="color: #000000">&gt;.&lt;</span><span style="color: #001080">methodName</span><span style="color: #000000">&gt;(</span><span style="color: #001080">parametersObject</span><span style="color: #000000">);</span>
+</code></pre>
+				<p>Available groups:</p>
+				<ul>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-actions/#api-group-actions">actions</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-applications/#api-group-applications">applications</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-batch/#api-group-batch">batch</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-group-boards">boards</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-group-cards">cards</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-checklists/#api-group-checklists">checklists</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-customfields/#api-group-customfields">customFields</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-emoji/#api-group-emoji">emoji</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-enterprises/#api-group-enterprises">enterprises</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-labels/#api-group-labels">labels</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-lists/#api-group-lists">lists</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-members/#api-group-members">members</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-notifications/#api-group-notifications">notifications</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-organizations/#api-group-organizations">organizations</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-plugins/#api-group-plugins">plugins</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-search/#api-group-search">search</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-tokens/#api-group-tokens">tokens</a></li>
+					<li><a href="https://developer.atlassian.com/cloud/trello/rest/api-group-webhooks/#api-group-webhooks">webhooks</a></li>
+				</ul>
+				<p>The name of the methods is the name of the endpoint in the group without spaces and in <code>camelCase</code>.</p>
+				<p>The parameters depend on the specific endpoint. For more information, <a href="https://mrrefactoring.github.io/trello.js/">see here</a>.</p>
+				<a href="#decrease-webpack-bundle-size" id="decrease-webpack-bundle-size" style="color: inherit; text-decoration: none;">
+					<h2>Decrease Webpack bundle size</h2>
+				</a>
+				<p>If you use Webpack and need to reduce the size of the assembly, you can create your client with only the groups you use.</p>
+				<pre><code class="language-typescript"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">BaseClient</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;trello.js&#039;</span><span style="color: #000000">;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">Boards</span><span style="color: #000000">, </span><span style="color: #001080">Members</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;trello.js/out/api&#039;</span><span style="color: #000000">;</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">CustomTrelloClient</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">BaseClient</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">boards</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Boards</span><span style="color: #000000">(</span><span style="color: #0000FF">this</span><span style="color: #000000">);</span>
+<span style="color: #000000">  </span><span style="color: #001080">members</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">Members</span><span style="color: #000000">(</span><span style="color: #0000FF">this</span><span style="color: #000000">);</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p>Distributed under the MIT License. See <code>LICENSE</code> for more information.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api.html">api</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_actions.html">api/actions</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_applications.html">api/applications</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_batch.html">api/batch</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_boards.html">api/boards</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_cards.html">api/cards</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_checklists.html">api/checklists</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_customfields.html">api/custom<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_emoji.html">api/emoji</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_enterprises.html">api/enterprises</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_labels.html">api/labels</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_lists.html">api/lists</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_members.html">api/members</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models.html">api/models</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_cfvalue.html">api/models/CFValue</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_action.html">api/models/action</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_actionfields.html">api/models/action<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_attachment.html">api/models/attachment</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_attachmentfields.html">api/models/attachment<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_board.html">api/models/board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_boardbackground.html">api/models/board<wbr>Background</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_boardfields.html">api/models/board<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_boardstars.html">api/models/board<wbr>Stars</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_card.html">api/models/card</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_cardfields.html">api/models/card<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_checkitem.html">api/models/check<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_checklist.html">api/models/checklist</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_color.html">api/models/color</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_customemoji.html">api/models/custom<wbr>Emoji</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_customfield.html">api/models/custom<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_customfielditems.html">api/models/custom<wbr>Field<wbr>Items</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_customsticker.html">api/models/custom<wbr>Sticker</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_emoji.html">api/models/emoji</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_enterprise.html">api/models/enterprise</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_error.html">api/models/error</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_export.html">api/models/export</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_label.html">api/models/label</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_limits.html">api/models/limits</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_limitsobject.html">api/models/limits<wbr>Object</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_list.html">api/models/list</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_listfields.html">api/models/list<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_member.html">api/models/member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_memberfields.html">api/models/member<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_memberprefs.html">api/models/member<wbr>Prefs</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_memberships.html">api/models/memberships</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_notification.html">api/models/notification</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_notificationfields.html">api/models/notification<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_organization.html">api/models/organization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_organizationfields.html">api/models/organization<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_plugin.html">api/models/plugin</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_plugindata.html">api/models/plugin<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_pluginlisting.html">api/models/plugin<wbr>Listing</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_preferences.html">api/models/preferences</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_savedsearch.html">api/models/saved<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_tag.html">api/models/tag</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_token.html">api/models/token</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_tokenfields.html">api/models/token<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_tokenpermission.html">api/models/token<wbr>Permission</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_trelloid.html">api/models/trelloID</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_viewfilter.html">api/models/view<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_models_webhook.html">api/models/webhook</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_notifications.html">api/notifications</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_organizations.html">api/organizations</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters.html">api/parameters</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_addactionreaction.html">api/parameters/add<wbr>Action<wbr>Reaction</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_addcardcomment.html">api/parameters/add<wbr>Card<wbr>Comment</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_addcardlabel.html">api/parameters/add<wbr>Card<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_addcardmember.html">api/parameters/add<wbr>Card<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_addcustomfieldoption.html">api/parameters/add<wbr>Custom<wbr>Field<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_addmembertoboard.html">api/parameters/add<wbr>Member<wbr>ToBoard</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_addorganizationmember.html">api/parameters/add<wbr>Organization<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_addstickertocard.html">api/parameters/add<wbr>Sticker<wbr>ToCard</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_applicationskeycompliance.html">api/parameters/applications<wbr>Key<wbr>Compliance</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_archiveallcardsinlist.html">api/parameters/archive<wbr>All<wbr>Cards<wbr>InList</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_changeemaillist.html">api/parameters/change<wbr>Email<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createboard.html">api/parameters/create<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createboardchecklist.html">api/parameters/create<wbr>Board<wbr>Checklist</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createboardlabel.html">api/parameters/create<wbr>Board<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createboardlist.html">api/parameters/create<wbr>Board<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createcalendarkey.html">api/parameters/create<wbr>Calendar<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createcard.html">api/parameters/create<wbr>Card</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createcardattachment.html">api/parameters/create<wbr>Card<wbr>Attachment</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createcardchecklist.html">api/parameters/create<wbr>Card<wbr>Checklist</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createcardlabel.html">api/parameters/create<wbr>Card<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createchecklist.html">api/parameters/create<wbr>Checklist</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createchecklistcheckitems.html">api/parameters/create<wbr>Checklist<wbr>Check<wbr>Items</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createcustomfield.html">api/parameters/create<wbr>Custom<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createemailkey.html">api/parameters/create<wbr>Email<wbr>Key</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createenterprisetoken.html">api/parameters/create<wbr>Enterprise<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createidtags.html">api/parameters/create<wbr>IdTags</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createlabel.html">api/parameters/create<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createlist.html">api/parameters/create<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_creatememberavatar.html">api/parameters/create<wbr>Member<wbr>Avatar</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createmembercustomemoji.html">api/parameters/create<wbr>Member<wbr>Custom<wbr>Emoji</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createmembersavedsearch.html">api/parameters/create<wbr>Member<wbr>Saved<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createorganization.html">api/parameters/create<wbr>Organization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createorganizationtag.html">api/parameters/create<wbr>Organization<wbr>Tag</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createpluginlisting.html">api/parameters/create<wbr>Plugin<wbr>Listing</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createpowerup.html">api/parameters/create<wbr>Power<wbr>Up</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createtokenwebhooks.html">api/parameters/create<wbr>Token<wbr>Webhooks</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_createwebhook.html">api/parameters/create<wbr>Webhook</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deactivateenterprisemember.html">api/parameters/deactivate<wbr>Enterprise<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteaction.html">api/parameters/delete<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteactionreaction.html">api/parameters/delete<wbr>Action<wbr>Reaction</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteboard.html">api/parameters/delete<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecard.html">api/parameters/delete<wbr>Card</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecardattachment.html">api/parameters/delete<wbr>Card<wbr>Attachment</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecardchecklist.html">api/parameters/delete<wbr>Card<wbr>Checklist</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecardchecklistitem.html">api/parameters/delete<wbr>Card<wbr>Checklist<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecardcomment.html">api/parameters/delete<wbr>Card<wbr>Comment</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecardlabel.html">api/parameters/delete<wbr>Card<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecardmember.html">api/parameters/delete<wbr>Card<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecardmembervote.html">api/parameters/delete<wbr>Card<wbr>Member<wbr>Vote</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecardsticker.html">api/parameters/delete<wbr>Card<wbr>Sticker</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletechecklist.html">api/parameters/delete<wbr>Checklist</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletechecklistcheckitem.html">api/parameters/delete<wbr>Checklist<wbr>Check<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecustomfield.html">api/parameters/delete<wbr>Custom<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletecustomfieldsoption.html">api/parameters/delete<wbr>Custom<wbr>Fields<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteenterprisememberadmin.html">api/parameters/delete<wbr>Enterprise<wbr>Member<wbr>Admin</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteenterpriseorganization.html">api/parameters/delete<wbr>Enterprise<wbr>Organization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletelabel.html">api/parameters/delete<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletememberboardbackgroud.html">api/parameters/delete<wbr>Member<wbr>Board<wbr>Backgroud</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletemembercustomboardbackground.html">api/parameters/delete<wbr>Member<wbr>Custom<wbr>Board<wbr>Background</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletemembercustomsticker.html">api/parameters/delete<wbr>Member<wbr>Custom<wbr>Sticker</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletemembersavedsearch.html">api/parameters/delete<wbr>Member<wbr>Saved<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteorganization.html">api/parameters/delete<wbr>Organization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteorganizationassociateddomain.html">api/parameters/delete<wbr>Organization<wbr>Associated<wbr>Domain</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteorganizationinvites.html">api/parameters/delete<wbr>Organization<wbr>Invites</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteorganizationlogo.html">api/parameters/delete<wbr>Organization<wbr>Logo</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteorganizationmember.html">api/parameters/delete<wbr>Organization<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteorganizationmemberfromall.html">api/parameters/delete<wbr>Organization<wbr>Member<wbr>From<wbr>All</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deleteorganizationtag.html">api/parameters/delete<wbr>Organization<wbr>Tag</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletepowerup.html">api/parameters/delete<wbr>Power<wbr>Up</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletetoken.html">api/parameters/delete<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletetokenwebhook.html">api/parameters/delete<wbr>Token<wbr>Webhook</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_deletewebhook.html">api/parameters/delete<wbr>Webhook</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_disablepowerup.html">api/parameters/disable<wbr>Power<wbr>Up</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_dismissmembermessage.html">api/parameters/dismiss<wbr>Member<wbr>Message</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_emoji.html">api/parameters/emoji</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_enablepowerup.html">api/parameters/enable<wbr>Power<wbr>Up</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_exportorganizationcsv.html">api/parameters/export<wbr>OrganizationCSV</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getaction.html">api/parameters/get<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactionboard.html">api/parameters/get<wbr>Action<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactioncard.html">api/parameters/get<wbr>Action<wbr>Card</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactionfield.html">api/parameters/get<wbr>Action<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactionlist.html">api/parameters/get<wbr>Action<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactionmember.html">api/parameters/get<wbr>Action<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactionmembercreator.html">api/parameters/get<wbr>Action<wbr>Member<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactionorganization.html">api/parameters/get<wbr>Action<wbr>Organization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactionreaction.html">api/parameters/get<wbr>Action<wbr>Reaction</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactionreactionsummary.html">api/parameters/get<wbr>Action<wbr>Reaction<wbr>Summary</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getactionreactions.html">api/parameters/get<wbr>Action<wbr>Reactions</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getbatch.html">api/parameters/get<wbr>Batch</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboard.html">api/parameters/get<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardactions.html">api/parameters/get<wbr>Board<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardcard.html">api/parameters/get<wbr>Board<wbr>Card</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardcards.html">api/parameters/get<wbr>Board<wbr>Cards</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardcardsfilter.html">api/parameters/get<wbr>Board<wbr>Cards<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardchecklists.html">api/parameters/get<wbr>Board<wbr>Checklists</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardcustomfields.html">api/parameters/get<wbr>Board<wbr>Custom<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardfield.html">api/parameters/get<wbr>Board<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardlabels.html">api/parameters/get<wbr>Board<wbr>Labels</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardlists.html">api/parameters/get<wbr>Board<wbr>Lists</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardlistsfilter.html">api/parameters/get<wbr>Board<wbr>Lists<wbr>Filter</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardmembers.html">api/parameters/get<wbr>Board<wbr>Members</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardmemberships.html">api/parameters/get<wbr>Board<wbr>Memberships</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getboardstars.html">api/parameters/get<wbr>Board<wbr>Stars</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcard.html">api/parameters/get<wbr>Card</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardactions.html">api/parameters/get<wbr>Card<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardattachment.html">api/parameters/get<wbr>Card<wbr>Attachment</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardattachments.html">api/parameters/get<wbr>Card<wbr>Attachments</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardboard.html">api/parameters/get<wbr>Card<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardchecklistitem.html">api/parameters/get<wbr>Card<wbr>Checklist<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardchecklists.html">api/parameters/get<wbr>Card<wbr>Checklists</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardcompletedchecklists.html">api/parameters/get<wbr>Card<wbr>Completed<wbr>Checklists</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardcustomfields.html">api/parameters/get<wbr>Card<wbr>Custom<wbr>Fields</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardfield.html">api/parameters/get<wbr>Card<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardlist.html">api/parameters/get<wbr>Card<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardmembers.html">api/parameters/get<wbr>Card<wbr>Members</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardmembersvoted.html">api/parameters/get<wbr>Card<wbr>Members<wbr>Voted</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardplugindata.html">api/parameters/get<wbr>Card<wbr>Plugin<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardsticker.html">api/parameters/get<wbr>Card<wbr>Sticker</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcardstickers.html">api/parameters/get<wbr>Card<wbr>Stickers</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getchecklist.html">api/parameters/get<wbr>Checklist</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getchecklistboard.html">api/parameters/get<wbr>Checklist<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getchecklistcards.html">api/parameters/get<wbr>Checklist<wbr>Cards</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getchecklistcheckitem.html">api/parameters/get<wbr>Checklist<wbr>Check<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getchecklistcheckitems.html">api/parameters/get<wbr>Checklist<wbr>Check<wbr>Items</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getchecklistfield.html">api/parameters/get<wbr>Checklist<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcustomfield.html">api/parameters/get<wbr>Custom<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcustomfieldoptions.html">api/parameters/get<wbr>Custom<wbr>Field<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getcustomfieldsoption.html">api/parameters/get<wbr>Custom<wbr>Fields<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getenabledpowerups.html">api/parameters/get<wbr>Enabled<wbr>Power<wbr>Ups</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getenterprise.html">api/parameters/get<wbr>Enterprise</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getenterpriseadmins.html">api/parameters/get<wbr>Enterprise<wbr>Admins</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getenterpriseauditlog.html">api/parameters/get<wbr>Enterprise<wbr>Audit<wbr>Log</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getenterprisemember.html">api/parameters/get<wbr>Enterprise<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getenterprisemembers.html">api/parameters/get<wbr>Enterprise<wbr>Members</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getenterprisesignupurl.html">api/parameters/get<wbr>Enterprise<wbr>Signup<wbr>Url</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getenterprisetransferrableorganization.html">api/parameters/get<wbr>Enterprise<wbr>Transferrable<wbr>Organization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getlabel.html">api/parameters/get<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getlist.html">api/parameters/get<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getlistactions.html">api/parameters/get<wbr>List<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getlistboard.html">api/parameters/get<wbr>List<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getlistcards.html">api/parameters/get<wbr>List<wbr>Cards</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmember.html">api/parameters/get<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberactions.html">api/parameters/get<wbr>Member<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberboardbackground.html">api/parameters/get<wbr>Member<wbr>Board<wbr>Background</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberboardbackgrounds.html">api/parameters/get<wbr>Member<wbr>Board<wbr>Backgrounds</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberboardstar.html">api/parameters/get<wbr>Member<wbr>Board<wbr>Star</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberboardstars.html">api/parameters/get<wbr>Member<wbr>Board<wbr>Stars</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberboards.html">api/parameters/get<wbr>Member<wbr>Boards</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberboardsinvited.html">api/parameters/get<wbr>Member<wbr>Boards<wbr>Invited</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembercards.html">api/parameters/get<wbr>Member<wbr>Cards</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembercustomboardbackground.html">api/parameters/get<wbr>Member<wbr>Custom<wbr>Board<wbr>Background</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembercustomboardbackgrounds.html">api/parameters/get<wbr>Member<wbr>Custom<wbr>Board<wbr>Backgrounds</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembercustomemoji.html">api/parameters/get<wbr>Member<wbr>Custom<wbr>Emoji</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembercustomemojis.html">api/parameters/get<wbr>Member<wbr>Custom<wbr>Emojis</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembercustomsticker.html">api/parameters/get<wbr>Member<wbr>Custom<wbr>Sticker</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembercustomstickers.html">api/parameters/get<wbr>Member<wbr>Custom<wbr>Stickers</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberfield.html">api/parameters/get<wbr>Member<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembernotifications.html">api/parameters/get<wbr>Member<wbr>Notifications</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberorganizations.html">api/parameters/get<wbr>Member<wbr>Organizations</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmemberorganizationsinvited.html">api/parameters/get<wbr>Member<wbr>Organizations<wbr>Invited</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembersavedsearch.html">api/parameters/get<wbr>Member<wbr>Saved<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembersavedsearches.html">api/parameters/get<wbr>Member<wbr>Saved<wbr>Searches</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getmembertokens.html">api/parameters/get<wbr>Member<wbr>Tokens</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getnotification.html">api/parameters/get<wbr>Notification</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getnotificationboard.html">api/parameters/get<wbr>Notification<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getnotificationcard.html">api/parameters/get<wbr>Notification<wbr>Card</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getnotificationfield.html">api/parameters/get<wbr>Notification<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getnotificationlist.html">api/parameters/get<wbr>Notification<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getnotificationmember.html">api/parameters/get<wbr>Notification<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getnotificationmembercreator.html">api/parameters/get<wbr>Notification<wbr>Member<wbr>Creator</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getnotificationorganization.html">api/parameters/get<wbr>Notification<wbr>Organization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganization.html">api/parameters/get<wbr>Organization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationactions.html">api/parameters/get<wbr>Organization<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationboards.html">api/parameters/get<wbr>Organization<wbr>Boards</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationexports.html">api/parameters/get<wbr>Organization<wbr>Exports</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationfield.html">api/parameters/get<wbr>Organization<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationmembers.html">api/parameters/get<wbr>Organization<wbr>Members</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationmembership.html">api/parameters/get<wbr>Organization<wbr>Membership</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationmemberships.html">api/parameters/get<wbr>Organization<wbr>Memberships</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationnewbillableguestboard.html">api/parameters/get<wbr>Organization<wbr>New<wbr>Billable<wbr>Guest<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationplugindata.html">api/parameters/get<wbr>Organization<wbr>Plugin<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getorganizationtags.html">api/parameters/get<wbr>Organization<wbr>Tags</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getplugin.html">api/parameters/get<wbr>Plugin</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getplugincompliancememberprivacy.html">api/parameters/get<wbr>Plugin<wbr>Compliance<wbr>Member<wbr>Privacy</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getpowerups.html">api/parameters/get<wbr>Power<wbr>Ups</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getsearch.html">api/parameters/get<wbr>Search</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getsearchmembers.html">api/parameters/get<wbr>Search<wbr>Members</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_gettoken.html">api/parameters/get<wbr>Token</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_gettokenmember.html">api/parameters/get<wbr>Token<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_gettokenwebhook.html">api/parameters/get<wbr>Token<wbr>Webhook</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_gettokenwebhooks.html">api/parameters/get<wbr>Token<wbr>Webhooks</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getwebhook.html">api/parameters/get<wbr>Webhook</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_getwebhookfield.html">api/parameters/get<wbr>Webhook<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_invitemember.html">api/parameters/invite<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_makeenterprisememberadmin.html">api/parameters/make<wbr>Enterprise<wbr>Member<wbr>Admin</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_markallnotificationsasread.html">api/parameters/mark<wbr>All<wbr>Notifications<wbr>AsRead</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_markasviewed.html">api/parameters/mark<wbr>AsViewed</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_markcardnotificationasread.html">api/parameters/mark<wbr>Card<wbr>Notification<wbr>AsRead</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_moveallcardsinlist.html">api/parameters/move<wbr>All<wbr>Cards<wbr>InList</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_movelisttodifferentboard.html">api/parameters/move<wbr>List<wbr>ToDifferent<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_removememberfromboard.html">api/parameters/remove<wbr>Member<wbr>From<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_renamelist.html">api/parameters/rename<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_setlistclosestate.html">api/parameters/set<wbr>List<wbr>Close<wbr>State</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_setorganizationlogo.html">api/parameters/set<wbr>Organization<wbr>Logo</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_starmemberboard.html">api/parameters/star<wbr>Member<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_transferorganizationtoenterprise.html">api/parameters/transfer<wbr>Organization<wbr>ToEnterprise</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_unstarmemberboard.html">api/parameters/unstar<wbr>Member<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateaction.html">api/parameters/update<wbr>Action</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateactiontext.html">api/parameters/update<wbr>Action<wbr>Text</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateboard.html">api/parameters/update<wbr>Board</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateboardbackground.html">api/parameters/update<wbr>Board<wbr>Background</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatecard.html">api/parameters/update<wbr>Card</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatecardcheckitem.html">api/parameters/update<wbr>Card<wbr>Check<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatecardchecklistitem.html">api/parameters/update<wbr>Card<wbr>Checklist<wbr>Item</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatecardcomment.html">api/parameters/update<wbr>Card<wbr>Comment</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatecardcustomfield.html">api/parameters/update<wbr>Card<wbr>Custom<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatecardsticker.html">api/parameters/update<wbr>Card<wbr>Sticker</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatechecklist.html">api/parameters/update<wbr>Checklist</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatechecklistfield.html">api/parameters/update<wbr>Checklist<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatecustomfield.html">api/parameters/update<wbr>Custom<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateemailposition.html">api/parameters/update<wbr>Email<wbr>Position</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateenterprisememberlicense.html">api/parameters/update<wbr>Enterprise<wbr>Member<wbr>License</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatelabel.html">api/parameters/update<wbr>Label</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatelabelfield.html">api/parameters/update<wbr>Label<wbr>Field</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatelist.html">api/parameters/update<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatemember.html">api/parameters/update<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatememberboardstar.html">api/parameters/update<wbr>Member<wbr>Board<wbr>Star</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatemembercustomboardbackground.html">api/parameters/update<wbr>Member<wbr>Custom<wbr>Board<wbr>Background</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatememberonboard.html">api/parameters/update<wbr>Member<wbr>OnBoard</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatemembersavedserch.html">api/parameters/update<wbr>Member<wbr>Saved<wbr>Serch</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatenotification.html">api/parameters/update<wbr>Notification</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatenotificationreadstatus.html">api/parameters/update<wbr>Notification<wbr>Read<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateorganization.html">api/parameters/update<wbr>Organization</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateorganizationdeactivatestatus.html">api/parameters/update<wbr>Organization<wbr>Deactivate<wbr>Status</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateorganizationmember.html">api/parameters/update<wbr>Organization<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateplugin.html">api/parameters/update<wbr>Plugin</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatepluginlisting.html">api/parameters/update<wbr>Plugin<wbr>Listing</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateshowlistguide.html">api/parameters/update<wbr>Show<wbr>List<wbr>Guide</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateshowsidebar.html">api/parameters/update<wbr>Show<wbr>Sidebar</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateshowsidebaractivity.html">api/parameters/update<wbr>Show<wbr>Sidebar<wbr>Activity</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateshowsidebarboardactions.html">api/parameters/update<wbr>Show<wbr>Sidebar<wbr>Board<wbr>Actions</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updateshowsidebarmembers.html">api/parameters/update<wbr>Show<wbr>Sidebar<wbr>Members</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatetokenwebhook.html">api/parameters/update<wbr>Token<wbr>Webhook</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_updatewebhook.html">api/parameters/update<wbr>Webhook</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_uploadmemberboardbackground.html">api/parameters/upload<wbr>Member<wbr>Board<wbr>Background</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_uploadmembercustomboardbackground.html">api/parameters/upload<wbr>Member<wbr>Custom<wbr>Board<wbr>Background</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_uploadmembercustomsticker.html">api/parameters/upload<wbr>Member<wbr>Custom<wbr>Sticker</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_parameters_voteoncardforgivenmember.html">api/parameters/vote<wbr>OnCard<wbr>For<wbr>Given<wbr>Member</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_plugins.html">api/plugins</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_search.html">api/search</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_tokens.html">api/tokens</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/api_webhooks.html">api/webhooks</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/clients.html">clients</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/clients_baseclient.html">clients/base<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/clients_client.html">clients/client</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/clients_trelloclient.html">clients/trello<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/config.html">config</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/index.html">index</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types.html">types</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types_callback.html">types/callback</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/types_requestconfig.html">types/request<wbr>Config</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-namespace"><span class="tsd-kind-icon">Namespace</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
