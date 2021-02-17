@@ -1,150 +1,145 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
+import * as Models from './models';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Tokens {
-  private prefix = 'tokens';
+  constructor(private client: Client) { }
 
-  constructor(private readonly client: TrelloClient) { }
-
-  public async getInfo(
-    options: {
-      token: string;
-      fields?: string[];
-      webhooks?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.token),
+  /**
+   * Retrieve information about a token. */
+  async getToken<T = Models.Token>(parameters: Parameters.GetToken, callback: Callback<T>): Promise<void>;
+  /**
+   * Retrieve information about a token. */
+  async getToken<T = Models.Token>(parameters: Parameters.GetToken, callback?: undefined): Promise<T>;
+  async getToken<T = Models.Token>(parameters: Parameters.GetToken, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/tokens/${parameters.token}`,
       method: 'GET',
       params: {
-        fields: options.fields && options.fields.join(','),
-        webhooks: options.webhooks
-      }
+        fields: parameters.fields,
+        webhooks: parameters.webhooks,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getToken' });
   }
 
-  public async getMember(
-    options: {
-      token: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.token, 'member'),
+  /**
+   * Retrieve information about a token's owner by token. */
+  async getTokenMember<T = Models.Member>(parameters: Parameters.GetTokenMember, callback: Callback<T>): Promise<void>;
+  /**
+   * Retrieve information about a token's owner by token. */
+  async getTokenMember<T = Models.Member>(parameters: Parameters.GetTokenMember, callback?: undefined): Promise<T>;
+  async getTokenMember<T = Models.Member>(parameters: Parameters.GetTokenMember, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/tokens/${parameters.token}/member`,
       method: 'GET',
       params: {
-        fields: options.fields && options.fields.join(',')
-      }
+        fields: parameters.fields,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getTokenMember' });
   }
 
-  public async getWebhooks(
-    options: {
-      token: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.token, 'webhooks'),
-      method: 'GET'
+  /**
+   * Retrieve all webhooks created with a Token. */
+  async getTokenWebhooks<T = unknown>(parameters: Parameters.GetTokenWebhooks, callback: Callback<T>): Promise<void>;
+  /**
+   * Retrieve all webhooks created with a Token. */
+  async getTokenWebhooks<T = unknown>(parameters: Parameters.GetTokenWebhooks, callback?: undefined): Promise<T>;
+  async getTokenWebhooks<T = unknown>(parameters: Parameters.GetTokenWebhooks, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/tokens/${parameters.token}/webhooks`,
+      method: 'GET',
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getTokenWebhooks' });
   }
 
-  public async getWebhook(
-    options: {
-      token: string;
-      webhookId: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.token, 'webhooks', options.webhookId),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async addWebhook(
-    options: {
-      token: string;
-      description?: string;
-      callbackURL: string;
-      idModel: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.token, 'webhooks'),
+  /**
+   * Create a new webhook for a Token. */
+  async createTokenWebhooks<T = Models.Webhook>(parameters: Parameters.CreateTokenWebhooks, callback: Callback<T>): Promise<void>;
+  /**
+   * Create a new webhook for a Token. */
+  async createTokenWebhooks<T = Models.Webhook>(parameters: Parameters.CreateTokenWebhooks, callback?: undefined): Promise<T>;
+  async createTokenWebhooks<T = Models.Webhook>(parameters: Parameters.CreateTokenWebhooks, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/tokens/${parameters.token}/webhooks`,
       method: 'POST',
       params: {
-        description: options.description,
-        callbackURL: options.callbackURL,
-        idModel: options.idModel
-      }
+        description: parameters.description,
+        callbackURL: parameters.callbackURL,
+        idModel: parameters.idModel,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'createTokenWebhooks' });
   }
 
-  public async updateWebhook(
-    options: {
-      token: string;
-      webhookId: string;
-      description?: string;
-      callbackURL: string;
-      idModel: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.token, 'webhooks', options.webhookId),
+  /**
+   * Retrieve a webhook created with a Token. */
+  async getTokenWebhook<T = Models.Webhook>(parameters: Parameters.GetTokenWebhook, callback: Callback<T>): Promise<void>;
+  /**
+   * Retrieve a webhook created with a Token. */
+  async getTokenWebhook<T = Models.Webhook>(parameters: Parameters.GetTokenWebhook, callback?: undefined): Promise<T>;
+  async getTokenWebhook<T = Models.Webhook>(parameters: Parameters.GetTokenWebhook, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
+      method: 'GET',
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'getTokenWebhook' });
+  }
+
+  /**
+   * Update a Webhook created by Token */
+  async updateTokenWebhook<T = unknown>(parameters: Parameters.UpdateTokenWebhook, callback: Callback<T>): Promise<void>;
+  /**
+   * Update a Webhook created by Token */
+  async updateTokenWebhook<T = unknown>(parameters: Parameters.UpdateTokenWebhook, callback?: undefined): Promise<T>;
+  async updateTokenWebhook<T = unknown>(parameters: Parameters.UpdateTokenWebhook, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
       method: 'PUT',
       params: {
-        description: options.description,
-        callbackURL: options.callbackURL,
-        idModel: options.idModel
-      }
+        description: parameters.description,
+        callbackURL: parameters.callbackURL,
+        idModel: parameters.idModel,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'updateTokenWebhook' });
   }
 
-  public async deleteToken(
-    options: {
-      token: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.token),
-      method: 'DELETE'
+  /**
+   * Delete a webhook created with given token. */
+  async deleteTokenWebhook<T = unknown>(parameters: Parameters.DeleteTokenWebhook, callback: Callback<T>): Promise<void>;
+  /**
+   * Delete a webhook created with given token. */
+  async deleteTokenWebhook<T = unknown>(parameters: Parameters.DeleteTokenWebhook, callback?: undefined): Promise<T>;
+  async deleteTokenWebhook<T = unknown>(parameters: Parameters.DeleteTokenWebhook, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
+      method: 'DELETE',
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'deleteTokenWebhook' });
   }
 
-  public async deleteWebhook(
-    options: {
-      token: string;
-      webhookId: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.token, 'webhooks', options.webhookId),
-      method: 'DELETE'
+  /**
+   * Delete a token. */
+  async deleteToken<T = unknown>(parameters: Parameters.DeleteToken, callback: Callback<T>): Promise<void>;
+  /**
+   * Delete a token. */
+  async deleteToken<T = unknown>(parameters: Parameters.DeleteToken, callback?: undefined): Promise<T>;
+  async deleteToken<T = unknown>(parameters: Parameters.DeleteToken, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/tokens/${parameters.token}/`,
+      method: 'DELETE',
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'deleteToken' });
   }
 }

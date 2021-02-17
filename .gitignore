@@ -1,4 +1,8 @@
+.idea/
 out/
 node_modules/
+coverage/
+docs/
 
-package-lock.json
+.env
+.DS_Store

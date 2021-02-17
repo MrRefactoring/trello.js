@@ -1,0 +1,30 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      max-parallel: 1
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm install
+      - name: Create .env file
+        run: |
+          touch .env
+          echo TRELLO_API_KEY=${{ secrets.TRELLO_API_KEY }} >> .env
+          echo TRELLO_API_TOKEN=${{ secrets.TRELLO_API_TOKEN }} >> .env
+      - run: npm run build
+      - run: npm run test
+      - run: npm run lint
+        env:
+          CI: true

@@ -1,0 +1,40 @@
+import { TrelloID } from './trelloID';
+import { Memberships } from './memberships';
+import { Preferences } from './preferences';
+import { LimitsObject } from './limitsObject';
+
+export interface Organization {
+  id: TrelloID;
+  activeBillableMemberCount: number | null;
+  allAdminsEnabled: boolean;
+  availableLicenseCount: number | null;
+  billableCollaboratorCount: number | null;
+  billableMemberCount: number | null;
+  creationMethod?: string | null;
+  credits: unknown[];
+  desc: string;
+  descData?: unknown | null;
+  displayName: string;
+  enterpriseJoinRequest?: unknown;
+  idBoards: string[];
+  idEnterprise: string | null;
+  idMemberCreator: string;
+  invitations: string[];
+  invited: boolean;
+  ixUpdate: string;
+  limits?: Record<'orgs' | string, Record<'totalMembersPerOrg' | 'freeBoardsPerOrg' | string, LimitsObject>>;
+  logoHash: string | null;
+  logoUrl: string | null;
+  maximumLicenseCount: number | null;
+  memberships: Memberships[];
+  name: string;
+  powerUps: string[];
+  prefs: Preferences;
+  premiumFeatures: string[];
+  products: string[];
+  promotions?: unknown[];
+  standardVariation: unknown | null;
+  teamType: unknown | null;
+  url: string;
+  website: string | null;
+}

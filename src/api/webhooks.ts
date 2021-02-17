@@ -1,92 +1,95 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
+import * as Models from './models';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Webhooks {
-  private prefix = 'webhooks';
+  constructor(private client: Client) { }
 
-  constructor(private readonly client: TrelloClient) { }
-
-  public async getWebhook(
-    options: { id: string },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getField(
-    options: { id: string, field: string },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, options.field),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async updateWebhook(
-    options: {
-      id: string;
-      description?: string;
-      callbackURL?: string;
-      idModel?: string;
-      active?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
-      method: 'PUT',
-      params: {
-        description: options.description,
-        callbackURL: options.callbackURL,
-        idModel: options.idModel,
-        active: options.active
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async addWebhook(
-    options: {
-      description?: string;
-      callbackURL: string;
-      idModel: string;
-      active?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix),
+  /**
+   * Create a new webhook. */
+  async createWebhook<T = Models.Webhook>(parameters: Parameters.CreateWebhook, callback: Callback<T>): Promise<void>;
+  /**
+   * Create a new webhook. */
+  async createWebhook<T = Models.Webhook>(parameters: Parameters.CreateWebhook, callback?: undefined): Promise<T>;
+  async createWebhook<T = Models.Webhook>(parameters: Parameters.CreateWebhook, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: '/webhooks/',
       method: 'POST',
       params: {
-        description: options.description,
-        callbackURL: options.callbackURL,
-        idModel: options.idModel,
-        active: options.active
-      }
+        description: parameters.description,
+        callbackURL: parameters.callbackURL,
+        idModel: parameters.idModel,
+        active: parameters.active,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'createWebhook' });
   }
 
-  public async deleteWebhook(
-    options: { id: string; },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
-      method: 'DELETE'
+  /**
+   * Get a webhook by ID. */
+  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhook, callback: Callback<T>): Promise<void>;
+  /**
+   * Get a webhook by ID. */
+  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhook, callback?: undefined): Promise<T>;
+  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhook, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/webhooks/${parameters.id}`,
+      method: 'GET',
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getWebhook' });
+  }
+
+  /**
+   * Update a webhook by ID. */
+  async updateWebhook<T = Models.Webhook>(parameters: Parameters.UpdateWebhook, callback: Callback<T>): Promise<void>;
+  /**
+   * Update a webhook by ID. */
+  async updateWebhook<T = Models.Webhook>(parameters: Parameters.UpdateWebhook, callback?: undefined): Promise<T>;
+  async updateWebhook<T = Models.Webhook>(parameters: Parameters.UpdateWebhook, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/webhooks/${parameters.id}`,
+      method: 'PUT',
+      params: {
+        description: parameters.description,
+        callbackURL: parameters.callbackURL,
+        idModel: parameters.idModel,
+        active: parameters.active,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'updateWebhook' });
+  }
+
+  /**
+   * Delete a webhook by ID. */
+  async deleteWebhook<T = unknown>(parameters: Parameters.DeleteWebhook, callback: Callback<T>): Promise<void>;
+  /**
+   * Delete a webhook by ID. */
+  async deleteWebhook<T = unknown>(parameters: Parameters.DeleteWebhook, callback?: undefined): Promise<T>;
+  async deleteWebhook<T = unknown>(parameters: Parameters.DeleteWebhook, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/webhooks/${parameters.id}`,
+      method: 'DELETE',
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'deleteWebhook' });
+  }
+
+  /**
+   * Get a field on a Webhook */
+  async getWebhookField<T = unknown>(parameters: Parameters.GetWebhookField, callback: Callback<T>): Promise<void>;
+  /**
+   * Get a field on a Webhook */
+  async getWebhookField<T = unknown>(parameters: Parameters.GetWebhookField, callback?: undefined): Promise<T>;
+  async getWebhookField<T = unknown>(parameters: Parameters.GetWebhookField, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/webhooks/${parameters.id}/${parameters.field}`,
+      method: 'GET',
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'getWebhookField' });
   }
 }

@@ -1,66 +1,66 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
-import {
-  SearchOptions as Options,
-  SearchResponses as Responses
-} from '../models';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Search {
-  private prefix = 'search';
+  constructor(private client: Client) { }
 
-  constructor(private readonly client: TrelloClient) { }
-
-  public async search(
-    options: Options.ISearch,
-    callback?: (err: any, data: any) => void
-  ): Promise<Responses.ISearch> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix),
+  /**
+   * Find what you're looking for in Trello */
+  async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback: Callback<T>): Promise<void>;
+  /**
+   * Find what you're looking for in Trello */
+  async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback?: undefined): Promise<T>;
+  async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: '/search',
       method: 'GET',
       params: {
-        query: options.query,
-        idBoards: options.idBoards,
-        idOrganizations: options.idOrganizations,
-        idCards: options.idCards,
-        modelTypes: options.modelTypes,
-        board_fields: options.boardFields && options.boardFields.join(','),
-        boards_limit: options.boardsLimit,
-        card_fields: options.cardFields && options.cardFields.join(','),
-        cards_limit: options.cardsLimit,
-        cards_page: options.cardsPage,
-        card_board: options.cardBoard,
-        card_list: options.cardList,
-        card_members: options.cardMembers,
-        card_stickers: options.cardStickers,
-        card_attachments: options.cardAttachments,
-        organization_fields: options.organizationFields,
-        organizations_limit: options.organizationsLimit,
-        member_fields: options.memberFields,
-        members_limit: options.membersLimit,
-        partial: options.partial
-      }
+        query: parameters.query,
+        idBoards: parameters.idBoards,
+        idOrganizations: parameters.idOrganizations,
+        idCards: parameters.idCards,
+        modelTypes: parameters.modelTypes,
+        board_fields: parameters.boardFields,
+        boards_limit: parameters.boardsLimit,
+        card_fields: parameters.cardFields,
+        cards_limit: parameters.cardsLimit,
+        cards_page: parameters.cardsPage,
+        card_board: parameters.cardBoard,
+        card_list: parameters.cardList,
+        card_members: parameters.cardMembers,
+        card_stickers: parameters.cardStickers,
+        card_attachments: parameters.cardAttachments,
+        organization_fields: parameters.organizationFields,
+        organizations_limit: parameters.organizationsLimit,
+        member_fields: parameters.memberFields,
+        members_limit: parameters.membersLimit,
+        partial: parameters.partial,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getSearch' });
   }
 
-  public async searchMembers(
-    options: Options.ISearchMembers,
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, 'members'),
+  /**
+   * Search for Trello members. */
+  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback: Callback<T>): Promise<void>;
+  /**
+   * Search for Trello members. */
+  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback?: undefined): Promise<T>;
+  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: '/search/members/',
       method: 'GET',
       params: {
-        query: options.query,
-        limit: options.limit,
-        idBoard: options.idBoard,
-        idOrganization: options.idOrganization,
-        onlyOrgMembers: options.onlyOrgMembers
-      }
+        query: parameters.query,
+        limit: parameters.limit,
+        idBoard: parameters.idBoard,
+        idOrganization: parameters.idOrganization,
+        onlyOrgMembers: parameters.onlyOrgMembers,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getSearchMembers' });
   }
 }

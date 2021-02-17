@@ -1,279 +1,207 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Lists {
-  private readonly prefix = 'lists';
+  constructor(private client: Client) { }
 
-  constructor(private readonly client: TrelloClient) { }
-
-  public async getList(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  /**
+   * Get information about a List */
+  async getList<T = unknown>(parameters: Parameters.GetList, callback: Callback<T>): Promise<void>;
+  /**
+   * Get information about a List */
+  async getList<T = unknown>(parameters: Parameters.GetList, callback?: undefined): Promise<T>;
+  async getList<T = unknown>(parameters: Parameters.GetList, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}`,
       method: 'GET',
       params: {
-        fields: options.fields && options.fields.join(',')
-      }
+        fields: parameters.fields,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getList' });
   }
 
-  public async getField(
-    options: {
-      id: string;
-      field: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, options.field),
-      method: 'GET'
+  /**
+   * Update the properties of a List */
+  async updateList<T = unknown>(parameters: Parameters.UpdateList, callback: Callback<T>): Promise<void>;
+  /**
+   * Update the properties of a List */
+  async updateList<T = unknown>(parameters: Parameters.UpdateList, callback?: undefined): Promise<T>;
+  async updateList<T = unknown>(parameters: Parameters.UpdateList, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}`,
+      method: 'PUT',
+      params: {
+        name: parameters.name,
+        closed: parameters.closed,
+        idBoard: parameters.idBoard,
+        pos: parameters.pos,
+        subscribed: parameters.subscribed,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'updateList' });
   }
 
-  public async getActions(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'actions'),
-      method: 'GET'
+  /**
+   * Create a new List on a Board */
+  async createList<T = unknown>(parameters: Parameters.CreateList, callback: Callback<T>): Promise<void>;
+  /**
+   * Create a new List on a Board */
+  async createList<T = unknown>(parameters: Parameters.CreateList, callback?: undefined): Promise<T>;
+  async createList<T = unknown>(parameters: Parameters.CreateList, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: '/lists',
+      method: 'POST',
+      params: {
+        name: parameters.name,
+        idBoard: parameters.idBoard,
+        idListSource: parameters.idListSource,
+        pos: parameters.pos,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'createList' });
   }
 
-  public async getBoard(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'board'),
+  /**
+   * Archive all cards in a list */
+  async archiveAllCardsInList<T = unknown>(parameters: Parameters.ArchiveAllCardsInList, callback: Callback<T>): Promise<void>;
+  /**
+   * Archive all cards in a list */
+  async archiveAllCardsInList<T = unknown>(parameters: Parameters.ArchiveAllCardsInList, callback?: undefined): Promise<T>;
+  async archiveAllCardsInList<T = unknown>(parameters: Parameters.ArchiveAllCardsInList, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}/archiveAllCards`,
+      method: 'POST',
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'archiveAllCardsInList' });
+  }
+
+  /**
+   * Move all Cards in a List */
+  async moveAllCardsInList<T = unknown>(parameters: Parameters.MoveAllCardsInList, callback: Callback<T>): Promise<void>;
+  /**
+   * Move all Cards in a List */
+  async moveAllCardsInList<T = unknown>(parameters: Parameters.MoveAllCardsInList, callback?: undefined): Promise<T>;
+  async moveAllCardsInList<T = unknown>(parameters: Parameters.MoveAllCardsInList, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}/moveAllCards`,
+      method: 'POST',
+      params: {
+        idBoard: parameters.idBoard,
+        idList: parameters.idList,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'moveAllCardsInList' });
+  }
+
+  /**
+   * Archive or unarchive a list */
+  async setListCloseState<T = unknown>(parameters: Parameters.SetListCloseState, callback: Callback<T>): Promise<void>;
+  /**
+   * Archive or unarchive a list */
+  async setListCloseState<T = unknown>(parameters: Parameters.SetListCloseState, callback?: undefined): Promise<T>;
+  async setListCloseState<T = unknown>(parameters: Parameters.SetListCloseState, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}/closed`,
+      method: 'PUT',
+      params: {
+        value: parameters.value,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'setListCloseState' });
+  }
+
+  /**
+   * Move a List to a different Board */
+  async moveListToDifferentBoard<T = unknown>(parameters: Parameters.MoveListToDifferentBoard, callback: Callback<T>): Promise<void>;
+  /**
+   * Move a List to a different Board */
+  async moveListToDifferentBoard<T = unknown>(parameters: Parameters.MoveListToDifferentBoard, callback?: undefined): Promise<T>;
+  async moveListToDifferentBoard<T = unknown>(parameters: Parameters.MoveListToDifferentBoard, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}/idBoard`,
+      method: 'PUT',
+      params: {
+        value: parameters.value,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'moveListToDifferentBoard' });
+  }
+
+  /**
+   * Rename a list */
+  async renameList<T = unknown>(parameters: Parameters.RenameList, callback: Callback<T>): Promise<void>;
+  /**
+   * Rename a list */
+  async renameList<T = unknown>(parameters: Parameters.RenameList, callback?: undefined): Promise<T>;
+  async renameList<T = unknown>(parameters: Parameters.RenameList, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}/${parameters.field}`,
+      method: 'PUT',
+      params: {
+        value: parameters.value,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'renameList' });
+  }
+
+  /**
+   * Get the Actions on a List */
+  async getListActions<T = unknown>(parameters: Parameters.GetListActions, callback: Callback<T>): Promise<void>;
+  /**
+   * Get the Actions on a List */
+  async getListActions<T = unknown>(parameters: Parameters.GetListActions, callback?: undefined): Promise<T>;
+  async getListActions<T = unknown>(parameters: Parameters.GetListActions, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}/actions`,
       method: 'GET',
       params: {
-        fields: options.fields && options.fields.join(',')
-      }
+        filter: parameters.filter,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getListActions' });
   }
 
-  public async getCards(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'cards'),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async updateList(
-    options: {
-      id: string;
-      name?: string;
-      closed?: boolean;
-      idBoard?: string;
-      pos?: string;
-      subscribed?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
-      method: 'PUT',
+  /**
+   * Get the board a list is on */
+  async getListBoard<T = unknown>(parameters: Parameters.GetListBoard, callback: Callback<T>): Promise<void>;
+  /**
+   * Get the board a list is on */
+  async getListBoard<T = unknown>(parameters: Parameters.GetListBoard, callback?: undefined): Promise<T>;
+  async getListBoard<T = unknown>(parameters: Parameters.GetListBoard, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}/board`,
+      method: 'GET',
       params: {
-        name: options.name,
-        closed: options.closed,
-        idBoard: options.idBoard,
-        pos: options.pos,
-        subscribed: options.subscribed
-      }
+        fields: parameters.fields,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getListBoard' });
   }
 
-  public async archive(
-    options: {
-      id: string;
-      value?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'closed'),
-      method: 'PUT',
-      params: {
-        value: options.value
-      }
+  /**
+   * List the cards in a list */
+  async getListCards<T = unknown>(parameters: Parameters.GetListCards, callback: Callback<T>): Promise<void>;
+  /**
+   * List the cards in a list */
+  async getListCards<T = unknown>(parameters: Parameters.GetListCards, callback?: undefined): Promise<T>;
+  async getListCards<T = unknown>(parameters: Parameters.GetListCards, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/lists/${parameters.id}/cards`,
+      method: 'GET',
     };
 
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async moveToBoard(
-    options: {
-      id: string;
-      value?: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'idBoard'),
-      method: 'PUT',
-      params: {
-        value: options.value
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async rename(
-    options: {
-      id: string;
-      value?: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'name'),
-      method: 'PUT',
-      params: {
-        value: options.value
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async changePosition(
-    options: {
-      id: string;
-      value?: string | number;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'pos'),
-      method: 'PUT',
-      params: {
-        value: options.value
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async setLimit(
-    options: {
-      id: string;
-      value?: number;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'softLimit'),
-      method: 'PUT',
-      params: {
-        value: options.value
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async subscribe(
-    options: {
-      id: string;
-      value?: boolean;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'subscribed'),
-      method: 'PUT',
-      params: {
-        value: options.value
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async addList(
-    options: {
-      name: string;
-      idBoard: string;
-      idListSource?: string;
-      pos?: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix),
-      method: 'POST',
-      params: {
-        name: options.name,
-        idBoard: options.idBoard,
-        idListSource: options.idListSource,
-        pos: options.pos
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async archiveAllCards(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'archiveAllCards'),
-      method: 'POST'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async moveAllCards(
-    options: {
-      id: string;
-      idBoard: string;
-      idList: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'moveAllCards'),
-      method: 'POST',
-      params: {
-        idBoard: options.idBoard,
-        idList: options.idList
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getListCards' });
   }
 }

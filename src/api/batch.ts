@@ -1,22 +1,27 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Batch {
-  constructor(private readonly client: TrelloClient) { }
+  constructor(private client: Client) { }
 
-  public async batch(
-    options: { urls: string },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl('batch'),
+  /**
+   * Make up to 10 GET requests in a single, batched API call.
+   */
+  async getBatch<T = unknown>(parameters: Parameters.GetBatch, callback: Callback<T>): Promise<void>;
+  /**
+   * Make up to 10 GET requests in a single, batched API call.
+   */
+  async getBatch<T = unknown>(parameters: Parameters.GetBatch, callback?: undefined): Promise<T>;
+  async getBatch<T = unknown>(parameters: Parameters.GetBatch, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: '/batch',
       method: 'GET',
       params: {
-        urls: options.urls
-      }
+        urls: parameters.urls,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getBatch' });
   }
 }

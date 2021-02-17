@@ -1,0 +1,13 @@
+.idea/
+.github/
+node_modules/
+tests/
+coverage/
+docs/
+
+.editorconfig
+.eslintrc
+.DS_Store
+.env
+.env.example
+tsconfig.tests.json

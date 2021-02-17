@@ -1,118 +1,97 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Labels {
-  private readonly prefix = 'labels';
+  constructor(private client: Client) { }
 
-  constructor(private readonly client: TrelloClient) { }
-
-  public async getLabel(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  /**
+   * Get information about a single Label. */
+  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback: Callback<T>): Promise<void>;
+  /**
+   * Get information about a single Label. */
+  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback?: undefined): Promise<T>;
+  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/labels/${parameters.id}`,
       method: 'GET',
       params: {
-        fields: options.fields && options.fields.join(',')
-      }
+        fields: parameters.fields,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getLabel' });
   }
 
-  public async updateLabel(
-    options: {
-      id: string;
-      name?: string;
-      color?: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  /**
+   * Update a label by ID. */
+  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback: Callback<T>): Promise<void>;
+  /**
+   * Update a label by ID. */
+  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback?: undefined): Promise<T>;
+  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/labels/${parameters.id}`,
       method: 'PUT',
       params: {
-        name: options.name,
-        color: options.color
-      }
+        name: parameters.name,
+        color: parameters.color,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'updateLabel' });
   }
 
-  public async updateColor(
-    options: {
-      id: string;
-      value: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'color'),
+  /**
+   * Delete a label by ID. */
+  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback: Callback<T>): Promise<void>;
+  /**
+   * Delete a label by ID. */
+  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback?: undefined): Promise<T>;
+  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/labels/${parameters.id}`,
+      method: 'DELETE',
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'deleteLabel' });
+  }
+
+  /**
+   * Update a field on a label. */
+  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback: Callback<T>): Promise<void>;
+  /**
+   * Update a field on a label. */
+  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback?: undefined): Promise<T>;
+  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/labels/${parameters.id}/${parameters.field}`,
       method: 'PUT',
       params: {
-        value: options.value
-      }
+        value: parameters.value,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'updateLabelField' });
   }
 
-  public async updateName(
-    options: {
-      id: string;
-      value: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'name'),
-      method: 'PUT',
-      params: {
-        value: options.value
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async addLabel(
-    options: {
-      idBoard: string;
-      name: string;
-      color: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix),
+  /**
+   * Create a new Label on a Board. */
+  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback: Callback<T>): Promise<void>;
+  /**
+   * Create a new Label on a Board. */
+  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback?: undefined): Promise<T>;
+  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: '/labels',
       method: 'POST',
       params: {
-        idBoard: options.idBoard,
-        name: options.name,
-        color: options.color
-      }
+        name: parameters.name,
+        color: parameters.color,
+        idBoard: parameters.idBoard,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async deleteLabel(
-    options: {
-      id: string;
-    },
-    callback?: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
-      method: 'DELETE'
-    };
-
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'createLabel' });
   }
 }

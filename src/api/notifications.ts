@@ -1,223 +1,212 @@
-import { AxiosRequestConfig } from 'axios';
-import { TrelloClient } from '..';
-import { joinUrl } from '../helpers';
+import * as Parameters from './parameters';
+import { Client } from '../clients';
+import { Callback, RequestConfig } from '../types';
 
 export class Notifications {
-  private readonly prefix = 'notifications';
+  constructor(private client: Client) { }
 
-  constructor(private readonly client: TrelloClient) { }
-
-  public async getNotification(
-    options: {
-      id: string;
-      board?: boolean;
-      boardFields?: string[];
-      card?: boolean;
-      cardFields?: string[];
-      display?: boolean;
-      entities?: boolean;
-      fields?: string[];
-      list?: boolean;
-      member?: boolean;
-      memberFields?: string[];
-      memberCreator?: boolean;
-      memberCreatorFields?: string[];
-      organization?: boolean;
-      organizationFields?: string[];
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback: Callback<T>): Promise<void>;
+  async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback?: undefined): Promise<T>;
+  async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}`,
       method: 'GET',
       params: {
-        board: options.board,
-        board_fields: options.boardFields && options.boardFields.join(','),
-        card: options.card,
-        card_fields: options.cardFields && options.cardFields.join(','),
-        display: options.display,
-        entities: options.entities,
-        fields: options.fields && options.fields.join(','),
-        list: options.list,
-        member: options.member,
-        member_fields: options.memberFields && options.memberFields.join(','),
-        memberCreator: options.memberCreator,
-        memberCreator_fields: options.memberCreatorFields && options.memberCreatorFields.join(','),
-        organization: options.organization,
-        organization_fields: options.organizationFields && options.organizationFields.join(',')
-      }
+        board: parameters.board,
+        board_fields: parameters.boardFields,
+        card: parameters.card,
+        card_fields: parameters.cardFields,
+        display: parameters.display,
+        entities: parameters.entities,
+        fields: parameters.fields,
+        list: parameters.list,
+        member: parameters.member,
+        member_fields: parameters.memberFields,
+        memberCreator: parameters.memberCreator,
+        memberCreator_fields: parameters.memberCreatorFields,
+        organization: parameters.organization,
+        organization_fields: parameters.organizationFields,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getNotification' });
   }
 
-  public async getField(
-    options: {
-      id: string;
-      field: string;
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, options.field),
-      method: 'GET'
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getBoard(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'board'),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getCard(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'card'),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getList(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'list'),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getMember(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'member'),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getMemberCreator(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'memberCreator'),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async getOrganization(
-    options: {
-      id: string;
-      fields?: string[];
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'organization'),
-      method: 'GET',
-      params: {
-        fields: options.fields && options.fields.join(',')
-      }
-    };
-
-    return this.client.sendRequest(opts, callback);
-  }
-
-  public async updateReadStatus(
-    options: {
-      id: string;
-      unread?: boolean;
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id),
+  /**
+   * Update the read status of a notification */
+  async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback: Callback<T>): Promise<void>;
+  /**
+   * Update the read status of a notification */
+  async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback?: undefined): Promise<T>;
+  async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}`,
       method: 'PUT',
       params: {
-        unread: options.unread
-      }
+        unread: parameters.unread,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'updateNotification' });
   }
 
-  public async updateUnreadStatus(
-    options: {
-      id: string;
-      value?: boolean;
-    },
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, options.id, 'unread'),
+  /**
+   * Get a specific property of a notification */
+  async getNotificationField<T = unknown>(parameters: Parameters.GetNotificationField, callback: Callback<T>): Promise<void>;
+  /**
+   * Get a specific property of a notification */
+  async getNotificationField<T = unknown>(parameters: Parameters.GetNotificationField, callback?: undefined): Promise<T>;
+  async getNotificationField<T = unknown>(parameters: Parameters.GetNotificationField, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}/${parameters.field}`,
+      method: 'GET',
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'getNotificationField' });
+  }
+
+  /**
+   * Mark all notifications as read */
+  async markAllNotificationsAsRead<T = unknown>(parameters?: Parameters.MarkAllNotificationsAsRead, callback?: Callback<T>): Promise<void>;
+  /**
+   * Mark all notifications as read */
+  async markAllNotificationsAsRead<T = unknown>(parameters?: Parameters.MarkAllNotificationsAsRead, callback?: undefined): Promise<T>;
+  async markAllNotificationsAsRead<T = unknown>(parameters?: Parameters.MarkAllNotificationsAsRead, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: '/notifications/all/read',
+      method: 'POST',
+      params: {
+        read: parameters?.read,
+        ids: parameters?.ids,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'markAllNotificationsAsRead' });
+  }
+
+  /**
+   * Update Notification's read status */
+  async updateNotificationReadStatus<T = unknown>(parameters: Parameters.UpdateNotificationReadStatus, callback: Callback<T>): Promise<void>;
+  /**
+   * Update Notification's read status */
+  async updateNotificationReadStatus<T = unknown>(parameters: Parameters.UpdateNotificationReadStatus, callback?: undefined): Promise<T>;
+  async updateNotificationReadStatus<T = unknown>(parameters: Parameters.UpdateNotificationReadStatus, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}/unread`,
       method: 'PUT',
       params: {
-        value: options.value
-      }
+        value: parameters.value,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'updateNotificationReadStatus' });
   }
 
-  public async markAllAsRead(
-    callback: (err: any, data: any) => void
-  ): Promise<any> {
-    const opts: AxiosRequestConfig = {
-      url: joinUrl(this.prefix, 'all', 'read'),
-      method: 'POST'
+  /**
+   * Get the board a notification is associated with */
+  async getNotificationBoard<T = unknown>(parameters: Parameters.GetNotificationBoard, callback: Callback<T>): Promise<void>;
+  /**
+   * Get the board a notification is associated with */
+  async getNotificationBoard<T = unknown>(parameters: Parameters.GetNotificationBoard, callback?: undefined): Promise<T>;
+  async getNotificationBoard<T = unknown>(parameters: Parameters.GetNotificationBoard, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}/board`,
+      method: 'GET',
+      params: {
+        fields: parameters.fields,
+      },
     };
 
-    return this.client.sendRequest(opts, callback);
+    return this.client.sendRequest(config, callback, { methodName: 'getNotificationBoard' });
+  }
+
+  /**
+   * Get the card a notification is associated with */
+  async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback: Callback<T>): Promise<void>;
+  /**
+   * Get the card a notification is associated with */
+  async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback?: undefined): Promise<T>;
+  async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}/card`,
+      method: 'GET',
+      params: {
+        fields: parameters.fields,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'getNotificationCard' });
+  }
+
+  /**
+   * Get the list a notification is associated with */
+  async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback: Callback<T>): Promise<void>;
+  /**
+   * Get the list a notification is associated with */
+  async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback?: undefined): Promise<T>;
+  async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}/list`,
+      method: 'GET',
+      params: {
+        fields: parameters.fields,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'getNotificationList' });
+  }
+
+  /**
+   * Get the member (not the creator) a notification is about */
+  async getNotificationMember<T = unknown>(parameters: Parameters.GetNotificationMember, callback: Callback<T>): Promise<void>;
+  /**
+   * Get the member (not the creator) a notification is about */
+  async getNotificationMember<T = unknown>(parameters: Parameters.GetNotificationMember, callback?: undefined): Promise<T>;
+  async getNotificationMember<T = unknown>(parameters: Parameters.GetNotificationMember, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}/member`,
+      method: 'GET',
+      params: {
+        fields: parameters.fields,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'getNotificationMember' });
+  }
+
+  /**
+   * Get the member who created the notification */
+  async getNotificationMemberCreator<T = unknown>(parameters: Parameters.GetNotificationMemberCreator, callback: Callback<T>): Promise<void>;
+  /**
+   * Get the member who created the notification */
+  async getNotificationMemberCreator<T = unknown>(parameters: Parameters.GetNotificationMemberCreator, callback?: undefined): Promise<T>;
+  async getNotificationMemberCreator<T = unknown>(parameters: Parameters.GetNotificationMemberCreator, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}/memberCreator`,
+      method: 'GET',
+      params: {
+        fields: parameters.fields,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'getNotificationMemberCreator' });
+  }
+
+  /**
+   * Get the organization a notification is associated with */
+  async getNotificationOrganization<T = unknown>(parameters: Parameters.GetNotificationOrganization, callback: Callback<T>): Promise<void>;
+  /**
+   * Get the organization a notification is associated with */
+  async getNotificationOrganization<T = unknown>(parameters: Parameters.GetNotificationOrganization, callback?: undefined): Promise<T>;
+  async getNotificationOrganization<T = unknown>(parameters: Parameters.GetNotificationOrganization, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/notifications/${parameters.id}/organization`,
+      method: 'GET',
+      params: {
+        fields: parameters.fields,
+      },
+    };
+
+    return this.client.sendRequest(config, callback, { methodName: 'getNotificationOrganization' });
   }
 }
