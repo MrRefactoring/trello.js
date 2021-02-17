@@ -46,6 +46,6 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "telemetry.trello.js": "^1.0.0"
+    "telemetry.trello.js": "*"
   }
 }
