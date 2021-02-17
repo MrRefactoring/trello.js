@@ -1,3 +1,6 @@
+# ⚠️ Has been renamed to [trello.js](https://www.npmjs.com/package/trello.js) ⚠️
+## This library is no longer supported because the name has been changed to [trello.js](https://www.npmjs.com/package/trello.js). Use it to keep your code up to date
+
 # Trello.ts
 
 NodeJS/JS Module which provides easy-to-use access to the Trello REST API.
