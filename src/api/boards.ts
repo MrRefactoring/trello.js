@@ -63,11 +63,11 @@ export class Boards {
 
   /**
    * Update an existing board by id */
-  async updateBoard<T = any>(parameters: Parameters.UpdateBoard, callback: Callback<T>): Promise<void>;
+  async updateBoard<T = unknown>(parameters: Parameters.UpdateBoard, callback: Callback<T>): Promise<void>;
   /**
    * Update an existing board by id */
-  async updateBoard<T = any>(parameters: Parameters.UpdateBoard, callback?: undefined): Promise<T>;
-  async updateBoard<T = any>(parameters: Parameters.UpdateBoard, callback?: Callback<T>): Promise<void | T> {
+  async updateBoard<T = unknown>(parameters: Parameters.UpdateBoard, callback?: undefined): Promise<T>;
+  async updateBoard<T = unknown>(parameters: Parameters.UpdateBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}`,
       method: 'PUT',
@@ -117,11 +117,11 @@ export class Boards {
 
   /**
    * Get a single, specific field on a board */
-  async getBoardField<T = any>(parameters: Parameters.GetBoardField, callback: Callback<T>): Promise<void>;
+  async getBoardField<T = unknown>(parameters: Parameters.GetBoardField, callback: Callback<T>): Promise<void>;
   /**
    * Get a single, specific field on a board */
-  async getBoardField<T = any>(parameters: Parameters.GetBoardField, callback?: undefined): Promise<T>;
-  async getBoardField<T = any>(parameters: Parameters.GetBoardField, callback?: Callback<T>): Promise<void | T> {
+  async getBoardField<T = unknown>(parameters: Parameters.GetBoardField, callback?: undefined): Promise<T>;
+  async getBoardField<T = unknown>(parameters: Parameters.GetBoardField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/${parameters.field}`,
       method: 'GET',
@@ -133,12 +133,12 @@ export class Boards {
   /**
    * Get an Actions on a Board.
    */
-  async getBoardActions<T = any>(parameters: Parameters.GetBoardActions, callback: Callback<T>): Promise<void>;
+  async getBoardActions<T = unknown>(parameters: Parameters.GetBoardActions, callback: Callback<T>): Promise<void>;
   /**
    * Get an Actions on a Board.
    */
-  async getBoardActions<T = any>(parameters: Parameters.GetBoardActions, callback?: undefined): Promise<T>;
-  async getBoardActions<T = any>(parameters: Parameters.GetBoardActions, callback?: Callback<T>): Promise<void | T> {
+  async getBoardActions<T = unknown>(parameters: Parameters.GetBoardActions, callback?: undefined): Promise<T>;
+  async getBoardActions<T = unknown>(parameters: Parameters.GetBoardActions, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.boardId}/actions`,
       method: 'GET',
@@ -152,11 +152,11 @@ export class Boards {
 
   /**
    * Get a single Card on a Board. */
-  async getBoardCard<T = any>(parameters: Parameters.GetBoardCard, callback: Callback<T>): Promise<void>;
+  async getBoardCard<T = unknown>(parameters: Parameters.GetBoardCard, callback: Callback<T>): Promise<void>;
   /**
    * Get a single Card on a Board. */
-  async getBoardCard<T = any>(parameters: Parameters.GetBoardCard, callback?: undefined): Promise<T>;
-  async getBoardCard<T = any>(parameters: Parameters.GetBoardCard, callback?: Callback<T>): Promise<void | T> {
+  async getBoardCard<T = unknown>(parameters: Parameters.GetBoardCard, callback?: undefined): Promise<T>;
+  async getBoardCard<T = unknown>(parameters: Parameters.GetBoardCard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/cards/${parameters.idCard}`,
       method: 'GET',
@@ -168,12 +168,12 @@ export class Boards {
   /**
    * Get a Stars on a Board.
    */
-  async getBoardStars<T = any>(parameters: Parameters.GetBoardStars, callback: Callback<T>): Promise<void>;
+  async getBoardStars<T = unknown>(parameters: Parameters.GetBoardStars, callback: Callback<T>): Promise<void>;
   /**
    * Get a Stars on a Board.
    */
-  async getBoardStars<T = any>(parameters: Parameters.GetBoardStars, callback?: undefined): Promise<T>;
-  async getBoardStars<T = any>(parameters: Parameters.GetBoardStars, callback?: Callback<T>): Promise<void | T> {
+  async getBoardStars<T = unknown>(parameters: Parameters.GetBoardStars, callback?: undefined): Promise<T>;
+  async getBoardStars<T = unknown>(parameters: Parameters.GetBoardStars, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.boardId}/boardStars`,
       method: 'GET',
@@ -184,11 +184,11 @@ export class Boards {
 
   /**
    * Get all of the checklists on a Board. */
-  async getBoardChecklists<T = any>(parameters: Parameters.GetBoardChecklists, callback: Callback<T>): Promise<void>;
+  async getBoardChecklists<T = unknown>(parameters: Parameters.GetBoardChecklists, callback: Callback<T>): Promise<void>;
   /**
    * Get all of the checklists on a Board. */
-  async getBoardChecklists<T = any>(parameters: Parameters.GetBoardChecklists, callback?: undefined): Promise<T>;
-  async getBoardChecklists<T = any>(parameters: Parameters.GetBoardChecklists, callback?: Callback<T>): Promise<void | T> {
+  async getBoardChecklists<T = unknown>(parameters: Parameters.GetBoardChecklists, callback?: undefined): Promise<T>;
+  async getBoardChecklists<T = unknown>(parameters: Parameters.GetBoardChecklists, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/checklists`,
       method: 'GET',
@@ -199,11 +199,11 @@ export class Boards {
 
   /**
    * Create a new checklist on a board. */
-  async createBoardChecklist<T = any>(parameters: Parameters.CreateBoardChecklist, callback: Callback<T>): Promise<void>;
+  async createBoardChecklist<T = unknown>(parameters: Parameters.CreateBoardChecklist, callback: Callback<T>): Promise<void>;
   /**
    * Create a new checklist on a board. */
-  async createBoardChecklist<T = any>(parameters: Parameters.CreateBoardChecklist, callback?: undefined): Promise<T>;
-  async createBoardChecklist<T = any>(parameters: Parameters.CreateBoardChecklist, callback?: Callback<T>): Promise<void | T> {
+  async createBoardChecklist<T = unknown>(parameters: Parameters.CreateBoardChecklist, callback?: undefined): Promise<T>;
+  async createBoardChecklist<T = unknown>(parameters: Parameters.CreateBoardChecklist, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/checklists`,
       method: 'POST',
@@ -217,11 +217,11 @@ export class Boards {
 
   /**
    * Get all of the open Cards on a Board. */
-  async getBoardCards<T = any>(parameters: Parameters.GetBoardCards, callback: Callback<T>): Promise<void>;
+  async getBoardCards<T = unknown>(parameters: Parameters.GetBoardCards, callback: Callback<T>): Promise<void>;
   /**
    * Get all of the open Cards on a Board. */
-  async getBoardCards<T = any>(parameters: Parameters.GetBoardCards, callback?: undefined): Promise<T>;
-  async getBoardCards<T = any>(parameters: Parameters.GetBoardCards, callback?: Callback<T>): Promise<void | T> {
+  async getBoardCards<T = unknown>(parameters: Parameters.GetBoardCards, callback?: undefined): Promise<T>;
+  async getBoardCards<T = unknown>(parameters: Parameters.GetBoardCards, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/cards`,
       method: 'GET',
@@ -232,11 +232,11 @@ export class Boards {
 
   /**
    * Get the Cards on a Board that match a given filter. */
-  async getBoardCardsFilter<T = any>(parameters: Parameters.GetBoardCardsFilter, callback: Callback<T>): Promise<void>;
+  async getBoardCardsFilter<T = unknown>(parameters: Parameters.GetBoardCardsFilter, callback: Callback<T>): Promise<void>;
   /**
    * Get the Cards on a Board that match a given filter. */
-  async getBoardCardsFilter<T = any>(parameters: Parameters.GetBoardCardsFilter, callback?: undefined): Promise<T>;
-  async getBoardCardsFilter<T = any>(parameters: Parameters.GetBoardCardsFilter, callback?: Callback<T>): Promise<void | T> {
+  async getBoardCardsFilter<T = unknown>(parameters: Parameters.GetBoardCardsFilter, callback?: undefined): Promise<T>;
+  async getBoardCardsFilter<T = unknown>(parameters: Parameters.GetBoardCardsFilter, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/cards/${parameters.filter}`,
       method: 'GET',
@@ -247,11 +247,11 @@ export class Boards {
 
   /**
    * Get the Custom Field Definitions that exist on a board. */
-  async getBoardCustomFields<T = any>(parameters: Parameters.GetBoardCustomFields, callback: Callback<T>): Promise<void>;
+  async getBoardCustomFields<T = unknown>(parameters: Parameters.GetBoardCustomFields, callback: Callback<T>): Promise<void>;
   /**
    * Get the Custom Field Definitions that exist on a board. */
-  async getBoardCustomFields<T = any>(parameters: Parameters.GetBoardCustomFields, callback?: undefined): Promise<T>;
-  async getBoardCustomFields<T = any>(parameters: Parameters.GetBoardCustomFields, callback?: Callback<T>): Promise<void | T> {
+  async getBoardCustomFields<T = unknown>(parameters: Parameters.GetBoardCustomFields, callback?: undefined): Promise<T>;
+  async getBoardCustomFields<T = unknown>(parameters: Parameters.GetBoardCustomFields, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/customFields`,
       method: 'GET',
@@ -262,11 +262,11 @@ export class Boards {
 
   /**
    * Get all of the Labels on a Board. */
-  async getBoardLabels<T = any>(parameters: Parameters.GetBoardLabels, callback: Callback<T>): Promise<void>;
+  async getBoardLabels<T = unknown>(parameters: Parameters.GetBoardLabels, callback: Callback<T>): Promise<void>;
   /**
    * Get all of the Labels on a Board. */
-  async getBoardLabels<T = any>(parameters: Parameters.GetBoardLabels, callback?: undefined): Promise<T>;
-  async getBoardLabels<T = any>(parameters: Parameters.GetBoardLabels, callback?: Callback<T>): Promise<void | T> {
+  async getBoardLabels<T = unknown>(parameters: Parameters.GetBoardLabels, callback?: undefined): Promise<T>;
+  async getBoardLabels<T = unknown>(parameters: Parameters.GetBoardLabels, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/labels`,
       method: 'GET',
@@ -281,11 +281,11 @@ export class Boards {
 
   /**
    * Create a new Label on a Board. */
-  async createBoardLabel<T = any>(parameters: Parameters.CreateBoardLabel, callback: Callback<T>): Promise<void>;
+  async createBoardLabel<T = unknown>(parameters: Parameters.CreateBoardLabel, callback: Callback<T>): Promise<void>;
   /**
    * Create a new Label on a Board. */
-  async createBoardLabel<T = any>(parameters: Parameters.CreateBoardLabel, callback?: undefined): Promise<T>;
-  async createBoardLabel<T = any>(parameters: Parameters.CreateBoardLabel, callback?: Callback<T>): Promise<void | T> {
+  async createBoardLabel<T = unknown>(parameters: Parameters.CreateBoardLabel, callback?: undefined): Promise<T>;
+  async createBoardLabel<T = unknown>(parameters: Parameters.CreateBoardLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/labels`,
       method: 'POST',
@@ -300,11 +300,11 @@ export class Boards {
 
   /**
    * Get the Lists on a Board */
-  async getBoardLists<T = any>(parameters: Parameters.GetBoardLists, callback: Callback<T>): Promise<void>;
+  async getBoardLists<T = unknown>(parameters: Parameters.GetBoardLists, callback: Callback<T>): Promise<void>;
   /**
    * Get the Lists on a Board */
-  async getBoardLists<T = any>(parameters: Parameters.GetBoardLists, callback?: undefined): Promise<T>;
-  async getBoardLists<T = any>(parameters: Parameters.GetBoardLists, callback?: Callback<T>): Promise<void | T> {
+  async getBoardLists<T = unknown>(parameters: Parameters.GetBoardLists, callback?: undefined): Promise<T>;
+  async getBoardLists<T = unknown>(parameters: Parameters.GetBoardLists, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/lists`,
       method: 'GET',
@@ -321,11 +321,11 @@ export class Boards {
 
   /**
    * Create a new List on a Board. */
-  async createBoardList<T = any>(parameters: Parameters.CreateBoardList, callback: Callback<T>): Promise<void>;
+  async createBoardList<T = unknown>(parameters: Parameters.CreateBoardList, callback: Callback<T>): Promise<void>;
   /**
    * Create a new List on a Board. */
-  async createBoardList<T = any>(parameters: Parameters.CreateBoardList, callback?: undefined): Promise<T>;
-  async createBoardList<T = any>(parameters: Parameters.CreateBoardList, callback?: Callback<T>): Promise<void | T> {
+  async createBoardList<T = unknown>(parameters: Parameters.CreateBoardList, callback?: undefined): Promise<T>;
+  async createBoardList<T = unknown>(parameters: Parameters.CreateBoardList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/lists`,
       method: 'POST',
@@ -338,9 +338,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'createBoardList' });
   }
 
-  async getBoardListsFilter<T = any>(parameters: Parameters.GetBoardListsFilter, callback: Callback<T>): Promise<void>;
-  async getBoardListsFilter<T = any>(parameters: Parameters.GetBoardListsFilter, callback?: undefined): Promise<T>;
-  async getBoardListsFilter<T = any>(parameters: Parameters.GetBoardListsFilter, callback?: Callback<T>): Promise<void | T> {
+  async getBoardListsFilter<T = unknown>(parameters: Parameters.GetBoardListsFilter, callback: Callback<T>): Promise<void>;
+  async getBoardListsFilter<T = unknown>(parameters: Parameters.GetBoardListsFilter, callback?: undefined): Promise<T>;
+  async getBoardListsFilter<T = unknown>(parameters: Parameters.GetBoardListsFilter, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/lists/${parameters.filter}`,
       method: 'GET',
@@ -351,11 +351,11 @@ export class Boards {
 
   /**
    * Get the Members for a board */
-  async getBoardMembers<T = any>(parameters: Parameters.GetBoardMembers, callback: Callback<T>): Promise<void>;
+  async getBoardMembers<T = unknown>(parameters: Parameters.GetBoardMembers, callback: Callback<T>): Promise<void>;
   /**
    * Get the Members for a board */
-  async getBoardMembers<T = any>(parameters: Parameters.GetBoardMembers, callback?: undefined): Promise<T>;
-  async getBoardMembers<T = any>(parameters: Parameters.GetBoardMembers, callback?: Callback<T>): Promise<void | T> {
+  async getBoardMembers<T = unknown>(parameters: Parameters.GetBoardMembers, callback?: undefined): Promise<T>;
+  async getBoardMembers<T = unknown>(parameters: Parameters.GetBoardMembers, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/members`,
       method: 'GET',
@@ -366,11 +366,11 @@ export class Boards {
 
   /**
    * Invite a Member to a Board via their email address. */
-  async inviteMember<T = any>(parameters: Parameters.InviteMember, callback: Callback<T>): Promise<void>;
+  async inviteMember<T = unknown>(parameters: Parameters.InviteMember, callback: Callback<T>): Promise<void>;
   /**
    * Invite a Member to a Board via their email address. */
-  async inviteMember<T = any>(parameters: Parameters.InviteMember, callback?: undefined): Promise<T>;
-  async inviteMember<T = any>(parameters: Parameters.InviteMember, callback?: Callback<T>): Promise<void | T> {
+  async inviteMember<T = unknown>(parameters: Parameters.InviteMember, callback?: undefined): Promise<T>;
+  async inviteMember<T = unknown>(parameters: Parameters.InviteMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/members`,
       method: 'PUT',
@@ -388,11 +388,11 @@ export class Boards {
 
   /**
    * Add a member to the board. */
-  async addMemberToBoard<T = any>(parameters: Parameters.AddMemberToBoard, callback: Callback<T>): Promise<void>;
+  async addMemberToBoard<T = unknown>(parameters: Parameters.AddMemberToBoard, callback: Callback<T>): Promise<void>;
   /**
    * Add a member to the board. */
-  async addMemberToBoard<T = any>(parameters: Parameters.AddMemberToBoard, callback?: undefined): Promise<T>;
-  async addMemberToBoard<T = any>(parameters: Parameters.AddMemberToBoard, callback?: Callback<T>): Promise<void | T> {
+  async addMemberToBoard<T = unknown>(parameters: Parameters.AddMemberToBoard, callback?: undefined): Promise<T>;
+  async addMemberToBoard<T = unknown>(parameters: Parameters.AddMemberToBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/members/${parameters.idMember}`,
       method: 'PUT',
@@ -405,9 +405,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'addMemberToBoard' });
   }
 
-  async removeMemberFromBoard<T = any>(parameters: Parameters.RemoveMemberFromBoard, callback: Callback<T>): Promise<void>;
-  async removeMemberFromBoard<T = any>(parameters: Parameters.RemoveMemberFromBoard, callback?: undefined): Promise<T>;
-  async removeMemberFromBoard<T = any>(parameters: Parameters.RemoveMemberFromBoard, callback?: Callback<T>): Promise<void | T> {
+  async removeMemberFromBoard<T = unknown>(parameters: Parameters.RemoveMemberFromBoard, callback: Callback<T>): Promise<void>;
+  async removeMemberFromBoard<T = unknown>(parameters: Parameters.RemoveMemberFromBoard, callback?: undefined): Promise<T>;
+  async removeMemberFromBoard<T = unknown>(parameters: Parameters.RemoveMemberFromBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/members/${parameters.idMember}`,
       method: 'DELETE',
@@ -418,11 +418,11 @@ export class Boards {
 
   /**
    * Update an existing board by id */
-  async updateMemberOnBoard<T = any>(parameters: Parameters.UpdateMemberOnBoard, callback: Callback<T>): Promise<void>;
+  async updateMemberOnBoard<T = unknown>(parameters: Parameters.UpdateMemberOnBoard, callback: Callback<T>): Promise<void>;
   /**
    * Update an existing board by id */
-  async updateMemberOnBoard<T = any>(parameters: Parameters.UpdateMemberOnBoard, callback?: undefined): Promise<T>;
-  async updateMemberOnBoard<T = any>(parameters: Parameters.UpdateMemberOnBoard, callback?: Callback<T>): Promise<void | T> {
+  async updateMemberOnBoard<T = unknown>(parameters: Parameters.UpdateMemberOnBoard, callback?: undefined): Promise<T>;
+  async updateMemberOnBoard<T = unknown>(parameters: Parameters.UpdateMemberOnBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/memberships/${parameters.idMembership}`,
       method: 'PUT',
@@ -437,11 +437,11 @@ export class Boards {
 
   /**
    * Update emailPosition Pref on a Board */
-  async updateEmailPosition<T = any>(parameters: Parameters.UpdateEmailPosition, callback: Callback<T>): Promise<void>;
+  async updateEmailPosition<T = unknown>(parameters: Parameters.UpdateEmailPosition, callback: Callback<T>): Promise<void>;
   /**
    * Update emailPosition Pref on a Board */
-  async updateEmailPosition<T = any>(parameters: Parameters.UpdateEmailPosition, callback?: undefined): Promise<T>;
-  async updateEmailPosition<T = any>(parameters: Parameters.UpdateEmailPosition, callback?: Callback<T>): Promise<void | T> {
+  async updateEmailPosition<T = unknown>(parameters: Parameters.UpdateEmailPosition, callback?: undefined): Promise<T>;
+  async updateEmailPosition<T = unknown>(parameters: Parameters.UpdateEmailPosition, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/myPrefs/emailPosition`,
       method: 'PUT',
@@ -455,11 +455,11 @@ export class Boards {
 
   /**
    * Change the default list that email-to-board cards are created in. */
-  async changeEmailList<T = any>(parameters: Parameters.ChangeEmailList, callback: Callback<T>): Promise<void>;
+  async changeEmailList<T = unknown>(parameters: Parameters.ChangeEmailList, callback: Callback<T>): Promise<void>;
   /**
    * Change the default list that email-to-board cards are created in. */
-  async changeEmailList<T = any>(parameters: Parameters.ChangeEmailList, callback?: undefined): Promise<T>;
-  async changeEmailList<T = any>(parameters: Parameters.ChangeEmailList, callback?: Callback<T>): Promise<void | T> {
+  async changeEmailList<T = unknown>(parameters: Parameters.ChangeEmailList, callback?: undefined): Promise<T>;
+  async changeEmailList<T = unknown>(parameters: Parameters.ChangeEmailList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/myPrefs/idEmailList`,
       method: 'PUT',
@@ -471,9 +471,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'changeEmailList' });
   }
 
-  async updateShowListGuide<T = any>(parameters: Parameters.UpdateShowListGuide, callback: Callback<T>): Promise<void>;
-  async updateShowListGuide<T = any>(parameters: Parameters.UpdateShowListGuide, callback?: undefined): Promise<T>;
-  async updateShowListGuide<T = any>(parameters: Parameters.UpdateShowListGuide, callback?: Callback<T>): Promise<void | T> {
+  async updateShowListGuide<T = unknown>(parameters: Parameters.UpdateShowListGuide, callback: Callback<T>): Promise<void>;
+  async updateShowListGuide<T = unknown>(parameters: Parameters.UpdateShowListGuide, callback?: undefined): Promise<T>;
+  async updateShowListGuide<T = unknown>(parameters: Parameters.UpdateShowListGuide, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/myPrefs/showListGuide`,
       method: 'PUT',
@@ -485,9 +485,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'updateShowListGuide' });
   }
 
-  async updateShowSidebar<T = any>(parameters: Parameters.UpdateShowSidebar, callback: Callback<T>): Promise<void>;
-  async updateShowSidebar<T = any>(parameters: Parameters.UpdateShowSidebar, callback?: undefined): Promise<T>;
-  async updateShowSidebar<T = any>(parameters: Parameters.UpdateShowSidebar, callback?: Callback<T>): Promise<void | T> {
+  async updateShowSidebar<T = unknown>(parameters: Parameters.UpdateShowSidebar, callback: Callback<T>): Promise<void>;
+  async updateShowSidebar<T = unknown>(parameters: Parameters.UpdateShowSidebar, callback?: undefined): Promise<T>;
+  async updateShowSidebar<T = unknown>(parameters: Parameters.UpdateShowSidebar, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/myPrefs/showSidebar`,
       method: 'PUT',
@@ -499,9 +499,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'updateShowSidebar' });
   }
 
-  async updateShowSidebarActivity<T = any>(parameters: Parameters.UpdateShowSidebarActivity, callback: Callback<T>): Promise<void>;
-  async updateShowSidebarActivity<T = any>(parameters: Parameters.UpdateShowSidebarActivity, callback?: undefined): Promise<T>;
-  async updateShowSidebarActivity<T = any>(parameters: Parameters.UpdateShowSidebarActivity, callback?: Callback<T>): Promise<void | T> {
+  async updateShowSidebarActivity<T = unknown>(parameters: Parameters.UpdateShowSidebarActivity, callback: Callback<T>): Promise<void>;
+  async updateShowSidebarActivity<T = unknown>(parameters: Parameters.UpdateShowSidebarActivity, callback?: undefined): Promise<T>;
+  async updateShowSidebarActivity<T = unknown>(parameters: Parameters.UpdateShowSidebarActivity, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/myPrefs/showSidebarActivity`,
       method: 'PUT',
@@ -513,9 +513,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'updateShowSidebarActivity' });
   }
 
-  async updateShowSidebarBoardActions<T = any>(parameters: Parameters.UpdateShowSidebarBoardActions, callback: Callback<T>): Promise<void>;
-  async updateShowSidebarBoardActions<T = any>(parameters: Parameters.UpdateShowSidebarBoardActions, callback?: undefined): Promise<T>;
-  async updateShowSidebarBoardActions<T = any>(parameters: Parameters.UpdateShowSidebarBoardActions, callback?: Callback<T>): Promise<void | T> {
+  async updateShowSidebarBoardActions<T = unknown>(parameters: Parameters.UpdateShowSidebarBoardActions, callback: Callback<T>): Promise<void>;
+  async updateShowSidebarBoardActions<T = unknown>(parameters: Parameters.UpdateShowSidebarBoardActions, callback?: undefined): Promise<T>;
+  async updateShowSidebarBoardActions<T = unknown>(parameters: Parameters.UpdateShowSidebarBoardActions, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/myPrefs/showSidebarBoardActions`,
       method: 'PUT',
@@ -527,9 +527,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'updateShowSidebarBoardActions' });
   }
 
-  async updateShowSidebarMembers<T = any>(parameters: Parameters.UpdateShowSidebarMembers, callback: Callback<T>): Promise<void>;
-  async updateShowSidebarMembers<T = any>(parameters: Parameters.UpdateShowSidebarMembers, callback?: undefined): Promise<T>;
-  async updateShowSidebarMembers<T = any>(parameters: Parameters.UpdateShowSidebarMembers, callback?: Callback<T>): Promise<void | T> {
+  async updateShowSidebarMembers<T = unknown>(parameters: Parameters.UpdateShowSidebarMembers, callback: Callback<T>): Promise<void>;
+  async updateShowSidebarMembers<T = unknown>(parameters: Parameters.UpdateShowSidebarMembers, callback?: undefined): Promise<T>;
+  async updateShowSidebarMembers<T = unknown>(parameters: Parameters.UpdateShowSidebarMembers, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/myPrefs/showSidebarMembers`,
       method: 'PUT',
@@ -576,11 +576,11 @@ export class Boards {
 
   /**
    * Create a new board. */
-  async createCalendarKey<T = any>(parameters: Parameters.CreateCalendarKey, callback: Callback<T>): Promise<void>;
+  async createCalendarKey<T = unknown>(parameters: Parameters.CreateCalendarKey, callback: Callback<T>): Promise<void>;
   /**
    * Create a new board. */
-  async createCalendarKey<T = any>(parameters: Parameters.CreateCalendarKey, callback?: undefined): Promise<T>;
-  async createCalendarKey<T = any>(parameters: Parameters.CreateCalendarKey, callback?: Callback<T>): Promise<void | T> {
+  async createCalendarKey<T = unknown>(parameters: Parameters.CreateCalendarKey, callback?: undefined): Promise<T>;
+  async createCalendarKey<T = unknown>(parameters: Parameters.CreateCalendarKey, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/calendarKey/generate`,
       method: 'POST',
@@ -589,9 +589,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'createCalendarKey' });
   }
 
-  async createEmailKey<T = any>(parameters: Parameters.CreateEmailKey, callback: Callback<T>): Promise<void>;
-  async createEmailKey<T = any>(parameters: Parameters.CreateEmailKey, callback?: undefined): Promise<T>;
-  async createEmailKey<T = any>(parameters: Parameters.CreateEmailKey, callback?: Callback<T>): Promise<void | T> {
+  async createEmailKey<T = unknown>(parameters: Parameters.CreateEmailKey, callback: Callback<T>): Promise<void>;
+  async createEmailKey<T = unknown>(parameters: Parameters.CreateEmailKey, callback?: undefined): Promise<T>;
+  async createEmailKey<T = unknown>(parameters: Parameters.CreateEmailKey, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/emailKey/generate`,
       method: 'POST',
@@ -600,9 +600,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'createEmailKey' });
   }
 
-  async createIdTags<T = any>(parameters: Parameters.CreateIdTags, callback: Callback<T>): Promise<void>;
-  async createIdTags<T = any>(parameters: Parameters.CreateIdTags, callback?: undefined): Promise<T>;
-  async createIdTags<T = any>(parameters: Parameters.CreateIdTags, callback?: Callback<T>): Promise<void | T> {
+  async createIdTags<T = unknown>(parameters: Parameters.CreateIdTags, callback: Callback<T>): Promise<void>;
+  async createIdTags<T = unknown>(parameters: Parameters.CreateIdTags, callback?: undefined): Promise<T>;
+  async createIdTags<T = unknown>(parameters: Parameters.CreateIdTags, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/idTags`,
       method: 'POST',
@@ -614,9 +614,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'createIdTags' });
   }
 
-  async markAsViewed<T = any>(parameters: Parameters.MarkAsViewed, callback: Callback<T>): Promise<void>;
-  async markAsViewed<T = any>(parameters: Parameters.MarkAsViewed, callback?: undefined): Promise<T>;
-  async markAsViewed<T = any>(parameters: Parameters.MarkAsViewed, callback?: Callback<T>): Promise<void | T> {
+  async markAsViewed<T = unknown>(parameters: Parameters.MarkAsViewed, callback: Callback<T>): Promise<void>;
+  async markAsViewed<T = unknown>(parameters: Parameters.MarkAsViewed, callback?: undefined): Promise<T>;
+  async markAsViewed<T = unknown>(parameters: Parameters.MarkAsViewed, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/markedAsViewed`,
       method: 'POST',
@@ -625,9 +625,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'markAsViewed' });
   }
 
-  async createPowerUp<T = any>(parameters: Parameters.CreatePowerUp, callback: Callback<T>): Promise<void>;
-  async createPowerUp<T = any>(parameters: Parameters.CreatePowerUp, callback?: undefined): Promise<T>;
-  async createPowerUp<T = any>(parameters: Parameters.CreatePowerUp, callback?: Callback<T>): Promise<void | T> {
+  async createPowerUp<T = unknown>(parameters: Parameters.CreatePowerUp, callback: Callback<T>): Promise<void>;
+  async createPowerUp<T = unknown>(parameters: Parameters.CreatePowerUp, callback?: undefined): Promise<T>;
+  async createPowerUp<T = unknown>(parameters: Parameters.CreatePowerUp, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/powerUps`,
       method: 'POST',
@@ -639,9 +639,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'createPowerUp' });
   }
 
-  async deletePowerUp<T = any>(parameters: Parameters.DeletePowerUp, callback: Callback<T>): Promise<void>;
-  async deletePowerUp<T = any>(parameters: Parameters.DeletePowerUp, callback?: undefined): Promise<T>;
-  async deletePowerUp<T = any>(parameters: Parameters.DeletePowerUp, callback?: Callback<T>): Promise<void | T> {
+  async deletePowerUp<T = unknown>(parameters: Parameters.DeletePowerUp, callback: Callback<T>): Promise<void>;
+  async deletePowerUp<T = unknown>(parameters: Parameters.DeletePowerUp, callback?: undefined): Promise<T>;
+  async deletePowerUp<T = unknown>(parameters: Parameters.DeletePowerUp, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/powerUps/${parameters.powerUp}`,
       method: 'DELETE',
@@ -652,11 +652,11 @@ export class Boards {
 
   /**
    * Get the enabled Power-Ups on a board */
-  async getEnabledPowerUps<T = any>(parameters: Parameters.GetEnabledPowerUps, callback: Callback<T>): Promise<void>;
+  async getEnabledPowerUps<T = unknown>(parameters: Parameters.GetEnabledPowerUps, callback: Callback<T>): Promise<void>;
   /**
    * Get the enabled Power-Ups on a board */
-  async getEnabledPowerUps<T = any>(parameters: Parameters.GetEnabledPowerUps, callback?: undefined): Promise<T>;
-  async getEnabledPowerUps<T = any>(parameters: Parameters.GetEnabledPowerUps, callback?: Callback<T>): Promise<void | T> {
+  async getEnabledPowerUps<T = unknown>(parameters: Parameters.GetEnabledPowerUps, callback?: undefined): Promise<T>;
+  async getEnabledPowerUps<T = unknown>(parameters: Parameters.GetEnabledPowerUps, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/boardPlugins`,
       method: 'GET',
@@ -667,11 +667,11 @@ export class Boards {
 
   /**
    * Enable a Power-Up on a Board */
-  async enablePowerUp<T = any>(parameters: Parameters.EnablePowerUp, callback: Callback<T>): Promise<void>;
+  async enablePowerUp<T = unknown>(parameters: Parameters.EnablePowerUp, callback: Callback<T>): Promise<void>;
   /**
    * Enable a Power-Up on a Board */
-  async enablePowerUp<T = any>(parameters: Parameters.EnablePowerUp, callback?: undefined): Promise<T>;
-  async enablePowerUp<T = any>(parameters: Parameters.EnablePowerUp, callback?: Callback<T>): Promise<void | T> {
+  async enablePowerUp<T = unknown>(parameters: Parameters.EnablePowerUp, callback?: undefined): Promise<T>;
+  async enablePowerUp<T = unknown>(parameters: Parameters.EnablePowerUp, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/boardPlugins`,
       method: 'POST',
@@ -685,11 +685,11 @@ export class Boards {
 
   /**
    * Disable a Power-Up on a board */
-  async disablePowerUp<T = any>(parameters: Parameters.DisablePowerUp, callback: Callback<T>): Promise<void>;
+  async disablePowerUp<T = unknown>(parameters: Parameters.DisablePowerUp, callback: Callback<T>): Promise<void>;
   /**
    * Disable a Power-Up on a board */
-  async disablePowerUp<T = any>(parameters: Parameters.DisablePowerUp, callback?: undefined): Promise<T>;
-  async disablePowerUp<T = any>(parameters: Parameters.DisablePowerUp, callback?: Callback<T>): Promise<void | T> {
+  async disablePowerUp<T = unknown>(parameters: Parameters.DisablePowerUp, callback?: undefined): Promise<T>;
+  async disablePowerUp<T = unknown>(parameters: Parameters.DisablePowerUp, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/boards/${parameters.id}/boardPlugins/${parameters.idPlugin}`,
       method: 'DELETE',

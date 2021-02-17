@@ -36,7 +36,7 @@ export * from './organizationFields';
 export * from './plugin';
 export * from './pluginData';
 export * from './pluginListing';
-export * from './prefs';
+export * from './preferences';
 export * from './savedSearch';
 export * from './tag';
 export * from './token';

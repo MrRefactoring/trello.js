@@ -1,5 +1,5 @@
 import { TrelloID } from './trelloID';
-import { Prefs } from './prefs';
+import { Preferences } from './preferences';
 import { Limits } from './limits';
 
 export interface Board {
@@ -13,7 +13,7 @@ export interface Board {
   pinned?: boolean;
   url?: string;
   shortUrl?: string;
-  prefs?: Prefs;
+  prefs?: Preferences;
   labelNames?: {
     green?: string;
     yellow?: string;

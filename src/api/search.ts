@@ -7,11 +7,11 @@ export class Search {
 
   /**
    * Find what you're looking for in Trello */
-  async getSearch<T = any>(parameters: Parameters.GetSearch, callback: Callback<T>): Promise<void>;
+  async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback: Callback<T>): Promise<void>;
   /**
    * Find what you're looking for in Trello */
-  async getSearch<T = any>(parameters: Parameters.GetSearch, callback?: undefined): Promise<T>;
-  async getSearch<T = any>(parameters: Parameters.GetSearch, callback?: Callback<T>): Promise<void | T> {
+  async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback?: undefined): Promise<T>;
+  async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/search',
       method: 'GET',
@@ -44,11 +44,11 @@ export class Search {
 
   /**
    * Search for Trello members. */
-  async getSearchMembers<T = any>(parameters: Parameters.GetSearchMembers, callback: Callback<T>): Promise<void>;
+  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback: Callback<T>): Promise<void>;
   /**
    * Search for Trello members. */
-  async getSearchMembers<T = any>(parameters: Parameters.GetSearchMembers, callback?: undefined): Promise<T>;
-  async getSearchMembers<T = any>(parameters: Parameters.GetSearchMembers, callback?: Callback<T>): Promise<void | T> {
+  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback?: undefined): Promise<T>;
+  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/search/members/',
       method: 'GET',

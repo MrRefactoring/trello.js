@@ -21,21 +21,21 @@ export interface Enterprise {
   organizationPrefs?: {
     boardVisibilityRestrict?: {};
     boardDeleteRestrict?: {};
-    attachmentRestrictions?: any[];
+    attachmentRestrictions?: unknown[];
   };
   ssoActivationFailed?: boolean;
-  idAdmins?: any[];
-  enterpriseDomains?: any[];
+  idAdmins?: unknown[];
+  enterpriseDomains?: unknown[];
   isRealEnterprise?: boolean;
-  pluginWhitelistingEnabled?: any[];
-  idOrganizations?: any[];
-  products?: any[];
+  pluginWhitelistingEnabled?: unknown[];
+  idOrganizations?: unknown[];
+  products?: unknown[];
   licenses?: {
     maxMembers?: number;
     totalMembers?: number;
-    relatedEnterprises?: any[];
+    relatedEnterprises?: unknown[];
   };
-  domains?: any[];
+  domains?: unknown[];
   dateOrganizationPrefsLastUpdated?: string;
   idp?: {
     requestSigned?: boolean;

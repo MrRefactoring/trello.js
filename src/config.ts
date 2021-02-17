@@ -21,6 +21,6 @@ export namespace Config {
 
   export namespace Middlewares {
     export type OnErrorHandler = (error: Config.Error) => void;
-    export type OnResponseHandler<T = any> = (data: T) => void;
+    export type OnResponseHandler<T = unknown> = (data: T) => void;
   }
 }

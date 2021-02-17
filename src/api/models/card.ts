@@ -25,7 +25,7 @@ export interface Card {
     due?: string;
     dueComplete?: boolean;
   };
-  checkItemStates?: any[];
+  checkItemStates?: unknown[];
   closed?: boolean;
   coordinates?: string;
   creationMethod?: string;
@@ -38,14 +38,14 @@ export interface Card {
   dueReminder?: string;
   email?: string;
   idBoard?: TrelloID;
-  idChecklists?: any[];
-  idLabels?: any[];
+  idChecklists?: unknown[];
+  idLabels?: unknown[];
   idList?: TrelloID;
-  idMembers?: any[];
-  idMembersVoted?: any[];
+  idMembers?: unknown[];
+  idMembersVoted?: unknown[];
   idShort?: number;
   idAttachmentCover?: TrelloID;
-  labels?: any[];
+  labels?: unknown[];
   limits?: Limits;
   locationName?: string;
   manualCoverAttachment?: boolean;

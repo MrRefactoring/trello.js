@@ -7,11 +7,11 @@ export class Labels {
 
   /**
    * Get information about a single Label. */
-  async getLabel<T = any>(parameters: Parameters.GetLabel, callback: Callback<T>): Promise<void>;
+  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback: Callback<T>): Promise<void>;
   /**
    * Get information about a single Label. */
-  async getLabel<T = any>(parameters: Parameters.GetLabel, callback?: undefined): Promise<T>;
-  async getLabel<T = any>(parameters: Parameters.GetLabel, callback?: Callback<T>): Promise<void | T> {
+  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback?: undefined): Promise<T>;
+  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'GET',
@@ -25,11 +25,11 @@ export class Labels {
 
   /**
    * Update a label by ID. */
-  async updateLabel<T = any>(parameters: Parameters.UpdateLabel, callback: Callback<T>): Promise<void>;
+  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback: Callback<T>): Promise<void>;
   /**
    * Update a label by ID. */
-  async updateLabel<T = any>(parameters: Parameters.UpdateLabel, callback?: undefined): Promise<T>;
-  async updateLabel<T = any>(parameters: Parameters.UpdateLabel, callback?: Callback<T>): Promise<void | T> {
+  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback?: undefined): Promise<T>;
+  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'PUT',
@@ -44,11 +44,11 @@ export class Labels {
 
   /**
    * Delete a label by ID. */
-  async deleteLabel<T = any>(parameters: Parameters.DeleteLabel, callback: Callback<T>): Promise<void>;
+  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback: Callback<T>): Promise<void>;
   /**
    * Delete a label by ID. */
-  async deleteLabel<T = any>(parameters: Parameters.DeleteLabel, callback?: undefined): Promise<T>;
-  async deleteLabel<T = any>(parameters: Parameters.DeleteLabel, callback?: Callback<T>): Promise<void | T> {
+  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback?: undefined): Promise<T>;
+  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'DELETE',
@@ -59,11 +59,11 @@ export class Labels {
 
   /**
    * Update a field on a label. */
-  async updateLabelField<T = any>(parameters: Parameters.UpdateLabelField, callback: Callback<T>): Promise<void>;
+  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback: Callback<T>): Promise<void>;
   /**
    * Update a field on a label. */
-  async updateLabelField<T = any>(parameters: Parameters.UpdateLabelField, callback?: undefined): Promise<T>;
-  async updateLabelField<T = any>(parameters: Parameters.UpdateLabelField, callback?: Callback<T>): Promise<void | T> {
+  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback?: undefined): Promise<T>;
+  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}/${parameters.field}`,
       method: 'PUT',
@@ -77,11 +77,11 @@ export class Labels {
 
   /**
    * Create a new Label on a Board. */
-  async createLabel<T = any>(parameters: Parameters.CreateLabel, callback: Callback<T>): Promise<void>;
+  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback: Callback<T>): Promise<void>;
   /**
    * Create a new Label on a Board. */
-  async createLabel<T = any>(parameters: Parameters.CreateLabel, callback?: undefined): Promise<T>;
-  async createLabel<T = any>(parameters: Parameters.CreateLabel, callback?: Callback<T>): Promise<void | T> {
+  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback?: undefined): Promise<T>;
+  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/labels',
       method: 'POST',

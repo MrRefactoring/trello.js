@@ -65,11 +65,11 @@ export class Webhooks {
 
   /**
    * Delete a webhook by ID. */
-  async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhook, callback: Callback<T>): Promise<void>;
+  async deleteWebhook<T = unknown>(parameters: Parameters.DeleteWebhook, callback: Callback<T>): Promise<void>;
   /**
    * Delete a webhook by ID. */
-  async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhook, callback?: undefined): Promise<T>;
-  async deleteWebhook<T = any>(parameters: Parameters.DeleteWebhook, callback?: Callback<T>): Promise<void | T> {
+  async deleteWebhook<T = unknown>(parameters: Parameters.DeleteWebhook, callback?: undefined): Promise<T>;
+  async deleteWebhook<T = unknown>(parameters: Parameters.DeleteWebhook, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/webhooks/${parameters.id}`,
       method: 'DELETE',
@@ -80,11 +80,11 @@ export class Webhooks {
 
   /**
    * Get a field on a Webhook */
-  async getWebhookField<T = any>(parameters: Parameters.GetWebhookField, callback: Callback<T>): Promise<void>;
+  async getWebhookField<T = unknown>(parameters: Parameters.GetWebhookField, callback: Callback<T>): Promise<void>;
   /**
    * Get a field on a Webhook */
-  async getWebhookField<T = any>(parameters: Parameters.GetWebhookField, callback?: undefined): Promise<T>;
-  async getWebhookField<T = any>(parameters: Parameters.GetWebhookField, callback?: Callback<T>): Promise<void | T> {
+  async getWebhookField<T = unknown>(parameters: Parameters.GetWebhookField, callback?: undefined): Promise<T>;
+  async getWebhookField<T = unknown>(parameters: Parameters.GetWebhookField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/webhooks/${parameters.id}/${parameters.field}`,
       method: 'GET',

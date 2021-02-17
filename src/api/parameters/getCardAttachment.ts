@@ -4,5 +4,5 @@ export interface GetCardAttachment {
   /** The ID of the Attachment */
   idAttachment: string;
   /** The Attachment fields to be included in the response. */
-  fields?: any[];
+  fields?: unknown[];
 }

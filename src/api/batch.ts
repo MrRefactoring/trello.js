@@ -8,12 +8,12 @@ export class Batch {
   /**
    * Make up to 10 GET requests in a single, batched API call.
    */
-  async getBatch<T = any>(parameters: Parameters.GetBatch, callback: Callback<T>): Promise<void>;
+  async getBatch<T = unknown>(parameters: Parameters.GetBatch, callback: Callback<T>): Promise<void>;
   /**
    * Make up to 10 GET requests in a single, batched API call.
    */
-  async getBatch<T = any>(parameters: Parameters.GetBatch, callback?: undefined): Promise<T>;
-  async getBatch<T = any>(parameters: Parameters.GetBatch, callback?: Callback<T>): Promise<void | T> {
+  async getBatch<T = unknown>(parameters: Parameters.GetBatch, callback?: undefined): Promise<T>;
+  async getBatch<T = unknown>(parameters: Parameters.GetBatch, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/batch',
       method: 'GET',

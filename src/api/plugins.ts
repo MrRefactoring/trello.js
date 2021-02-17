@@ -57,9 +57,9 @@ export class Plugins {
     return this.client.sendRequest(config, callback, { methodName: 'createPluginListing' });
   }
 
-  async getPluginComplianceMemberPrivacy<T = any>(parameters: Parameters.GetPluginComplianceMemberPrivacy, callback: Callback<T>): Promise<void>;
-  async getPluginComplianceMemberPrivacy<T = any>(parameters: Parameters.GetPluginComplianceMemberPrivacy, callback?: undefined): Promise<T>;
-  async getPluginComplianceMemberPrivacy<T = any>(parameters: Parameters.GetPluginComplianceMemberPrivacy, callback?: Callback<T>): Promise<void | T> {
+  async getPluginComplianceMemberPrivacy<T = unknown>(parameters: Parameters.GetPluginComplianceMemberPrivacy, callback: Callback<T>): Promise<void>;
+  async getPluginComplianceMemberPrivacy<T = unknown>(parameters: Parameters.GetPluginComplianceMemberPrivacy, callback?: undefined): Promise<T>;
+  async getPluginComplianceMemberPrivacy<T = unknown>(parameters: Parameters.GetPluginComplianceMemberPrivacy, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/plugins/${parameters.id}/compliance/memberPrivacy`,
       method: 'GET',

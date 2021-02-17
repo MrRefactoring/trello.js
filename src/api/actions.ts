@@ -8,11 +8,11 @@ export class Actions {
 
   /**
    * Get an Action */
-  async getAction<T = any>(parameters: Parameters.GetAction, callback: Callback<T>): Promise<void>;
+  async getAction<T = unknown>(parameters: Parameters.GetAction, callback: Callback<T>): Promise<void>;
   /**
    * Get an Action */
-  async getAction<T = any>(parameters: Parameters.GetAction, callback?: undefined): Promise<T>;
-  async getAction<T = any>(parameters: Parameters.GetAction, callback?: Callback<T>): Promise<void | T> {
+  async getAction<T = unknown>(parameters: Parameters.GetAction, callback?: undefined): Promise<T>;
+  async getAction<T = unknown>(parameters: Parameters.GetAction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}`,
       method: 'GET',
@@ -32,11 +32,11 @@ export class Actions {
 
   /**
    * Update a specific Action. Only comment actions can be updated. Used to edit the content of a comment. */
-  async updateAction<T = any>(parameters: Parameters.UpdateAction, callback: Callback<T>): Promise<void>;
+  async updateAction<T = unknown>(parameters: Parameters.UpdateAction, callback: Callback<T>): Promise<void>;
   /**
    * Update a specific Action. Only comment actions can be updated. Used to edit the content of a comment. */
-  async updateAction<T = any>(parameters: Parameters.UpdateAction, callback?: undefined): Promise<T>;
-  async updateAction<T = any>(parameters: Parameters.UpdateAction, callback?: Callback<T>): Promise<void | T> {
+  async updateAction<T = unknown>(parameters: Parameters.UpdateAction, callback?: undefined): Promise<T>;
+  async updateAction<T = unknown>(parameters: Parameters.UpdateAction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}`,
       method: 'PUT',
@@ -50,11 +50,11 @@ export class Actions {
 
   /**
    * Delete a specific action. Only comment actions can be deleted. */
-  async deleteAction<T = any>(parameters: Parameters.DeleteAction, callback: Callback<T>): Promise<void>;
+  async deleteAction<T = unknown>(parameters: Parameters.DeleteAction, callback: Callback<T>): Promise<void>;
   /**
    * Delete a specific action. Only comment actions can be deleted. */
-  async deleteAction<T = any>(parameters: Parameters.DeleteAction, callback?: undefined): Promise<T>;
-  async deleteAction<T = any>(parameters: Parameters.DeleteAction, callback?: Callback<T>): Promise<void | T> {
+  async deleteAction<T = unknown>(parameters: Parameters.DeleteAction, callback?: undefined): Promise<T>;
+  async deleteAction<T = unknown>(parameters: Parameters.DeleteAction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}`,
       method: 'DELETE',
@@ -188,11 +188,11 @@ export class Actions {
 
   /**
    * Update a comment action */
-  async updateActionText<T = any>(parameters: Parameters.UpdateActionText, callback: Callback<T>): Promise<void>;
+  async updateActionText<T = unknown>(parameters: Parameters.UpdateActionText, callback: Callback<T>): Promise<void>;
   /**
    * Update a comment action */
-  async updateActionText<T = any>(parameters: Parameters.UpdateActionText, callback?: undefined): Promise<T>;
-  async updateActionText<T = any>(parameters: Parameters.UpdateActionText, callback?: Callback<T>): Promise<void | T> {
+  async updateActionText<T = unknown>(parameters: Parameters.UpdateActionText, callback?: undefined): Promise<T>;
+  async updateActionText<T = unknown>(parameters: Parameters.UpdateActionText, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/text`,
       method: 'PUT',
@@ -206,11 +206,11 @@ export class Actions {
 
   /**
    * List reactions for an action */
-  async getActionReactions<T = any>(parameters: Parameters.GetActionReactions, callback: Callback<T>): Promise<void>;
+  async getActionReactions<T = unknown>(parameters: Parameters.GetActionReactions, callback: Callback<T>): Promise<void>;
   /**
    * List reactions for an action */
-  async getActionReactions<T = any>(parameters: Parameters.GetActionReactions, callback?: undefined): Promise<T>;
-  async getActionReactions<T = any>(parameters: Parameters.GetActionReactions, callback?: Callback<T>): Promise<void | T> {
+  async getActionReactions<T = unknown>(parameters: Parameters.GetActionReactions, callback?: undefined): Promise<T>;
+  async getActionReactions<T = unknown>(parameters: Parameters.GetActionReactions, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactions`,
       method: 'GET',
@@ -225,11 +225,11 @@ export class Actions {
 
   /**
    * Adds a new reaction to an action */
-  async addActionReaction<T = any>(parameters: Parameters.AddActionReaction, callback: Callback<T>): Promise<void>;
+  async addActionReaction<T = unknown>(parameters: Parameters.AddActionReaction, callback: Callback<T>): Promise<void>;
   /**
    * Adds a new reaction to an action */
-  async addActionReaction<T = any>(parameters: Parameters.AddActionReaction, callback?: undefined): Promise<T>;
-  async addActionReaction<T = any>(parameters: Parameters.AddActionReaction, callback?: Callback<T>): Promise<void | T> {
+  async addActionReaction<T = unknown>(parameters: Parameters.AddActionReaction, callback?: undefined): Promise<T>;
+  async addActionReaction<T = unknown>(parameters: Parameters.AddActionReaction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactions`,
       method: 'POST',
@@ -246,11 +246,11 @@ export class Actions {
 
   /**
    * Get information for a reaction */
-  async getActionReaction<T = any>(parameters: Parameters.GetActionReaction, callback: Callback<T>): Promise<void>;
+  async getActionReaction<T = unknown>(parameters: Parameters.GetActionReaction, callback: Callback<T>): Promise<void>;
   /**
    * Get information for a reaction */
-  async getActionReaction<T = any>(parameters: Parameters.GetActionReaction, callback?: undefined): Promise<T>;
-  async getActionReaction<T = any>(parameters: Parameters.GetActionReaction, callback?: Callback<T>): Promise<void | T> {
+  async getActionReaction<T = unknown>(parameters: Parameters.GetActionReaction, callback?: undefined): Promise<T>;
+  async getActionReaction<T = unknown>(parameters: Parameters.GetActionReaction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactions/${parameters.id}`,
       method: 'GET',
@@ -265,11 +265,11 @@ export class Actions {
 
   /**
    * Deletes a reaction */
-  async deleteActionReaction<T = any>(parameters: Parameters.DeleteActionReaction, callback: Callback<T>): Promise<void>;
+  async deleteActionReaction<T = unknown>(parameters: Parameters.DeleteActionReaction, callback: Callback<T>): Promise<void>;
   /**
    * Deletes a reaction */
-  async deleteActionReaction<T = any>(parameters: Parameters.DeleteActionReaction, callback?: undefined): Promise<T>;
-  async deleteActionReaction<T = any>(parameters: Parameters.DeleteActionReaction, callback?: Callback<T>): Promise<void | T> {
+  async deleteActionReaction<T = unknown>(parameters: Parameters.DeleteActionReaction, callback?: undefined): Promise<T>;
+  async deleteActionReaction<T = unknown>(parameters: Parameters.DeleteActionReaction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactions/${parameters.id}`,
       method: 'DELETE',
@@ -280,11 +280,11 @@ export class Actions {
 
   /**
    * List a summary of all reactions for an action */
-  async getActionReactionSummary<T = any>(parameters: Parameters.GetActionReactionSummary, callback: Callback<T>): Promise<void>;
+  async getActionReactionSummary<T = unknown>(parameters: Parameters.GetActionReactionSummary, callback: Callback<T>): Promise<void>;
   /**
    * List a summary of all reactions for an action */
-  async getActionReactionSummary<T = any>(parameters: Parameters.GetActionReactionSummary, callback?: undefined): Promise<T>;
-  async getActionReactionSummary<T = any>(parameters: Parameters.GetActionReactionSummary, callback?: Callback<T>): Promise<void | T> {
+  async getActionReactionSummary<T = unknown>(parameters: Parameters.GetActionReactionSummary, callback?: undefined): Promise<T>;
+  async getActionReactionSummary<T = unknown>(parameters: Parameters.GetActionReactionSummary, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactionsSummary`,
       method: 'GET',

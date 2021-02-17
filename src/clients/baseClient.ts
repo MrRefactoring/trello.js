@@ -11,9 +11,49 @@ export class BaseClient implements Client {
   constructor(private config: Config) {
     this.telemetryClient = new TelemetryClient(config.telemetry);
     this.instance = axios.create({
+      paramsSerializer: this.paramSerializer.bind(this),
       ...config.baseRequestConfig,
       baseURL: 'https://api.trello.com/1',
     });
+  }
+
+  protected paramSerializer(parameters: Record<string, any>): string {
+    const parts: string[] = [];
+
+    Object.entries(parameters).forEach(([key, value]) => {
+      if (value === null || typeof value === 'undefined') {
+        return undefined;
+      }
+
+      if (Array.isArray(value)) {
+        // eslint-disable-next-line no-param-reassign
+        value = value.join(',');
+      }
+
+      if (value instanceof Date) {
+        // eslint-disable-next-line no-param-reassign
+        value = value.toISOString();
+      } else if (value !== null && typeof value === 'object') {
+        // eslint-disable-next-line no-param-reassign
+        value = JSON.stringify(value);
+      }
+
+      parts.push(`${this.encode(key)}=${this.encode(value)}`);
+
+      return undefined;
+    });
+
+    return parts.join('&');
+  }
+
+  protected encode(value: string) {
+    return encodeURIComponent(value)
+      .replace(/%3A/gi, ':')
+      .replace(/%24/g, '$')
+      .replace(/%2C/gi, ',')
+      .replace(/%20/g, '+')
+      .replace(/%5B/gi, '[')
+      .replace(/%5D/gi, ']');
   }
 
   async sendRequest<T>(requestConfig: RequestConfig, callback?: Callback<T> | undefined, telemetryData?: Partial<Telemetry>): Promise<T>;

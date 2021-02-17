@@ -24,6 +24,7 @@ Usability, consistency, and performance are key focuses of trello.js, and it als
 - [Usage](#usage)
   - [Key and token pair issuing](#key-and-token-pair-issuing)
   - [Client creation and first request](#client-creation-first-request-and-using-algorithm)
+- [Decrease Webpack bundle size](#decrease-webpack-bundle-size)
 - [License](#license)
 
 ## Installation
@@ -167,11 +168,23 @@ Available groups:
 - [tokens](https://developer.atlassian.com/cloud/trello/rest/api-group-tokens/#api-group-tokens)
 - [webhooks](https://developer.atlassian.com/cloud/trello/rest/api-group-webhooks/#api-group-webhooks)
 
-The name of the methods is the name of the endpoint in the group without spaces and in camelCase.
+The name of the methods is the name of the endpoint in the group without spaces and in `camelCase`.
 
-The parameters depend on the specific endpoint. For more information, see http://localhost TODO
+The parameters depend on the specific endpoint. For more information, [see here](https://mrrefactoring.github.io/trello.js/).
 
 ## Decrease Webpack bundle size
+
+If you use Webpack and need to reduce the size of the assembly, you can create your client with only the groups you use.
+
+```typescript
+import { BaseClient } from 'trello.js';
+import { Boards, Members } from 'trello.js/out/api';
+
+export class CustomTrelloClient extends BaseClient {
+  boards = new Boards(this);
+  members = new Members(this);
+}
+```
 
 ## License
 
