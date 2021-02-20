@@ -64,8 +64,8 @@ The following tracking parameters can be configured:
 import { Config } from 'trello.js';
 
 const config: Config = {
-  apiKey: 'YOUR_API_KEY',
-  apiToken: 'YOUR_API_TOKEN',
+  key: 'YOUR_API_KEY',
+  token: 'YOUR_API_TOKEN',
   telemetry: {
     allowedToPassAuthenticationStatus: false,  // true by default
     allowedToPassRequestStatusCode: true,  // true by default
@@ -83,8 +83,8 @@ If you want to disable telemetry, set the `telemetry` field to `false`.
 import { Config } from 'trello.js';
 
 const config: Config = {
-  apiKey: 'YOUR_API_KEY',
-  apiToken: 'YOUR_API_TOKEN',
+  key: 'YOUR_API_KEY',
+  token: 'YOUR_API_TOKEN',
   telemetry: false, // Telemetry will not be collected
 };
 ```
@@ -104,8 +104,8 @@ Take the key and token obtained in the previous step and pass them to `TrelloCli
 import { TrelloClient } from 'trello.js';
 
 const trelloClient = new TrelloClient({
-  apiKey: 'YOUR_API_KEY',
-  apiToken: 'YOUR_API_TOKEN',
+  key: 'YOUR_API_KEY',
+  token: 'YOUR_API_TOKEN',
 });
 
 async function main() {

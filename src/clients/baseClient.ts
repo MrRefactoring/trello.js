@@ -64,13 +64,13 @@ export class BaseClient implements Client {
       ...rawRequestConfig,
       params: {
         ...rawRequestConfig.params,
-        key: this.config.apiKey,
-        token: this.config.apiToken,
+        key: this.config.key,
+        token: this.config.token,
       },
     };
 
     const telemetry: Telemetry = {
-      authenticated: !!(this.config.apiKey && this.config.apiToken),
+      authenticated: !!(this.config.key && this.config.token),
       bodyExists: !!requestConfig.data,
       callbackUsed: !!callback,
       libVersion: '1.0.0',

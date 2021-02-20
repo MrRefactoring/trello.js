@@ -2,8 +2,8 @@ import { AxiosError, AxiosRequestConfig } from 'axios';
 import { TelemetryConfig } from 'telemetry.trello.js';
 
 export interface Config {
-  apiKey: string;
-  apiToken: string;
+  key: string;
+  token: string;
   baseRequestConfig?: Config.BaseRequestConfig;
   middlewares?: Config.Middlewares;
   telemetry?: Config.Telemetry;

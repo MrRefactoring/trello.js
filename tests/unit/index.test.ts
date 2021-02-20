@@ -19,13 +19,13 @@ describe('Facade', () => {
   });
 
   it('should return Client', () => {
-    const client: Client = new BaseClient({ apiToken: '', apiKey: '' });
+    const client: Client = new BaseClient({ token: '', key: '' });
 
     expect(client).toBeDefined();
   });
 
   it('should return Config', () => {
-    const config: Config = { apiKey: '', apiToken: '' };
+    const config: Config = { key: '', token: '' };
 
     expect(config).toBeDefined();
   });
