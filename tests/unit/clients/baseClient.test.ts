@@ -3,8 +3,8 @@ import { BaseClient } from '../../../src';
 describe('BaseClient tests', () => {
   it('should return correct serialized parameters', () => {
     const baseClient = new BaseClient({
-      apiKey: '',
-      apiToken: '',
+      key: '',
+      token: '',
     });
 
     // @ts-ignore

@@ -8,8 +8,8 @@ describe('Tests for the code presented in the Readme', () => {
     const trelloTestBoardDescription = 'Automatically generated board for system tests for Trello.JS lib';
 
     const trelloClient = new TrelloClient({
-      apiKey: TRELLO_API_KEY,
-      apiToken: TRELLO_API_TOKEN,
+      key: TRELLO_API_KEY,
+      token: TRELLO_API_TOKEN,
     });
 
     const boards = await trelloClient.members.getMemberBoards({ id: 'me' });
