@@ -7,7 +7,7 @@ export class Notifications {
   }
 
   async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback: Callback<T>): Promise<void>;
-  async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback?: undefined): Promise<T>;
+  async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback?: never): Promise<T>;
   async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}`,
@@ -38,7 +38,7 @@ export class Notifications {
   async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback: Callback<T>): Promise<void>;
   /**
    * Update the read status of a notification */
-  async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback?: undefined): Promise<T>;
+  async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback?: never): Promise<T>;
   async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}`,
@@ -56,7 +56,7 @@ export class Notifications {
   async getNotificationField<T = unknown>(parameters: Parameters.GetNotificationField, callback: Callback<T>): Promise<void>;
   /**
    * Get a specific property of a notification */
-  async getNotificationField<T = unknown>(parameters: Parameters.GetNotificationField, callback?: undefined): Promise<T>;
+  async getNotificationField<T = unknown>(parameters: Parameters.GetNotificationField, callback?: never): Promise<T>;
   async getNotificationField<T = unknown>(parameters: Parameters.GetNotificationField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}/${parameters.field}`,
@@ -71,7 +71,7 @@ export class Notifications {
   async markAllNotificationsAsRead<T = unknown>(parameters?: Parameters.MarkAllNotificationsAsRead, callback?: Callback<T>): Promise<void>;
   /**
    * Mark all notifications as read */
-  async markAllNotificationsAsRead<T = unknown>(parameters?: Parameters.MarkAllNotificationsAsRead, callback?: undefined): Promise<T>;
+  async markAllNotificationsAsRead<T = unknown>(parameters?: Parameters.MarkAllNotificationsAsRead, callback?: never): Promise<T>;
   async markAllNotificationsAsRead<T = unknown>(parameters?: Parameters.MarkAllNotificationsAsRead, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/notifications/all/read',
@@ -90,7 +90,7 @@ export class Notifications {
   async updateNotificationReadStatus<T = unknown>(parameters: Parameters.UpdateNotificationReadStatus, callback: Callback<T>): Promise<void>;
   /**
    * Update Notification's read status */
-  async updateNotificationReadStatus<T = unknown>(parameters: Parameters.UpdateNotificationReadStatus, callback?: undefined): Promise<T>;
+  async updateNotificationReadStatus<T = unknown>(parameters: Parameters.UpdateNotificationReadStatus, callback?: never): Promise<T>;
   async updateNotificationReadStatus<T = unknown>(parameters: Parameters.UpdateNotificationReadStatus, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}/unread`,
@@ -108,7 +108,7 @@ export class Notifications {
   async getNotificationBoard<T = unknown>(parameters: Parameters.GetNotificationBoard, callback: Callback<T>): Promise<void>;
   /**
    * Get the board a notification is associated with */
-  async getNotificationBoard<T = unknown>(parameters: Parameters.GetNotificationBoard, callback?: undefined): Promise<T>;
+  async getNotificationBoard<T = unknown>(parameters: Parameters.GetNotificationBoard, callback?: never): Promise<T>;
   async getNotificationBoard<T = unknown>(parameters: Parameters.GetNotificationBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}/board`,
@@ -126,7 +126,7 @@ export class Notifications {
   async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback: Callback<T>): Promise<void>;
   /**
    * Get the card a notification is associated with */
-  async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback?: undefined): Promise<T>;
+  async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback?: never): Promise<T>;
   async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}/card`,
@@ -144,7 +144,7 @@ export class Notifications {
   async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback: Callback<T>): Promise<void>;
   /**
    * Get the list a notification is associated with */
-  async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback?: undefined): Promise<T>;
+  async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback?: never): Promise<T>;
   async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}/list`,
@@ -162,7 +162,7 @@ export class Notifications {
   async getNotificationMember<T = unknown>(parameters: Parameters.GetNotificationMember, callback: Callback<T>): Promise<void>;
   /**
    * Get the member (not the creator) a notification is about */
-  async getNotificationMember<T = unknown>(parameters: Parameters.GetNotificationMember, callback?: undefined): Promise<T>;
+  async getNotificationMember<T = unknown>(parameters: Parameters.GetNotificationMember, callback?: never): Promise<T>;
   async getNotificationMember<T = unknown>(parameters: Parameters.GetNotificationMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}/member`,
@@ -180,7 +180,7 @@ export class Notifications {
   async getNotificationMemberCreator<T = unknown>(parameters: Parameters.GetNotificationMemberCreator, callback: Callback<T>): Promise<void>;
   /**
    * Get the member who created the notification */
-  async getNotificationMemberCreator<T = unknown>(parameters: Parameters.GetNotificationMemberCreator, callback?: undefined): Promise<T>;
+  async getNotificationMemberCreator<T = unknown>(parameters: Parameters.GetNotificationMemberCreator, callback?: never): Promise<T>;
   async getNotificationMemberCreator<T = unknown>(parameters: Parameters.GetNotificationMemberCreator, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}/memberCreator`,
@@ -198,7 +198,7 @@ export class Notifications {
   async getNotificationOrganization<T = unknown>(parameters: Parameters.GetNotificationOrganization, callback: Callback<T>): Promise<void>;
   /**
    * Get the organization a notification is associated with */
-  async getNotificationOrganization<T = unknown>(parameters: Parameters.GetNotificationOrganization, callback?: undefined): Promise<T>;
+  async getNotificationOrganization<T = unknown>(parameters: Parameters.GetNotificationOrganization, callback?: never): Promise<T>;
   async getNotificationOrganization<T = unknown>(parameters: Parameters.GetNotificationOrganization, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/notifications/${parameters.id}/organization`,

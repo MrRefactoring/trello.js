@@ -12,7 +12,7 @@ export class Tokens {
   async getToken<T = Models.Token>(parameters: Parameters.GetToken, callback: Callback<T>): Promise<void>;
   /**
    * Retrieve information about a token. */
-  async getToken<T = Models.Token>(parameters: Parameters.GetToken, callback?: undefined): Promise<T>;
+  async getToken<T = Models.Token>(parameters: Parameters.GetToken, callback?: never): Promise<T>;
   async getToken<T = Models.Token>(parameters: Parameters.GetToken, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/tokens/${parameters.token}`,
@@ -31,7 +31,7 @@ export class Tokens {
   async getTokenMember<T = Models.Member>(parameters: Parameters.GetTokenMember, callback: Callback<T>): Promise<void>;
   /**
    * Retrieve information about a token's owner by token. */
-  async getTokenMember<T = Models.Member>(parameters: Parameters.GetTokenMember, callback?: undefined): Promise<T>;
+  async getTokenMember<T = Models.Member>(parameters: Parameters.GetTokenMember, callback?: never): Promise<T>;
   async getTokenMember<T = Models.Member>(parameters: Parameters.GetTokenMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/tokens/${parameters.token}/member`,
@@ -49,7 +49,7 @@ export class Tokens {
   async getTokenWebhooks<T = Array<Models.Webhook>>(parameters: Parameters.GetTokenWebhooks, callback: Callback<T>): Promise<void>;
   /**
    * Retrieve all webhooks created with a Token. */
-  async getTokenWebhooks<T = Array<Models.Webhook>>(parameters: Parameters.GetTokenWebhooks, callback?: undefined): Promise<T>;
+  async getTokenWebhooks<T = Array<Models.Webhook>>(parameters: Parameters.GetTokenWebhooks, callback?: never): Promise<T>;
   async getTokenWebhooks<T = Array<Models.Webhook>>(parameters: Parameters.GetTokenWebhooks, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/tokens/${parameters.token}/webhooks`,
@@ -64,7 +64,7 @@ export class Tokens {
   async createTokenWebhooks<T = Models.Webhook>(parameters: Parameters.CreateTokenWebhooks, callback: Callback<T>): Promise<void>;
   /**
    * Create a new webhook for a Token. */
-  async createTokenWebhooks<T = Models.Webhook>(parameters: Parameters.CreateTokenWebhooks, callback?: undefined): Promise<T>;
+  async createTokenWebhooks<T = Models.Webhook>(parameters: Parameters.CreateTokenWebhooks, callback?: never): Promise<T>;
   async createTokenWebhooks<T = Models.Webhook>(parameters: Parameters.CreateTokenWebhooks, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/tokens/${parameters.token}/webhooks`,
@@ -84,7 +84,7 @@ export class Tokens {
   async getTokenWebhook<T = Models.Webhook>(parameters: Parameters.GetTokenWebhook, callback: Callback<T>): Promise<void>;
   /**
    * Retrieve a webhook created with a Token. */
-  async getTokenWebhook<T = Models.Webhook>(parameters: Parameters.GetTokenWebhook, callback?: undefined): Promise<T>;
+  async getTokenWebhook<T = Models.Webhook>(parameters: Parameters.GetTokenWebhook, callback?: never): Promise<T>;
   async getTokenWebhook<T = Models.Webhook>(parameters: Parameters.GetTokenWebhook, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
@@ -99,7 +99,7 @@ export class Tokens {
   async updateTokenWebhook<T = unknown>(parameters: Parameters.UpdateTokenWebhook, callback: Callback<T>): Promise<void>;
   /**
    * Update a Webhook created by Token */
-  async updateTokenWebhook<T = unknown>(parameters: Parameters.UpdateTokenWebhook, callback?: undefined): Promise<T>;
+  async updateTokenWebhook<T = unknown>(parameters: Parameters.UpdateTokenWebhook, callback?: never): Promise<T>;
   async updateTokenWebhook<T = unknown>(parameters: Parameters.UpdateTokenWebhook, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
@@ -119,7 +119,7 @@ export class Tokens {
   async deleteTokenWebhook<T = unknown>(parameters: Parameters.DeleteTokenWebhook, callback: Callback<T>): Promise<void>;
   /**
    * Delete a webhook created with given token. */
-  async deleteTokenWebhook<T = unknown>(parameters: Parameters.DeleteTokenWebhook, callback?: undefined): Promise<T>;
+  async deleteTokenWebhook<T = unknown>(parameters: Parameters.DeleteTokenWebhook, callback?: never): Promise<T>;
   async deleteTokenWebhook<T = unknown>(parameters: Parameters.DeleteTokenWebhook, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
