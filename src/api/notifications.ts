@@ -3,7 +3,8 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Notifications {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback: Callback<T>): Promise<void>;
   async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback?: undefined): Promise<T>;

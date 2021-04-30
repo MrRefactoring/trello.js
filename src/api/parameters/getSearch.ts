@@ -31,7 +31,7 @@ export interface GetSearch {
   cardAttachments?: string;
   /** all or a comma-separated list of billableMemberCount, desc, descData, displayName, idBoards, invitations, invited, logoHash, memberships, name, powerUps, prefs, premiumFeatures, products, url, website */
   organizationFields?: string;
-  /** The maximum number of teams to return. Maximum 1000 */
+  /** The maximum number of Workspaces to return. Maximum 1000 */
   organizationsLimit?: number;
   /** all or a comma-separated list of: avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials, memberType, products, status, url, username */
   memberFields?: string;

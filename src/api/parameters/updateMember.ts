@@ -10,8 +10,28 @@ export interface UpdateMember {
   bio?: string;
   /** One of: `gravatar`, `none`, `upload` */
   avatarSource?: string;
+
+  preferences?: {
+    colorBlind?: boolean;
+    locale?: string;
+    /** `-1` for disabled, `1`, or `60` */
+    minutesBetweenSummaries?: number;
+  };
+
+  /**
+   * @deprecated Use `preferences.colorBlind`.
+   */
   colorBlind?: boolean;
+
+  /**
+   * @deprecated `preferences.locale`.
+   */
   locale?: string;
-  /** `-1` for disabled, `1`, or `60` */
+
+  /**
+   * @deprecated Use `preferences.minutesBetweenSummaries`.
+   *
+   * `-1` for disabled, `1`, or `60`
+   */
   minutesBetweenSummaries?: number;
 }

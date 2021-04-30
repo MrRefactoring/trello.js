@@ -3,7 +3,8 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Lists {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   /**
    * Get information about a List */

@@ -44,7 +44,7 @@ export interface Member {
     name?: string;
     count?: string;
     lastDismissed?: string;
-    _id?: TrelloID;
+    Id?: TrelloID;
   };
   oneTimeMessagesDismissed?: string[];
   prefs?: MemberPrefs;

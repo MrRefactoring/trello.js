@@ -3,7 +3,8 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Checklists {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   async createChecklist<T = unknown>(parameters: Parameters.CreateChecklist, callback: Callback<T>): Promise<void>;
   async createChecklist<T = unknown>(parameters: Parameters.CreateChecklist, callback?: undefined): Promise<T>;

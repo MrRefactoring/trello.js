@@ -1,17 +1,19 @@
+import * as Models from './models';
 import * as Parameters from './parameters';
 import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Search {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   /**
    * Find what you're looking for in Trello */
-  async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback: Callback<T>): Promise<void>;
+  async getSearch<T = Array<Models.Member | Models.Card | Models.Board | Models.Organization>>(parameters: Parameters.GetSearch, callback: Callback<T>): Promise<void>;
   /**
    * Find what you're looking for in Trello */
-  async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback?: undefined): Promise<T>;
-  async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback?: Callback<T>): Promise<void | T> {
+  async getSearch<T = Array<Models.Member | Models.Card | Models.Board | Models.Organization>>(parameters: Parameters.GetSearch, callback?: never): Promise<T>;
+  async getSearch<T = Array<Models.Member | Models.Card | Models.Board | Models.Organization>>(parameters: Parameters.GetSearch, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/search',
       method: 'GET',
@@ -44,11 +46,11 @@ export class Search {
 
   /**
    * Search for Trello members. */
-  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback: Callback<T>): Promise<void>;
+  async getSearchMembers<T = Array<Models.Member>>(parameters: Parameters.GetSearchMembers, callback: Callback<T>): Promise<void>;
   /**
    * Search for Trello members. */
-  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback?: undefined): Promise<T>;
-  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback?: Callback<T>): Promise<void | T> {
+  async getSearchMembers<T = Array<Models.Member>>(parameters: Parameters.GetSearchMembers, callback?: never): Promise<T>;
+  async getSearchMembers<T = Array<Models.Member>>(parameters: Parameters.GetSearchMembers, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/search/members/',
       method: 'GET',

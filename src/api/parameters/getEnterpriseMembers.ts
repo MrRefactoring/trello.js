@@ -15,8 +15,28 @@ export interface GetEnterpriseMembers {
   startIndex?: number;
   /** [SCIM-style filter](https://developer.atlassian.com/cloud/trello/scim/). */
   count?: string;
-  /** Any valid value that the [nested organization field resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+
+  organization?: {
+    /** Any valid value that the [nested organization field resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+    fields?: string;
+  };
+
+  board?: {
+    /** Any valid value that the [nested board resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+    fields?: string;
+  };
+
+  /**
+   * @deprecated Use `organization.fields`.
+   *
+   * Any valid value that the [nested organization field resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts.
+   */
   organizationFields?: string;
-  /** Any valid value that the [nested board resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+
+  /**
+   * @deprecated Use `board.fields`.
+   *
+   * Any valid value that the [nested board resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts.
+   */
   boardFields?: string;
 }

@@ -9,20 +9,82 @@ export interface UpdateOrganization {
   desc?: string;
   /** A URL starting with `http://`, `https://`, or `null` */
   website?: string;
-  /** The Google Apps domain to link this org to. */
+
+  preferences?: {
+    /** The Google Apps domain to link this org to. */
+    associatedDomain?: string;
+    /** Whether non-team members can be added to boards inside the team */
+    externalMembersDisabled?: boolean;
+    /** `1` or `2` */
+    googleAppsVersion?: number;
+    /** An email address with optional wildcard characters. (E.g. `subdomain.*.trello.com`) */
+    orgInviteRestrict?: string;
+    /** Whether the team page is publicly visible. One of: `private`, `public` */
+    permissionLevel?: 'private' | 'public';
+
+    boardVisibilityRestrict?: {
+      /** Who on the team can make team visible boards. One of `admin`, `none`, `org` */
+      org?: 'admin' | 'none' | 'org';
+      /** Who can make private boards. One of: `admin`, `none`, `org` */
+      private?: 'admin' | 'none' | 'org';
+      /** Who on the team can make public boards. One of: `admin`, `none`, `org` */
+      public?: 'admin' | 'none' | 'org';
+    };
+  };
+
+  /**
+   * @deprecated Use `preferences.associatedDomain`.
+   *
+   * The Google Apps domain to link this org to.
+   */
   associatedDomain?: string;
-  /** Whether non-team members can be added to boards inside the team */
+
+  /**
+   * @deprecated Use `preferences.externalMembersDisabled`.
+   *
+   * Whether non-team members can be added to boards inside the team.
+   */
   externalMembersDisabled?: boolean;
-  /** `1` or `2` */
+
+  /**
+   * @deprecated Use `preferences.googleAppsVersion`.
+   *
+   * `1` or `2`
+   */
   googleAppsVersion?: number;
-  /** Who on the team can make team visible boards. One of `admin`, `none`, `org` */
+
+  /**
+   * @deprecated Use `preferences.boardVisibilityRestrict.org`.
+   *
+   * Who on the team can make team visible boards. One of `admin`, `none`, `org`
+   */
   org?: string;
-  /** Who can make private boards. One of: `admin`, `none`, `org` */
+
+  /**
+   * @deprecated Use `preferences.boardVisibilityRestrict.private`.
+   *
+   * Who can make private boards. One of: `admin`, `none`, `org`
+   */
   private?: string;
-  /** Who on the team can make public boards. One of: `admin`, `none`, `org` */
+
+  /**
+   * @deprecated Use `preferences.boardVisibilityRestrict.public`.
+   *
+   * Who on the team can make public boards. One of: `admin`, `none`, `org`
+   */
   public?: string;
-  /** An email address with optional wildcard characters. (E.g. `subdomain.*.trello.com`) */
+
+  /**
+   * @deprecated Use `preferences.orgInviteRestrict`.
+   *
+   * An email address with optional wildcard characters. (E.g. `subdomain.*.trello.com`)
+   */
   orgInviteRestrict?: string;
-  /** Whether the team page is publicly visible. One of: `private`, `public` */
+
+  /**
+   * @deprecated Use `preferences.permissionLevel`.
+   *
+   * Whether the team page is publicly visible. One of: `private`, `public`
+   */
   permissionLevel?: string;
 }

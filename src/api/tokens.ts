@@ -4,7 +4,8 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Tokens {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   /**
    * Retrieve information about a token. */
@@ -45,11 +46,11 @@ export class Tokens {
 
   /**
    * Retrieve all webhooks created with a Token. */
-  async getTokenWebhooks<T = unknown>(parameters: Parameters.GetTokenWebhooks, callback: Callback<T>): Promise<void>;
+  async getTokenWebhooks<T = Array<Models.Webhook>>(parameters: Parameters.GetTokenWebhooks, callback: Callback<T>): Promise<void>;
   /**
    * Retrieve all webhooks created with a Token. */
-  async getTokenWebhooks<T = unknown>(parameters: Parameters.GetTokenWebhooks, callback?: undefined): Promise<T>;
-  async getTokenWebhooks<T = unknown>(parameters: Parameters.GetTokenWebhooks, callback?: Callback<T>): Promise<void | T> {
+  async getTokenWebhooks<T = Array<Models.Webhook>>(parameters: Parameters.GetTokenWebhooks, callback?: undefined): Promise<T>;
+  async getTokenWebhooks<T = Array<Models.Webhook>>(parameters: Parameters.GetTokenWebhooks, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/tokens/${parameters.token}/webhooks`,
       method: 'GET',
@@ -133,7 +134,7 @@ export class Tokens {
   async deleteToken<T = unknown>(parameters: Parameters.DeleteToken, callback: Callback<T>): Promise<void>;
   /**
    * Delete a token. */
-  async deleteToken<T = unknown>(parameters: Parameters.DeleteToken, callback?: undefined): Promise<T>;
+  async deleteToken<T = unknown>(parameters: Parameters.DeleteToken, callback?: never): Promise<T>;
   async deleteToken<T = unknown>(parameters: Parameters.DeleteToken, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/tokens/${parameters.token}/`,

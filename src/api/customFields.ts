@@ -4,7 +4,8 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class CustomFields {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   /**
    * Create a new Custom Field on a board. */
@@ -23,7 +24,7 @@ export class CustomFields {
         type: parameters?.type,
         options: parameters?.options,
         pos: parameters?.pos,
-        display_cardFront: parameters?.displayCardFront,
+        display_cardFront: parameters?.displayCardFront || parameters?.display?.cardFront,
       },
     };
 
@@ -54,7 +55,7 @@ export class CustomFields {
       data: {
         name: parameters.name,
         pos: parameters.pos,
-        'display/cardFront': parameters.dispalyCardFront,
+        'display/cardFront': parameters.dispalyCardFront || parameters.display?.cardFront,
       },
     };
 

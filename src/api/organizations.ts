@@ -4,13 +4,14 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Organizations {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   /**
-   * Create a new team */
+   * Create a new Workspace */
   async createOrganization<T = unknown>(parameters: Parameters.CreateOrganization, callback: Callback<T>): Promise<void>;
   /**
-   * Create a new team */
+   * Create a new Workspace */
   async createOrganization<T = unknown>(parameters: Parameters.CreateOrganization, callback?: undefined): Promise<T>;
   async createOrganization<T = unknown>(parameters: Parameters.CreateOrganization, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -53,14 +54,14 @@ export class Organizations {
         displayName: parameters.displayName,
         desc: parameters.desc,
         website: parameters.website,
-        'prefs/associatedDomain': parameters.associatedDomain,
-        'prefs/externalMembersDisabled': parameters.externalMembersDisabled,
-        'prefs/googleAppsVersion': parameters.googleAppsVersion,
-        'prefs/boardVisibilityRestrict/org': parameters.org,
-        'prefs/boardVisibilityRestrict/private': parameters.private,
-        'prefs/boardVisibilityRestrict/public': parameters.public,
-        'prefs/orgInviteRestrict': parameters.orgInviteRestrict,
-        'prefs/permissionLevel': parameters.permissionLevel,
+        'prefs/associatedDomain': parameters.associatedDomain || parameters.preferences?.associatedDomain,
+        'prefs/externalMembersDisabled': parameters.externalMembersDisabled || parameters.preferences?.externalMembersDisabled,
+        'prefs/googleAppsVersion': parameters.googleAppsVersion || parameters.preferences?.googleAppsVersion,
+        'prefs/boardVisibilityRestrict/org': parameters.org || parameters.preferences?.boardVisibilityRestrict?.org,
+        'prefs/boardVisibilityRestrict/private': parameters.private || parameters.preferences?.boardVisibilityRestrict?.private,
+        'prefs/boardVisibilityRestrict/public': parameters.public || parameters.preferences?.boardVisibilityRestrict?.public,
+        'prefs/orgInviteRestrict': parameters.orgInviteRestrict || parameters.preferences?.orgInviteRestrict,
+        'prefs/permissionLevel': parameters.permissionLevel || parameters.preferences?.permissionLevel,
       },
     };
 
@@ -94,12 +95,12 @@ export class Organizations {
   }
 
   /**
-   * List the actions on a team */
-  async getOrganizationActions<T = unknown>(parameters: Parameters.GetOrganizationActions, callback: Callback<T>): Promise<void>;
+   * List the actions on a Workspace */
+  async getOrganizationActions<T = Array<Models.Action>>(parameters: Parameters.GetOrganizationActions, callback: Callback<T>): Promise<void>;
   /**
-   * List the actions on a team */
-  async getOrganizationActions<T = unknown>(parameters: Parameters.GetOrganizationActions, callback?: undefined): Promise<T>;
-  async getOrganizationActions<T = unknown>(parameters: Parameters.GetOrganizationActions, callback?: Callback<T>): Promise<void | T> {
+   * List the actions on a Workspace */
+  async getOrganizationActions<T = Array<Models.Action>>(parameters: Parameters.GetOrganizationActions, callback?: undefined): Promise<T>;
+  async getOrganizationActions<T = Array<Models.Action>>(parameters: Parameters.GetOrganizationActions, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/organizations/${parameters.id}/actions`,
       method: 'GET',
@@ -109,12 +110,12 @@ export class Organizations {
   }
 
   /**
-   * List the boards in a team */
-  async getOrganizationBoards<T = unknown>(parameters: Parameters.GetOrganizationBoards, callback: Callback<T>): Promise<void>;
+   * List the boards in a Workspace */
+  async getOrganizationBoards<T = Array<Models.Board>>(parameters: Parameters.GetOrganizationBoards, callback: Callback<T>): Promise<void>;
   /**
-   * List the boards in a team */
-  async getOrganizationBoards<T = unknown>(parameters: Parameters.GetOrganizationBoards, callback?: undefined): Promise<T>;
-  async getOrganizationBoards<T = unknown>(parameters: Parameters.GetOrganizationBoards, callback?: Callback<T>): Promise<void | T> {
+   * List the boards in a Workspace */
+  async getOrganizationBoards<T = Array<Models.Board>>(parameters: Parameters.GetOrganizationBoards, callback?: undefined): Promise<T>;
+  async getOrganizationBoards<T = Array<Models.Board>>(parameters: Parameters.GetOrganizationBoards, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/organizations/${parameters.id}/boards`,
       method: 'GET',
@@ -129,11 +130,11 @@ export class Organizations {
 
   /**
    * Retrieve the exports that exist for the given organization */
-  async getOrganizationExports<T = unknown>(parameters: Parameters.GetOrganizationExports, callback: Callback<T>): Promise<void>;
+  async getOrganizationExports<T = Array<Models.Export>>(parameters: Parameters.GetOrganizationExports, callback: Callback<T>): Promise<void>;
   /**
    * Retrieve the exports that exist for the given organization */
-  async getOrganizationExports<T = unknown>(parameters: Parameters.GetOrganizationExports, callback?: undefined): Promise<T>;
-  async getOrganizationExports<T = unknown>(parameters: Parameters.GetOrganizationExports, callback?: Callback<T>): Promise<void | T> {
+  async getOrganizationExports<T = Array<Models.Export>>(parameters: Parameters.GetOrganizationExports, callback?: undefined): Promise<T>;
+  async getOrganizationExports<T = Array<Models.Export>>(parameters: Parameters.GetOrganizationExports, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/organizations/${parameters.id}/exports`,
       method: 'GET',
@@ -161,12 +162,12 @@ export class Organizations {
   }
 
   /**
-   * List the members in a team */
-  async getOrganizationMembers<T = unknown>(parameters: Parameters.GetOrganizationMembers, callback: Callback<T>): Promise<void>;
+   * List the members in a Workspace */
+  async getOrganizationMembers<T = Array<Models.Member>>(parameters: Parameters.GetOrganizationMembers, callback: Callback<T>): Promise<void>;
   /**
-   * List the members in a team */
-  async getOrganizationMembers<T = unknown>(parameters: Parameters.GetOrganizationMembers, callback?: undefined): Promise<T>;
-  async getOrganizationMembers<T = unknown>(parameters: Parameters.GetOrganizationMembers, callback?: Callback<T>): Promise<void | T> {
+   * List the members in a Workspace */
+  async getOrganizationMembers<T = Array<Models.Member>>(parameters: Parameters.GetOrganizationMembers, callback?: undefined): Promise<T>;
+  async getOrganizationMembers<T = Array<Models.Member>>(parameters: Parameters.GetOrganizationMembers, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/organizations/${parameters.id}/members`,
       method: 'GET',
@@ -192,12 +193,12 @@ export class Organizations {
   }
 
   /**
-   * List the memberships of a team */
-  async getOrganizationMemberships<T = unknown>(parameters: Parameters.GetOrganizationMemberships, callback: Callback<T>): Promise<void>;
+   * List the memberships of a Workspace */
+  async getOrganizationMemberships<T = Array<Models.Memberships>>(parameters: Parameters.GetOrganizationMemberships, callback: Callback<T>): Promise<void>;
   /**
-   * List the memberships of a team */
-  async getOrganizationMemberships<T = unknown>(parameters: Parameters.GetOrganizationMemberships, callback?: undefined): Promise<T>;
-  async getOrganizationMemberships<T = unknown>(parameters: Parameters.GetOrganizationMemberships, callback?: Callback<T>): Promise<void | T> {
+   * List the memberships of a Workspace */
+  async getOrganizationMemberships<T = Array<Models.Memberships>>(parameters: Parameters.GetOrganizationMemberships, callback?: undefined): Promise<T>;
+  async getOrganizationMemberships<T = Array<Models.Memberships>>(parameters: Parameters.GetOrganizationMemberships, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/organizations/${parameters.id}/memberships`,
       method: 'GET',
@@ -229,12 +230,12 @@ export class Organizations {
   }
 
   /**
-   * Get organization scoped pluginData on this team */
-  async getOrganizationPluginData<T = unknown>(parameters: Parameters.GetOrganizationPluginData, callback: Callback<T>): Promise<void>;
+   * Get organization scoped pluginData on this Workspace */
+  async getOrganizationPluginData<T = Array<Models.PluginData>>(parameters: Parameters.GetOrganizationPluginData, callback: Callback<T>): Promise<void>;
   /**
-   * Get organization scoped pluginData on this team */
-  async getOrganizationPluginData<T = unknown>(parameters: Parameters.GetOrganizationPluginData, callback?: undefined): Promise<T>;
-  async getOrganizationPluginData<T = unknown>(parameters: Parameters.GetOrganizationPluginData, callback?: Callback<T>): Promise<void | T> {
+   * Get organization scoped pluginData on this Workspace */
+  async getOrganizationPluginData<T = Array<Models.PluginData>>(parameters: Parameters.GetOrganizationPluginData, callback?: undefined): Promise<T>;
+  async getOrganizationPluginData<T = Array<Models.PluginData>>(parameters: Parameters.GetOrganizationPluginData, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/organizations/${parameters.id}/pluginData`,
       method: 'GET',
@@ -245,11 +246,11 @@ export class Organizations {
 
   /**
    * List the organization's collections */
-  async getOrganizationTags<T = unknown>(parameters: Parameters.GetOrganizationTags, callback: Callback<T>): Promise<void>;
+  async getOrganizationTags<T = Array<Models.Tag>>(parameters: Parameters.GetOrganizationTags, callback: Callback<T>): Promise<void>;
   /**
    * List the organization's collections */
-  async getOrganizationTags<T = unknown>(parameters: Parameters.GetOrganizationTags, callback?: undefined): Promise<T>;
-  async getOrganizationTags<T = unknown>(parameters: Parameters.GetOrganizationTags, callback?: Callback<T>): Promise<void | T> {
+  async getOrganizationTags<T = Array<Models.Tag>>(parameters: Parameters.GetOrganizationTags, callback?: undefined): Promise<T>;
+  async getOrganizationTags<T = Array<Models.Tag>>(parameters: Parameters.GetOrganizationTags, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/organizations/${parameters.id}/tags`,
       method: 'GET',
@@ -274,10 +275,10 @@ export class Organizations {
   }
 
   /**
-   * Add a member to a team or update their member type. */
+   * Add a member to a Workspace or update their member type. */
   async addOrganizationMember<T = unknown>(parameters: Parameters.AddOrganizationMember, callback: Callback<T>): Promise<void>;
   /**
-   * Add a member to a team or update their member type. */
+   * Add a member to a Workspace or update their member type. */
   async addOrganizationMember<T = unknown>(parameters: Parameters.AddOrganizationMember, callback?: undefined): Promise<T>;
   async addOrganizationMember<T = unknown>(parameters: Parameters.AddOrganizationMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -292,10 +293,10 @@ export class Organizations {
   }
 
   /**
-   * Remove a member from a team */
+   * Remove a member from a Workspace */
   async deleteOrganizationMember<T = unknown>(parameters: Parameters.DeleteOrganizationMember, callback: Callback<T>): Promise<void>;
   /**
-   * Remove a member from a team */
+   * Remove a member from a Workspace */
   async deleteOrganizationMember<T = unknown>(parameters: Parameters.DeleteOrganizationMember, callback?: undefined): Promise<T>;
   async deleteOrganizationMember<T = unknown>(parameters: Parameters.DeleteOrganizationMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -307,10 +308,10 @@ export class Organizations {
   }
 
   /**
-   * Deactivate or reactivate a member of a team */
+   * Deactivate or reactivate a member of a Workspace */
   async updateOrganizationDeactivateStatus<T = unknown>(parameters: Parameters.UpdateOrganizationDeactivateStatus, callback: Callback<T>): Promise<void>;
   /**
-   * Deactivate or reactivate a member of a team */
+   * Deactivate or reactivate a member of a Workspace */
   async updateOrganizationDeactivateStatus<T = unknown>(parameters: Parameters.UpdateOrganizationDeactivateStatus, callback?: undefined): Promise<T>;
   async updateOrganizationDeactivateStatus<T = unknown>(parameters: Parameters.UpdateOrganizationDeactivateStatus, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -325,10 +326,10 @@ export class Organizations {
   }
 
   /**
-   * Set the logo image for a team */
+   * Set the logo image for a Workspace */
   async setOrganizationLogo<T = unknown>(parameters: Parameters.SetOrganizationLogo, callback: Callback<T>): Promise<void>;
   /**
-   * Set the logo image for a team */
+   * Set the logo image for a Workspace */
   async setOrganizationLogo<T = unknown>(parameters: Parameters.SetOrganizationLogo, callback?: undefined): Promise<T>;
   async setOrganizationLogo<T = unknown>(parameters: Parameters.SetOrganizationLogo, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -343,10 +344,10 @@ export class Organizations {
   }
 
   /**
-   * Delete a the logo from a team */
+   * Delete a the logo from a Workspace */
   async deleteOrganizationLogo<T = unknown>(parameters: Parameters.DeleteOrganizationLogo, callback: Callback<T>): Promise<void>;
   /**
-   * Delete a the logo from a team */
+   * Delete a the logo from a Workspace */
   async deleteOrganizationLogo<T = unknown>(parameters: Parameters.DeleteOrganizationLogo, callback?: undefined): Promise<T>;
   async deleteOrganizationLogo<T = unknown>(parameters: Parameters.DeleteOrganizationLogo, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -358,10 +359,10 @@ export class Organizations {
   }
 
   /**
-   * Remove a member from a team and from all team boards */
+   * Remove a member from a Workspace and from all Workspace boards */
   async deleteOrganizationMemberFromAll<T = unknown>(parameters: Parameters.DeleteOrganizationMemberFromAll, callback: Callback<T>): Promise<void>;
   /**
-   * Remove a member from a team and from all team boards */
+   * Remove a member from a Workspace and from all Workspace boards */
   async deleteOrganizationMemberFromAll<T = unknown>(parameters: Parameters.DeleteOrganizationMemberFromAll, callback?: undefined): Promise<T>;
   async deleteOrganizationMemberFromAll<T = unknown>(parameters: Parameters.DeleteOrganizationMemberFromAll, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -373,10 +374,10 @@ export class Organizations {
   }
 
   /**
-   * Remove the associated Google Apps domain from a team */
+   * Remove the associated Google Apps domain from a Workspace */
   async deleteOrganizationAssociatedDomain<T = unknown>(parameters: Parameters.DeleteOrganizationAssociatedDomain, callback: Callback<T>): Promise<void>;
   /**
-   * Remove the associated Google Apps domain from a team */
+   * Remove the associated Google Apps domain from a Workspace */
   async deleteOrganizationAssociatedDomain<T = unknown>(parameters: Parameters.DeleteOrganizationAssociatedDomain, callback?: undefined): Promise<T>;
   async deleteOrganizationAssociatedDomain<T = unknown>(parameters: Parameters.DeleteOrganizationAssociatedDomain, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -388,10 +389,10 @@ export class Organizations {
   }
 
   /**
-   * Remove the email domain restriction on who can be invited to the team */
+   * Remove the email domain restriction on who can be invited to the Workspace */
   async deleteOrganizationInvites<T = unknown>(parameters: Parameters.DeleteOrganizationInvites, callback: Callback<T>): Promise<void>;
   /**
-   * Remove the email domain restriction on who can be invited to the team */
+   * Remove the email domain restriction on who can be invited to the Workspace */
   async deleteOrganizationInvites<T = unknown>(parameters: Parameters.DeleteOrganizationInvites, callback?: undefined): Promise<T>;
   async deleteOrganizationInvites<T = unknown>(parameters: Parameters.DeleteOrganizationInvites, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {

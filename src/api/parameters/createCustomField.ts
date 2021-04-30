@@ -10,6 +10,16 @@ export interface CreateCustomField {
   /** If the type is `checkbox` */
   options?: string;
   pos?: 'top' | 'bottom' | number;
-  /** Whether this Custom Field should be shown on the front of Cards */
+
+  display?: {
+    /** Whether this Custom Field should be shown on the front of Cards. */
+    cardFront?: boolean;
+  }
+
+  /**
+   * @deprecated Use `display.cardFront`.
+   *
+   * Whether this Custom Field should be shown on the front of Cards.
+   */
   displayCardFront?: boolean;
 }

@@ -4,7 +4,8 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Cards {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   /**
    * Create a new card */
@@ -138,11 +139,11 @@ export class Cards {
 
   /**
    * List the Actions on a Card */
-  async getCardActions<T = unknown>(parameters: Parameters.GetCardActions, callback: Callback<T>): Promise<void>;
+  async getCardActions<T = Array<Models.Action>>(parameters: Parameters.GetCardActions, callback: Callback<T>): Promise<void>;
   /**
    * List the Actions on a Card */
-  async getCardActions<T = unknown>(parameters: Parameters.GetCardActions, callback?: undefined): Promise<T>;
-  async getCardActions<T = unknown>(parameters: Parameters.GetCardActions, callback?: Callback<T>): Promise<void | T> {
+  async getCardActions<T = Array<Models.Action>>(parameters: Parameters.GetCardActions, callback?: undefined): Promise<T>;
+  async getCardActions<T = Array<Models.Action>>(parameters: Parameters.GetCardActions, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/actions`,
       method: 'GET',
@@ -156,11 +157,11 @@ export class Cards {
 
   /**
    * List the attachments on a card */
-  async getCardAttachments<T = unknown>(parameters: Parameters.GetCardAttachments, callback: Callback<T>): Promise<void>;
+  async getCardAttachments<T = Array<Models.Attachment>>(parameters: Parameters.GetCardAttachments, callback: Callback<T>): Promise<void>;
   /**
    * List the attachments on a card */
-  async getCardAttachments<T = unknown>(parameters: Parameters.GetCardAttachments, callback?: undefined): Promise<T>;
-  async getCardAttachments<T = unknown>(parameters: Parameters.GetCardAttachments, callback?: Callback<T>): Promise<void | T> {
+  async getCardAttachments<T = Array<Models.Attachment>>(parameters: Parameters.GetCardAttachments, callback?: undefined): Promise<T>;
+  async getCardAttachments<T = Array<Models.Attachment>>(parameters: Parameters.GetCardAttachments, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments`,
       method: 'GET',
@@ -171,11 +172,11 @@ export class Cards {
 
   /**
    * Create an Attachment to a Card */
-  async createCardAttachment<T = unknown>(parameters: Parameters.CreateCardAttachment, callback: Callback<T>): Promise<void>;
+  async createCardAttachment<T = Array<Models.Attachment>>(parameters: Parameters.CreateCardAttachment, callback: Callback<T>): Promise<void>;
   /**
    * Create an Attachment to a Card */
-  async createCardAttachment<T = unknown>(parameters: Parameters.CreateCardAttachment, callback?: undefined): Promise<T>;
-  async createCardAttachment<T = unknown>(parameters: Parameters.CreateCardAttachment, callback?: Callback<T>): Promise<void | T> {
+  async createCardAttachment<T = Array<Models.Attachment>>(parameters: Parameters.CreateCardAttachment, callback?: undefined): Promise<T>;
+  async createCardAttachment<T = Array<Models.Attachment>>(parameters: Parameters.CreateCardAttachment, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments`,
       method: 'POST',
@@ -193,11 +194,11 @@ export class Cards {
 
   /**
    * Get a specific Attachment on a Card. */
-  async getCardAttachment<T = unknown>(parameters: Parameters.GetCardAttachment, callback: Callback<T>): Promise<void>;
+  async getCardAttachment<T = Array<Models.Attachment>>(parameters: Parameters.GetCardAttachment, callback: Callback<T>): Promise<void>;
   /**
    * Get a specific Attachment on a Card. */
-  async getCardAttachment<T = unknown>(parameters: Parameters.GetCardAttachment, callback?: undefined): Promise<T>;
-  async getCardAttachment<T = unknown>(parameters: Parameters.GetCardAttachment, callback?: Callback<T>): Promise<void | T> {
+  async getCardAttachment<T = Array<Models.Attachment>>(parameters: Parameters.GetCardAttachment, callback?: undefined): Promise<T>;
+  async getCardAttachment<T = Array<Models.Attachment>>(parameters: Parameters.GetCardAttachment, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
       method: 'GET',
@@ -588,11 +589,11 @@ export class Cards {
 
   /**
    * Get the custom field items for a card. */
-  async getCardCustomFields<T = unknown>(parameters: Parameters.GetCardCustomFields, callback: Callback<T>): Promise<void>;
+  async getCardCustomFields<T = Array<Models.CustomFieldItems>>(parameters: Parameters.GetCardCustomFields, callback: Callback<T>): Promise<void>;
   /**
    * Get the custom field items for a card. */
-  async getCardCustomFields<T = unknown>(parameters: Parameters.GetCardCustomFields, callback?: undefined): Promise<T>;
-  async getCardCustomFields<T = unknown>(parameters: Parameters.GetCardCustomFields, callback?: Callback<T>): Promise<void | T> {
+  async getCardCustomFields<T = Array<Models.CustomFieldItems>>(parameters: Parameters.GetCardCustomFields, callback?: undefined): Promise<T>;
+  async getCardCustomFields<T = Array<Models.CustomFieldItems>>(parameters: Parameters.GetCardCustomFields, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/customFieldItems`,
       method: 'GET',

@@ -4,7 +4,8 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Plugins {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   /**
    * Get plugins */

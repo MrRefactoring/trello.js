@@ -4,14 +4,15 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Emoji {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {
+  }
 
   /**
    * List available Emoji */
-  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: Callback<T>): Promise<void>;
+  async emoji<T = Models.Emoji>(parameters: Parameters.Emoji | undefined, callback: Callback<T>): Promise<void>;
   /**
    * List available Emoji */
-  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: undefined): Promise<T>;
+  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: never): Promise<T>;
   async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/emoji',

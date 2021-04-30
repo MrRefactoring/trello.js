@@ -15,20 +15,79 @@ export interface CreateBoard {
   keepFromSource?: string;
   /** The Power-Ups that should be enabled on the new board. One of: `all`, `calendar`, `cardAging`, `recap`, `voting`. */
   powerUps?: string;
-  /** The permissions level of the board. One of: `org`, `private`, `public`. */
+
+  preferences: {
+    /** The permissions level of the board. One of: `org`, `private`, `public`. */
+    permissionLevel?: 'org' | 'private' | 'public';
+    /** Who can vote on this board. One of `disabled`, `members`, `observers`, `org`, `public`. */
+    voting?: 'disabled' | 'members' | 'observers' | 'org' | 'public';
+    /** Who can comment on cards on this board. One of: `disabled`, `members`, `observers`, `org`, `public`. */
+    comments?: 'disabled' | 'members' | 'observers' | 'org' | 'public';
+    /** Determines what types of members can invite users to join. One of: `admins`, `members`. */
+    invitations?: 'admins' | 'members';
+    /** Determines whether users can join the boards themselves or whether they have to be invited. */
+    selfJoin?: boolean;
+    /** Determines whether card covers are enabled. */
+    cardCovers?: boolean;
+    /** The id of a custom background or one of: `blue`, `orange`, `green`, `red`, `purple`, `pink`, `lime`, `sky`, `grey`. */
+    background?: 'blue' | 'orange' | 'green' | 'red' | 'purple' | 'pink' | 'lime' | 'sky' | 'grey';
+    /** Determines the type of card aging that should take place on the board if card aging is enabled. One of: `pirate`, `regular`. */
+    cardAging?: 'pirate' | 'regular';
+  };
+
+  /**
+   * @deprecated Use `preferences.permissionLevel`
+   *
+   * The permissions level of the board. One of: `org`, `private`, `public`.
+   */
   prefsPermissionLevel?: string;
-  /** Who can vote on this board. One of `disabled`, `members`, `observers`, `org`, `public`. */
+
+  /**
+   * @deprecated Use `preferences.voting`
+   *
+   * Who can vote on this board. One of `disabled`, `members`, `observers`, `org`, `public`.
+   */
   prefsVoting?: string;
-  /** Who can comment on cards on this board. One of: `disabled`, `members`, `observers`, `org`, `public`. */
+
+  /**
+   * @deprecated Use `preferences.comments`
+   *
+   * Who can comment on cards on this board. One of: `disabled`, `members`, `observers`, `org`, `public`.
+   */
   prefsComments?: string;
-  /** Determines what types of members can invite users to join. One of: `admins`, `members`. */
+
+  /**
+   * @deprecated Use `preferences.invitation`
+   *
+   * Determines what types of members can invite users to join. One of: `admins`, `members`.
+   */
   prefsInvitations?: string;
-  /** Determines whether users can join the boards themselves or whether they have to be invited. */
+
+  /**
+   * @deprecated Use `preferences.selfJoin`
+   *
+   * Determines whether users can join the boards themselves or whether they have to be invited.
+   */
   prefsSelfJoin?: boolean;
-  /** Determines whether card covers are enabled. */
+
+  /**
+   *  @deprecated Use `preferences.cardCovers`
+   *
+   * Determines whether card covers are enabled.
+   */
   prefsCardCovers?: boolean;
-  /** The id of a custom background or one of: `blue`, `orange`, `green`, `red`, `purple`, `pink`, `lime`, `sky`, `grey`. */
+
+  /**
+   * @deprecated Use `preferences.background`
+   *
+   * The id of a custom background or one of: `blue`, `orange`, `green`, `red`, `purple`, `pink`, `lime`, `sky`, `grey`.
+   */
   prefsBackground?: string;
-  /** Determines the type of card aging that should take place on the board if card aging is enabled. One of: `pirate`, `regular`. */
+
+  /**
+   * @deprecated Use `preferences.cardAging`
+   *
+   * Determines the type of card aging that should take place on the board if card aging is enabled. One of: `pirate`, `regular`.
+   */
   prefsCardAging?: string;
 }
