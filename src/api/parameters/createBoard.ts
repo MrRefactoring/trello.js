@@ -16,7 +16,7 @@ export interface CreateBoard {
   /** The Power-Ups that should be enabled on the new board. One of: `all`, `calendar`, `cardAging`, `recap`, `voting`. */
   powerUps?: string;
 
-  preferences: {
+  preferences?: {
     /** The permissions level of the board. One of: `org`, `private`, `public`. */
     permissionLevel?: 'org' | 'private' | 'public';
     /** Who can vote on this board. One of `disabled`, `members`, `observers`, `org`, `public`. */
