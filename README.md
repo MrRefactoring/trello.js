@@ -188,6 +188,7 @@ export class CustomTrelloClient extends BaseClient {
 
 ## Take a look at our other products
 
+* [Confluence.js](https://github.com/MrRefactoring/confluence.js) - confluence.js is a powerful Node.JS / Browser module that allows you to interact with the Confluence API very easily
 * [Jira.js](https://github.com/MrRefactoring/jira.js) - a JavaScript/TypeScript wrapper for the JIRA REST API
 
 ## License

@@ -76,7 +76,7 @@ export class BaseClient implements Client {
       libVersion: '1.0.0',
       libVersionHash: '226a631aedb85a43e7ad5714c4e623b5',
       methodName: telemetryData?.methodName || 'sendRequest',
-      onErrorMiddlewareUser: !!this.config.middlewares?.onError,
+      onErrorMiddlewareUsed: !!this.config.middlewares?.onError,
       onResponseMiddlewareUsed: !!this.config.middlewares?.onResponse,
       queryExists: !!requestConfig.params,
       requestStartTime: startDateTime,
