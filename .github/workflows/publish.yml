@@ -1,0 +1,30 @@
+name: NPM publish
+on: workflow_dispatch
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v2
+      - name: Use Node.js 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Install dependencies
+        run: npm i
+      - name: Create .env file
+        run: |
+          touch .env
+          echo TRELLO_API_KEY=${{ secrets.TRELLO_API_KEY }} >> .env
+          echo TRELLO_API_TOKEN=${{ secrets.TRELLO_API_TOKEN }} >> .env
+      - name: Building sources
+        run: npm run build
+      - name: Tests
+        run: npm run test
+      - name: Linting
+        run: npm run lint
+        env:
+          CI: true
+      - name: Publishing
+        run: npm publish
