@@ -28,3 +28,5 @@ jobs:
           CI: true
       - name: Publishing
         run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
