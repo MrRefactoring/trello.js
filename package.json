@@ -1,6 +1,6 @@
 {
   "name": "trello.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Simple Trello API Client",
   "author": "Vladislav Tupikin <mrrefactoring@yandex.ru>",
   "license": "MIT",
@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build && npm run test && npm run lint",
-    "doc": "typedoc --name Trello.js --out docs ./src",
+    "doc": "typedoc --name \"Trello.js - API library\" --out docs ./src/index.ts --plugin typedoc-plugin-extras --footerDate --footerTime --footerTypedocVersion --favicon https://svgshare.com/i/bQb.svg",
     "lint": "eslint src tests --ext .ts",
     "lint:fix": "npm run lint -- --fix",
     "test": "jest tests",
@@ -31,22 +31,23 @@
   ],
   "devDependencies": {
     "@types/dotenv": "^8.2.0",
-    "@types/jest": "^26.0.24",
-    "@typescript-eslint/eslint-plugin": "^4.31.1",
-    "@typescript-eslint/parser": "^4.31.1",
+    "@types/jest": "^27.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.1.0",
+    "@typescript-eslint/parser": "^5.1.0",
     "dotenv": "^10.0.0",
-    "eslint": "^7.32.0",
+    "eslint": "^8.0.1",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-airbnb-typescript": "^14.0.0",
+    "eslint-config-airbnb-typescript": "^14.0.1",
     "eslint-import-resolver-typescript": "^2.5.0",
-    "eslint-plugin-import": "^2.24.2",
-    "jest": "^26.6.3",
-    "ts-jest": "^26.5.6",
-    "typedoc": "^0.22.3",
-    "typescript": "^4.4.3"
+    "eslint-plugin-import": "^2.25.2",
+    "jest": "^27.3.1",
+    "ts-jest": "^27.0.7",
+    "typedoc": "^0.22.6",
+    "typedoc-plugin-extras": "^2.2.1",
+    "typescript": "^4.4.4"
   },
   "dependencies": {
-    "axios": "^0.21.4",
+    "axios": "^0.23.0",
     "telemetry.trello.js": "<2"
   }
 }
