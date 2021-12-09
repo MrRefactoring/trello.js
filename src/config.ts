@@ -1,18 +1,19 @@
 import { AxiosError, AxiosRequestConfig } from 'axios';
-import { TelemetryConfig } from 'telemetry.trello.js';
 
 export interface Config {
   key: string;
   token: string;
   baseRequestConfig?: Config.BaseRequestConfig;
   middlewares?: Config.Middlewares;
+  /** @deprecated */
   telemetry?: Config.Telemetry;
 }
 
 export namespace Config {
   export type Error = AxiosError;
   export type BaseRequestConfig = AxiosRequestConfig;
-  export type Telemetry = boolean | TelemetryConfig;
+  /** @deprecated */
+  export type Telemetry = any;
 
   export interface Middlewares {
     onError?: Config.Middlewares.OnErrorHandler;

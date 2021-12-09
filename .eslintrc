@@ -6,7 +6,7 @@
   "parserOptions": {
     "ecmaVersion": 2018,
     "sourceType": "module",
-    "project": "./tsconfig.tests.json"
+    "project": "./tsconfig.lint.json"
   },
   "plugins": [
     "import"

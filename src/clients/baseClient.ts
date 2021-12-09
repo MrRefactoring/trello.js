@@ -1,15 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
-import { Telemetry, TelemetryClient } from 'telemetry.trello.js';
 import { Client } from './client';
 import { Callback, RequestConfig } from '../types';
 import { Config } from '../config';
 
 export class BaseClient implements Client {
   private instance: AxiosInstance;
-  private telemetryClient: TelemetryClient;
 
   constructor(private config: Config) {
-    this.telemetryClient = new TelemetryClient(config.telemetry);
     this.instance = axios.create({
       paramsSerializer: this.paramSerializer.bind(this),
       ...config.baseRequestConfig,
@@ -56,10 +53,9 @@ export class BaseClient implements Client {
       .replace(/%5D/gi, ']');
   }
 
-  async sendRequest<T>(requestConfig: RequestConfig, callback?: Callback<T> | undefined, telemetryData?: Partial<Telemetry>): Promise<T>;
-  async sendRequest<T>(requestConfig: RequestConfig, callback: Callback<T>, telemetryData?: Partial<Telemetry>): Promise<void>;
-  async sendRequest<T>(rawRequestConfig: RequestConfig, callback?: Callback<T>, telemetryData?: Partial<Telemetry>): Promise<T | void> {
-    const startDateTime = new Date();
+  async sendRequest<T>(requestConfig: RequestConfig, callback?: Callback<T> | undefined, telemetryData?: any): Promise<T>;
+  async sendRequest<T>(requestConfig: RequestConfig, callback: Callback<T>, telemetryData?: any): Promise<void>;
+  async sendRequest<T>(rawRequestConfig: RequestConfig, callback?: Callback<T>): Promise<T | void> {
     const requestConfig: RequestConfig = {
       ...rawRequestConfig,
       params: {
@@ -67,23 +63,6 @@ export class BaseClient implements Client {
         key: this.config.key,
         token: this.config.token,
       },
-    };
-
-    const telemetry: Telemetry = {
-      authenticated: !!(this.config.key && this.config.token),
-      bodyExists: !!requestConfig.data,
-      callbackUsed: !!callback,
-      libVersion: '1.0.3',
-      libVersionHash: '55f9c405bd87ba23896f34011ffce8da',
-      methodName: telemetryData?.methodName || 'sendRequest',
-      onErrorMiddlewareUser: !!this.config.middlewares?.onError,
-      onResponseMiddlewareUsed: !!this.config.middlewares?.onResponse,
-      queryExists: !!requestConfig.params,
-      requestStartTime: startDateTime,
-      requestEndTime: new Date(),
-      requestStatusCode: 0,
-      timeout: this.config.baseRequestConfig?.timeout || this.instance.defaults.timeout || -1,
-      ...telemetryData,
     };
 
     try {
@@ -96,8 +75,6 @@ export class BaseClient implements Client {
 
       this.config.middlewares?.onResponse?.(response.data);
 
-      telemetry.requestStatusCode = response.status;
-
       return responseHandler(response.data);
     } catch (e: any) {
       const callbackErrorHandler = callback && ((error: Config.Error) => callback(error));
@@ -109,13 +86,7 @@ export class BaseClient implements Client {
 
       this.config.middlewares?.onError?.(e);
 
-      telemetry.requestStatusCode = e.response?.status ?? 0;
-
       return errorHandler(e);
-    } finally {
-      telemetry.requestEndTime = new Date();
-
-      this.telemetryClient.sendTelemetry(telemetry);
     }
   }
 }
