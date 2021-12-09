@@ -18,9 +18,6 @@ Usability, consistency, and performance are key focuses of trello.js, and it als
 ## Table of contents
 
 - [Installation](#installation)
-- [Telemetry information collection agreement](#telemetry-information-collection-agreement)
-  - [Customizing telemetry collection data example](#customizing-telemetry-collection-data-example)
-  - [Disabling telemetry collection example](#disabling-telemetry-collection-example)
 - [Usage](#usage)
   - [Key and token pair issuing](#key-and-token-pair-issuing)
   - [Client creation and first request](#client-creation-first-request-and-using-algorithm)
@@ -41,52 +38,6 @@ Install with the yarn:
 
 ```bash
 yarn add trello.js
-```
-
-## Telemetry information collection agreement
-
-The use of this library may collect, record and transmit data about the operation of the library and related data, as well as potentially personal data, including ip address from which the request is made, user agent from the device from which the request is made, version of the library used, version of the telemetry sending library, name of the invoked method, authorization type information (can be configured), callback information, onResponse middleware usage information, onError middleware usage information, queries usage information, body usage information in queries, HTTP response code (can be configured), request start date and time and response receipt date and time (can be configured), timeout settings.
-
-The type and amount of data may vary with the version of the libraries and can be changed at any time without notice.
-
-Telemetry data collection is enabled by default.
-
-The following tracking parameters can be configured:
-
-- Authentication status
-- Request status code
-- Request timings
-- Timeout information
-
-#### Customizing telemetry collection data example
-
-```typescript
-import { Config } from 'trello.js';
-
-const config: Config = {
-  key: 'YOUR_API_KEY',
-  token: 'YOUR_API_TOKEN',
-  telemetry: {
-    allowedToPassAuthenticationStatus: false,  // true by default
-    allowedToPassRequestStatusCode: true,  // true by default
-    allowedToPassRequestTimings: false,  // true by default
-    allowedToPassTimeout: true, // true by default
-  },
-};
-```
-
-If you want to disable telemetry, set the `telemetry` field to `false`.
-
-#### Disabling telemetry collection example
-
-```typescript
-import { Config } from 'trello.js';
-
-const config: Config = {
-  key: 'YOUR_API_KEY',
-  token: 'YOUR_API_TOKEN',
-  telemetry: false, // Telemetry will not be collected
-};
 ```
 
 ## Usage
