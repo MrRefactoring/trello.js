@@ -6,13 +6,13 @@ import { Callback, RequestConfig } from '../types';
 export class Organizations {
   constructor(private client: Client) {}
 
-  /** Create a new team */
+  /** Create a new Workspace */
   async createOrganization<T = unknown>(
     parameters: Parameters.CreateOrganization,
     callback: Callback<T>
   ): Promise<void>;
-  /** Create a new team */
-  async createOrganization<T = unknown>(parameters: Parameters.CreateOrganization, callback?: undefined): Promise<T>;
+  /** Create a new Workspace */
+  async createOrganization<T = unknown>(parameters: Parameters.CreateOrganization, callback?: never): Promise<T>;
   async createOrganization<T = unknown>(
     parameters: Parameters.CreateOrganization,
     callback?: Callback<T>,
@@ -28,17 +28,14 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createOrganization' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getOrganization<T = Models.Organization>(
     parameters: Parameters.GetOrganization,
     callback: Callback<T>
   ): Promise<void>;
-  async getOrganization<T = Models.Organization>(
-    parameters: Parameters.GetOrganization,
-    callback?: undefined
-  ): Promise<T>;
+  async getOrganization<T = Models.Organization>(parameters: Parameters.GetOrganization, callback?: never): Promise<T>;
   async getOrganization<T = Models.Organization>(
     parameters: Parameters.GetOrganization,
     callback?: Callback<T>,
@@ -48,7 +45,7 @@ export class Organizations {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganization' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update an organization */
@@ -59,7 +56,7 @@ export class Organizations {
   /** Update an organization */
   async updateOrganization<T = Models.Organization>(
     parameters: Parameters.UpdateOrganization,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async updateOrganization<T = Models.Organization>(
     parameters: Parameters.UpdateOrganization,
@@ -84,7 +81,7 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateOrganization' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete an Organization */
@@ -93,7 +90,7 @@ export class Organizations {
     callback: Callback<T>
   ): Promise<void>;
   /** Delete an Organization */
-  async deleteOrganization<T = unknown>(parameters: Parameters.DeleteOrganization, callback?: undefined): Promise<T>;
+  async deleteOrganization<T = unknown>(parameters: Parameters.DeleteOrganization, callback?: never): Promise<T>;
   async deleteOrganization<T = unknown>(
     parameters: Parameters.DeleteOrganization,
     callback?: Callback<T>,
@@ -103,7 +100,7 @@ export class Organizations {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteOrganization' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getOrganizationField<T = Models.Organization>(
@@ -112,7 +109,7 @@ export class Organizations {
   ): Promise<void>;
   async getOrganizationField<T = Models.Organization>(
     parameters: Parameters.GetOrganizationField,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getOrganizationField<T = Models.Organization>(
     parameters: Parameters.GetOrganizationField,
@@ -123,20 +120,20 @@ export class Organizations {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationField' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** List the actions on a team */
-  async getOrganizationActions<T = unknown>(
+  /** List the actions on a Workspace */
+  async getOrganizationActions<T = Models.Action[]>(
     parameters: Parameters.GetOrganizationActions,
     callback: Callback<T>
   ): Promise<void>;
-  /** List the actions on a team */
-  async getOrganizationActions<T = unknown>(
+  /** List the actions on a Workspace */
+  async getOrganizationActions<T = Models.Action[]>(
     parameters: Parameters.GetOrganizationActions,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getOrganizationActions<T = unknown>(
+  async getOrganizationActions<T = Models.Action[]>(
     parameters: Parameters.GetOrganizationActions,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -145,20 +142,20 @@ export class Organizations {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationActions' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** List the boards in a team */
-  async getOrganizationBoards<T = unknown>(
+  /** List the boards in a Workspace */
+  async getOrganizationBoards<T = Array<Models.Board>>(
     parameters: Parameters.GetOrganizationBoards,
     callback: Callback<T>
   ): Promise<void>;
-  /** List the boards in a team */
-  async getOrganizationBoards<T = unknown>(
+  /** List the boards in a Workspace */
+  async getOrganizationBoards<T = Array<Models.Board>>(
     parameters: Parameters.GetOrganizationBoards,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getOrganizationBoards<T = unknown>(
+  async getOrganizationBoards<T = Array<Models.Board>>(
     parameters: Parameters.GetOrganizationBoards,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -171,20 +168,20 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationBoards' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Retrieve the exports that exist for the given organization */
-  async getOrganizationExports<T = unknown>(
+  async getOrganizationExports<T = Models.Export[]>(
     parameters: Parameters.GetOrganizationExports,
     callback: Callback<T>
   ): Promise<void>;
   /** Retrieve the exports that exist for the given organization */
-  async getOrganizationExports<T = unknown>(
+  async getOrganizationExports<T = Models.Export[]>(
     parameters: Parameters.GetOrganizationExports,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getOrganizationExports<T = unknown>(
+  async getOrganizationExports<T = Models.Export[]>(
     parameters: Parameters.GetOrganizationExports,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -193,7 +190,7 @@ export class Organizations {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationExports' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Kick off CSV export for an organization */
@@ -204,7 +201,7 @@ export class Organizations {
   /** Kick off CSV export for an organization */
   async exportOrganizationCSV<T = Models.Export>(
     parameters: Parameters.ExportOrganizationCSV,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async exportOrganizationCSV<T = Models.Export>(
     parameters: Parameters.ExportOrganizationCSV,
@@ -218,20 +215,20 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'exportOrganizationCSV' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** List the members in a team */
-  async getOrganizationMembers<T = unknown>(
+  /** List the members in a Workspace */
+  async getOrganizationMembers<T = Array<Models.Member>>(
     parameters: Parameters.GetOrganizationMembers,
     callback: Callback<T>
   ): Promise<void>;
-  /** List the members in a team */
-  async getOrganizationMembers<T = unknown>(
+  /** List the members in a Workspace */
+  async getOrganizationMembers<T = Array<Models.Member>>(
     parameters: Parameters.GetOrganizationMembers,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getOrganizationMembers<T = unknown>(
+  async getOrganizationMembers<T = Array<Models.Member>>(
     parameters: Parameters.GetOrganizationMembers,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -240,7 +237,7 @@ export class Organizations {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationMembers' });
+    return this.client.sendRequest(config, callback);
   }
 
   async updateOrganizationMember<T = unknown>(
@@ -249,7 +246,7 @@ export class Organizations {
   ): Promise<void>;
   async updateOrganizationMember<T = unknown>(
     parameters: Parameters.UpdateOrganizationMember,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async updateOrganizationMember<T = unknown>(
     parameters: Parameters.UpdateOrganizationMember,
@@ -265,20 +262,20 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateOrganizationMember' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** List the memberships of a team */
-  async getOrganizationMemberships<T = unknown>(
+  /** List the memberships of a Workspace */
+  async getOrganizationMemberships<T = Array<Models.Memberships>>(
     parameters: Parameters.GetOrganizationMemberships,
     callback: Callback<T>
   ): Promise<void>;
-  /** List the memberships of a team */
-  async getOrganizationMemberships<T = unknown>(
+  /** List the memberships of a Workspace */
+  async getOrganizationMemberships<T = Array<Models.Memberships>>(
     parameters: Parameters.GetOrganizationMemberships,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getOrganizationMemberships<T = unknown>(
+  async getOrganizationMemberships<T = Array<Models.Memberships>>(
     parameters: Parameters.GetOrganizationMemberships,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -291,7 +288,7 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationMemberships' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a single Membership for an Organization */
@@ -302,7 +299,7 @@ export class Organizations {
   /** Get a single Membership for an Organization */
   async getOrganizationMembership<T = unknown>(
     parameters: Parameters.GetOrganizationMembership,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getOrganizationMembership<T = unknown>(
     parameters: Parameters.GetOrganizationMembership,
@@ -316,20 +313,20 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationMembership' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Get organization scoped pluginData on this team */
-  async getOrganizationPluginData<T = unknown>(
+  /** Get organization scoped pluginData on this Workspace */
+  async getOrganizationPluginData<T = Array<Models.PluginData>>(
     parameters: Parameters.GetOrganizationPluginData,
     callback: Callback<T>
   ): Promise<void>;
-  /** Get organization scoped pluginData on this team */
-  async getOrganizationPluginData<T = unknown>(
+  /** Get organization scoped pluginData on this Workspace */
+  async getOrganizationPluginData<T = Array<Models.PluginData>>(
     parameters: Parameters.GetOrganizationPluginData,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getOrganizationPluginData<T = unknown>(
+  async getOrganizationPluginData<T = Array<Models.PluginData>>(
     parameters: Parameters.GetOrganizationPluginData,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -338,17 +335,20 @@ export class Organizations {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationPluginData' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** List the organization's collections */
-  async getOrganizationTags<T = unknown>(
+  async getOrganizationTags<T = Array<Models.Tag>>(
     parameters: Parameters.GetOrganizationTags,
     callback: Callback<T>
   ): Promise<void>;
   /** List the organization's collections */
-  async getOrganizationTags<T = unknown>(parameters: Parameters.GetOrganizationTags, callback?: undefined): Promise<T>;
-  async getOrganizationTags<T = unknown>(
+  async getOrganizationTags<T = Array<Models.Tag>>(
+    parameters: Parameters.GetOrganizationTags,
+    callback?: never
+  ): Promise<T>;
+  async getOrganizationTags<T = Array<Models.Tag>>(
     parameters: Parameters.GetOrganizationTags,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -357,7 +357,7 @@ export class Organizations {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationTags' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Create a Tag in an Organization */
@@ -366,10 +366,7 @@ export class Organizations {
     callback: Callback<T>
   ): Promise<void>;
   /** Create a Tag in an Organization */
-  async createOrganizationTag<T = unknown>(
-    parameters: Parameters.CreateOrganizationTag,
-    callback?: undefined
-  ): Promise<T>;
+  async createOrganizationTag<T = unknown>(parameters: Parameters.CreateOrganizationTag, callback?: never): Promise<T>;
   async createOrganizationTag<T = unknown>(
     parameters: Parameters.CreateOrganizationTag,
     callback?: Callback<T>,
@@ -379,19 +376,16 @@ export class Organizations {
       method: 'POST',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createOrganizationTag' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Add a member to a team or update their member type. */
+  /** Add a member to a Workspace or update their member type. */
   async addOrganizationMember<T = unknown>(
     parameters: Parameters.AddOrganizationMember,
     callback: Callback<T>
   ): Promise<void>;
-  /** Add a member to a team or update their member type. */
-  async addOrganizationMember<T = unknown>(
-    parameters: Parameters.AddOrganizationMember,
-    callback?: undefined
-  ): Promise<T>;
+  /** Add a member to a Workspace or update their member type. */
+  async addOrganizationMember<T = unknown>(parameters: Parameters.AddOrganizationMember, callback?: never): Promise<T>;
   async addOrganizationMember<T = unknown>(
     parameters: Parameters.AddOrganizationMember,
     callback?: Callback<T>,
@@ -404,18 +398,18 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'addOrganizationMember' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Remove a member from a team */
+  /** Remove a member from a Workspace */
   async deleteOrganizationMember<T = unknown>(
     parameters: Parameters.DeleteOrganizationMember,
     callback: Callback<T>
   ): Promise<void>;
-  /** Remove a member from a team */
+  /** Remove a member from a Workspace */
   async deleteOrganizationMember<T = unknown>(
     parameters: Parameters.DeleteOrganizationMember,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteOrganizationMember<T = unknown>(
     parameters: Parameters.DeleteOrganizationMember,
@@ -426,18 +420,18 @@ export class Organizations {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationMember' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Deactivate or reactivate a member of a team */
+  /** Deactivate or reactivate a member of a Workspace */
   async updateOrganizationDeactivateStatus<T = unknown>(
     parameters: Parameters.UpdateOrganizationDeactivateStatus,
     callback: Callback<T>
   ): Promise<void>;
-  /** Deactivate or reactivate a member of a team */
+  /** Deactivate or reactivate a member of a Workspace */
   async updateOrganizationDeactivateStatus<T = unknown>(
     parameters: Parameters.UpdateOrganizationDeactivateStatus,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async updateOrganizationDeactivateStatus<T = unknown>(
     parameters: Parameters.UpdateOrganizationDeactivateStatus,
@@ -451,16 +445,15 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateOrganizationDeactivateStatus' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Set the logo image for a team */
+  /** Set the logo image for a Workspace */
   async setOrganizationLogo<T = unknown>(
     parameters: Parameters.SetOrganizationLogo,
     callback: Callback<T>
   ): Promise<void>;
-  /** Set the logo image for a team */
-  async setOrganizationLogo<T = unknown>(parameters: Parameters.SetOrganizationLogo, callback?: undefined): Promise<T>;
+  /** Set the logo image for a Workspace */
   async setOrganizationLogo<T = unknown>(
     parameters: Parameters.SetOrganizationLogo,
     callback?: Callback<T>,
@@ -473,18 +466,18 @@ export class Organizations {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'setOrganizationLogo' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Delete a the logo from a team */
+  /** Delete a logo from a Workspace */
   async deleteOrganizationLogo<T = unknown>(
     parameters: Parameters.DeleteOrganizationLogo,
     callback: Callback<T>
   ): Promise<void>;
-  /** Delete a the logo from a team */
+  /** Delete a logo from a Workspace */
   async deleteOrganizationLogo<T = unknown>(
     parameters: Parameters.DeleteOrganizationLogo,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteOrganizationLogo<T = unknown>(
     parameters: Parameters.DeleteOrganizationLogo,
@@ -495,18 +488,18 @@ export class Organizations {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationLogo' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Remove a member from a team and from all team boards */
+  /** Remove a member from a Workspace and from all Workspace boards */
   async deleteOrganizationMemberFromAll<T = unknown>(
     parameters: Parameters.DeleteOrganizationMemberFromAll,
     callback: Callback<T>
   ): Promise<void>;
-  /** Remove a member from a team and from all team boards */
+  /** Remove a member from a Workspace and from all Workspace boards */
   async deleteOrganizationMemberFromAll<T = unknown>(
     parameters: Parameters.DeleteOrganizationMemberFromAll,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteOrganizationMemberFromAll<T = unknown>(
     parameters: Parameters.DeleteOrganizationMemberFromAll,
@@ -517,18 +510,18 @@ export class Organizations {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationMemberFromAll' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Remove the associated Google Apps domain from a team */
+  /** Remove the associated Google Apps domain from a Workspace */
   async deleteOrganizationAssociatedDomain<T = unknown>(
     parameters: Parameters.DeleteOrganizationAssociatedDomain,
     callback: Callback<T>
   ): Promise<void>;
-  /** Remove the associated Google Apps domain from a team */
+  /** Remove the associated Google Apps domain from a Workspace */
   async deleteOrganizationAssociatedDomain<T = unknown>(
     parameters: Parameters.DeleteOrganizationAssociatedDomain,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteOrganizationAssociatedDomain<T = unknown>(
     parameters: Parameters.DeleteOrganizationAssociatedDomain,
@@ -539,18 +532,18 @@ export class Organizations {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationAssociatedDomain' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Remove the email domain restriction on who can be invited to the team */
+  /** Remove the email domain restriction on who can be invited to the Workspace */
   async deleteOrganizationInvites<T = unknown>(
     parameters: Parameters.DeleteOrganizationInvites,
     callback: Callback<T>
   ): Promise<void>;
-  /** Remove the email domain restriction on who can be invited to the team */
+  /** Remove the email domain restriction on who can be invited to the Workspace */
   async deleteOrganizationInvites<T = unknown>(
     parameters: Parameters.DeleteOrganizationInvites,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteOrganizationInvites<T = unknown>(
     parameters: Parameters.DeleteOrganizationInvites,
@@ -561,7 +554,7 @@ export class Organizations {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationInvites' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete an organization's tag */
@@ -570,10 +563,7 @@ export class Organizations {
     callback: Callback<T>
   ): Promise<void>;
   /** Delete an organization's tag */
-  async deleteOrganizationTag<T = unknown>(
-    parameters: Parameters.DeleteOrganizationTag,
-    callback?: undefined
-  ): Promise<T>;
+  async deleteOrganizationTag<T = unknown>(parameters: Parameters.DeleteOrganizationTag, callback?: never): Promise<T>;
   async deleteOrganizationTag<T = unknown>(
     parameters: Parameters.DeleteOrganizationTag,
     callback?: Callback<T>,
@@ -583,7 +573,7 @@ export class Organizations {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteOrganizationTag' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Used to check whether the given board has new billable guests on it. */
@@ -594,7 +584,7 @@ export class Organizations {
   /** Used to check whether the given board has new billable guests on it. */
   async getOrganizationNewBillableGuestBoard<T = unknown>(
     parameters: Parameters.GetOrganizationNewBillableGuestBoard,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getOrganizationNewBillableGuestBoard<T = unknown>(
     parameters: Parameters.GetOrganizationNewBillableGuestBoard,
@@ -605,6 +595,6 @@ export class Organizations {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getOrganizationNewBillableGuestBoard' });
+    return this.client.sendRequest(config, callback);
   }
 }

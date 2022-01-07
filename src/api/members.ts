@@ -7,10 +7,10 @@ export class Members {
   constructor(private client: Client) {}
 
   /** Get a member */
-  async getMember<T = unknown>(parameters: Parameters.GetMember, callback: Callback<T>): Promise<void>;
+  async getMember<T = Models.Member>(parameters: Parameters.GetMember, callback: Callback<T>): Promise<void>;
   /** Get a member */
-  async getMember<T = unknown>(parameters: Parameters.GetMember, callback?: undefined): Promise<T>;
-  async getMember<T = unknown>(parameters: Parameters.GetMember, callback?: Callback<T>): Promise<void | T> {
+  async getMember<T = Models.Member>(parameters: Parameters.GetMember, callback?: never): Promise<T>;
+  async getMember<T = Models.Member>(parameters: Parameters.GetMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/members/${parameters.id}`,
       method: 'GET',
@@ -28,23 +28,23 @@ export class Members {
         fields: parameters.fields,
         notifications: parameters.notifications,
         organizations: parameters.organizations,
-        organization_fields: parameters.organizationFields,
-        organization_paid_account: parameters.organizationPaidAccount,
+        organization_fields: parameters.organization.fields,
+        organization_paid_account: parameters.organization.paid.account,
         organizationsInvited: parameters.organizationsInvited,
-        organizationsInvited_fields: parameters.organizationsInvitedFields,
-        paid_account: parameters.paidAccount,
+        organizationsInvited_fields: parameters.organizationsInvited.fields,
+        paid_account: parameters.paid.account,
         savedSearches: parameters.savedSearches,
         tokens: parameters.tokens,
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMember' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update a Member */
   async updateMember<T = unknown>(parameters: Parameters.UpdateMember, callback: Callback<T>): Promise<void>;
   /** Update a Member */
-  async updateMember<T = unknown>(parameters: Parameters.UpdateMember, callback?: undefined): Promise<T>;
+  async updateMember<T = unknown>(parameters: Parameters.UpdateMember, callback?: never): Promise<T>;
   async updateMember<T = unknown>(parameters: Parameters.UpdateMember, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/members/${parameters.id}`,
@@ -61,27 +61,33 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateMember' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a particular property of a member */
   async getMemberField<T = unknown>(parameters: Parameters.GetMemberField, callback: Callback<T>): Promise<void>;
   /** Get a particular property of a member */
-  async getMemberField<T = unknown>(parameters: Parameters.GetMemberField, callback?: undefined): Promise<T>;
+  async getMemberField<T = unknown>(parameters: Parameters.GetMemberField, callback?: never): Promise<T>;
   async getMemberField<T = unknown>(parameters: Parameters.GetMemberField, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/members/${parameters.id}/${parameters.field}`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberField' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** List the actions for a member */
-  async getMemberActions<T = unknown>(parameters: Parameters.GetMemberActions, callback: Callback<T>): Promise<void>;
+  async getMemberActions<T = Array<Models.Member>>(
+    parameters: Parameters.GetMemberActions,
+    callback: Callback<T>
+  ): Promise<void>;
   /** List the actions for a member */
-  async getMemberActions<T = unknown>(parameters: Parameters.GetMemberActions, callback?: undefined): Promise<T>;
-  async getMemberActions<T = unknown>(
+  async getMemberActions<T = Array<Models.Member>>(
+    parameters: Parameters.GetMemberActions,
+    callback?: never
+  ): Promise<T>;
+  async getMemberActions<T = Array<Models.Member>>(
     parameters: Parameters.GetMemberActions,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -93,20 +99,20 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberActions' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a member's custom board backgrounds */
-  async getMemberBoardBackgrounds<T = unknown>(
+  async getMemberBoardBackgrounds<T = Array<Models.BoardBackground>>(
     parameters: Parameters.GetMemberBoardBackgrounds,
     callback: Callback<T>
   ): Promise<void>;
   /** Get a member's custom board backgrounds */
-  async getMemberBoardBackgrounds<T = unknown>(
+  async getMemberBoardBackgrounds<T = Array<Models.BoardBackground>>(
     parameters: Parameters.GetMemberBoardBackgrounds,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getMemberBoardBackgrounds<T = unknown>(
+  async getMemberBoardBackgrounds<T = Array<Models.BoardBackground>>(
     parameters: Parameters.GetMemberBoardBackgrounds,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -118,20 +124,20 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberBoardBackgrounds' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Upload a new boardBackground */
-  async uploadMemberBoardBackground<T = unknown>(
+  async uploadMemberBoardBackground<T = Array<Models.BoardBackground>>(
     parameters: Parameters.UploadMemberBoardBackground,
     callback: Callback<T>
   ): Promise<void>;
   /** Upload a new boardBackground */
-  async uploadMemberBoardBackground<T = unknown>(
+  async uploadMemberBoardBackground<T = Array<Models.BoardBackground>>(
     parameters: Parameters.UploadMemberBoardBackground,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async uploadMemberBoardBackground<T = unknown>(
+  async uploadMemberBoardBackground<T = Array<Models.BoardBackground>>(
     parameters: Parameters.UploadMemberBoardBackground,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -143,7 +149,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'uploadMemberBoardBackground' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a member's board background */
@@ -154,7 +160,7 @@ export class Members {
   /** Get a member's board background */
   async getMemberBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberBoardBackground,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getMemberBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberBoardBackground,
@@ -168,7 +174,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberBoardBackground' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update a board background */
@@ -179,7 +185,7 @@ export class Members {
   /** Update a board background */
   async updateBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateBoardBackground,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async updateBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateBoardBackground,
@@ -194,7 +200,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateBoardBackground' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete a board background */
@@ -205,7 +211,7 @@ export class Members {
   /** Delete a board background */
   async deleteMemberBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberBoardBackgroud,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteMemberBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberBoardBackgroud,
@@ -216,7 +222,7 @@ export class Members {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteMemberBoardBackground' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** List a member's board stars */
@@ -225,7 +231,7 @@ export class Members {
     callback: Callback<T>
   ): Promise<void>;
   /** List a member's board stars */
-  async getMemberBoardStars<T = unknown>(parameters: Parameters.GetMemberBoardStars, callback?: undefined): Promise<T>;
+  async getMemberBoardStars<T = unknown>(parameters: Parameters.GetMemberBoardStars, callback?: never): Promise<T>;
   async getMemberBoardStars<T = unknown>(
     parameters: Parameters.GetMemberBoardStars,
     callback?: Callback<T>,
@@ -235,14 +241,17 @@ export class Members {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberBoardStars' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Star a new board on behalf of a Member */
-  async starMemberBoard<T = unknown>(parameters: Parameters.StarMemberBoard, callback: Callback<T>): Promise<void>;
+  async starMemberBoard<T = Models.BoardStars[]>(
+    parameters: Parameters.StarMemberBoard,
+    callback: Callback<T>
+  ): Promise<void>;
   /** Star a new board on behalf of a Member */
-  async starMemberBoard<T = unknown>(parameters: Parameters.StarMemberBoard, callback?: undefined): Promise<T>;
-  async starMemberBoard<T = unknown>(
+  async starMemberBoard<T = Models.BoardStars[]>(parameters: Parameters.StarMemberBoard, callback?: never): Promise<T>;
+  async starMemberBoard<T = Models.BoardStars[]>(
     parameters: Parameters.StarMemberBoard,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -255,7 +264,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'starMemberBoard' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a specific boardStar */
@@ -266,7 +275,7 @@ export class Members {
   /** Get a specific boardStar */
   async getMemberBoardStar<T = Models.BoardStars>(
     parameters: Parameters.GetMemberBoardStar,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getMemberBoardStar<T = Models.BoardStars>(
     parameters: Parameters.GetMemberBoardStar,
@@ -277,7 +286,7 @@ export class Members {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberBoardStar' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update the position of a starred board */
@@ -286,10 +295,7 @@ export class Members {
     callback: Callback<T>
   ): Promise<void>;
   /** Update the position of a starred board */
-  async updateMemberBoardStar<T = unknown>(
-    parameters: Parameters.UpdateMemberBoardStar,
-    callback?: undefined
-  ): Promise<T>;
+  async updateMemberBoardStar<T = unknown>(parameters: Parameters.UpdateMemberBoardStar, callback?: never): Promise<T>;
   async updateMemberBoardStar<T = unknown>(
     parameters: Parameters.UpdateMemberBoardStar,
     callback?: Callback<T>,
@@ -302,13 +308,13 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateMemberBoardStar' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Unstar a board */
   async unstarMemberBoard<T = unknown>(parameters: Parameters.UnstarMemberBoard, callback: Callback<T>): Promise<void>;
   /** Unstar a board */
-  async unstarMemberBoard<T = unknown>(parameters: Parameters.UnstarMemberBoard, callback?: undefined): Promise<T>;
+  async unstarMemberBoard<T = unknown>(parameters: Parameters.UnstarMemberBoard, callback?: never): Promise<T>;
   async unstarMemberBoard<T = unknown>(
     parameters: Parameters.UnstarMemberBoard,
     callback?: Callback<T>,
@@ -318,7 +324,7 @@ export class Members {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'unstarMemberBoard' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Lists the boards that the user is a member of. */
@@ -327,7 +333,7 @@ export class Members {
     callback: Callback<T>
   ): Promise<void>;
   /** Lists the boards that the user is a member of. */
-  async getMemberBoards<T = Models.Board[]>(parameters: Parameters.GetMemberBoards, callback?: undefined): Promise<T>;
+  async getMemberBoards<T = Models.Board[]>(parameters: Parameters.GetMemberBoards, callback?: never): Promise<T>;
   async getMemberBoards<T = Models.Board[]>(
     parameters: Parameters.GetMemberBoards,
     callback?: Callback<T>,
@@ -344,20 +350,20 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberBoards' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get the boards the member has been invited to */
-  async getMemberBoardsInvited<T = unknown>(
+  async getMemberBoardsInvited<T = Models.Board[]>(
     parameters: Parameters.GetMemberBoardsInvited,
     callback: Callback<T>
   ): Promise<void>;
   /** Get the boards the member has been invited to */
-  async getMemberBoardsInvited<T = unknown>(
+  async getMemberBoardsInvited<T = Models.Board[]>(
     parameters: Parameters.GetMemberBoardsInvited,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getMemberBoardsInvited<T = unknown>(
+  async getMemberBoardsInvited<T = Models.Board[]>(
     parameters: Parameters.GetMemberBoardsInvited,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -369,14 +375,17 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberBoardsInvited' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Gets the cards a member is on */
-  async getMemberCards<T = unknown>(parameters: Parameters.GetMemberCards, callback: Callback<T>): Promise<void>;
+  async getMemberCards<T = Models.Card[]>(parameters: Parameters.GetMemberCards, callback: Callback<T>): Promise<void>;
   /** Gets the cards a member is on */
-  async getMemberCards<T = unknown>(parameters: Parameters.GetMemberCards, callback?: undefined): Promise<T>;
-  async getMemberCards<T = unknown>(parameters: Parameters.GetMemberCards, callback?: Callback<T>): Promise<void | T> {
+  async getMemberCards<T = Models.Card[]>(parameters: Parameters.GetMemberCards, callback?: never): Promise<T>;
+  async getMemberCards<T = Models.Card[]>(
+    parameters: Parameters.GetMemberCards,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/members/${parameters.id}/cards`,
       method: 'GET',
@@ -385,20 +394,20 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberCards' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a member's custom board backgrounds */
-  async getMemberCustomBoardBackgrounds<T = unknown>(
+  async getMemberCustomBoardBackgrounds<T = Models.BoardBackground[]>(
     parameters: Parameters.GetMemberCustomBoardBackgrounds,
     callback: Callback<T>
   ): Promise<void>;
   /** Get a member's custom board backgrounds */
-  async getMemberCustomBoardBackgrounds<T = unknown>(
+  async getMemberCustomBoardBackgrounds<T = Models.BoardBackground[]>(
     parameters: Parameters.GetMemberCustomBoardBackgrounds,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getMemberCustomBoardBackgrounds<T = unknown>(
+  async getMemberCustomBoardBackgrounds<T = Models.BoardBackground[]>(
     parameters: Parameters.GetMemberCustomBoardBackgrounds,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -407,7 +416,7 @@ export class Members {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberCustomBoardBackgrounds' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Upload a new custom board background */
@@ -418,7 +427,7 @@ export class Members {
   /** Upload a new custom board background */
   async uploadMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UploadMemberCustomBoardBackground,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async uploadMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UploadMemberCustomBoardBackground,
@@ -432,7 +441,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'uploadMemberCustomBoardBackground' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a specific custom board background */
@@ -443,7 +452,7 @@ export class Members {
   /** Get a specific custom board background */
   async getMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberCustomBoardBackground,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberCustomBoardBackground,
@@ -454,7 +463,7 @@ export class Members {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberCustomBoardBackground' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update a specific custom board background */
@@ -465,7 +474,7 @@ export class Members {
   /** Update a specific custom board background */
   async updateMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateMemberCustomBoardBackground,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async updateMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateMemberCustomBoardBackground,
@@ -480,7 +489,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateMemberCustomBoardBackground' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete a specific custom board background */
@@ -491,7 +500,7 @@ export class Members {
   /** Delete a specific custom board background */
   async deleteMemberCustomBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberCustomBoardBackground,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteMemberCustomBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberCustomBoardBackground,
@@ -502,20 +511,20 @@ export class Members {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteMemberCustomBoardBackground' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a Member's uploaded custom Emojis */
-  async getMemberCustomEmojis<T = unknown>(
+  async getMemberCustomEmojis<T = Models.CustomEmoji[]>(
     parameters: Parameters.GetMemberCustomEmojis,
     callback: Callback<T>
   ): Promise<void>;
   /** Get a Member's uploaded custom Emojis */
-  async getMemberCustomEmojis<T = unknown>(
+  async getMemberCustomEmojis<T = Models.CustomEmoji[]>(
     parameters: Parameters.GetMemberCustomEmojis,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getMemberCustomEmojis<T = unknown>(
+  async getMemberCustomEmojis<T = Models.CustomEmoji[]>(
     parameters: Parameters.GetMemberCustomEmojis,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -524,7 +533,7 @@ export class Members {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberCustomEmojis' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Create a new custom Emoji */
@@ -535,7 +544,7 @@ export class Members {
   /** Create a new custom Emoji */
   async createMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.CreateMemberCustomEmoji,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async createMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.CreateMemberCustomEmoji,
@@ -550,7 +559,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createMemberCustomEmoji' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a Member's custom Emoji */
@@ -561,7 +570,7 @@ export class Members {
   /** Get a Member's custom Emoji */
   async getMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.GetMemberCustomEmoji,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.GetMemberCustomEmoji,
@@ -575,20 +584,20 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberCustomEmoji' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a Member's uploaded stickers */
-  async getMemberCustomStickers<T = unknown>(
+  async getMemberCustomStickers<T = Models.CustomSticker[]>(
     parameters: Parameters.GetMemberCustomStickers,
     callback: Callback<T>
   ): Promise<void>;
   /** Get a Member's uploaded stickers */
-  async getMemberCustomStickers<T = unknown>(
+  async getMemberCustomStickers<T = Models.CustomSticker[]>(
     parameters: Parameters.GetMemberCustomStickers,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getMemberCustomStickers<T = unknown>(
+  async getMemberCustomStickers<T = Models.CustomSticker[]>(
     parameters: Parameters.GetMemberCustomStickers,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -597,7 +606,7 @@ export class Members {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberCustomStickers' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Upload a new custom sticker */
@@ -608,7 +617,7 @@ export class Members {
   /** Upload a new custom sticker */
   async uploadMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.UploadMemberCustomSticker,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async uploadMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.UploadMemberCustomSticker,
@@ -622,7 +631,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'uploadMemberCustomSticker' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a Member's custom Sticker */
@@ -633,7 +642,7 @@ export class Members {
   /** Get a Member's custom Sticker */
   async getMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.GetMemberCustomSticker,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.GetMemberCustomSticker,
@@ -647,7 +656,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberCustomSticker' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete a Member's custom Sticker */
@@ -658,7 +667,7 @@ export class Members {
   /** Delete a Member's custom Sticker */
   async deleteMemberCustomSticker<T = unknown>(
     parameters: Parameters.DeleteMemberCustomSticker,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteMemberCustomSticker<T = unknown>(
     parameters: Parameters.DeleteMemberCustomSticker,
@@ -669,20 +678,20 @@ export class Members {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteMemberCustomSticker' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a member's notifications */
-  async getMemberNotifications<T = unknown>(
+  async getMemberNotifications<T = Models.Notification[]>(
     parameters: Parameters.GetMemberNotifications,
     callback: Callback<T>
   ): Promise<void>;
   /** Get a member's notifications */
-  async getMemberNotifications<T = unknown>(
+  async getMemberNotifications<T = Models.Notification[]>(
     parameters: Parameters.GetMemberNotifications,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getMemberNotifications<T = unknown>(
+  async getMemberNotifications<T = Models.Notification[]>(
     parameters: Parameters.GetMemberNotifications,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -704,18 +713,18 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberNotifications' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Get a member's teams */
+  /** Get a member's Workspaces */
   async getMemberOrganizations<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizations,
     callback: Callback<T>
   ): Promise<void>;
-  /** Get a member's teams */
+  /** Get a member's Workspaces */
   async getMemberOrganizations<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizations,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getMemberOrganizations<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizations,
@@ -731,20 +740,20 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberOrganizations' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /** Get a member's teams they have been invited to */
-  async getMemberOrganizationsInvited<T = unknown>(
+  /** Get a member's Workspaces they have been invited to */
+  async getMemberOrganizationsInvited<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizationsInvited,
     callback: Callback<T>
   ): Promise<void>;
-  /** Get a member's teams they have been invited to */
-  async getMemberOrganizationsInvited<T = unknown>(
+  /** Get a member's Workspaces they have been invited to */
+  async getMemberOrganizationsInvited<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizationsInvited,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getMemberOrganizationsInvited<T = unknown>(
+  async getMemberOrganizationsInvited<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizationsInvited,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -756,20 +765,20 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberOrganizationsInvited' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** List the saved searches of a Member */
-  async getMemberSavedSearches<T = unknown>(
+  async getMemberSavedSearches<T = Models.SavedSearch[]>(
     parameters: Parameters.GetMemberSavedSearches,
     callback: Callback<T>
   ): Promise<void>;
   /** List the saved searches of a Member */
-  async getMemberSavedSearches<T = unknown>(
+  async getMemberSavedSearches<T = Models.SavedSearch[]>(
     parameters: Parameters.GetMemberSavedSearches,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
-  async getMemberSavedSearches<T = unknown>(
+  async getMemberSavedSearches<T = Models.SavedSearch[]>(
     parameters: Parameters.GetMemberSavedSearches,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -778,7 +787,7 @@ export class Members {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberSavedSearches' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Create a saved search */
@@ -789,7 +798,7 @@ export class Members {
   /** Create a saved search */
   async createMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.CreateMemberSavedSearch,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async createMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.CreateMemberSavedSearch,
@@ -805,7 +814,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createMemberSavedSearch' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a saved search */
@@ -816,7 +825,7 @@ export class Members {
   /** Get a saved search */
   async getMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.GetMemberSavedSearch,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.GetMemberSavedSearch,
@@ -827,7 +836,7 @@ export class Members {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberSavedSearch' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update a saved search */
@@ -838,7 +847,7 @@ export class Members {
   /** Update a saved search */
   async updateMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.UpdateMemberSavedSerch,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async updateMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.UpdateMemberSavedSerch,
@@ -854,7 +863,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateMemberSavedSearch' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete a saved search */
@@ -865,7 +874,7 @@ export class Members {
   /** Delete a saved search */
   async deleteMemberSavedSearch<T = unknown>(
     parameters: Parameters.DeleteMemberSavedSearch,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteMemberSavedSearch<T = unknown>(
     parameters: Parameters.DeleteMemberSavedSearch,
@@ -876,14 +885,17 @@ export class Members {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteMemberSavedSearch' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** List a members app tokens */
-  async getMemberTokens<T = unknown>(parameters: Parameters.GetMemberTokens, callback: Callback<T>): Promise<void>;
+  async getMemberTokens<T = Models.Token[]>(
+    parameters: Parameters.GetMemberTokens,
+    callback: Callback<T>
+  ): Promise<void>;
   /** List a members app tokens */
-  async getMemberTokens<T = unknown>(parameters: Parameters.GetMemberTokens, callback?: undefined): Promise<T>;
-  async getMemberTokens<T = unknown>(
+  async getMemberTokens<T = Models.Token[]>(parameters: Parameters.GetMemberTokens, callback?: never): Promise<T>;
+  async getMemberTokens<T = Models.Token[]>(
     parameters: Parameters.GetMemberTokens,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -895,7 +907,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getMemberTokens' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Create a new avatar for a member */
@@ -904,7 +916,7 @@ export class Members {
     callback: Callback<T>
   ): Promise<void>;
   /** Create a new avatar for a member */
-  async createMemberAvatar<T = unknown>(parameters: Parameters.CreateMemberAvatar, callback?: undefined): Promise<T>;
+  async createMemberAvatar<T = unknown>(parameters: Parameters.CreateMemberAvatar, callback?: never): Promise<T>;
   async createMemberAvatar<T = unknown>(
     parameters: Parameters.CreateMemberAvatar,
     callback?: Callback<T>,
@@ -917,7 +929,7 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createMemberAvatar' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Dismiss a message */
@@ -926,10 +938,7 @@ export class Members {
     callback: Callback<T>
   ): Promise<void>;
   /** Dismiss a message */
-  async dismissMemberMessage<T = unknown>(
-    parameters: Parameters.DismissMemberMessage,
-    callback?: undefined
-  ): Promise<T>;
+  async dismissMemberMessage<T = unknown>(parameters: Parameters.DismissMemberMessage, callback?: never): Promise<T>;
   async dismissMemberMessage<T = unknown>(
     parameters: Parameters.DismissMemberMessage,
     callback?: Callback<T>,
@@ -942,6 +951,6 @@ export class Members {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'dismissMemberMessage' });
+    return this.client.sendRequest(config, callback);
   }
 }

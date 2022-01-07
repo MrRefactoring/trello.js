@@ -6,7 +6,7 @@ export class Notifications {
   constructor(private client: Client) {}
 
   async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback: Callback<T>): Promise<void>;
-  async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback?: undefined): Promise<T>;
+  async getNotification<T = unknown>(parameters: Parameters.GetNotification, callback?: never): Promise<T>;
   async getNotification<T = unknown>(
     parameters: Parameters.GetNotification,
     callback?: Callback<T>,
@@ -32,7 +32,7 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getNotification' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update the read status of a notification */
@@ -41,7 +41,7 @@ export class Notifications {
     callback: Callback<T>
   ): Promise<void>;
   /** Update the read status of a notification */
-  async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback?: undefined): Promise<T>;
+  async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback?: never): Promise<T>;
   async updateNotification<T = unknown>(
     parameters: Parameters.UpdateNotification,
     callback?: Callback<T>,
@@ -54,7 +54,7 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateNotification' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get a specific property of a notification */
@@ -63,10 +63,7 @@ export class Notifications {
     callback: Callback<T>
   ): Promise<void>;
   /** Get a specific property of a notification */
-  async getNotificationField<T = unknown>(
-    parameters: Parameters.GetNotificationField,
-    callback?: undefined
-  ): Promise<T>;
+  async getNotificationField<T = unknown>(parameters: Parameters.GetNotificationField, callback?: never): Promise<T>;
   async getNotificationField<T = unknown>(
     parameters: Parameters.GetNotificationField,
     callback?: Callback<T>,
@@ -76,7 +73,7 @@ export class Notifications {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getNotificationField' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Mark all notifications as read */
@@ -87,7 +84,7 @@ export class Notifications {
   /** Mark all notifications as read */
   async markAllNotificationsAsRead<T = unknown>(
     parameters?: Parameters.MarkAllNotificationsAsRead,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async markAllNotificationsAsRead<T = unknown>(
     parameters?: Parameters.MarkAllNotificationsAsRead,
@@ -102,7 +99,7 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'markAllNotificationsAsRead' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update Notification's read status */
@@ -113,7 +110,7 @@ export class Notifications {
   /** Update Notification's read status */
   async updateNotificationReadStatus<T = unknown>(
     parameters: Parameters.UpdateNotificationReadStatus,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async updateNotificationReadStatus<T = unknown>(
     parameters: Parameters.UpdateNotificationReadStatus,
@@ -127,7 +124,7 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateNotificationReadStatus' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get the board a notification is associated with */
@@ -136,10 +133,7 @@ export class Notifications {
     callback: Callback<T>
   ): Promise<void>;
   /** Get the board a notification is associated with */
-  async getNotificationBoard<T = unknown>(
-    parameters: Parameters.GetNotificationBoard,
-    callback?: undefined
-  ): Promise<T>;
+  async getNotificationBoard<T = unknown>(parameters: Parameters.GetNotificationBoard, callback?: never): Promise<T>;
   async getNotificationBoard<T = unknown>(
     parameters: Parameters.GetNotificationBoard,
     callback?: Callback<T>,
@@ -152,7 +146,7 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getNotificationBoard' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get the card a notification is associated with */
@@ -161,7 +155,7 @@ export class Notifications {
     callback: Callback<T>
   ): Promise<void>;
   /** Get the card a notification is associated with */
-  async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback?: undefined): Promise<T>;
+  async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback?: never): Promise<T>;
   async getNotificationCard<T = unknown>(
     parameters: Parameters.GetNotificationCard,
     callback?: Callback<T>,
@@ -174,7 +168,7 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getNotificationCard' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get the list a notification is associated with */
@@ -183,7 +177,7 @@ export class Notifications {
     callback: Callback<T>
   ): Promise<void>;
   /** Get the list a notification is associated with */
-  async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback?: undefined): Promise<T>;
+  async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback?: never): Promise<T>;
   async getNotificationList<T = unknown>(
     parameters: Parameters.GetNotificationList,
     callback?: Callback<T>,
@@ -196,7 +190,7 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getNotificationList' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get the member (not the creator) a notification is about */
@@ -205,10 +199,7 @@ export class Notifications {
     callback: Callback<T>
   ): Promise<void>;
   /** Get the member (not the creator) a notification is about */
-  async getNotificationMember<T = unknown>(
-    parameters: Parameters.GetNotificationMember,
-    callback?: undefined
-  ): Promise<T>;
+  async getNotificationMember<T = unknown>(parameters: Parameters.GetNotificationMember, callback?: never): Promise<T>;
   async getNotificationMember<T = unknown>(
     parameters: Parameters.GetNotificationMember,
     callback?: Callback<T>,
@@ -221,7 +212,7 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getNotificationMember' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get the member who created the notification */
@@ -232,7 +223,7 @@ export class Notifications {
   /** Get the member who created the notification */
   async getNotificationMemberCreator<T = unknown>(
     parameters: Parameters.GetNotificationMemberCreator,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getNotificationMemberCreator<T = unknown>(
     parameters: Parameters.GetNotificationMemberCreator,
@@ -246,7 +237,7 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getNotificationMemberCreator' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get the organization a notification is associated with */
@@ -257,7 +248,7 @@ export class Notifications {
   /** Get the organization a notification is associated with */
   async getNotificationOrganization<T = unknown>(
     parameters: Parameters.GetNotificationOrganization,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getNotificationOrganization<T = unknown>(
     parameters: Parameters.GetNotificationOrganization,
@@ -271,6 +262,6 @@ export class Notifications {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getNotificationOrganization' });
+    return this.client.sendRequest(config, callback);
   }
 }

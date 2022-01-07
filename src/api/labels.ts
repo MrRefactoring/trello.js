@@ -8,7 +8,7 @@ export class Labels {
   /** Get information about a single Label. */
   async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback: Callback<T>): Promise<void>;
   /** Get information about a single Label. */
-  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback?: undefined): Promise<T>;
+  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback?: never): Promise<T>;
   async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
@@ -18,13 +18,13 @@ export class Labels {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getLabel' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update a label by ID. */
   async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback: Callback<T>): Promise<void>;
   /** Update a label by ID. */
-  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback?: undefined): Promise<T>;
+  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback?: never): Promise<T>;
   async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
@@ -35,26 +35,26 @@ export class Labels {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateLabel' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete a label by ID. */
   async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback: Callback<T>): Promise<void>;
   /** Delete a label by ID. */
-  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback?: undefined): Promise<T>;
+  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback?: never): Promise<T>;
   async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/labels/${parameters.id}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteLabel' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update a field on a label. */
   async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback: Callback<T>): Promise<void>;
   /** Update a field on a label. */
-  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback?: undefined): Promise<T>;
+  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback?: never): Promise<T>;
   async updateLabelField<T = unknown>(
     parameters: Parameters.UpdateLabelField,
     callback?: Callback<T>,
@@ -67,13 +67,13 @@ export class Labels {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateLabelField' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Create a new Label on a Board. */
   async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback: Callback<T>): Promise<void>;
   /** Create a new Label on a Board. */
-  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback?: undefined): Promise<T>;
+  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback?: never): Promise<T>;
   async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/labels',
@@ -85,6 +85,6 @@ export class Labels {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createLabel' });
+    return this.client.sendRequest(config, callback);
   }
 }

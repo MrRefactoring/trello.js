@@ -6,7 +6,7 @@ export class Checklists {
   constructor(private client: Client) {}
 
   async createChecklist<T = unknown>(parameters: Parameters.CreateChecklist, callback: Callback<T>): Promise<void>;
-  async createChecklist<T = unknown>(parameters: Parameters.CreateChecklist, callback?: undefined): Promise<T>;
+  async createChecklist<T = unknown>(parameters: Parameters.CreateChecklist, callback?: never): Promise<T>;
   async createChecklist<T = unknown>(
     parameters: Parameters.CreateChecklist,
     callback?: Callback<T>,
@@ -22,11 +22,11 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createChecklist' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklist<T = unknown>(parameters: Parameters.GetChecklist, callback: Callback<T>): Promise<void>;
-  async getChecklist<T = unknown>(parameters: Parameters.GetChecklist, callback?: undefined): Promise<T>;
+  async getChecklist<T = unknown>(parameters: Parameters.GetChecklist, callback?: never): Promise<T>;
   async getChecklist<T = unknown>(parameters: Parameters.GetChecklist, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}`,
@@ -39,13 +39,13 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklist' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update an existing checklist. */
   async updateChecklist<T = unknown>(parameters: Parameters.UpdateChecklist, callback: Callback<T>): Promise<void>;
   /** Update an existing checklist. */
-  async updateChecklist<T = unknown>(parameters: Parameters.UpdateChecklist, callback?: undefined): Promise<T>;
+  async updateChecklist<T = unknown>(parameters: Parameters.UpdateChecklist, callback?: never): Promise<T>;
   async updateChecklist<T = unknown>(
     parameters: Parameters.UpdateChecklist,
     callback?: Callback<T>,
@@ -59,13 +59,13 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateChecklist' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete a checklist */
   async deleteChecklist<T = unknown>(parameters: Parameters.DeleteChecklist, callback: Callback<T>): Promise<void>;
   /** Delete a checklist */
-  async deleteChecklist<T = unknown>(parameters: Parameters.DeleteChecklist, callback?: undefined): Promise<T>;
+  async deleteChecklist<T = unknown>(parameters: Parameters.DeleteChecklist, callback?: never): Promise<T>;
   async deleteChecklist<T = unknown>(
     parameters: Parameters.DeleteChecklist,
     callback?: Callback<T>,
@@ -75,11 +75,11 @@ export class Checklists {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteChecklist' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklistField<T = unknown>(parameters: Parameters.GetChecklistField, callback: Callback<T>): Promise<void>;
-  async getChecklistField<T = unknown>(parameters: Parameters.GetChecklistField, callback?: undefined): Promise<T>;
+  async getChecklistField<T = unknown>(parameters: Parameters.GetChecklistField, callback?: never): Promise<T>;
   async getChecklistField<T = unknown>(
     parameters: Parameters.GetChecklistField,
     callback?: Callback<T>,
@@ -89,17 +89,14 @@ export class Checklists {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistField' });
+    return this.client.sendRequest(config, callback);
   }
 
   async updateChecklistField<T = unknown>(
     parameters: Parameters.UpdateChecklistField,
     callback: Callback<T>
   ): Promise<void>;
-  async updateChecklistField<T = unknown>(
-    parameters: Parameters.UpdateChecklistField,
-    callback?: undefined
-  ): Promise<T>;
+  async updateChecklistField<T = unknown>(parameters: Parameters.UpdateChecklistField, callback?: never): Promise<T>;
   async updateChecklistField<T = unknown>(
     parameters: Parameters.UpdateChecklistField,
     callback?: Callback<T>,
@@ -112,11 +109,11 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateChecklistField' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklistBoard<T = unknown>(parameters: Parameters.GetChecklistBoard, callback: Callback<T>): Promise<void>;
-  async getChecklistBoard<T = unknown>(parameters: Parameters.GetChecklistBoard, callback?: undefined): Promise<T>;
+  async getChecklistBoard<T = unknown>(parameters: Parameters.GetChecklistBoard, callback?: never): Promise<T>;
   async getChecklistBoard<T = unknown>(
     parameters: Parameters.GetChecklistBoard,
     callback?: Callback<T>,
@@ -129,11 +126,11 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistBoard' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklistCards<T = unknown>(parameters: Parameters.GetChecklistCards, callback: Callback<T>): Promise<void>;
-  async getChecklistCards<T = unknown>(parameters: Parameters.GetChecklistCards, callback?: undefined): Promise<T>;
+  async getChecklistCards<T = unknown>(parameters: Parameters.GetChecklistCards, callback?: never): Promise<T>;
   async getChecklistCards<T = unknown>(
     parameters: Parameters.GetChecklistCards,
     callback?: Callback<T>,
@@ -143,7 +140,7 @@ export class Checklists {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistCards' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklistCheckItems<T = unknown>(
@@ -152,7 +149,7 @@ export class Checklists {
   ): Promise<void>;
   async getChecklistCheckItems<T = unknown>(
     parameters: Parameters.GetChecklistCheckItems,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async getChecklistCheckItems<T = unknown>(
     parameters: Parameters.GetChecklistCheckItems,
@@ -167,7 +164,7 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistCheckItems' });
+    return this.client.sendRequest(config, callback);
   }
 
   async createChecklistCheckItems<T = unknown>(
@@ -176,7 +173,7 @@ export class Checklists {
   ): Promise<void>;
   async createChecklistCheckItems<T = unknown>(
     parameters: Parameters.CreateChecklistCheckItems,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async createChecklistCheckItems<T = unknown>(
     parameters: Parameters.CreateChecklistCheckItems,
@@ -192,17 +189,14 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createChecklistCheckItems' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklistCheckItem<T = unknown>(
     parameters: Parameters.GetChecklistCheckItem,
     callback: Callback<T>
   ): Promise<void>;
-  async getChecklistCheckItem<T = unknown>(
-    parameters: Parameters.GetChecklistCheckItem,
-    callback?: undefined
-  ): Promise<T>;
+  async getChecklistCheckItem<T = unknown>(parameters: Parameters.GetChecklistCheckItem, callback?: never): Promise<T>;
   async getChecklistCheckItem<T = unknown>(
     parameters: Parameters.GetChecklistCheckItem,
     callback?: Callback<T>,
@@ -215,7 +209,7 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistCheckItem' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Remove an item from a checklist */
@@ -226,7 +220,7 @@ export class Checklists {
   /** Remove an item from a checklist */
   async deleteChecklistCheckItem<T = unknown>(
     parameters: Parameters.DeleteChecklistCheckItem,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteChecklistCheckItem<T = unknown>(
     parameters: Parameters.DeleteChecklistCheckItem,
@@ -237,6 +231,6 @@ export class Checklists {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteChecklistCheckItem' });
+    return this.client.sendRequest(config, callback);
   }
 }

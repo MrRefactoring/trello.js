@@ -11,7 +11,7 @@ export class Applications {
   ): Promise<void>;
   async applicationsKeyCompliance<T = unknown>(
     parameters: Parameters.ApplicationsKeyCompliance,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async applicationsKeyCompliance<T = unknown>(
     parameters: Parameters.ApplicationsKeyCompliance,
@@ -22,6 +22,6 @@ export class Applications {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'applicationsKeyCompliance' });
+    return this.client.sendRequest(config, callback);
   }
 }

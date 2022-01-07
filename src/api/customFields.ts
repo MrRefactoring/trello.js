@@ -14,7 +14,7 @@ export class CustomFields {
   /** Create a new Custom Field on a board. */
   async createCustomField<T = Models.CustomField>(
     parameters?: Parameters.CreateCustomField,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async createCustomField<T = Models.CustomField>(
     parameters?: Parameters.CreateCustomField,
@@ -34,14 +34,14 @@ export class CustomFields {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createCustomField' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getCustomField<T = Models.CustomField>(
     parameters: Parameters.GetCustomField,
     callback: Callback<T>
   ): Promise<void>;
-  async getCustomField<T = Models.CustomField>(parameters: Parameters.GetCustomField, callback?: undefined): Promise<T>;
+  async getCustomField<T = Models.CustomField>(parameters: Parameters.GetCustomField, callback?: never): Promise<T>;
   async getCustomField<T = Models.CustomField>(
     parameters: Parameters.GetCustomField,
     callback?: Callback<T>,
@@ -51,7 +51,7 @@ export class CustomFields {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCustomField' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Update a Custom Field definition. */
@@ -62,7 +62,7 @@ export class CustomFields {
   /** Update a Custom Field definition. */
   async updateCustomField<T = Models.CustomField>(
     parameters: Parameters.UpdateCustomField,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async updateCustomField<T = Models.CustomField>(
     parameters: Parameters.UpdateCustomField,
@@ -78,13 +78,13 @@ export class CustomFields {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateCustomField' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete a Custom Field from a board. */
   async deleteCustomField<T = unknown>(parameters: Parameters.DeleteCustomField, callback: Callback<T>): Promise<void>;
   /** Delete a Custom Field from a board. */
-  async deleteCustomField<T = unknown>(parameters: Parameters.DeleteCustomField, callback?: undefined): Promise<T>;
+  async deleteCustomField<T = unknown>(parameters: Parameters.DeleteCustomField, callback?: never): Promise<T>;
   async deleteCustomField<T = unknown>(
     parameters: Parameters.DeleteCustomField,
     callback?: Callback<T>,
@@ -94,7 +94,7 @@ export class CustomFields {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteCustomField' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Get the options of a drop down Custom Field */
@@ -103,10 +103,7 @@ export class CustomFields {
     callback: Callback<T>
   ): Promise<void>;
   /** Get the options of a drop down Custom Field */
-  async getCustomFieldOptions<T = unknown>(
-    parameters: Parameters.GetCustomFieldOptions,
-    callback?: undefined
-  ): Promise<T>;
+  async getCustomFieldOptions<T = unknown>(parameters: Parameters.GetCustomFieldOptions, callback?: never): Promise<T>;
   async getCustomFieldOptions<T = unknown>(
     parameters: Parameters.GetCustomFieldOptions,
     callback?: Callback<T>,
@@ -116,7 +113,7 @@ export class CustomFields {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCustomFieldOptions' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Add an option to a dropdown Custom Field */
@@ -125,10 +122,7 @@ export class CustomFields {
     callback: Callback<T>
   ): Promise<void>;
   /** Add an option to a dropdown Custom Field */
-  async addCustomFieldOption<T = unknown>(
-    parameters: Parameters.AddCustomFieldOption,
-    callback?: undefined
-  ): Promise<T>;
+  async addCustomFieldOption<T = unknown>(parameters: Parameters.AddCustomFieldOption, callback?: never): Promise<T>;
   async addCustomFieldOption<T = unknown>(
     parameters: Parameters.AddCustomFieldOption,
     callback?: Callback<T>,
@@ -138,7 +132,7 @@ export class CustomFields {
       method: 'POST',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'addCustomFieldOption' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Retrieve a specific, existing Option on a given dropdown-type Custom Field */
@@ -147,10 +141,7 @@ export class CustomFields {
     callback: Callback<T>
   ): Promise<void>;
   /** Retrieve a specific, existing Option on a given dropdown-type Custom Field */
-  async getCustomFieldsOption<T = unknown>(
-    parameters: Parameters.GetCustomFieldsOption,
-    callback?: undefined
-  ): Promise<T>;
+  async getCustomFieldsOption<T = unknown>(parameters: Parameters.GetCustomFieldsOption, callback?: never): Promise<T>;
   async getCustomFieldsOption<T = unknown>(
     parameters: Parameters.GetCustomFieldsOption,
     callback?: Callback<T>,
@@ -160,7 +151,7 @@ export class CustomFields {
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getCustomFieldsOption' });
+    return this.client.sendRequest(config, callback);
   }
 
   /** Delete an option from a Custom Field dropdown. */
@@ -171,7 +162,7 @@ export class CustomFields {
   /** Delete an option from a Custom Field dropdown. */
   async deleteCustomFieldsOption<T = unknown>(
     parameters: Parameters.DeleteCustomFieldsOption,
-    callback?: undefined
+    callback?: never
   ): Promise<T>;
   async deleteCustomFieldsOption<T = unknown>(
     parameters: Parameters.DeleteCustomFieldsOption,
@@ -182,6 +173,6 @@ export class CustomFields {
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteCustomFieldsOption' });
+    return this.client.sendRequest(config, callback);
   }
 }

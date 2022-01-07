@@ -7,9 +7,9 @@ export class Emoji {
   constructor(private client: Client) {}
 
   /** List available Emoji */
-  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: Callback<T>): Promise<void>;
+  async emoji<T = Models.Emoji>(parameters: Parameters.Emoji | undefined, callback: Callback<T>): Promise<void>;
   /** List available Emoji */
-  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: undefined): Promise<T>;
+  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: never): Promise<T>;
   async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/emoji',
@@ -20,6 +20,6 @@ export class Emoji {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'emoji' });
+    return this.client.sendRequest(config, callback);
   }
 }
