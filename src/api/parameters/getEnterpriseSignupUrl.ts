@@ -5,6 +5,9 @@ export interface GetEnterpriseSignupUrl {
   confirmationAccepted?: boolean;
   /** Any valid URL. */
   returnUrl?: string;
-  /** Designates whether the user has seen/consented to the Trello ToS prior to being redirected to the enterprise signup page/their IdP. */
+  /**
+   * Designates whether the user has seen/consented to the Trello ToS prior to being redirected to the enterprise signup
+   * page/their IdP.
+   */
   tosAccepted?: boolean;
 }

@@ -19,7 +19,10 @@ export interface CreateCard {
   fileSource?: string;
   /** The ID of a card to copy into the new card */
   idCardSource?: string;
-  /** If using `idCardSource` you can specify which properties to copy over. `all` or comma-separated list of: `attachments,checklists,comments,due,labels,members,stickers` */
+  /**
+   * If using `idCardSource` you can specify which properties to copy over. `all` or comma-separated list of:
+   * `attachments,checklists,comments,due,labels,members,stickers`
+   */
   keepFromSource?: string;
   /** For use with/by the Map Power-Up */
   address?: string;

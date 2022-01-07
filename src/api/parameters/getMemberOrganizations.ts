@@ -3,7 +3,10 @@ export interface GetMemberOrganizations {
   id: string;
   /** One of: `all`, `members`, `none`, `public` (Note: `members` filters to only private teams) */
   filter?: string;
-  /** `all` or a comma-separated list of organization [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/) */
+  /**
+   * `all` or a comma-separated list of organization
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+   */
   fields?: 'all' | string;
   paidAccount?: boolean;
 }

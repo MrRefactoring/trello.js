@@ -1,2 +1,1 @@
-export interface TokenFields {
-}
+export interface TokenFields {}

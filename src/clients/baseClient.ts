@@ -53,7 +53,11 @@ export class BaseClient implements Client {
       .replace(/%5D/gi, ']');
   }
 
-  async sendRequest<T>(requestConfig: RequestConfig, callback?: Callback<T> | undefined, telemetryData?: any): Promise<T>;
+  async sendRequest<T>(
+    requestConfig: RequestConfig,
+    callback?: Callback<T> | undefined,
+    telemetryData?: any
+  ): Promise<T>;
   async sendRequest<T>(requestConfig: RequestConfig, callback: Callback<T>, telemetryData?: any): Promise<void>;
   async sendRequest<T>(rawRequestConfig: RequestConfig, callback?: Callback<T>): Promise<T | void> {
     const requestConfig: RequestConfig = {

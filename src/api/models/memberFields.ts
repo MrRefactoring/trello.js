@@ -1,2 +1,1 @@
-export interface MemberFields {
-}
+export interface MemberFields {}

@@ -3,13 +3,11 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Lists {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {}
 
-  /**
-   * Get information about a List */
+  /** Get information about a List */
   async getList<T = unknown>(parameters: Parameters.GetList, callback: Callback<T>): Promise<void>;
-  /**
-   * Get information about a List */
+  /** Get information about a List */
   async getList<T = unknown>(parameters: Parameters.GetList, callback?: undefined): Promise<T>;
   async getList<T = unknown>(parameters: Parameters.GetList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -23,11 +21,9 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'getList' });
   }
 
-  /**
-   * Update the properties of a List */
+  /** Update the properties of a List */
   async updateList<T = unknown>(parameters: Parameters.UpdateList, callback: Callback<T>): Promise<void>;
-  /**
-   * Update the properties of a List */
+  /** Update the properties of a List */
   async updateList<T = unknown>(parameters: Parameters.UpdateList, callback?: undefined): Promise<T>;
   async updateList<T = unknown>(parameters: Parameters.UpdateList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -45,11 +41,9 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'updateList' });
   }
 
-  /**
-   * Create a new List on a Board */
+  /** Create a new List on a Board */
   async createList<T = unknown>(parameters: Parameters.CreateList, callback: Callback<T>): Promise<void>;
-  /**
-   * Create a new List on a Board */
+  /** Create a new List on a Board */
   async createList<T = unknown>(parameters: Parameters.CreateList, callback?: undefined): Promise<T>;
   async createList<T = unknown>(parameters: Parameters.CreateList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -66,13 +60,20 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'createList' });
   }
 
-  /**
-   * Archive all cards in a list */
-  async archiveAllCardsInList<T = unknown>(parameters: Parameters.ArchiveAllCardsInList, callback: Callback<T>): Promise<void>;
-  /**
-   * Archive all cards in a list */
-  async archiveAllCardsInList<T = unknown>(parameters: Parameters.ArchiveAllCardsInList, callback?: undefined): Promise<T>;
-  async archiveAllCardsInList<T = unknown>(parameters: Parameters.ArchiveAllCardsInList, callback?: Callback<T>): Promise<void | T> {
+  /** Archive all cards in a list */
+  async archiveAllCardsInList<T = unknown>(
+    parameters: Parameters.ArchiveAllCardsInList,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** Archive all cards in a list */
+  async archiveAllCardsInList<T = unknown>(
+    parameters: Parameters.ArchiveAllCardsInList,
+    callback?: undefined
+  ): Promise<T>;
+  async archiveAllCardsInList<T = unknown>(
+    parameters: Parameters.ArchiveAllCardsInList,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/lists/${parameters.id}/archiveAllCards`,
       method: 'POST',
@@ -81,13 +82,17 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'archiveAllCardsInList' });
   }
 
-  /**
-   * Move all Cards in a List */
-  async moveAllCardsInList<T = unknown>(parameters: Parameters.MoveAllCardsInList, callback: Callback<T>): Promise<void>;
-  /**
-   * Move all Cards in a List */
+  /** Move all Cards in a List */
+  async moveAllCardsInList<T = unknown>(
+    parameters: Parameters.MoveAllCardsInList,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** Move all Cards in a List */
   async moveAllCardsInList<T = unknown>(parameters: Parameters.MoveAllCardsInList, callback?: undefined): Promise<T>;
-  async moveAllCardsInList<T = unknown>(parameters: Parameters.MoveAllCardsInList, callback?: Callback<T>): Promise<void | T> {
+  async moveAllCardsInList<T = unknown>(
+    parameters: Parameters.MoveAllCardsInList,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/lists/${parameters.id}/moveAllCards`,
       method: 'POST',
@@ -100,13 +105,14 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'moveAllCardsInList' });
   }
 
-  /**
-   * Archive or unarchive a list */
+  /** Archive or unarchive a list */
   async setListCloseState<T = unknown>(parameters: Parameters.SetListCloseState, callback: Callback<T>): Promise<void>;
-  /**
-   * Archive or unarchive a list */
+  /** Archive or unarchive a list */
   async setListCloseState<T = unknown>(parameters: Parameters.SetListCloseState, callback?: undefined): Promise<T>;
-  async setListCloseState<T = unknown>(parameters: Parameters.SetListCloseState, callback?: Callback<T>): Promise<void | T> {
+  async setListCloseState<T = unknown>(
+    parameters: Parameters.SetListCloseState,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/lists/${parameters.id}/closed`,
       method: 'PUT',
@@ -118,13 +124,20 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'setListCloseState' });
   }
 
-  /**
-   * Move a List to a different Board */
-  async moveListToDifferentBoard<T = unknown>(parameters: Parameters.MoveListToDifferentBoard, callback: Callback<T>): Promise<void>;
-  /**
-   * Move a List to a different Board */
-  async moveListToDifferentBoard<T = unknown>(parameters: Parameters.MoveListToDifferentBoard, callback?: undefined): Promise<T>;
-  async moveListToDifferentBoard<T = unknown>(parameters: Parameters.MoveListToDifferentBoard, callback?: Callback<T>): Promise<void | T> {
+  /** Move a List to a different Board */
+  async moveListToDifferentBoard<T = unknown>(
+    parameters: Parameters.MoveListToDifferentBoard,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** Move a List to a different Board */
+  async moveListToDifferentBoard<T = unknown>(
+    parameters: Parameters.MoveListToDifferentBoard,
+    callback?: undefined
+  ): Promise<T>;
+  async moveListToDifferentBoard<T = unknown>(
+    parameters: Parameters.MoveListToDifferentBoard,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/lists/${parameters.id}/idBoard`,
       method: 'PUT',
@@ -136,11 +149,9 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'moveListToDifferentBoard' });
   }
 
-  /**
-   * Rename a list */
+  /** Rename a list */
   async renameList<T = unknown>(parameters: Parameters.RenameList, callback: Callback<T>): Promise<void>;
-  /**
-   * Rename a list */
+  /** Rename a list */
   async renameList<T = unknown>(parameters: Parameters.RenameList, callback?: undefined): Promise<T>;
   async renameList<T = unknown>(parameters: Parameters.RenameList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -154,11 +165,9 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'renameList' });
   }
 
-  /**
-   * Get the Actions on a List */
+  /** Get the Actions on a List */
   async getListActions<T = unknown>(parameters: Parameters.GetListActions, callback: Callback<T>): Promise<void>;
-  /**
-   * Get the Actions on a List */
+  /** Get the Actions on a List */
   async getListActions<T = unknown>(parameters: Parameters.GetListActions, callback?: undefined): Promise<T>;
   async getListActions<T = unknown>(parameters: Parameters.GetListActions, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -172,11 +181,9 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'getListActions' });
   }
 
-  /**
-   * Get the board a list is on */
+  /** Get the board a list is on */
   async getListBoard<T = unknown>(parameters: Parameters.GetListBoard, callback: Callback<T>): Promise<void>;
-  /**
-   * Get the board a list is on */
+  /** Get the board a list is on */
   async getListBoard<T = unknown>(parameters: Parameters.GetListBoard, callback?: undefined): Promise<T>;
   async getListBoard<T = unknown>(parameters: Parameters.GetListBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -190,11 +197,9 @@ export class Lists {
     return this.client.sendRequest(config, callback, { methodName: 'getListBoard' });
   }
 
-  /**
-   * List the cards in a list */
+  /** List the cards in a list */
   async getListCards<T = unknown>(parameters: Parameters.GetListCards, callback: Callback<T>): Promise<void>;
-  /**
-   * List the cards in a list */
+  /** List the cards in a list */
   async getListCards<T = unknown>(parameters: Parameters.GetListCards, callback?: undefined): Promise<T>;
   async getListCards<T = unknown>(parameters: Parameters.GetListCards, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {

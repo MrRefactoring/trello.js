@@ -1,2 +1,1 @@
-export interface BoardFields {
-}
+export interface BoardFields {}

@@ -1,2 +1,1 @@
-export interface AttachmentFields {
-}
+export interface AttachmentFields {}

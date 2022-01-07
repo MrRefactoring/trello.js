@@ -3,13 +3,11 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Search {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {}
 
-  /**
-   * Find what you're looking for in Trello */
+  /** Find what you're looking for in Trello */
   async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback: Callback<T>): Promise<void>;
-  /**
-   * Find what you're looking for in Trello */
+  /** Find what you're looking for in Trello */
   async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback?: undefined): Promise<T>;
   async getSearch<T = unknown>(parameters: Parameters.GetSearch, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -42,13 +40,14 @@ export class Search {
     return this.client.sendRequest(config, callback, { methodName: 'getSearch' });
   }
 
-  /**
-   * Search for Trello members. */
+  /** Search for Trello members. */
   async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback: Callback<T>): Promise<void>;
-  /**
-   * Search for Trello members. */
+  /** Search for Trello members. */
   async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback?: undefined): Promise<T>;
-  async getSearchMembers<T = unknown>(parameters: Parameters.GetSearchMembers, callback?: Callback<T>): Promise<void | T> {
+  async getSearchMembers<T = unknown>(
+    parameters: Parameters.GetSearchMembers,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: '/search/members/',
       method: 'GET',

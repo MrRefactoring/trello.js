@@ -1,2 +1,1 @@
-export interface OrganizationFields {
-}
+export interface OrganizationFields {}

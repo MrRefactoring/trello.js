@@ -3,7 +3,10 @@ export interface CreateBoard {
   name: string;
   /** Determines whether to use the default set of labels. */
   defaultLabels?: boolean;
-  /** Determines whether to add the default set of lists to a board (To Do, Doing, Done). It is ignored if `idBoardSource` is provided. */
+  /**
+   * Determines whether to add the default set of lists to a board (To Do, Doing, Done). It is ignored if
+   * `idBoardSource` is provided.
+   */
   defaultLists?: boolean;
   /** A new description for the board, 0 to 16384 characters long */
   desc?: string;

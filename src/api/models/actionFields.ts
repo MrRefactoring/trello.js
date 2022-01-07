@@ -1,2 +1,1 @@
-export interface ActionFields {
-}
+export interface ActionFields {}
