@@ -96,16 +96,16 @@ export class Enterprises {
   }
 
   /** Get the signup URL for an enterprise. */
-  async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupurl>(
+  async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupUrl>(
     parameters: Parameters.GetEnterpriseSignupUrl,
     callback: Callback<T>
   ): Promise<void>;
   /** Get the signup URL for an enterprise. */
-  async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupurl>(
+  async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupUrl>(
     parameters: Parameters.GetEnterpriseSignupUrl,
     callback?: never
   ): Promise<T>;
-  async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupurl>(
+  async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupUrl>(
     parameters: Parameters.GetEnterpriseSignupUrl,
     callback?: Callback<T>,
   ): Promise<void | T> {

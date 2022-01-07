@@ -21,21 +21,25 @@ export interface Enterprise {
   organizationPrefs?: {
     boardVisibilityRestrict?: {};
     boardDeleteRestrict?: {};
-    attachmentRestrictions?: unknown[];
+    attachmentRestrictions?: string[];
   };
   ssoActivationFailed?: boolean;
-  idAdmins?: unknown[];
-  enterpriseDomains?: unknown[];
+  idAdmins?: TrelloID[];
+  enterpriseDomains?: string[];
   isRealEnterprise?: boolean;
-  pluginWhitelistingEnabled?: unknown[];
-  idOrganizations?: unknown[];
-  products?: unknown[];
+  pluginWhitelistingEnabled?: TrelloID[];
+  idOrganizations?: TrelloID[];
+  products?: number[];
   licenses?: {
     maxMembers?: number;
     totalMembers?: number;
-    relatedEnterprises?: unknown[];
+    relatedEnterprises?: {
+      name?: string;
+      displayName?: string;
+      count?: number;
+    }[];
   };
-  domains?: unknown[];
+  domains?: string[];
   dateOrganizationPrefsLastUpdated?: string;
   idp?: {
     requestSigned?: boolean;

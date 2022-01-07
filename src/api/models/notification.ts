@@ -13,5 +13,5 @@ export interface Notification {
   board?: Board;
   idMemberCreator?: TrelloID;
   idAction?: TrelloID;
-  reactions?: unknown[];
+  reactions?: any[];
 }
