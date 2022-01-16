@@ -17,17 +17,51 @@ export interface CreateCard {
   /** A URL starting with `http://` or `https://` */
   urlSource?: string;
   fileSource?: string;
+  /** The mimeType of the attachment. Max length 256 */
+  mimeType?: string;
   /** The ID of a card to copy into the new card */
   idCardSource?: string;
   /**
    * If using `idCardSource` you can specify which properties to copy over. `all` or comma-separated list of:
-   * `attachments,checklists,comments,due,labels,members,stickers`
+   *
+   * - Attachments
+   * - Checklists
+   * - CustomFields
+   * - Comments
+   * - Due
+   * - Labels
+   * - Members
+   * - Start
+   * - Stickers
    */
-  keepFromSource?: string;
-  /** For use with/by the Map Power-Up */
+  keepFromSource?:
+  | 'all'
+  | 'attachments'
+  | 'checklists'
+  | 'customFields'
+  | 'comments'
+  | 'due'
+  | 'labels'
+  | 'members'
+  | 'start'
+  | 'stickers'
+  | (
+    | 'attachments'
+    | 'checklists'
+    | 'customFields'
+    | 'comments'
+    | 'due'
+    | 'labels'
+    | 'members'
+    | 'start'
+    | 'stickers'
+  )[]
+  | string
+  | string[];
+  /** For use with/by the Map View */
   address?: string;
-  /** For use with/by the Map Power-Up */
+  /** For use with/by the Map View */
   locationName?: string;
-  /** For use with/by the Map Power-Up. Should take the form latitude,longitude */
+  /** For use with/by the Map View. Should take the form latitude,longitude */
   coordinates?: string;
 }

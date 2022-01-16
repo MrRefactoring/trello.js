@@ -7,10 +7,10 @@ export class Actions {
   constructor(private client: Client) {}
 
   /** Get an Action */
-  async getAction<T = unknown>(parameters: Parameters.GetAction, callback: Callback<T>): Promise<void>;
+  async getAction<T = Models.Action>(parameters: Parameters.GetAction, callback: Callback<T>): Promise<void>;
   /** Get an Action */
-  async getAction<T = unknown>(parameters: Parameters.GetAction, callback?: never): Promise<T>;
-  async getAction<T = unknown>(parameters: Parameters.GetAction, callback?: Callback<T>): Promise<void | T> {
+  async getAction<T = Models.Action>(parameters: Parameters.GetAction, callback?: never): Promise<T>;
+  async getAction<T = Models.Action>(parameters: Parameters.GetAction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}`,
       method: 'GET',
@@ -19,9 +19,9 @@ export class Actions {
         entities: parameters.entities,
         fields: parameters.fields,
         member: parameters.member,
-        member_fields: parameters.member.fields,
+        member_fields: parameters.memberFields,
         memberCreator: parameters.memberCreator,
-        memberCreator_fields: parameters.memberCreator.fields,
+        memberCreator_fields: parameters.memberCreatorFields,
       },
     };
 

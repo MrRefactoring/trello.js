@@ -8,6 +8,8 @@ export * from './getActionList';
 export * from './getActionMember';
 export * from './getActionMemberCreator';
 export * from './getActionOrganization';
+export * from './getEnterprisesIdClaimableOrganizations';
+export * from './getEnterprisesIdPendingOrganizations';
 export * from './updateActionText';
 export * from './getActionReactions';
 export * from './addActionReaction';

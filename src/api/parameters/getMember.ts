@@ -42,11 +42,24 @@ export interface GetMember {
   notifications?: string;
   /** One of: `all`, `members`, `none`, `public` */
   organizations?: string;
+
+  organization?: {
+    /**
+     * `all` or a comma-separated list of organization
+     * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+     */
+    fields?: 'all' | string | string[];
+    paidAccount?: boolean;
+  };
+
   /**
-   * `all` or a comma-separated list of organization
-   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+   * @deprecated Use `organization: { fields }` instead.
+   *
+   *   `all` or a comma-separated list of organization
+   *   [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
   organizationFields?: 'all' | string[];
+  /** @deprecated Use `organization: { paidAccount }` instead. */
   organizationPaidAccount?: boolean;
   /** One of: `all`, `members`, `none`, `public` */
   organizationsInvited?: string;

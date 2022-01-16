@@ -12,7 +12,88 @@ export interface GetBoard {
    * [here](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/).
    */
   cards?: string;
-  /** Use with the `cards` param to include card pluginData with the response */
+
+  card?: {
+    /** Use with the `cards` param to include card pluginData with the response */
+    pluginData?: boolean;
+    /**
+     * All or a comma-separated list of: `badges`, `checkItemStates`, `closed`, `dateLastActivity`, `desc`, `descData`,
+     * `due`, `email`, `idAttachmentCover`, `idBoard`, `idChecklists`, `idLabels`, `idList`, `idMembers`,
+     * `idMembersVoted`, `idShort`, `labels`, `manualCoverAttachment`, `name`, `pos`, `shortLink`, `shortUrl`,
+     * `subscribed`, `url`
+     */
+    fields?:
+    | 'all'
+    | string
+    | string[]
+    | 'badges'
+    | 'checkItemStates'
+    | 'closed'
+    | 'dateLastActivity'
+    | 'desc'
+    | 'descData'
+    | 'due'
+    | 'email'
+    | 'idAttachmentCover'
+    | 'idBoard'
+    | 'idChecklists'
+    | 'idLabels'
+    | 'idList'
+    | 'idMembers'
+    | 'idMembersVoted'
+    | 'idShort'
+    | 'labels'
+    | 'manualCoverAttachment'
+    | 'name'
+    | 'pos'
+    | 'shortLink'
+    | 'shortUrl'
+    | 'subscribed'
+    | 'url'
+    | (
+      | 'badges'
+      | 'checkItemStates'
+      | 'closed'
+      | 'dateLastActivity'
+      | 'desc'
+      | 'descData'
+      | 'due'
+      | 'email'
+      | 'idAttachmentCover'
+      | 'idBoard'
+      | 'idChecklists'
+      | 'idLabels'
+      | 'idList'
+      | 'idMembers'
+      | 'idMembersVoted'
+      | 'idShort'
+      | 'labels'
+      | 'manualCoverAttachment'
+      | 'name'
+      | 'pos'
+      | 'shortLink'
+      | 'shortUrl'
+      | 'subscribed'
+      | 'url'
+    )[];
+    /** Whether to include the parent list with card results */
+    list?: boolean;
+    /** Whether to include member objects with card results */
+    members?: boolean;
+    /** Whether to include sticker objects with card results */
+    stickers?: boolean;
+    /**
+     * Whether to include attachment objects with card results. A boolean value (true or false) or cover for only card
+     * cover attachments.
+     */
+    attachments?: boolean;
+  };
+
+  /**
+   * @deprecated Use `card: { pluginData: true }` instead.
+   *
+   *   Use with the `cards` param to include card pluginData with the response
+   */
   cardPluginData?: boolean;
   /**
    * This is a nested resource. Read more about checklists as nested resources

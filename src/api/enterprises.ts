@@ -23,17 +23,17 @@ export class Enterprises {
       params: {
         fields: parameters.fields,
         members: parameters.members,
-        member_fields: parameters.member.fields,
-        member_filter: parameters.member.filter,
-        member_sort: parameters.member.sort,
-        member_sortBy: parameters.member.sortBy,
-        member_sortOrder: parameters.member.sortOrder,
-        member_startIndex: parameters.member.startIndex,
-        member_count: parameters.member.count,
+        member_fields: parameters.memberFields ?? parameters.member?.fields,
+        member_filter: parameters.memberFilter ?? parameters.member?.filter,
+        member_sort: parameters.memberSort ?? parameters.member?.sort,
+        member_sortBy: parameters.memberSortBy,
+        member_sortOrder: parameters.memberSortOrder,
+        member_startIndex: parameters.memberStartIndex ?? parameters.member?.startIndex,
+        member_count: parameters.memberCount ?? parameters.member?.count,
         organizations: parameters.organizations,
-        organization_fields: parameters.organization.fields,
-        organization_paid_accounts: parameters.organization.paid.accounts,
-        organization_memberships: parameters.organization.memberships,
+        organization_fields: parameters.organizationFields ?? parameters.organization?.fields,
+        organization_paid_accounts: parameters.organizationPaidAccounts ?? parameters.organization?.paidAccounts,
+        organization_memberships: parameters.organizationMemberships ?? parameters.organization?.memberships,
       },
     };
 
@@ -314,7 +314,7 @@ export class Enterprises {
       url: `/enterprises/${parameters.id}/members/${parameters.idMember}/licensed`,
       method: 'PUT',
       params: {
-        value: parameters.value,
+        value: parameters.values ?? parameters.value,
       },
     };
 
@@ -372,17 +372,17 @@ export class Enterprises {
   }
 
   /** Remove a member as admin from an enterprise. */
-  async enterprisesIdOrganizationsIdmember<T = unknown>(
-    parameters: Parameters.EnterprisesIdOrganizationsIdmember,
+  async deleteEnterpriseMemberAdmin<T = unknown>(
+    parameters: Parameters.DeleteEnterpriseMemberAdmin,
     callback: Callback<T>
   ): Promise<void>;
   /** Remove a member as admin from an enterprise. */
-  async enterprisesIdOrganizationsIdmember<T = unknown>(
-    parameters: Parameters.EnterprisesIdOrganizationsIdmember,
+  async deleteEnterpriseMemberAdmin<T = unknown>(
+    parameters: Parameters.DeleteEnterpriseMemberAdmin,
     callback?: never
   ): Promise<T>;
-  async enterprisesIdOrganizationsIdmember<T = unknown>(
-    parameters: Parameters.EnterprisesIdOrganizationsIdmember,
+  async deleteEnterpriseMemberAdmin<T = unknown>(
+    parameters: Parameters.DeleteEnterpriseMemberAdmin,
     callback?: Callback<T>,
   ): Promise<void | T> {
     const config: RequestConfig = {
@@ -390,23 +390,21 @@ export class Enterprises {
       method: 'DELETE',
     };
 
-    // TODO
-
     return this.client.sendRequest(config, callback);
   }
 
   /** Remove an organization from an enterprise. */
-  async deleteEnterprisesIdOrganizationsIdorg<T = unknown>(
-    parameters: Parameters.DeleteEnterprisesIdOrganizationsIdorg,
+  async deleteEnterpriseOrganization<T = unknown>(
+    parameters: Parameters.DeleteEnterpriseOrganization,
     callback: Callback<T>
   ): Promise<void>;
   /** Remove an organization from an enterprise. */
-  async deleteEnterprisesIdOrganizationsIdorg<T = unknown>(
-    parameters: Parameters.DeleteEnterprisesIdOrganizationsIdorg,
+  async deleteEnterpriseOrganization<T = unknown>(
+    parameters: Parameters.DeleteEnterpriseOrganization,
     callback?: never
   ): Promise<T>;
-  async deleteEnterprisesIdOrganizationsIdorg<T = unknown>(
-    parameters: Parameters.DeleteEnterprisesIdOrganizationsIdorg,
+  async deleteEnterpriseOrganization<T = unknown>(
+    parameters: Parameters.DeleteEnterpriseOrganization,
     callback?: Callback<T>,
   ): Promise<void | T> {
     const config: RequestConfig = {
