@@ -1,4 +1,2 @@
-/**
- * The fields on a Card. */
-export interface CardFields {
-}
+/** The fields on a Card. */
+export interface CardFields {}

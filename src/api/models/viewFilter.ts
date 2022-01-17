@@ -1,2 +1,1 @@
-export interface ViewFilter {
-}
+export interface ViewFilter {}

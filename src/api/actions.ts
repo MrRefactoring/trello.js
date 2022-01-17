@@ -4,15 +4,13 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Actions {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {}
 
-  /**
-   * Get an Action */
-  async getAction<T = unknown>(parameters: Parameters.GetAction, callback: Callback<T>): Promise<void>;
-  /**
-   * Get an Action */
-  async getAction<T = unknown>(parameters: Parameters.GetAction, callback?: undefined): Promise<T>;
-  async getAction<T = unknown>(parameters: Parameters.GetAction, callback?: Callback<T>): Promise<void | T> {
+  /** Get an Action */
+  async getAction<T = Models.Action>(parameters: Parameters.GetAction, callback: Callback<T>): Promise<void>;
+  /** Get an Action */
+  async getAction<T = Models.Action>(parameters: Parameters.GetAction, callback?: never): Promise<T>;
+  async getAction<T = Models.Action>(parameters: Parameters.GetAction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}`,
       method: 'GET',
@@ -27,15 +25,13 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getAction' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Update a specific Action. Only comment actions can be updated. Used to edit the content of a comment. */
+  /** Update a specific Action. Only comment actions can be updated. Used to edit the content of a comment. */
   async updateAction<T = unknown>(parameters: Parameters.UpdateAction, callback: Callback<T>): Promise<void>;
-  /**
-   * Update a specific Action. Only comment actions can be updated. Used to edit the content of a comment. */
-  async updateAction<T = unknown>(parameters: Parameters.UpdateAction, callback?: undefined): Promise<T>;
+  /** Update a specific Action. Only comment actions can be updated. Used to edit the content of a comment. */
+  async updateAction<T = unknown>(parameters: Parameters.UpdateAction, callback?: never): Promise<T>;
   async updateAction<T = unknown>(parameters: Parameters.UpdateAction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}`,
@@ -45,46 +41,46 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateAction' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Delete a specific action. Only comment actions can be deleted. */
+  /** Delete a specific action. Only comment actions can be deleted. */
   async deleteAction<T = unknown>(parameters: Parameters.DeleteAction, callback: Callback<T>): Promise<void>;
-  /**
-   * Delete a specific action. Only comment actions can be deleted. */
-  async deleteAction<T = unknown>(parameters: Parameters.DeleteAction, callback?: undefined): Promise<T>;
+  /** Delete a specific action. Only comment actions can be deleted. */
+  async deleteAction<T = unknown>(parameters: Parameters.DeleteAction, callback?: never): Promise<T>;
   async deleteAction<T = unknown>(parameters: Parameters.DeleteAction, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteAction' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Get a specific property of an action */
+  /** Get a specific property of an action */
   async getActionField<T = Models.Action>(parameters: Parameters.GetActionField, callback: Callback<T>): Promise<void>;
-  /**
-   * Get a specific property of an action */
-  async getActionField<T = Models.Action>(parameters: Parameters.GetActionField, callback?: undefined): Promise<T>;
-  async getActionField<T = Models.Action>(parameters: Parameters.GetActionField, callback?: Callback<T>): Promise<void | T> {
+  /** Get a specific property of an action */
+  async getActionField<T = Models.Action>(parameters: Parameters.GetActionField, callback?: never): Promise<T>;
+  async getActionField<T = Models.Action>(
+    parameters: Parameters.GetActionField,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/${parameters.field}`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionField' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Get the Board for an Action */
+  /** Get the Board for an Action */
   async getActionBoard<T = Models.Board>(parameters: Parameters.GetActionBoard, callback: Callback<T>): Promise<void>;
-  /**
-   * Get the Board for an Action */
-  async getActionBoard<T = Models.Board>(parameters: Parameters.GetActionBoard, callback?: undefined): Promise<T>;
-  async getActionBoard<T = Models.Board>(parameters: Parameters.GetActionBoard, callback?: Callback<T>): Promise<void | T> {
+  /** Get the Board for an Action */
+  async getActionBoard<T = Models.Board>(parameters: Parameters.GetActionBoard, callback?: never): Promise<T>;
+  async getActionBoard<T = Models.Board>(
+    parameters: Parameters.GetActionBoard,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/board`,
       method: 'GET',
@@ -93,16 +89,17 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionBoard' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Get the card for an action */
+  /** Get the card for an action */
   async getActionCard<T = Models.Card>(parameters: Parameters.GetActionCard, callback: Callback<T>): Promise<void>;
-  /**
-   * Get the card for an action */
-  async getActionCard<T = Models.Card>(parameters: Parameters.GetActionCard, callback?: undefined): Promise<T>;
-  async getActionCard<T = Models.Card>(parameters: Parameters.GetActionCard, callback?: Callback<T>): Promise<void | T> {
+  /** Get the card for an action */
+  async getActionCard<T = Models.Card>(parameters: Parameters.GetActionCard, callback?: never): Promise<T>;
+  async getActionCard<T = Models.Card>(
+    parameters: Parameters.GetActionCard,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/card`,
       method: 'GET',
@@ -111,16 +108,20 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionCard' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Get the List for an Action */
-  async getActionList<T = Models.List>(parameters: Parameters.GetActionList, callback: Callback<T>): Promise<void>;
-  /**
-   * Get the List for an Action */
-  async getActionList<T = Models.List>(parameters: Parameters.GetActionList, callback?: undefined): Promise<T>;
-  async getActionList<T = Models.List>(parameters: Parameters.GetActionList, callback?: Callback<T>): Promise<void | T> {
+  /** Get the List for an Action */
+  async getActionList<T = Models.TrelloList>(
+    parameters: Parameters.GetActionList,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** Get the List for an Action */
+  async getActionList<T = Models.TrelloList>(parameters: Parameters.GetActionList, callback?: never): Promise<T>;
+  async getActionList<T = Models.TrelloList>(
+    parameters: Parameters.GetActionList,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/list`,
       method: 'GET',
@@ -129,16 +130,20 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionList' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Gets the member of an action (not the creator) */
-  async getActionMember<T = Models.Member>(parameters: Parameters.GetActionMember, callback: Callback<T>): Promise<void>;
-  /**
-   * Gets the member of an action (not the creator) */
-  async getActionMember<T = Models.Member>(parameters: Parameters.GetActionMember, callback?: undefined): Promise<T>;
-  async getActionMember<T = Models.Member>(parameters: Parameters.GetActionMember, callback?: Callback<T>): Promise<void | T> {
+  /** Gets the member of an action (not the creator) */
+  async getActionMember<T = Models.Member>(
+    parameters: Parameters.GetActionMember,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** Gets the member of an action (not the creator) */
+  async getActionMember<T = Models.Member>(parameters: Parameters.GetActionMember, callback?: never): Promise<T>;
+  async getActionMember<T = Models.Member>(
+    parameters: Parameters.GetActionMember,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/member`,
       method: 'GET',
@@ -147,16 +152,23 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionMember' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Get the Member who created the Action */
-  async getActionMemberCreator<T = Models.Member>(parameters: Parameters.GetActionMemberCreator, callback: Callback<T>): Promise<void>;
-  /**
-   * Get the Member who created the Action */
-  async getActionMemberCreator<T = Models.Member>(parameters: Parameters.GetActionMemberCreator, callback?: undefined): Promise<T>;
-  async getActionMemberCreator<T = Models.Member>(parameters: Parameters.GetActionMemberCreator, callback?: Callback<T>): Promise<void | T> {
+  /** Get the Member who created the Action */
+  async getActionMemberCreator<T = Models.Member>(
+    parameters: Parameters.GetActionMemberCreator,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** Get the Member who created the Action */
+  async getActionMemberCreator<T = Models.Member>(
+    parameters: Parameters.GetActionMemberCreator,
+    callback?: never
+  ): Promise<T>;
+  async getActionMemberCreator<T = Models.Member>(
+    parameters: Parameters.GetActionMemberCreator,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/memberCreator`,
       method: 'GET',
@@ -165,16 +177,23 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionMemberCreator' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Get the Organization of an Action */
-  async getActionOrganization<T = Models.Organization>(parameters: Parameters.GetActionOrganization, callback: Callback<T>): Promise<void>;
-  /**
-   * Get the Organization of an Action */
-  async getActionOrganization<T = Models.Organization>(parameters: Parameters.GetActionOrganization, callback?: undefined): Promise<T>;
-  async getActionOrganization<T = Models.Organization>(parameters: Parameters.GetActionOrganization, callback?: Callback<T>): Promise<void | T> {
+  /** Get the Organization of an Action */
+  async getActionOrganization<T = Models.Organization>(
+    parameters: Parameters.GetActionOrganization,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** Get the Organization of an Action */
+  async getActionOrganization<T = Models.Organization>(
+    parameters: Parameters.GetActionOrganization,
+    callback?: never
+  ): Promise<T>;
+  async getActionOrganization<T = Models.Organization>(
+    parameters: Parameters.GetActionOrganization,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/organization`,
       method: 'GET',
@@ -183,16 +202,17 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionOrganization' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Update a comment action */
+  /** Update a comment action */
   async updateActionText<T = unknown>(parameters: Parameters.UpdateActionText, callback: Callback<T>): Promise<void>;
-  /**
-   * Update a comment action */
-  async updateActionText<T = unknown>(parameters: Parameters.UpdateActionText, callback?: undefined): Promise<T>;
-  async updateActionText<T = unknown>(parameters: Parameters.UpdateActionText, callback?: Callback<T>): Promise<void | T> {
+  /** Update a comment action */
+  async updateActionText<T = unknown>(parameters: Parameters.UpdateActionText, callback?: never): Promise<T>;
+  async updateActionText<T = unknown>(
+    parameters: Parameters.UpdateActionText,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.id}/text`,
       method: 'PUT',
@@ -201,16 +221,20 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateActionText' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * List reactions for an action */
-  async getActionReactions<T = unknown>(parameters: Parameters.GetActionReactions, callback: Callback<T>): Promise<void>;
-  /**
-   * List reactions for an action */
-  async getActionReactions<T = unknown>(parameters: Parameters.GetActionReactions, callback?: undefined): Promise<T>;
-  async getActionReactions<T = unknown>(parameters: Parameters.GetActionReactions, callback?: Callback<T>): Promise<void | T> {
+  /** List reactions for an action */
+  async getActionReactions<T = unknown>(
+    parameters: Parameters.GetActionReactions,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** List reactions for an action */
+  async getActionReactions<T = unknown>(parameters: Parameters.GetActionReactions, callback?: never): Promise<T>;
+  async getActionReactions<T = unknown>(
+    parameters: Parameters.GetActionReactions,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactions`,
       method: 'GET',
@@ -220,16 +244,17 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionReactions' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Adds a new reaction to an action */
+  /** Adds a new reaction to an action */
   async addActionReaction<T = unknown>(parameters: Parameters.AddActionReaction, callback: Callback<T>): Promise<void>;
-  /**
-   * Adds a new reaction to an action */
-  async addActionReaction<T = unknown>(parameters: Parameters.AddActionReaction, callback?: undefined): Promise<T>;
-  async addActionReaction<T = unknown>(parameters: Parameters.AddActionReaction, callback?: Callback<T>): Promise<void | T> {
+  /** Adds a new reaction to an action */
+  async addActionReaction<T = unknown>(parameters: Parameters.AddActionReaction, callback?: never): Promise<T>;
+  async addActionReaction<T = unknown>(
+    parameters: Parameters.AddActionReaction,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactions`,
       method: 'POST',
@@ -241,16 +266,17 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'addActionReaction' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Get information for a reaction */
+  /** Get information for a reaction */
   async getActionReaction<T = unknown>(parameters: Parameters.GetActionReaction, callback: Callback<T>): Promise<void>;
-  /**
-   * Get information for a reaction */
-  async getActionReaction<T = unknown>(parameters: Parameters.GetActionReaction, callback?: undefined): Promise<T>;
-  async getActionReaction<T = unknown>(parameters: Parameters.GetActionReaction, callback?: Callback<T>): Promise<void | T> {
+  /** Get information for a reaction */
+  async getActionReaction<T = unknown>(parameters: Parameters.GetActionReaction, callback?: never): Promise<T>;
+  async getActionReaction<T = unknown>(
+    parameters: Parameters.GetActionReaction,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactions/${parameters.id}`,
       method: 'GET',
@@ -260,36 +286,47 @@ export class Actions {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionReaction' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Deletes a reaction */
-  async deleteActionReaction<T = unknown>(parameters: Parameters.DeleteActionReaction, callback: Callback<T>): Promise<void>;
-  /**
-   * Deletes a reaction */
-  async deleteActionReaction<T = unknown>(parameters: Parameters.DeleteActionReaction, callback?: undefined): Promise<T>;
-  async deleteActionReaction<T = unknown>(parameters: Parameters.DeleteActionReaction, callback?: Callback<T>): Promise<void | T> {
+  /** Deletes a reaction */
+  async deleteActionReaction<T = unknown>(
+    parameters: Parameters.DeleteActionReaction,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** Deletes a reaction */
+  async deleteActionReaction<T = unknown>(parameters: Parameters.DeleteActionReaction, callback?: never): Promise<T>;
+  async deleteActionReaction<T = unknown>(
+    parameters: Parameters.DeleteActionReaction,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactions/${parameters.id}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteActionReaction' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * List a summary of all reactions for an action */
-  async getActionReactionSummary<T = unknown>(parameters: Parameters.GetActionReactionSummary, callback: Callback<T>): Promise<void>;
-  /**
-   * List a summary of all reactions for an action */
-  async getActionReactionSummary<T = unknown>(parameters: Parameters.GetActionReactionSummary, callback?: undefined): Promise<T>;
-  async getActionReactionSummary<T = unknown>(parameters: Parameters.GetActionReactionSummary, callback?: Callback<T>): Promise<void | T> {
+  /** List a summary of all reactions for an action */
+  async getActionReactionSummary<T = unknown>(
+    parameters: Parameters.GetActionReactionSummary,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** List a summary of all reactions for an action */
+  async getActionReactionSummary<T = unknown>(
+    parameters: Parameters.GetActionReactionSummary,
+    callback?: never
+  ): Promise<T>;
+  async getActionReactionSummary<T = unknown>(
+    parameters: Parameters.GetActionReactionSummary,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/actions/${parameters.idAction}/reactionsSummary`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getActionReactionSummary' });
+    return this.client.sendRequest(config, callback);
   }
 }

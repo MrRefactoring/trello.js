@@ -4,7 +4,8 @@ import { Limits } from './limits';
 
 export interface Board {
   id: TrelloID;
-  name: string;
+  /** The name of the board. */
+  name?: string;
   desc?: string;
   descData?: string;
   closed?: boolean;

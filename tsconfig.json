@@ -4,7 +4,9 @@
     "module": "CommonJS",
     "outDir": "out",
     "declaration": true,
-    "strict": true
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "importHelpers": true
   },
   "exclude": [
     "node_modules",

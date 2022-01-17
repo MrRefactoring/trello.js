@@ -1,6 +1,9 @@
 export interface GetMemberOrganizationsInvited {
   /** The ID or username of the member */
   id: string;
-  /** `all` or a comma-separated list of organization [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/) */
+  /**
+   * `all` or a comma-separated list of organization
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+   */
   fields?: 'all' | string;
 }

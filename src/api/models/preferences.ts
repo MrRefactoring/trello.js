@@ -1,16 +1,24 @@
+import { CardAging } from './cardAging';
 import { TrelloID } from './trelloID';
+import { ImageDescriptor } from './imageDescriptor';
 
 export interface Preferences {
   associatedDomain?: string | null;
   attachmentRestrictions?: string | null;
   background?: TrelloID;
+  backgroundBottomColor?: string;
+  backgroundBrightness?: string;
   backgroundImage?: string;
-  backgroundImageScaled?: string;
-  boardDeleteRestrict?: unknown[];
-  boardInviteRestrict?: string;
-  boardVisibilityRestrict?: unknown[];
+  backgroundImageScaled?: ImageDescriptor[];
+  backgroundTile?: boolean;
+  backgroundTopColor?: string;
   calendarFeedEnabled?: boolean;
-  cardAging?: string;
+  canBeEnterprise?: boolean;
+  canBeOrg?: boolean;
+  canBePrivate?: boolean;
+  canBePublic?: boolean;
+  canInvite?: boolean;
+  cardAging?: CardAging;
   cardCovers?: boolean;
   comments?: string;
   externalMembersDisabled?: boolean;

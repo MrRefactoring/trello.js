@@ -3,11 +3,14 @@ import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
 
 export class Checklists {
-  constructor(private client: Client) { }
+  constructor(private client: Client) {}
 
   async createChecklist<T = unknown>(parameters: Parameters.CreateChecklist, callback: Callback<T>): Promise<void>;
-  async createChecklist<T = unknown>(parameters: Parameters.CreateChecklist, callback?: undefined): Promise<T>;
-  async createChecklist<T = unknown>(parameters: Parameters.CreateChecklist, callback?: Callback<T>): Promise<void | T> {
+  async createChecklist<T = unknown>(parameters: Parameters.CreateChecklist, callback?: never): Promise<T>;
+  async createChecklist<T = unknown>(
+    parameters: Parameters.CreateChecklist,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: '/checklists',
       method: 'POST',
@@ -19,11 +22,11 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createChecklist' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklist<T = unknown>(parameters: Parameters.GetChecklist, callback: Callback<T>): Promise<void>;
-  async getChecklist<T = unknown>(parameters: Parameters.GetChecklist, callback?: undefined): Promise<T>;
+  async getChecklist<T = unknown>(parameters: Parameters.GetChecklist, callback?: never): Promise<T>;
   async getChecklist<T = unknown>(parameters: Parameters.GetChecklist, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}`,
@@ -36,16 +39,17 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklist' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Update an existing checklist. */
+  /** Update an existing checklist. */
   async updateChecklist<T = unknown>(parameters: Parameters.UpdateChecklist, callback: Callback<T>): Promise<void>;
-  /**
-   * Update an existing checklist. */
-  async updateChecklist<T = unknown>(parameters: Parameters.UpdateChecklist, callback?: undefined): Promise<T>;
-  async updateChecklist<T = unknown>(parameters: Parameters.UpdateChecklist, callback?: Callback<T>): Promise<void | T> {
+  /** Update an existing checklist. */
+  async updateChecklist<T = unknown>(parameters: Parameters.UpdateChecklist, callback?: never): Promise<T>;
+  async updateChecklist<T = unknown>(
+    parameters: Parameters.UpdateChecklist,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}`,
       method: 'PUT',
@@ -55,38 +59,48 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateChecklist' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Delete a checklist */
+  /** Delete a checklist */
   async deleteChecklist<T = unknown>(parameters: Parameters.DeleteChecklist, callback: Callback<T>): Promise<void>;
-  /**
-   * Delete a checklist */
-  async deleteChecklist<T = unknown>(parameters: Parameters.DeleteChecklist, callback?: undefined): Promise<T>;
-  async deleteChecklist<T = unknown>(parameters: Parameters.DeleteChecklist, callback?: Callback<T>): Promise<void | T> {
+  /** Delete a checklist */
+  async deleteChecklist<T = unknown>(parameters: Parameters.DeleteChecklist, callback?: never): Promise<T>;
+  async deleteChecklist<T = unknown>(
+    parameters: Parameters.DeleteChecklist,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteChecklist' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklistField<T = unknown>(parameters: Parameters.GetChecklistField, callback: Callback<T>): Promise<void>;
-  async getChecklistField<T = unknown>(parameters: Parameters.GetChecklistField, callback?: undefined): Promise<T>;
-  async getChecklistField<T = unknown>(parameters: Parameters.GetChecklistField, callback?: Callback<T>): Promise<void | T> {
+  async getChecklistField<T = unknown>(parameters: Parameters.GetChecklistField, callback?: never): Promise<T>;
+  async getChecklistField<T = unknown>(
+    parameters: Parameters.GetChecklistField,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}/${parameters.field}`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistField' });
+    return this.client.sendRequest(config, callback);
   }
 
-  async updateChecklistField<T = unknown>(parameters: Parameters.UpdateChecklistField, callback: Callback<T>): Promise<void>;
-  async updateChecklistField<T = unknown>(parameters: Parameters.UpdateChecklistField, callback?: undefined): Promise<T>;
-  async updateChecklistField<T = unknown>(parameters: Parameters.UpdateChecklistField, callback?: Callback<T>): Promise<void | T> {
+  async updateChecklistField<T = unknown>(
+    parameters: Parameters.UpdateChecklistField,
+    callback: Callback<T>
+  ): Promise<void>;
+  async updateChecklistField<T = unknown>(parameters: Parameters.UpdateChecklistField, callback?: never): Promise<T>;
+  async updateChecklistField<T = unknown>(
+    parameters: Parameters.UpdateChecklistField,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}/${parameters.field}`,
       method: 'PUT',
@@ -95,12 +109,15 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'updateChecklistField' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklistBoard<T = unknown>(parameters: Parameters.GetChecklistBoard, callback: Callback<T>): Promise<void>;
-  async getChecklistBoard<T = unknown>(parameters: Parameters.GetChecklistBoard, callback?: undefined): Promise<T>;
-  async getChecklistBoard<T = unknown>(parameters: Parameters.GetChecklistBoard, callback?: Callback<T>): Promise<void | T> {
+  async getChecklistBoard<T = unknown>(parameters: Parameters.GetChecklistBoard, callback?: never): Promise<T>;
+  async getChecklistBoard<T = unknown>(
+    parameters: Parameters.GetChecklistBoard,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}/board`,
       method: 'GET',
@@ -109,23 +126,35 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistBoard' });
+    return this.client.sendRequest(config, callback);
   }
 
   async getChecklistCards<T = unknown>(parameters: Parameters.GetChecklistCards, callback: Callback<T>): Promise<void>;
-  async getChecklistCards<T = unknown>(parameters: Parameters.GetChecklistCards, callback?: undefined): Promise<T>;
-  async getChecklistCards<T = unknown>(parameters: Parameters.GetChecklistCards, callback?: Callback<T>): Promise<void | T> {
+  async getChecklistCards<T = unknown>(parameters: Parameters.GetChecklistCards, callback?: never): Promise<T>;
+  async getChecklistCards<T = unknown>(
+    parameters: Parameters.GetChecklistCards,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}/cards`,
       method: 'GET',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistCards' });
+    return this.client.sendRequest(config, callback);
   }
 
-  async getChecklistCheckItems<T = unknown>(parameters: Parameters.GetChecklistCheckItems, callback: Callback<T>): Promise<void>;
-  async getChecklistCheckItems<T = unknown>(parameters: Parameters.GetChecklistCheckItems, callback?: undefined): Promise<T>;
-  async getChecklistCheckItems<T = unknown>(parameters: Parameters.GetChecklistCheckItems, callback?: Callback<T>): Promise<void | T> {
+  async getChecklistCheckItems<T = unknown>(
+    parameters: Parameters.GetChecklistCheckItems,
+    callback: Callback<T>
+  ): Promise<void>;
+  async getChecklistCheckItems<T = unknown>(
+    parameters: Parameters.GetChecklistCheckItems,
+    callback?: never
+  ): Promise<T>;
+  async getChecklistCheckItems<T = unknown>(
+    parameters: Parameters.GetChecklistCheckItems,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}/checkItems`,
       method: 'GET',
@@ -135,12 +164,21 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistCheckItems' });
+    return this.client.sendRequest(config, callback);
   }
 
-  async createChecklistCheckItems<T = unknown>(parameters: Parameters.CreateChecklistCheckItems, callback: Callback<T>): Promise<void>;
-  async createChecklistCheckItems<T = unknown>(parameters: Parameters.CreateChecklistCheckItems, callback?: undefined): Promise<T>;
-  async createChecklistCheckItems<T = unknown>(parameters: Parameters.CreateChecklistCheckItems, callback?: Callback<T>): Promise<void | T> {
+  async createChecklistCheckItems<T = unknown>(
+    parameters: Parameters.CreateChecklistCheckItems,
+    callback: Callback<T>
+  ): Promise<void>;
+  async createChecklistCheckItems<T = unknown>(
+    parameters: Parameters.CreateChecklistCheckItems,
+    callback?: never
+  ): Promise<T>;
+  async createChecklistCheckItems<T = unknown>(
+    parameters: Parameters.CreateChecklistCheckItems,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}/checkItems`,
       method: 'POST',
@@ -151,12 +189,18 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'createChecklistCheckItems' });
+    return this.client.sendRequest(config, callback);
   }
 
-  async getChecklistCheckItem<T = unknown>(parameters: Parameters.GetChecklistCheckItem, callback: Callback<T>): Promise<void>;
-  async getChecklistCheckItem<T = unknown>(parameters: Parameters.GetChecklistCheckItem, callback?: undefined): Promise<T>;
-  async getChecklistCheckItem<T = unknown>(parameters: Parameters.GetChecklistCheckItem, callback?: Callback<T>): Promise<void | T> {
+  async getChecklistCheckItem<T = unknown>(
+    parameters: Parameters.GetChecklistCheckItem,
+    callback: Callback<T>
+  ): Promise<void>;
+  async getChecklistCheckItem<T = unknown>(parameters: Parameters.GetChecklistCheckItem, callback?: never): Promise<T>;
+  async getChecklistCheckItem<T = unknown>(
+    parameters: Parameters.GetChecklistCheckItem,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}/checkItems/${parameters.idCheckItem}`,
       method: 'GET',
@@ -165,21 +209,28 @@ export class Checklists {
       },
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'getChecklistCheckItem' });
+    return this.client.sendRequest(config, callback);
   }
 
-  /**
-   * Remove an item from a checklist */
-  async deleteChecklistCheckItem<T = unknown>(parameters: Parameters.DeleteChecklistCheckItem, callback: Callback<T>): Promise<void>;
-  /**
-   * Remove an item from a checklist */
-  async deleteChecklistCheckItem<T = unknown>(parameters: Parameters.DeleteChecklistCheckItem, callback?: undefined): Promise<T>;
-  async deleteChecklistCheckItem<T = unknown>(parameters: Parameters.DeleteChecklistCheckItem, callback?: Callback<T>): Promise<void | T> {
+  /** Remove an item from a checklist */
+  async deleteChecklistCheckItem<T = unknown>(
+    parameters: Parameters.DeleteChecklistCheckItem,
+    callback: Callback<T>
+  ): Promise<void>;
+  /** Remove an item from a checklist */
+  async deleteChecklistCheckItem<T = unknown>(
+    parameters: Parameters.DeleteChecklistCheckItem,
+    callback?: never
+  ): Promise<T>;
+  async deleteChecklistCheckItem<T = unknown>(
+    parameters: Parameters.DeleteChecklistCheckItem,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/checklists/${parameters.id}/checkItems/${parameters.idCheckItem}`,
       method: 'DELETE',
     };
 
-    return this.client.sendRequest(config, callback, { methodName: 'deleteChecklistCheckItem' });
+    return this.client.sendRequest(config, callback);
   }
 }
