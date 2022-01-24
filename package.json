@@ -23,7 +23,8 @@
       "ts"
     ],
     "require": [
-      "ts-node/register"
+      "ts-node/register",
+      "dotenv/config"
     ]
   },
   "repository": "https://github.com/MrRefactoring/trello.js",
