@@ -264,10 +264,10 @@ export class Cards {
   }
 
   /** Get the board a card is on */
-  async getCardBoard<T = unknown>(parameters: Parameters.GetCardBoard, callback: Callback<T>): Promise<void>;
+  async getCardBoard<T = Models.Board>(parameters: Parameters.GetCardBoard, callback: Callback<T>): Promise<void>;
   /** Get the board a card is on */
-  async getCardBoard<T = unknown>(parameters: Parameters.GetCardBoard, callback?: never): Promise<T>;
-  async getCardBoard<T = unknown>(parameters: Parameters.GetCardBoard, callback?: Callback<T>): Promise<void | T> {
+  async getCardBoard<T = Models.Board>(parameters: Parameters.GetCardBoard, callback?: never): Promise<T>;
+  async getCardBoard<T = Models.Board>(parameters: Parameters.GetCardBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/board`,
       method: 'GET',
@@ -420,10 +420,10 @@ export class Cards {
   }
 
   /** Get the list a card is in */
-  async getCardList<T = unknown>(parameters: Parameters.GetCardList, callback: Callback<T>): Promise<void>;
+  async getCardList<T = Models.List>(parameters: Parameters.GetCardList, callback: Callback<T>): Promise<void>;
   /** Get the list a card is in */
-  async getCardList<T = unknown>(parameters: Parameters.GetCardList, callback?: never): Promise<T>;
-  async getCardList<T = unknown>(parameters: Parameters.GetCardList, callback?: Callback<T>): Promise<void | T> {
+  async getCardList<T = Models.List>(parameters: Parameters.GetCardList, callback?: never): Promise<T>;
+  async getCardList<T = Models.List>(parameters: Parameters.GetCardList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/list`,
       method: 'GET',

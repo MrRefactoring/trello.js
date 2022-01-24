@@ -112,6 +112,22 @@ test.serial('Adding attachments to card', async t => {
   t.pass();
 });
 
+test.serial('Adding comments to card', async t => {
+  const lists = await client.boards.getBoardLists({ id: board.id });
+
+  const toDoList = lists.find((list) => list.name === 'To Do');
+
+  const cards = await client.lists.getListCards({ id: toDoList!.id });
+
+  const card = cards.find((oneCard) => oneCard.name === '');
+
+  const comment = await client.cards.addCardComment({ id: card!.id, text: 'My first trello comment :)' });
+
+  t.truthy(!!comment.id);
+
+  t.pass();
+});
+
 test.serial('Deleting cards attachments', async t => {
   const lists = await client.boards.getBoardLists({ id: board.id });
 
