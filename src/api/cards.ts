@@ -2,6 +2,7 @@ import * as Models from './models';
 import * as Parameters from './parameters';
 import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
+import * as FormData from 'form-data';
 
 export class Cards {
   constructor(private client: Client) {}
@@ -102,10 +103,10 @@ export class Cards {
   }
 
   /** Delete a Card */
-  async deleteCard<T = unknown>(parameters: Parameters.DeleteCard, callback: Callback<T>): Promise<void>;
+  async deleteCard<T = Models.DeletedCard>(parameters: Parameters.DeleteCard, callback: Callback<T>): Promise<void>;
   /** Delete a Card */
-  async deleteCard<T = unknown>(parameters: Parameters.DeleteCard, callback?: never): Promise<T>;
-  async deleteCard<T = unknown>(parameters: Parameters.DeleteCard, callback?: Callback<T>): Promise<void | T> {
+  async deleteCard<T = Models.DeletedCard>(parameters: Parameters.DeleteCard, callback?: never): Promise<T>;
+  async deleteCard<T = Models.DeletedCard>(parameters: Parameters.DeleteCard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}`,
       method: 'DELETE',
@@ -150,16 +151,16 @@ export class Cards {
   }
 
   /** List the attachments on a card */
-  async getCardAttachments<T = Array<Models.Attachment>>(
+  async getCardAttachments<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachments,
     callback: Callback<T>
   ): Promise<void>;
   /** List the attachments on a card */
-  async getCardAttachments<T = Array<Models.Attachment>>(
+  async getCardAttachments<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachments,
     callback?: never
   ): Promise<T>;
-  async getCardAttachments<T = Array<Models.Attachment>>(
+  async getCardAttachments<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachments,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -172,31 +173,47 @@ export class Cards {
   }
 
   /** Create an Attachment to a Card */
-  async createCardAttachment<T = Array<Models.Attachment>>(
+  async createCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.CreateCardAttachment,
     callback: Callback<T>
   ): Promise<void>;
   /** Create an Attachment to a Card */
-  async createCardAttachment<T = Array<Models.Attachment>>(
+  async createCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.CreateCardAttachment,
     callback?: never
   ): Promise<T>;
-  async createCardAttachment<T = Array<Models.Attachment>>(
+  async createCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.CreateCardAttachment,
     callback?: Callback<T>,
   ): Promise<void | T> {
+    let formData: FormData | undefined;
+
+    if (parameters.file) {
+      formData = new FormData();
+
+      formData.append('file', parameters.file, parameters.name);
+      formData.append('name', parameters.name);
+      formData.append('mimeType', parameters.mimeType);
+    }
+
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments`,
       method: 'POST',
+      headers: {
+        ...formData?.getHeaders?.(),
+      },
       params: {
-        // TODO check
         name: parameters.name,
-        file: parameters.file,
         mimeType: parameters.mimeType,
         url: parameters.url,
         setCover: parameters.setCover,
       },
+      data: formData,
     };
+
+    if (formData) {
+      config.headers!['Content-Length'] = formData.getLengthSync?.();
+    }
 
     return this.client.sendRequest(config, callback);
   }

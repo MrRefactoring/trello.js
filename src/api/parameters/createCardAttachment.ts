@@ -4,7 +4,7 @@ export interface CreateCardAttachment {
   /** The name of the attachment. Max length 256. */
   name?: string;
   /** The file to attach, as multipart/form-data */
-  file?: string;
+  file?: Buffer | ReadableStream | string | Blob | File;
   /** The mimeType of the attachment. Max length 256 */
   mimeType?: string;
   /** A URL to attach. Must start with `http://` or `https://` */

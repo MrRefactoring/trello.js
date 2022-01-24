@@ -3,8 +3,9 @@ import { Limits } from './limits';
 import { Color } from './color';
 
 export interface Card {
-  id?: TrelloID;
+  id: TrelloID;
   address?: string;
+  attachments: unknown[];
   badges?: {
     attachmentsByType?: {
       trello?: {
@@ -26,41 +27,48 @@ export interface Card {
     dueComplete?: boolean;
   };
   checkItemStates?: unknown[];
-  closed?: boolean;
+  closed: boolean;
   coordinates?: string;
   creationMethod?: string;
   dateLastActivity?: string;
-  desc?: string;
+  desc: string;
   descData?: {
     emoji?: {};
   };
   due?: string;
-  dueReminder?: string;
+  dueReminder: string | null;
   email?: string;
-  idBoard?: TrelloID;
-  idChecklists?: unknown[];
-  idLabels?: unknown[];
-  idList?: TrelloID;
-  idMembers?: unknown[];
+  idBoard: TrelloID;
+  idChecklists: unknown[];
+  idLabels: unknown[];
+  idList: TrelloID;
+  idMembers: unknown[];
   idMembersVoted?: unknown[];
-  idShort?: number;
+  idShort: number;
   idAttachmentCover?: TrelloID;
   labels?: unknown[];
   limits?: Limits;
   locationName?: string;
   manualCoverAttachment?: boolean;
-  name?: string;
-  pos?: number;
-  shortLink?: string;
+  name: string;
+  pos: number;
+  shortLink: string;
   shortUrl?: string;
-  subscribed?: boolean;
+  subscribed: boolean;
+  stickers: unknown[];
   url?: string;
+  isTemplate: boolean;
   cover?: {
-    idAttachment?: TrelloID;
-    color?: Color;
-    idUploadedBackground?: boolean;
+    idAttachment: TrelloID | null;
+    color: Color | null;
+    idUploadedBackground: boolean | null;
     size?: string;
     brightness?: string;
+    idPlugin: string | null;
     isTemplate?: boolean;
   };
+
+  cardRole: unknown | null;
+  dueComplete: boolean;
+  start: unknown | null;
 }

@@ -318,13 +318,13 @@ export class Boards {
   }
 
   /** Get the Lists on a Board */
-  async getBoardLists<T = Models.TrelloList[]>(
+  async getBoardLists<T = Models.List[]>(
     parameters: Parameters.GetBoardLists,
     callback: Callback<T>
   ): Promise<void>;
   /** Get the Lists on a Board */
-  async getBoardLists<T = Models.TrelloList[]>(parameters: Parameters.GetBoardLists, callback?: never): Promise<T>;
-  async getBoardLists<T = Models.TrelloList[]>(
+  async getBoardLists<T = Models.List[]>(parameters: Parameters.GetBoardLists, callback?: never): Promise<T>;
+  async getBoardLists<T = Models.List[]>(
     parameters: Parameters.GetBoardLists,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -343,13 +343,13 @@ export class Boards {
   }
 
   /** Create a new List on a Board. */
-  async createBoardList<T = Models.TrelloList>(
+  async createBoardList<T = Models.List>(
     parameters: Parameters.CreateBoardList,
     callback: Callback<T>
   ): Promise<void>;
   /** Create a new List on a Board. */
-  async createBoardList<T = Models.TrelloList>(parameters: Parameters.CreateBoardList, callback?: never): Promise<T>;
-  async createBoardList<T = Models.TrelloList>(
+  async createBoardList<T = Models.List>(parameters: Parameters.CreateBoardList, callback?: never): Promise<T>;
+  async createBoardList<T = Models.List>(
     parameters: Parameters.CreateBoardList,
     callback?: Callback<T>,
   ): Promise<void | T> {
