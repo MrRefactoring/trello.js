@@ -1,5 +1,6 @@
 import { Color } from './color';
 import { Limits } from './limits';
+import { Preview } from './preview';
 import { TrelloID } from './trelloID';
 
 export interface Attachment {
@@ -11,7 +12,7 @@ export interface Attachment {
   isUpload: boolean;
   mimeType: string;
   name: string;
-  previews: string[];
+  previews: Preview[];
   url: string;
   pos: number;
   fileName: string | null;

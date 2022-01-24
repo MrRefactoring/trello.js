@@ -1,3 +1,4 @@
+import { Attachment } from './attachment';
 import { Color } from './color';
 import { Limits } from './limits';
 import { TrelloID } from './trelloID';
@@ -5,7 +6,7 @@ import { TrelloID } from './trelloID';
 export interface Card {
   id: TrelloID;
   address?: string;
-  attachments: unknown[];
+  attachments: Attachment[];
   badges?: {
     attachmentsByType?: {
       trello?: {
