@@ -5,7 +5,7 @@ export interface GetCardAttachments {
    * `all` or a comma-separated list of attachment
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  fields: string;
+  fields?: string;
   /** Use `cover` to restrict to just the cover attachment */
-  filter: string;
+  filter?: string;
 }

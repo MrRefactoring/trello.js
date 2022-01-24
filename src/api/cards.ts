@@ -173,16 +173,16 @@ export class Cards {
   }
 
   /** Create an Attachment to a Card */
-  async createCardAttachment<T = Models.Attachment[]>(
+  async createCardAttachment<T = Models.Attachment>(
     parameters: Parameters.CreateCardAttachment,
     callback: Callback<T>
   ): Promise<void>;
   /** Create an Attachment to a Card */
-  async createCardAttachment<T = Models.Attachment[]>(
+  async createCardAttachment<T = Models.Attachment>(
     parameters: Parameters.CreateCardAttachment,
     callback?: never
   ): Promise<T>;
-  async createCardAttachment<T = Models.Attachment[]>(
+  async createCardAttachment<T = Models.Attachment>(
     parameters: Parameters.CreateCardAttachment,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -219,16 +219,16 @@ export class Cards {
   }
 
   /** Get a specific Attachment on a Card. */
-  async getCardAttachment<T = Array<Models.Attachment>>(
+  async getCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachment,
     callback: Callback<T>
   ): Promise<void>;
   /** Get a specific Attachment on a Card. */
-  async getCardAttachment<T = Array<Models.Attachment>>(
+  async getCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachment,
     callback?: never
   ): Promise<T>;
-  async getCardAttachment<T = Array<Models.Attachment>>(
+  async getCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachment,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -244,13 +244,13 @@ export class Cards {
   }
 
   /** Delete an Attachment */
-  async deleteCardAttachment<T = unknown>(
+  async deleteCardAttachment<T = Models.DeletedCard>(
     parameters: Parameters.DeleteCardAttachment,
     callback: Callback<T>
   ): Promise<void>;
   /** Delete an Attachment */
-  async deleteCardAttachment<T = unknown>(parameters: Parameters.DeleteCardAttachment, callback?: never): Promise<T>;
-  async deleteCardAttachment<T = unknown>(
+  async deleteCardAttachment<T = Models.DeletedCard>(parameters: Parameters.DeleteCardAttachment, callback?: never): Promise<T>;
+  async deleteCardAttachment<T = Models.DeletedCard>(
     parameters: Parameters.DeleteCardAttachment,
     callback?: Callback<T>,
   ): Promise<void | T> {

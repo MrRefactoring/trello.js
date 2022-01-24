@@ -1,7 +1,6 @@
 import test from 'ava';
 import { Models, TrelloClient } from '../../src';
 import * as fs from 'fs';
-import axios from 'axios';
 
 const { TRELLO_API_KEY = '', TRELLO_API_TOKEN = '' } = process.env;
 
@@ -97,13 +96,11 @@ test.serial('Adding attachments to card', async t => {
 
   t.truthy(!!card);
 
-  const { data: image } = await axios({ url: 'https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/hero/6a3ccd8e5c9a0e8ebea4235d12da6b24/hero.png' });
-
   await client.cards.createCardAttachment({
     id: card!.id,
-    file: image,
-    name: 'Editor config',
-    mimeType: 'image/png',
+    file: fs.readFileSync('./.editorconfig'),
+    name: 'Editor config.txt',
+    mimeType: 'text/plain',
   });
 
   await client.cards.createCardAttachment({
@@ -115,7 +112,23 @@ test.serial('Adding attachments to card', async t => {
   t.pass();
 });
 
-test.serial.skip('Deleting cards', async t => {
+test.serial('Deleting cards attachments', async t => {
+  const lists = await client.boards.getBoardLists({ id: board.id });
+
+  const toDoList = lists.find((list) => list.name === 'To Do');
+
+  const cards = await client.lists.getListCards({ id: toDoList!.id });
+
+  const card = cards.find((oneCard) => oneCard.name === '');
+
+  const attachments = await client.cards.getCardAttachments({ id: card!.id });
+
+  await Promise.all(attachments.map(attachment => client.cards.deleteCardAttachment({ id: card!.id, idAttachment: attachment.id })));
+
+  t.pass();
+});
+
+test.serial('Deleting cards', async t => {
   const lists = await client.boards.getBoardLists({ id: board.id });
 
   await Promise.all(lists.map(async list => {
@@ -129,7 +142,7 @@ test.serial.skip('Deleting cards', async t => {
   t.pass();
 });
 
-test.serial.skip('Deleting lists', async t => {
+test.serial('Deleting lists', async t => {
   const lists = await client.boards.getBoardLists({ id: board.id });
 
   await Promise.all(lists.map(async list => {
@@ -141,7 +154,7 @@ test.serial.skip('Deleting lists', async t => {
   t.pass();
 });
 
-test.serial.skip('Deleting board', async t => {
+test.serial('Deleting board', async t => {
   await client.boards.deleteBoard({ id: board.id });
 
   t.pass();
