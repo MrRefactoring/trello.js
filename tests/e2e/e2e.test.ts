@@ -1,6 +1,7 @@
 import test from 'ava';
 import { Models, TrelloClient } from '../../src';
 import * as fs from 'fs';
+import axios from 'axios';
 
 const { TRELLO_API_KEY = '', TRELLO_API_TOKEN = '' } = process.env;
 
@@ -96,11 +97,13 @@ test.serial('Adding attachments to card', async t => {
 
   t.truthy(!!card);
 
+  const { data: image } = await axios({ url: 'https://d2k1ftgv7pobq7.cloudfront.net/meta/p/res/images/spirit/hero/6a3ccd8e5c9a0e8ebea4235d12da6b24/hero.png' });
+
   await client.cards.createCardAttachment({
     id: card!.id,
-    file: fs.readFileSync('./.editorconfig'),
+    file: image,
     name: 'Editor config',
-    mimeType: 'text/plain',
+    mimeType: 'image/png',
   });
 
   await client.cards.createCardAttachment({
