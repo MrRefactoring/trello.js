@@ -1,6 +1,6 @@
+import * as fs from 'fs';
 import test from 'ava';
 import { Models, TrelloClient } from '../../src';
-import * as fs from 'fs';
 
 const { TRELLO_API_KEY = '', TRELLO_API_TOKEN = '' } = process.env;
 

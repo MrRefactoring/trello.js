@@ -1,5 +1,5 @@
-import { TrelloID } from './trelloID';
 import { Limits } from './limits';
+import { TrelloID } from './trelloID';
 
 export interface List {
   id: TrelloID;

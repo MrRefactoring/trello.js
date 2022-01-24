@@ -1,6 +1,6 @@
-import { TrelloID } from './trelloID';
-import { Limits } from './limits';
 import { Color } from './color';
+import { Limits } from './limits';
+import { TrelloID } from './trelloID';
 
 export interface Card {
   id: TrelloID;

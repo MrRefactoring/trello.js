@@ -1,6 +1,6 @@
-import { TrelloID } from './trelloID';
 import { LimitsObject } from './limitsObject';
 import { MemberPrefs } from './memberPrefs';
+import { TrelloID } from './trelloID';
 
 export interface Member {
   id?: TrelloID;

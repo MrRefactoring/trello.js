@@ -1,7 +1,7 @@
-import { TrelloID } from './trelloID';
+import { LimitsObject } from './limitsObject';
 import { Memberships } from './memberships';
 import { Preferences } from './preferences';
-import { LimitsObject } from './limitsObject';
+import { TrelloID } from './trelloID';
 
 export interface Organization {
   id: TrelloID;

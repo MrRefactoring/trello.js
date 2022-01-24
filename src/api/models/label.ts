@@ -1,5 +1,5 @@
-import { TrelloID } from './trelloID';
 import { Color } from './color';
+import { TrelloID } from './trelloID';
 
 export interface Label {
   /** The ID of the label. */

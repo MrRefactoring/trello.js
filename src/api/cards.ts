@@ -1,8 +1,8 @@
+import * as FormData from 'form-data';
 import * as Models from './models';
 import * as Parameters from './parameters';
 import { Client } from '../clients';
 import { Callback, RequestConfig } from '../types';
-import * as FormData from 'form-data';
 
 export class Cards {
   constructor(private client: Client) {}

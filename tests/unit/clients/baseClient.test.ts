@@ -1,5 +1,5 @@
-import test from 'ava';
 import { BaseClient } from '../../../src';
+import test from 'ava';
 
 test('should return correct serialized parameters', t => {
   const baseClient = new BaseClient({
