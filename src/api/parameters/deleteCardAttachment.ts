@@ -3,5 +3,4 @@ export interface DeleteCardAttachment {
   id: string;
   /** The ID of the Attachment */
   idAttachment: string;
-  body?: {};
 }

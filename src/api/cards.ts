@@ -257,7 +257,6 @@ export class Cards {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
       method: 'DELETE',
-      data: parameters.body, // todo
     };
 
     return this.client.sendRequest(config, callback);
