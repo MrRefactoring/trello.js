@@ -43,10 +43,10 @@ export class Lists {
   }
 
   /** Create a new List on a Board */
-  async createList<T = unknown>(parameters: Parameters.CreateList, callback: Callback<T>): Promise<void>;
+  async createList<T = Models.List>(parameters: Parameters.CreateList, callback: Callback<T>): Promise<void>;
   /** Create a new List on a Board */
-  async createList<T = unknown>(parameters: Parameters.CreateList, callback?: never): Promise<T>;
-  async createList<T = unknown>(parameters: Parameters.CreateList, callback?: Callback<T>): Promise<void | T> {
+  async createList<T = Models.List>(parameters: Parameters.CreateList, callback?: never): Promise<T>;
+  async createList<T = Models.List>(parameters: Parameters.CreateList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: '/lists',
       method: 'POST',
@@ -104,10 +104,10 @@ export class Lists {
   }
 
   /** Archive or unarchive a list */
-  async setListCloseState<T = unknown>(parameters: Parameters.SetListCloseState, callback: Callback<T>): Promise<void>;
+  async setListCloseState<T = Models.List>(parameters: Parameters.SetListCloseState, callback: Callback<T>): Promise<void>;
   /** Archive or unarchive a list */
-  async setListCloseState<T = unknown>(parameters: Parameters.SetListCloseState, callback?: never): Promise<T>;
-  async setListCloseState<T = unknown>(
+  async setListCloseState<T = Models.List>(parameters: Parameters.SetListCloseState, callback?: never): Promise<T>;
+  async setListCloseState<T = Models.List>(
     parameters: Parameters.SetListCloseState,
     callback?: Callback<T>,
   ): Promise<void | T> {

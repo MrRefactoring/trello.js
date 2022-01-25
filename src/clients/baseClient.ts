@@ -1,7 +1,7 @@
-import axios, { AxiosInstance } from 'axios';
 import { Client } from './client';
-import { Callback, RequestConfig } from '../types';
 import { Config } from '../config';
+import axios, { AxiosInstance } from 'axios';
+import { Callback, RequestConfig } from '../types';
 
 export class BaseClient implements Client {
   private instance: AxiosInstance;

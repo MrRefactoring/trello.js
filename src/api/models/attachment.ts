@@ -1,16 +1,20 @@
-import { TrelloID } from './trelloID';
 import { Color } from './color';
+import { Limits } from './limits';
+import { Preview } from './preview';
+import { TrelloID } from './trelloID';
 
 export interface Attachment {
-  id?: TrelloID;
-  bytes?: string;
-  date?: string;
-  edgeColor?: Color;
-  idMember?: TrelloID;
-  isUpload?: boolean;
-  mimeType?: string;
-  name?: string;
-  previews?: string[];
-  url?: string;
-  pos?: number;
+  id: TrelloID;
+  bytes: number | null;
+  date: string;
+  edgeColor: Color | null;
+  idMember: TrelloID;
+  isUpload: boolean;
+  mimeType: string;
+  name: string;
+  previews: Preview[];
+  url: string;
+  pos: number;
+  fileName: string | null;
+  limits: Limits;
 }

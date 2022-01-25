@@ -1,56 +1,53 @@
+import test from 'ava';
 import {
-  Client,
   BaseClient,
-  Config,
   Callback,
-  RequestConfig,
+  Config,
   Models,
   Parameters,
+  RequestConfig,
   TrelloClient,
 } from '../../src';
 
-describe('Facade', () => {
-  it('should return TrelloClient', () => {
-    expect(TrelloClient).toBeDefined();
-  });
+test('Trello Client should be defined', t => {
+  t.truthy(!!TrelloClient);
+});
 
-  it('should return BaseClient', () => {
-    expect(BaseClient).toBeDefined();
-  });
+test('BaseClient should be defined', t => {
+  t.truthy(!!BaseClient);
+});
 
-  it('should return Client', () => {
-    const client: Client = new BaseClient({ token: '', key: '' });
+test('Config should be defined', t => {
+  const config: Config = {
+    key: '',
+    token: '',
+  };
 
-    expect(client).toBeDefined();
-  });
+  t.is(config.key, '');
+  t.is(config.token, '');
+});
 
-  it('should return Config', () => {
-    const config: Config = { key: '', token: '' };
+test('RequestConfig should be defined', t => {
+  const requestConfig: RequestConfig = { url: '' };
 
-    expect(config).toBeDefined();
-  });
+  t.is(requestConfig.url, '');
+});
 
-  it('should return RequestConfig', () => {
-    const requestConfig: RequestConfig = { url: '' };
+test('Callback should be defined', t => {
+  const callback: Callback<{ testVal: string; }> = (err, data) => {
+    t.is(err, null);
+    t.deepEqual(data, { testVal: 'hello' });
+  };
 
-    expect(requestConfig).toBeDefined();
-  });
+  t.truthy(!!callback);
 
-  it('should return Callback', () => {
-    const callback: Callback<{ testVal: string; }> = (err, data) => {
-      expect(err).toBeNull();
-      expect(data).toEqual({ testVal: 'hello' });
-    };
+  callback(null, { testVal: 'hello' });
+});
 
-    expect(callback).toBeDefined();
-    callback(null, { testVal: 'hello' });
-  });
+test('Models should be defined', t => {
+  t.truthy(!!Models);
+});
 
-  it('should return Models', () => {
-    expect(Models).toBeDefined();
-  });
-
-  it('should return Parameters', () => {
-    expect(Parameters).toBeDefined();
-  });
+test('Parameters should be defined', t => {
+  t.truthy(!!Parameters);
 });

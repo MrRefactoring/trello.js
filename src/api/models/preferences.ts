@@ -1,6 +1,6 @@
 import { CardAging } from './cardAging';
-import { TrelloID } from './trelloID';
 import { ImageDescriptor } from './imageDescriptor';
+import { TrelloID } from './trelloID';
 
 export interface Preferences {
   associatedDomain?: string | null;

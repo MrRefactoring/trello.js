@@ -112,13 +112,13 @@ export class Actions {
   }
 
   /** Get the List for an Action */
-  async getActionList<T = Models.TrelloList>(
+  async getActionList<T = Models.List>(
     parameters: Parameters.GetActionList,
     callback: Callback<T>
   ): Promise<void>;
   /** Get the List for an Action */
-  async getActionList<T = Models.TrelloList>(parameters: Parameters.GetActionList, callback?: never): Promise<T>;
-  async getActionList<T = Models.TrelloList>(
+  async getActionList<T = Models.List>(parameters: Parameters.GetActionList, callback?: never): Promise<T>;
+  async getActionList<T = Models.List>(
     parameters: Parameters.GetActionList,
     callback?: Callback<T>,
   ): Promise<void | T> {

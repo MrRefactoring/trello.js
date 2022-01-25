@@ -1,3 +1,4 @@
+import * as FormData from 'form-data';
 import * as Models from './models';
 import * as Parameters from './parameters';
 import { Client } from '../clients';
@@ -102,10 +103,10 @@ export class Cards {
   }
 
   /** Delete a Card */
-  async deleteCard<T = unknown>(parameters: Parameters.DeleteCard, callback: Callback<T>): Promise<void>;
+  async deleteCard<T = Models.DeletedCard>(parameters: Parameters.DeleteCard, callback: Callback<T>): Promise<void>;
   /** Delete a Card */
-  async deleteCard<T = unknown>(parameters: Parameters.DeleteCard, callback?: never): Promise<T>;
-  async deleteCard<T = unknown>(parameters: Parameters.DeleteCard, callback?: Callback<T>): Promise<void | T> {
+  async deleteCard<T = Models.DeletedCard>(parameters: Parameters.DeleteCard, callback?: never): Promise<T>;
+  async deleteCard<T = Models.DeletedCard>(parameters: Parameters.DeleteCard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}`,
       method: 'DELETE',
@@ -150,16 +151,16 @@ export class Cards {
   }
 
   /** List the attachments on a card */
-  async getCardAttachments<T = Array<Models.Attachment>>(
+  async getCardAttachments<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachments,
     callback: Callback<T>
   ): Promise<void>;
   /** List the attachments on a card */
-  async getCardAttachments<T = Array<Models.Attachment>>(
+  async getCardAttachments<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachments,
     callback?: never
   ): Promise<T>;
-  async getCardAttachments<T = Array<Models.Attachment>>(
+  async getCardAttachments<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachments,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -172,46 +173,62 @@ export class Cards {
   }
 
   /** Create an Attachment to a Card */
-  async createCardAttachment<T = Array<Models.Attachment>>(
+  async createCardAttachment<T = Models.Attachment>(
     parameters: Parameters.CreateCardAttachment,
     callback: Callback<T>
   ): Promise<void>;
   /** Create an Attachment to a Card */
-  async createCardAttachment<T = Array<Models.Attachment>>(
+  async createCardAttachment<T = Models.Attachment>(
     parameters: Parameters.CreateCardAttachment,
     callback?: never
   ): Promise<T>;
-  async createCardAttachment<T = Array<Models.Attachment>>(
+  async createCardAttachment<T = Models.Attachment>(
     parameters: Parameters.CreateCardAttachment,
     callback?: Callback<T>,
   ): Promise<void | T> {
+    let formData: FormData | undefined;
+
+    if (parameters.file) {
+      formData = new FormData();
+
+      formData.append('file', parameters.file, parameters.name);
+      formData.append('name', parameters.name);
+      formData.append('mimeType', parameters.mimeType);
+    }
+
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments`,
       method: 'POST',
+      headers: {
+        ...formData?.getHeaders?.(),
+      },
       params: {
-        // TODO check
         name: parameters.name,
-        file: parameters.file,
         mimeType: parameters.mimeType,
         url: parameters.url,
         setCover: parameters.setCover,
       },
+      data: formData,
     };
+
+    if (formData) {
+      config.headers!['Content-Length'] = formData.getLengthSync?.();
+    }
 
     return this.client.sendRequest(config, callback);
   }
 
   /** Get a specific Attachment on a Card. */
-  async getCardAttachment<T = Array<Models.Attachment>>(
+  async getCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachment,
     callback: Callback<T>
   ): Promise<void>;
   /** Get a specific Attachment on a Card. */
-  async getCardAttachment<T = Array<Models.Attachment>>(
+  async getCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachment,
     callback?: never
   ): Promise<T>;
-  async getCardAttachment<T = Array<Models.Attachment>>(
+  async getCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachment,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -227,30 +244,29 @@ export class Cards {
   }
 
   /** Delete an Attachment */
-  async deleteCardAttachment<T = unknown>(
+  async deleteCardAttachment<T = Models.DeletedCard>(
     parameters: Parameters.DeleteCardAttachment,
     callback: Callback<T>
   ): Promise<void>;
   /** Delete an Attachment */
-  async deleteCardAttachment<T = unknown>(parameters: Parameters.DeleteCardAttachment, callback?: never): Promise<T>;
-  async deleteCardAttachment<T = unknown>(
+  async deleteCardAttachment<T = Models.DeletedCard>(parameters: Parameters.DeleteCardAttachment, callback?: never): Promise<T>;
+  async deleteCardAttachment<T = Models.DeletedCard>(
     parameters: Parameters.DeleteCardAttachment,
     callback?: Callback<T>,
   ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
       method: 'DELETE',
-      data: parameters.body, // todo
     };
 
     return this.client.sendRequest(config, callback);
   }
 
   /** Get the board a card is on */
-  async getCardBoard<T = unknown>(parameters: Parameters.GetCardBoard, callback: Callback<T>): Promise<void>;
+  async getCardBoard<T = Models.Board>(parameters: Parameters.GetCardBoard, callback: Callback<T>): Promise<void>;
   /** Get the board a card is on */
-  async getCardBoard<T = unknown>(parameters: Parameters.GetCardBoard, callback?: never): Promise<T>;
-  async getCardBoard<T = unknown>(parameters: Parameters.GetCardBoard, callback?: Callback<T>): Promise<void | T> {
+  async getCardBoard<T = Models.Board>(parameters: Parameters.GetCardBoard, callback?: never): Promise<T>;
+  async getCardBoard<T = Models.Board>(parameters: Parameters.GetCardBoard, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/board`,
       method: 'GET',
@@ -403,10 +419,10 @@ export class Cards {
   }
 
   /** Get the list a card is in */
-  async getCardList<T = unknown>(parameters: Parameters.GetCardList, callback: Callback<T>): Promise<void>;
+  async getCardList<T = Models.List>(parameters: Parameters.GetCardList, callback: Callback<T>): Promise<void>;
   /** Get the list a card is in */
-  async getCardList<T = unknown>(parameters: Parameters.GetCardList, callback?: never): Promise<T>;
-  async getCardList<T = unknown>(parameters: Parameters.GetCardList, callback?: Callback<T>): Promise<void | T> {
+  async getCardList<T = Models.List>(parameters: Parameters.GetCardList, callback?: never): Promise<T>;
+  async getCardList<T = Models.List>(parameters: Parameters.GetCardList, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}/list`,
       method: 'GET',

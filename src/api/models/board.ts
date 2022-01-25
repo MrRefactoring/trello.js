@@ -1,6 +1,6 @@
-import { TrelloID } from './trelloID';
-import { Preferences } from './preferences';
 import { Limits } from './limits';
+import { Preferences } from './preferences';
+import { TrelloID } from './trelloID';
 
 export interface Board {
   id: TrelloID;

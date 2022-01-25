@@ -318,13 +318,10 @@ export class Boards {
   }
 
   /** Get the Lists on a Board */
-  async getBoardLists<T = Models.TrelloList[]>(
-    parameters: Parameters.GetBoardLists,
-    callback: Callback<T>
-  ): Promise<void>;
+  async getBoardLists<T = Models.List[]>(parameters: Parameters.GetBoardLists, callback: Callback<T>): Promise<void>;
   /** Get the Lists on a Board */
-  async getBoardLists<T = Models.TrelloList[]>(parameters: Parameters.GetBoardLists, callback?: never): Promise<T>;
-  async getBoardLists<T = Models.TrelloList[]>(
+  async getBoardLists<T = Models.List[]>(parameters: Parameters.GetBoardLists, callback?: never): Promise<T>;
+  async getBoardLists<T = Models.List[]>(
     parameters: Parameters.GetBoardLists,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -343,13 +340,10 @@ export class Boards {
   }
 
   /** Create a new List on a Board. */
-  async createBoardList<T = Models.TrelloList>(
-    parameters: Parameters.CreateBoardList,
-    callback: Callback<T>
-  ): Promise<void>;
+  async createBoardList<T = Models.List>(parameters: Parameters.CreateBoardList, callback: Callback<T>): Promise<void>;
   /** Create a new List on a Board. */
-  async createBoardList<T = Models.TrelloList>(parameters: Parameters.CreateBoardList, callback?: never): Promise<T>;
-  async createBoardList<T = Models.TrelloList>(
+  async createBoardList<T = Models.List>(parameters: Parameters.CreateBoardList, callback?: never): Promise<T>;
+  async createBoardList<T = Models.List>(
     parameters: Parameters.CreateBoardList,
     callback?: Callback<T>,
   ): Promise<void | T> {
@@ -708,7 +702,9 @@ export class Boards {
     return this.client.sendRequest(config, callback, { methodName: 'markAsViewed' });
   }
 
+  /** @deprecated Was removed from API */
   async createPowerUp<T = unknown>(parameters: Parameters.CreatePowerUp, callback: Callback<T>): Promise<void>;
+  /** @deprecated Was removed from API */
   async createPowerUp<T = unknown>(parameters: Parameters.CreatePowerUp, callback?: never): Promise<T>;
   async createPowerUp<T = unknown>(parameters: Parameters.CreatePowerUp, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {
@@ -717,28 +713,38 @@ export class Boards {
       params: {
         value: parameters.value,
       },
-    }; // todo deprecated?
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  async deletePowerUp<T = unknown>(parameters: Parameters.DeletePowerUp, callback: Callback<T>): Promise<void>;
-  async deletePowerUp<T = unknown>(parameters: Parameters.DeletePowerUp, callback?: never): Promise<T>;
-  async deletePowerUp<T = unknown>(parameters: Parameters.DeletePowerUp, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/boards/${parameters.id}/powerUps/${parameters.powerUp}`,
-      method: 'DELETE', // todo deprecated?
     };
 
     return this.client.sendRequest(config, callback);
   }
 
-  /** Get the enabled Power-Ups on a board */
+  /** @deprecated Was removed from API */
+  async deletePowerUp<T = unknown>(parameters: Parameters.DeletePowerUp, callback: Callback<T>): Promise<void>;
+  /** @deprecated Was removed from API */
+  async deletePowerUp<T = unknown>(parameters: Parameters.DeletePowerUp, callback?: never): Promise<T>;
+  async deletePowerUp<T = unknown>(parameters: Parameters.DeletePowerUp, callback?: Callback<T>): Promise<void | T> {
+    const config: RequestConfig = {
+      url: `/boards/${parameters.id}/powerUps/${parameters.powerUp}`,
+      method: 'DELETE',
+    };
+
+    return this.client.sendRequest(config, callback);
+  }
+
+  /**
+   * @deprecated Will be removed from API
+   *
+   *   Get the enabled Power-Ups on a board
+   */
   async getEnabledPowerUps<T = Models.Plugin[]>(
     parameters: Parameters.GetEnabledPowerUps,
     callback: Callback<T>
   ): Promise<void>;
-  /** Get the enabled Power-Ups on a board */
+  /**
+   * @deprecated Will be removed from API
+   *
+   *   Get the enabled Power-Ups on a board
+   */
   async getEnabledPowerUps<T = Models.Plugin[]>(
     parameters: Parameters.GetEnabledPowerUps,
     callback?: never
@@ -755,7 +761,11 @@ export class Boards {
     return this.client.sendRequest(config, callback);
   }
 
-  /** Enable a Power-Up on a Board */
+  /**
+   * @deprecated Will be removed from API
+   *
+   *   Enable a Power-Up on a Board
+   */
   async enablePowerUp<T = unknown>(parameters: Parameters.EnablePowerUp, callback: Callback<T>): Promise<void>;
   /** Enable a Power-Up on a Board */
   async enablePowerUp<T = unknown>(parameters: Parameters.EnablePowerUp, callback?: never): Promise<T>;
@@ -771,7 +781,11 @@ export class Boards {
     return this.client.sendRequest(config, callback);
   }
 
-  /** Disable a Power-Up on a board */
+  /**
+   * @deprecated Will be removed from API
+   *
+   *   Disable a Power-Up on a board
+   */
   async disablePowerUp<T = unknown>(parameters: Parameters.DisablePowerUp, callback: Callback<T>): Promise<void>;
   /** Disable a Power-Up on a board */
   async disablePowerUp<T = unknown>(parameters: Parameters.DisablePowerUp, callback?: never): Promise<T>;
@@ -784,9 +798,17 @@ export class Boards {
     return this.client.sendRequest(config, callback);
   }
 
-  /** List the Power-Ups on a board */
+  /**
+   * @deprecated Will be removed from API
+   *
+   *   List the Power-Ups on a board
+   */
   async getPowerUps<T = Models.Plugin>(parameters: Parameters.GetPowerUps, callback: Callback<T>): Promise<void>;
-  /** List the Power-Ups on a board */
+  /**
+   * @deprecated Will be removed from API
+   *
+   *   List the Power-Ups on a board
+   */
   async getPowerUps<T = Models.Plugin>(parameters: Parameters.GetPowerUps, callback?: never): Promise<T>;
   async getPowerUps<T = Models.Plugin>(parameters: Parameters.GetPowerUps, callback?: Callback<T>): Promise<void | T> {
     const config: RequestConfig = {

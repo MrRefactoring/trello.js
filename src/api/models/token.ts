@@ -1,5 +1,5 @@
-import { TrelloID } from './trelloID';
 import { TokenPermission } from './tokenPermission';
+import { TrelloID } from './trelloID';
 
 export interface Token {
   id?: TrelloID;
