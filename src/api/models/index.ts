@@ -13,6 +13,8 @@ export * from './checkItem';
 export * from './checklist';
 export * from './claimableOrganizations';
 export * from './color';
+export * from './list';
+export * from './deletedCard';
 export * from './customEmoji';
 export * from './customField';
 export * from './customFieldItems';
