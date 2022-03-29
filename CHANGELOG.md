@@ -1,3 +1,7 @@
+### 1.2.3
+
+- Dependencies updated
+
 ### 1.2.2
 
 - Dependencies updated
