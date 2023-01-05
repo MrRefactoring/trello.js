@@ -1,3 +1,10 @@
+# Trello.js changelog
+
+### 1.2.5
+
+- Badge fix
+- Dependencies updated
+
 ### 1.2.4
 
 - Dependencies updated

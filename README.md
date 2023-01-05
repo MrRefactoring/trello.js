@@ -3,7 +3,7 @@
 
 <a href="https://www.npmjs.com/package/trello.js"><img alt="NPM version" src="https://img.shields.io/npm/v/trello.js.svg?maxAge=3600&style=flat-square" /></a>
 <a href="https://www.npmjs.com/package/trello.js"><img alt="NPM downloads per month" src="https://img.shields.io/npm/dm/trello.js.svg?maxAge=3600&style=flat-square" /></a>
-<a href="https://github.com/MrRefactoring/trello.js"><img alt="build status" src="https://img.shields.io/github/workflow/status/mrrefactoring/trello.js/ci?style=flat-square"></a>
+<a href="https://github.com/MrRefactoring/trello.js"><img alt="build status" src="https://img.shields.io/github/actions/workflow/status/mrrefactoring/trello.js/ci.yml?style=flat-square"></a>
 <a href="https://github.com/mrrefactoring/trello.js/blob/develop/LICENSE"><img alt="license" src="https://img.shields.io/github/license/mrrefactoring/trello.js?color=green&style=flat-square"/></a>
 
 <span>JavaScript / TypeScript library for Node.JS and browsers to easily interact with Atlassian Trello API</span>
