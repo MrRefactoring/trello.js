@@ -64,7 +64,7 @@ export class Lists {
   /** Archive all cards in a list */
   async archiveAllCardsInList<T = unknown>(
     parameters: Parameters.ArchiveAllCardsInList,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Archive all cards in a list */
   async archiveAllCardsInList<T = unknown>(parameters: Parameters.ArchiveAllCardsInList, callback?: never): Promise<T>;
@@ -83,7 +83,7 @@ export class Lists {
   /** Move all Cards in a List */
   async moveAllCardsInList<T = unknown>(
     parameters: Parameters.MoveAllCardsInList,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Move all Cards in a List */
   async moveAllCardsInList<T = unknown>(parameters: Parameters.MoveAllCardsInList, callback?: never): Promise<T>;
@@ -104,7 +104,10 @@ export class Lists {
   }
 
   /** Archive or unarchive a list */
-  async setListCloseState<T = Models.List>(parameters: Parameters.SetListCloseState, callback: Callback<T>): Promise<void>;
+  async setListCloseState<T = Models.List>(
+    parameters: Parameters.SetListCloseState,
+    callback: Callback<T>,
+  ): Promise<void>;
   /** Archive or unarchive a list */
   async setListCloseState<T = Models.List>(parameters: Parameters.SetListCloseState, callback?: never): Promise<T>;
   async setListCloseState<T = Models.List>(
@@ -125,12 +128,12 @@ export class Lists {
   /** Move a List to a different Board */
   async moveListToDifferentBoard<T = unknown>(
     parameters: Parameters.MoveListToDifferentBoard,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Move a List to a different Board */
   async moveListToDifferentBoard<T = unknown>(
     parameters: Parameters.MoveListToDifferentBoard,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async moveListToDifferentBoard<T = unknown>(
     parameters: Parameters.MoveListToDifferentBoard,

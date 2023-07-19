@@ -9,12 +9,12 @@ export class Boards {
   /** Get information about the memberships users have to the board. */
   async getBoardMemberships<T = Models.Memberships>(
     parameters: Parameters.GetBoardMemberships,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get information about the memberships users have to the board. */
   async getBoardMemberships<T = Models.Memberships>(
     parameters: Parameters.GetBoardMemberships,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getBoardMemberships<T = Models.Memberships>(
     parameters: Parameters.GetBoardMemberships,
@@ -169,7 +169,7 @@ export class Boards {
   /** Get a Stars on a Board. */
   async getBoardStars<T = Array<Models.BoardStars>>(
     parameters: Parameters.GetBoardStars,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a Stars on a Board. */
   async getBoardStars<T = Array<Models.BoardStars>>(parameters: Parameters.GetBoardStars, callback?: never): Promise<T>;
@@ -188,7 +188,7 @@ export class Boards {
   /** Get all of the checklists on a Board. */
   async getBoardChecklists<T = unknown>(
     parameters: Parameters.GetBoardChecklists,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get all of the checklists on a Board. */
   async getBoardChecklists<T = unknown>(parameters: Parameters.GetBoardChecklists, callback?: never): Promise<T>;
@@ -207,7 +207,7 @@ export class Boards {
   /** Create a new checklist on a board. */
   async createBoardChecklist<T = unknown>(
     parameters: Parameters.CreateBoardChecklist,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create a new checklist on a board. */
   async createBoardChecklist<T = unknown>(parameters: Parameters.CreateBoardChecklist, callback?: never): Promise<T>;
@@ -242,7 +242,7 @@ export class Boards {
   /** Get the Cards on a Board that match a given filter. */
   async getBoardCardsFilter<T = unknown>(
     parameters: Parameters.GetBoardCardsFilter,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the Cards on a Board that match a given filter. */
   async getBoardCardsFilter<T = unknown>(parameters: Parameters.GetBoardCardsFilter, callback?: never): Promise<T>;
@@ -261,12 +261,12 @@ export class Boards {
   /** Get the Custom Field Definitions that exist on a board. */
   async getBoardCustomFields<T = Models.CustomField[]>(
     parameters: Parameters.GetBoardCustomFields,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the Custom Field Definitions that exist on a board. */
   async getBoardCustomFields<T = Models.CustomField[]>(
     parameters: Parameters.GetBoardCustomFields,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getBoardCustomFields<T = Models.CustomField[]>(
     parameters: Parameters.GetBoardCustomFields,
@@ -361,7 +361,7 @@ export class Boards {
 
   async getBoardListsFilter<T = unknown>(
     parameters: Parameters.GetBoardListsFilter,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async getBoardListsFilter<T = unknown>(parameters: Parameters.GetBoardListsFilter, callback?: never): Promise<T>;
   async getBoardListsFilter<T = unknown>(
@@ -434,7 +434,7 @@ export class Boards {
 
   async removeMemberFromBoard<T = unknown>(
     parameters: Parameters.RemoveMemberFromBoard,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async removeMemberFromBoard<T = unknown>(parameters: Parameters.RemoveMemberFromBoard, callback?: never): Promise<T>;
   async removeMemberFromBoard<T = unknown>(
@@ -452,7 +452,7 @@ export class Boards {
   /** Update an existing board by id */
   async updateMemberOnBoard<T = unknown>(
     parameters: Parameters.UpdateMemberOnBoard,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update an existing board by id */
   async updateMemberOnBoard<T = unknown>(parameters: Parameters.UpdateMemberOnBoard, callback?: never): Promise<T>;
@@ -475,7 +475,7 @@ export class Boards {
   /** Update emailPosition Pref on a Board */
   async updateEmailPosition<T = unknown>(
     parameters: Parameters.UpdateEmailPosition,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update emailPosition Pref on a Board */
   async updateEmailPosition<T = unknown>(parameters: Parameters.UpdateEmailPosition, callback?: never): Promise<T>;
@@ -515,7 +515,7 @@ export class Boards {
 
   async updateShowListGuide<T = unknown>(
     parameters: Parameters.UpdateShowListGuide,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async updateShowListGuide<T = unknown>(parameters: Parameters.UpdateShowListGuide, callback?: never): Promise<T>;
   async updateShowListGuide<T = unknown>(
@@ -552,11 +552,11 @@ export class Boards {
 
   async updateShowSidebarActivity<T = unknown>(
     parameters: Parameters.UpdateShowSidebarActivity,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async updateShowSidebarActivity<T = unknown>(
     parameters: Parameters.UpdateShowSidebarActivity,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateShowSidebarActivity<T = unknown>(
     parameters: Parameters.UpdateShowSidebarActivity,
@@ -575,11 +575,11 @@ export class Boards {
 
   async updateShowSidebarBoardActions<T = unknown>(
     parameters: Parameters.UpdateShowSidebarBoardActions,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async updateShowSidebarBoardActions<T = unknown>(
     parameters: Parameters.UpdateShowSidebarBoardActions,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateShowSidebarBoardActions<T = unknown>(
     parameters: Parameters.UpdateShowSidebarBoardActions,
@@ -598,11 +598,11 @@ export class Boards {
 
   async updateShowSidebarMembers<T = unknown>(
     parameters: Parameters.UpdateShowSidebarMembers,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async updateShowSidebarMembers<T = unknown>(
     parameters: Parameters.UpdateShowSidebarMembers,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateShowSidebarMembers<T = unknown>(
     parameters: Parameters.UpdateShowSidebarMembers,
@@ -738,7 +738,7 @@ export class Boards {
    */
   async getEnabledPowerUps<T = Models.Plugin[]>(
     parameters: Parameters.GetEnabledPowerUps,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /**
    * @deprecated Will be removed from API
@@ -747,7 +747,7 @@ export class Boards {
    */
   async getEnabledPowerUps<T = Models.Plugin[]>(
     parameters: Parameters.GetEnabledPowerUps,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getEnabledPowerUps<T = Models.Plugin[]>(
     parameters: Parameters.GetEnabledPowerUps,

@@ -38,12 +38,12 @@ export class Plugins {
   /** Create a new listing for a given locale for your Power-Up */
   async createPluginListing<T = Models.PluginListing>(
     parameters: Parameters.CreatePluginListing,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create a new listing for a given locale for your Power-Up */
   async createPluginListing<T = Models.PluginListing>(
     parameters: Parameters.CreatePluginListing,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async createPluginListing<T = Models.PluginListing>(
     parameters: Parameters.CreatePluginListing,
@@ -65,11 +65,11 @@ export class Plugins {
 
   async getPluginComplianceMemberPrivacy<T = unknown>(
     parameters: Parameters.GetPluginComplianceMemberPrivacy,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async getPluginComplianceMemberPrivacy<T = unknown>(
     parameters: Parameters.GetPluginComplianceMemberPrivacy,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getPluginComplianceMemberPrivacy<T = unknown>(
     parameters: Parameters.GetPluginComplianceMemberPrivacy,
@@ -86,12 +86,12 @@ export class Plugins {
   /** Update an existing listing for your Power-Up */
   async updatePluginListing<T = Models.PluginListing>(
     parameters: Parameters.UpdatePluginListing,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update an existing listing for your Power-Up */
   async updatePluginListing<T = Models.PluginListing>(
     parameters: Parameters.UpdatePluginListing,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updatePluginListing<T = Models.PluginListing>(
     parameters: Parameters.UpdatePluginListing,

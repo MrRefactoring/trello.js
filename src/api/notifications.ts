@@ -38,7 +38,7 @@ export class Notifications {
   /** Update the read status of a notification */
   async updateNotification<T = unknown>(
     parameters: Parameters.UpdateNotification,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update the read status of a notification */
   async updateNotification<T = unknown>(parameters: Parameters.UpdateNotification, callback?: never): Promise<T>;
@@ -60,7 +60,7 @@ export class Notifications {
   /** Get a specific property of a notification */
   async getNotificationField<T = unknown>(
     parameters: Parameters.GetNotificationField,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a specific property of a notification */
   async getNotificationField<T = unknown>(parameters: Parameters.GetNotificationField, callback?: never): Promise<T>;
@@ -79,12 +79,12 @@ export class Notifications {
   /** Mark all notifications as read */
   async markAllNotificationsAsRead<T = unknown>(
     parameters?: Parameters.MarkAllNotificationsAsRead,
-    callback?: Callback<T>
+    callback?: Callback<T>,
   ): Promise<void>;
   /** Mark all notifications as read */
   async markAllNotificationsAsRead<T = unknown>(
     parameters?: Parameters.MarkAllNotificationsAsRead,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async markAllNotificationsAsRead<T = unknown>(
     parameters?: Parameters.MarkAllNotificationsAsRead,
@@ -105,12 +105,12 @@ export class Notifications {
   /** Update Notification's read status */
   async updateNotificationReadStatus<T = unknown>(
     parameters: Parameters.UpdateNotificationReadStatus,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update Notification's read status */
   async updateNotificationReadStatus<T = unknown>(
     parameters: Parameters.UpdateNotificationReadStatus,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateNotificationReadStatus<T = unknown>(
     parameters: Parameters.UpdateNotificationReadStatus,
@@ -130,7 +130,7 @@ export class Notifications {
   /** Get the board a notification is associated with */
   async getNotificationBoard<T = unknown>(
     parameters: Parameters.GetNotificationBoard,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the board a notification is associated with */
   async getNotificationBoard<T = unknown>(parameters: Parameters.GetNotificationBoard, callback?: never): Promise<T>;
@@ -152,7 +152,7 @@ export class Notifications {
   /** Get the card a notification is associated with */
   async getNotificationCard<T = unknown>(
     parameters: Parameters.GetNotificationCard,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the card a notification is associated with */
   async getNotificationCard<T = unknown>(parameters: Parameters.GetNotificationCard, callback?: never): Promise<T>;
@@ -174,7 +174,7 @@ export class Notifications {
   /** Get the list a notification is associated with */
   async getNotificationList<T = unknown>(
     parameters: Parameters.GetNotificationList,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the list a notification is associated with */
   async getNotificationList<T = unknown>(parameters: Parameters.GetNotificationList, callback?: never): Promise<T>;
@@ -196,7 +196,7 @@ export class Notifications {
   /** Get the member (not the creator) a notification is about */
   async getNotificationMember<T = unknown>(
     parameters: Parameters.GetNotificationMember,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the member (not the creator) a notification is about */
   async getNotificationMember<T = unknown>(parameters: Parameters.GetNotificationMember, callback?: never): Promise<T>;
@@ -218,12 +218,12 @@ export class Notifications {
   /** Get the member who created the notification */
   async getNotificationMemberCreator<T = unknown>(
     parameters: Parameters.GetNotificationMemberCreator,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the member who created the notification */
   async getNotificationMemberCreator<T = unknown>(
     parameters: Parameters.GetNotificationMemberCreator,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getNotificationMemberCreator<T = unknown>(
     parameters: Parameters.GetNotificationMemberCreator,
@@ -243,12 +243,12 @@ export class Notifications {
   /** Get the organization a notification is associated with */
   async getNotificationOrganization<T = unknown>(
     parameters: Parameters.GetNotificationOrganization,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the organization a notification is associated with */
   async getNotificationOrganization<T = unknown>(
     parameters: Parameters.GetNotificationOrganization,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getNotificationOrganization<T = unknown>(
     parameters: Parameters.GetNotificationOrganization,

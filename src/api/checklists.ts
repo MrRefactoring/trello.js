@@ -94,7 +94,7 @@ export class Checklists {
 
   async updateChecklistField<T = unknown>(
     parameters: Parameters.UpdateChecklistField,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async updateChecklistField<T = unknown>(parameters: Parameters.UpdateChecklistField, callback?: never): Promise<T>;
   async updateChecklistField<T = unknown>(
@@ -145,11 +145,11 @@ export class Checklists {
 
   async getChecklistCheckItems<T = unknown>(
     parameters: Parameters.GetChecklistCheckItems,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async getChecklistCheckItems<T = unknown>(
     parameters: Parameters.GetChecklistCheckItems,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getChecklistCheckItems<T = unknown>(
     parameters: Parameters.GetChecklistCheckItems,
@@ -169,11 +169,11 @@ export class Checklists {
 
   async createChecklistCheckItems<T = unknown>(
     parameters: Parameters.CreateChecklistCheckItems,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async createChecklistCheckItems<T = unknown>(
     parameters: Parameters.CreateChecklistCheckItems,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async createChecklistCheckItems<T = unknown>(
     parameters: Parameters.CreateChecklistCheckItems,
@@ -194,7 +194,7 @@ export class Checklists {
 
   async getChecklistCheckItem<T = unknown>(
     parameters: Parameters.GetChecklistCheckItem,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async getChecklistCheckItem<T = unknown>(parameters: Parameters.GetChecklistCheckItem, callback?: never): Promise<T>;
   async getChecklistCheckItem<T = unknown>(
@@ -215,12 +215,12 @@ export class Checklists {
   /** Remove an item from a checklist */
   async deleteChecklistCheckItem<T = unknown>(
     parameters: Parameters.DeleteChecklistCheckItem,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Remove an item from a checklist */
   async deleteChecklistCheckItem<T = unknown>(
     parameters: Parameters.DeleteChecklistCheckItem,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteChecklistCheckItem<T = unknown>(
     parameters: Parameters.DeleteChecklistCheckItem,

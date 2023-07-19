@@ -56,7 +56,7 @@ export class BaseClient implements Client {
   async sendRequest<T>(
     requestConfig: RequestConfig,
     callback?: Callback<T> | undefined,
-    telemetryData?: any
+    telemetryData?: any,
   ): Promise<T>;
   async sendRequest<T>(requestConfig: RequestConfig, callback: Callback<T>, telemetryData?: any): Promise<void>;
   async sendRequest<T>(rawRequestConfig: RequestConfig, callback?: Callback<T>): Promise<T | void> {

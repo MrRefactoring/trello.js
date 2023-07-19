@@ -9,7 +9,7 @@ export class Organizations {
   /** Create a new Workspace */
   async createOrganization<T = unknown>(
     parameters: Parameters.CreateOrganization,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create a new Workspace */
   async createOrganization<T = unknown>(parameters: Parameters.CreateOrganization, callback?: never): Promise<T>;
@@ -33,7 +33,7 @@ export class Organizations {
 
   async getOrganization<T = Models.Organization>(
     parameters: Parameters.GetOrganization,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async getOrganization<T = Models.Organization>(parameters: Parameters.GetOrganization, callback?: never): Promise<T>;
   async getOrganization<T = Models.Organization>(
@@ -51,12 +51,12 @@ export class Organizations {
   /** Update an organization */
   async updateOrganization<T = Models.Organization>(
     parameters: Parameters.UpdateOrganization,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update an organization */
   async updateOrganization<T = Models.Organization>(
     parameters: Parameters.UpdateOrganization,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateOrganization<T = Models.Organization>(
     parameters: Parameters.UpdateOrganization,
@@ -87,7 +87,7 @@ export class Organizations {
   /** Delete an Organization */
   async deleteOrganization<T = unknown>(
     parameters: Parameters.DeleteOrganization,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete an Organization */
   async deleteOrganization<T = unknown>(parameters: Parameters.DeleteOrganization, callback?: never): Promise<T>;
@@ -105,11 +105,11 @@ export class Organizations {
 
   async getOrganizationField<T = Models.Organization>(
     parameters: Parameters.GetOrganizationField,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async getOrganizationField<T = Models.Organization>(
     parameters: Parameters.GetOrganizationField,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationField<T = Models.Organization>(
     parameters: Parameters.GetOrganizationField,
@@ -126,12 +126,12 @@ export class Organizations {
   /** List the actions on a Workspace */
   async getOrganizationActions<T = Models.Action[]>(
     parameters: Parameters.GetOrganizationActions,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List the actions on a Workspace */
   async getOrganizationActions<T = Models.Action[]>(
     parameters: Parameters.GetOrganizationActions,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationActions<T = Models.Action[]>(
     parameters: Parameters.GetOrganizationActions,
@@ -148,12 +148,12 @@ export class Organizations {
   /** List the boards in a Workspace */
   async getOrganizationBoards<T = Array<Models.Board>>(
     parameters: Parameters.GetOrganizationBoards,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List the boards in a Workspace */
   async getOrganizationBoards<T = Array<Models.Board>>(
     parameters: Parameters.GetOrganizationBoards,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationBoards<T = Array<Models.Board>>(
     parameters: Parameters.GetOrganizationBoards,
@@ -174,12 +174,12 @@ export class Organizations {
   /** Retrieve the exports that exist for the given organization */
   async getOrganizationExports<T = Models.Export[]>(
     parameters: Parameters.GetOrganizationExports,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Retrieve the exports that exist for the given organization */
   async getOrganizationExports<T = Models.Export[]>(
     parameters: Parameters.GetOrganizationExports,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationExports<T = Models.Export[]>(
     parameters: Parameters.GetOrganizationExports,
@@ -196,12 +196,12 @@ export class Organizations {
   /** Kick off CSV export for an organization */
   async exportOrganizationCSV<T = Models.Export>(
     parameters: Parameters.ExportOrganizationCSV,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Kick off CSV export for an organization */
   async exportOrganizationCSV<T = Models.Export>(
     parameters: Parameters.ExportOrganizationCSV,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async exportOrganizationCSV<T = Models.Export>(
     parameters: Parameters.ExportOrganizationCSV,
@@ -221,12 +221,12 @@ export class Organizations {
   /** List the members in a Workspace */
   async getOrganizationMembers<T = Array<Models.Member>>(
     parameters: Parameters.GetOrganizationMembers,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List the members in a Workspace */
   async getOrganizationMembers<T = Array<Models.Member>>(
     parameters: Parameters.GetOrganizationMembers,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationMembers<T = Array<Models.Member>>(
     parameters: Parameters.GetOrganizationMembers,
@@ -242,11 +242,11 @@ export class Organizations {
 
   async updateOrganizationMember<T = unknown>(
     parameters: Parameters.UpdateOrganizationMember,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async updateOrganizationMember<T = unknown>(
     parameters: Parameters.UpdateOrganizationMember,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateOrganizationMember<T = unknown>(
     parameters: Parameters.UpdateOrganizationMember,
@@ -268,12 +268,12 @@ export class Organizations {
   /** List the memberships of a Workspace */
   async getOrganizationMemberships<T = Array<Models.Memberships>>(
     parameters: Parameters.GetOrganizationMemberships,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List the memberships of a Workspace */
   async getOrganizationMemberships<T = Array<Models.Memberships>>(
     parameters: Parameters.GetOrganizationMemberships,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationMemberships<T = Array<Models.Memberships>>(
     parameters: Parameters.GetOrganizationMemberships,
@@ -294,12 +294,12 @@ export class Organizations {
   /** Get a single Membership for an Organization */
   async getOrganizationMembership<T = unknown>(
     parameters: Parameters.GetOrganizationMembership,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a single Membership for an Organization */
   async getOrganizationMembership<T = unknown>(
     parameters: Parameters.GetOrganizationMembership,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationMembership<T = unknown>(
     parameters: Parameters.GetOrganizationMembership,
@@ -319,12 +319,12 @@ export class Organizations {
   /** Get organization scoped pluginData on this Workspace */
   async getOrganizationPluginData<T = Array<Models.PluginData>>(
     parameters: Parameters.GetOrganizationPluginData,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get organization scoped pluginData on this Workspace */
   async getOrganizationPluginData<T = Array<Models.PluginData>>(
     parameters: Parameters.GetOrganizationPluginData,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationPluginData<T = Array<Models.PluginData>>(
     parameters: Parameters.GetOrganizationPluginData,
@@ -341,12 +341,12 @@ export class Organizations {
   /** List the organization's collections */
   async getOrganizationTags<T = Array<Models.Tag>>(
     parameters: Parameters.GetOrganizationTags,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List the organization's collections */
   async getOrganizationTags<T = Array<Models.Tag>>(
     parameters: Parameters.GetOrganizationTags,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationTags<T = Array<Models.Tag>>(
     parameters: Parameters.GetOrganizationTags,
@@ -363,7 +363,7 @@ export class Organizations {
   /** Create a Tag in an Organization */
   async createOrganizationTag<T = unknown>(
     parameters: Parameters.CreateOrganizationTag,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create a Tag in an Organization */
   async createOrganizationTag<T = unknown>(parameters: Parameters.CreateOrganizationTag, callback?: never): Promise<T>;
@@ -382,7 +382,7 @@ export class Organizations {
   /** Add a member to a Workspace or update their member type. */
   async addOrganizationMember<T = unknown>(
     parameters: Parameters.AddOrganizationMember,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Add a member to a Workspace or update their member type. */
   async addOrganizationMember<T = unknown>(parameters: Parameters.AddOrganizationMember, callback?: never): Promise<T>;
@@ -404,12 +404,12 @@ export class Organizations {
   /** Remove a member from a Workspace */
   async deleteOrganizationMember<T = unknown>(
     parameters: Parameters.DeleteOrganizationMember,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Remove a member from a Workspace */
   async deleteOrganizationMember<T = unknown>(
     parameters: Parameters.DeleteOrganizationMember,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteOrganizationMember<T = unknown>(
     parameters: Parameters.DeleteOrganizationMember,
@@ -426,12 +426,12 @@ export class Organizations {
   /** Deactivate or reactivate a member of a Workspace */
   async updateOrganizationDeactivateStatus<T = unknown>(
     parameters: Parameters.UpdateOrganizationDeactivateStatus,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Deactivate or reactivate a member of a Workspace */
   async updateOrganizationDeactivateStatus<T = unknown>(
     parameters: Parameters.UpdateOrganizationDeactivateStatus,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateOrganizationDeactivateStatus<T = unknown>(
     parameters: Parameters.UpdateOrganizationDeactivateStatus,
@@ -451,7 +451,7 @@ export class Organizations {
   /** Set the logo image for a Workspace */
   async setOrganizationLogo<T = unknown>(
     parameters: Parameters.SetOrganizationLogo,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Set the logo image for a Workspace */
   async setOrganizationLogo<T = unknown>(
@@ -472,12 +472,12 @@ export class Organizations {
   /** Delete a logo from a Workspace */
   async deleteOrganizationLogo<T = unknown>(
     parameters: Parameters.DeleteOrganizationLogo,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete a logo from a Workspace */
   async deleteOrganizationLogo<T = unknown>(
     parameters: Parameters.DeleteOrganizationLogo,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteOrganizationLogo<T = unknown>(
     parameters: Parameters.DeleteOrganizationLogo,
@@ -494,12 +494,12 @@ export class Organizations {
   /** Remove a member from a Workspace and from all Workspace boards */
   async deleteOrganizationMemberFromAll<T = unknown>(
     parameters: Parameters.DeleteOrganizationMemberFromAll,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Remove a member from a Workspace and from all Workspace boards */
   async deleteOrganizationMemberFromAll<T = unknown>(
     parameters: Parameters.DeleteOrganizationMemberFromAll,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteOrganizationMemberFromAll<T = unknown>(
     parameters: Parameters.DeleteOrganizationMemberFromAll,
@@ -516,12 +516,12 @@ export class Organizations {
   /** Remove the associated Google Apps domain from a Workspace */
   async deleteOrganizationAssociatedDomain<T = unknown>(
     parameters: Parameters.DeleteOrganizationAssociatedDomain,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Remove the associated Google Apps domain from a Workspace */
   async deleteOrganizationAssociatedDomain<T = unknown>(
     parameters: Parameters.DeleteOrganizationAssociatedDomain,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteOrganizationAssociatedDomain<T = unknown>(
     parameters: Parameters.DeleteOrganizationAssociatedDomain,
@@ -538,12 +538,12 @@ export class Organizations {
   /** Remove the email domain restriction on who can be invited to the Workspace */
   async deleteOrganizationInvites<T = unknown>(
     parameters: Parameters.DeleteOrganizationInvites,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Remove the email domain restriction on who can be invited to the Workspace */
   async deleteOrganizationInvites<T = unknown>(
     parameters: Parameters.DeleteOrganizationInvites,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteOrganizationInvites<T = unknown>(
     parameters: Parameters.DeleteOrganizationInvites,
@@ -560,7 +560,7 @@ export class Organizations {
   /** Delete an organization's tag */
   async deleteOrganizationTag<T = unknown>(
     parameters: Parameters.DeleteOrganizationTag,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete an organization's tag */
   async deleteOrganizationTag<T = unknown>(parameters: Parameters.DeleteOrganizationTag, callback?: never): Promise<T>;
@@ -579,12 +579,12 @@ export class Organizations {
   /** Used to check whether the given board has new billable guests on it. */
   async getOrganizationNewBillableGuestBoard<T = unknown>(
     parameters: Parameters.GetOrganizationNewBillableGuestBoard,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Used to check whether the given board has new billable guests on it. */
   async getOrganizationNewBillableGuestBoard<T = unknown>(
     parameters: Parameters.GetOrganizationNewBillableGuestBoard,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getOrganizationNewBillableGuestBoard<T = unknown>(
     parameters: Parameters.GetOrganizationNewBillableGuestBoard,

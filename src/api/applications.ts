@@ -7,11 +7,11 @@ export class Applications {
 
   async applicationsKeyCompliance<T = unknown>(
     parameters: Parameters.ApplicationsKeyCompliance,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async applicationsKeyCompliance<T = unknown>(
     parameters: Parameters.ApplicationsKeyCompliance,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async applicationsKeyCompliance<T = unknown>(
     parameters: Parameters.ApplicationsKeyCompliance,

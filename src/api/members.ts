@@ -80,12 +80,12 @@ export class Members {
   /** List the actions for a member */
   async getMemberActions<T = Array<Models.Member>>(
     parameters: Parameters.GetMemberActions,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List the actions for a member */
   async getMemberActions<T = Array<Models.Member>>(
     parameters: Parameters.GetMemberActions,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberActions<T = Array<Models.Member>>(
     parameters: Parameters.GetMemberActions,
@@ -105,12 +105,12 @@ export class Members {
   /** Get a member's custom board backgrounds */
   async getMemberBoardBackgrounds<T = Array<Models.BoardBackground>>(
     parameters: Parameters.GetMemberBoardBackgrounds,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a member's custom board backgrounds */
   async getMemberBoardBackgrounds<T = Array<Models.BoardBackground>>(
     parameters: Parameters.GetMemberBoardBackgrounds,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberBoardBackgrounds<T = Array<Models.BoardBackground>>(
     parameters: Parameters.GetMemberBoardBackgrounds,
@@ -130,12 +130,12 @@ export class Members {
   /** Upload a new boardBackground */
   async uploadMemberBoardBackground<T = Array<Models.BoardBackground>>(
     parameters: Parameters.UploadMemberBoardBackground,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Upload a new boardBackground */
   async uploadMemberBoardBackground<T = Array<Models.BoardBackground>>(
     parameters: Parameters.UploadMemberBoardBackground,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async uploadMemberBoardBackground<T = Array<Models.BoardBackground>>(
     parameters: Parameters.UploadMemberBoardBackground,
@@ -155,12 +155,12 @@ export class Members {
   /** Get a member's board background */
   async getMemberBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberBoardBackground,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a member's board background */
   async getMemberBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberBoardBackground,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberBoardBackground,
@@ -180,12 +180,12 @@ export class Members {
   /** Update a board background */
   async updateBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateBoardBackground,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update a board background */
   async updateBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateBoardBackground,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateBoardBackground,
@@ -206,12 +206,12 @@ export class Members {
   /** Delete a board background */
   async deleteMemberBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberBoardBackgroud,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete a board background */
   async deleteMemberBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberBoardBackgroud,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteMemberBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberBoardBackgroud,
@@ -228,7 +228,7 @@ export class Members {
   /** List a member's board stars */
   async getMemberBoardStars<T = unknown>(
     parameters: Parameters.GetMemberBoardStars,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List a member's board stars */
   async getMemberBoardStars<T = unknown>(parameters: Parameters.GetMemberBoardStars, callback?: never): Promise<T>;
@@ -247,7 +247,7 @@ export class Members {
   /** Star a new board on behalf of a Member */
   async starMemberBoard<T = Models.BoardStars[]>(
     parameters: Parameters.StarMemberBoard,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Star a new board on behalf of a Member */
   async starMemberBoard<T = Models.BoardStars[]>(parameters: Parameters.StarMemberBoard, callback?: never): Promise<T>;
@@ -270,12 +270,12 @@ export class Members {
   /** Get a specific boardStar */
   async getMemberBoardStar<T = Models.BoardStars>(
     parameters: Parameters.GetMemberBoardStar,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a specific boardStar */
   async getMemberBoardStar<T = Models.BoardStars>(
     parameters: Parameters.GetMemberBoardStar,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberBoardStar<T = Models.BoardStars>(
     parameters: Parameters.GetMemberBoardStar,
@@ -292,7 +292,7 @@ export class Members {
   /** Update the position of a starred board */
   async updateMemberBoardStar<T = unknown>(
     parameters: Parameters.UpdateMemberBoardStar,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update the position of a starred board */
   async updateMemberBoardStar<T = unknown>(parameters: Parameters.UpdateMemberBoardStar, callback?: never): Promise<T>;
@@ -330,7 +330,7 @@ export class Members {
   /** Lists the boards that the user is a member of. */
   async getMemberBoards<T = Models.Board[]>(
     parameters: Parameters.GetMemberBoards,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Lists the boards that the user is a member of. */
   async getMemberBoards<T = Models.Board[]>(parameters: Parameters.GetMemberBoards, callback?: never): Promise<T>;
@@ -356,12 +356,12 @@ export class Members {
   /** Get the boards the member has been invited to */
   async getMemberBoardsInvited<T = Models.Board[]>(
     parameters: Parameters.GetMemberBoardsInvited,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the boards the member has been invited to */
   async getMemberBoardsInvited<T = Models.Board[]>(
     parameters: Parameters.GetMemberBoardsInvited,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberBoardsInvited<T = Models.Board[]>(
     parameters: Parameters.GetMemberBoardsInvited,
@@ -400,12 +400,12 @@ export class Members {
   /** Get a member's custom board backgrounds */
   async getMemberCustomBoardBackgrounds<T = Models.BoardBackground[]>(
     parameters: Parameters.GetMemberCustomBoardBackgrounds,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a member's custom board backgrounds */
   async getMemberCustomBoardBackgrounds<T = Models.BoardBackground[]>(
     parameters: Parameters.GetMemberCustomBoardBackgrounds,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberCustomBoardBackgrounds<T = Models.BoardBackground[]>(
     parameters: Parameters.GetMemberCustomBoardBackgrounds,
@@ -422,12 +422,12 @@ export class Members {
   /** Upload a new custom board background */
   async uploadMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UploadMemberCustomBoardBackground,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Upload a new custom board background */
   async uploadMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UploadMemberCustomBoardBackground,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async uploadMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UploadMemberCustomBoardBackground,
@@ -447,12 +447,12 @@ export class Members {
   /** Get a specific custom board background */
   async getMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberCustomBoardBackground,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a specific custom board background */
   async getMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberCustomBoardBackground,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.GetMemberCustomBoardBackground,
@@ -469,12 +469,12 @@ export class Members {
   /** Update a specific custom board background */
   async updateMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateMemberCustomBoardBackground,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update a specific custom board background */
   async updateMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateMemberCustomBoardBackground,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateMemberCustomBoardBackground<T = Models.BoardBackground>(
     parameters: Parameters.UpdateMemberCustomBoardBackground,
@@ -495,12 +495,12 @@ export class Members {
   /** Delete a specific custom board background */
   async deleteMemberCustomBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberCustomBoardBackground,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete a specific custom board background */
   async deleteMemberCustomBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberCustomBoardBackground,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteMemberCustomBoardBackground<T = unknown>(
     parameters: Parameters.DeleteMemberCustomBoardBackground,
@@ -517,12 +517,12 @@ export class Members {
   /** Get a Member's uploaded custom Emojis */
   async getMemberCustomEmojis<T = Models.CustomEmoji[]>(
     parameters: Parameters.GetMemberCustomEmojis,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a Member's uploaded custom Emojis */
   async getMemberCustomEmojis<T = Models.CustomEmoji[]>(
     parameters: Parameters.GetMemberCustomEmojis,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberCustomEmojis<T = Models.CustomEmoji[]>(
     parameters: Parameters.GetMemberCustomEmojis,
@@ -539,12 +539,12 @@ export class Members {
   /** Create a new custom Emoji */
   async createMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.CreateMemberCustomEmoji,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create a new custom Emoji */
   async createMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.CreateMemberCustomEmoji,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async createMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.CreateMemberCustomEmoji,
@@ -565,12 +565,12 @@ export class Members {
   /** Get a Member's custom Emoji */
   async getMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.GetMemberCustomEmoji,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a Member's custom Emoji */
   async getMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.GetMemberCustomEmoji,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberCustomEmoji<T = Models.CustomEmoji>(
     parameters: Parameters.GetMemberCustomEmoji,
@@ -590,12 +590,12 @@ export class Members {
   /** Get a Member's uploaded stickers */
   async getMemberCustomStickers<T = Models.CustomSticker[]>(
     parameters: Parameters.GetMemberCustomStickers,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a Member's uploaded stickers */
   async getMemberCustomStickers<T = Models.CustomSticker[]>(
     parameters: Parameters.GetMemberCustomStickers,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberCustomStickers<T = Models.CustomSticker[]>(
     parameters: Parameters.GetMemberCustomStickers,
@@ -612,12 +612,12 @@ export class Members {
   /** Upload a new custom sticker */
   async uploadMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.UploadMemberCustomSticker,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Upload a new custom sticker */
   async uploadMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.UploadMemberCustomSticker,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async uploadMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.UploadMemberCustomSticker,
@@ -637,12 +637,12 @@ export class Members {
   /** Get a Member's custom Sticker */
   async getMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.GetMemberCustomSticker,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a Member's custom Sticker */
   async getMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.GetMemberCustomSticker,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberCustomSticker<T = Models.CustomSticker>(
     parameters: Parameters.GetMemberCustomSticker,
@@ -662,12 +662,12 @@ export class Members {
   /** Delete a Member's custom Sticker */
   async deleteMemberCustomSticker<T = unknown>(
     parameters: Parameters.DeleteMemberCustomSticker,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete a Member's custom Sticker */
   async deleteMemberCustomSticker<T = unknown>(
     parameters: Parameters.DeleteMemberCustomSticker,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteMemberCustomSticker<T = unknown>(
     parameters: Parameters.DeleteMemberCustomSticker,
@@ -684,12 +684,12 @@ export class Members {
   /** Get a member's notifications */
   async getMemberNotifications<T = Models.Notification[]>(
     parameters: Parameters.GetMemberNotifications,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a member's notifications */
   async getMemberNotifications<T = Models.Notification[]>(
     parameters: Parameters.GetMemberNotifications,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberNotifications<T = Models.Notification[]>(
     parameters: Parameters.GetMemberNotifications,
@@ -719,12 +719,12 @@ export class Members {
   /** Get a member's Workspaces */
   async getMemberOrganizations<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizations,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a member's Workspaces */
   async getMemberOrganizations<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizations,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberOrganizations<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizations,
@@ -746,12 +746,12 @@ export class Members {
   /** Get a member's Workspaces they have been invited to */
   async getMemberOrganizationsInvited<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizationsInvited,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a member's Workspaces they have been invited to */
   async getMemberOrganizationsInvited<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizationsInvited,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberOrganizationsInvited<T = Models.Organization[]>(
     parameters: Parameters.GetMemberOrganizationsInvited,
@@ -771,12 +771,12 @@ export class Members {
   /** List the saved searches of a Member */
   async getMemberSavedSearches<T = Models.SavedSearch[]>(
     parameters: Parameters.GetMemberSavedSearches,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List the saved searches of a Member */
   async getMemberSavedSearches<T = Models.SavedSearch[]>(
     parameters: Parameters.GetMemberSavedSearches,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberSavedSearches<T = Models.SavedSearch[]>(
     parameters: Parameters.GetMemberSavedSearches,
@@ -793,12 +793,12 @@ export class Members {
   /** Create a saved search */
   async createMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.CreateMemberSavedSearch,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create a saved search */
   async createMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.CreateMemberSavedSearch,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async createMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.CreateMemberSavedSearch,
@@ -820,12 +820,12 @@ export class Members {
   /** Get a saved search */
   async getMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.GetMemberSavedSearch,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a saved search */
   async getMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.GetMemberSavedSearch,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.GetMemberSavedSearch,
@@ -842,12 +842,12 @@ export class Members {
   /** Update a saved search */
   async updateMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.UpdateMemberSavedSerch,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update a saved search */
   async updateMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.UpdateMemberSavedSerch,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateMemberSavedSearch<T = Models.SavedSearch>(
     parameters: Parameters.UpdateMemberSavedSerch,
@@ -869,12 +869,12 @@ export class Members {
   /** Delete a saved search */
   async deleteMemberSavedSearch<T = unknown>(
     parameters: Parameters.DeleteMemberSavedSearch,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete a saved search */
   async deleteMemberSavedSearch<T = unknown>(
     parameters: Parameters.DeleteMemberSavedSearch,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteMemberSavedSearch<T = unknown>(
     parameters: Parameters.DeleteMemberSavedSearch,
@@ -891,7 +891,7 @@ export class Members {
   /** List a members app tokens */
   async getMemberTokens<T = Models.Token[]>(
     parameters: Parameters.GetMemberTokens,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List a members app tokens */
   async getMemberTokens<T = Models.Token[]>(parameters: Parameters.GetMemberTokens, callback?: never): Promise<T>;
@@ -913,7 +913,7 @@ export class Members {
   /** Create a new avatar for a member */
   async createMemberAvatar<T = unknown>(
     parameters: Parameters.CreateMemberAvatar,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create a new avatar for a member */
   async createMemberAvatar<T = unknown>(parameters: Parameters.CreateMemberAvatar, callback?: never): Promise<T>;
@@ -935,7 +935,7 @@ export class Members {
   /** Dismiss a message */
   async dismissMemberMessage<T = unknown>(
     parameters: Parameters.DismissMemberMessage,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Dismiss a message */
   async dismissMemberMessage<T = unknown>(parameters: Parameters.DismissMemberMessage, callback?: never): Promise<T>;

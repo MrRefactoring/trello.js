@@ -9,12 +9,12 @@ export class Search {
   /** Find what you're looking for in Trello */
   async getSearch<T = Array<Models.Member | Models.Card | Models.Board | Models.Organization>>(
     parameters: Parameters.GetSearch,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Find what you're looking for in Trello */
   async getSearch<T = Array<Models.Member | Models.Card | Models.Board | Models.Organization>>(
     parameters: Parameters.GetSearch,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getSearch<T = Array<Models.Member | Models.Card | Models.Board | Models.Organization>>(
     parameters: Parameters.GetSearch,
@@ -54,7 +54,7 @@ export class Search {
   /** Search for Trello members. */
   async getSearchMembers<T = Models.Member[]>(
     parameters: Parameters.GetSearchMembers,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Search for Trello members. */
   async getSearchMembers<T = Models.Member[]>(parameters: Parameters.GetSearchMembers, callback?: never): Promise<T>;

@@ -61,12 +61,12 @@ export class Tokens {
   /** Create a new webhook for a Token. */
   async createTokenWebhooks<T = Models.Webhook>(
     parameters: Parameters.CreateTokenWebhooks,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create a new webhook for a Token. */
   async createTokenWebhooks<T = Models.Webhook>(
     parameters: Parameters.CreateTokenWebhooks,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async createTokenWebhooks<T = Models.Webhook>(
     parameters: Parameters.CreateTokenWebhooks,
@@ -88,7 +88,7 @@ export class Tokens {
   /** Retrieve a webhook created with a Token. */
   async getTokenWebhook<T = Models.Webhook>(
     parameters: Parameters.GetTokenWebhook,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Retrieve a webhook created with a Token. */
   async getTokenWebhook<T = Models.Webhook>(parameters: Parameters.GetTokenWebhook, callback?: never): Promise<T>;
@@ -107,7 +107,7 @@ export class Tokens {
   /** Update a Webhook created by Token */
   async updateTokenWebhook<T = unknown>(
     parameters: Parameters.UpdateTokenWebhook,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update a Webhook created by Token */
   async updateTokenWebhook<T = unknown>(parameters: Parameters.UpdateTokenWebhook, callback?: never): Promise<T>;
@@ -131,7 +131,7 @@ export class Tokens {
   /** Delete a webhook created with given token. */
   async deleteTokenWebhook<T = unknown>(
     parameters: Parameters.DeleteTokenWebhook,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete a webhook created with given token. */
   async deleteTokenWebhook<T = unknown>(parameters: Parameters.DeleteTokenWebhook, callback?: never): Promise<T>;

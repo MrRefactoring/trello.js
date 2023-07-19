@@ -9,7 +9,7 @@ export class Enterprises {
   /** Get an enterprise by its ID. */
   async getEnterprise<T = Models.Enterprise>(
     parameters: Parameters.GetEnterprise,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get an enterprise by its ID. */
   async getEnterprise<T = Models.Enterprise>(parameters: Parameters.GetEnterprise, callback?: never): Promise<T>;
@@ -47,7 +47,7 @@ export class Enterprises {
    */
   async getEnterpriseAuditLog<T = Models.EnterpriseAuditLog[]>(
     parameters: Parameters.GetEnterpriseAuditLog,
-    callback?: Callback<T>
+    callback?: Callback<T>,
   ): Promise<void>;
   /**
    * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from
@@ -56,7 +56,7 @@ export class Enterprises {
    */
   async getEnterpriseAuditLog<T = Models.EnterpriseAuditLog[]>(
     parameters: Parameters.GetEnterpriseAuditLog,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getEnterpriseAuditLog<T = Models.EnterpriseAuditLog[]>(
     parameters: Parameters.GetEnterpriseAuditLog,
@@ -73,12 +73,12 @@ export class Enterprises {
   /** Get an enterprise's admin members. */
   async getEnterpriseAdmins<T = Models.EnterpriseAdmin>(
     parameters: Parameters.GetEnterpriseAdmins,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get an enterprise's admin members. */
   async getEnterpriseAdmins<T = Models.EnterpriseAdmin>(
     parameters: Parameters.GetEnterpriseAdmins,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getEnterpriseAdmins<T = Models.EnterpriseAdmin>(
     parameters: Parameters.GetEnterpriseAdmins,
@@ -98,12 +98,12 @@ export class Enterprises {
   /** Get the signup URL for an enterprise. */
   async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupUrl>(
     parameters: Parameters.GetEnterpriseSignupUrl,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the signup URL for an enterprise. */
   async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupUrl>(
     parameters: Parameters.GetEnterpriseSignupUrl,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupUrl>(
     parameters: Parameters.GetEnterpriseSignupUrl,
@@ -126,12 +126,12 @@ export class Enterprises {
   /** Get the members of an enterprise. */
   async getEnterpriseMembers<T = Models.Member[]>(
     parameters: Parameters.GetEnterpriseMembers,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the members of an enterprise. */
   async getEnterpriseMembers<T = Models.Member[]>(
     parameters: Parameters.GetEnterpriseMembers,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getEnterpriseMembers<T = Models.Member[]>(
     parameters: Parameters.GetEnterpriseMembers,
@@ -159,12 +159,12 @@ export class Enterprises {
   /** Get a specific member of an enterprise by ID. */
   async getEnterpriseMember<T = Models.Member>(
     parameters: Parameters.GetEnterpriseMember,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a specific member of an enterprise by ID. */
   async getEnterpriseMember<T = Models.Member>(
     parameters: Parameters.GetEnterpriseMember,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getEnterpriseMember<T = Models.Member>(
     parameters: Parameters.GetEnterpriseMember,
@@ -186,12 +186,12 @@ export class Enterprises {
   /** Get whether an organization can be transferred to an enterprise. */
   async getEnterpriseTransferrableOrganization<T = Models.TransferrableOrganization>(
     parameters: Parameters.GetEnterpriseTransferrableOrganization,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get whether an organization can be transferred to an enterprise. */
   async getEnterpriseTransferrableOrganization<T = Models.TransferrableOrganization>(
     parameters: Parameters.GetEnterpriseTransferrableOrganization,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getEnterpriseTransferrableOrganization<T = Models.TransferrableOrganization>(
     parameters: Parameters.GetEnterpriseTransferrableOrganization,
@@ -208,12 +208,12 @@ export class Enterprises {
   /** Get the Workspaces that are claimable by the enterprise by ID. */
   async getEnterprisesIdClaimableOrganizations<T = Models.ClaimableOrganizations>(
     parameters: Parameters.GetEnterprisesIdClaimableOrganizations,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the Workspaces that are claimable by the enterprise by ID. */
   async getEnterprisesIdClaimableOrganizations<T = Models.ClaimableOrganizations>(
     parameters: Parameters.GetEnterprisesIdClaimableOrganizations,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getEnterprisesIdClaimableOrganizations<T = Models.ClaimableOrganizations>(
     parameters: Parameters.GetEnterprisesIdClaimableOrganizations,
@@ -230,12 +230,12 @@ export class Enterprises {
   /** Get the Workspaces that are pending for the enterprise by ID. */
   async getEnterprisesIdPendingOrganizations<T = Models.PendingOrganizations[]>(
     parameters: Parameters.GetEnterprisesIdPendingOrganizations,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the Workspaces that are pending for the enterprise by ID. */
   async getEnterprisesIdPendingOrganizations<T = Models.PendingOrganizations[]>(
     parameters: Parameters.GetEnterprisesIdPendingOrganizations,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getEnterprisesIdPendingOrganizations<T = Models.PendingOrganizations[]>(
     parameters: Parameters.GetEnterprisesIdPendingOrganizations,
@@ -252,7 +252,7 @@ export class Enterprises {
   /** Create an auth Token for an Enterprise. */
   async createEnterpriseToken<T = unknown>(
     parameters: Parameters.CreateEnterpriseToken,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create an auth Token for an Enterprise. */
   async createEnterpriseToken<T = unknown>(parameters: Parameters.CreateEnterpriseToken, callback?: never): Promise<T>;
@@ -274,12 +274,12 @@ export class Enterprises {
   /** Transfer an organization to an enterprise. */
   async transferOrganizationToEnterprise<T = Array<Models.Organization>>(
     parameters: Parameters.TransferOrganizationToEnterprise,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Transfer an organization to an enterprise. */
   async transferOrganizationToEnterprise<T = Array<Models.Organization>>(
     parameters: Parameters.TransferOrganizationToEnterprise,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async transferOrganizationToEnterprise<T = Array<Models.Organization>>(
     parameters: Parameters.TransferOrganizationToEnterprise,
@@ -299,12 +299,12 @@ export class Enterprises {
   /** This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or not. */
   async updateEnterpriseMemberLicense<T = Models.Member>(
     parameters: Parameters.UpdateEnterpriseMemberLicense,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or not. */
   async updateEnterpriseMemberLicense<T = Models.Member>(
     parameters: Parameters.UpdateEnterpriseMemberLicense,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateEnterpriseMemberLicense<T = Models.Member>(
     parameters: Parameters.UpdateEnterpriseMemberLicense,
@@ -324,12 +324,12 @@ export class Enterprises {
   /** Deactivate a Member of an Enterprise. */
   async deactivateEnterpriseMember<T = unknown>(
     parameters: Parameters.DeactivateEnterpriseMember,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Deactivate a Member of an Enterprise. */
   async deactivateEnterpriseMember<T = unknown>(
     parameters: Parameters.DeactivateEnterpriseMember,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deactivateEnterpriseMember<T = unknown>(
     parameters: Parameters.DeactivateEnterpriseMember,
@@ -352,12 +352,12 @@ export class Enterprises {
   /** Make Member an admin of Enterprise. */
   async makeEnterpriseMemberAdmin<T = unknown>(
     parameters: Parameters.MakeEnterpriseMemberAdmin,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Make Member an admin of Enterprise. */
   async makeEnterpriseMemberAdmin<T = unknown>(
     parameters: Parameters.MakeEnterpriseMemberAdmin,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async makeEnterpriseMemberAdmin<T = unknown>(
     parameters: Parameters.MakeEnterpriseMemberAdmin,
@@ -374,12 +374,12 @@ export class Enterprises {
   /** Remove a member as admin from an enterprise. */
   async deleteEnterpriseMemberAdmin<T = unknown>(
     parameters: Parameters.DeleteEnterpriseMemberAdmin,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Remove a member as admin from an enterprise. */
   async deleteEnterpriseMemberAdmin<T = unknown>(
     parameters: Parameters.DeleteEnterpriseMemberAdmin,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteEnterpriseMemberAdmin<T = unknown>(
     parameters: Parameters.DeleteEnterpriseMemberAdmin,
@@ -396,12 +396,12 @@ export class Enterprises {
   /** Remove an organization from an enterprise. */
   async deleteEnterpriseOrganization<T = unknown>(
     parameters: Parameters.DeleteEnterpriseOrganization,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Remove an organization from an enterprise. */
   async deleteEnterpriseOrganization<T = unknown>(
     parameters: Parameters.DeleteEnterpriseOrganization,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteEnterpriseOrganization<T = unknown>(
     parameters: Parameters.DeleteEnterpriseOrganization,

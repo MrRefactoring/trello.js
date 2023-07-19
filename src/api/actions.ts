@@ -112,10 +112,7 @@ export class Actions {
   }
 
   /** Get the List for an Action */
-  async getActionList<T = Models.List>(
-    parameters: Parameters.GetActionList,
-    callback: Callback<T>
-  ): Promise<void>;
+  async getActionList<T = Models.List>(parameters: Parameters.GetActionList, callback: Callback<T>): Promise<void>;
   /** Get the List for an Action */
   async getActionList<T = Models.List>(parameters: Parameters.GetActionList, callback?: never): Promise<T>;
   async getActionList<T = Models.List>(
@@ -136,7 +133,7 @@ export class Actions {
   /** Gets the member of an action (not the creator) */
   async getActionMember<T = Models.Member>(
     parameters: Parameters.GetActionMember,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Gets the member of an action (not the creator) */
   async getActionMember<T = Models.Member>(parameters: Parameters.GetActionMember, callback?: never): Promise<T>;
@@ -158,12 +155,12 @@ export class Actions {
   /** Get the Member who created the Action */
   async getActionMemberCreator<T = Models.Member>(
     parameters: Parameters.GetActionMemberCreator,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the Member who created the Action */
   async getActionMemberCreator<T = Models.Member>(
     parameters: Parameters.GetActionMemberCreator,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getActionMemberCreator<T = Models.Member>(
     parameters: Parameters.GetActionMemberCreator,
@@ -183,12 +180,12 @@ export class Actions {
   /** Get the Organization of an Action */
   async getActionOrganization<T = Models.Organization>(
     parameters: Parameters.GetActionOrganization,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the Organization of an Action */
   async getActionOrganization<T = Models.Organization>(
     parameters: Parameters.GetActionOrganization,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getActionOrganization<T = Models.Organization>(
     parameters: Parameters.GetActionOrganization,
@@ -227,7 +224,7 @@ export class Actions {
   /** List reactions for an action */
   async getActionReactions<T = unknown>(
     parameters: Parameters.GetActionReactions,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List reactions for an action */
   async getActionReactions<T = unknown>(parameters: Parameters.GetActionReactions, callback?: never): Promise<T>;
@@ -292,7 +289,7 @@ export class Actions {
   /** Deletes a reaction */
   async deleteActionReaction<T = unknown>(
     parameters: Parameters.DeleteActionReaction,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Deletes a reaction */
   async deleteActionReaction<T = unknown>(parameters: Parameters.DeleteActionReaction, callback?: never): Promise<T>;
@@ -311,12 +308,12 @@ export class Actions {
   /** List a summary of all reactions for an action */
   async getActionReactionSummary<T = unknown>(
     parameters: Parameters.GetActionReactionSummary,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List a summary of all reactions for an action */
   async getActionReactionSummary<T = unknown>(
     parameters: Parameters.GetActionReactionSummary,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getActionReactionSummary<T = unknown>(
     parameters: Parameters.GetActionReactionSummary,

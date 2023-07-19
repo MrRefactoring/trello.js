@@ -9,12 +9,12 @@ export class CustomFields {
   /** Create a new Custom Field on a board. */
   async createCustomField<T = Models.CustomField>(
     parameters?: Parameters.CreateCustomField,
-    callback?: Callback<T>
+    callback?: Callback<T>,
   ): Promise<void>;
   /** Create a new Custom Field on a board. */
   async createCustomField<T = Models.CustomField>(
     parameters?: Parameters.CreateCustomField,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async createCustomField<T = Models.CustomField>(
     parameters?: Parameters.CreateCustomField,
@@ -39,7 +39,7 @@ export class CustomFields {
 
   async getCustomField<T = Models.CustomField>(
     parameters: Parameters.GetCustomField,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   async getCustomField<T = Models.CustomField>(parameters: Parameters.GetCustomField, callback?: never): Promise<T>;
   async getCustomField<T = Models.CustomField>(
@@ -57,12 +57,12 @@ export class CustomFields {
   /** Update a Custom Field definition. */
   async updateCustomField<T = Models.CustomField>(
     parameters: Parameters.UpdateCustomField,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update a Custom Field definition. */
   async updateCustomField<T = Models.CustomField>(
     parameters: Parameters.UpdateCustomField,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateCustomField<T = Models.CustomField>(
     parameters: Parameters.UpdateCustomField,
@@ -100,7 +100,7 @@ export class CustomFields {
   /** Get the options of a drop down Custom Field */
   async getCustomFieldOptions<T = unknown>(
     parameters: Parameters.GetCustomFieldOptions,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the options of a drop down Custom Field */
   async getCustomFieldOptions<T = unknown>(parameters: Parameters.GetCustomFieldOptions, callback?: never): Promise<T>;
@@ -119,7 +119,7 @@ export class CustomFields {
   /** Add an option to a dropdown Custom Field */
   async addCustomFieldOption<T = unknown>(
     parameters: Parameters.AddCustomFieldOption,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Add an option to a dropdown Custom Field */
   async addCustomFieldOption<T = unknown>(parameters: Parameters.AddCustomFieldOption, callback?: never): Promise<T>;
@@ -138,7 +138,7 @@ export class CustomFields {
   /** Retrieve a specific, existing Option on a given dropdown-type Custom Field */
   async getCustomFieldsOption<T = unknown>(
     parameters: Parameters.GetCustomFieldsOption,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Retrieve a specific, existing Option on a given dropdown-type Custom Field */
   async getCustomFieldsOption<T = unknown>(parameters: Parameters.GetCustomFieldsOption, callback?: never): Promise<T>;
@@ -157,12 +157,12 @@ export class CustomFields {
   /** Delete an option from a Custom Field dropdown. */
   async deleteCustomFieldsOption<T = unknown>(
     parameters: Parameters.DeleteCustomFieldsOption,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete an option from a Custom Field dropdown. */
   async deleteCustomFieldsOption<T = unknown>(
     parameters: Parameters.DeleteCustomFieldsOption,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteCustomFieldsOption<T = unknown>(
     parameters: Parameters.DeleteCustomFieldsOption,

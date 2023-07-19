@@ -106,7 +106,10 @@ export class Cards {
   async deleteCard<T = Models.DeletedCard>(parameters: Parameters.DeleteCard, callback: Callback<T>): Promise<void>;
   /** Delete a Card */
   async deleteCard<T = Models.DeletedCard>(parameters: Parameters.DeleteCard, callback?: never): Promise<T>;
-  async deleteCard<T = Models.DeletedCard>(parameters: Parameters.DeleteCard, callback?: Callback<T>): Promise<void | T> {
+  async deleteCard<T = Models.DeletedCard>(
+    parameters: Parameters.DeleteCard,
+    callback?: Callback<T>,
+  ): Promise<void | T> {
     const config: RequestConfig = {
       url: `/cards/${parameters.id}`,
       method: 'DELETE',
@@ -131,7 +134,7 @@ export class Cards {
   /** List the Actions on a Card */
   async getCardActions<T = Models.Action[]>(
     parameters: Parameters.GetCardActions,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List the Actions on a Card */
   async getCardActions<T = Models.Action[]>(parameters: Parameters.GetCardActions, callback?: never): Promise<T>;
@@ -153,12 +156,12 @@ export class Cards {
   /** List the attachments on a card */
   async getCardAttachments<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachments,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** List the attachments on a card */
   async getCardAttachments<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachments,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getCardAttachments<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachments,
@@ -175,12 +178,12 @@ export class Cards {
   /** Create an Attachment to a Card */
   async createCardAttachment<T = Models.Attachment>(
     parameters: Parameters.CreateCardAttachment,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create an Attachment to a Card */
   async createCardAttachment<T = Models.Attachment>(
     parameters: Parameters.CreateCardAttachment,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async createCardAttachment<T = Models.Attachment>(
     parameters: Parameters.CreateCardAttachment,
@@ -221,12 +224,12 @@ export class Cards {
   /** Get a specific Attachment on a Card. */
   async getCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachment,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a specific Attachment on a Card. */
   async getCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachment,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getCardAttachment<T = Models.Attachment[]>(
     parameters: Parameters.GetCardAttachment,
@@ -246,10 +249,13 @@ export class Cards {
   /** Delete an Attachment */
   async deleteCardAttachment<T = Models.DeletedCard>(
     parameters: Parameters.DeleteCardAttachment,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete an Attachment */
-  async deleteCardAttachment<T = Models.DeletedCard>(parameters: Parameters.DeleteCardAttachment, callback?: never): Promise<T>;
+  async deleteCardAttachment<T = Models.DeletedCard>(
+    parameters: Parameters.DeleteCardAttachment,
+    callback?: never,
+  ): Promise<T>;
   async deleteCardAttachment<T = Models.DeletedCard>(
     parameters: Parameters.DeleteCardAttachment,
     callback?: Callback<T>,
@@ -281,12 +287,12 @@ export class Cards {
   /** Get the completed checklist items on a card */
   async getCardCompletedChecklists<T = unknown>(
     parameters: Parameters.GetCardCompletedChecklists,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the completed checklist items on a card */
   async getCardCompletedChecklists<T = unknown>(
     parameters: Parameters.GetCardCompletedChecklists,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getCardCompletedChecklists<T = unknown>(
     parameters: Parameters.GetCardCompletedChecklists,
@@ -328,7 +334,7 @@ export class Cards {
   /** Create a new checklist on a card */
   async createCardChecklist<T = unknown>(
     parameters: Parameters.CreateCardChecklist,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Create a new checklist on a card */
   async createCardChecklist<T = unknown>(parameters: Parameters.CreateCardChecklist, callback?: never): Promise<T>;
@@ -352,7 +358,7 @@ export class Cards {
   /** Get a specific checkItem on a card */
   async getCardChecklistItem<T = unknown>(
     parameters: Parameters.GetCardChecklistItem,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get a specific checkItem on a card */
   async getCardChecklistItem<T = unknown>(parameters: Parameters.GetCardChecklistItem, callback?: never): Promise<T>;
@@ -374,7 +380,7 @@ export class Cards {
   /** Update an item in a checklist on a card. */
   async updateCardCheckItem<T = unknown>(
     parameters: Parameters.UpdateCardCheckItem,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update an item in a checklist on a card. */
   async updateCardCheckItem<T = unknown>(parameters: Parameters.UpdateCardCheckItem, callback?: never): Promise<T>;
@@ -399,12 +405,12 @@ export class Cards {
   /** Delete a checklist item */
   async deleteCardChecklistItem<T = unknown>(
     parameters: Parameters.DeleteCardChecklistItem,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete a checklist item */
   async deleteCardChecklistItem<T = unknown>(
     parameters: Parameters.DeleteCardChecklistItem,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async deleteCardChecklistItem<T = unknown>(
     parameters: Parameters.DeleteCardChecklistItem,
@@ -453,7 +459,7 @@ export class Cards {
   /** Get the members who have voted on a card */
   async getCardMembersVoted<T = unknown>(
     parameters: Parameters.GetCardMembersVoted,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the members who have voted on a card */
   async getCardMembersVoted<T = unknown>(parameters: Parameters.GetCardMembersVoted, callback?: never): Promise<T>;
@@ -475,12 +481,12 @@ export class Cards {
   /** Vote on the card for a given member. */
   async voteOnCardForGivenMember<T = unknown>(
     parameters: Parameters.VoteOnCardForGivenMember,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Vote on the card for a given member. */
   async voteOnCardForGivenMember<T = unknown>(
     parameters: Parameters.VoteOnCardForGivenMember,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async voteOnCardForGivenMember<T = unknown>(
     parameters: Parameters.VoteOnCardForGivenMember,
@@ -652,7 +658,7 @@ export class Cards {
    */
   async updateCardCustomField<T = unknown>(
     parameters: Parameters.UpdateCardCustomField,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /**
    * Setting, updating, and removing the value for a Custom Field on a card. For more details on updating custom fields
@@ -675,12 +681,12 @@ export class Cards {
   /** Get the custom field items for a card. */
   async getCardCustomFields<T = Models.CustomFieldItems[]>(
     parameters: Parameters.GetCardCustomFields,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Get the custom field items for a card. */
   async getCardCustomFields<T = Models.CustomFieldItems[]>(
     parameters: Parameters.GetCardCustomFields,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async getCardCustomFields<T = Models.CustomFieldItems[]>(
     parameters: Parameters.GetCardCustomFields,
@@ -768,12 +774,12 @@ export class Cards {
   /** Mark notifications about this card as read */
   async markCardNotificationAsRead<T = unknown>(
     parameters: Parameters.MarkCardNotificationAsRead,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Mark notifications about this card as read */
   async markCardNotificationAsRead<T = unknown>(
     parameters: Parameters.MarkCardNotificationAsRead,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async markCardNotificationAsRead<T = unknown>(
     parameters: Parameters.MarkCardNotificationAsRead,
@@ -822,7 +828,7 @@ export class Cards {
   /** Remove a member's vote from a card */
   async deleteCardMemberVote<T = unknown>(
     parameters: Parameters.DeleteCardMemberVote,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Remove a member's vote from a card */
   async deleteCardMemberVote<T = unknown>(parameters: Parameters.DeleteCardMemberVote, callback?: never): Promise<T>;
@@ -841,12 +847,12 @@ export class Cards {
   /** Update an item in a checklist on a card. */
   async updateCardChecklistItem<T = Models.CheckItem>(
     parameters: Parameters.UpdateCardChecklistItem,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Update an item in a checklist on a card. */
   async updateCardChecklistItem<T = Models.CheckItem>(
     parameters: Parameters.UpdateCardChecklistItem,
-    callback?: never
+    callback?: never,
   ): Promise<T>;
   async updateCardChecklistItem<T = Models.CheckItem>(
     parameters: Parameters.UpdateCardChecklistItem,
@@ -866,7 +872,7 @@ export class Cards {
   /** Delete a checklist from a card */
   async deleteCardChecklist<T = unknown>(
     parameters: Parameters.DeleteCardChecklist,
-    callback: Callback<T>
+    callback: Callback<T>,
   ): Promise<void>;
   /** Delete a checklist from a card */
   async deleteCardChecklist<T = unknown>(parameters: Parameters.DeleteCardChecklist, callback?: never): Promise<T>;

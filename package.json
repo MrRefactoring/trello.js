@@ -1,6 +1,6 @@
 {
   "name": "trello.js",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "description": "Simple Trello API Client",
   "author": "Vladislav Tupikin <mrrefactoring@yandex.ru>",
   "license": "MIT",
@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsc",
     "prepublishOnly": "npm run build && npm run test && npm run lint",
-    "prettier": "prettier --write src/**/*.ts",
+    "prettier": "prettier --write src",
     "doc": "typedoc --name \"Trello.js - API library\" --out docs ./src/index.ts --plugin typedoc-plugin-extras --footerDate --footerTime --footerTypedocVersion --favicon https://svgshare.com/i/bQb.svg",
     "lint": "eslint src tests --ext .ts",
     "lint:fix": "npm run lint -- --fix",
@@ -35,26 +35,26 @@
     "api"
   ],
   "devDependencies": {
-    "@types/node": "^18.11.18",
-    "@typescript-eslint/eslint-plugin": "^5.48.0",
-    "@typescript-eslint/parser": "^5.48.0",
-    "ava": "^5.1.0",
-    "dotenv": "^16.0.3",
-    "eslint": "^8.31.0",
+    "@types/node": "^20.4.2",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "ava": "^5.3.1",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.45.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-import": "^2.26.0",
-    "prettier": "^2.8.1",
+    "eslint-config-airbnb-typescript": "^17.1.0",
+    "eslint-import-resolver-typescript": "^3.5.5",
+    "eslint-plugin-import": "^2.27.5",
+    "prettier": "^3.0.0",
     "prettier-plugin-jsdoc": "^0.4.2",
     "ts-node": "^10.9.1",
-    "typedoc": "^0.23.23",
-    "typedoc-plugin-extras": "^2.3.1",
-    "typescript": "^4.9.4"
+    "typedoc": "^0.24.8",
+    "typedoc-plugin-extras": "^2.3.3",
+    "typescript": "^5.1.6"
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.4.0",
     "form-data": "^4.0.0",
-    "tslib": "^2.4.1"
+    "tslib": "^2.6.0"
   }
 }
