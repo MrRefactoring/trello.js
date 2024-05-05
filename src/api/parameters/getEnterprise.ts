@@ -89,12 +89,12 @@ export interface GetEnterprise {
     paidAccounts?: boolean;
     /** Comma-seperated list of: `me`, `normal`, `admin`, `active`, `deactivated` */
     memberships?:
-      | 'me'
-      | 'normal'
-      | 'admin'
-      | 'active'
-      | 'deactivated'
-      | ('me' | 'normal' | 'admin' | 'active' | 'deactivated')[];
+    | 'me'
+    | 'normal'
+    | 'admin'
+    | 'active'
+    | 'deactivated'
+    | ('me' | 'normal' | 'admin' | 'active' | 'deactivated')[];
   };
 
   /**

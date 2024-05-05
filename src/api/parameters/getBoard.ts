@@ -23,9 +23,34 @@ export interface GetBoard {
      * `subscribed`, `url`
      */
     fields?:
-      | 'all'
-      | string
-      | string[]
+    | 'all'
+    | string
+    | string[]
+    | 'badges'
+    | 'checkItemStates'
+    | 'closed'
+    | 'dateLastActivity'
+    | 'desc'
+    | 'descData'
+    | 'due'
+    | 'email'
+    | 'idAttachmentCover'
+    | 'idBoard'
+    | 'idChecklists'
+    | 'idLabels'
+    | 'idList'
+    | 'idMembers'
+    | 'idMembersVoted'
+    | 'idShort'
+    | 'labels'
+    | 'manualCoverAttachment'
+    | 'name'
+    | 'pos'
+    | 'shortLink'
+    | 'shortUrl'
+    | 'subscribed'
+    | 'url'
+    | (
       | 'badges'
       | 'checkItemStates'
       | 'closed'
@@ -50,32 +75,7 @@ export interface GetBoard {
       | 'shortUrl'
       | 'subscribed'
       | 'url'
-      | (
-          | 'badges'
-          | 'checkItemStates'
-          | 'closed'
-          | 'dateLastActivity'
-          | 'desc'
-          | 'descData'
-          | 'due'
-          | 'email'
-          | 'idAttachmentCover'
-          | 'idBoard'
-          | 'idChecklists'
-          | 'idLabels'
-          | 'idList'
-          | 'idMembers'
-          | 'idMembersVoted'
-          | 'idShort'
-          | 'labels'
-          | 'manualCoverAttachment'
-          | 'name'
-          | 'pos'
-          | 'shortLink'
-          | 'shortUrl'
-          | 'subscribed'
-          | 'url'
-        )[];
+    )[];
     /** Whether to include the parent list with card results */
     list?: boolean;
     /** Whether to include member objects with card results */
