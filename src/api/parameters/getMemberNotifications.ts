@@ -1,4 +1,6 @@
-export interface GetMemberNotifications {
+import { Actions } from './actions';
+
+export interface GetMemberNotifications extends Actions {
   /** The ID or username of the member */
   id: string;
   entities?: boolean;
@@ -15,10 +17,6 @@ export interface GetMemberNotifications {
   limit?: number;
   /** Max 100 */
   page?: number;
-  /** A notification ID */
-  before?: string;
-  /** A notification ID */
-  since?: string;
   memberCreator?: boolean;
   /**
    * `all` or a comma-separated list of member

@@ -35,17 +35,7 @@ export interface CreateCard {
    * - Stickers
    */
   keepFromSource?:
-  | 'all'
-  | 'attachments'
-  | 'checklists'
-  | 'customFields'
-  | 'comments'
-  | 'due'
-  | 'labels'
-  | 'members'
-  | 'start'
-  | 'stickers'
-  | (
+    | 'all'
     | 'attachments'
     | 'checklists'
     | 'customFields'
@@ -55,9 +45,19 @@ export interface CreateCard {
     | 'members'
     | 'start'
     | 'stickers'
-  )[]
-  | string
-  | string[];
+    | (
+        | 'attachments'
+        | 'checklists'
+        | 'customFields'
+        | 'comments'
+        | 'due'
+        | 'labels'
+        | 'members'
+        | 'start'
+        | 'stickers'
+      )[]
+    | string
+    | string[];
   /** For use with/by the Map View */
   address?: string;
   /** For use with/by the Map View */

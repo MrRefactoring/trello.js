@@ -95,6 +95,8 @@ export class Members {
       url: `/members/${parameters.id}/actions`,
       method: 'GET',
       params: {
+        before: parameters.before,
+        since: parameters.since,
         filter: parameters.filter,
       },
     };

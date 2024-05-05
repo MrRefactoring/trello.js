@@ -12,15 +12,15 @@ export interface GetSearch {
    * `cards`, `members`, `organizations`
    */
   modelTypes?:
-  | 'all'
-  | string
-  | string[]
-  | 'actions'
-  | 'boards'
-  | 'cards'
-  | 'members'
-  | 'organizations'
-  | ('actions' | 'boards' | 'cards' | 'members' | 'organizations')[];
+    | 'all'
+    | string
+    | string[]
+    | 'actions'
+    | 'boards'
+    | 'cards'
+    | 'members'
+    | 'organizations'
+    | ('actions' | 'boards' | 'cards' | 'members' | 'organizations')[];
 
   board?: {
     /**
@@ -29,29 +29,9 @@ export interface GetSearch {
      * `shortLink`, `shortUrl`, `starred`, `subscribed`, `url`
      */
     fields?:
-    | 'all'
-    | string
-    | string[]
-    | 'closed'
-    | 'dateLastActivity'
-    | 'dateLastView'
-    | 'desc'
-    | 'descData'
-    | 'idOrganization'
-    | 'invitations'
-    | 'invited'
-    | 'labelNames'
-    | 'memberships'
-    | 'name'
-    | 'pinned'
-    | 'powerUps'
-    | 'prefs'
-    | 'shortLink'
-    | 'shortUrl'
-    | 'starred'
-    | 'subscribed'
-    | 'url'
-    | (
+      | 'all'
+      | string
+      | string[]
       | 'closed'
       | 'dateLastActivity'
       | 'dateLastView'
@@ -71,7 +51,27 @@ export interface GetSearch {
       | 'starred'
       | 'subscribed'
       | 'url'
-    )[];
+      | (
+          | 'closed'
+          | 'dateLastActivity'
+          | 'dateLastView'
+          | 'desc'
+          | 'descData'
+          | 'idOrganization'
+          | 'invitations'
+          | 'invited'
+          | 'labelNames'
+          | 'memberships'
+          | 'name'
+          | 'pinned'
+          | 'powerUps'
+          | 'prefs'
+          | 'shortLink'
+          | 'shortUrl'
+          | 'starred'
+          | 'subscribed'
+          | 'url'
+        )[];
     organization?: string;
   };
 
@@ -88,34 +88,9 @@ export interface GetSearch {
      * `subscribed`, `url`
      */
     fields?:
-    | 'all'
-    | string
-    | string[]
-    | 'badges'
-    | 'checkItemStates'
-    | 'closed'
-    | 'dateLastActivity'
-    | 'desc'
-    | 'descData'
-    | 'due'
-    | 'email'
-    | 'idAttachmentCover'
-    | 'idBoard'
-    | 'idChecklists'
-    | 'idLabels'
-    | 'idList'
-    | 'idMembers'
-    | 'idMembersVoted'
-    | 'idShort'
-    | 'labels'
-    | 'manualCoverAttachment'
-    | 'name'
-    | 'pos'
-    | 'shortLink'
-    | 'shortUrl'
-    | 'subscribed'
-    | 'url'
-    | (
+      | 'all'
+      | string
+      | string[]
       | 'badges'
       | 'checkItemStates'
       | 'closed'
@@ -140,7 +115,32 @@ export interface GetSearch {
       | 'shortUrl'
       | 'subscribed'
       | 'url'
-    )[];
+      | (
+          | 'badges'
+          | 'checkItemStates'
+          | 'closed'
+          | 'dateLastActivity'
+          | 'desc'
+          | 'descData'
+          | 'due'
+          | 'email'
+          | 'idAttachmentCover'
+          | 'idBoard'
+          | 'idChecklists'
+          | 'idLabels'
+          | 'idList'
+          | 'idMembers'
+          | 'idMembersVoted'
+          | 'idShort'
+          | 'labels'
+          | 'manualCoverAttachment'
+          | 'name'
+          | 'pos'
+          | 'shortLink'
+          | 'shortUrl'
+          | 'subscribed'
+          | 'url'
+        )[];
     /** Whether to include the parent board with card results */
     board?: boolean;
     /** Whether to include the parent list with card results */

@@ -20,7 +20,8 @@ export interface GetEnterpriseMembers {
    * Deprecated: Please use `sort` instead. This parameter expects a
    * [SCIM-style](https://developer.atlassian.com/cloud/trello/scim/) sorting value. Note that the members array
    * returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be controlled with
-   * member_startIndex, etc, but the API response will not contain the total available result count or pagination status data.
+   * member_startIndex, etc, but the API response will not contain the total available result count or pagination status
+   * data.
    */
   sortBy?: string;
   /** Deprecated: Please use `sort` instead. One of: `ascending`, `descending`, `asc`, `desc`. */

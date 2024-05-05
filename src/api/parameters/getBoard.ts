@@ -23,34 +23,9 @@ export interface GetBoard {
      * `subscribed`, `url`
      */
     fields?:
-    | 'all'
-    | string
-    | string[]
-    | 'badges'
-    | 'checkItemStates'
-    | 'closed'
-    | 'dateLastActivity'
-    | 'desc'
-    | 'descData'
-    | 'due'
-    | 'email'
-    | 'idAttachmentCover'
-    | 'idBoard'
-    | 'idChecklists'
-    | 'idLabels'
-    | 'idList'
-    | 'idMembers'
-    | 'idMembersVoted'
-    | 'idShort'
-    | 'labels'
-    | 'manualCoverAttachment'
-    | 'name'
-    | 'pos'
-    | 'shortLink'
-    | 'shortUrl'
-    | 'subscribed'
-    | 'url'
-    | (
+      | 'all'
+      | string
+      | string[]
       | 'badges'
       | 'checkItemStates'
       | 'closed'
@@ -75,7 +50,32 @@ export interface GetBoard {
       | 'shortUrl'
       | 'subscribed'
       | 'url'
-    )[];
+      | (
+          | 'badges'
+          | 'checkItemStates'
+          | 'closed'
+          | 'dateLastActivity'
+          | 'desc'
+          | 'descData'
+          | 'due'
+          | 'email'
+          | 'idAttachmentCover'
+          | 'idBoard'
+          | 'idChecklists'
+          | 'idLabels'
+          | 'idList'
+          | 'idMembers'
+          | 'idMembersVoted'
+          | 'idShort'
+          | 'labels'
+          | 'manualCoverAttachment'
+          | 'name'
+          | 'pos'
+          | 'shortLink'
+          | 'shortUrl'
+          | 'subscribed'
+          | 'url'
+        )[];
     /** Whether to include the parent list with card results */
     list?: boolean;
     /** Whether to include member objects with card results */
@@ -100,7 +100,10 @@ export interface GetBoard {
    * [here](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/).
    */
   checklists?: string;
-  /** This is a nested resource. Read more about custom fields as nested resources [here](#custom-fields-nested-resource). */
+  /**
+   * This is a nested resource. Read more about custom fields as nested resources
+   * [here](#custom-fields-nested-resource).
+   */
   customFields?: boolean;
   /**
    * The fields of the board to be included in the response. Valid values: all or a comma-separated list of: closed,

@@ -32,7 +32,10 @@ export interface CreateBoard {
     selfJoin?: boolean;
     /** Determines whether card covers are enabled. */
     cardCovers?: boolean;
-    /** The id of a custom background or one of: `blue`, `orange`, `green`, `red`, `purple`, `pink`, `lime`, `sky`, `grey`. */
+    /**
+     * The id of a custom background or one of: `blue`, `orange`, `green`, `red`, `purple`, `pink`, `lime`, `sky`,
+     * `grey`.
+     */
     background?: 'blue' | 'orange' | 'green' | 'red' | 'purple' | 'pink' | 'lime' | 'sky' | 'grey';
     /**
      * Determines the type of card aging that should take place on the board if card aging is enabled. One of: `pirate`,
@@ -86,7 +89,8 @@ export interface CreateBoard {
   /**
    * @deprecated Use `prefs.cardAging` instead.
    *
-   *   Determines the type of card aging that should take place on the board if card aging is enabled. One of: `pirate`, `regular`.
+   *   Determines the type of card aging that should take place on the board if card aging is enabled. One of: `pirate`,
+   *   `regular`.
    */
   prefsCardAging?: string;
 }
