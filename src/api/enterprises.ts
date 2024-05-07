@@ -296,12 +296,18 @@ export class Enterprises {
     return this.client.sendRequest(config, callback);
   }
 
-  /** This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or not. */
+  /**
+   * This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses
+   * or not.
+   */
   async updateEnterpriseMemberLicense<T = Models.Member>(
     parameters: Parameters.UpdateEnterpriseMemberLicense,
     callback: Callback<T>,
   ): Promise<void>;
-  /** This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or not. */
+  /**
+   * This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses
+   * or not.
+   */
   async updateEnterpriseMemberLicense<T = Models.Member>(
     parameters: Parameters.UpdateEnterpriseMemberLicense,
     callback?: never,

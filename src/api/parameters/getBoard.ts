@@ -100,7 +100,10 @@ export interface GetBoard {
    * [here](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/).
    */
   checklists?: string;
-  /** This is a nested resource. Read more about custom fields as nested resources [here](#custom-fields-nested-resource). */
+  /**
+   * This is a nested resource. Read more about custom fields as nested resources
+   * [here](#custom-fields-nested-resource).
+   */
   customFields?: boolean;
   /**
    * The fields of the board to be included in the response. Valid values: all or a comma-separated list of: closed,

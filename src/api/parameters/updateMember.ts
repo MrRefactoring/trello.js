@@ -5,7 +5,10 @@ export interface UpdateMember {
   fullName?: string;
   /** New initials for the member. 1-4 characters long. */
   initials?: string;
-  /** New username for the member. At least 3 characters long, only lowercase letters, underscores, and numbers. Must be unique. */
+  /**
+   * New username for the member. At least 3 characters long, only lowercase letters, underscores, and numbers. Must be
+   * unique.
+   */
   username?: string;
   bio?: string;
   /** One of: `gravatar`, `none`, `upload` */

@@ -1,5 +1,9 @@
 # Trello.js changelog
 
+### 1.2.7
+
+- [#25](https://github.com/MrRefactoring/trello.js/issues/25): `before` and `since` parameters added to `getMemberActions` endpoint.
+
 ### 1.2.5
 
 - Badge fix

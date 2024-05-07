@@ -25,7 +25,8 @@ export interface GetEnterprise {
      * This parameter expects a [SCIM-style](https://developer.atlassian.com/cloud/trello/scim/) sorting value prefixed
      * by a `-` to sort descending. If no `-` is prefixed, it will be sorted ascending. Note that the members array
      * returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be controlled with
-     * member_startIndex, etc, but the API response will not contain the total available result count or pagination status data.
+     * member_startIndex, etc, but the API response will not contain the total available result count or pagination
+     * status data.
      */
     sort?: string;
     /** Any integer between 0 and 100. */
@@ -54,7 +55,8 @@ export interface GetEnterprise {
    *   This parameter expects a [SCIM-style](https://developer.atlassian.com/cloud/trello/scim/) sorting value prefixed by
    *   a `-` to sort descending. If no `-` is prefixed, it will be sorted ascending. Note that the members array
    *   returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be controlled with
-   *   member_startIndex, etc, but the API response will not contain the total available result count or pagination status data.
+   *   member_startIndex, etc, but the API response will not contain the total available result count or pagination
+   *   status data.
    */
   memberSort?: string;
   /**
