@@ -1,5 +1,10 @@
 # Trello.js changelog
 
+### 2.0.0
+
+- Any mention of telemetry has been eliminated from the project
+- todo add full changelog
+
 ### v1.2.8 (2025-04-21)
 
 - Fixes

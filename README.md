@@ -26,7 +26,7 @@ Usability, consistency, and performance are key focuses of trello.js, and it als
 
 ## Installation
 
-**Node.js 10.0.0 or newer is required.**
+**Node.js 20.0.0 or newer is required.**
 
 Install with the npm:
 

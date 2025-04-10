@@ -1,30 +1,86 @@
-name: ci
+name: CI Pipeline
 
-on: [push]
+on:
+  push:
+
+env:
+  NODE_VERSION: '18'
+  PNPM_VERSION: '10'
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
-
-    strategy:
-      max-parallel: 1
-      matrix:
-        node-version: [16.x, 18.x]
-
     steps:
       - uses: actions/checkout@v4
-      - name: Use Node.js ${{ matrix.node-version }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-      - name: Create .env file
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+
+  lint:
+    name: Lint
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # First install pnpm globally
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+
+      # Then setup Node.js with pnpm cache
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      # Verify installations
+      - name: Check versions
         run: |
-          touch .env
-          echo TRELLO_API_KEY=${{ secrets.TRELLO_API_KEY }} >> .env
-          echo TRELLO_API_TOKEN=${{ secrets.TRELLO_API_TOKEN }} >> .env
-      - run: npm run build
-      - run: npm run test
-      - run: npm run lint
-        env:
-          CI: true
+          node --version
+          pnpm --version
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+
+  test:
+    name: Test with Coverage
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm test:coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

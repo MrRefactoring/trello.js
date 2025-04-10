@@ -1,0 +1,49 @@
+name: Manual Dev Publish
+
+on:
+  workflow_dispatch: # Manual trigger only
+
+jobs:
+  publish-dev:
+    name: Publish Dev Version
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # For npm OIDC auth
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate dev version
+        id: version
+        run: |
+          BASE_VERSION=$(node -p "require('./package.json').version")
+          TIMESTAMP=$(date -u +"%Y%m%d%H%M%S")
+          DEV_VERSION="${BASE_VERSION}-dev-${TIMESTAMP}"
+          echo "Generated version: $DEV_VERSION"
+          echo "version=$DEV_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Update package version
+        run: npm pkg set version="${{ steps.version.outputs.version }}"
+
+      - name: Build package
+        run: pnpm run build
+
+      - name: Publish to npm (dev tag)
+        run: pnpm publish --tag dev --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
