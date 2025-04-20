@@ -1,7 +1,7 @@
 export interface GetEnterpriseMembers {
   /** ID of the Enterprise to retrieve. */
   id: string;
-  /** A comma-seperated list of valid [member fields](member). */
+  /** A comma-seperated list of valid [member fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object). */
   fields?: string;
   /**
    * Pass a [SCIM-style query](https://developer.atlassian.com/cloud/trello/scim/) to filter members. This takes
