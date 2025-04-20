@@ -1,5 +1,5 @@
 <div align="center">
-  <img alt="Trello.js logo" src="https://svgshare.com/i/U4A.svg"/>
+  <img alt="Trello.js logo" src="https://bad37fb3-cb50-4e0b-9035-a3e09e8afb3b.selstorage.ru/trello.js%2Flogo.svg"/>
 
 <a href="https://www.npmjs.com/package/trello.js"><img alt="NPM version" src="https://img.shields.io/npm/v/trello.js.svg?maxAge=3600&style=flat-square" /></a>
 <a href="https://www.npmjs.com/package/trello.js"><img alt="NPM downloads per month" src="https://img.shields.io/npm/dm/trello.js.svg?maxAge=3600&style=flat-square" /></a>
@@ -38,6 +38,12 @@ Install with the yarn:
 
 ```bash
 yarn add trello.js
+```
+
+Install with the pnpm:
+
+```bash
+pnpm add trello.js
 ```
 
 ## Usage
