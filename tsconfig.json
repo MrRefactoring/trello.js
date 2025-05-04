@@ -1,16 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "module": "CommonJS",
-    "outDir": "out",
-    "declaration": true,
+    "target": "ES2023",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "outDir": "dist",
     "strict": true,
+    "declaration": true,
     "forceConsistentCasingInFileNames": true,
-    "importHelpers": true
+    "baseUrl": ".",
+    "paths": {
+      "~": ["src"],
+      "~/*": ["src/*"],
+      "~tests/*": ["tests/*"]
+    }
   },
   "exclude": [
     "node_modules",
-    "tests",
-    "out"
+    "dist"
   ]
 }
