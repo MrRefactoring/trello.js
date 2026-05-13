@@ -1,25 +1,18 @@
-import * as Models from './models';
-import * as Parameters from './parameters';
-import { Client } from '../clients';
-import { Callback, RequestConfig } from '../types';
+import { EmojiSchema, type Emoji } from '#/models/emoji';
+import { type GetEmoji } from '#/parameters/getEmoji';
+import { type Client, type SendRequestOptions } from '#/core';
 
-export class Emoji {
-  constructor(private client: Client) {}
+/** List available Emoji */
+export async function getEmoji(client: Client, parameters?: GetEmoji): Promise<Emoji> {
+  const config: SendRequestOptions<Emoji> = {
+    url: '/emoji',
+    method: 'GET',
+    searchParams: {
+      locale: parameters?.locale,
+      spritesheets: parameters?.spritesheets,
+    },
+    schema: EmojiSchema,
+  };
 
-  /** List available Emoji */
-  async emoji<T = Models.Emoji>(parameters: Parameters.Emoji | undefined, callback: Callback<T>): Promise<void>;
-  /** List available Emoji */
-  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: never): Promise<T>;
-  async emoji<T = Models.Emoji>(parameters?: Parameters.Emoji, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: '/emoji',
-      method: 'GET',
-      params: {
-        locale: parameters?.locale,
-        spritesheets: parameters?.spriteSheets,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
+  return await client.sendRequest(config);
 }

@@ -1,958 +1,777 @@
-import * as Models from './models';
-import * as Parameters from './parameters';
-import { Client } from '../clients';
-import { Callback, RequestConfig } from '../types';
-
-export class Members {
-  constructor(private client: Client) {}
-
-  /** Get a member */
-  async getMember<T = Models.Member>(parameters: Parameters.GetMember, callback: Callback<T>): Promise<void>;
-  /** Get a member */
-  async getMember<T = Models.Member>(parameters: Parameters.GetMember, callback?: never): Promise<T>;
-  async getMember<T = Models.Member>(parameters: Parameters.GetMember, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}`,
-      method: 'GET',
-      params: {
-        actions: parameters.actions,
-        boards: parameters.boards,
-        boardBackgrounds: parameters.boardBackgrounds,
-        boardsInvited: parameters.boardsInvited,
-        boardsInvited_fields: parameters.boardsInvitedFields,
-        boardStars: parameters.boardStars,
-        cards: parameters.cards,
-        customBoardBackgrounds: parameters.customBoardBackgrounds,
-        customEmoji: parameters.customEmoji,
-        customStickers: parameters.customStickers,
-        fields: parameters.fields,
-        notifications: parameters.notifications,
-        organizations: parameters.organizations,
-        organization_fields: parameters.organizationFields ?? parameters.organization?.fields,
-        organization_paid_account: parameters.organizationPaidAccount ?? parameters.organization?.paidAccount,
-        organizationsInvited: parameters.organizationsInvited,
-        organizationsInvited_fields: parameters.organizationsInvitedFields,
-        paid_account: parameters.paidAccount,
-        savedSearches: parameters.savedSearches,
-        tokens: parameters.tokens,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Update a Member */
-  async updateMember<T = unknown>(parameters: Parameters.UpdateMember, callback: Callback<T>): Promise<void>;
-  /** Update a Member */
-  async updateMember<T = unknown>(parameters: Parameters.UpdateMember, callback?: never): Promise<T>;
-  async updateMember<T = unknown>(parameters: Parameters.UpdateMember, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}`,
-      method: 'PUT',
-      params: {
-        fullName: parameters.fullName,
-        initials: parameters.initials,
-        username: parameters.username,
-        bio: parameters.bio,
-        avatarSource: parameters.avatarSource,
-        'prefs/colorBlind': parameters.colorBlind,
-        'prefs/locale': parameters.locale,
-        'prefs/minutesBetweenSummaries': parameters.minutesBetweenSummaries,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a particular property of a member */
-  async getMemberField<T = unknown>(parameters: Parameters.GetMemberField, callback: Callback<T>): Promise<void>;
-  /** Get a particular property of a member */
-  async getMemberField<T = unknown>(parameters: Parameters.GetMemberField, callback?: never): Promise<T>;
-  async getMemberField<T = unknown>(parameters: Parameters.GetMemberField, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/${parameters.field}`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** List the actions for a member */
-  async getMemberActions<T = Array<Models.Member>>(
-    parameters: Parameters.GetMemberActions,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** List the actions for a member */
-  async getMemberActions<T = Array<Models.Member>>(
-    parameters: Parameters.GetMemberActions,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberActions<T = Array<Models.Member>>(
-    parameters: Parameters.GetMemberActions,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/actions`,
-      method: 'GET',
-      params: {
-        before: parameters.before,
-        since: parameters.since,
-        filter: parameters.filter,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a member's custom board backgrounds */
-  async getMemberBoardBackgrounds<T = Array<Models.BoardBackground>>(
-    parameters: Parameters.GetMemberBoardBackgrounds,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a member's custom board backgrounds */
-  async getMemberBoardBackgrounds<T = Array<Models.BoardBackground>>(
-    parameters: Parameters.GetMemberBoardBackgrounds,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberBoardBackgrounds<T = Array<Models.BoardBackground>>(
-    parameters: Parameters.GetMemberBoardBackgrounds,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardBackgrounds`,
-      method: 'GET',
-      params: {
-        filter: parameters.filter,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Upload a new boardBackground */
-  async uploadMemberBoardBackground<T = Array<Models.BoardBackground>>(
-    parameters: Parameters.UploadMemberBoardBackground,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Upload a new boardBackground */
-  async uploadMemberBoardBackground<T = Array<Models.BoardBackground>>(
-    parameters: Parameters.UploadMemberBoardBackground,
-    callback?: never,
-  ): Promise<T>;
-  async uploadMemberBoardBackground<T = Array<Models.BoardBackground>>(
-    parameters: Parameters.UploadMemberBoardBackground,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardBackgrounds`,
-      method: 'POST',
-      params: {
-        file: parameters.file,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a member's board background */
-  async getMemberBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.GetMemberBoardBackground,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a member's board background */
-  async getMemberBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.GetMemberBoardBackground,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.GetMemberBoardBackground,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Update a board background */
-  async updateBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.UpdateBoardBackground,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Update a board background */
-  async updateBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.UpdateBoardBackground,
-    callback?: never,
-  ): Promise<T>;
-  async updateBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.UpdateBoardBackground,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
-      method: 'PUT',
-      params: {
-        brightness: parameters.brightness,
-        tile: parameters.tile,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Delete a board background */
-  async deleteMemberBoardBackground<T = unknown>(
-    parameters: Parameters.DeleteMemberBoardBackgroud,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Delete a board background */
-  async deleteMemberBoardBackground<T = unknown>(
-    parameters: Parameters.DeleteMemberBoardBackgroud,
-    callback?: never,
-  ): Promise<T>;
-  async deleteMemberBoardBackground<T = unknown>(
-    parameters: Parameters.DeleteMemberBoardBackgroud,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
-      method: 'DELETE',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** List a member's board stars */
-  async getMemberBoardStars<T = unknown>(
-    parameters: Parameters.GetMemberBoardStars,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** List a member's board stars */
-  async getMemberBoardStars<T = unknown>(parameters: Parameters.GetMemberBoardStars, callback?: never): Promise<T>;
-  async getMemberBoardStars<T = unknown>(
-    parameters: Parameters.GetMemberBoardStars,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardStars`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Star a new board on behalf of a Member */
-  async starMemberBoard<T = Models.BoardStars[]>(
-    parameters: Parameters.StarMemberBoard,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Star a new board on behalf of a Member */
-  async starMemberBoard<T = Models.BoardStars[]>(parameters: Parameters.StarMemberBoard, callback?: never): Promise<T>;
-  async starMemberBoard<T = Models.BoardStars[]>(
-    parameters: Parameters.StarMemberBoard,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardStars`,
-      method: 'POST',
-      params: {
-        idBoard: parameters.idBoard,
-        pos: parameters.pos,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a specific boardStar */
-  async getMemberBoardStar<T = Models.BoardStars>(
-    parameters: Parameters.GetMemberBoardStar,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a specific boardStar */
-  async getMemberBoardStar<T = Models.BoardStars>(
-    parameters: Parameters.GetMemberBoardStar,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberBoardStar<T = Models.BoardStars>(
-    parameters: Parameters.GetMemberBoardStar,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Update the position of a starred board */
-  async updateMemberBoardStar<T = unknown>(
-    parameters: Parameters.UpdateMemberBoardStar,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Update the position of a starred board */
-  async updateMemberBoardStar<T = unknown>(parameters: Parameters.UpdateMemberBoardStar, callback?: never): Promise<T>;
-  async updateMemberBoardStar<T = unknown>(
-    parameters: Parameters.UpdateMemberBoardStar,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
-      method: 'PUT',
-      params: {
-        pos: parameters.pos,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Unstar a board */
-  async unstarMemberBoard<T = unknown>(parameters: Parameters.UnstarMemberBoard, callback: Callback<T>): Promise<void>;
-  /** Unstar a board */
-  async unstarMemberBoard<T = unknown>(parameters: Parameters.UnstarMemberBoard, callback?: never): Promise<T>;
-  async unstarMemberBoard<T = unknown>(
-    parameters: Parameters.UnstarMemberBoard,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
-      method: 'DELETE',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Lists the boards that the user is a member of. */
-  async getMemberBoards<T = Models.Board[]>(
-    parameters: Parameters.GetMemberBoards,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Lists the boards that the user is a member of. */
-  async getMemberBoards<T = Models.Board[]>(parameters: Parameters.GetMemberBoards, callback?: never): Promise<T>;
-  async getMemberBoards<T = Models.Board[]>(
-    parameters: Parameters.GetMemberBoards,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boards`,
-      method: 'GET',
-      params: {
-        filter: parameters.filter,
-        fields: parameters.fields,
-        lists: parameters.lists,
-        organization: parameters.organization,
-        organization_fields: parameters.organizationFields,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get the boards the member has been invited to */
-  async getMemberBoardsInvited<T = Models.Board[]>(
-    parameters: Parameters.GetMemberBoardsInvited,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get the boards the member has been invited to */
-  async getMemberBoardsInvited<T = Models.Board[]>(
-    parameters: Parameters.GetMemberBoardsInvited,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberBoardsInvited<T = Models.Board[]>(
-    parameters: Parameters.GetMemberBoardsInvited,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/boardsInvited`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Gets the cards a member is on */
-  async getMemberCards<T = Models.Card[]>(parameters: Parameters.GetMemberCards, callback: Callback<T>): Promise<void>;
-  /** Gets the cards a member is on */
-  async getMemberCards<T = Models.Card[]>(parameters: Parameters.GetMemberCards, callback?: never): Promise<T>;
-  async getMemberCards<T = Models.Card[]>(
-    parameters: Parameters.GetMemberCards,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/cards`,
-      method: 'GET',
-      params: {
-        filter: parameters.filter,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a member's custom board backgrounds */
-  async getMemberCustomBoardBackgrounds<T = Models.BoardBackground[]>(
-    parameters: Parameters.GetMemberCustomBoardBackgrounds,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a member's custom board backgrounds */
-  async getMemberCustomBoardBackgrounds<T = Models.BoardBackground[]>(
-    parameters: Parameters.GetMemberCustomBoardBackgrounds,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberCustomBoardBackgrounds<T = Models.BoardBackground[]>(
-    parameters: Parameters.GetMemberCustomBoardBackgrounds,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customBoardBackgrounds`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Upload a new custom board background */
-  async uploadMemberCustomBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.UploadMemberCustomBoardBackground,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Upload a new custom board background */
-  async uploadMemberCustomBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.UploadMemberCustomBoardBackground,
-    callback?: never,
-  ): Promise<T>;
-  async uploadMemberCustomBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.UploadMemberCustomBoardBackground,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customBoardBackgrounds`,
-      method: 'POST',
-      params: {
-        file: parameters.file,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a specific custom board background */
-  async getMemberCustomBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.GetMemberCustomBoardBackground,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a specific custom board background */
-  async getMemberCustomBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.GetMemberCustomBoardBackground,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberCustomBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.GetMemberCustomBoardBackground,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Update a specific custom board background */
-  async updateMemberCustomBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.UpdateMemberCustomBoardBackground,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Update a specific custom board background */
-  async updateMemberCustomBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.UpdateMemberCustomBoardBackground,
-    callback?: never,
-  ): Promise<T>;
-  async updateMemberCustomBoardBackground<T = Models.BoardBackground>(
-    parameters: Parameters.UpdateMemberCustomBoardBackground,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
-      method: 'PUT',
-      params: {
-        brightness: parameters.brightness,
-        tile: parameters.tile,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Delete a specific custom board background */
-  async deleteMemberCustomBoardBackground<T = unknown>(
-    parameters: Parameters.DeleteMemberCustomBoardBackground,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Delete a specific custom board background */
-  async deleteMemberCustomBoardBackground<T = unknown>(
-    parameters: Parameters.DeleteMemberCustomBoardBackground,
-    callback?: never,
-  ): Promise<T>;
-  async deleteMemberCustomBoardBackground<T = unknown>(
-    parameters: Parameters.DeleteMemberCustomBoardBackground,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
-      method: 'DELETE',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a Member's uploaded custom Emojis */
-  async getMemberCustomEmojis<T = Models.CustomEmoji[]>(
-    parameters: Parameters.GetMemberCustomEmojis,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a Member's uploaded custom Emojis */
-  async getMemberCustomEmojis<T = Models.CustomEmoji[]>(
-    parameters: Parameters.GetMemberCustomEmojis,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberCustomEmojis<T = Models.CustomEmoji[]>(
-    parameters: Parameters.GetMemberCustomEmojis,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customEmoji`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Create a new custom Emoji */
-  async createMemberCustomEmoji<T = Models.CustomEmoji>(
-    parameters: Parameters.CreateMemberCustomEmoji,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Create a new custom Emoji */
-  async createMemberCustomEmoji<T = Models.CustomEmoji>(
-    parameters: Parameters.CreateMemberCustomEmoji,
-    callback?: never,
-  ): Promise<T>;
-  async createMemberCustomEmoji<T = Models.CustomEmoji>(
-    parameters: Parameters.CreateMemberCustomEmoji,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customEmoji`,
-      method: 'POST',
-      params: {
-        file: parameters.file,
-        name: parameters.name,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a Member's custom Emoji */
-  async getMemberCustomEmoji<T = Models.CustomEmoji>(
-    parameters: Parameters.GetMemberCustomEmoji,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a Member's custom Emoji */
-  async getMemberCustomEmoji<T = Models.CustomEmoji>(
-    parameters: Parameters.GetMemberCustomEmoji,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberCustomEmoji<T = Models.CustomEmoji>(
-    parameters: Parameters.GetMemberCustomEmoji,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customEmoji/${parameters.idEmoji}`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a Member's uploaded stickers */
-  async getMemberCustomStickers<T = Models.CustomSticker[]>(
-    parameters: Parameters.GetMemberCustomStickers,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a Member's uploaded stickers */
-  async getMemberCustomStickers<T = Models.CustomSticker[]>(
-    parameters: Parameters.GetMemberCustomStickers,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberCustomStickers<T = Models.CustomSticker[]>(
-    parameters: Parameters.GetMemberCustomStickers,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customStickers`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Upload a new custom sticker */
-  async uploadMemberCustomSticker<T = Models.CustomSticker>(
-    parameters: Parameters.UploadMemberCustomSticker,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Upload a new custom sticker */
-  async uploadMemberCustomSticker<T = Models.CustomSticker>(
-    parameters: Parameters.UploadMemberCustomSticker,
-    callback?: never,
-  ): Promise<T>;
-  async uploadMemberCustomSticker<T = Models.CustomSticker>(
-    parameters: Parameters.UploadMemberCustomSticker,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customStickers`,
-      method: 'POST',
-      params: {
-        file: parameters.file,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a Member's custom Sticker */
-  async getMemberCustomSticker<T = Models.CustomSticker>(
-    parameters: Parameters.GetMemberCustomSticker,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a Member's custom Sticker */
-  async getMemberCustomSticker<T = Models.CustomSticker>(
-    parameters: Parameters.GetMemberCustomSticker,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberCustomSticker<T = Models.CustomSticker>(
-    parameters: Parameters.GetMemberCustomSticker,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Delete a Member's custom Sticker */
-  async deleteMemberCustomSticker<T = unknown>(
-    parameters: Parameters.DeleteMemberCustomSticker,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Delete a Member's custom Sticker */
-  async deleteMemberCustomSticker<T = unknown>(
-    parameters: Parameters.DeleteMemberCustomSticker,
-    callback?: never,
-  ): Promise<T>;
-  async deleteMemberCustomSticker<T = unknown>(
-    parameters: Parameters.DeleteMemberCustomSticker,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
-      method: 'DELETE',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a member's notifications */
-  async getMemberNotifications<T = Models.Notification[]>(
-    parameters: Parameters.GetMemberNotifications,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a member's notifications */
-  async getMemberNotifications<T = Models.Notification[]>(
-    parameters: Parameters.GetMemberNotifications,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberNotifications<T = Models.Notification[]>(
-    parameters: Parameters.GetMemberNotifications,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/notifications`,
-      method: 'GET',
-      params: {
-        entities: parameters.entities,
-        display: parameters.display,
-        filter: parameters.filter,
-        read_filter: parameters.readFilter,
-        fields: parameters.fields,
-        limit: parameters.limit,
-        page: parameters.page,
-        before: parameters.before,
-        since: parameters.since,
-        memberCreator: parameters.memberCreator,
-        memberCreator_fields: parameters.memberCreatorFields,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a member's Workspaces */
-  async getMemberOrganizations<T = Models.Organization[]>(
-    parameters: Parameters.GetMemberOrganizations,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a member's Workspaces */
-  async getMemberOrganizations<T = Models.Organization[]>(
-    parameters: Parameters.GetMemberOrganizations,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberOrganizations<T = Models.Organization[]>(
-    parameters: Parameters.GetMemberOrganizations,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/organizations`,
-      method: 'GET',
-      params: {
-        filter: parameters.filter,
-        fields: parameters.fields,
-        paid_account: parameters.paidAccount,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a member's Workspaces they have been invited to */
-  async getMemberOrganizationsInvited<T = Models.Organization[]>(
-    parameters: Parameters.GetMemberOrganizationsInvited,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a member's Workspaces they have been invited to */
-  async getMemberOrganizationsInvited<T = Models.Organization[]>(
-    parameters: Parameters.GetMemberOrganizationsInvited,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberOrganizationsInvited<T = Models.Organization[]>(
-    parameters: Parameters.GetMemberOrganizationsInvited,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/organizationsInvited`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** List the saved searches of a Member */
-  async getMemberSavedSearches<T = Models.SavedSearch[]>(
-    parameters: Parameters.GetMemberSavedSearches,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** List the saved searches of a Member */
-  async getMemberSavedSearches<T = Models.SavedSearch[]>(
-    parameters: Parameters.GetMemberSavedSearches,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberSavedSearches<T = Models.SavedSearch[]>(
-    parameters: Parameters.GetMemberSavedSearches,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/savedSearches`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Create a saved search */
-  async createMemberSavedSearch<T = Models.SavedSearch>(
-    parameters: Parameters.CreateMemberSavedSearch,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Create a saved search */
-  async createMemberSavedSearch<T = Models.SavedSearch>(
-    parameters: Parameters.CreateMemberSavedSearch,
-    callback?: never,
-  ): Promise<T>;
-  async createMemberSavedSearch<T = Models.SavedSearch>(
-    parameters: Parameters.CreateMemberSavedSearch,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/savedSearches`,
-      method: 'POST',
-      params: {
-        name: parameters.name,
-        query: parameters.query,
-        pos: parameters.pos,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Get a saved search */
-  async getMemberSavedSearch<T = Models.SavedSearch>(
-    parameters: Parameters.GetMemberSavedSearch,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a saved search */
-  async getMemberSavedSearch<T = Models.SavedSearch>(
-    parameters: Parameters.GetMemberSavedSearch,
-    callback?: never,
-  ): Promise<T>;
-  async getMemberSavedSearch<T = Models.SavedSearch>(
-    parameters: Parameters.GetMemberSavedSearch,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Update a saved search */
-  async updateMemberSavedSearch<T = Models.SavedSearch>(
-    parameters: Parameters.UpdateMemberSavedSerch,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Update a saved search */
-  async updateMemberSavedSearch<T = Models.SavedSearch>(
-    parameters: Parameters.UpdateMemberSavedSerch,
-    callback?: never,
-  ): Promise<T>;
-  async updateMemberSavedSearch<T = Models.SavedSearch>(
-    parameters: Parameters.UpdateMemberSavedSerch,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
-      method: 'PUT',
-      params: {
-        name: parameters.name,
-        query: parameters.query,
-        pos: parameters.pos,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Delete a saved search */
-  async deleteMemberSavedSearch<T = unknown>(
-    parameters: Parameters.DeleteMemberSavedSearch,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Delete a saved search */
-  async deleteMemberSavedSearch<T = unknown>(
-    parameters: Parameters.DeleteMemberSavedSearch,
-    callback?: never,
-  ): Promise<T>;
-  async deleteMemberSavedSearch<T = unknown>(
-    parameters: Parameters.DeleteMemberSavedSearch,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
-      method: 'DELETE',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** List a members app tokens */
-  async getMemberTokens<T = Models.Token[]>(
-    parameters: Parameters.GetMemberTokens,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** List a members app tokens */
-  async getMemberTokens<T = Models.Token[]>(parameters: Parameters.GetMemberTokens, callback?: never): Promise<T>;
-  async getMemberTokens<T = Models.Token[]>(
-    parameters: Parameters.GetMemberTokens,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/tokens`,
-      method: 'GET',
-      params: {
-        webhooks: parameters.webhooks,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Create a new avatar for a member */
-  async createMemberAvatar<T = unknown>(
-    parameters: Parameters.CreateMemberAvatar,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Create a new avatar for a member */
-  async createMemberAvatar<T = unknown>(parameters: Parameters.CreateMemberAvatar, callback?: never): Promise<T>;
-  async createMemberAvatar<T = unknown>(
-    parameters: Parameters.CreateMemberAvatar,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/avatar`,
-      method: 'POST',
-      params: {
-        file: parameters.file,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
-
-  /** Dismiss a message */
-  async dismissMemberMessage<T = unknown>(
-    parameters: Parameters.DismissMemberMessage,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Dismiss a message */
-  async dismissMemberMessage<T = unknown>(parameters: Parameters.DismissMemberMessage, callback?: never): Promise<T>;
-  async dismissMemberMessage<T = unknown>(
-    parameters: Parameters.DismissMemberMessage,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/members/${parameters.id}/oneTimeMessagesDismissed`,
-      method: 'POST',
-      params: {
-        value: parameters.value,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
+import { MemberSchema, type Member } from '#/models/member';
+import { FieldValueSchema, type FieldValue } from '#/models/fieldValue';
+import { ActionSchema, type Action } from '#/models/action';
+import { BoardBackgroundSchema, type BoardBackground } from '#/models/boardBackground';
+import { BoardStarsSchema, type BoardStars } from '#/models/boardStars';
+import { BoardSchema, type Board } from '#/models/board';
+import { CardSchema, type Card } from '#/models/card';
+import { CustomEmojiSchema, type CustomEmoji } from '#/models/customEmoji';
+import { CustomStickerSchema, type CustomSticker } from '#/models/customSticker';
+import { NotificationSchema, type Notification } from '#/models/notification';
+import { OrganizationSchema, type Organization } from '#/models/organization';
+import { SavedSearchSchema, type SavedSearch } from '#/models/savedSearch';
+import { TokenSchema, type Token } from '#/models/token';
+import {
+  NotificationChannelSettingsSchema,
+  type NotificationChannelSettings,
+} from '#/models/notificationChannelSettings';
+import { type GetMember } from '#/parameters/getMember';
+import { type UpdateMember } from '#/parameters/updateMember';
+import { type GetMemberField } from '#/parameters/getMemberField';
+import { type GetMemberActions } from '#/parameters/getMemberActions';
+import { type GetMemberBoardBackgrounds } from '#/parameters/getMemberBoardBackgrounds';
+import { type CreateMemberBoardBackground } from '#/parameters/createMemberBoardBackground';
+import { type GetMemberBoardBackground } from '#/parameters/getMemberBoardBackground';
+import { type UpdateMemberBoardBackground } from '#/parameters/updateMemberBoardBackground';
+import { type DeleteMemberBoardBackground } from '#/parameters/deleteMemberBoardBackground';
+import { type GetMemberBoardStars } from '#/parameters/getMemberBoardStars';
+import { type StarBoard } from '#/parameters/starBoard';
+import { type GetMemberBoardStar } from '#/parameters/getMemberBoardStar';
+import { type UpdateMemberBoardStar } from '#/parameters/updateMemberBoardStar';
+import { type UnstarBoard } from '#/parameters/unstarBoard';
+import { type GetMemberBoards } from '#/parameters/getMemberBoards';
+import { type GetMemberInvitedBoards } from '#/parameters/getMemberInvitedBoards';
+import { type GetMemberCards } from '#/parameters/getMemberCards';
+import { type GetMemberCustomBoardBackgrounds } from '#/parameters/getMemberCustomBoardBackgrounds';
+import { type CreateMemberCustomBoardBackground } from '#/parameters/createMemberCustomBoardBackground';
+import { type GetMemberCustomBoardBackground } from '#/parameters/getMemberCustomBoardBackground';
+import { type UpdateMemberCustomBoardBackground } from '#/parameters/updateMemberCustomBoardBackground';
+import { type DeleteMemberCustomBoardBackground } from '#/parameters/deleteMemberCustomBoardBackground';
+import { type GetMemberCustomEmojis } from '#/parameters/getMemberCustomEmojis';
+import { type UploadMemberCustomEmoji } from '#/parameters/uploadMemberCustomEmoji';
+import { type GetMemberCustomEmoji } from '#/parameters/getMemberCustomEmoji';
+import { type GetMemberCustomStickers } from '#/parameters/getMemberCustomStickers';
+import { type UploadMemberCustomSticker } from '#/parameters/uploadMemberCustomSticker';
+import { type GetMemberCustomSticker } from '#/parameters/getMemberCustomSticker';
+import { type DeleteMemberCustomSticker } from '#/parameters/deleteMemberCustomSticker';
+import { type GetMemberNotifications } from '#/parameters/getMemberNotifications';
+import { type GetMemberOrganizations } from '#/parameters/getMemberOrganizations';
+import { type GetMemberInvitedOrganizations } from '#/parameters/getMemberInvitedOrganizations';
+import { type GetMemberSavedSearches } from '#/parameters/getMemberSavedSearches';
+import { type CreateMemberSavedSearch } from '#/parameters/createMemberSavedSearch';
+import { type GetMemberSavedSearch } from '#/parameters/getMemberSavedSearch';
+import { type UpdateMemberSavedSearch } from '#/parameters/updateMemberSavedSearch';
+import { type DeleteMemberSavedSearch } from '#/parameters/deleteMemberSavedSearch';
+import { type GetMemberTokens } from '#/parameters/getMemberTokens';
+import { type UploadMemberAvatar } from '#/parameters/uploadMemberAvatar';
+import { type DismissMemberOneTimeMessage } from '#/parameters/dismissMemberOneTimeMessage';
+import { type GetMemberNotificationChannelSettings } from '#/parameters/getMemberNotificationChannelSettings';
+import { type UpdateMemberNotificationChannelSettings } from '#/parameters/updateMemberNotificationChannelSettings';
+import { type GetMemberNotificationChannelSetting } from '#/parameters/getMemberNotificationChannelSetting';
+import { type UpdateMemberNotificationChannelSetting } from '#/parameters/updateMemberNotificationChannelSetting';
+import { type UpdateMemberNotificationChannelBlockedKey } from '#/parameters/updateMemberNotificationChannelBlockedKey';
+import { type Client, type SendRequestOptions } from '#/core';
+import { z } from 'zod';
+
+/** Get a member */
+export async function getMember(client: Client, parameters: GetMember): Promise<Member> {
+  const config: SendRequestOptions<Member> = {
+    url: `/members/${parameters.id}`,
+    method: 'GET',
+    searchParams: {
+      actions: parameters.actions,
+      boards: parameters.boards,
+      boardBackgrounds: parameters.boardBackgrounds,
+      boardsInvited: parameters.boardsInvited,
+      boardsInvited_fields: parameters.boardsInvitedFields,
+      boardStars: parameters.boardStars,
+      cards: parameters.cards,
+      customBoardBackgrounds: parameters.customBoardBackgrounds,
+      customEmoji: parameters.customEmoji,
+      customStickers: parameters.customStickers,
+      fields: parameters.fields,
+      notifications: parameters.notifications,
+      organizations: parameters.organizations,
+      organization_fields: parameters.organizationFields,
+      organization_paid_account: parameters.organizationPaidAccount,
+      organizationsInvited: parameters.organizationsInvited,
+      organizationsInvited_fields: parameters.organizationsInvitedFields,
+      paid_account: parameters.paidAccount,
+      savedSearches: parameters.savedSearches,
+      tokens: parameters.tokens,
+    },
+    schema: MemberSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Update a Member */
+export async function updateMember(client: Client, parameters: UpdateMember): Promise<Member> {
+  const config: SendRequestOptions<Member> = {
+    url: `/members/${parameters.id}`,
+    method: 'PUT',
+    searchParams: {
+      fullName: parameters.fullName,
+      initials: parameters.initials,
+      username: parameters.username,
+      bio: parameters.bio,
+      avatarSource: parameters.avatarSource,
+      'prefs/colorBlind': parameters['prefs/colorBlind'],
+      'prefs/locale': parameters['prefs/locale'],
+      'prefs/minutesBetweenSummaries': parameters['prefs/minutesBetweenSummaries'],
+    },
+    schema: MemberSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a particular property of a member */
+export async function getMemberField<T = unknown>(client: Client, parameters: GetMemberField): Promise<FieldValue<T>> {
+  const config: SendRequestOptions<FieldValue<T>> = {
+    url: `/members/${parameters.id}/${parameters.field}`,
+    method: 'GET',
+    schema: FieldValueSchema as z.ZodType<FieldValue<T>>,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** List the actions for a member */
+export async function getMemberActions(client: Client, parameters: GetMemberActions): Promise<Action[]> {
+  const config: SendRequestOptions<Action[]> = {
+    url: `/members/${parameters.id}/actions`,
+    method: 'GET',
+    searchParams: {
+      filter: parameters.filter,
+      fields: parameters.fields,
+      format: parameters.format,
+      idModels: parameters.idModels,
+      limit: parameters.limit,
+      member: parameters.member,
+      member_fields: parameters.memberFields,
+      memberCreator: parameters.memberCreator,
+      memberCreator_fields: parameters.memberCreatorFields,
+      page: parameters.page,
+      reactions: parameters.reactions,
+      before: parameters.before,
+      since: parameters.since,
+    },
+    schema: z.array(ActionSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a member's custom board backgrounds */
+export async function getMemberBoardBackgrounds(
+  client: Client,
+  parameters: GetMemberBoardBackgrounds,
+): Promise<BoardBackground[]> {
+  const config: SendRequestOptions<BoardBackground[]> = {
+    url: `/members/${parameters.id}/boardBackgrounds`,
+    method: 'GET',
+    searchParams: {
+      filter: parameters.filter,
+    },
+    schema: z.array(BoardBackgroundSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Upload a new boardBackground */
+export async function createMemberBoardBackground(
+  client: Client,
+  parameters: CreateMemberBoardBackground,
+): Promise<BoardBackground[]> {
+  const config: SendRequestOptions<BoardBackground[]> = {
+    url: `/members/${parameters.id}/boardBackgrounds`,
+    method: 'POST',
+    searchParams: {
+      file: parameters.file,
+    },
+    schema: z.array(BoardBackgroundSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a member's board background */
+export async function getMemberBoardBackground(
+  client: Client,
+  parameters: GetMemberBoardBackground,
+): Promise<BoardBackground> {
+  const config: SendRequestOptions<BoardBackground> = {
+    url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+    },
+    schema: BoardBackgroundSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Update a board background */
+export async function updateMemberBoardBackground(
+  client: Client,
+  parameters: UpdateMemberBoardBackground,
+): Promise<BoardBackground> {
+  const config: SendRequestOptions<BoardBackground> = {
+    url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
+    method: 'PUT',
+    searchParams: {
+      brightness: parameters.brightness,
+      tile: parameters.tile,
+    },
+    schema: BoardBackgroundSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Delete a board background */
+export async function deleteMemberBoardBackground(
+  client: Client,
+  parameters: DeleteMemberBoardBackground,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
+    method: 'DELETE',
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** List a member's board stars */
+export async function getMemberBoardStars(client: Client, parameters: GetMemberBoardStars): Promise<BoardStars[]> {
+  const config: SendRequestOptions<BoardStars[]> = {
+    url: `/members/${parameters.id}/boardStars`,
+    method: 'GET',
+    schema: z.array(BoardStarsSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Star a new board on behalf of a Member */
+export async function starBoard(client: Client, parameters: StarBoard): Promise<BoardStars> {
+  const config: SendRequestOptions<BoardStars> = {
+    url: `/members/${parameters.id}/boardStars`,
+    method: 'POST',
+    searchParams: {
+      idBoard: parameters.idBoard,
+      pos: parameters.pos,
+    },
+    schema: BoardStarsSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a specific boardStar */
+export async function getMemberBoardStar(client: Client, parameters: GetMemberBoardStar): Promise<BoardStars> {
+  const config: SendRequestOptions<BoardStars> = {
+    url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
+    method: 'GET',
+    schema: BoardStarsSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Update the position of a starred board */
+export async function updateMemberBoardStar(client: Client, parameters: UpdateMemberBoardStar): Promise<BoardStars> {
+  const config: SendRequestOptions<BoardStars> = {
+    url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
+    method: 'PUT',
+    searchParams: {
+      pos: parameters.pos,
+    },
+    schema: BoardStarsSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Unstar a board */
+export async function unstarBoard(client: Client, parameters: UnstarBoard): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
+    method: 'DELETE',
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Lists the boards that the user is a member of. */
+export async function getMemberBoards(client: Client, parameters: GetMemberBoards): Promise<Board[]> {
+  const config: SendRequestOptions<Board[]> = {
+    url: `/members/${parameters.id}/boards`,
+    method: 'GET',
+    searchParams: {
+      filter: parameters.filter,
+      fields: parameters.fields,
+      lists: parameters.lists,
+      organization: parameters.organization,
+      organization_fields: parameters.organizationFields,
+    },
+    schema: z.array(BoardSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get the boards the member has been invited to */
+export async function getMemberInvitedBoards(client: Client, parameters: GetMemberInvitedBoards): Promise<Board[]> {
+  const config: SendRequestOptions<Board[]> = {
+    url: `/members/${parameters.id}/boardsInvited`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+    },
+    schema: z.array(BoardSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Gets the cards a member is on */
+export async function getMemberCards(client: Client, parameters: GetMemberCards): Promise<Card[]> {
+  const config: SendRequestOptions<Card[]> = {
+    url: `/members/${parameters.id}/cards`,
+    method: 'GET',
+    searchParams: {
+      filter: parameters.filter,
+    },
+    schema: z.array(CardSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a member's custom board backgrounds */
+export async function getMemberCustomBoardBackgrounds(
+  client: Client,
+  parameters: GetMemberCustomBoardBackgrounds,
+): Promise<BoardBackground[]> {
+  const config: SendRequestOptions<BoardBackground[]> = {
+    url: `/members/${parameters.id}/customBoardBackgrounds`,
+    method: 'GET',
+    schema: z.array(BoardBackgroundSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Upload a new custom board background */
+export async function createMemberCustomBoardBackground(
+  client: Client,
+  parameters: CreateMemberCustomBoardBackground,
+): Promise<BoardBackground> {
+  const config: SendRequestOptions<BoardBackground> = {
+    url: `/members/${parameters.id}/customBoardBackgrounds`,
+    method: 'POST',
+    searchParams: {
+      file: parameters.file,
+    },
+    schema: BoardBackgroundSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a specific custom board background */
+export async function getMemberCustomBoardBackground(
+  client: Client,
+  parameters: GetMemberCustomBoardBackground,
+): Promise<BoardBackground> {
+  const config: SendRequestOptions<BoardBackground> = {
+    url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
+    method: 'GET',
+    schema: BoardBackgroundSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Update a specific custom board background */
+export async function updateMemberCustomBoardBackground(
+  client: Client,
+  parameters: UpdateMemberCustomBoardBackground,
+): Promise<BoardBackground> {
+  const config: SendRequestOptions<BoardBackground> = {
+    url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
+    method: 'PUT',
+    searchParams: {
+      brightness: parameters.brightness,
+      tile: parameters.tile,
+    },
+    schema: BoardBackgroundSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Delete a specific custom board background */
+export async function deleteMemberCustomBoardBackground(
+  client: Client,
+  parameters: DeleteMemberCustomBoardBackground,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
+    method: 'DELETE',
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a Member's uploaded custom Emojis */
+export async function getMemberCustomEmojis(client: Client, parameters: GetMemberCustomEmojis): Promise<CustomEmoji[]> {
+  const config: SendRequestOptions<CustomEmoji[]> = {
+    url: `/members/${parameters.id}/customEmoji`,
+    method: 'GET',
+    schema: z.array(CustomEmojiSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Create a new custom Emoji */
+export async function uploadMemberCustomEmoji(
+  client: Client,
+  parameters: UploadMemberCustomEmoji,
+): Promise<CustomEmoji> {
+  const config: SendRequestOptions<CustomEmoji> = {
+    url: `/members/${parameters.id}/customEmoji`,
+    method: 'POST',
+    searchParams: {
+      file: parameters.file,
+      name: parameters.name,
+    },
+    schema: CustomEmojiSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a Member's custom Emoji */
+export async function getMemberCustomEmoji(client: Client, parameters: GetMemberCustomEmoji): Promise<CustomEmoji> {
+  const config: SendRequestOptions<CustomEmoji> = {
+    url: `/members/${parameters.id}/customEmoji/${parameters.idEmoji}`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+    },
+    schema: CustomEmojiSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a Member's uploaded stickers */
+export async function getMemberCustomStickers(
+  client: Client,
+  parameters: GetMemberCustomStickers,
+): Promise<CustomSticker[]> {
+  const config: SendRequestOptions<CustomSticker[]> = {
+    url: `/members/${parameters.id}/customStickers`,
+    method: 'GET',
+    schema: z.array(CustomStickerSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Upload a new custom sticker */
+export async function uploadMemberCustomSticker(
+  client: Client,
+  parameters: UploadMemberCustomSticker,
+): Promise<CustomSticker> {
+  const config: SendRequestOptions<CustomSticker> = {
+    url: `/members/${parameters.id}/customStickers`,
+    method: 'POST',
+    searchParams: {
+      file: parameters.file,
+    },
+    schema: CustomStickerSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a Member's custom Sticker */
+export async function getMemberCustomSticker(
+  client: Client,
+  parameters: GetMemberCustomSticker,
+): Promise<CustomSticker> {
+  const config: SendRequestOptions<CustomSticker> = {
+    url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+    },
+    schema: CustomStickerSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Delete a Member's custom Sticker */
+export async function deleteMemberCustomSticker(client: Client, parameters: DeleteMemberCustomSticker): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
+    method: 'DELETE',
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a member's notifications */
+export async function getMemberNotifications(
+  client: Client,
+  parameters: GetMemberNotifications,
+): Promise<Notification[]> {
+  const config: SendRequestOptions<Notification[]> = {
+    url: `/members/${parameters.id}/notifications`,
+    method: 'GET',
+    searchParams: {
+      entities: parameters.entities,
+      display: parameters.display,
+      filter: parameters.filter,
+      read_filter: parameters.readFilter,
+      fields: parameters.fields,
+      limit: parameters.limit,
+      page: parameters.page,
+      before: parameters.before,
+      since: parameters.since,
+      memberCreator: parameters.memberCreator,
+      memberCreator_fields: parameters.memberCreatorFields,
+    },
+    schema: z.array(NotificationSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a member's Workspaces */
+export async function getMemberOrganizations(
+  client: Client,
+  parameters: GetMemberOrganizations,
+): Promise<Organization[]> {
+  const config: SendRequestOptions<Organization[]> = {
+    url: `/members/${parameters.id}/organizations`,
+    method: 'GET',
+    searchParams: {
+      filter: parameters.filter,
+      fields: parameters.fields,
+      paid_account: parameters.paidAccount,
+    },
+    schema: z.array(OrganizationSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a member's Workspaces they have been invited to */
+export async function getMemberInvitedOrganizations(
+  client: Client,
+  parameters: GetMemberInvitedOrganizations,
+): Promise<Organization[]> {
+  const config: SendRequestOptions<Organization[]> = {
+    url: `/members/${parameters.id}/organizationsInvited`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+    },
+    schema: z.array(OrganizationSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** List the saved searches of a Member */
+export async function getMemberSavedSearches(
+  client: Client,
+  parameters: GetMemberSavedSearches,
+): Promise<SavedSearch[]> {
+  const config: SendRequestOptions<SavedSearch[]> = {
+    url: `/members/${parameters.id}/savedSearches`,
+    method: 'GET',
+    schema: z.array(SavedSearchSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Create a saved search */
+export async function createMemberSavedSearch(
+  client: Client,
+  parameters: CreateMemberSavedSearch,
+): Promise<SavedSearch> {
+  const config: SendRequestOptions<SavedSearch> = {
+    url: `/members/${parameters.id}/savedSearches`,
+    method: 'POST',
+    searchParams: {
+      name: parameters.name,
+      query: parameters.query,
+      pos: parameters.pos,
+    },
+    schema: SavedSearchSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a saved search */
+export async function getMemberSavedSearch(client: Client, parameters: GetMemberSavedSearch): Promise<SavedSearch> {
+  const config: SendRequestOptions<SavedSearch> = {
+    url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
+    method: 'GET',
+    schema: SavedSearchSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Update a saved search */
+export async function updateMemberSavedSearch(
+  client: Client,
+  parameters: UpdateMemberSavedSearch,
+): Promise<SavedSearch> {
+  const config: SendRequestOptions<SavedSearch> = {
+    url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
+    method: 'PUT',
+    searchParams: {
+      name: parameters.name,
+      query: parameters.query,
+      pos: parameters.pos,
+    },
+    schema: SavedSearchSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Delete a saved search */
+export async function deleteMemberSavedSearch(client: Client, parameters: DeleteMemberSavedSearch): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
+    method: 'DELETE',
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** List a members app tokens */
+export async function getMemberTokens(client: Client, parameters: GetMemberTokens): Promise<Token[]> {
+  const config: SendRequestOptions<Token[]> = {
+    url: `/members/${parameters.id}/tokens`,
+    method: 'GET',
+    searchParams: {
+      webhooks: parameters.webhooks,
+    },
+    schema: z.array(TokenSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Create a new avatar for a member */
+export async function uploadMemberAvatar(client: Client, parameters: UploadMemberAvatar): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/members/${parameters.id}/avatar`,
+    method: 'POST',
+    searchParams: {
+      file: parameters.file,
+    },
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Dismiss a message */
+export async function dismissMemberOneTimeMessage(
+  client: Client,
+  parameters: DismissMemberOneTimeMessage,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/members/${parameters.id}/oneTimeMessagesDismissed`,
+    method: 'POST',
+    searchParams: {
+      value: parameters.value,
+    },
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get a member's notification channel settings */
+export async function getMemberNotificationChannelSettings(
+  client: Client,
+  parameters: GetMemberNotificationChannelSettings,
+): Promise<NotificationChannelSettings[]> {
+  const config: SendRequestOptions<NotificationChannelSettings[]> = {
+    url: `/members/${parameters.id}/notificationsChannelSettings`,
+    method: 'GET',
+    schema: z.array(NotificationChannelSettingsSchema),
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Update blocked notification keys of Member on a specific channel */
+export async function updateMemberNotificationChannelSettings(
+  client: Client,
+  parameters: UpdateMemberNotificationChannelSettings,
+): Promise<NotificationChannelSettings> {
+  const config: SendRequestOptions<NotificationChannelSettings> = {
+    url: `/members/${parameters.id}/notificationsChannelSettings`,
+    method: 'PUT',
+    body: {
+      channel: parameters.channel,
+      blockedKeys: parameters.blockedKeys,
+    },
+    schema: NotificationChannelSettingsSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Get blocked notification keys of Member on a specific channel */
+export async function getMemberNotificationChannelSetting(
+  client: Client,
+  parameters: GetMemberNotificationChannelSetting,
+): Promise<NotificationChannelSettings> {
+  const config: SendRequestOptions<NotificationChannelSettings> = {
+    url: `/members/${parameters.id}/notificationsChannelSettings/${parameters.channel}`,
+    method: 'GET',
+    schema: NotificationChannelSettingsSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Update blocked notification keys of Member on a specific channel */
+export async function updateMemberNotificationChannelSetting(
+  client: Client,
+  parameters: UpdateMemberNotificationChannelSetting,
+): Promise<NotificationChannelSettings> {
+  const config: SendRequestOptions<NotificationChannelSettings> = {
+    url: `/members/${parameters.id}/notificationsChannelSettings/${parameters.channel}`,
+    method: 'PUT',
+    body: {
+      blockedKeys: parameters.blockedKeys,
+    },
+    schema: NotificationChannelSettingsSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Update blocked notification keys of Member on a specific channel */
+export async function updateMemberNotificationChannelBlockedKey(
+  client: Client,
+  parameters: UpdateMemberNotificationChannelBlockedKey,
+): Promise<NotificationChannelSettings> {
+  const config: SendRequestOptions<NotificationChannelSettings> = {
+    url: `/members/${parameters.id}/notificationsChannelSettings/${parameters.channel}/${parameters.blockedKeys}`,
+    method: 'PUT',
+    schema: NotificationChannelSettingsSchema,
+  };
+
+  return await client.sendRequest(config);
 }

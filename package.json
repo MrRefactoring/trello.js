@@ -1,69 +1,196 @@
 {
   "name": "trello.js",
-  "version": "1.2.8",
-  "description": "Simple Trello API Client",
+  "type": "module",
+  "imports": {
+    "#/*": "./src/*"
+  },
+  "version": "2.0.0",
+  "description": "Type-safe Trello REST API client for TypeScript and JavaScript. ESM-only, tree-shakable, validated by Zod. Full coverage of boards, cards, lists, webhooks, members, organizations. Works in Node.js 22+ and modern browsers.",
   "author": "Vladislav Tupikin <vladislav.tupikin@icloud.com>",
   "license": "MIT",
-  "main": "out/index.js",
-  "types": "out/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "prepublishOnly": "npm run build && npm run test && npm run lint",
-    "prettier": "prettier --write src",
-    "doc": "typedoc --name \"Trello.js - API library\" --out docs ./src/index.ts --favicon https://bad37fb3-cb50-4e0b-9035-a3e09e8afb3b.selstorage.ru/trello.js%2Ffavicon.svg",
-    "lint": "eslint src tests --ext .ts",
-    "lint:fix": "npm run lint -- --fix",
-    "test": "npm run test:unit && npm run test:integration && npm run test:e2e",
-    "test:unit": "ava tests/unit/**/*.ts",
-    "test:integration": "ava --serial tests/integration/**/*.ts",
-    "test:e2e": "ava --serial tests/e2e/**/*.ts"
+  "files": [
+    "dist",
+    "CHANGELOG.md"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./package.json": "./package.json",
+    "./models": {
+      "types": "./dist/models/index.d.ts",
+      "import": "./dist/models/index.js"
+    },
+    "./parameters": {
+      "types": "./dist/parameters/index.d.ts",
+      "import": "./dist/parameters/index.js"
+    },
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.js"
+    },
+    "./actions": {
+      "types": "./dist/api/actions.d.ts",
+      "import": "./dist/api/actions.js"
+    },
+    "./batch": {
+      "types": "./dist/api/batch.d.ts",
+      "import": "./dist/api/batch.js"
+    },
+    "./boards": {
+      "types": "./dist/api/boards.d.ts",
+      "import": "./dist/api/boards.js"
+    },
+    "./cards": {
+      "types": "./dist/api/cards.d.ts",
+      "import": "./dist/api/cards.js"
+    },
+    "./checklists": {
+      "types": "./dist/api/checklists.d.ts",
+      "import": "./dist/api/checklists.js"
+    },
+    "./customFields": {
+      "types": "./dist/api/customFields.d.ts",
+      "import": "./dist/api/customFields.js"
+    },
+    "./emoji": {
+      "types": "./dist/api/emoji.d.ts",
+      "import": "./dist/api/emoji.js"
+    },
+    "./enterprises": {
+      "types": "./dist/api/enterprises.d.ts",
+      "import": "./dist/api/enterprises.js"
+    },
+    "./labels": {
+      "types": "./dist/api/labels.d.ts",
+      "import": "./dist/api/labels.js"
+    },
+    "./lists": {
+      "types": "./dist/api/lists.d.ts",
+      "import": "./dist/api/lists.js"
+    },
+    "./members": {
+      "types": "./dist/api/members.d.ts",
+      "import": "./dist/api/members.js"
+    },
+    "./notifications": {
+      "types": "./dist/api/notifications.d.ts",
+      "import": "./dist/api/notifications.js"
+    },
+    "./organizations": {
+      "types": "./dist/api/organizations.d.ts",
+      "import": "./dist/api/organizations.js"
+    },
+    "./plugins": {
+      "types": "./dist/api/plugins.d.ts",
+      "import": "./dist/api/plugins.js"
+    },
+    "./search": {
+      "types": "./dist/api/search.d.ts",
+      "import": "./dist/api/search.js"
+    },
+    "./tokens": {
+      "types": "./dist/api/tokens.d.ts",
+      "import": "./dist/api/tokens.js"
+    },
+    "./webhooks": {
+      "types": "./dist/api/webhooks.d.ts",
+      "import": "./dist/api/webhooks.js"
+    }
   },
-  "ava": {
-    "extensions": [
-      "ts"
-    ],
-    "require": [
-      "ts-node/register",
-      "dotenv/config"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrRefactoring/trello.js.git"
   },
-  "repository": "https://github.com/MrRefactoring/trello.js",
   "homepage": "https://mrrefactoring.github.io/trello.js",
+  "bugs": {
+    "url": "https://github.com/MrRefactoring/trello.js/issues"
+  },
   "keywords": [
     "trello",
     "trello-api",
+    "trello-rest-api",
     "trello-client",
     "trello-sdk",
+    "trello-typescript",
+    "trello-bot",
+    "atlassian",
+    "atlassian-api",
+    "kanban",
     "api-client",
     "rest-client",
     "typescript",
-    "axios",
+    "type-safe",
+    "esm",
+    "tree-shaking",
+    "zod",
+    "fetch",
+    "openapi",
     "boards",
     "cards",
     "lists",
     "webhooks",
-    "atlassian"
+    "automation"
   ],
+  "scripts": {
+    "build": "tsc && tsc-alias --resolve-full-paths",
+    "check:attw": "attw --pack . --profile=esm-only",
+    "prepublishOnly": "pnpm run build && pnpm run lint && pnpm run check:attw",
+    "prettier": "prettier --write src",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "code:formatting": "pnpm run prettier && pnpm run lint:fix",
+    "test": "vitest run && vitest run --config vitest.config.live.ts",
+    "test:watch": "vitest",
+    "test:live": "vitest run --config vitest.config.live.ts",
+    "test:live:watch": "vitest --config vitest.config.live.ts",
+    "audit:schemas": "vitest run --config vitest.config.audit.ts",
+    "test:coverage": "vitest run --config vitest.config.coverage.ts --coverage",
+    "codemod:v1-to-v2": "jscodeshift -t tools/codemod/v1-to-v2.ts --parser tsx --extensions ts,tsx,js,jsx",
+    "docs:api": "typedoc && node scripts/copy-api-to-ru.mjs",
+    "docs:og": "node scripts/build-og-image.mjs",
+    "docs:dev": "pnpm run docs:api && vitepress dev docs",
+    "docs:build": "pnpm run docs:api && vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
   "devDependencies": {
-    "@types/node": "^20.17.30",
-    "@typescript-eslint/eslint-plugin": "^7.18.0",
-    "@typescript-eslint/parser": "^7.18.0",
-    "ava": "^6.2.0",
-    "dotenv": "^16.5.0",
-    "eslint": "^8.57.1",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^18.0.0",
-    "eslint-import-resolver-typescript": "^4.3.3",
-    "eslint-plugin-import": "^2.31.0",
-    "prettier": "^3.5.3",
-    "prettier-plugin-jsdoc": "^1.3.2",
-    "ts-node": "^10.9.2",
-    "typedoc": "^0.28.3",
-    "typescript": "^5.8.3"
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@eslint/js": "^10.0.1",
+    "@resvg/resvg-js": "^2.6.2",
+    "@stylistic/eslint-plugin": "^5.10.0",
+    "@types/jscodeshift": "^17.3.0",
+    "@types/node": "^22.19.19",
+    "@vitest/coverage-v8": "^4.1.6",
+    "dotenv": "^17.4.2",
+    "eslint": "^10.4.0",
+    "globals": "^17.6.0",
+    "jiti": "^2.7.0",
+    "jscodeshift": "^17.3.0",
+    "prettier": "^3.8.3",
+    "prettier-plugin-jsdoc": "^1.8.0",
+    "sitemap": "^9.0.1",
+    "tsc-alias": "^1.8.17",
+    "typedoc": "^0.28.19",
+    "typedoc-plugin-markdown": "^4.11.0",
+    "typedoc-vitepress-theme": "^1.1.2",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.3",
+    "vitepress": "^1.6.4",
+    "vitest": "^4.1.6"
   },
   "dependencies": {
-    "axios": "^1.8.4",
-    "form-data": "^4.0.2",
-    "tslib": "^2.8.1"
-  }
+    "zod": "^4.4.3"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "packageManager": "pnpm@11.1.2"
 }

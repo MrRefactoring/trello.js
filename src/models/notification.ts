@@ -1,0 +1,22 @@
+import { z } from 'zod';
+import { apiObject } from '#/core/apiObject';
+import { CardSchema } from '#/models/card';
+import { BoardSchema } from '#/models/board';
+import { TrelloIDSchema } from '#/models/trelloID';
+import { ReactionSchema } from '#/models/reaction';
+
+export const NotificationSchema = apiObject({
+  id: z.string(),
+  unread: z.boolean().optional(),
+  type: z.enum(['cardDueSoon']).optional(),
+  date: z.coerce.date().optional(),
+  dateRead: z.coerce.date().optional(),
+  data: z.string().optional(),
+  card: CardSchema.optional(),
+  board: BoardSchema.optional(),
+  idMemberCreator: TrelloIDSchema.nullish(),
+  idAction: TrelloIDSchema.nullish(),
+  reactions: z.array(ReactionSchema).optional(),
+});
+
+export type Notification = z.infer<typeof NotificationSchema>;

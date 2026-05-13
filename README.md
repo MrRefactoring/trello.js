@@ -1,148 +1,184 @@
 <div align="center">
-  <img alt="Trello.js logo" src="https://bad37fb3-cb50-4e0b-9035-a3e09e8afb3b.selstorage.ru/trello.js%2Flogo.svg"/>
+  <img alt="trello.js logo" src="https://raw.githubusercontent.com/MrRefactoring/trello.js/master/docs/public/logo.svg" width="320"/>
 
-<a href="https://www.npmjs.com/package/trello.js"><img alt="NPM version" src="https://img.shields.io/npm/v/trello.js.svg?maxAge=3600&style=flat-square" /></a>
-<a href="https://www.npmjs.com/package/trello.js"><img alt="NPM downloads per month" src="https://img.shields.io/npm/dm/trello.js.svg?maxAge=3600&style=flat-square" /></a>
-<a href="https://github.com/MrRefactoring/trello.js"><img alt="build status" src="https://img.shields.io/github/actions/workflow/status/mrrefactoring/trello.js/ci.yml?style=flat-square"></a>
-<a href="https://github.com/mrrefactoring/trello.js/blob/develop/LICENSE"><img alt="license" src="https://img.shields.io/github/license/mrrefactoring/trello.js?color=green&style=flat-square"/></a>
+<h1>trello.js</h1>
 
-<span>JavaScript / TypeScript library for Node.JS and browsers to easily interact with Atlassian Trello API</span>
+<p>
+<a href="https://www.npmjs.com/package/trello.js"><img alt="npm version" src="https://img.shields.io/npm/v/trello.js.svg?style=flat-square"/></a>
+<a href="https://www.npmjs.com/package/trello.js"><img alt="npm downloads" src="https://img.shields.io/npm/dm/trello.js.svg?style=flat-square"/></a>
+<a href="https://bundlephobia.com/package/trello.js"><img alt="bundle size" src="https://img.shields.io/bundlephobia/minzip/trello.js?style=flat-square"/></a>
+<a href="https://github.com/MrRefactoring/trello.js/actions/workflows/ci.yml"><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/MrRefactoring/trello.js/ci.yml?branch=master&style=flat-square"/></a>
+<a href="https://github.com/MrRefactoring/trello.js/blob/master/LICENSE"><img alt="license" src="https://img.shields.io/github/license/MrRefactoring/trello.js?color=green&style=flat-square"/></a>
+</p>
+
+<p><strong>Type-safe Trello REST API client for Node.js and the browser.</strong></p>
 </div>
 
-## About
+> **English** · [Русский](./README.ru.md)
 
-trello.js is a powerful [Node.JS](https://nodejs.org/) / Browser module that allows you to interact with the [Trello API](https://developer.atlassian.com/cloud/trello/rest/api-group-actions/) very easily.
+## Why trello.js
 
-Usability, consistency, and performance are key focuses of trello.js, and it also has nearly 100% coverage of the Trello API. It receives new Trello features shortly after they arrive in the API.
-
-## Table of contents
-
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Key and token pair issuing](#key-and-token-pair-issuing)
-  - [Client creation and first request](#client-creation-first-request-and-using-algorithm)
-- [Decrease Webpack bundle size](#decrease-webpack-bundle-size)
-- [License](#license)
+- 🔒 **Fully typed** — every endpoint, parameter, and response. No `any`, no guessing.
+- ✅ **Runtime validation** powered by [Zod 4](https://zod.dev) — drift between docs and reality is caught at the boundary.
+- 🌳 **Tree-shakable** — subpath exports per namespace (`trello.js/boards`, `trello.js/cards`, …) plus `trello.js/models` and `trello.js/parameters`. Pay only for what you import.
+- 📦 **ESM-only**, modern Node.js (≥22), browser-ready via any bundler.
+- 🧪 **Full API coverage** — 17 namespaces, 250+ methods, auto-generated from the official Trello swagger.
+- ⚡ **Built-in retry** for 429 responses with exponential backoff.
+- 📐 **One runtime dependency** — `zod`.
 
 ## Installation
 
-**Node.js 10.0.0 or newer is required.**
-
-Install with the npm:
-
-```bash
-npm install trello.js
-```
-
-Install with the yarn:
-
-```bash
-yarn add trello.js
-```
-
-Install with the pnpm:
+> Requires Node.js 22+ and an ESM project (`"type": "module"` or a bundler).
 
 ```bash
 pnpm add trello.js
+# or
+npm install trello.js
+# or
+yarn add trello.js
 ```
 
-## Usage
+## Quick start
 
-#### Key and token pair issuing
+1. Get your [API key and token](https://trello.com/power-ups/admin) from Trello.
+2. Create a client and make your first call:
 
-To interact with the Trello API, you must first get API Key and API Token.
-The [official documentation](https://developer.atlassian.com/cloud/trello/guides/rest-api/api-introduction/#authentication-and-authorization) does a good job of describing how to issue a Key and Token pair to work.
+```ts
+import { createTrelloClient } from 'trello.js';
 
-#### Client creation, first request and using algorithm
-
-Take the key and token obtained in the previous step and pass them to `TrelloClient`, then call to create a new board.
-
-```typescript
-import { TrelloClient } from 'trello.js';
-
-const trelloClient = new TrelloClient({
-  key: 'YOUR_API_KEY',
-  token: 'YOUR_API_TOKEN',
+const trello = createTrelloClient({
+  apiKey: process.env.TRELLO_KEY!,
+  apiToken: process.env.TRELLO_TOKEN!,
 });
 
-async function main() {
-  const createdBoard = await trelloClient.boards.createBoard({
-    name: 'My first board',
-    desc: 'From trello.js with love'
-  });
+const board = await trello.boards.createBoard({
+  name: 'My first board',
+  desc: 'From trello.js with love',
+});
 
-  console.log(createdBoard);
+console.log(board.url);
+```
+
+That's it.
+
+## Recipes
+
+### Boards
+
+```ts
+const board = await trello.boards.getBoard({ id: boardId });
+const lists = await trello.boards.getBoardLists({ id: boardId });
+
+await trello.boards.updateBoard({ id: boardId, closed: true });
+```
+
+### Cards
+
+```ts
+const card = await trello.cards.createCard({
+  idList: listId,
+  name: 'Write release notes',
+  pos: 'top',
+});
+
+await trello.cards.updateCard({ id: card.id, idList: targetListId });
+await trello.cards.createCardComment({ id: card.id, text: 'Done.' });
+```
+
+### Search
+
+```ts
+const result = await trello.search.search({
+  query: 'release',
+  modelTypes: 'cards,boards',
+  cards_limit: 20,
+});
+
+result.cards?.forEach((c) => console.log(c.name));
+```
+
+### Webhooks
+
+```ts
+const webhook = await trello.webhooks.createWebhook({
+  idModel: boardId,
+  callbackURL: 'https://my-app.example.com/trello/hook',
+  description: 'Activity stream',
+});
+```
+
+> Your `callbackURL` must respond `200` to a `HEAD` request — Trello checks it at creation time.
+
+## Tree-shakable imports
+
+For the smallest possible bundle, import the namespace functions directly:
+
+```ts
+import { createClient } from 'trello.js/core';
+import { getBoard } from 'trello.js/boards';
+import { createCard } from 'trello.js/cards';
+
+const client = createClient({ apiKey, apiToken });
+
+const board = await getBoard(client, { id });
+const card = await createCard(client, { idList: board.idLists?.[0], name: 'Hi' });
+```
+
+Bundlers strip out unused namespaces. The 15+ namespaces you don't import never end up in your output.
+
+## TypeScript & schemas
+
+Types flow from the methods automatically:
+
+```ts
+const board = await trello.boards.getBoard({ id });
+//    ^? Board
+```
+
+Every model also has a runtime Zod schema. Import from the root or the dedicated subpath:
+
+```ts
+import { BoardSchema, type Board } from 'trello.js/models';
+
+const board: Board = BoardSchema.parse(payload);
+```
+
+## Error handling
+
+Non-2xx responses throw `Error('Request failed: <status> <statusText> - <body>')`. Schema mismatches throw `ZodError`. Rate-limit 429s retry automatically (2 s, 4 s, 8 s).
+
+```ts
+try {
+  await trello.boards.getBoard({ id: 'bad' });
+} catch (err) {
+  if (err instanceof Error && err.message.includes('404')) {
+    // handle not-found
+  }
 }
-
-main();
-
-// Expected output:
-// {
-//   id: '562c56ea71b89509da09b802',
-//   name: 'My first board',
-//   desc: 'From trello.js with love',
-//   descData: null,
-//   closed: false,
-//   idOrganization: '134d3ee72b12a9636211247e',
-//   idEnterprise: null,
-//   pinned: false,
-//   url: 'https://trello.com/b/hUdovbPJ/my-first-board',
-//   shortUrl: 'https://trello.com/b/hUdovbPJ',
-//   prefs: {
-//     ...
-//   },
-//   labelNames: {
-//     ...
-//   },
-//   limits: {}
-// }
 ```
 
-The algorithm for using the library:
+See the [error handling guide](https://mrrefactoring.github.io/trello.js/guide/error-handling) for details.
 
-```typescript
-client.<group>.<methodName>(parametersObject);
-```
+## Documentation
 
-Available groups:
+📖 **[Full documentation](https://mrrefactoring.github.io/trello.js/)** — guides, recipes, migration  
+📚 **[API reference](https://mrrefactoring.github.io/trello.js/api/)** — every method, generated from source  
+🇷🇺 **[Русская версия](https://mrrefactoring.github.io/trello.js/ru/)**
 
-- [actions](https://developer.atlassian.com/cloud/trello/rest/api-group-actions/#api-group-actions)
-- [applications](https://developer.atlassian.com/cloud/trello/rest/api-group-applications/#api-group-applications)
-- [batch](https://developer.atlassian.com/cloud/trello/rest/api-group-batch/#api-group-batch)
-- [boards](https://developer.atlassian.com/cloud/trello/rest/api-group-boards/#api-group-boards)
-- [cards](https://developer.atlassian.com/cloud/trello/rest/api-group-cards/#api-group-cards)
-- [checklists](https://developer.atlassian.com/cloud/trello/rest/api-group-checklists/#api-group-checklists)
-- [customFields](https://developer.atlassian.com/cloud/trello/rest/api-group-customfields/#api-group-customfields)
-- [emoji](https://developer.atlassian.com/cloud/trello/rest/api-group-emoji/#api-group-emoji)
-- [enterprises](https://developer.atlassian.com/cloud/trello/rest/api-group-enterprises/#api-group-enterprises)
-- [labels](https://developer.atlassian.com/cloud/trello/rest/api-group-labels/#api-group-labels)
-- [lists](https://developer.atlassian.com/cloud/trello/rest/api-group-lists/#api-group-lists)
-- [members](https://developer.atlassian.com/cloud/trello/rest/api-group-members/#api-group-members)
-- [notifications](https://developer.atlassian.com/cloud/trello/rest/api-group-notifications/#api-group-notifications)
-- [organizations](https://developer.atlassian.com/cloud/trello/rest/api-group-organizations/#api-group-organizations)
-- [plugins](https://developer.atlassian.com/cloud/trello/rest/api-group-plugins/#api-group-plugins)
-- [search](https://developer.atlassian.com/cloud/trello/rest/api-group-search/#api-group-search)
-- [tokens](https://developer.atlassian.com/cloud/trello/rest/api-group-tokens/#api-group-tokens)
-- [webhooks](https://developer.atlassian.com/cloud/trello/rest/api-group-webhooks/#api-group-webhooks)
+## Compatibility
 
-The name of the methods is the name of the endpoint in the group without spaces and in `camelCase`.
+- Node.js ≥ 22 (ESM-only)
+- TypeScript ≥ 6.0 recommended
+- Modern bundlers: Vite, webpack 5+, Rollup, esbuild
 
-The parameters depend on the specific endpoint. For more information, [see here](https://mrrefactoring.github.io/trello.js/).
+## Migrating from v1?
 
-## Decrease Webpack bundle size
+See the [v1 → v2 migration guide](https://mrrefactoring.github.io/trello.js/migration/v1-to-v2). Headline changes: `new TrelloClient` → `createTrelloClient`, `key/token` → `apiKey/apiToken`, ESM-only, Node 22+.
 
-If you use Webpack and need to reduce the size of the assembly, you can create your client with only the groups you use.
+## Contributing
 
-```typescript
-import { BaseClient } from 'trello.js';
-import { Boards, Members } from 'trello.js/out/api';
-
-export class CustomTrelloClient extends BaseClient {
-  boards = new Boards(this);
-  members = new Members(this);
-}
-```
+See [CONTRIBUTING.md](./CONTRIBUTING.md). Most of `src/` is auto-generated from the Trello swagger — please don't hand-edit `src/api/`, `src/models/`, or `src/parameters/`.
 
 ## License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+[MIT](./LICENSE) © Vladislav Tupikin

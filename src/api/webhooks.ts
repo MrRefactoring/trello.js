@@ -1,94 +1,81 @@
-import * as Models from './models';
-import * as Parameters from './parameters';
-import { Client } from '../clients';
-import { Callback, RequestConfig } from '../types';
+import { WebhookSchema, type Webhook } from '#/models/webhook';
+import { FieldValueSchema, type FieldValue } from '#/models/fieldValue';
+import { type CreateWebhook } from '#/parameters/createWebhook';
+import { type GetWebhook } from '#/parameters/getWebhook';
+import { type UpdateWebhook } from '#/parameters/updateWebhook';
+import { type DeleteWebhook } from '#/parameters/deleteWebhook';
+import { type GetWebhookField } from '#/parameters/getWebhookField';
+import { type Client, type SendRequestOptions } from '#/core';
+import type { z } from 'zod';
 
-export class Webhooks {
-  constructor(private client: Client) {}
+/** Create a new webhook. */
+export async function createWebhook(client: Client, parameters: CreateWebhook): Promise<Webhook> {
+  const config: SendRequestOptions<Webhook> = {
+    url: '/webhooks/',
+    method: 'POST',
+    searchParams: {
+      description: parameters.description,
+      callbackURL: parameters.callbackURL,
+      idModel: parameters.idModel,
+      active: parameters.active,
+    },
+    schema: WebhookSchema,
+  };
 
-  /** Create a new webhook. */
-  async createWebhook<T = Models.Webhook>(parameters: Parameters.CreateWebhook, callback: Callback<T>): Promise<void>;
-  /** Create a new webhook. */
-  async createWebhook<T = Models.Webhook>(parameters: Parameters.CreateWebhook, callback?: never): Promise<T>;
-  async createWebhook<T = Models.Webhook>(
-    parameters: Parameters.CreateWebhook,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: '/webhooks/',
-      method: 'POST',
-      params: {
-        description: parameters.description,
-        callbackURL: parameters.callbackURL,
-        idModel: parameters.idModel,
-        active: parameters.active,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/**
+ * Get a webhook by ID. You must use the token query parameter and pass in the token the webhook was created under, or
+ * else you will encounter a 'webhook does not belong to token' error.
+ */
+export async function getWebhook(client: Client, parameters: GetWebhook): Promise<Webhook> {
+  const config: SendRequestOptions<Webhook> = {
+    url: `/webhooks/${parameters.id}`,
+    method: 'GET',
+    schema: WebhookSchema,
+  };
 
-  /** Get a webhook by ID. */
-  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhook, callback: Callback<T>): Promise<void>;
-  /** Get a webhook by ID. */
-  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhook, callback?: never): Promise<T>;
-  async getWebhook<T = Models.Webhook>(parameters: Parameters.GetWebhook, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/webhooks/${parameters.id}`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Update a webhook by ID. */
+export async function updateWebhook(client: Client, parameters: UpdateWebhook): Promise<Webhook> {
+  const config: SendRequestOptions<Webhook> = {
+    url: `/webhooks/${parameters.id}`,
+    method: 'PUT',
+    searchParams: {
+      description: parameters.description,
+      callbackURL: parameters.callbackURL,
+      idModel: parameters.idModel,
+      active: parameters.active,
+    },
+    schema: WebhookSchema,
+  };
 
-  /** Update a webhook by ID. */
-  async updateWebhook<T = Models.Webhook>(parameters: Parameters.UpdateWebhook, callback: Callback<T>): Promise<void>;
-  /** Update a webhook by ID. */
-  async updateWebhook<T = Models.Webhook>(parameters: Parameters.UpdateWebhook, callback?: never): Promise<T>;
-  async updateWebhook<T = Models.Webhook>(
-    parameters: Parameters.UpdateWebhook,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/webhooks/${parameters.id}`,
-      method: 'PUT',
-      params: {
-        description: parameters.description,
-        callbackURL: parameters.callbackURL,
-        idModel: parameters.idModel,
-        active: parameters.active,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Delete a webhook by ID. */
+export async function deleteWebhook(client: Client, parameters: DeleteWebhook): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/webhooks/${parameters.id}`,
+    method: 'DELETE',
+  };
 
-  /** Delete a webhook by ID. */
-  async deleteWebhook<T = unknown>(parameters: Parameters.DeleteWebhook, callback: Callback<T>): Promise<void>;
-  /** Delete a webhook by ID. */
-  async deleteWebhook<T = unknown>(parameters: Parameters.DeleteWebhook, callback?: never): Promise<T>;
-  async deleteWebhook<T = unknown>(parameters: Parameters.DeleteWebhook, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/webhooks/${parameters.id}`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get a field on a Webhook */
+export async function getWebhookField<T = unknown>(
+  client: Client,
+  parameters: GetWebhookField,
+): Promise<FieldValue<T>> {
+  const config: SendRequestOptions<FieldValue<T>> = {
+    url: `/webhooks/${parameters.id}/${parameters.field}`,
+    method: 'GET',
+    schema: FieldValueSchema as z.ZodType<FieldValue<T>>,
+  };
 
-  /** Get a field on a Webhook */
-  async getWebhookField<T = unknown>(parameters: Parameters.GetWebhookField, callback: Callback<T>): Promise<void>;
-  /** Get a field on a Webhook */
-  async getWebhookField<T = unknown>(parameters: Parameters.GetWebhookField, callback?: never): Promise<T>;
-  async getWebhookField<T = unknown>(
-    parameters: Parameters.GetWebhookField,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/webhooks/${parameters.id}/${parameters.field}`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
+  return await client.sendRequest(config);
 }

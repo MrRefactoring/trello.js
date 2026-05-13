@@ -1,113 +1,76 @@
-import * as Models from './models';
-import * as Parameters from './parameters';
-import { Client } from '../clients';
-import { Callback, RequestConfig } from '../types';
+import { PluginSchema, type Plugin } from '#/models/plugin';
+import { PluginListingSchema, type PluginListing } from '#/models/pluginListing';
+import { type GetPlugin } from '#/parameters/getPlugin';
+import { type UpdatePlugin } from '#/parameters/updatePlugin';
+import { type CreatePluginListing } from '#/parameters/createPluginListing';
+import { type GetPluginMemberPrivacyCompliance } from '#/parameters/getPluginMemberPrivacyCompliance';
+import { type UpdatePluginListing } from '#/parameters/updatePluginListing';
+import { type Client, type SendRequestOptions } from '#/core';
 
-export class Plugins {
-  constructor(private client: Client) {}
+/** Get plugins */
+export async function getPlugin(client: Client, parameters: GetPlugin): Promise<Plugin> {
+  const config: SendRequestOptions<Plugin> = {
+    url: `/plugins/${parameters.id}/`,
+    method: 'GET',
+    schema: PluginSchema,
+  };
 
-  /** Get plugins */
-  async getPlugin<T = Models.Plugin>(parameters: Parameters.GetPlugin, callback: Callback<T>): Promise<void>;
-  /** Get plugins */
-  async getPlugin<T = Models.Plugin>(parameters: Parameters.GetPlugin, callback?: never): Promise<T>;
-  async getPlugin<T = Models.Plugin>(parameters: Parameters.GetPlugin, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/plugins/${parameters.id}/`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Update a Plugin */
+export async function updatePlugin(client: Client, parameters: UpdatePlugin): Promise<Plugin> {
+  const config: SendRequestOptions<Plugin> = {
+    url: `/plugins/${parameters.id}/`,
+    method: 'PUT',
+    schema: PluginSchema,
+  };
 
-  /** Update a Plugin */
-  async updatePlugin<T = Models.Plugin>(parameters: Parameters.UpdatePlugin, callback: Callback<T>): Promise<void>;
-  /** Update a Plugin */
-  async updatePlugin<T = Models.Plugin>(parameters: Parameters.UpdatePlugin, callback?: never): Promise<T>;
-  async updatePlugin<T = Models.Plugin>(
-    parameters: Parameters.UpdatePlugin,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/plugins/${parameters.id}/`,
-      method: 'PUT',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Create a new listing for a given locale for your Power-Up */
+export async function createPluginListing(client: Client, parameters: CreatePluginListing): Promise<PluginListing> {
+  const config: SendRequestOptions<PluginListing> = {
+    url: `/plugins/${parameters.idPlugin}/listing`,
+    method: 'POST',
+    body: {
+      description: parameters.description,
+      locale: parameters.locale,
+      overview: parameters.overview,
+      name: parameters.name,
+    },
+    schema: PluginListingSchema,
+  };
 
-  /** Create a new listing for a given locale for your Power-Up */
-  async createPluginListing<T = Models.PluginListing>(
-    parameters: Parameters.CreatePluginListing,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Create a new listing for a given locale for your Power-Up */
-  async createPluginListing<T = Models.PluginListing>(
-    parameters: Parameters.CreatePluginListing,
-    callback?: never,
-  ): Promise<T>;
-  async createPluginListing<T = Models.PluginListing>(
-    parameters: Parameters.CreatePluginListing,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/plugins/${parameters.idPlugin}/listing`,
-      method: 'POST',
-      data: {
-        description: parameters.description,
-        locale: parameters.locale,
-        overview: parameters.overview,
-        name: parameters.name,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+export async function getPluginMemberPrivacyCompliance(
+  client: Client,
+  parameters: GetPluginMemberPrivacyCompliance,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/plugins/${parameters.id}/compliance/memberPrivacy`,
+    method: 'GET',
+  };
 
-  async getPluginComplianceMemberPrivacy<T = unknown>(
-    parameters: Parameters.GetPluginComplianceMemberPrivacy,
-    callback: Callback<T>,
-  ): Promise<void>;
-  async getPluginComplianceMemberPrivacy<T = unknown>(
-    parameters: Parameters.GetPluginComplianceMemberPrivacy,
-    callback?: never,
-  ): Promise<T>;
-  async getPluginComplianceMemberPrivacy<T = unknown>(
-    parameters: Parameters.GetPluginComplianceMemberPrivacy,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/plugins/${parameters.id}/compliance/memberPrivacy`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Update an existing listing for your Power-Up */
+export async function updatePluginListing(client: Client, parameters: UpdatePluginListing): Promise<PluginListing> {
+  const config: SendRequestOptions<PluginListing> = {
+    url: `/plugins/${parameters.idPlugin}/listings/${parameters.idListing}`,
+    method: 'PUT',
+    body: {
+      description: parameters.description,
+      locale: parameters.locale,
+      overview: parameters.overview,
+      name: parameters.name,
+    },
+    schema: PluginListingSchema,
+  };
 
-  /** Update an existing listing for your Power-Up */
-  async updatePluginListing<T = Models.PluginListing>(
-    parameters: Parameters.UpdatePluginListing,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Update an existing listing for your Power-Up */
-  async updatePluginListing<T = Models.PluginListing>(
-    parameters: Parameters.UpdatePluginListing,
-    callback?: never,
-  ): Promise<T>;
-  async updatePluginListing<T = Models.PluginListing>(
-    parameters: Parameters.UpdatePluginListing,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/plugins/${parameters.idPlugin}/listings/${parameters.idListing}`,
-      method: 'PUT',
-      data: {
-        description: parameters.description,
-        locale: parameters.locale,
-        overview: parameters.overview,
-        name: parameters.name,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
+  return await client.sendRequest(config);
 }

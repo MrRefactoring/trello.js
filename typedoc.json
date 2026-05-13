@@ -1,0 +1,26 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": [
+    "src/api",
+    "src/models",
+    "src/parameters",
+    "src/core/index.ts",
+    "src/createTrelloClient.ts"
+  ],
+  "entryPointStrategy": "expand",
+  "exclude": ["**/*.test.ts", "**/index.ts"],
+  "tsconfig": "tsconfig.json",
+  "out": "docs/api",
+  "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+  "hidePageHeader": true,
+  "hideBreadcrumbs": true,
+  "readme": "none",
+  "githubPages": false,
+  "useCodeBlocks": true,
+  "expandObjects": false,
+  "expandParameters": false,
+  "parametersFormat": "table",
+  "sidebar": { "autoConfiguration": true, "format": "vitepress" },
+  "docsRoot": "docs",
+  "intentionallyNotExported": ["ActionFieldValue", "CardFieldValue", "BatchClient"]
+}

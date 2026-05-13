@@ -1,216 +1,183 @@
-import * as Models from './models';
-import * as Parameters from './parameters';
-import { Client } from '../clients';
-import { Callback, RequestConfig } from '../types';
+import { TrelloListSchema, type TrelloList } from '#/models/trelloList';
+import { ActionSchema, type Action } from '#/models/action';
+import { BoardSchema, type Board } from '#/models/board';
+import { CardSchema, type Card } from '#/models/card';
+import { type GetList } from '#/parameters/getList';
+import { type UpdateList } from '#/parameters/updateList';
+import { type CreateList } from '#/parameters/createList';
+import { type ArchiveAllListCards } from '#/parameters/archiveAllListCards';
+import { type MoveAllListCards } from '#/parameters/moveAllListCards';
+import { type ArchiveList } from '#/parameters/archiveList';
+import { type MoveListToBoard } from '#/parameters/moveListToBoard';
+import { type UpdateListField } from '#/parameters/updateListField';
+import { type GetListActions } from '#/parameters/getListActions';
+import { type GetListBoard } from '#/parameters/getListBoard';
+import { type GetListCards } from '#/parameters/getListCards';
+import { type Client, type SendRequestOptions } from '#/core';
+import { z } from 'zod';
 
-export class Lists {
-  constructor(private client: Client) {}
+/** Get information about a List */
+export async function getList(client: Client, parameters: GetList): Promise<TrelloList> {
+  const config: SendRequestOptions<TrelloList> = {
+    url: `/lists/${parameters.id}`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+    },
+    schema: TrelloListSchema,
+  };
 
-  /** Get information about a List */
-  async getList<T = unknown>(parameters: Parameters.GetList, callback: Callback<T>): Promise<void>;
-  /** Get information about a List */
-  async getList<T = unknown>(parameters: Parameters.GetList, callback?: never): Promise<T>;
-  async getList<T = unknown>(parameters: Parameters.GetList, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Update the properties of a List */
+export async function updateList(client: Client, parameters: UpdateList): Promise<TrelloList> {
+  const config: SendRequestOptions<TrelloList> = {
+    url: `/lists/${parameters.id}`,
+    method: 'PUT',
+    searchParams: {
+      name: parameters.name,
+      closed: parameters.closed,
+      idBoard: parameters.idBoard,
+      pos: parameters.pos,
+      subscribed: parameters.subscribed,
+    },
+    schema: TrelloListSchema,
+  };
 
-  /** Update the properties of a List */
-  async updateList<T = unknown>(parameters: Parameters.UpdateList, callback: Callback<T>): Promise<void>;
-  /** Update the properties of a List */
-  async updateList<T = unknown>(parameters: Parameters.UpdateList, callback?: never): Promise<T>;
-  async updateList<T = unknown>(parameters: Parameters.UpdateList, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}`,
-      method: 'PUT',
-      params: {
-        name: parameters.name,
-        closed: parameters.closed,
-        idBoard: parameters.idBoard,
-        pos: parameters.pos,
-        subscribed: parameters.subscribed,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Create a new List on a Board */
+export async function createList(client: Client, parameters: CreateList): Promise<TrelloList> {
+  const config: SendRequestOptions<TrelloList> = {
+    url: '/lists',
+    method: 'POST',
+    searchParams: {
+      name: parameters.name,
+      idBoard: parameters.idBoard,
+      idListSource: parameters.idListSource,
+      pos: parameters.pos,
+    },
+    schema: TrelloListSchema,
+  };
 
-  /** Create a new List on a Board */
-  async createList<T = Models.List>(parameters: Parameters.CreateList, callback: Callback<T>): Promise<void>;
-  /** Create a new List on a Board */
-  async createList<T = Models.List>(parameters: Parameters.CreateList, callback?: never): Promise<T>;
-  async createList<T = Models.List>(parameters: Parameters.CreateList, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: '/lists',
-      method: 'POST',
-      params: {
-        name: parameters.name,
-        idBoard: parameters.idBoard,
-        idListSource: parameters.idListSource,
-        pos: parameters.pos,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Archive all cards in a list */
+export async function archiveAllListCards(client: Client, parameters: ArchiveAllListCards): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/lists/${parameters.id}/archiveAllCards`,
+    method: 'POST',
+  };
 
-  /** Archive all cards in a list */
-  async archiveAllCardsInList<T = unknown>(
-    parameters: Parameters.ArchiveAllCardsInList,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Archive all cards in a list */
-  async archiveAllCardsInList<T = unknown>(parameters: Parameters.ArchiveAllCardsInList, callback?: never): Promise<T>;
-  async archiveAllCardsInList<T = unknown>(
-    parameters: Parameters.ArchiveAllCardsInList,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}/archiveAllCards`,
-      method: 'POST',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Move all Cards in a List */
+export async function moveAllListCards(client: Client, parameters: MoveAllListCards): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/lists/${parameters.id}/moveAllCards`,
+    method: 'POST',
+    searchParams: {
+      idBoard: parameters.idBoard,
+      idList: parameters.idList,
+    },
+  };
 
-  /** Move all Cards in a List */
-  async moveAllCardsInList<T = unknown>(
-    parameters: Parameters.MoveAllCardsInList,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Move all Cards in a List */
-  async moveAllCardsInList<T = unknown>(parameters: Parameters.MoveAllCardsInList, callback?: never): Promise<T>;
-  async moveAllCardsInList<T = unknown>(
-    parameters: Parameters.MoveAllCardsInList,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}/moveAllCards`,
-      method: 'POST',
-      params: {
-        idBoard: parameters.idBoard,
-        idList: parameters.idList,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Archive or unarchive a list */
+export async function archiveList(client: Client, parameters: ArchiveList): Promise<TrelloList> {
+  const config: SendRequestOptions<TrelloList> = {
+    url: `/lists/${parameters.id}/closed`,
+    method: 'PUT',
+    searchParams: {
+      value: parameters.value,
+    },
+    schema: TrelloListSchema,
+  };
 
-  /** Archive or unarchive a list */
-  async setListCloseState<T = Models.List>(
-    parameters: Parameters.SetListCloseState,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Archive or unarchive a list */
-  async setListCloseState<T = Models.List>(parameters: Parameters.SetListCloseState, callback?: never): Promise<T>;
-  async setListCloseState<T = Models.List>(
-    parameters: Parameters.SetListCloseState,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}/closed`,
-      method: 'PUT',
-      params: {
-        value: parameters.value,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Move a List to a different Board */
+export async function moveListToBoard(client: Client, parameters: MoveListToBoard): Promise<TrelloList> {
+  const config: SendRequestOptions<TrelloList> = {
+    url: `/lists/${parameters.id}/idBoard`,
+    method: 'PUT',
+    searchParams: {
+      value: parameters.value,
+    },
+    schema: TrelloListSchema,
+  };
 
-  /** Move a List to a different Board */
-  async moveListToDifferentBoard<T = unknown>(
-    parameters: Parameters.MoveListToDifferentBoard,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Move a List to a different Board */
-  async moveListToDifferentBoard<T = unknown>(
-    parameters: Parameters.MoveListToDifferentBoard,
-    callback?: never,
-  ): Promise<T>;
-  async moveListToDifferentBoard<T = unknown>(
-    parameters: Parameters.MoveListToDifferentBoard,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}/idBoard`,
-      method: 'PUT',
-      params: {
-        value: parameters.value,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Rename a list */
+export async function updateListField(client: Client, parameters: UpdateListField): Promise<TrelloList> {
+  const config: SendRequestOptions<TrelloList> = {
+    url: `/lists/${parameters.id}/${parameters.field}`,
+    method: 'PUT',
+    searchParams: {
+      value: parameters.value,
+    },
+    schema: TrelloListSchema,
+  };
 
-  /** Rename a list */
-  async renameList<T = unknown>(parameters: Parameters.RenameList, callback: Callback<T>): Promise<void>;
-  /** Rename a list */
-  async renameList<T = unknown>(parameters: Parameters.RenameList, callback?: never): Promise<T>;
-  async renameList<T = unknown>(parameters: Parameters.RenameList, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}/${parameters.field}`,
-      method: 'PUT',
-      params: {
-        value: parameters.value,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get the Actions on a List */
+export async function getListActions(client: Client, parameters: GetListActions): Promise<Action[]> {
+  const config: SendRequestOptions<Action[]> = {
+    url: `/lists/${parameters.id}/actions`,
+    method: 'GET',
+    searchParams: {
+      filter: parameters.filter,
+      fields: parameters.fields,
+      format: parameters.format,
+      idModels: parameters.idModels,
+      limit: parameters.limit,
+      member: parameters.member,
+      member_fields: parameters.memberFields,
+      memberCreator: parameters.memberCreator,
+      memberCreator_fields: parameters.memberCreatorFields,
+      page: parameters.page,
+      reactions: parameters.reactions,
+      before: parameters.before,
+      since: parameters.since,
+    },
+    schema: z.array(ActionSchema),
+  };
 
-  /** Get the Actions on a List */
-  async getListActions<T = unknown>(parameters: Parameters.GetListActions, callback: Callback<T>): Promise<void>;
-  /** Get the Actions on a List */
-  async getListActions<T = unknown>(parameters: Parameters.GetListActions, callback?: never): Promise<T>;
-  async getListActions<T = unknown>(parameters: Parameters.GetListActions, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}/actions`,
-      method: 'GET',
-      params: {
-        filter: parameters.filter,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get the board a list is on */
+export async function getListBoard(client: Client, parameters: GetListBoard): Promise<Board> {
+  const config: SendRequestOptions<Board> = {
+    url: `/lists/${parameters.id}/board`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+    },
+    schema: BoardSchema,
+  };
 
-  /** Get the board a list is on */
-  async getListBoard<T = unknown>(parameters: Parameters.GetListBoard, callback: Callback<T>): Promise<void>;
-  /** Get the board a list is on */
-  async getListBoard<T = unknown>(parameters: Parameters.GetListBoard, callback?: never): Promise<T>;
-  async getListBoard<T = unknown>(parameters: Parameters.GetListBoard, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}/board`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** List the cards in a list */
+export async function getListCards(client: Client, parameters: GetListCards): Promise<Card[]> {
+  const config: SendRequestOptions<Card[]> = {
+    url: `/lists/${parameters.id}/cards`,
+    method: 'GET',
+    schema: z.array(CardSchema),
+  };
 
-  /** List the cards in a list */
-  async getListCards<T = Models.Card[]>(parameters: Parameters.GetListCards, callback: Callback<T>): Promise<void>;
-  /** List the cards in a list */
-  async getListCards<T = Models.Card[]>(parameters: Parameters.GetListCards, callback?: never): Promise<T>;
-  async getListCards<T = Models.Card[]>(
-    parameters: Parameters.GetListCards,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/lists/${parameters.id}/cards`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
+  return await client.sendRequest(config);
 }
