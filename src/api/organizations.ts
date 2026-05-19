@@ -1,600 +1,403 @@
-import * as Models from './models';
-import * as Parameters from './parameters';
-import { Client } from '../clients';
-import { Callback, RequestConfig } from '../types';
+import { OrganizationSchema, type Organization } from '#/models/organization';
+import { FieldValueSchema, type FieldValue } from '#/models/fieldValue';
+import { ActionSchema, type Action } from '#/models/action';
+import { BoardSchema, type Board } from '#/models/board';
+import { ExportSchema, type Export } from '#/models/export';
+import { MemberSchema, type Member } from '#/models/member';
+import { MembershipsSchema, type Memberships } from '#/models/memberships';
+import { PluginDataSchema, type PluginData } from '#/models/pluginData';
+import { TagSchema, type Tag } from '#/models/tag';
+import { type CreateOrganization } from '#/parameters/createOrganization';
+import { type GetOrganization } from '#/parameters/getOrganization';
+import { type UpdateOrganization } from '#/parameters/updateOrganization';
+import { type DeleteOrganization } from '#/parameters/deleteOrganization';
+import { type GetOrganizationField } from '#/parameters/getOrganizationField';
+import { type GetOrganizationActions } from '#/parameters/getOrganizationActions';
+import { type GetOrganizationBoards } from '#/parameters/getOrganizationBoards';
+import { type GetOrganizationExports } from '#/parameters/getOrganizationExports';
+import { type CreateOrganizationExport } from '#/parameters/createOrganizationExport';
+import { type GetOrganizationMembers } from '#/parameters/getOrganizationMembers';
+import { type UpdateOrganizationMembers } from '#/parameters/updateOrganizationMembers';
+import { type GetOrganizationMemberships } from '#/parameters/getOrganizationMemberships';
+import { type GetOrganizationMembership } from '#/parameters/getOrganizationMembership';
+import { type GetOrganizationPluginData } from '#/parameters/getOrganizationPluginData';
+import { type GetOrganizationTags } from '#/parameters/getOrganizationTags';
+import { type CreateOrganizationTag } from '#/parameters/createOrganizationTag';
+import { type UpdateOrganizationMember } from '#/parameters/updateOrganizationMember';
+import { type RemoveOrganizationMember } from '#/parameters/removeOrganizationMember';
+import { type DeactivateOrganizationMember } from '#/parameters/deactivateOrganizationMember';
+import { type UploadOrganizationLogo } from '#/parameters/uploadOrganizationLogo';
+import { type DeleteOrganizationLogo } from '#/parameters/deleteOrganizationLogo';
+import { type RemoveOrganizationMemberFromAllBoards } from '#/parameters/removeOrganizationMemberFromAllBoards';
+import { type DeleteOrganizationAssociatedDomain } from '#/parameters/deleteOrganizationAssociatedDomain';
+import { type DeleteOrganizationInviteRestriction } from '#/parameters/deleteOrganizationInviteRestriction';
+import { type DeleteOrganizationTag } from '#/parameters/deleteOrganizationTag';
+import { type GetOrganizationNewBillableGuests } from '#/parameters/getOrganizationNewBillableGuests';
+import { type Client, type SendRequestOptions } from '#/core';
+import { z } from 'zod';
 
-export class Organizations {
-  constructor(private client: Client) {}
+/** Create a new Workspace */
+export async function createOrganization(client: Client, parameters: CreateOrganization): Promise<Organization> {
+  const config: SendRequestOptions<Organization> = {
+    url: '/organizations',
+    method: 'POST',
+    searchParams: {
+      displayName: parameters.displayName,
+      desc: parameters.desc,
+      name: parameters.name,
+      website: parameters.website,
+    },
+    schema: OrganizationSchema,
+  };
 
-  /** Create a new Workspace */
-  async createOrganization<T = unknown>(
-    parameters: Parameters.CreateOrganization,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Create a new Workspace */
-  async createOrganization<T = unknown>(parameters: Parameters.CreateOrganization, callback?: never): Promise<T>;
-  async createOrganization<T = unknown>(
-    parameters: Parameters.CreateOrganization,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: '/organizations',
-      method: 'POST',
-      params: {
-        displayName: parameters.displayName,
-        desc: parameters.desc,
-        name: parameters.name,
-        website: parameters.website,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+export async function getOrganization(client: Client, parameters: GetOrganization): Promise<Organization> {
+  const config: SendRequestOptions<Organization> = {
+    url: `/organizations/${parameters.id}`,
+    method: 'GET',
+    schema: OrganizationSchema,
+  };
 
-  async getOrganization<T = Models.Organization>(
-    parameters: Parameters.GetOrganization,
-    callback: Callback<T>,
-  ): Promise<void>;
-  async getOrganization<T = Models.Organization>(parameters: Parameters.GetOrganization, callback?: never): Promise<T>;
-  async getOrganization<T = Models.Organization>(
-    parameters: Parameters.GetOrganization,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Update an organization */
+export async function updateOrganization(client: Client, parameters: UpdateOrganization): Promise<Organization> {
+  const config: SendRequestOptions<Organization> = {
+    url: `/organizations/${parameters.id}`,
+    method: 'PUT',
+    searchParams: {
+      name: parameters.name,
+      displayName: parameters.displayName,
+      desc: parameters.desc,
+      website: parameters.website,
+      'prefs/associatedDomain': parameters['prefs/associatedDomain'],
+      'prefs/externalMembersDisabled': parameters['prefs/externalMembersDisabled'],
+      'prefs/googleAppsVersion': parameters['prefs/googleAppsVersion'],
+      'prefs/boardVisibilityRestrict/org': parameters['prefs/boardVisibilityRestrict/org'],
+      'prefs/boardVisibilityRestrict/private': parameters['prefs/boardVisibilityRestrict/private'],
+      'prefs/boardVisibilityRestrict/public': parameters['prefs/boardVisibilityRestrict/public'],
+      'prefs/orgInviteRestrict': parameters['prefs/orgInviteRestrict'],
+      'prefs/permissionLevel': parameters['prefs/permissionLevel'],
+    },
+    schema: OrganizationSchema,
+  };
 
-  /** Update an organization */
-  async updateOrganization<T = Models.Organization>(
-    parameters: Parameters.UpdateOrganization,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Update an organization */
-  async updateOrganization<T = Models.Organization>(
-    parameters: Parameters.UpdateOrganization,
-    callback?: never,
-  ): Promise<T>;
-  async updateOrganization<T = Models.Organization>(
-    parameters: Parameters.UpdateOrganization,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}`,
-      method: 'PUT',
-      params: {
-        name: parameters.name,
-        displayName: parameters.displayName,
-        desc: parameters.desc,
-        website: parameters.website,
-        'prefs/associatedDomain': parameters.associatedDomain,
-        'prefs/externalMembersDisabled': parameters.externalMembersDisabled,
-        'prefs/googleAppsVersion': parameters.googleAppsVersion,
-        'prefs/boardVisibilityRestrict/org': parameters.org,
-        'prefs/boardVisibilityRestrict/private': parameters.private,
-        'prefs/boardVisibilityRestrict/public': parameters.public,
-        'prefs/orgInviteRestrict': parameters.orgInviteRestrict,
-        'prefs/permissionLevel': parameters.permissionLevel,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Delete an Organization */
+export async function deleteOrganization(client: Client, parameters: DeleteOrganization): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/organizations/${parameters.id}`,
+    method: 'DELETE',
+  };
 
-  /** Delete an Organization */
-  async deleteOrganization<T = unknown>(
-    parameters: Parameters.DeleteOrganization,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Delete an Organization */
-  async deleteOrganization<T = unknown>(parameters: Parameters.DeleteOrganization, callback?: never): Promise<T>;
-  async deleteOrganization<T = unknown>(
-    parameters: Parameters.DeleteOrganization,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+export async function getOrganizationField<T = unknown>(
+  client: Client,
+  parameters: GetOrganizationField,
+): Promise<FieldValue<T>> {
+  const config: SendRequestOptions<FieldValue<T>> = {
+    url: `/organizations/${parameters.id}/${parameters.field}`,
+    method: 'GET',
+    schema: FieldValueSchema as z.ZodType<FieldValue<T>>,
+  };
 
-  async getOrganizationField<T = Models.Organization>(
-    parameters: Parameters.GetOrganizationField,
-    callback: Callback<T>,
-  ): Promise<void>;
-  async getOrganizationField<T = Models.Organization>(
-    parameters: Parameters.GetOrganizationField,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationField<T = Models.Organization>(
-    parameters: Parameters.GetOrganizationField,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/${parameters.field}`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** List the actions on a Workspace */
+export async function getOrganizationActions(client: Client, parameters: GetOrganizationActions): Promise<Action[]> {
+  const config: SendRequestOptions<Action[]> = {
+    url: `/organizations/${parameters.id}/actions`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+      filter: parameters.filter,
+      format: parameters.format,
+      idModels: parameters.idModels,
+      limit: parameters.limit,
+      member: parameters.member,
+      member_fields: parameters.memberFields,
+      memberCreator: parameters.memberCreator,
+      memberCreator_fields: parameters.memberCreatorFields,
+      page: parameters.page,
+      reactions: parameters.reactions,
+      before: parameters.before,
+      since: parameters.since,
+    },
+    schema: z.array(ActionSchema),
+  };
 
-  /** List the actions on a Workspace */
-  async getOrganizationActions<T = Models.Action[]>(
-    parameters: Parameters.GetOrganizationActions,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** List the actions on a Workspace */
-  async getOrganizationActions<T = Models.Action[]>(
-    parameters: Parameters.GetOrganizationActions,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationActions<T = Models.Action[]>(
-    parameters: Parameters.GetOrganizationActions,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/actions`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** List the boards in a Workspace */
+export async function getOrganizationBoards(client: Client, parameters: GetOrganizationBoards): Promise<Board[]> {
+  const config: SendRequestOptions<Board[]> = {
+    url: `/organizations/${parameters.id}/boards`,
+    method: 'GET',
+    searchParams: {
+      filter: parameters.filter,
+      fields: parameters.fields,
+    },
+    schema: z.array(BoardSchema),
+  };
 
-  /** List the boards in a Workspace */
-  async getOrganizationBoards<T = Array<Models.Board>>(
-    parameters: Parameters.GetOrganizationBoards,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** List the boards in a Workspace */
-  async getOrganizationBoards<T = Array<Models.Board>>(
-    parameters: Parameters.GetOrganizationBoards,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationBoards<T = Array<Models.Board>>(
-    parameters: Parameters.GetOrganizationBoards,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/boards`,
-      method: 'GET',
-      params: {
-        filter: parameters.filter,
-        fields: parameters.fields,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Retrieve the exports that exist for the given organization */
+export async function getOrganizationExports(client: Client, parameters: GetOrganizationExports): Promise<Export[]> {
+  const config: SendRequestOptions<Export[]> = {
+    url: `/organizations/${parameters.id}/exports`,
+    method: 'GET',
+    schema: z.array(ExportSchema),
+  };
 
-  /** Retrieve the exports that exist for the given organization */
-  async getOrganizationExports<T = Models.Export[]>(
-    parameters: Parameters.GetOrganizationExports,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Retrieve the exports that exist for the given organization */
-  async getOrganizationExports<T = Models.Export[]>(
-    parameters: Parameters.GetOrganizationExports,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationExports<T = Models.Export[]>(
-    parameters: Parameters.GetOrganizationExports,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/exports`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Kick off CSV export for an organization */
+export async function createOrganizationExport(client: Client, parameters: CreateOrganizationExport): Promise<Export> {
+  const config: SendRequestOptions<Export> = {
+    url: `/organizations/${parameters.id}/exports`,
+    method: 'POST',
+    searchParams: {
+      attachments: parameters.attachments,
+    },
+    schema: ExportSchema,
+  };
 
-  /** Kick off CSV export for an organization */
-  async exportOrganizationCSV<T = Models.Export>(
-    parameters: Parameters.ExportOrganizationCSV,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Kick off CSV export for an organization */
-  async exportOrganizationCSV<T = Models.Export>(
-    parameters: Parameters.ExportOrganizationCSV,
-    callback?: never,
-  ): Promise<T>;
-  async exportOrganizationCSV<T = Models.Export>(
-    parameters: Parameters.ExportOrganizationCSV,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/exports`,
-      method: 'POST',
-      params: {
-        attachments: parameters.attachments,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** List the members in a Workspace */
+export async function getOrganizationMembers(client: Client, parameters: GetOrganizationMembers): Promise<Member[]> {
+  const config: SendRequestOptions<Member[]> = {
+    url: `/organizations/${parameters.id}/members`,
+    method: 'GET',
+    schema: z.array(MemberSchema),
+  };
 
-  /** List the members in a Workspace */
-  async getOrganizationMembers<T = Array<Models.Member>>(
-    parameters: Parameters.GetOrganizationMembers,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** List the members in a Workspace */
-  async getOrganizationMembers<T = Array<Models.Member>>(
-    parameters: Parameters.GetOrganizationMembers,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationMembers<T = Array<Models.Member>>(
-    parameters: Parameters.GetOrganizationMembers,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/members`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+export async function updateOrganizationMembers(client: Client, parameters: UpdateOrganizationMembers): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/organizations/${parameters.id}/members`,
+    method: 'PUT',
+    searchParams: {
+      email: parameters.email,
+      fullName: parameters.fullName,
+      type: parameters.type,
+    },
+  };
 
-  async updateOrganizationMember<T = unknown>(
-    parameters: Parameters.UpdateOrganizationMember,
-    callback: Callback<T>,
-  ): Promise<void>;
-  async updateOrganizationMember<T = unknown>(
-    parameters: Parameters.UpdateOrganizationMember,
-    callback?: never,
-  ): Promise<T>;
-  async updateOrganizationMember<T = unknown>(
-    parameters: Parameters.UpdateOrganizationMember,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/members`,
-      method: 'PUT',
-      params: {
-        email: parameters.email,
-        fullName: parameters.fullName,
-        type: parameters.type,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** List the memberships of a Workspace */
+export async function getOrganizationMemberships(
+  client: Client,
+  parameters: GetOrganizationMemberships,
+): Promise<Memberships[]> {
+  const config: SendRequestOptions<Memberships[]> = {
+    url: `/organizations/${parameters.id}/memberships`,
+    method: 'GET',
+    searchParams: {
+      filter: parameters.filter,
+      member: parameters.member,
+    },
+    schema: z.array(MembershipsSchema),
+  };
 
-  /** List the memberships of a Workspace */
-  async getOrganizationMemberships<T = Array<Models.Memberships>>(
-    parameters: Parameters.GetOrganizationMemberships,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** List the memberships of a Workspace */
-  async getOrganizationMemberships<T = Array<Models.Memberships>>(
-    parameters: Parameters.GetOrganizationMemberships,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationMemberships<T = Array<Models.Memberships>>(
-    parameters: Parameters.GetOrganizationMemberships,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/memberships`,
-      method: 'GET',
-      params: {
-        filter: parameters.filter,
-        member: parameters.member,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get a single Membership for an Organization */
+export async function getOrganizationMembership(
+  client: Client,
+  parameters: GetOrganizationMembership,
+): Promise<Memberships> {
+  const config: SendRequestOptions<Memberships> = {
+    url: `/organizations/${parameters.id}/memberships/${parameters.idMembership}`,
+    method: 'GET',
+    searchParams: {
+      member: parameters.member,
+    },
+    schema: MembershipsSchema,
+  };
 
-  /** Get a single Membership for an Organization */
-  async getOrganizationMembership<T = unknown>(
-    parameters: Parameters.GetOrganizationMembership,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a single Membership for an Organization */
-  async getOrganizationMembership<T = unknown>(
-    parameters: Parameters.GetOrganizationMembership,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationMembership<T = unknown>(
-    parameters: Parameters.GetOrganizationMembership,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/memberships/${parameters.idMembership}`,
-      method: 'GET',
-      params: {
-        member: parameters.member,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get organization scoped pluginData on this Workspace */
+export async function getOrganizationPluginData(
+  client: Client,
+  parameters: GetOrganizationPluginData,
+): Promise<PluginData[]> {
+  const config: SendRequestOptions<PluginData[]> = {
+    url: `/organizations/${parameters.id}/pluginData`,
+    method: 'GET',
+    schema: z.array(PluginDataSchema),
+  };
 
-  /** Get organization scoped pluginData on this Workspace */
-  async getOrganizationPluginData<T = Array<Models.PluginData>>(
-    parameters: Parameters.GetOrganizationPluginData,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get organization scoped pluginData on this Workspace */
-  async getOrganizationPluginData<T = Array<Models.PluginData>>(
-    parameters: Parameters.GetOrganizationPluginData,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationPluginData<T = Array<Models.PluginData>>(
-    parameters: Parameters.GetOrganizationPluginData,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/pluginData`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** List the organization's collections */
+export async function getOrganizationTags(client: Client, parameters: GetOrganizationTags): Promise<Tag[]> {
+  const config: SendRequestOptions<Tag[]> = {
+    url: `/organizations/${parameters.id}/tags`,
+    method: 'GET',
+    schema: z.array(TagSchema),
+  };
 
-  /** List the organization's collections */
-  async getOrganizationTags<T = Array<Models.Tag>>(
-    parameters: Parameters.GetOrganizationTags,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** List the organization's collections */
-  async getOrganizationTags<T = Array<Models.Tag>>(
-    parameters: Parameters.GetOrganizationTags,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationTags<T = Array<Models.Tag>>(
-    parameters: Parameters.GetOrganizationTags,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/tags`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Create a Tag in an Organization */
+export async function createOrganizationTag(client: Client, parameters: CreateOrganizationTag): Promise<Tag> {
+  const config: SendRequestOptions<Tag> = {
+    url: `/organizations/${parameters.id}/tags`,
+    method: 'POST',
+    schema: TagSchema,
+  };
 
-  /** Create a Tag in an Organization */
-  async createOrganizationTag<T = unknown>(
-    parameters: Parameters.CreateOrganizationTag,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Create a Tag in an Organization */
-  async createOrganizationTag<T = unknown>(parameters: Parameters.CreateOrganizationTag, callback?: never): Promise<T>;
-  async createOrganizationTag<T = unknown>(
-    parameters: Parameters.CreateOrganizationTag,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/tags`,
-      method: 'POST',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Add a member to a Workspace or update their member type. */
+export async function updateOrganizationMember(client: Client, parameters: UpdateOrganizationMember): Promise<Member> {
+  const config: SendRequestOptions<Member> = {
+    url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
+    method: 'PUT',
+    searchParams: {
+      type: parameters.type,
+    },
+    schema: MemberSchema,
+  };
 
-  /** Add a member to a Workspace or update their member type. */
-  async addOrganizationMember<T = unknown>(
-    parameters: Parameters.AddOrganizationMember,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Add a member to a Workspace or update their member type. */
-  async addOrganizationMember<T = unknown>(parameters: Parameters.AddOrganizationMember, callback?: never): Promise<T>;
-  async addOrganizationMember<T = unknown>(
-    parameters: Parameters.AddOrganizationMember,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
-      method: 'PUT',
-      params: {
-        type: parameters.type,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Remove a member from a Workspace */
+export async function removeOrganizationMember(client: Client, parameters: RemoveOrganizationMember): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
+    method: 'DELETE',
+  };
 
-  /** Remove a member from a Workspace */
-  async deleteOrganizationMember<T = unknown>(
-    parameters: Parameters.DeleteOrganizationMember,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Remove a member from a Workspace */
-  async deleteOrganizationMember<T = unknown>(
-    parameters: Parameters.DeleteOrganizationMember,
-    callback?: never,
-  ): Promise<T>;
-  async deleteOrganizationMember<T = unknown>(
-    parameters: Parameters.DeleteOrganizationMember,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Deactivate or reactivate a member of a Workspace */
+export async function deactivateOrganizationMember(
+  client: Client,
+  parameters: DeactivateOrganizationMember,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/organizations/${parameters.id}/members/${parameters.idMember}/deactivated`,
+    method: 'PUT',
+    searchParams: {
+      value: parameters.value,
+    },
+  };
 
-  /** Deactivate or reactivate a member of a Workspace */
-  async updateOrganizationDeactivateStatus<T = unknown>(
-    parameters: Parameters.UpdateOrganizationDeactivateStatus,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Deactivate or reactivate a member of a Workspace */
-  async updateOrganizationDeactivateStatus<T = unknown>(
-    parameters: Parameters.UpdateOrganizationDeactivateStatus,
-    callback?: never,
-  ): Promise<T>;
-  async updateOrganizationDeactivateStatus<T = unknown>(
-    parameters: Parameters.UpdateOrganizationDeactivateStatus,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/members/${parameters.idMember}/deactivated`,
-      method: 'PUT',
-      params: {
-        value: parameters.value,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Set the logo image for a Workspace */
+export async function uploadOrganizationLogo(
+  client: Client,
+  parameters: UploadOrganizationLogo,
+): Promise<Organization> {
+  const config: SendRequestOptions<Organization> = {
+    url: `/organizations/${parameters.id}/logo`,
+    method: 'POST',
+    searchParams: {
+      file: parameters.file,
+    },
+    schema: OrganizationSchema,
+  };
 
-  /** Set the logo image for a Workspace */
-  async setOrganizationLogo<T = unknown>(
-    parameters: Parameters.SetOrganizationLogo,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Set the logo image for a Workspace */
-  async setOrganizationLogo<T = unknown>(
-    parameters: Parameters.SetOrganizationLogo,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/logo`,
-      method: 'POST',
-      params: {
-        file: parameters.file,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Delete a the logo from a Workspace */
+export async function deleteOrganizationLogo(client: Client, parameters: DeleteOrganizationLogo): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/organizations/${parameters.id}/logo`,
+    method: 'DELETE',
+  };
 
-  /** Delete a logo from a Workspace */
-  async deleteOrganizationLogo<T = unknown>(
-    parameters: Parameters.DeleteOrganizationLogo,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Delete a logo from a Workspace */
-  async deleteOrganizationLogo<T = unknown>(
-    parameters: Parameters.DeleteOrganizationLogo,
-    callback?: never,
-  ): Promise<T>;
-  async deleteOrganizationLogo<T = unknown>(
-    parameters: Parameters.DeleteOrganizationLogo,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/logo`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Remove a member from a Workspace and from all Workspace boards */
+export async function removeOrganizationMemberFromAllBoards(
+  client: Client,
+  parameters: RemoveOrganizationMemberFromAllBoards,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/organizations/${parameters.id}/members/${parameters.idMember}/all`,
+    method: 'DELETE',
+  };
 
-  /** Remove a member from a Workspace and from all Workspace boards */
-  async deleteOrganizationMemberFromAll<T = unknown>(
-    parameters: Parameters.DeleteOrganizationMemberFromAll,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Remove a member from a Workspace and from all Workspace boards */
-  async deleteOrganizationMemberFromAll<T = unknown>(
-    parameters: Parameters.DeleteOrganizationMemberFromAll,
-    callback?: never,
-  ): Promise<T>;
-  async deleteOrganizationMemberFromAll<T = unknown>(
-    parameters: Parameters.DeleteOrganizationMemberFromAll,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/members/${parameters.idMember}/all`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Remove the associated Google Apps domain from a Workspace */
+export async function deleteOrganizationAssociatedDomain(
+  client: Client,
+  parameters: DeleteOrganizationAssociatedDomain,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/organizations/${parameters.id}/prefs/associatedDomain`,
+    method: 'DELETE',
+  };
 
-  /** Remove the associated Google Apps domain from a Workspace */
-  async deleteOrganizationAssociatedDomain<T = unknown>(
-    parameters: Parameters.DeleteOrganizationAssociatedDomain,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Remove the associated Google Apps domain from a Workspace */
-  async deleteOrganizationAssociatedDomain<T = unknown>(
-    parameters: Parameters.DeleteOrganizationAssociatedDomain,
-    callback?: never,
-  ): Promise<T>;
-  async deleteOrganizationAssociatedDomain<T = unknown>(
-    parameters: Parameters.DeleteOrganizationAssociatedDomain,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/prefs/associatedDomain`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Remove the email domain restriction on who can be invited to the Workspace */
+export async function deleteOrganizationInviteRestriction(
+  client: Client,
+  parameters: DeleteOrganizationInviteRestriction,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/organizations/${parameters.id}/prefs/orgInviteRestrict`,
+    method: 'DELETE',
+  };
 
-  /** Remove the email domain restriction on who can be invited to the Workspace */
-  async deleteOrganizationInvites<T = unknown>(
-    parameters: Parameters.DeleteOrganizationInvites,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Remove the email domain restriction on who can be invited to the Workspace */
-  async deleteOrganizationInvites<T = unknown>(
-    parameters: Parameters.DeleteOrganizationInvites,
-    callback?: never,
-  ): Promise<T>;
-  async deleteOrganizationInvites<T = unknown>(
-    parameters: Parameters.DeleteOrganizationInvites,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/prefs/orgInviteRestrict`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Delete an organization's tag */
+export async function deleteOrganizationTag(client: Client, parameters: DeleteOrganizationTag): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/organizations/${parameters.id}/tags/${parameters.idTag}`,
+    method: 'DELETE',
+  };
 
-  /** Delete an organization's tag */
-  async deleteOrganizationTag<T = unknown>(
-    parameters: Parameters.DeleteOrganizationTag,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Delete an organization's tag */
-  async deleteOrganizationTag<T = unknown>(parameters: Parameters.DeleteOrganizationTag, callback?: never): Promise<T>;
-  async deleteOrganizationTag<T = unknown>(
-    parameters: Parameters.DeleteOrganizationTag,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/tags/${parameters.idTag}`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Used to check whether the given board has new billable guests on it. */
+export async function getOrganizationNewBillableGuests(
+  client: Client,
+  parameters: GetOrganizationNewBillableGuests,
+): Promise<unknown> {
+  const config: SendRequestOptions<unknown> = {
+    url: `/organizations/${parameters.id}/newBillableGuests/${parameters.idBoard}`,
+    method: 'GET',
+  };
 
-  /** Used to check whether the given board has new billable guests on it. */
-  async getOrganizationNewBillableGuestBoard<T = unknown>(
-    parameters: Parameters.GetOrganizationNewBillableGuestBoard,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Used to check whether the given board has new billable guests on it. */
-  async getOrganizationNewBillableGuestBoard<T = unknown>(
-    parameters: Parameters.GetOrganizationNewBillableGuestBoard,
-    callback?: never,
-  ): Promise<T>;
-  async getOrganizationNewBillableGuestBoard<T = unknown>(
-    parameters: Parameters.GetOrganizationNewBillableGuestBoard,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/organizations/${parameters.id}/newBillableGuests/${parameters.idBoard}`,
-      method: 'GET',
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
+  return await client.sendRequest(config);
 }

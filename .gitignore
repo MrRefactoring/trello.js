@@ -1,8 +1,13 @@
 .idea/
-out/
+dist/
 node_modules/
 coverage/
-docs/
+graphify-out/
+
+docs/.vitepress/cache/
+docs/.vitepress/dist/
+docs/api/
+docs/ru/api/
 
 .env
 .DS_Store

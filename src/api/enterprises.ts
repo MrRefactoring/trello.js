@@ -1,423 +1,428 @@
-import * as Models from './models';
-import * as Parameters from './parameters';
-import { Client } from '../clients';
-import { Callback, RequestConfig } from '../types';
+import { EnterpriseSchema, type Enterprise } from '#/models/enterprise';
+import { EnterpriseAuditLogSchema, type EnterpriseAuditLog } from '#/models/enterpriseAuditLog';
+import { EnterpriseAdminSchema, type EnterpriseAdmin } from '#/models/enterpriseAdmin';
+import { GetEnterpriseSignUpUrlSchema, type GetEnterpriseSignUpUrl } from '#/models/getEnterpriseSignUpUrl';
+import { MembershipSchema, type Membership } from '#/models/membership';
+import { MemberSchema, type Member } from '#/models/member';
+import { TransferrableOrganizationSchema, type TransferrableOrganization } from '#/models/transferrableOrganization';
+import { ClaimableOrganizationsSchema, type ClaimableOrganizations } from '#/models/claimableOrganizations';
+import { PendingOrganizationsSchema, type PendingOrganizations } from '#/models/pendingOrganizations';
+import { APITokenSchema, type APIToken } from '#/models/aPIToken';
+import { OrganizationSchema, type Organization } from '#/models/organization';
+import { type GetEnterprise } from '#/parameters/getEnterprise';
+import { type GetEnterpriseAuditLog } from '#/parameters/getEnterpriseAuditLog';
+import { type GetEnterpriseAdmins } from '#/parameters/getEnterpriseAdmins';
+import { type GetEnterpriseSignUpUrl as GetEnterpriseSignUpUrlParameters } from '#/parameters/getEnterpriseSignUpUrl';
+import { type GetUser } from '#/parameters/getUser';
+import { type GetEnterpriseMembers } from '#/parameters/getEnterpriseMembers';
+import { type GetEnterpriseMember } from '#/parameters/getEnterpriseMember';
+import { type GetEnterpriseTransferrableOrganization } from '#/parameters/getEnterpriseTransferrableOrganization';
+import { type GetEnterpriseBulkTransferrableOrganizations } from '#/parameters/getEnterpriseBulkTransferrableOrganizations';
+import { type UpdateEnterpriseJoinRequests } from '#/parameters/updateEnterpriseJoinRequests';
+import { type GetEnterpriseClaimableOrganizations } from '#/parameters/getEnterpriseClaimableOrganizations';
+import { type GetEnterprisePendingOrganizations } from '#/parameters/getEnterprisePendingOrganizations';
+import { type CreateEnterpriseToken } from '#/parameters/createEnterpriseToken';
+import { type GetEnterpriseOrganizations } from '#/parameters/getEnterpriseOrganizations';
+import { type AddEnterpriseOrganization } from '#/parameters/addEnterpriseOrganization';
+import { type UpdateEnterpriseMemberLicensed } from '#/parameters/updateEnterpriseMemberLicensed';
+import { type DeactivateEnterpriseMember } from '#/parameters/deactivateEnterpriseMember';
+import { type AddEnterpriseAdmin } from '#/parameters/addEnterpriseAdmin';
+import { type RemoveEnterpriseAdmin } from '#/parameters/removeEnterpriseAdmin';
+import { type RemoveEnterpriseOrganization } from '#/parameters/removeEnterpriseOrganization';
+import { type GetEnterpriseBulkOrganizations } from '#/parameters/getEnterpriseBulkOrganizations';
+import { type Client, type SendRequestOptions } from '#/core';
+import { z } from 'zod';
 
-export class Enterprises {
-  constructor(private client: Client) {}
+/** Get an enterprise by its ID. */
+export async function getEnterprise(client: Client, parameters: GetEnterprise): Promise<Enterprise> {
+  const config: SendRequestOptions<Enterprise> = {
+    url: `/enterprises/${parameters.id}`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+      members: parameters.members,
+      member_fields: parameters.memberFields,
+      member_filter: parameters.memberFilter,
+      member_sort: parameters.memberSort,
+      member_sortBy: parameters.memberSortBy,
+      member_sortOrder: parameters.memberSortOrder,
+      member_startIndex: parameters.memberStartIndex,
+      member_count: parameters.memberCount,
+      organizations: parameters.organizations,
+      organization_fields: parameters.organizationFields,
+      organization_paid_accounts: parameters.organizationPaidAccounts,
+      organization_memberships: parameters.organizationMemberships,
+    },
+    schema: EnterpriseSchema,
+  };
 
-  /** Get an enterprise by its ID. */
-  async getEnterprise<T = Models.Enterprise>(
-    parameters: Parameters.GetEnterprise,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get an enterprise by its ID. */
-  async getEnterprise<T = Models.Enterprise>(parameters: Parameters.GetEnterprise, callback?: never): Promise<T>;
-  async getEnterprise<T = Models.Enterprise>(
-    parameters: Parameters.GetEnterprise,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-        members: parameters.members,
-        member_fields: parameters.memberFields ?? parameters.member?.fields,
-        member_filter: parameters.memberFilter ?? parameters.member?.filter,
-        member_sort: parameters.memberSort ?? parameters.member?.sort,
-        member_sortBy: parameters.memberSortBy,
-        member_sortOrder: parameters.memberSortOrder,
-        member_startIndex: parameters.memberStartIndex ?? parameters.member?.startIndex,
-        member_count: parameters.memberCount ?? parameters.member?.count,
-        organizations: parameters.organizations,
-        organization_fields: parameters.organizationFields ?? parameters.organization?.fields,
-        organization_paid_accounts: parameters.organizationPaidAccounts ?? parameters.organization?.paidAccounts,
-        organization_memberships: parameters.organizationMemberships ?? parameters.organization?.memberships,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/**
+ * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from an
+ * Enterprise's audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is
+ * required for this route.
+ *
+ * NOTE: For enterprises that have opted in to user management via AdminHub, the auditlog will will contain actions
+ * taken in AdminHub, but may not contain the source for those actions.
+ */
+export async function getEnterpriseAuditLog(
+  client: Client,
+  parameters: GetEnterpriseAuditLog,
+): Promise<EnterpriseAuditLog[]> {
+  const config: SendRequestOptions<EnterpriseAuditLog[]> = {
+    url: `/enterprises/${parameters.id}/auditlog`,
+    method: 'GET',
+    schema: z.array(EnterpriseAuditLogSchema),
+  };
 
-  /**
-   * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from
-   * an Enterprise's audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is
-   * required for this route.
-   */
-  async getEnterpriseAuditLog<T = Models.EnterpriseAuditLog[]>(
-    parameters: Parameters.GetEnterpriseAuditLog,
-    callback?: Callback<T>,
-  ): Promise<void>;
-  /**
-   * Returns an array of Actions related to the Enterprise object. Used for populating data sent to Google Sheets from
-   * an Enterprise's audit log page: https://trello.com/e/{enterprise_name}/admin/auditlog. An Enterprise admin token is
-   * required for this route.
-   */
-  async getEnterpriseAuditLog<T = Models.EnterpriseAuditLog[]>(
-    parameters: Parameters.GetEnterpriseAuditLog,
-    callback?: never,
-  ): Promise<T>;
-  async getEnterpriseAuditLog<T = Models.EnterpriseAuditLog[]>(
-    parameters: Parameters.GetEnterpriseAuditLog,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/auditlog`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get an enterprise's admin members. */
+export async function getEnterpriseAdmins(client: Client, parameters: GetEnterpriseAdmins): Promise<EnterpriseAdmin> {
+  const config: SendRequestOptions<EnterpriseAdmin> = {
+    url: `/enterprises/${parameters.id}/admins`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+    },
+    schema: EnterpriseAdminSchema,
+  };
 
-  /** Get an enterprise's admin members. */
-  async getEnterpriseAdmins<T = Models.EnterpriseAdmin>(
-    parameters: Parameters.GetEnterpriseAdmins,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get an enterprise's admin members. */
-  async getEnterpriseAdmins<T = Models.EnterpriseAdmin>(
-    parameters: Parameters.GetEnterpriseAdmins,
-    callback?: never,
-  ): Promise<T>;
-  async getEnterpriseAdmins<T = Models.EnterpriseAdmin>(
-    parameters: Parameters.GetEnterpriseAdmins,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/admins`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get the signup URL for an enterprise. */
+export async function getEnterpriseSignUpUrl(
+  client: Client,
+  parameters: GetEnterpriseSignUpUrlParameters,
+): Promise<GetEnterpriseSignUpUrl> {
+  const config: SendRequestOptions<GetEnterpriseSignUpUrl> = {
+    url: `/enterprises/${parameters.id}/signupUrl`,
+    method: 'GET',
+    searchParams: {
+      authenticate: parameters.authenticate,
+      confirmationAccepted: parameters.confirmationAccepted,
+      returnUrl: parameters.returnUrl,
+      tosAccepted: parameters.tosAccepted,
+    },
+    schema: GetEnterpriseSignUpUrlSchema,
+  };
 
-  /** Get the signup URL for an enterprise. */
-  async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupUrl>(
-    parameters: Parameters.GetEnterpriseSignupUrl,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get the signup URL for an enterprise. */
-  async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupUrl>(
-    parameters: Parameters.GetEnterpriseSignupUrl,
-    callback?: never,
-  ): Promise<T>;
-  async getEnterpriseSignupUrl<T = Models.GetEnterprisesIdSignupUrl>(
-    parameters: Parameters.GetEnterpriseSignupUrl,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/signupUrl`,
-      method: 'GET',
-      params: {
-        authenticate: parameters.authenticate,
-        confirmationAccepted: parameters.confirmationAccepted,
-        returnUrl: parameters.returnUrl,
-        tosAccepted: parameters.tosAccepted,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/**
+ * Get an enterprise's users. You can choose to retrieve licensed members, board guests, etc. The response is paginated
+ * and will return 100 users at a time.
+ */
+export async function getUser(client: Client, parameters: GetUser): Promise<Membership[]> {
+  const config: SendRequestOptions<Membership[]> = {
+    url: `/enterprises/${parameters.id}/members/query`,
+    method: 'GET',
+    searchParams: {
+      licensed: parameters.licensed,
+      deactivated: parameters.deactivated,
+      collaborator: parameters.collaborator,
+      managed: parameters.managed,
+      admin: parameters.admin,
+      activeSince: parameters.activeSince,
+      inactiveSince: parameters.inactiveSince,
+      search: parameters.search,
+      cursor: parameters.cursor,
+    },
+    schema: z.array(MembershipSchema),
+  };
 
-  /** Get the members of an enterprise. */
-  async getEnterpriseMembers<T = Models.Member[]>(
-    parameters: Parameters.GetEnterpriseMembers,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get the members of an enterprise. */
-  async getEnterpriseMembers<T = Models.Member[]>(
-    parameters: Parameters.GetEnterpriseMembers,
-    callback?: never,
-  ): Promise<T>;
-  async getEnterpriseMembers<T = Models.Member[]>(
-    parameters: Parameters.GetEnterpriseMembers,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/members`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-        filter: parameters.filter,
-        sort: parameters.sort,
-        sortBy: parameters.sortBy,
-        sortOrder: parameters.sortOrder,
-        startIndex: parameters.startIndex,
-        count: parameters.count,
-        organization_fields: parameters.organizationFields,
-        board_fields: parameters.boardFields,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get the members of an enterprise. */
+export async function getEnterpriseMembers(client: Client, parameters: GetEnterpriseMembers): Promise<Member[]> {
+  const config: SendRequestOptions<Member[]> = {
+    url: `/enterprises/${parameters.id}/members`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+      filter: parameters.filter,
+      sort: parameters.sort,
+      sortBy: parameters.sortBy,
+      sortOrder: parameters.sortOrder,
+      startIndex: parameters.startIndex,
+      count: parameters.count,
+      organization_fields: parameters.organizationFields,
+      board_fields: parameters.boardFields,
+    },
+    schema: z.array(MemberSchema),
+  };
 
-  /** Get a specific member of an enterprise by ID. */
-  async getEnterpriseMember<T = Models.Member>(
-    parameters: Parameters.GetEnterpriseMember,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get a specific member of an enterprise by ID. */
-  async getEnterpriseMember<T = Models.Member>(
-    parameters: Parameters.GetEnterpriseMember,
-    callback?: never,
-  ): Promise<T>;
-  async getEnterpriseMember<T = Models.Member>(
-    parameters: Parameters.GetEnterpriseMember,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/members/${parameters.idMember}`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-        organization_fields: parameters.organizationFields,
-        board_fields: parameters.boardFields,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get a specific member of an enterprise by ID. */
+export async function getEnterpriseMember(client: Client, parameters: GetEnterpriseMember): Promise<Member> {
+  const config: SendRequestOptions<Member> = {
+    url: `/enterprises/${parameters.id}/members/${parameters.idMember}`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+      organization_fields: parameters.organizationFields,
+      board_fields: parameters.boardFields,
+    },
+    schema: MemberSchema,
+  };
 
-  /** Get whether an organization can be transferred to an enterprise. */
-  async getEnterpriseTransferrableOrganization<T = Models.TransferrableOrganization>(
-    parameters: Parameters.GetEnterpriseTransferrableOrganization,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get whether an organization can be transferred to an enterprise. */
-  async getEnterpriseTransferrableOrganization<T = Models.TransferrableOrganization>(
-    parameters: Parameters.GetEnterpriseTransferrableOrganization,
-    callback?: never,
-  ): Promise<T>;
-  async getEnterpriseTransferrableOrganization<T = Models.TransferrableOrganization>(
-    parameters: Parameters.GetEnterpriseTransferrableOrganization,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/transferrable/organization/${parameters.idOrganization}`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get whether an organization can be transferred to an enterprise. */
+export async function getEnterpriseTransferrableOrganization(
+  client: Client,
+  parameters: GetEnterpriseTransferrableOrganization,
+): Promise<TransferrableOrganization> {
+  const config: SendRequestOptions<TransferrableOrganization> = {
+    url: `/enterprises/${parameters.id}/transferrable/organization/${parameters.idOrganization}`,
+    method: 'GET',
+    schema: TransferrableOrganizationSchema,
+  };
 
-  /** Get the Workspaces that are claimable by the enterprise by ID. */
-  async getEnterprisesIdClaimableOrganizations<T = Models.ClaimableOrganizations>(
-    parameters: Parameters.GetEnterprisesIdClaimableOrganizations,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get the Workspaces that are claimable by the enterprise by ID. */
-  async getEnterprisesIdClaimableOrganizations<T = Models.ClaimableOrganizations>(
-    parameters: Parameters.GetEnterprisesIdClaimableOrganizations,
-    callback?: never,
-  ): Promise<T>;
-  async getEnterprisesIdClaimableOrganizations<T = Models.ClaimableOrganizations>(
-    parameters: Parameters.GetEnterprisesIdClaimableOrganizations,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/claimableOrganizations`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get a list of organizations that can be transferred to an enterprise when given a bulk list of organizations. */
+export async function getEnterpriseBulkTransferrableOrganizations(
+  client: Client,
+  parameters: GetEnterpriseBulkTransferrableOrganizations,
+): Promise<TransferrableOrganization[]> {
+  const config: SendRequestOptions<TransferrableOrganization[]> = {
+    url: `/enterprises/${parameters.id}/transferrable/bulk/${parameters.idOrganizations}`,
+    method: 'GET',
+    schema: z.array(TransferrableOrganizationSchema),
+  };
 
-  /** Get the Workspaces that are pending for the enterprise by ID. */
-  async getEnterprisesIdPendingOrganizations<T = Models.PendingOrganizations[]>(
-    parameters: Parameters.GetEnterprisesIdPendingOrganizations,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Get the Workspaces that are pending for the enterprise by ID. */
-  async getEnterprisesIdPendingOrganizations<T = Models.PendingOrganizations[]>(
-    parameters: Parameters.GetEnterprisesIdPendingOrganizations,
-    callback?: never,
-  ): Promise<T>;
-  async getEnterprisesIdPendingOrganizations<T = Models.PendingOrganizations[]>(
-    parameters: Parameters.GetEnterprisesIdPendingOrganizations,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/pendingOrganizations`,
-      method: 'GET',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Decline enterpriseJoinRequests from one organization or bulk amount of organizations */
+export async function updateEnterpriseJoinRequests(
+  client: Client,
+  parameters: UpdateEnterpriseJoinRequests,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/enterprises/$${parameters.id}/enterpriseJoinRequest/bulk`,
+    method: 'PUT',
+    searchParams: {
+      idOrganizations: parameters.idOrganizations,
+    },
+  };
 
-  /** Create an auth Token for an Enterprise. */
-  async createEnterpriseToken<T = unknown>(
-    parameters: Parameters.CreateEnterpriseToken,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Create an auth Token for an Enterprise. */
-  async createEnterpriseToken<T = unknown>(parameters: Parameters.CreateEnterpriseToken, callback?: never): Promise<T>;
-  async createEnterpriseToken<T = unknown>(
-    parameters: Parameters.CreateEnterpriseToken,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/tokens`,
-      method: 'POST',
-      params: {
-        expiration: parameters.expiration,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/**
+ * Get the Workspaces that are claimable by the enterprise by ID. Can optionally query for workspaces based on
+ * activeness/ inactiveness.
+ */
+export async function getEnterpriseClaimableOrganizations(
+  client: Client,
+  parameters: GetEnterpriseClaimableOrganizations,
+): Promise<ClaimableOrganizations> {
+  const config: SendRequestOptions<ClaimableOrganizations> = {
+    url: `/enterprises/${parameters.id}/claimableOrganizations`,
+    method: 'GET',
+    searchParams: {
+      limit: parameters.limit,
+      cursor: parameters.cursor,
+      name: parameters.name,
+      activeSince: parameters.activeSince,
+      inactiveSince: parameters.inactiveSince,
+    },
+    schema: ClaimableOrganizationsSchema,
+  };
 
-  /** Transfer an organization to an enterprise. */
-  async transferOrganizationToEnterprise<T = Array<Models.Organization>>(
-    parameters: Parameters.TransferOrganizationToEnterprise,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Transfer an organization to an enterprise. */
-  async transferOrganizationToEnterprise<T = Array<Models.Organization>>(
-    parameters: Parameters.TransferOrganizationToEnterprise,
-    callback?: never,
-  ): Promise<T>;
-  async transferOrganizationToEnterprise<T = Array<Models.Organization>>(
-    parameters: Parameters.TransferOrganizationToEnterprise,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/organizations`,
-      method: 'PUT',
-      params: {
-        idOrganization: parameters.idOrganization,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get the Workspaces that are pending for the enterprise by ID. */
+export async function getEnterprisePendingOrganizations(
+  client: Client,
+  parameters: GetEnterprisePendingOrganizations,
+): Promise<PendingOrganizations[]> {
+  const config: SendRequestOptions<PendingOrganizations[]> = {
+    url: `/enterprises/${parameters.id}/pendingOrganizations`,
+    method: 'GET',
+    searchParams: {
+      activeSince: parameters.activeSince,
+      inactiveSince: parameters.inactiveSince,
+    },
+    schema: z.array(PendingOrganizationsSchema),
+  };
 
-  /**
-   * This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses
-   * or not.
-   */
-  async updateEnterpriseMemberLicense<T = Models.Member>(
-    parameters: Parameters.UpdateEnterpriseMemberLicense,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /**
-   * This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses
-   * or not.
-   */
-  async updateEnterpriseMemberLicense<T = Models.Member>(
-    parameters: Parameters.UpdateEnterpriseMemberLicense,
-    callback?: never,
-  ): Promise<T>;
-  async updateEnterpriseMemberLicense<T = Models.Member>(
-    parameters: Parameters.UpdateEnterpriseMemberLicense,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/members/${parameters.idMember}/licensed`,
-      method: 'PUT',
-      params: {
-        value: parameters.values ?? parameters.value,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Create an auth Token for an Enterprise. */
+export async function createEnterpriseToken(client: Client, parameters: CreateEnterpriseToken): Promise<APIToken> {
+  const config: SendRequestOptions<APIToken> = {
+    url: `/enterprises/${parameters.id}/tokens`,
+    method: 'POST',
+    searchParams: {
+      expiration: parameters.expiration,
+    },
+    schema: APITokenSchema,
+  };
 
-  /** Deactivate a Member of an Enterprise. */
-  async deactivateEnterpriseMember<T = unknown>(
-    parameters: Parameters.DeactivateEnterpriseMember,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Deactivate a Member of an Enterprise. */
-  async deactivateEnterpriseMember<T = unknown>(
-    parameters: Parameters.DeactivateEnterpriseMember,
-    callback?: never,
-  ): Promise<T>;
-  async deactivateEnterpriseMember<T = unknown>(
-    parameters: Parameters.DeactivateEnterpriseMember,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/members/${parameters.idMember}/deactivated`,
-      method: 'PUT',
-      params: {
-        value: parameters.value,
-        fields: parameters.fields,
-        organization_fields: parameters.organizationFields,
-        board_fields: parameters.boardFields,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Get the organizations of an enterprise. */
+export async function getEnterpriseOrganizations(
+  client: Client,
+  parameters: GetEnterpriseOrganizations,
+): Promise<Organization[]> {
+  const config: SendRequestOptions<Organization[]> = {
+    url: `/enterprises/${parameters.id}/organizations`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+      filter: parameters.filter,
+      startIndex: parameters.startIndex,
+      count: parameters.count,
+    },
+    schema: z.array(OrganizationSchema),
+  };
 
-  /** Make Member an admin of Enterprise. */
-  async makeEnterpriseMemberAdmin<T = unknown>(
-    parameters: Parameters.MakeEnterpriseMemberAdmin,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Make Member an admin of Enterprise. */
-  async makeEnterpriseMemberAdmin<T = unknown>(
-    parameters: Parameters.MakeEnterpriseMemberAdmin,
-    callback?: never,
-  ): Promise<T>;
-  async makeEnterpriseMemberAdmin<T = unknown>(
-    parameters: Parameters.MakeEnterpriseMemberAdmin,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
-      method: 'PUT',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/**
+ * Transfer an organization to an enterprise.
+ *
+ * NOTE: For enterprises that have opted in to user management via AdminHub, this endpoint will result in the
+ * organization being added to the enterprise asynchronously. A 200 response only indicates receipt of the request, it
+ * does not indicate successful addition to the enterprise.
+ */
+export async function addEnterpriseOrganization(
+  client: Client,
+  parameters: AddEnterpriseOrganization,
+): Promise<Organization[]> {
+  const config: SendRequestOptions<Organization[]> = {
+    url: `/enterprises/${parameters.id}/organizations`,
+    method: 'PUT',
+    searchParams: {
+      idOrganization: parameters.idOrganization,
+    },
+    schema: z.array(OrganizationSchema),
+  };
 
-  /** Remove a member as admin from an enterprise. */
-  async deleteEnterpriseMemberAdmin<T = unknown>(
-    parameters: Parameters.DeleteEnterpriseMemberAdmin,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Remove a member as admin from an enterprise. */
-  async deleteEnterpriseMemberAdmin<T = unknown>(
-    parameters: Parameters.DeleteEnterpriseMemberAdmin,
-    callback?: never,
-  ): Promise<T>;
-  async deleteEnterpriseMemberAdmin<T = unknown>(
-    parameters: Parameters.DeleteEnterpriseMemberAdmin,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/**
+ * This endpoint is used to update whether the provided Member should use one of the Enterprise's available licenses or
+ * not. Revoking a license will deactivate a Member of an Enterprise.
+ *
+ * NOTE: Revoking of licenses is not possible for enterprises that have opted in to user management via AdminHub.
+ */
+export async function updateEnterpriseMemberLicensed(
+  client: Client,
+  parameters: UpdateEnterpriseMemberLicensed,
+): Promise<Member> {
+  const config: SendRequestOptions<Member> = {
+    url: `/enterprises/${parameters.id}/members/${parameters.idMember}/licensed`,
+    method: 'PUT',
+    searchParams: {
+      value: parameters.value,
+    },
+    schema: MemberSchema,
+  };
 
-  /** Remove an organization from an enterprise. */
-  async deleteEnterpriseOrganization<T = unknown>(
-    parameters: Parameters.DeleteEnterpriseOrganization,
-    callback: Callback<T>,
-  ): Promise<void>;
-  /** Remove an organization from an enterprise. */
-  async deleteEnterpriseOrganization<T = unknown>(
-    parameters: Parameters.DeleteEnterpriseOrganization,
-    callback?: never,
-  ): Promise<T>;
-  async deleteEnterpriseOrganization<T = unknown>(
-    parameters: Parameters.DeleteEnterpriseOrganization,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/enterprises/${parameters.id}/organizations/${parameters.idOrg}`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/**
+ * Deactivate a Member of an Enterprise.
+ *
+ * NOTE: Deactivation is not possible for enterprises that have opted in to user management via AdminHub.
+ */
+export async function deactivateEnterpriseMember(
+  client: Client,
+  parameters: DeactivateEnterpriseMember,
+): Promise<Member> {
+  const config: SendRequestOptions<Member> = {
+    url: `/enterprises/${parameters.id}/members/${parameters.idMember}/deactivated`,
+    method: 'PUT',
+    searchParams: {
+      value: parameters.value,
+      fields: parameters.fields,
+      organization_fields: parameters.organizationFields,
+      board_fields: parameters.boardFields,
+    },
+    schema: MemberSchema,
+  };
+
+  return await client.sendRequest(config);
+}
+
+/**
+ * Make Member an admin of Enterprise.
+ *
+ * NOTE: This endpoint is not available to enterprises that have opted in to user management via AdminHub.
+ */
+export async function addEnterpriseAdmin(client: Client, parameters: AddEnterpriseAdmin): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
+    method: 'PUT',
+  };
+
+  return await client.sendRequest(config);
+}
+
+/**
+ * Remove a member as admin from an enterprise.
+ *
+ * NOTE: This endpoint is not available to enterprises that have opted in to user management via AdminHub.
+ */
+export async function removeEnterpriseAdmin(client: Client, parameters: RemoveEnterpriseAdmin): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
+    method: 'DELETE',
+  };
+
+  return await client.sendRequest(config);
+}
+
+/** Remove an organization from an enterprise. */
+export async function removeEnterpriseOrganization(
+  client: Client,
+  parameters: RemoveEnterpriseOrganization,
+): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/enterprises/${parameters.id}/organizations/${parameters.idOrg}`,
+    method: 'DELETE',
+  };
+
+  return await client.sendRequest(config);
+}
+
+/**
+ * Accept an array of organizations to an enterprise.
+ *
+ * NOTE: For enterprises that have opted in to user management via AdminHub, this endpoint will result in organizations
+ * being added to the enterprise asynchronously. A 200 response only indicates receipt of the request, it does not
+ * indicate successful addition to the enterprise.
+ */
+export async function getEnterpriseBulkOrganizations(
+  client: Client,
+  parameters: GetEnterpriseBulkOrganizations,
+): Promise<Organization[]> {
+  const config: SendRequestOptions<Organization[]> = {
+    url: `/enterprises/${parameters.id}/organizations/bulk/${parameters.idOrganizations}`,
+    method: 'GET',
+    schema: z.array(OrganizationSchema),
+  };
+
+  return await client.sendRequest(config);
 }

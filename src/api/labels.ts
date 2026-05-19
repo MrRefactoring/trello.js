@@ -1,90 +1,76 @@
-import * as Parameters from './parameters';
-import { Client } from '../clients';
-import { Callback, RequestConfig } from '../types';
+import { LabelSchema, type Label } from '#/models/label';
+import { type GetLabel } from '#/parameters/getLabel';
+import { type UpdateLabel } from '#/parameters/updateLabel';
+import { type DeleteLabel } from '#/parameters/deleteLabel';
+import { type UpdateLabelField } from '#/parameters/updateLabelField';
+import { type CreateLabel } from '#/parameters/createLabel';
+import { type Client, type SendRequestOptions } from '#/core';
 
-export class Labels {
-  constructor(private client: Client) {}
+/** Get information about a single Label. */
+export async function getLabel(client: Client, parameters: GetLabel): Promise<Label> {
+  const config: SendRequestOptions<Label> = {
+    url: `/labels/${parameters.id}`,
+    method: 'GET',
+    searchParams: {
+      fields: parameters.fields,
+    },
+    schema: LabelSchema,
+  };
 
-  /** Get information about a single Label. */
-  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback: Callback<T>): Promise<void>;
-  /** Get information about a single Label. */
-  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback?: never): Promise<T>;
-  async getLabel<T = unknown>(parameters: Parameters.GetLabel, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/labels/${parameters.id}`,
-      method: 'GET',
-      params: {
-        fields: parameters.fields,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Update a label by ID. */
+export async function updateLabel(client: Client, parameters: UpdateLabel): Promise<Label> {
+  const config: SendRequestOptions<Label> = {
+    url: `/labels/${parameters.id}`,
+    method: 'PUT',
+    searchParams: {
+      name: parameters.name,
+      color: parameters.color,
+    },
+    schema: LabelSchema,
+  };
 
-  /** Update a label by ID. */
-  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback: Callback<T>): Promise<void>;
-  /** Update a label by ID. */
-  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback?: never): Promise<T>;
-  async updateLabel<T = unknown>(parameters: Parameters.UpdateLabel, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/labels/${parameters.id}`,
-      method: 'PUT',
-      params: {
-        name: parameters.name,
-        color: parameters.color,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Delete a label by ID. */
+export async function deleteLabel(client: Client, parameters: DeleteLabel): Promise<void> {
+  const config: SendRequestOptions<void> = {
+    url: `/labels/${parameters.id}`,
+    method: 'DELETE',
+  };
 
-  /** Delete a label by ID. */
-  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback: Callback<T>): Promise<void>;
-  /** Delete a label by ID. */
-  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback?: never): Promise<T>;
-  async deleteLabel<T = unknown>(parameters: Parameters.DeleteLabel, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/labels/${parameters.id}`,
-      method: 'DELETE',
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Update a field on a label. */
+export async function updateLabelField(client: Client, parameters: UpdateLabelField): Promise<Label> {
+  const config: SendRequestOptions<Label> = {
+    url: `/labels/${parameters.id}/${parameters.field}`,
+    method: 'PUT',
+    searchParams: {
+      value: parameters.value,
+    },
+    schema: LabelSchema,
+  };
 
-  /** Update a field on a label. */
-  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback: Callback<T>): Promise<void>;
-  /** Update a field on a label. */
-  async updateLabelField<T = unknown>(parameters: Parameters.UpdateLabelField, callback?: never): Promise<T>;
-  async updateLabelField<T = unknown>(
-    parameters: Parameters.UpdateLabelField,
-    callback?: Callback<T>,
-  ): Promise<void | T> {
-    const config: RequestConfig = {
-      url: `/labels/${parameters.id}/${parameters.field}`,
-      method: 'PUT',
-      params: {
-        value: parameters.value,
-      },
-    };
+  return await client.sendRequest(config);
+}
 
-    return this.client.sendRequest(config, callback);
-  }
+/** Create a new Label on a Board. */
+export async function createLabel(client: Client, parameters: CreateLabel): Promise<Label> {
+  const config: SendRequestOptions<Label> = {
+    url: '/labels',
+    method: 'POST',
+    searchParams: {
+      name: parameters.name,
+      color: parameters.color,
+      idBoard: parameters.idBoard,
+    },
+    schema: LabelSchema,
+  };
 
-  /** Create a new Label on a Board. */
-  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback: Callback<T>): Promise<void>;
-  /** Create a new Label on a Board. */
-  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback?: never): Promise<T>;
-  async createLabel<T = unknown>(parameters: Parameters.CreateLabel, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: '/labels',
-      method: 'POST',
-      params: {
-        name: parameters.name,
-        color: parameters.color,
-        idBoard: parameters.idBoard,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
+  return await client.sendRequest(config);
 }

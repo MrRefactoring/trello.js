@@ -1,16 +1,24 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "module": "CommonJS",
-    "outDir": "out",
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "outDir": "dist",
+    "rootDir": "src",
     "declaration": true,
+    "declarationMap": true,
     "strict": true,
+    "verbatimModuleSyntax": true,
     "forceConsistentCasingInFileNames": true,
-    "importHelpers": true
+    "stripInternal": true,
+    "paths": {
+      "#/*": ["./src/*"]
+    }
   },
+  "include": ["src"],
   "exclude": [
     "node_modules",
-    "tests",
-    "out"
+    "dist",
+    "eslint.config.ts"
   ]
 }

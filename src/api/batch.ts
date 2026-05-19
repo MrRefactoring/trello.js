@@ -1,23 +1,15 @@
-import * as Parameters from './parameters';
-import { Client } from '../clients';
-import { Callback, RequestConfig } from '../types';
+import { type Run } from '#/parameters/run';
+import { type Client, type SendRequestOptions } from '#/core';
 
-export class Batch {
-  constructor(private client: Client) {}
+/** Make up to 10 GET requests in a single, batched API call. */
+export async function run(client: Client, parameters: Run): Promise<unknown> {
+  const config: SendRequestOptions<unknown> = {
+    url: '/batch',
+    method: 'GET',
+    searchParams: {
+      urls: parameters.urls,
+    },
+  };
 
-  /** Make up to 10 GET requests in a single, batched API call. */
-  async getBatch<T = unknown>(parameters: Parameters.GetBatch, callback: Callback<T>): Promise<void>;
-  /** Make up to 10 GET requests in a single, batched API call. */
-  async getBatch<T = unknown>(parameters: Parameters.GetBatch, callback?: never): Promise<T>;
-  async getBatch<T = unknown>(parameters: Parameters.GetBatch, callback?: Callback<T>): Promise<void | T> {
-    const config: RequestConfig = {
-      url: '/batch',
-      method: 'GET',
-      params: {
-        urls: parameters.urls,
-      },
-    };
-
-    return this.client.sendRequest(config, callback);
-  }
+  return await client.sendRequest(config);
 }

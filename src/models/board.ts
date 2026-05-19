@@ -1,0 +1,82 @@
+import { z } from 'zod';
+import { apiObject } from '#/core/apiObject';
+import { TrelloIDSchema } from '#/models/trelloID';
+import { PrefsSchema } from '#/models/prefs';
+import { LimitsSchema } from '#/models/limits';
+import { MembershipsSchema } from '#/models/memberships';
+import { BoardMyPrefsSchema } from '#/models/boardMyPrefs';
+import { OrganizationSchema } from '#/models/organization';
+
+export const BoardSchema = apiObject({
+  id: TrelloIDSchema,
+  /** The name of the board. */
+  name: z.string().optional(),
+  desc: z.string().optional(),
+  descData: z.record(z.string(), z.any()).nullish(),
+  closed: z.boolean().optional(),
+  idMemberCreator: TrelloIDSchema.optional(),
+  idOrganization: TrelloIDSchema.optional(),
+  pinned: z.boolean().optional(),
+  url: z.string().optional(),
+  shortUrl: z.string().optional(),
+  prefs: PrefsSchema.optional(),
+  labelNames: apiObject({
+    green: z.string().optional(),
+    yellow: z.string().optional(),
+    orange: z.string().optional(),
+    red: z.string().optional(),
+    purple: z.string().optional(),
+    blue: z.string().optional(),
+    sky: z.string().optional(),
+    lime: z.string().optional(),
+    pink: z.string().optional(),
+    black: z.string().optional(),
+    green_light: z.string().optional(),
+    green_dark: z.string().optional(),
+    yellow_light: z.string().optional(),
+    yellow_dark: z.string().optional(),
+    orange_light: z.string().optional(),
+    orange_dark: z.string().optional(),
+    red_light: z.string().optional(),
+    red_dark: z.string().optional(),
+    purple_light: z.string().optional(),
+    purple_dark: z.string().optional(),
+    blue_light: z.string().optional(),
+    blue_dark: z.string().optional(),
+    sky_light: z.string().optional(),
+    sky_dark: z.string().optional(),
+    lime_light: z.string().optional(),
+    lime_dark: z.string().optional(),
+    pink_light: z.string().optional(),
+    pink_dark: z.string().optional(),
+    black_light: z.string().optional(),
+    black_dark: z.string().optional(),
+  }).optional(),
+  limits: LimitsSchema.optional(),
+  starred: z.boolean().optional(),
+  memberships: z.array(MembershipsSchema).optional(),
+  shortLink: z.string().optional(),
+  subscribed: z.boolean().optional(),
+  powerUps: z.array(z.string()).optional(),
+  dateLastActivity: z.coerce.date().optional(),
+  dateLastView: z.coerce.date().optional(),
+  idTags: z.array(z.string()).optional(),
+  datePluginDisable: z.coerce.date().nullish(),
+  creationMethod: z.string().nullish(),
+  ixUpdate: z.string().optional(),
+  templateGallery: z.string().nullish(),
+  enterpriseOwned: z.boolean().optional(),
+  idEnterprise: z.string().nullish(),
+  creationMethodError: z.unknown().optional(),
+  creationMethodLoadingPhase: z.unknown().optional(),
+  creationMethodLoadingStartedAt: z.unknown().optional(),
+  dateClosed: z.unknown().optional(),
+  idBoardSource: z.unknown().optional(),
+  nodeId: z.string().optional(),
+  premiumFeatures: z.array(z.string()).optional(),
+  type: z.unknown().optional(),
+  myPrefs: BoardMyPrefsSchema.nullish(),
+  organization: OrganizationSchema.nullish(),
+});
+
+export type Board = z.infer<typeof BoardSchema>;
