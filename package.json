@@ -182,7 +182,7 @@
     "typedoc-plugin-markdown": "^4.11.0",
     "typedoc-vitepress-theme": "^1.1.2",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.3",
+    "typescript-eslint": "^8.59.4",
     "vitepress": "^1.6.4",
     "vitest": "^4.1.6"
   },
@@ -192,5 +192,5 @@
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "pnpm@11.1.2"
+  "packageManager": "pnpm@11.1.3"
 }

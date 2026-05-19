@@ -39,6 +39,8 @@ jobs:
 
       - name: Build docs
         run: pnpm run docs:build
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
 
       - uses: actions/configure-pages@v6
 
