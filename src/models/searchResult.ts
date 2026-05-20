@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core/apiObject';
+import { apiObject } from '#/core';
 import { CardSchema } from '#/models/card';
 import { BoardSchema } from '#/models/board';
 import { MemberSchema } from '#/models/member';

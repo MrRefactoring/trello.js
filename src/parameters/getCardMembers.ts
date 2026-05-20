@@ -3,7 +3,10 @@ import { z } from 'zod';
 export const GetCardMembersSchema = z.object({
   /** The ID of the Card */
   id: z.unknown(),
-  /** `all` or a comma-separated list of member [fields](/cloud/trello/guides/rest-api/object-definitions/) */
+  /**
+   * `all` or a comma-separated list of member
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+   */
   fields: z.union([z.string(), z.array(z.string())]).optional(),
 });
 

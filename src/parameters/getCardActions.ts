@@ -12,7 +12,7 @@ export const GetCardActionsSchema = z.object({
   page: z.number().optional(),
   /**
    * The fields to be returned for the Actions. [See Action fields
-   * here](/cloud/trello/guides/rest-api/object-definitions/#action-object).
+   * here](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#action-object).
    */
   fields: z.unknown().optional(),
   /** The format of the returned Actions. Either list or count. */
@@ -23,17 +23,25 @@ export const GetCardActionsSchema = z.object({
   limit: z.number().optional(),
   /** Whether to return the member object for each action. */
   member: z.boolean().optional(),
-  /** The fields of the [member](/cloud/trello/guides/rest-api/object-definitions/#member-object) to return. */
+  /**
+   * The fields of the
+   * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) to
+   * return.
+   */
   memberFields: z.string().optional(),
   /** Whether to return the memberCreator object for each action. */
   memberCreator: z.boolean().optional(),
-  /** The fields of the [member](/cloud/trello/guides/rest-api/object-definitions/#member-object) creator to return */
+  /**
+   * The fields of the
+   * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) creator to
+   * return
+   */
   memberCreatorFields: z.string().optional(),
   /** Whether to show reactions on comments or not. */
   reactions: z.boolean().optional(),
   /**
-   * A date string in the form of YYYY-MM-DDThh:mm:ssZ or a mongo object ID. Only objects created before this date
-   * will be returned.
+   * A date string in the form of YYYY-MM-DDThh:mm:ssZ or a mongo object ID. Only objects created before this date will
+   * be returned.
    */
   before: z.string().optional(),
   /**

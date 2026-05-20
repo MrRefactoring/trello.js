@@ -7,6 +7,9 @@
 - Build scripts (`scripts/build-og-image`, `scripts/copy-api-to-ru`) migrated from `.mjs` to TypeScript, executed via `tsx`. `tsx` added as a dev dependency.
 - `repository.url` switched to the canonical `git+https://` form so the npm package page can auto-link Issues and Pull Requests against the GitHub repo.
 - npm `description` and `keywords` reworked for discoverability: leads with "type-safe", names Zod 4 explicitly, mentions checklists, and adds high-intent keywords (`javascript`, `nodejs`, `browser`, `atlassian-trello`, `trello-board`, `trello-card`). GitHub repo description and topics aligned to match.
+- Regenerated `src/api`, `src/models`, `src/parameters` from the latest Trello OpenAPI spec via `apis-code-gen`. No public-API changes.
+- `apiObject` re-exported from `#/core` so generated modules can import it from the barrel.
+- JSDoc links to the Trello developer docs rewritten from site-relative (`/cloud/trello/...`) to absolute (`https://developer.atlassian.com/cloud/trello/...`) so they're clickable from IDEs and typedoc.
 
 ## v2.0.0 (2026-05-19)
 

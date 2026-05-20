@@ -9,9 +9,15 @@ export const DeactivateEnterpriseMemberSchema = z.object({
   value: z.boolean(),
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
   fields: z.unknown().optional(),
-  /** Any valid value that the [nested organization resource](/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+  /**
+   * Any valid value that the [nested organization
+   * resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts.
+   */
   organizationFields: z.unknown().optional(),
-  /** Any valid value that the [nested board resource](/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+  /**
+   * Any valid value that the [nested board
+   * resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts.
+   */
   boardFields: z.unknown().optional(),
 });
 

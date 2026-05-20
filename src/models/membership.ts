@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core/apiObject';
+import { apiObject } from '#/core';
 import { MemberSchema } from '#/models/member';
 
 export const MembershipSchema = apiObject({

@@ -95,7 +95,9 @@ export function createBatchRunner(realClient: Client) {
     // Suppress unhandled rejections on the namespace function promises (e.g. boards.getBoard(...))
     // — they reject when their inner promise is rejected, but we return innerPromises directly.
     const builderResult = builder(batchClient);
-    builderResult.forEach((p) => { p.catch(() => {}); });
+    builderResult.forEach(p => {
+      p.catch(() => {});
+    });
 
     if (urls.length === 0) return [] as unknown as { -readonly [K in keyof T]: Awaited<T[K]> };
 

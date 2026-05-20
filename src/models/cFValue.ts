@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core/apiObject';
+import { apiObject } from '#/core';
 
 export const CFValueSchema = apiObject({
   number: z.string().optional(),

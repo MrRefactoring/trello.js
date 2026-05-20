@@ -149,8 +149,8 @@ export async function getBoardField<T = unknown>(client: Client, parameters: Get
 }
 
 /**
- * Get all of the actions of a Board. See [Nested Resources](/cloud/trello/guides/rest-api/nested-resources/) for more
- * information.
+ * Get all of the actions of a Board. See [Nested
+ * Resources](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) for more information.
  */
 export async function getBoardActions(client: Client, parameters: GetBoardActions): Promise<Action[]> {
   const config: SendRequestOptions<Action[]> = {
@@ -202,8 +202,8 @@ export async function getBoardChecklists(client: Client, parameters: GetBoardChe
 }
 
 /**
- * Get all of the open Cards on a Board. See [Nested Resources](/cloud/trello/guides/rest-api/nested-resources/) for
- * more information.
+ * Get all of the open Cards on a Board. See [Nested
+ * Resources](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) for more information.
  */
 export async function getBoardCards(client: Client, parameters: GetBoardCards): Promise<Card[]> {
   const config: SendRequestOptions<Card[]> = {
@@ -217,7 +217,7 @@ export async function getBoardCards(client: Client, parameters: GetBoardCards): 
 
 /**
  * Get the Cards on a Board that match a given filter. See [Nested
- * Resources](/cloud/trello/guides/rest-api/nested-resources/) for more information.
+ * Resources](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) for more information.
  */
 export async function getBoardCardsByFilter(client: Client, parameters: GetBoardCardsByFilter): Promise<Card[]> {
   const config: SendRequestOptions<Card[]> = {

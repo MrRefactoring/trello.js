@@ -8,11 +8,14 @@ export const GetEnterpriseMemberSchema = z.object({
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
   fields: z.string().optional(),
   /**
-   * Any valid value that the [nested organization field resource](/cloud/trello/guides/rest-api/nested-resources/)
-   * accepts.
+   * Any valid value that the [nested organization field
+   * resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts.
    */
   organizationFields: z.string().optional(),
-  /** Any valid value that the [nested board resource](/cloud/trello/guides/rest-api/nested-resources/) accepts. */
+  /**
+   * Any valid value that the [nested board
+   * resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts.
+   */
   boardFields: z.string().optional(),
 });
 
