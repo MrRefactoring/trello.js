@@ -1,5 +1,12 @@
 # Trello.js changelog
 
+## Unreleased
+
+### Internal
+
+- Build scripts (`scripts/build-og-image`, `scripts/copy-api-to-ru`) migrated from `.mjs` to TypeScript, executed via `tsx`. `tsx` added as a dev dependency.
+- `repository.url` switched to the canonical `git+https://` form so the npm package page can auto-link Issues and Pull Requests against the GitHub repo.
+
 ## v2.0.0 (2026-05-19)
 
 A substantial rewrite. The public surface changed in several places — see the [v1 → v2 migration guide](https://mrrefactoring.github.io/trello.js/migration/v1-to-v2) for upgrade steps.
