@@ -3,7 +3,10 @@ import { z } from 'zod';
 export const GetEnterpriseOrganizationsSchema = z.object({
   /** ID of the Enterprise to retrieve. */
   id: z.unknown(),
-  /** Comma-separated list of organization [fields](/cloud/trello/guides/rest-api/object-definitions/) */
+  /**
+   * Comma-separated list of organization
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+   */
   fields: z.unknown().optional(),
   filter: z.string().optional(),
   /** Any integer greater than and equal to 1. */

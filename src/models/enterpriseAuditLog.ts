@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core/apiObject';
+import { apiObject } from '#/core';
 import { TrelloIDSchema } from '#/models/trelloID';
 import { OrganizationSchema } from '#/models/organization';
 import { MemberSchema } from '#/models/member';

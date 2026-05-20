@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core/apiObject';
+import { apiObject } from '#/core';
 
 export const LimitsObjectSchema = apiObject({
   status: z.enum(['ok', 'warning']).optional(),

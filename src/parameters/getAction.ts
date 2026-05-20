@@ -5,15 +5,21 @@ export const GetActionSchema = z.object({
   entities: z.boolean().optional(),
   /**
    * `all` or a comma-separated list of action
-   * [fields](/cloud/trello/guides/rest-api/object-definitions/#action-object)
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#action-object)
    */
   fields: z.union([z.string(), z.array(z.string())]).optional(),
   member: z.boolean().optional(),
-  /** `all` or a comma-separated list of member [fields](/cloud/trello/guides/rest-api/object-definitions/) */
+  /**
+   * `all` or a comma-separated list of member
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+   */
   memberFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** Whether to include the member object for the creator of the action */
   memberCreator: z.boolean().optional(),
-  /** `all` or a comma-separated list of member [fields](/cloud/trello/guides/rest-api/object-definitions/) */
+  /**
+   * `all` or a comma-separated list of member
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+   */
   memberCreatorFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** The ID of the Action */
   id: z.unknown(),

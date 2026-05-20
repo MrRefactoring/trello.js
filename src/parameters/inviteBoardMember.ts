@@ -3,10 +3,7 @@ import { z } from 'zod';
 export const InviteBoardMemberSchema = z.object({
   /** The email address of a user to add as a member of the board. */
   email: z.string(),
-  /**
-   * Valid values: admin, normal, observer. Determines what type of member the user being added should be of the
-   * board.
-   */
+  /** Valid values: admin, normal, observer. Determines what type of member the user being added should be of the board. */
   type: z.enum(['admin', 'normal', 'observer']).optional(),
   /** The ID of the board */
   id: z.unknown(),

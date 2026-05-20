@@ -171,8 +171,8 @@ export async function getCardField<T = unknown>(client: Client, parameters: GetC
 }
 
 /**
- * List the Actions on a Card. See [Nested Resources](/cloud/trello/guides/rest-api/nested-resources/) for more
- * information.
+ * List the Actions on a Card. See [Nested
+ * Resources](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) for more information.
  */
 export async function getCardActions(client: Client, parameters: GetCardActions): Promise<Action[]> {
   const config: SendRequestOptions<Action[]> = {
@@ -533,7 +533,7 @@ export async function deleteCardComment(client: Client, parameters: DeleteCardCo
 /**
  * Setting, updating, and removing the value for a Custom Field on a card. For more details on updating custom fields
  * check out the [Getting Started With Custom
- * Fields](/cloud/trello/guides/rest-api/getting-started-with-custom-fields/)
+ * Fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/getting-started-with-custom-fields/)
  */
 export async function updateCardCustomFieldItem(client: Client, parameters: UpdateCardCustomFieldItem): Promise<void> {
   const config: SendRequestOptions<void> = {
@@ -548,7 +548,7 @@ export async function updateCardCustomFieldItem(client: Client, parameters: Upda
 /**
  * Setting, updating, and removing the values for multiple Custom Fields on a card. For more details on updating custom
  * fields check out the [Getting Started With Custom
- * Fields](/cloud/trello/guides/rest-api/getting-started-with-custom-fields/)
+ * Fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/getting-started-with-custom-fields/)
  */
 export async function updateCardCustomFields(client: Client, parameters: UpdateCardCustomFields): Promise<void> {
   const config: SendRequestOptions<void> = {

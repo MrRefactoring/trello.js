@@ -8,7 +8,10 @@ export const GetMemberNotificationsSchema = z.object({
   filter: z.string().optional(),
   /** One of: `all`, `read`, `unread` */
   readFilter: z.string().optional(),
-  /** `all` or a comma-separated list of notification [fields](/cloud/trello/guides/rest-api/object-definitions/) */
+  /**
+   * `all` or a comma-separated list of notification
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+   */
   fields: z.union([z.string(), z.array(z.string())]).optional(),
   /** Max 1000 */
   limit: z.number().optional(),
@@ -19,7 +22,10 @@ export const GetMemberNotificationsSchema = z.object({
   /** A notification ID */
   since: z.string().optional(),
   memberCreator: z.boolean().optional(),
-  /** `all` or a comma-separated list of member [fields](/cloud/trello/guides/rest-api/object-definitions/) */
+  /**
+   * `all` or a comma-separated list of member
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
+   */
   memberCreatorFields: z.union([z.string(), z.array(z.string())]).optional(),
 });
 

@@ -1,5 +1,5 @@
 import type { z } from 'zod';
-import { apiObject } from '#/core/apiObject';
+import { apiObject } from '#/core';
 import { LimitValueSchema } from '#/models/limitValue';
 
 export const LimitsSchema = apiObject({

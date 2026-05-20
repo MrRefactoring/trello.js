@@ -4,8 +4,8 @@ export const GetEnterpriseSchema = z.object({
   /** ID of the enterprise to retrieve. */
   id: z.unknown(),
   /**
-   * Comma-separated list of: `id`, `name`, `displayName`, `prefs`, `ssoActivationFailed`, `idAdmins`, `idMembers`
-   * (Note that the members array returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be
+   * Comma-separated list of: `id`, `name`, `displayName`, `prefs`, `ssoActivationFailed`, `idAdmins`, `idMembers` (Note
+   * that the members array returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be
    * controlled with member_startIndex, etc, but the API response will not contain the total available result count or
    * pagination status data.), `idOrganizations`, `products`, `userTypes`, `idMembers`, `idOrganizations`
    */
@@ -22,13 +22,13 @@ export const GetEnterpriseSchema = z.object({
   /**
    * This parameter expects a SCIM-style sorting value prefixed by a `-` to sort descending. If no `-` is prefixed, it
    * will be sorted ascending. Note that the members array returned will be paginated if `members` is 'normal' or
-   * 'admins'. Pagination can be controlled with member_startIndex, etc, but the API response will not contain the
-   * total available result count or pagination status data.
+   * 'admins'. Pagination can be controlled with member_startIndex, etc, but the API response will not contain the total
+   * available result count or pagination status data.
    */
   memberSort: z.string().optional(),
   /**
-   * Deprecated: Please use member_sort. This parameter expects a SCIM-style sorting value. Note that the members
-   * array returned will be paginated if `members` is `normal` or `admins`. Pagination can be controlled with
+   * Deprecated: Please use member_sort. This parameter expects a SCIM-style sorting value. Note that the members array
+   * returned will be paginated if `members` is `normal` or `admins`. Pagination can be controlled with
    * `member_startIndex`, etc, and the API response's header will contain the total count and pagination state.
    */
   memberSortBy: z.string().optional(),
