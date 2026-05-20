@@ -6,6 +6,7 @@
 
 - Build scripts (`scripts/build-og-image`, `scripts/copy-api-to-ru`) migrated from `.mjs` to TypeScript, executed via `tsx`. `tsx` added as a dev dependency.
 - `repository.url` switched to the canonical `git+https://` form so the npm package page can auto-link Issues and Pull Requests against the GitHub repo.
+- npm `description` and `keywords` reworked for discoverability: leads with "type-safe", names Zod 4 explicitly, mentions checklists, and adds high-intent keywords (`javascript`, `nodejs`, `browser`, `atlassian-trello`, `trello-board`, `trello-card`). GitHub repo description and topics aligned to match.
 
 ## v2.0.0 (2026-05-19)
 
