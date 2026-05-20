@@ -104,7 +104,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MrRefactoring/trello.js.git"
+    "url": "git+https://github.com/MrRefactoring/trello.js.git"
   },
   "homepage": "https://mrrefactoring.github.io/trello.js",
   "bugs": {
@@ -151,8 +151,8 @@
     "audit:schemas": "vitest run --config vitest.config.audit.ts",
     "test:coverage": "vitest run --config vitest.config.coverage.ts --coverage",
     "codemod:v1-to-v2": "jscodeshift -t tools/codemod/v1-to-v2.ts --parser tsx --extensions ts,tsx,js,jsx",
-    "docs:api": "typedoc && node scripts/copy-api-to-ru.mjs",
-    "docs:og": "node scripts/build-og-image.mjs",
+    "docs:api": "typedoc && tsx scripts/copy-api-to-ru.ts",
+    "docs:og": "tsx scripts/build-og-image.ts",
     "docs:dev": "pnpm run docs:api && vitepress dev docs",
     "docs:build": "pnpm run docs:api && vitepress build docs",
     "docs:preview": "vitepress preview docs"
@@ -168,7 +168,7 @@
     "@stylistic/eslint-plugin": "^5.10.0",
     "@types/jscodeshift": "^17.3.0",
     "@types/node": "^22.19.19",
-    "@vitest/coverage-v8": "^4.1.6",
+    "@vitest/coverage-v8": "^4.1.7",
     "dotenv": "^17.4.2",
     "eslint": "^10.4.0",
     "globals": "^17.6.0",
@@ -178,13 +178,14 @@
     "prettier-plugin-jsdoc": "^1.8.0",
     "sitemap": "^9.0.1",
     "tsc-alias": "^1.8.17",
+    "tsx": "^4.22.3",
     "typedoc": "^0.28.19",
     "typedoc-plugin-markdown": "^4.11.0",
     "typedoc-vitepress-theme": "^1.1.2",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.4",
     "vitepress": "^1.6.4",
-    "vitest": "^4.1.6"
+    "vitest": "^4.1.7"
   },
   "dependencies": {
     "zod": "^4.4.3"

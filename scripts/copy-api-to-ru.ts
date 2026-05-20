@@ -34,16 +34,21 @@ cpSync(src, dst, { recursive: true });
 // each HTML to ~1.5 MB).
 const SIDEBAR_EXCLUDE = new Set(['models', 'parameters']);
 
+type SidebarEntry = { text: string;[key: string]: unknown };
+
 if (existsSync(sidebarSrc)) {
-  const sidebar = JSON.parse(readFileSync(sidebarSrc, 'utf-8'));
+  const sidebar = JSON.parse(readFileSync(sidebarSrc, 'utf-8')) as SidebarEntry[];
   const trimmed = sidebar.filter((entry) => !SIDEBAR_EXCLUDE.has(entry.text));
+
   writeFileSync(sidebarSrc, JSON.stringify(trimmed));
 
   // RU-prefixed variant: every "/api/..." link → "/ru/api/..."
   const ruSidebar = JSON.stringify(trimmed).replaceAll('"/api/', '"/ru/api/');
+
   writeFileSync(sidebarRu, ruSidebar);
 }
 
-const rel = (p) => p.replace(root + '/', '');
+const rel = (p: string): string => p.replace(root + '/', '');
+
 console.log(`[copy-api-to-ru] ${rel(src)} → ${rel(dst)}`);
 console.log(`[copy-api-to-ru] ${rel(sidebarSrc)} → ${rel(sidebarRu)} (with /ru/api/ prefix)`);
