@@ -7,7 +7,60 @@ export const GetEnterpriseMembersSchema = z.object({
    * A comma-seperated list of valid [member
    * fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object).
    */
-  fields: z.string().optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'activityBlocked',
+        'avatarHash',
+        'avatarUrl',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idEnterprise',
+        'idMemberReferrer',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'nonPublic',
+        'nonPublicAvailable',
+        'products',
+        'status',
+        'url',
+        'username',
+        'idBoards',
+        'idOrganizations',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'activityBlocked',
+          'avatarHash',
+          'avatarUrl',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idEnterprise',
+          'idMemberReferrer',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'nonPublic',
+          'nonPublicAvailable',
+          'products',
+          'status',
+          'url',
+          'username',
+          'idBoards',
+          'idOrganizations',
+        ]),
+      ),
+    ])
+    .optional(),
   /**
    * Pass a SCIM-style query to filter members. This takes precedence over the all/normal/admins value of members. If
    * any of the below member_* args are set, the member array will be paginated.

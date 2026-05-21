@@ -7,7 +7,44 @@ export const GetCardListSchema = z.object({
    * `all` or a comma-separated list of list
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  fields: z.union([z.string(), z.array(z.string())]).optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'name',
+        'closed',
+        'pos',
+        'softLimit',
+        'idBoard',
+        'subscribed',
+        'color',
+        'datasource',
+        'filter',
+        'type',
+        'creationMethod',
+        'idOrganization',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'name',
+          'closed',
+          'pos',
+          'softLimit',
+          'idBoard',
+          'subscribed',
+          'color',
+          'datasource',
+          'filter',
+          'type',
+          'creationMethod',
+          'idOrganization',
+        ]),
+      ),
+    ])
+    .optional(),
 });
 
 export type GetCardList = z.input<typeof GetCardListSchema>;

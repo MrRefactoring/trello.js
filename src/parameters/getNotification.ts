@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { MemberFieldsSchema } from '../models';
 
 export const GetNotificationSchema = z.object({
   /** The ID of the notification */
@@ -188,14 +187,120 @@ export const GetNotificationSchema = z.object({
    * `all` or a comma-separated list of member
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  memberFields: MemberFieldsSchema.optional(),
+  memberFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'activityBlocked',
+        'avatarHash',
+        'avatarUrl',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idEnterprise',
+        'idMemberReferrer',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'nonPublic',
+        'nonPublicAvailable',
+        'products',
+        'status',
+        'url',
+        'username',
+        'idBoards',
+        'idOrganizations',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'activityBlocked',
+          'avatarHash',
+          'avatarUrl',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idEnterprise',
+          'idMemberReferrer',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'nonPublic',
+          'nonPublicAvailable',
+          'products',
+          'status',
+          'url',
+          'username',
+          'idBoards',
+          'idOrganizations',
+        ]),
+      ),
+    ])
+    .optional(),
   /** Whether to include the member object of the creator */
   memberCreator: z.boolean().optional(),
   /**
    * `all` or a comma-separated list of member
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  memberCreatorFields: MemberFieldsSchema.optional(),
+  memberCreatorFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'activityBlocked',
+        'avatarHash',
+        'avatarUrl',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idEnterprise',
+        'idMemberReferrer',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'nonPublic',
+        'nonPublicAvailable',
+        'products',
+        'status',
+        'url',
+        'username',
+        'idBoards',
+        'idOrganizations',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'activityBlocked',
+          'avatarHash',
+          'avatarUrl',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idEnterprise',
+          'idMemberReferrer',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'nonPublic',
+          'nonPublicAvailable',
+          'products',
+          'status',
+          'url',
+          'username',
+          'idBoards',
+          'idOrganizations',
+        ]),
+      ),
+    ])
+    .optional(),
   /** Whether to include the organization object */
   organization: z.boolean().optional(),
   /**
@@ -203,7 +308,50 @@ export const GetNotificationSchema = z.object({
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
   organizationFields: z
-    .union([z.string(), z.array(z.string()), z.enum(['id', 'name']), z.array(z.enum(['id', 'name']))])
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'billableMemberCount',
+        'desc',
+        'descData',
+        'displayName',
+        'idBoards',
+        'invitations',
+        'invited',
+        'logoHash',
+        'memberships',
+        'name',
+        'powerUps',
+        'prefs',
+        'premiumFeatures',
+        'products',
+        'url',
+        'website',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'billableMemberCount',
+          'desc',
+          'descData',
+          'displayName',
+          'idBoards',
+          'invitations',
+          'invited',
+          'logoHash',
+          'memberships',
+          'name',
+          'powerUps',
+          'prefs',
+          'premiumFeatures',
+          'products',
+          'url',
+          'website',
+        ]),
+      ),
+    ])
     .optional(),
 });
 

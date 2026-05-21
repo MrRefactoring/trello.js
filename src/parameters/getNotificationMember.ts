@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { MemberFieldsSchema } from '../models';
 
 export const GetNotificationMemberSchema = z.object({
   /** The ID of the notification */
@@ -8,7 +7,60 @@ export const GetNotificationMemberSchema = z.object({
    * `all` or a comma-separated list of member
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  fields: MemberFieldsSchema.optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'activityBlocked',
+        'avatarHash',
+        'avatarUrl',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idEnterprise',
+        'idMemberReferrer',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'nonPublic',
+        'nonPublicAvailable',
+        'products',
+        'status',
+        'url',
+        'username',
+        'idBoards',
+        'idOrganizations',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'activityBlocked',
+          'avatarHash',
+          'avatarUrl',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idEnterprise',
+          'idMemberReferrer',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'nonPublic',
+          'nonPublicAvailable',
+          'products',
+          'status',
+          'url',
+          'username',
+          'idBoards',
+          'idOrganizations',
+        ]),
+      ),
+    ])
+    .optional(),
 });
 
 export type GetNotificationMember = z.input<typeof GetNotificationMemberSchema>;

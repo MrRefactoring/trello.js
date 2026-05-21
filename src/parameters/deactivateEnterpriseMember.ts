@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { MemberFieldsSchema } from '../models';
 
 export const DeactivateEnterpriseMemberSchema = z.object({
   /** ID of the enterprise to retrieve. */
@@ -9,13 +8,109 @@ export const DeactivateEnterpriseMemberSchema = z.object({
   /** Determines whether the user is deactivated or not. */
   value: z.boolean(),
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
-  fields: MemberFieldsSchema.optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'activityBlocked',
+        'avatarHash',
+        'avatarUrl',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idEnterprise',
+        'idMemberReferrer',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'nonPublic',
+        'nonPublicAvailable',
+        'products',
+        'status',
+        'url',
+        'username',
+        'idBoards',
+        'idOrganizations',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'activityBlocked',
+          'avatarHash',
+          'avatarUrl',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idEnterprise',
+          'idMemberReferrer',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'nonPublic',
+          'nonPublicAvailable',
+          'products',
+          'status',
+          'url',
+          'username',
+          'idBoards',
+          'idOrganizations',
+        ]),
+      ),
+    ])
+    .optional(),
   /**
    * Any valid value that the [nested organization
    * resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts.
    */
   organizationFields: z
-    .union([z.string(), z.array(z.string()), z.enum(['id', 'name']), z.array(z.enum(['id', 'name']))])
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'billableMemberCount',
+        'desc',
+        'descData',
+        'displayName',
+        'idBoards',
+        'invitations',
+        'invited',
+        'logoHash',
+        'memberships',
+        'name',
+        'powerUps',
+        'prefs',
+        'premiumFeatures',
+        'products',
+        'url',
+        'website',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'billableMemberCount',
+          'desc',
+          'descData',
+          'displayName',
+          'idBoards',
+          'invitations',
+          'invited',
+          'logoHash',
+          'memberships',
+          'name',
+          'powerUps',
+          'prefs',
+          'premiumFeatures',
+          'products',
+          'url',
+          'website',
+        ]),
+      ),
+    ])
     .optional(),
   /**
    * Any valid value that the [nested board

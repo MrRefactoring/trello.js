@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { ListFieldsSchema } from '../models';
 
 export const GetNotificationListSchema = z.object({
   /** The ID of the notification */
@@ -8,7 +7,44 @@ export const GetNotificationListSchema = z.object({
    * `all` or a comma-separated list of list
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  fields: ListFieldsSchema.optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'name',
+        'closed',
+        'pos',
+        'softLimit',
+        'idBoard',
+        'subscribed',
+        'color',
+        'datasource',
+        'filter',
+        'type',
+        'creationMethod',
+        'idOrganization',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'name',
+          'closed',
+          'pos',
+          'softLimit',
+          'idBoard',
+          'subscribed',
+          'color',
+          'datasource',
+          'filter',
+          'type',
+          'creationMethod',
+          'idOrganization',
+        ]),
+      ),
+    ])
+    .optional(),
 });
 
 export type GetNotificationList = z.input<typeof GetNotificationListSchema>;

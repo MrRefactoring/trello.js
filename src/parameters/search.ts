@@ -13,13 +13,69 @@ export const SearchSchema = z.object({
    * What type or types of Trello objects you want to search. all or a comma-separated list of: `actions`, `boards`,
    * `cards`, `members`, `organizations`
    */
-  modelTypes: z.union([z.string(), z.array(z.string())]).optional(),
+  modelTypes: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum(['actions', 'boards', 'cards', 'members', 'organizations']),
+      z.array(z.enum(['actions', 'boards', 'cards', 'members', 'organizations'])),
+    ])
+    .optional(),
   /**
    * All or a comma-separated list of: `closed`, `dateLastActivity`, `dateLastView`, `desc`, `descData`,
    * `idOrganization`, `invitations`, `invited`, `labelNames`, `memberships`, `name`, `pinned`, `powerUps`, `prefs`,
    * `shortLink`, `shortUrl`, `starred`, `subscribed`, `url`
    */
-  boardFields: z.union([z.string(), z.array(z.string())]).optional(),
+  boardFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'closed',
+        'dateLastActivity',
+        'dateLastView',
+        'desc',
+        'descData',
+        'idOrganization',
+        'invitations',
+        'invited',
+        'labelNames',
+        'memberships',
+        'name',
+        'pinned',
+        'powerUps',
+        'prefs',
+        'shortLink',
+        'shortUrl',
+        'starred',
+        'subscribed',
+        'url',
+      ]),
+      z.array(
+        z.enum([
+          'closed',
+          'dateLastActivity',
+          'dateLastView',
+          'desc',
+          'descData',
+          'idOrganization',
+          'invitations',
+          'invited',
+          'labelNames',
+          'memberships',
+          'name',
+          'pinned',
+          'powerUps',
+          'prefs',
+          'shortLink',
+          'shortUrl',
+          'starred',
+          'subscribed',
+          'url',
+        ]),
+      ),
+    ])
+    .optional(),
   /** The maximum number of boards returned. Maximum: 1000 */
   boardsLimit: z.number().optional(),
   /** Whether to include the parent organization with board results */
@@ -29,7 +85,64 @@ export const SearchSchema = z.object({
    * `due`, `idAttachmentCover`, `idBoard`, `idChecklists`, `idLabels`, `idList`, `idMembers`, `idMembersVoted`,
    * `idShort`, `labels`, `manualCoverAttachment`, `name`, `pos`, `shortLink`, `shortUrl`, `subscribed`, `url`
    */
-  cardFields: z.union([z.string(), z.array(z.string())]).optional(),
+  cardFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'badges',
+        'checkItemStates',
+        'closed',
+        'dateLastActivity',
+        'desc',
+        'descData',
+        'due',
+        'idAttachmentCover',
+        'idBoard',
+        'idChecklists',
+        'idLabels',
+        'idList',
+        'idMembers',
+        'idMembersVoted',
+        'idShort',
+        'labels',
+        'manualCoverAttachment',
+        'name',
+        'pos',
+        'shortLink',
+        'shortUrl',
+        'subscribed',
+        'url',
+      ]),
+      z.array(
+        z.enum([
+          'badges',
+          'checkItemStates',
+          'closed',
+          'dateLastActivity',
+          'desc',
+          'descData',
+          'due',
+          'idAttachmentCover',
+          'idBoard',
+          'idChecklists',
+          'idLabels',
+          'idList',
+          'idMembers',
+          'idMembersVoted',
+          'idShort',
+          'labels',
+          'manualCoverAttachment',
+          'name',
+          'pos',
+          'shortLink',
+          'shortUrl',
+          'subscribed',
+          'url',
+        ]),
+      ),
+    ])
+    .optional(),
   /** The maximum number of cards to return. Maximum: 1000 */
   cardsLimit: z.number().optional(),
   /** The page of results for cards. Maximum: 100 */

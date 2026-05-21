@@ -5,7 +5,50 @@ export const GetActionOrganizationSchema = z.object({
   id: z.string(),
   /** `all` or a comma-separated list of organization fields */
   fields: z
-    .union([z.string(), z.array(z.string()), z.enum(['id', 'name']), z.array(z.enum(['id', 'name']))])
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'billableMemberCount',
+        'desc',
+        'descData',
+        'displayName',
+        'idBoards',
+        'invitations',
+        'invited',
+        'logoHash',
+        'memberships',
+        'name',
+        'powerUps',
+        'prefs',
+        'premiumFeatures',
+        'products',
+        'url',
+        'website',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'billableMemberCount',
+          'desc',
+          'descData',
+          'displayName',
+          'idBoards',
+          'invitations',
+          'invited',
+          'logoHash',
+          'memberships',
+          'name',
+          'powerUps',
+          'prefs',
+          'premiumFeatures',
+          'products',
+          'url',
+          'website',
+        ]),
+      ),
+    ])
     .optional(),
 });
 

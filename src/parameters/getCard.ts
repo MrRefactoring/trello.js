@@ -137,7 +137,60 @@ export const GetCardSchema = z.object({
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/). **Defaults**:
    * `avatarHash, fullName, initials, username`
    */
-  memberFields: z.union([z.string(), z.array(z.string())]).optional(),
+  memberFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'activityBlocked',
+        'avatarHash',
+        'avatarUrl',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idEnterprise',
+        'idMemberReferrer',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'nonPublic',
+        'nonPublicAvailable',
+        'products',
+        'status',
+        'url',
+        'username',
+        'idBoards',
+        'idOrganizations',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'activityBlocked',
+          'avatarHash',
+          'avatarUrl',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idEnterprise',
+          'idMemberReferrer',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'nonPublic',
+          'nonPublicAvailable',
+          'products',
+          'status',
+          'url',
+          'username',
+          'idBoards',
+          'idOrganizations',
+        ]),
+      ),
+    ])
+    .optional(),
   /** Whether to return member objects for members who voted on the card */
   membersVoted: z.boolean().optional(),
   /**
@@ -145,12 +198,72 @@ export const GetCardSchema = z.object({
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/). **Defaults**:
    * `avatarHash, fullName, initials, username`
    */
-  memberVotedFields: z.union([z.string(), z.array(z.string())]).optional(),
+  memberVotedFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'activityBlocked',
+        'avatarHash',
+        'avatarUrl',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idEnterprise',
+        'idMemberReferrer',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'nonPublic',
+        'nonPublicAvailable',
+        'products',
+        'status',
+        'url',
+        'username',
+        'idBoards',
+        'idOrganizations',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'activityBlocked',
+          'avatarHash',
+          'avatarUrl',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idEnterprise',
+          'idMemberReferrer',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'nonPublic',
+          'nonPublicAvailable',
+          'products',
+          'status',
+          'url',
+          'username',
+          'idBoards',
+          'idOrganizations',
+        ]),
+      ),
+    ])
+    .optional(),
   checkItemStates: z.boolean().optional(),
   /** Whether to return the checklists on the card. `all` or `none` */
   checklists: z.string().optional(),
   /** `all` or a comma-separated list of `idBoard,idCard,name,pos` */
-  checklistFields: z.union([z.string(), z.array(z.string())]).optional(),
+  checklistFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum(['idBoard', 'idCard', 'name', 'pos']),
+      z.array(z.enum(['idBoard', 'idCard', 'name', 'pos'])),
+    ])
+    .optional(),
   /** Whether to return the board object the card is on */
   board: z.boolean().optional(),
   /**
@@ -212,7 +325,14 @@ export const GetCardSchema = z.object({
    * `all` or a comma-separated list of sticker
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  stickerFields: z.union([z.string(), z.array(z.string())]).optional(),
+  stickerFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled']),
+      z.array(z.enum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled'])),
+    ])
+    .optional(),
   /** Whether to include the customFieldItems */
   customFieldItems: z.boolean().optional(),
   /** The ID of the Card */

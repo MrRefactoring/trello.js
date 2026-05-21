@@ -9,7 +9,38 @@ export const GetEnterpriseSchema = z.object({
    * controlled with member_startIndex, etc, but the API response will not contain the total available result count or
    * pagination status data.), `idOrganizations`, `products`, `userTypes`, `idMembers`, `idOrganizations`
    */
-  fields: z.union([z.string(), z.array(z.string())]).optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'name',
+        'displayName',
+        'prefs',
+        'ssoActivationFailed',
+        'idAdmins',
+        'idMembers',
+        'idOrganizations',
+        'products',
+        'userTypes',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'name',
+          'displayName',
+          'prefs',
+          'ssoActivationFailed',
+          'idAdmins',
+          'idMembers',
+          'idOrganizations',
+          'products',
+          'userTypes',
+        ]),
+      ),
+    ])
+    .optional(),
   /** One of: `none`, `normal`, `admins`, `owners`, `all` */
   members: z.union([z.string(), z.enum(['none', 'normal', 'admins', 'owners', 'all'])]).optional(),
   /** One of: `avatarHash`, `fullName`, `initials`, `username` */

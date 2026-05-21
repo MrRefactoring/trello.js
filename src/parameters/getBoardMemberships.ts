@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { MemberFieldsSchema } from '../models';
 
 export const GetBoardMembershipsSchema = z.object({
   /** The ID of the board */
@@ -19,7 +18,60 @@ export const GetBoardMembershipsSchema = z.object({
    * Fields to show if `member=true`. Valid values: [nested member resource
    * fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/).
    */
-  memberFields: MemberFieldsSchema.optional(),
+  memberFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'activityBlocked',
+        'avatarHash',
+        'avatarUrl',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idEnterprise',
+        'idMemberReferrer',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'nonPublic',
+        'nonPublicAvailable',
+        'products',
+        'status',
+        'url',
+        'username',
+        'idBoards',
+        'idOrganizations',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'activityBlocked',
+          'avatarHash',
+          'avatarUrl',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idEnterprise',
+          'idMemberReferrer',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'nonPublic',
+          'nonPublicAvailable',
+          'products',
+          'status',
+          'url',
+          'username',
+          'idBoards',
+          'idOrganizations',
+        ]),
+      ),
+    ])
+    .optional(),
 });
 
 export type GetBoardMemberships = z.input<typeof GetBoardMembershipsSchema>;

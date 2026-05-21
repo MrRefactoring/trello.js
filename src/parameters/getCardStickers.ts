@@ -7,7 +7,14 @@ export const GetCardStickersSchema = z.object({
    * `all` or a comma-separated list of sticker
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  fields: z.union([z.string(), z.array(z.string())]).optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled']),
+      z.array(z.enum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled'])),
+    ])
+    .optional(),
 });
 
 export type GetCardStickers = z.input<typeof GetCardStickersSchema>;
