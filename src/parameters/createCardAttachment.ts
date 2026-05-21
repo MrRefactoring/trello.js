@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const CreateCardAttachmentSchema = z.object({
   /** The name of the attachment. Max length 256. */
@@ -12,7 +13,7 @@ export const CreateCardAttachmentSchema = z.object({
   /** Determines whether to use the new attachment as a cover for the Card. */
   setCover: z.boolean().optional(),
   /** The ID of the Card */
-  id: z.unknown(),
+  id: TrelloIDSchema,
 });
 
 export type CreateCardAttachment = z.input<typeof CreateCardAttachmentSchema>;

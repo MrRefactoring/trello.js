@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetCardStickersSchema = z.object({
   /** The ID of the Card */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /**
    * `all` or a comma-separated list of sticker
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)

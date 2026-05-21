@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const UpdateOrganizationSchema = z.object({
   /** A new name for the organization. At least 3 lowercase letters, underscores, and numbers. Must be unique */
@@ -16,17 +17,17 @@ export const UpdateOrganizationSchema = z.object({
   /** `1` or `2` */
   'prefs/googleAppsVersion': z.number().optional(),
   /** Who on the Workspace can make Workspace visible boards. One of `admin`, `none`, `org` */
-  'prefs/boardVisibilityRestrict/org': z.string().optional(),
+  'prefs/boardVisibilityRestrict/org': z.union([z.string(), z.enum(['admin', 'none', 'org'])]).optional(),
   /** Who can make private boards. One of: `admin`, `none`, `org` */
-  'prefs/boardVisibilityRestrict/private': z.string().optional(),
+  'prefs/boardVisibilityRestrict/private': z.union([z.string(), z.enum(['admin', 'none', 'org'])]).optional(),
   /** Who on the Workspace can make public boards. One of: `admin`, `none`, `org` */
-  'prefs/boardVisibilityRestrict/public': z.string().optional(),
+  'prefs/boardVisibilityRestrict/public': z.union([z.string(), z.enum(['admin', 'none', 'org'])]).optional(),
   /** An email address with optional wildcard characters. (E.g. `subdomain.*.trello.com`) */
   'prefs/orgInviteRestrict': z.string().optional(),
   /** Whether the Workspace page is publicly visible. One of: `private`, `public` */
-  'prefs/permissionLevel': z.string().optional(),
+  'prefs/permissionLevel': z.union([z.string(), z.enum(['private', 'public'])]).optional(),
   /** The ID or name of the Organization */
-  id: z.unknown(),
+  id: TrelloIDSchema,
 });
 
 export type UpdateOrganization = z.input<typeof UpdateOrganizationSchema>;

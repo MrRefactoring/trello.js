@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetEnterpriseClaimableOrganizationsSchema = z.object({
   /** ID of the enterprise to retrieve */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /** Limits the number of workspaces to be sorted */
   limit: z.number().optional(),
   /** Specifies the sort order to return matching documents */

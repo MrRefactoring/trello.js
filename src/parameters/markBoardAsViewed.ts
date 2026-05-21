@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const MarkBoardAsViewedSchema = z.object({
   /** The id of the board to update */
-  id: z.unknown(),
+  id: TrelloIDSchema,
 });
 
 export type MarkBoardAsViewed = z.input<typeof MarkBoardAsViewedSchema>;

@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const CreatePluginListingSchema = z.object({
   /** The ID of the Power-Up for which you are creating a new listing. */
-  idPlugin: z.unknown(),
+  idPlugin: TrelloIDSchema,
   /** The description to show for the given locale */
   description: z.string().optional(),
   /** The locale that this listing should be displayed for. */

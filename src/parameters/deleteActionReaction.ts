@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const DeleteActionReactionSchema = z.object({
   /** The ID of the Action */
-  idAction: z.unknown(),
+  idAction: TrelloIDSchema,
   /** The ID of the reaction */
-  id: z.unknown(),
+  id: TrelloIDSchema,
 });
 
 export type DeleteActionReaction = z.input<typeof DeleteActionReactionSchema>;

@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+### Added
+
+- The upstream codegen (`apis-code-gen`) now resolves `$ref` schemas in parameter and request-body positions natively — they emit `${X}Schema` references (and imports) instead of falling through to `z.unknown()`. Closes the root cause across the spec; each consumer no longer needs a per-config inlining patch. As a result:
+  - **Path-level `id` parameters**: every operation that takes a `{id}` now generates `id: TrelloIDSchema` (imported from `../models`) rather than `id: z.unknown()`. Affects 200+ parameter files.
+  - **Top-level `oneOf` schemas** (e.g. `posStringOrNumber: oneOf:[{string,enum:['top','bottom']}, {number}]`) are emitted as proper `z.union([...])` schemas in the models directory. The Trello-specific workaround that flattened `posStringOrNumber` to `z.number()` has been removed.
+  - **Path-level shared parameters** are merged into operation-level parameters via the `mergePathParameters` transform so they participate in the normal generation pipeline.
+  - **`fields`-style CSV query params** (entities `Action`, `Attachment`, `Board`, `Card`, `Notification`, `Organization`, `Token`): now accept `z.enum([...documented field names...])` or an array thereof in addition to the existing free-form `string | string[]`. Affected: `getAction`, `getActionBoard`, `getActionCard`, `getActionOrganization`, `getBoardLists`, `getCard`, `getCardAttachments`, `getCardBoard`, `getEnterpriseOrganizations`, `getListBoard`, `getMember`, `getMemberBoards`, `getMemberInvitedBoards`, `getMemberInvitedOrganizations`, `getMemberNotifications`, `getMemberOrganizations`, `getNotification`, `getNotificationBoard`, `getNotificationCard`, `getNotificationOrganization`, `getOrganizationBoards`, `getToken`, `deactivateEnterpriseMember`. Entities with no documented enum (member, list, sticker, checklist, label, emoji) are intentionally left as loose strings.
+  - **Single-value `$ref` enums in query and path params**: `Color` (`createLabel.color`, `updateLabel.color`), `ViewFilter` (`getBoardLists.cards`/`filter`, `getBoardListsByFilter.filter`), and the path `field` params on `getActionField`, `getCardField`, `getNotificationField`, `getOrganizationField` now expose `z.union([z.string(), z.enum([...])])`.
+  - **Inline-listed JSDoc enums** ("One of: `a`, `b`, `c`" / "Valid values: a, b, c") on plain `string` params: `boardStars`, `getBoardStars.filter`, `getEnterprise.members`/`memberFields`/`memberSortOrder`/`organizations`, `getEnterpriseMembers.count`, `createEnterpriseToken.expiration`, `getBoardField.field`, `getMemberNotifications.readFilter`, `updateBoard.prefs/{permissionLevel,invitations,voting,comments,background,cardAging}`, `updateOrganization.prefs/{boardVisibilityRestrict/*,permissionLevel}`.
+  - **Positioning params** (`pos` and friends) — `top`, `bottom`, or a positive number — typed as `z.union([z.string(), z.number(), z.enum(['top', 'bottom'])])` across `createBoardList`, `createCardChecklist`, `createChecklist`, `createChecklistItem`, `createCustomField`, `createCustomFieldOption`, `createMemberSavedSearch`, `starBoard`, `updateCardCheckItem`, `updateCardChecklistItem`, `updateChecklist`, `updateCustomField`, `updateMemberBoardStar`, `updateMemberSavedSearch`. Loose `z.string()` branch kept for backward compatibility with callers that previously passed `z.string()` / `z.unknown()`.
+  - **`$ref`-to-enum/primitive-union request body fields** picked up the same treatment, so body-side `pos`/`color`/`idCard`/etc. flow through the same inline expansion instead of `z.unknown()`.
+- `POST /checklists.name` JSDoc now documents the server-side default (`**Defaults**: `Checklist``) — verified empirically against the live API.
+
 ### Internal
 
 - Build scripts (`scripts/build-og-image`, `scripts/copy-api-to-ru`) migrated from `.mjs` to TypeScript, executed via `tsx`. `tsx` added as a dev dependency.

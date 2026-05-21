@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const UpdatePluginListingSchema = z.object({
   /** The ID of the Power-Up whose listing is being updated. */
-  idPlugin: z.unknown(),
+  idPlugin: TrelloIDSchema,
   /** The ID of the existing listing for the Power-Up that is being updated. */
-  idListing: z.unknown(),
+  idListing: TrelloIDSchema,
   /** The description to show for the given locale */
   description: z.string().optional(),
   /** The locale that this listing should be displayed for. */

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const CreateWebhookSchema = z.object({
   /** A string with a length from `0` to `16384`. */
@@ -6,7 +7,7 @@ export const CreateWebhookSchema = z.object({
   /** A valid URL that is reachable with a `HEAD` and `POST` request. */
   callbackURL: z.string(),
   /** ID of the model to be monitored */
-  idModel: z.unknown(),
+  idModel: TrelloIDSchema,
   /** Determines whether the webhook is active and sending `POST` requests. */
   active: z.boolean().optional(),
 });

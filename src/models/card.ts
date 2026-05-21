@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
 import { TrelloIDSchema } from '#/models/trelloID';
+import { ChecklistSchema } from '#/models/checklist';
+import { LabelSchema } from '#/models/label';
 import { LimitsSchema } from '#/models/limits';
 import { ColorSchema } from '#/models/color';
 
@@ -45,14 +47,14 @@ export const CardSchema = apiObject({
   due: z.coerce.date().nullish(),
   dueReminder: z.string().nullish(),
   idBoard: TrelloIDSchema.optional(),
-  idChecklists: z.array(z.union([z.unknown(), z.unknown()])).optional(),
-  idLabels: z.array(z.union([z.unknown(), z.unknown()])).optional(),
+  idChecklists: z.array(z.union([ChecklistSchema, TrelloIDSchema])).optional(),
+  idLabels: z.array(z.union([LabelSchema, TrelloIDSchema])).optional(),
   idList: TrelloIDSchema.optional(),
-  idMembers: z.array(z.unknown()).optional(),
-  idMembersVoted: z.array(z.unknown()).optional(),
+  idMembers: z.array(TrelloIDSchema).optional(),
+  idMembersVoted: z.array(TrelloIDSchema).optional(),
   idShort: z.number().optional(),
   idAttachmentCover: TrelloIDSchema.nullish(),
-  labels: z.array(z.unknown()).optional(),
+  labels: z.array(TrelloIDSchema).optional(),
   limits: LimitsSchema.optional(),
   locationName: z.string().nullish(),
   manualCoverAttachment: z.boolean().optional(),

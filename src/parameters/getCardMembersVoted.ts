@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetCardMembersVotedSchema = z.object({
   /**
@@ -7,7 +8,7 @@ export const GetCardMembersVotedSchema = z.object({
    */
   fields: z.union([z.string(), z.array(z.string())]).optional(),
   /** The ID of the Card */
-  id: z.unknown(),
+  id: TrelloIDSchema,
 });
 
 export type GetCardMembersVoted = z.input<typeof GetCardMembersVotedSchema>;

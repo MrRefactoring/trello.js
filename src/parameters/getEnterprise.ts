@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetEnterpriseSchema = z.object({
   /** ID of the enterprise to retrieve. */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /**
    * Comma-separated list of: `id`, `name`, `displayName`, `prefs`, `ssoActivationFailed`, `idAdmins`, `idMembers` (Note
    * that the members array returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be
@@ -11,9 +12,9 @@ export const GetEnterpriseSchema = z.object({
    */
   fields: z.union([z.string(), z.array(z.string())]).optional(),
   /** One of: `none`, `normal`, `admins`, `owners`, `all` */
-  members: z.string().optional(),
+  members: z.union([z.string(), z.enum(['none', 'normal', 'admins', 'owners', 'all'])]).optional(),
   /** One of: `avatarHash`, `fullName`, `initials`, `username` */
-  memberFields: z.string().optional(),
+  memberFields: z.union([z.string(), z.enum(['avatarHash', 'fullName', 'initials', 'username'])]).optional(),
   /**
    * Pass a SCIM-style query to filter members. This takes precedence over the all/normal/admins value of members. If
    * any of the member_* args are set, the member array will be paginated.
@@ -33,13 +34,13 @@ export const GetEnterpriseSchema = z.object({
    */
   memberSortBy: z.string().optional(),
   /** Deprecated: Please use member_sort. One of: `ascending`, `descending`, `asc`, `desc` */
-  memberSortOrder: z.string().optional(),
+  memberSortOrder: z.union([z.string(), z.enum(['ascending', 'descending', 'asc', 'desc'])]).optional(),
   /** Any integer between 0 and 100. */
   memberStartIndex: z.number().optional(),
   /** 0 to 100 */
   memberCount: z.number().optional(),
   /** One of: `none`, `members`, `public`, `all` */
-  organizations: z.string().optional(),
+  organizations: z.union([z.string(), z.enum(['none', 'members', 'public', 'all'])]).optional(),
   /** Any valid value that the [nested organization field resource]() accepts. */
   organizationFields: z.string().optional(),
   /** Whether or not to include paid account information in the returned workspace objects */

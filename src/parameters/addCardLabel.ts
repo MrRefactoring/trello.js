@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const AddCardLabelSchema = z.object({
   /** The ID of the Card */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /** The ID of the label to add */
-  value: z.unknown().optional(),
+  value: TrelloIDSchema.optional(),
 });
 
 export type AddCardLabel = z.input<typeof AddCardLabelSchema>;

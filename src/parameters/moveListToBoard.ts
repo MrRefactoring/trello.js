@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const MoveListToBoardSchema = z.object({
   /** The ID of the list */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /** The ID of the board to move the list to */
-  value: z.unknown(),
+  value: TrelloIDSchema,
 });
 
 export type MoveListToBoard = z.input<typeof MoveListToBoardSchema>;

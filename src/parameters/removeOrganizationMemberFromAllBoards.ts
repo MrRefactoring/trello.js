@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const RemoveOrganizationMemberFromAllBoardsSchema = z.object({
   /** The ID or name of the organization */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /** The ID of the member to remove from the Workspace */
-  idMember: z.unknown(),
+  idMember: TrelloIDSchema,
 });
 
 export type RemoveOrganizationMemberFromAllBoards = z.input<typeof RemoveOrganizationMemberFromAllBoardsSchema>;

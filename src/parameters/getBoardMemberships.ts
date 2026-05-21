@@ -1,8 +1,10 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
+import { MemberFieldsSchema } from '../models';
 
 export const GetBoardMembershipsSchema = z.object({
   /** The ID of the board */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /** One of `admins`, `all`, `none`, `normal` */
   filter: z.enum(['admins', 'all', 'none', 'normal']).optional(),
   /** Works for premium organizations only. */
@@ -18,7 +20,7 @@ export const GetBoardMembershipsSchema = z.object({
    * Fields to show if `member=true`. Valid values: [nested member resource
    * fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/).
    */
-  memberFields: z.unknown().optional(),
+  memberFields: MemberFieldsSchema.optional(),
 });
 
 export type GetBoardMemberships = z.input<typeof GetBoardMembershipsSchema>;

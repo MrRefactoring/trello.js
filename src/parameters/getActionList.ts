@@ -1,10 +1,12 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
+import { ListFieldsSchema } from '../models';
 
 export const GetActionListSchema = z.object({
   /** The ID of the action */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /** `all` or a comma-separated list of list fields */
-  fields: z.unknown().optional(),
+  fields: ListFieldsSchema.optional(),
 });
 
 export type GetActionList = z.input<typeof GetActionListSchema>;

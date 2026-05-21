@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetActionReactionSchema = z.object({
   /**
@@ -9,9 +10,9 @@ export const GetActionReactionSchema = z.object({
   /** Whether to load the emoji as a nested resource. */
   emoji: z.boolean().optional(),
   /** The ID of the Action */
-  idAction: z.unknown(),
+  idAction: TrelloIDSchema,
   /** The ID of the reaction */
-  id: z.unknown(),
+  id: TrelloIDSchema,
 });
 
 export type GetActionReaction = z.input<typeof GetActionReactionSchema>;

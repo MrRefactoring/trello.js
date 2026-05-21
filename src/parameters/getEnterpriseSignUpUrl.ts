@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetEnterpriseSignUpUrlSchema = z.object({
   /** ID of the enterprise to retrieve. */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   authenticate: z.boolean().optional(),
   confirmationAccepted: z.boolean().optional(),
   /** Any valid URL. */

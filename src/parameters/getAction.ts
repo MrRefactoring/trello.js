@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetActionSchema = z.object({
   display: z.boolean().optional(),
@@ -7,7 +8,14 @@ export const GetActionSchema = z.object({
    * `all` or a comma-separated list of action
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#action-object)
    */
-  fields: z.union([z.string(), z.array(z.string())]).optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
+      z.array(z.enum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator'])),
+    ])
+    .optional(),
   member: z.boolean().optional(),
   /**
    * `all` or a comma-separated list of member
@@ -22,7 +30,7 @@ export const GetActionSchema = z.object({
    */
   memberCreatorFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** The ID of the Action */
-  id: z.unknown(),
+  id: TrelloIDSchema,
 });
 
 export type GetAction = z.input<typeof GetActionSchema>;

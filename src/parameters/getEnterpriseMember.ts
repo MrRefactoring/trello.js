@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetEnterpriseMemberSchema = z.object({
   /** ID of the enterprise to retrieve. */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /** An ID of a member resource. */
-  idMember: z.unknown(),
+  idMember: TrelloIDSchema,
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
   fields: z.string().optional(),
   /**

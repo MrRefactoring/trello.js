@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetChecklistFieldSchema = z.object({
   /** ID of a checklist. */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /** Field to update. */
   field: z.enum(['name', 'pos']),
 });

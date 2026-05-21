@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetUserSchema = z.object({
   /** ID of the enterprise to retrieve. */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /**
    * When true, returns members who possess a license for the corresponding Trello Enterprise; when false, returns
    * members who do not. If unspecified, both licensed and unlicensed members will be returned.

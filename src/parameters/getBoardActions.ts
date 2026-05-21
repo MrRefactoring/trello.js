@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { ActionSchema } from '../models';
 
 export const GetBoardActionsSchema = z.object({
   boardId: z.string(),
@@ -6,7 +7,7 @@ export const GetBoardActionsSchema = z.object({
    * The fields to be returned for the Actions. [See Action fields
    * here](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#action-object).
    */
-  fields: z.unknown().optional(),
+  fields: ActionSchema.optional(),
   /**
    * A comma-separated list of [action
    * types](https://developer.atlassian.com/cloud/trello/guides/rest-api/action-types/).

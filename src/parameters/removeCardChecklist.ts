@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const RemoveCardChecklistSchema = z.object({
   /** The ID of the Card */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /** The ID of the checklist to delete */
-  idChecklist: z.unknown(),
+  idChecklist: TrelloIDSchema,
 });
 
 export type RemoveCardChecklist = z.input<typeof RemoveCardChecklistSchema>;

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const UpdateListSchema = z.object({
   /** New name for the list */
@@ -6,7 +7,7 @@ export const UpdateListSchema = z.object({
   /** Whether the list should be closed (archived) */
   closed: z.boolean().optional(),
   /** ID of a board the list should be moved to */
-  idBoard: z.unknown().optional(),
+  idBoard: TrelloIDSchema.optional(),
   /** New position for the list: `top`, `bottom`, or a positive floating point number */
   pos: z.union([z.number(), z.enum(['top', 'bottom'])]).optional(),
   /** Whether the active member is subscribed to this list */

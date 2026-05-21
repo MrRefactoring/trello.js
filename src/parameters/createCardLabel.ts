@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const CreateCardLabelSchema = z.object({
   /** The ID of the Card */
-  id: z.unknown(),
+  id: TrelloIDSchema,
   /**
    * A valid label color or `null`. See
    * [labels](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)

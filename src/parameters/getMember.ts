@@ -1,8 +1,10 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
+import { MemberFieldsSchema } from '../models';
 
 export const GetMemberSchema = z.object({
   /** The ID or username of the member */
-  id: z.union([z.unknown(), z.string()]),
+  id: z.union([TrelloIDSchema, z.string()]),
   /**
    * See the [Actions Nested
    * Resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/#actions-nested-resource)
@@ -23,7 +25,50 @@ export const GetMemberSchema = z.object({
    * `all` or a comma-separated list of board
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  boardsInvitedFields: z.unknown().optional(),
+  boardsInvitedFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'name',
+        'desc',
+        'descData',
+        'closed',
+        'idMemberCreator',
+        'idOrganization',
+        'pinned',
+        'url',
+        'shortUrl',
+        'prefs',
+        'labelNames',
+        'starred',
+        'limits',
+        'memberships',
+        'enterpriseOwned',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'name',
+          'desc',
+          'descData',
+          'closed',
+          'idMemberCreator',
+          'idOrganization',
+          'pinned',
+          'url',
+          'shortUrl',
+          'prefs',
+          'labelNames',
+          'starred',
+          'limits',
+          'memberships',
+          'enterpriseOwned',
+        ]),
+      ),
+    ])
+    .optional(),
   /** Whether to return the boardStars or not */
   boardStars: z.boolean().optional(),
   /**
@@ -42,7 +87,7 @@ export const GetMemberSchema = z.object({
    * `all` or a comma-separated list of member
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  fields: z.unknown().optional(),
+  fields: MemberFieldsSchema.optional(),
   /**
    * See the [Notifications Nested
    * Resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/#notifications-nested-resource)
@@ -54,7 +99,9 @@ export const GetMemberSchema = z.object({
    * `all` or a comma-separated list of organization
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  organizationFields: z.unknown().optional(),
+  organizationFields: z
+    .union([z.string(), z.array(z.string()), z.enum(['id', 'name']), z.array(z.enum(['id', 'name']))])
+    .optional(),
   /** Whether or not to include paid account information in the returned workspace object */
   organizationPaidAccount: z.boolean().optional(),
   /** One of: `all`, `members`, `none`, `public` */
@@ -63,7 +110,9 @@ export const GetMemberSchema = z.object({
    * `all` or a comma-separated list of organization
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  organizationsInvitedFields: z.unknown().optional(),
+  organizationsInvitedFields: z
+    .union([z.string(), z.array(z.string()), z.enum(['id', 'name']), z.array(z.enum(['id', 'name']))])
+    .optional(),
   /** Whether or not to include paid account information in the returned member object */
   paidAccount: z.boolean().optional(),
   savedSearches: z.boolean().optional(),

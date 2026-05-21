@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { TrelloIDSchema } from '../models';
 
 export const GetLabelSchema = z.object({
   /**
@@ -7,7 +8,7 @@ export const GetLabelSchema = z.object({
    */
   fields: z.union([z.string(), z.array(z.string())]).optional(),
   /** The ID of the Label */
-  id: z.unknown(),
+  id: TrelloIDSchema,
 });
 
 export type GetLabel = z.input<typeof GetLabelSchema>;
