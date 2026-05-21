@@ -1,11 +1,10 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { MemberSchema } from '#/models/member';
 
 export const MembershipsSchema = apiObject({
-  id: TrelloIDSchema,
-  idMember: TrelloIDSchema.optional(),
+  id: z.string(),
+  idMember: z.string().optional(),
   memberType: z.string().optional(),
   unconfirmed: z.boolean().optional(),
   deactivated: z.boolean().optional(),

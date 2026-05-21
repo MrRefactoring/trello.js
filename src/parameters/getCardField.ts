@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetCardFieldSchema = z.object({
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The desired field. */
   field: z.union([
     z.string(),

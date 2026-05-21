@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetOrganizationNewBillableGuestsSchema = z.object({
   /** The ID or name of the organization */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The ID of the board to check for new billable guests. */
-  idBoard: TrelloIDSchema,
+  idBoard: z.string(),
 });
 
 export type GetOrganizationNewBillableGuests = z.input<typeof GetOrganizationNewBillableGuestsSchema>;

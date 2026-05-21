@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetMemberBoardStarSchema = z.object({
   /** The ID or username of the member */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The ID of the board star */
-  idStar: TrelloIDSchema,
+  idStar: z.string(),
 });
 
 export type GetMemberBoardStar = z.input<typeof GetMemberBoardStarSchema>;

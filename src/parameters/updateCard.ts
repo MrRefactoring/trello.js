@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const UpdateCardSchema = z.object({
   /** The new name for the card */
@@ -9,15 +8,15 @@ export const UpdateCardSchema = z.object({
   /** Whether the card should be archived (closed: true) */
   closed: z.boolean().optional(),
   /** Comma-separated list of member IDs */
-  idMembers: TrelloIDSchema.optional(),
+  idMembers: z.string().optional(),
   /** The ID of the image attachment the card should use as its cover, or null for none */
-  idAttachmentCover: TrelloIDSchema.optional(),
+  idAttachmentCover: z.string().optional(),
   /** The ID of the list the card should be in */
-  idList: TrelloIDSchema.optional(),
+  idList: z.string().optional(),
   /** Comma-separated list of label IDs */
-  idLabels: TrelloIDSchema.optional(),
+  idLabels: z.string().optional(),
   /** The ID of the board the card should be on */
-  idBoard: TrelloIDSchema.optional(),
+  idBoard: z.string().optional(),
   /** The position of the card in its list. `top`, `bottom`, or a positive float */
   pos: z.union([z.enum(['top', 'bottom']), z.number()]).optional(),
   /** When the card is due, or `null` */
@@ -76,7 +75,7 @@ export const UpdateCardSchema = z.object({
     })
     .optional(),
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type UpdateCard = z.input<typeof UpdateCardSchema>;

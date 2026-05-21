@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const UpdateBoardSchema = z.object({
   /** The new name for the board. 1 to 16384 characters long. */
@@ -9,7 +8,7 @@ export const UpdateBoardSchema = z.object({
   /** Whether the board is closed */
   closed: z.boolean().optional(),
   /** Whether the acting user is subscribed to the board */
-  subscribed: TrelloIDSchema.optional(),
+  subscribed: z.string().optional(),
   /** The id of the Workspace the board should be moved to */
   idOrganization: z.string().optional(),
   /** One of: org, private, public */
@@ -34,7 +33,7 @@ export const UpdateBoardSchema = z.object({
   'prefs/cardAging': z.union([z.string(), z.enum(['pirate', 'regular'])]).optional(),
   /** Determines whether the calendar feed is enabled or not. */
   'prefs/calendarFeedEnabled': z.boolean().optional(),
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type UpdateBoard = z.input<typeof UpdateBoardSchema>;

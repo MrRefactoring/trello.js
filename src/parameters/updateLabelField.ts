@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const UpdateLabelFieldSchema = z.object({
   /** The id of the label */
@@ -7,7 +6,7 @@ export const UpdateLabelFieldSchema = z.object({
   /** The field on the Label to update. */
   field: z.enum(['color', 'name']),
   /** The new value for the field. */
-  value: TrelloIDSchema,
+  value: z.string(),
 });
 
 export type UpdateLabelField = z.input<typeof UpdateLabelFieldSchema>;

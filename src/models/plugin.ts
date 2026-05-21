@@ -1,9 +1,8 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const PluginSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   idBoard: z.string().nullish(),
   idPlugin: z.string().nullish(),
   promotional: z.boolean().optional(),

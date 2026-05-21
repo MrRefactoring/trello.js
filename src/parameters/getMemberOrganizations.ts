@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetMemberOrganizationsSchema = z.object({
   /** The ID or username of the member */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** One of: `all`, `members`, `none`, `public` (Note: `members` filters to only private Workspaces) */
   filter: z.enum(['all', 'members', 'none', 'public']).optional(),
   /**

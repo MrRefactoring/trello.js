@@ -1,9 +1,8 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const CustomEmojiSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   url: z.string().optional(),
   name: z.string().optional(),
 });

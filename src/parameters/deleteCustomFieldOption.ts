@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const DeleteCustomFieldOptionSchema = z.object({
   /** ID of the customfielditem. */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** ID of the customfieldoption to retrieve. */
-  idCustomFieldOption: TrelloIDSchema,
+  idCustomFieldOption: z.string(),
 });
 
 export type DeleteCustomFieldOption = z.input<typeof DeleteCustomFieldOptionSchema>;

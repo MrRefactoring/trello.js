@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetBoardSchema = z.object({
   /**
@@ -64,7 +63,7 @@ export const GetBoardSchema = z.object({
   myPrefs: z.boolean().optional(),
   /** Also known as collections, tags, refer to the collection(s) that a Board belongs to. */
   tags: z.boolean().optional(),
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type GetBoard = z.input<typeof GetBoardSchema>;

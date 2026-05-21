@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetChecklistSchema = z.object({
   /**
@@ -23,7 +22,7 @@ export const GetChecklistSchema = z.object({
    */
   fields: z.union([z.string(), z.array(z.string())]).optional(),
   /** ID of a checklist. */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type GetChecklist = z.input<typeof GetChecklistSchema>;

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const CreateBoardSchema = z.object({
   /** The new name for the board. 1 to 16384 characters long. */
@@ -14,9 +13,9 @@ export const CreateBoardSchema = z.object({
   /** A new description for the board, 0 to 16384 characters long */
   desc: z.string().max(16384, 'desc must be at most 16384 characters').optional(),
   /** The id or name of the Workspace the board should belong to. */
-  idOrganization: TrelloIDSchema.optional(),
+  idOrganization: z.string().optional(),
   /** The id of a board to copy into the new board. */
-  idBoardSource: TrelloIDSchema.optional(),
+  idBoardSource: z.string().optional(),
   /** To keep cards from the original board pass in the value `cards` */
   keepFromSource: z.enum(['cards', 'none']).optional(),
   /** The Power-Ups that should be enabled on the new board. One of: `all`, `calendar`, `cardAging`, `recap`, `voting`. */

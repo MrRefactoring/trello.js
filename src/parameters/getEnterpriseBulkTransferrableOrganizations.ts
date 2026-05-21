@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetEnterpriseBulkTransferrableOrganizationsSchema = z.object({
   /** ID of the Enterprise to retrieve. */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** An array of IDs of an Organization resource. */
   idOrganizations: z.array(z.unknown()),
 });

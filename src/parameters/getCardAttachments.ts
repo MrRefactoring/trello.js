@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetCardAttachmentsSchema = z.object({
   /**
@@ -43,7 +42,7 @@ export const GetCardAttachmentsSchema = z.object({
   /** Use `cover` to restrict to just the cover attachment */
   filter: z.string().optional(),
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type GetCardAttachments = z.input<typeof GetCardAttachmentsSchema>;

@@ -1,7 +1,6 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
 import { CardAgingSchema } from '#/models/cardAging';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { ImageDescriptorSchema } from '#/models/imageDescriptor';
 import { SwitcherViewSchema } from '#/models/switcherView';
 
@@ -16,7 +15,7 @@ export const PrefsSchema = apiObject({
   isTemplate: z.boolean().optional(),
   cardAging: CardAgingSchema.optional(),
   calendarFeedEnabled: z.boolean().optional(),
-  background: TrelloIDSchema.optional(),
+  background: z.string().optional(),
   backgroundImage: z.string().url().nullish(),
   backgroundImageScaled: z.array(ImageDescriptorSchema).nullish(),
   backgroundTile: z.boolean().optional(),

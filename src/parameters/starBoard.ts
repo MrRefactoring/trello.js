@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const StarBoardSchema = z.object({
   /** The ID or username of the member */
-  id: z.union([TrelloIDSchema, z.string()]),
+  id: z.union([z.string(), z.string()]),
   /** The ID of the board to star */
-  idBoard: TrelloIDSchema,
+  idBoard: z.string(),
   /** The position of the newly starred board. `top`, `bottom`, or a positive float. */
   pos: z.union([z.string(), z.number(), z.enum(['top', 'bottom'])]),
 });

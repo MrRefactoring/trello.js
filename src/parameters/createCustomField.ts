@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const CreateCustomFieldSchema = z.object({
   /** The ID of the model for which the Custom Field is being defined. This should always be the ID of a board. */
-  idModel: TrelloIDSchema,
+  idModel: z.string(),
   /** The type of model that the Custom Field is being defined on. This should always be `board`. */
   modelType: z.enum(['board']),
   /** The name of the Custom Field */

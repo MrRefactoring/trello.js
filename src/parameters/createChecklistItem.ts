@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const CreateChecklistItemSchema = z.object({
   /** The name of the new check item on the checklist. Should be a string of length 1 to 16384. */
@@ -13,9 +12,9 @@ export const CreateChecklistItemSchema = z.object({
   /** A dueReminder for the due date on the checkitem */
   dueReminder: z.number().optional(),
   /** An ID of a member resource. */
-  idMember: TrelloIDSchema.optional(),
+  idMember: z.string().optional(),
   /** ID of a checklist. */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type CreateChecklistItem = z.input<typeof CreateChecklistItemSchema>;

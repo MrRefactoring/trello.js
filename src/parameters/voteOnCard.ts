@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const VoteOnCardSchema = z.object({
   /** The ID of the member to vote 'yes' on the card */
-  value: TrelloIDSchema,
+  value: z.string(),
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type VoteOnCard = z.input<typeof VoteOnCardSchema>;

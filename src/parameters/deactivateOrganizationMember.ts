@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const DeactivateOrganizationMemberSchema = z.object({
   /** The ID or name of the organization */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The ID or username of the member to update */
-  idMember: z.union([TrelloIDSchema, z.string()]),
+  idMember: z.union([z.string(), z.string()]),
   value: z.boolean(),
 });
 

@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const AddBoardTagSchema = z.object({
   /** The id of the board to update */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The id of a tag from the organization to which this board belongs. */
-  value: TrelloIDSchema,
+  value: z.string(),
 });
 
 export type AddBoardTag = z.input<typeof AddBoardTagSchema>;

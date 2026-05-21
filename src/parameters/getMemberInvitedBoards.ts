@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetMemberInvitedBoardsSchema = z.object({
   /** The ID or username of the member */
-  id: TrelloIDSchema,
+  id: z.string(),
   /**
    * `all` or a comma-separated list of board
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)

@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const RemoveOrganizationMemberSchema = z.object({
   /** The ID or name of the organization */
-  id: z.union([TrelloIDSchema, z.string()]),
+  id: z.union([z.string(), z.string()]),
   /** The ID of the Member to remove from the Workspace */
-  idMember: TrelloIDSchema,
+  idMember: z.string(),
 });
 
 export type RemoveOrganizationMember = z.input<typeof RemoveOrganizationMemberSchema>;

@@ -1,9 +1,8 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const TagSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   name: z.string().optional(),
 });
 

@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetCardSchema = z.object({
   /**
@@ -217,7 +216,7 @@ export const GetCardSchema = z.object({
   /** Whether to include the customFieldItems */
   customFieldItems: z.boolean().optional(),
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type GetCard = z.input<typeof GetCardSchema>;

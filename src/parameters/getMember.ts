@@ -1,10 +1,9 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 import { MemberFieldsSchema } from '../models';
 
 export const GetMemberSchema = z.object({
   /** The ID or username of the member */
-  id: z.union([TrelloIDSchema, z.string()]),
+  id: z.union([z.string(), z.string()]),
   /**
    * See the [Actions Nested
    * Resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/#actions-nested-resource)

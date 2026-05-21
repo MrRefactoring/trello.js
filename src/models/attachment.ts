@@ -1,15 +1,14 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { ColorSchema } from '#/models/color';
 import { LimitsSchema } from '#/models/limits';
 
 export const AttachmentSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   bytes: z.string().nullish(),
   date: z.coerce.date().optional(),
   edgeColor: ColorSchema.nullish(),
-  idMember: TrelloIDSchema.optional(),
+  idMember: z.string().optional(),
   isUpload: z.boolean().optional(),
   mimeType: z.string().optional(),
   name: z.string().optional(),

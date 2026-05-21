@@ -1,10 +1,9 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 import { LabelSchema } from '../models';
 
 export const GetBoardLabelsSchema = z.object({
   /** The ID of the Board. */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The fields to be returned for the Labels. */
   fields: LabelSchema.optional(),
   /** The number of Labels to be returned. */

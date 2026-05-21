@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const DeleteCardAttachmentSchema = z.object({
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The ID of the attachment to delete */
-  idAttachment: TrelloIDSchema,
+  idAttachment: z.string(),
 });
 
 export type DeleteCardAttachment = z.input<typeof DeleteCardAttachmentSchema>;

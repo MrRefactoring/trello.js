@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const UpdateOrganizationSchema = z.object({
   /** A new name for the organization. At least 3 lowercase letters, underscores, and numbers. Must be unique */
@@ -27,7 +26,7 @@ export const UpdateOrganizationSchema = z.object({
   /** Whether the Workspace page is publicly visible. One of: `private`, `public` */
   'prefs/permissionLevel': z.union([z.string(), z.enum(['private', 'public'])]).optional(),
   /** The ID or name of the Organization */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type UpdateOrganization = z.input<typeof UpdateOrganizationSchema>;

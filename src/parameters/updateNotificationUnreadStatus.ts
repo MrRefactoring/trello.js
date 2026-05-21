@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const UpdateNotificationUnreadStatusSchema = z.object({
   /** The ID of the notification */
-  id: TrelloIDSchema,
+  id: z.string(),
   value: z.string().optional(),
 });
 

@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetEnterpriseSchema = z.object({
   /** ID of the enterprise to retrieve. */
-  id: TrelloIDSchema,
+  id: z.string(),
   /**
    * Comma-separated list of: `id`, `name`, `displayName`, `prefs`, `ssoActivationFailed`, `idAdmins`, `idMembers` (Note
    * that the members array returned will be paginated if `members` is 'normal' or 'admins'. Pagination can be

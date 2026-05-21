@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetEnterpriseOrganizationsSchema = z.object({
   /** ID of the Enterprise to retrieve. */
-  id: TrelloIDSchema,
+  id: z.string(),
   /**
    * Comma-separated list of organization
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)

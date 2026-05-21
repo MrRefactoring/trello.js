@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetMemberCustomEmojiSchema = z.object({
   /** The ID or username of the member */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The ID of the custom emoji */
-  idEmoji: TrelloIDSchema,
+  idEmoji: z.string(),
   /** `all` or a comma-separated list of `name`, `url` */
   fields: z.enum(['name', 'url', 'all']).optional(),
 });

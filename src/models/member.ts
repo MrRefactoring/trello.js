@@ -1,11 +1,10 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { LimitsSchema } from '#/models/limits';
 import { MemberPrefsSchema } from '#/models/memberPrefs';
 
 export const MemberSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   activityBlocked: z.boolean().optional(),
   avatarHash: z.string().optional(),
   avatarUrl: z.string().optional(),
@@ -15,10 +14,10 @@ export const MemberSchema = apiObject({
   }).nullish(),
   confirmed: z.boolean().optional(),
   fullName: z.string().optional(),
-  idEnterprise: TrelloIDSchema.nullish(),
+  idEnterprise: z.string().nullish(),
   idEnterprisesDeactivated: z.array(z.string()).optional(),
-  idMemberReferrer: TrelloIDSchema.nullish(),
-  idPremOrgsAdmin: z.array(TrelloIDSchema).optional(),
+  idMemberReferrer: z.string().nullish(),
+  idPremOrgsAdmin: z.array(z.string()).optional(),
   initials: z.string().optional(),
   memberType: z.enum(['normal', 'ghost']).optional(),
   /**
@@ -44,9 +43,9 @@ export const MemberSchema = apiObject({
   avatarSource: z.enum(['none', 'gravatar', 'upload']).optional(),
   email: z.string().optional(),
   gravatarHash: z.string().optional(),
-  idBoards: z.array(TrelloIDSchema).optional(),
-  idOrganizations: z.array(TrelloIDSchema).optional(),
-  idEnterprisesAdmin: z.array(TrelloIDSchema).optional(),
+  idBoards: z.array(z.string()).optional(),
+  idOrganizations: z.array(z.string()).optional(),
+  idEnterprisesAdmin: z.array(z.string()).optional(),
   limits: LimitsSchema.optional(),
   loginTypes: z.array(z.string()).optional(),
   marketingOptIn: apiObject({
@@ -59,7 +58,7 @@ export const MemberSchema = apiObject({
         name: z.string().optional(),
         count: z.number().optional(),
         lastDismissed: z.coerce.date().optional(),
-        _id: TrelloIDSchema.optional(),
+        _id: z.string().optional(),
       }),
     )
     .optional(),
@@ -71,7 +70,7 @@ export const MemberSchema = apiObject({
   premiumFeatures: z.array(z.string()).optional(),
   isAaMastered: z.boolean().optional(),
   ixUpdate: z.string().optional(),
-  idBoardsPinned: z.array(TrelloIDSchema).nullish(),
+  idBoardsPinned: z.array(z.string()).nullish(),
   aaBlockSyncUntil: z.string().nullish(),
   credentialsRemovedCount: z.number().optional(),
   dateLastActive: z.coerce.date().optional(),

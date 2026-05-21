@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const DeleteCardStickerSchema = z.object({
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The ID of the sticker */
-  idSticker: TrelloIDSchema,
+  idSticker: z.string(),
 });
 
 export type DeleteCardSticker = z.input<typeof DeleteCardStickerSchema>;

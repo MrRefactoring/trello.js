@@ -1,12 +1,11 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 import { MemberFieldsSchema } from '../models';
 
 export const DeactivateEnterpriseMemberSchema = z.object({
   /** ID of the enterprise to retrieve. */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** ID of the Member to deactive. */
-  idMember: TrelloIDSchema,
+  idMember: z.string(),
   /** Determines whether the user is deactivated or not. */
   value: z.boolean(),
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */

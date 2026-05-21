@@ -1,10 +1,9 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 import { ActionSchema } from '../models';
 
 export const GetOrganizationActionsSchema = z.object({
   /** The ID or name of the organization */
-  id: TrelloIDSchema,
+  id: z.string(),
   /**
    * The fields to be returned for the Actions. [See Action fields
    * here](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#action-object).

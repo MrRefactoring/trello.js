@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const DeleteMemberBoardBackgroundSchema = z.object({
   /** The ID or username of the member */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The ID of the board background */
-  idBackground: TrelloIDSchema,
+  idBackground: z.string(),
 });
 
 export type DeleteMemberBoardBackground = z.input<typeof DeleteMemberBoardBackgroundSchema>;

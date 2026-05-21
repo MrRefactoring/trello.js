@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const MarkCardNotificationsReadSchema = z.object({
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type MarkCardNotificationsRead = z.input<typeof MarkCardNotificationsReadSchema>;

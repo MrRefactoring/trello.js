@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetMemberNotificationsSchema = z.object({
   /** The ID or username of the member */
-  id: TrelloIDSchema,
+  id: z.string(),
   entities: z.boolean().optional(),
   display: z.boolean().optional(),
   filter: z.string().optional(),

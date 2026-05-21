@@ -1,10 +1,9 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 import { ActionSchema } from '../models';
 
 export const GetCardActionsSchema = z.object({
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
   /**
    * A comma-separated list of [action
    * types](https://developer.atlassian.com/cloud/trello/guides/rest-api/action-types/).

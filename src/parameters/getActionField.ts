@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetActionFieldSchema = z.object({
   /** The ID of the Action */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** An action field */
   field: z.union([
     z.string(),

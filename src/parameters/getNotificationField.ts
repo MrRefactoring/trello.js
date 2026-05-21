@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetNotificationFieldSchema = z.object({
   /** The ID of the notification */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** A notification [field](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/) */
   field: z.union([
     z.string(),

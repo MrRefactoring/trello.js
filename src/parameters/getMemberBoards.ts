@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetMemberBoardsSchema = z.object({
   /** The ID or username of the member */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** `all` or a comma-separated list of: `closed`, `members`, `open`, `organization`, `public`, `starred` */
   filter: z.enum(['all', 'closed', 'members', 'open', 'organization', 'public', 'starred']).optional(),
   /**

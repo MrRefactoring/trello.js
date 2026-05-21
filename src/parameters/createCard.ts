@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const CreateCardSchema = z.object({
   /** The name for the card */
@@ -15,18 +14,18 @@ export const CreateCardSchema = z.object({
   /** Whether the status of the card is complete */
   dueComplete: z.boolean().optional(),
   /** The ID of the list the card should be created in */
-  idList: TrelloIDSchema,
+  idList: z.string(),
   /** Comma-separated list of member IDs to add to the card */
-  idMembers: z.array(TrelloIDSchema).optional(),
+  idMembers: z.array(z.string()).optional(),
   /** Comma-separated list of label IDs to add to the card */
-  idLabels: z.array(TrelloIDSchema).optional(),
+  idLabels: z.array(z.string()).optional(),
   /** A URL starting with `http://` or `https://`. The URL will be attached to the card upon creation. */
   urlSource: z.string().optional(),
   fileSource: z.string().optional(),
   /** The mimeType of the attachment. Max length 256 */
   mimeType: z.string().optional(),
   /** The ID of a card to copy into the new card */
-  idCardSource: TrelloIDSchema.optional(),
+  idCardSource: z.string().optional(),
   /**
    * If using `idCardSource` you can specify which properties to copy over. `all` or comma-separated list of:
    * `attachments,checklists,customFields,comments,due,start,labels,members,start,stickers`

@@ -1,11 +1,10 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { ImageDescriptorSchema } from '#/models/imageDescriptor';
 import { LimitsSchema } from '#/models/limits';
 
 export const CustomStickerSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   url: z.string().optional(),
   scaled: z.array(ImageDescriptorSchema).optional(),
   image: z.string().nullish(),

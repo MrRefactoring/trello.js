@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetBoardListsSchema = z.object({
   /** Filter to apply to Cards. */
@@ -94,7 +93,7 @@ export const GetBoardListsSchema = z.object({
    */
   fields: z.union([z.string(), z.array(z.string())]).optional(),
   /** The ID of the board */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type GetBoardLists = z.input<typeof GetBoardListsSchema>;

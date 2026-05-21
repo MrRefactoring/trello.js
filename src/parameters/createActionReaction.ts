@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const CreateActionReactionSchema = z.object({
   /** The ID of the action */
-  idAction: TrelloIDSchema,
+  idAction: z.string(),
   /** The primary `shortName` of the emoji to add. See [/emoji](#emoji) */
   shortName: z.string().optional(),
   /** The `skinVariation` of the emoji to add. See [/emoji](#emoji) */

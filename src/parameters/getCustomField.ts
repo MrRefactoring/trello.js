@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetCustomFieldSchema = z.object({
   /** ID of the Custom Field. */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type GetCustomField = z.input<typeof GetCustomFieldSchema>;

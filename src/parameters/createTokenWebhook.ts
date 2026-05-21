@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const CreateTokenWebhookSchema = z.object({
   /** A description to be displayed when retrieving information about the webhook. */
@@ -7,7 +6,7 @@ export const CreateTokenWebhookSchema = z.object({
   /** The URL that the webhook should POST information to. */
   callbackURL: z.string(),
   /** ID of the object to create a webhook on. */
-  idModel: TrelloIDSchema,
+  idModel: z.string(),
   token: z.string(),
 });
 

@@ -1,10 +1,9 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 import { ChannelSchema } from '../models';
 
 export const UpdateMemberNotificationChannelBlockedKeySchema = z.object({
   /** The ID or username of the member */
-  id: z.union([TrelloIDSchema, z.string()]),
+  id: z.union([z.string(), z.string()]),
   /** Channel to block notifications on */
   channel: ChannelSchema,
   /** Singular key or comma-separated list of notification keys */

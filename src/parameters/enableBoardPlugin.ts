@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const EnableBoardPluginSchema = z.object({
   /** The ID of the Power-Up to enable */
-  idPlugin: TrelloIDSchema.optional(),
+  idPlugin: z.string().optional(),
   /** The ID of the Board */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type EnableBoardPlugin = z.input<typeof EnableBoardPluginSchema>;

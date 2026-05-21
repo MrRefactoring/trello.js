@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const UpdateBoardEmailListSchema = z.object({
   /** The id of the board to update */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The id of an email list. */
-  value: TrelloIDSchema,
+  value: z.string(),
 });
 
 export type UpdateBoardEmailList = z.input<typeof UpdateBoardEmailListSchema>;

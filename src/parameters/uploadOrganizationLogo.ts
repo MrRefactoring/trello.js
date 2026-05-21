@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const UploadOrganizationLogoSchema = z.object({
   /** The ID or name of the Workspace */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** Image file for the logo */
   file: z.string().optional(),
 });

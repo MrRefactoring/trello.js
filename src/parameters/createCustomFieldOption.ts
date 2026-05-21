@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const CreateCustomFieldOptionSchema = z.object({
   /** ID of the customfield. */
-  id: TrelloIDSchema,
+  id: z.string(),
   value: z
     .object({
       text: z.string().optional(),

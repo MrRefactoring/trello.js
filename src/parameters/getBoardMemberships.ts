@@ -1,10 +1,9 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 import { MemberFieldsSchema } from '../models';
 
 export const GetBoardMembershipsSchema = z.object({
   /** The ID of the board */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** One of `admins`, `all`, `none`, `normal` */
   filter: z.enum(['admins', 'all', 'none', 'normal']).optional(),
   /** Works for premium organizations only. */

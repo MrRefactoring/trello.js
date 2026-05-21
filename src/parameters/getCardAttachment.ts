@@ -1,13 +1,12 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetCardAttachmentSchema = z.object({
   /** The Attachment fields to be included in the response. */
   fields: z.array(z.unknown()).optional(),
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The ID of the Attachment */
-  idAttachment: TrelloIDSchema,
+  idAttachment: z.string(),
 });
 
 export type GetCardAttachment = z.input<typeof GetCardAttachmentSchema>;

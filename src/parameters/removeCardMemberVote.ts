@@ -1,11 +1,10 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const RemoveCardMemberVoteSchema = z.object({
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The ID of the member whose vote to remove */
-  idMember: TrelloIDSchema,
+  idMember: z.string(),
 });
 
 export type RemoveCardMemberVote = z.input<typeof RemoveCardMemberVoteSchema>;

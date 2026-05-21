@@ -1,10 +1,9 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const BoardStarsSchema = apiObject({
-  id: TrelloIDSchema,
-  idBoard: TrelloIDSchema.optional(),
+  id: z.string(),
+  idBoard: z.string().optional(),
   pos: z.number().optional(),
 });
 

@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetActionReactionSummarySchema = z.object({
   /** The ID of the action */
-  idAction: TrelloIDSchema,
+  idAction: z.string(),
 });
 
 export type GetActionReactionSummary = z.input<typeof GetActionReactionSummarySchema>;

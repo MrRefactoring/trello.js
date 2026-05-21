@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const CreateMemberSavedSearchSchema = z.object({
   /** The name for the saved search */
@@ -9,7 +8,7 @@ export const CreateMemberSavedSearchSchema = z.object({
   /** The position of the saved search. `top`, `bottom`, or a positive float. */
   pos: z.union([z.string(), z.number(), z.enum(['top', 'bottom'])]),
   /** The ID or username of the member */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type CreateMemberSavedSearch = z.input<typeof CreateMemberSavedSearchSchema>;

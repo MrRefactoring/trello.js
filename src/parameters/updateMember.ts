@@ -1,9 +1,8 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const UpdateMemberSchema = z.object({
   /** The ID or username of the member */
-  id: TrelloIDSchema,
+  id: z.string(),
   /** New name for the member. Cannot begin or end with a space. */
   fullName: z.string().optional(),
   /** New initials for the member. 1-4 characters long. */

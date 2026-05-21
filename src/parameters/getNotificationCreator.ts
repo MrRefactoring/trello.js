@@ -1,10 +1,9 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 import { MemberFieldsSchema } from '../models';
 
 export const GetNotificationCreatorSchema = z.object({
   /** The ID of the notification */
-  id: TrelloIDSchema,
+  id: z.string(),
   /**
    * `all` or a comma-separated list of member
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)

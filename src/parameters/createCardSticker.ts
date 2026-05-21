@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const CreateCardStickerSchema = z.object({
   /**
@@ -16,7 +15,7 @@ export const CreateCardStickerSchema = z.object({
   /** The rotation of the sticker */
   rotate: z.number().optional(),
   /** The ID of the Card */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type CreateCardSticker = z.input<typeof CreateCardStickerSchema>;

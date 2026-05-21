@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { TrelloIDSchema } from '../models';
 
 export const GetActionSchema = z.object({
   display: z.boolean().optional(),
@@ -30,7 +29,7 @@ export const GetActionSchema = z.object({
    */
   memberCreatorFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** The ID of the Action */
-  id: TrelloIDSchema,
+  id: z.string(),
 });
 
 export type GetAction = z.input<typeof GetActionSchema>;
