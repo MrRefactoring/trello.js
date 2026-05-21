@@ -54,7 +54,7 @@ export const CardSchema = apiObject({
   idMembersVoted: z.array(TrelloIDSchema).optional(),
   idShort: z.number().optional(),
   idAttachmentCover: TrelloIDSchema.nullish(),
-  labels: z.array(TrelloIDSchema).optional(),
+  labels: z.array(LabelSchema).optional(),
   limits: LimitsSchema.optional(),
   locationName: z.string().nullish(),
   manualCoverAttachment: z.boolean().optional(),
