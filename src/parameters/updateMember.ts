@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const UpdateMemberSchema = z.object({
   /** The ID or username of the member */
-  id: z.unknown(),
+  id: z.string(),
   /** New name for the member. Cannot begin or end with a space. */
   fullName: z.string().optional(),
   /** New initials for the member. 1-4 characters long. */

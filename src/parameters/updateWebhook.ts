@@ -6,11 +6,11 @@ export const UpdateWebhookSchema = z.object({
   /** A valid URL that is reachable with a `HEAD` and `POST` request. */
   callbackURL: z.string().optional(),
   /** ID of the model to be monitored */
-  idModel: z.unknown().optional(),
+  idModel: z.string().optional(),
   /** Determines whether the webhook is active and sending `POST` requests. */
   active: z.boolean().optional(),
   /** ID of the webhook to retrieve. */
-  id: z.unknown(),
+  id: z.string(),
 });
 
 export type UpdateWebhook = z.input<typeof UpdateWebhookSchema>;

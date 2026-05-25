@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { PrefsSchema } from '#/models/prefs';
 import { LimitsSchema } from '#/models/limits';
 import { MembershipsSchema } from '#/models/memberships';
@@ -8,14 +7,14 @@ import { BoardMyPrefsSchema } from '#/models/boardMyPrefs';
 import { OrganizationSchema } from '#/models/organization';
 
 export const BoardSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The name of the board. */
   name: z.string().optional(),
   desc: z.string().optional(),
   descData: z.record(z.string(), z.any()).nullish(),
   closed: z.boolean().optional(),
-  idMemberCreator: TrelloIDSchema.optional(),
-  idOrganization: TrelloIDSchema.optional(),
+  idMemberCreator: z.string().optional(),
+  idOrganization: z.string().optional(),
   pinned: z.boolean().optional(),
   url: z.string().optional(),
   shortUrl: z.string().optional(),

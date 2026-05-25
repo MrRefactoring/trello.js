@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const UpdateNotificationSchema = z.object({
   /** The ID of the notification */
-  id: z.unknown(),
+  id: z.string(),
   /** Whether the notification should be marked as read or not */
   unread: z.boolean().optional(),
 });

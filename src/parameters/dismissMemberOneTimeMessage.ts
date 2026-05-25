@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const DismissMemberOneTimeMessageSchema = z.object({
   /** The ID or username of the member */
-  id: z.unknown(),
+  id: z.string(),
   /** The message to dismiss */
-  value: z.unknown(),
+  value: z.string(),
 });
 
 export type DismissMemberOneTimeMessage = z.input<typeof DismissMemberOneTimeMessageSchema>;

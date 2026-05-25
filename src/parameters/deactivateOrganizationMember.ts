@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const DeactivateOrganizationMemberSchema = z.object({
   /** The ID or name of the organization */
-  id: z.unknown(),
+  id: z.string(),
   /** The ID or username of the member to update */
-  idMember: z.union([z.unknown(), z.string()]),
+  idMember: z.union([z.string(), z.string()]),
   value: z.boolean(),
 });
 

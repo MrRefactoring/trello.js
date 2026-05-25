@@ -1,11 +1,10 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const WebhookSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   description: z.string().optional(),
-  idModel: TrelloIDSchema.optional(),
+  idModel: z.string().optional(),
   callbackURL: z.string().optional(),
   active: z.boolean().optional(),
   consecutiveFailures: z.number().optional(),

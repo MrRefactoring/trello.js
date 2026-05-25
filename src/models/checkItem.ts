@@ -1,19 +1,18 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { posStringOrNumberSchema } from '#/models/posStringOrNumber';
 import { LimitsSchema } from '#/models/limits';
 
 export const CheckItemSchema = apiObject({
-  idChecklist: TrelloIDSchema.optional(),
+  idChecklist: z.string().optional(),
   state: z.enum(['complete', 'incomplete']).optional(),
-  id: TrelloIDSchema,
+  id: z.string(),
   name: z.string().optional(),
   nameData: z.record(z.string(), z.any()).optional(),
   pos: posStringOrNumberSchema.optional(),
   due: z.coerce.date().nullish(),
   dueReminder: z.number().nullish(),
-  idMember: TrelloIDSchema.nullish(),
+  idMember: z.string().nullish(),
   limits: LimitsSchema.optional(),
   creationMethod: z.unknown().optional(),
 });

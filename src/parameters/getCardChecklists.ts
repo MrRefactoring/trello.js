@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const GetCardChecklistsSchema = z.object({
   /** The ID of the Card */
-  id: z.unknown(),
+  id: z.string(),
   /** `all` or `none` */
   checkItems: z.enum(['all', 'none']).optional(),
   /** `all` or a comma-separated list of: `name,nameData,pos,state,type,due,dueReminder,idMember` */

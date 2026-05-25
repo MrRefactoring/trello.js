@@ -1,12 +1,11 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { LimitsSchema } from '#/models/limits';
 import { MemberSchema } from '#/models/member';
 
 export const ActionSchema = apiObject({
-  id: TrelloIDSchema,
-  idMemberCreator: TrelloIDSchema,
+  id: z.string(),
+  idMemberCreator: z.string(),
   data: z.record(z.string(), z.any()),
   type: z.string(),
   date: z.coerce.date(),
@@ -18,12 +17,12 @@ export const ActionSchema = apiObject({
         type: z.string().optional(),
         translationKey: z.string().optional(),
         hideIfContext: z.boolean().optional(),
-        idContext: TrelloIDSchema.optional(),
+        idContext: z.string().optional(),
       }).optional(),
       card: apiObject({
         type: z.string().optional(),
         hideIfContext: z.boolean().optional(),
-        id: TrelloIDSchema,
+        id: z.string(),
         shortLink: z.string().optional(),
         text: z.string().optional(),
       }).optional(),
@@ -33,19 +32,19 @@ export const ActionSchema = apiObject({
       }).optional(),
       memberCreator: apiObject({
         type: z.string().optional(),
-        id: TrelloIDSchema,
+        id: z.string(),
         username: z.string().optional(),
         text: z.string().optional(),
       }).optional(),
     }).optional(),
   }).optional(),
   memberCreator: apiObject({
-    id: TrelloIDSchema,
+    id: z.string(),
     activityBlocked: z.boolean().optional(),
     avatarHash: z.string().optional(),
     avatarUrl: z.string().optional(),
     fullName: z.string().optional(),
-    idMemberReferrer: TrelloIDSchema.nullish(),
+    idMemberReferrer: z.string().nullish(),
     initials: z.string().optional(),
     username: z.string().optional(),
     nonPublic: z.record(z.string(), z.any()).optional(),

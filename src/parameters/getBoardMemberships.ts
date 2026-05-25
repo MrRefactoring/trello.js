@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const GetBoardMembershipsSchema = z.object({
   /** The ID of the board */
-  id: z.unknown(),
+  id: z.string(),
   /** One of `admins`, `all`, `none`, `normal` */
   filter: z.enum(['admins', 'all', 'none', 'normal']).optional(),
   /** Works for premium organizations only. */
@@ -18,7 +18,60 @@ export const GetBoardMembershipsSchema = z.object({
    * Fields to show if `member=true`. Valid values: [nested member resource
    * fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/).
    */
-  memberFields: z.unknown().optional(),
+  memberFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'id',
+        'activityBlocked',
+        'avatarHash',
+        'avatarUrl',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idEnterprise',
+        'idMemberReferrer',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'nonPublic',
+        'nonPublicAvailable',
+        'products',
+        'status',
+        'url',
+        'username',
+        'idBoards',
+        'idOrganizations',
+      ]),
+      z.array(
+        z.enum([
+          'id',
+          'activityBlocked',
+          'avatarHash',
+          'avatarUrl',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idEnterprise',
+          'idMemberReferrer',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'nonPublic',
+          'nonPublicAvailable',
+          'products',
+          'status',
+          'url',
+          'username',
+          'idBoards',
+          'idOrganizations',
+        ]),
+      ),
+    ])
+    .optional(),
 });
 
 export type GetBoardMemberships = z.input<typeof GetBoardMembershipsSchema>;

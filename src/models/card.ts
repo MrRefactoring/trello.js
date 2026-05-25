@@ -1,11 +1,12 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
+import { ChecklistSchema } from '#/models/checklist';
+import { LabelSchema } from '#/models/label';
 import { LimitsSchema } from '#/models/limits';
 import { ColorSchema } from '#/models/color';
 
 export const CardSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   address: z.string().nullish(),
   badges: apiObject({
     attachmentsByType: apiObject({
@@ -44,19 +45,19 @@ export const CardSchema = apiObject({
   }).optional(),
   due: z.coerce.date().nullish(),
   dueReminder: z.string().nullish(),
-  idBoard: TrelloIDSchema.optional(),
-  idChecklists: z.array(z.union([z.unknown(), z.unknown()])).optional(),
-  idLabels: z.array(z.union([z.unknown(), z.unknown()])).optional(),
-  idList: TrelloIDSchema.optional(),
-  idMembers: z.array(z.unknown()).optional(),
-  idMembersVoted: z.array(z.unknown()).optional(),
+  idBoard: z.string().optional(),
+  idChecklists: z.array(z.union([ChecklistSchema, z.string()])).optional(),
+  idLabels: z.array(z.union([LabelSchema, z.string()])).optional(),
+  idList: z.string().optional(),
+  idMembers: z.array(z.string()).optional(),
+  idMembersVoted: z.array(z.string()).optional(),
   idShort: z.number().optional(),
-  idAttachmentCover: TrelloIDSchema.nullish(),
-  labels: z.array(z.unknown()).optional(),
+  idAttachmentCover: z.string().nullish(),
+  labels: z.array(LabelSchema).optional(),
   limits: LimitsSchema.optional(),
   locationName: z.string().nullish(),
   manualCoverAttachment: z.boolean().optional(),
-  mirrorSourceId: TrelloIDSchema.nullish(),
+  mirrorSourceId: z.string().nullish(),
   name: z.string().optional(),
   pos: z.number().optional(),
   shortLink: z.string().optional(),
@@ -64,7 +65,7 @@ export const CardSchema = apiObject({
   subscribed: z.boolean().optional(),
   url: z.string().optional(),
   cover: apiObject({
-    idAttachment: TrelloIDSchema.nullish(),
+    idAttachment: z.string().nullish(),
     color: ColorSchema.nullish(),
     idUploadedBackground: z.boolean().nullish(),
     size: z.enum(['normal']).optional(),

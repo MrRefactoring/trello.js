@@ -1,14 +1,13 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const CustomFieldItemsSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   value: apiObject({
     checked: z.string().optional(),
   }).optional(),
-  idCustomField: TrelloIDSchema.optional(),
-  idModel: TrelloIDSchema.optional(),
+  idCustomField: z.string().optional(),
+  idModel: z.string().optional(),
   modelType: z.enum(['card', 'board', 'member']).optional(),
 });
 

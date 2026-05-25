@@ -7,7 +7,7 @@ export const GetBoardSchema = z.object({
    */
   actions: z.string().optional(),
   /** Valid values are one of: `mine` or `none`. */
-  boardStars: z.string().optional(),
+  boardStars: z.union([z.string(), z.enum(['mine', 'none'])]).optional(),
   /**
    * This is a nested resource. Read more about cards as nested resources
    * [here](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/).
@@ -63,7 +63,7 @@ export const GetBoardSchema = z.object({
   myPrefs: z.boolean().optional(),
   /** Also known as collections, tags, refer to the collection(s) that a Board belongs to. */
   tags: z.boolean().optional(),
-  id: z.unknown(),
+  id: z.string(),
 });
 
 export type GetBoard = z.input<typeof GetBoardSchema>;

@@ -1,12 +1,11 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const PluginDataSchema = apiObject({
-  id: TrelloIDSchema,
-  idPlugin: TrelloIDSchema.optional(),
+  id: z.string(),
+  idPlugin: z.string().optional(),
   scope: z.enum(['member', 'board', 'organization', 'card']).optional(),
-  idModel: TrelloIDSchema.optional(),
+  idModel: z.string().optional(),
   value: z.string().optional(),
   access: z.enum(['private', 'shared']).optional(),
 });

@@ -1,10 +1,9 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { LimitsSchema } from '#/models/limits';
 
 export const TrelloListSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   /** The name of the list */
   name: z.string().optional(),
   closed: z.boolean().optional(),

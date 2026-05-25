@@ -1,10 +1,9 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { ImageDescriptorSchema } from '#/models/imageDescriptor';
 
 export const BoardBackgroundSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   attribution: apiObject({
     url: z.string().nullish(),
     name: z.string().nullish(),

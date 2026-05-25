@@ -1,20 +1,19 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { OrganizationPrefsSchema } from '#/models/organizationPrefs';
 import { MembershipsSchema } from '#/models/memberships';
 import { LimitsSchema } from '#/models/limits';
 
 export const OrganizationSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   name: z.string().optional(),
   displayName: z.string().optional(),
   dateLastActivity: z.coerce.date().optional(),
   prefs: OrganizationPrefsSchema.optional(),
-  idEnterprise: TrelloIDSchema.nullish(),
+  idEnterprise: z.string().nullish(),
   offering: z.string().optional(),
   url: z.string().optional(),
-  idBoards: z.array(TrelloIDSchema).optional(),
+  idBoards: z.array(z.string()).optional(),
   memberships: z.array(MembershipsSchema).optional(),
   premiumFeatures: z.array(z.string()).optional(),
   desc: z.string().optional(),

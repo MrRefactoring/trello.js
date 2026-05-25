@@ -6,7 +6,7 @@ export const UpdateMemberSavedSearchSchema = z.object({
   /** The new search query */
   query: z.string().optional(),
   /** New position for saves search. `top`, `bottom`, or a positive float. */
-  pos: z.string().optional(),
+  pos: z.union([z.string(), z.number(), z.enum(['top', 'bottom'])]).optional(),
   /** The ID or username of the member */
   id: z.string(),
   /** The ID of the saved search to delete */

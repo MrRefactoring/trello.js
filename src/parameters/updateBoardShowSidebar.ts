@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const UpdateBoardShowSidebarSchema = z.object({
   /** The id of the board to update */
-  id: z.unknown(),
+  id: z.string(),
   /** Determines whether to show the side bar. */
   value: z.boolean(),
 });

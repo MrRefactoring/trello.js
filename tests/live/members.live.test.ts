@@ -156,9 +156,29 @@ describe('Members', () => {
       expect(Array.isArray(backgrounds)).toBe(true);
     });
 
+    it('getMemberBoardBackground fetches an individual custom background by id', async ({ skip }) => {
+      // Trello's default backgrounds (color names like `blue`, `green`) aren't
+      // fetchable through `/boardBackgrounds/{id}` — the endpoint returns 400
+      // "Invalid id". Filter to `custom` so only uploaded backgrounds with
+      // real TrelloIDs flow through.
+      const backgrounds = await trello.members.getMemberBoardBackgrounds({ id: 'me', filter: 'custom' });
+      if (backgrounds.length === 0) skip();
+      const idBackground = String(backgrounds[0].id);
+      const bg = await trello.members.getMemberBoardBackground({ id: 'me', idBackground });
+      expect(String(bg.id)).toBe(idBackground);
+    });
+
     it('getMemberCustomBoardBackgrounds returns an array', async () => {
       const backgrounds = await trello.members.getMemberCustomBoardBackgrounds({ id: 'me' });
       expect(Array.isArray(backgrounds)).toBe(true);
+    });
+
+    it('getMemberCustomBoardBackground fetches an individual custom background by id', async ({ skip }) => {
+      const backgrounds = await trello.members.getMemberCustomBoardBackgrounds({ id: 'me' });
+      if (backgrounds.length === 0) skip();
+      const idBackground = String(backgrounds[0].id);
+      const bg = await trello.members.getMemberCustomBoardBackground({ id: 'me', idBackground });
+      expect(String(bg.id)).toBe(idBackground);
     });
   });
 
@@ -169,12 +189,39 @@ describe('Members', () => {
       const emojis = await trello.members.getMemberCustomEmojis({ id: 'me' });
       expect(Array.isArray(emojis)).toBe(true);
     });
+
+    it('getMemberCustomEmoji fetches an individual emoji by id', async ({ skip }) => {
+      const emojis = await trello.members.getMemberCustomEmojis({ id: 'me' });
+      if (emojis.length === 0) skip();
+      const idEmoji = String(emojis[0].id);
+      const emoji = await trello.members.getMemberCustomEmoji({ id: 'me', idEmoji });
+      expect(String(emoji.id)).toBe(idEmoji);
+    });
   });
 
   describe('custom stickers', () => {
     it('getMemberCustomStickers returns an array', async () => {
       const stickers = await trello.members.getMemberCustomStickers({ id: 'me' });
       expect(Array.isArray(stickers)).toBe(true);
+    });
+
+    it('getMemberCustomSticker fetches an individual sticker by id', async ({ skip }) => {
+      const stickers = await trello.members.getMemberCustomStickers({ id: 'me' });
+      if (stickers.length === 0) skip();
+      const idSticker = String(stickers[0].id);
+      const sticker = await trello.members.getMemberCustomSticker({ id: 'me', idSticker });
+      expect(String(sticker.id)).toBe(idSticker);
+    });
+  });
+
+  // ─── one-time messages ─────────────────────────────────────────────────────
+
+  describe('one-time messages', () => {
+    it('dismissMemberOneTimeMessage requires session auth', ({ skip }) => {
+      // Endpoint returns 401 "unauthorized member permission requested" for
+      // key/token auth — only an Atlassian-account session can dismiss. Same
+      // story as the notification channel settings below.
+      skip();
     });
   });
 

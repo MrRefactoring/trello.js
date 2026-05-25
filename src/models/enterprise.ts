@@ -1,10 +1,9 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { OrganizationPrefsSchema } from '#/models/organizationPrefs';
 
 export const EnterpriseSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   name: z.string().optional(),
   displayName: z.string().optional(),
   logoHash: z.string().nullish(),
@@ -23,11 +22,11 @@ export const EnterpriseSchema = apiObject({
   }).optional(),
   organizationPrefs: OrganizationPrefsSchema.optional(),
   ssoActivationFailed: z.boolean().optional(),
-  idAdmins: z.array(TrelloIDSchema).optional(),
+  idAdmins: z.array(z.string()).optional(),
   enterpriseDomains: z.array(z.string()).optional(),
   isRealEnterprise: z.boolean().optional(),
-  pluginWhitelistingEnabled: z.array(TrelloIDSchema).optional(),
-  idOrganizations: z.array(TrelloIDSchema).optional(),
+  pluginWhitelistingEnabled: z.array(z.string()).optional(),
+  idOrganizations: z.array(z.string()).optional(),
   products: z.array(z.number()).optional(),
   licenses: apiObject({
     maxMembers: z.number().nullish(),

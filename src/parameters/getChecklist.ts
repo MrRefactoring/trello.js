@@ -20,9 +20,16 @@ export const GetChecklistSchema = z.object({
    * `all` or a comma-separated list of checklist
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  fields: z.union([z.string(), z.array(z.string())]).optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum(['id', 'name', 'idBoard', 'idCard', 'pos']),
+      z.array(z.enum(['id', 'name', 'idBoard', 'idCard', 'pos'])),
+    ])
+    .optional(),
   /** ID of a checklist. */
-  id: z.unknown(),
+  id: z.string(),
 });
 
 export type GetChecklist = z.input<typeof GetChecklistSchema>;

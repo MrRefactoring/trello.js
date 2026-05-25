@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const RemoveCardMemberSchema = z.object({
   /** The ID of the Card */
-  id: z.unknown(),
+  id: z.string(),
   /** The ID of the member to remove from the card */
-  idMember: z.unknown(),
+  idMember: z.string(),
 });
 
 export type RemoveCardMember = z.input<typeof RemoveCardMemberSchema>;

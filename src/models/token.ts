@@ -1,12 +1,11 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { TokenPermissionSchema } from '#/models/tokenPermission';
 
 export const TokenSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   identifier: z.string().optional(),
-  idMember: TrelloIDSchema.optional(),
+  idMember: z.string().optional(),
   dateCreated: z.coerce.date().optional(),
   dateExpires: z.coerce.date().nullish(),
   permissions: z.array(TokenPermissionSchema).optional(),

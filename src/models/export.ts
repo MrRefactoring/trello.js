@@ -1,9 +1,8 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const ExportSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   status: apiObject({
     attempts: z.number().optional(),
     finished: z.boolean().optional(),

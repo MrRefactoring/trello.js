@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const UpdateListFieldSchema = z.object({
   /** The ID of the list */
-  id: z.unknown(),
+  id: z.string(),
   /** The field on the List to be updated */
   field: z.enum(['name', 'pos', 'subscribed']),
   /** The new value for the field */

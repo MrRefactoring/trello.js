@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const GetOrganizationMembershipSchema = z.object({
   /** The ID or name of the organization */
-  id: z.unknown(),
+  id: z.string(),
   /** The ID of the membership to load */
-  idMembership: z.unknown(),
+  idMembership: z.string(),
   /** Whether to include the Member object in the response */
   member: z.boolean().optional(),
 });

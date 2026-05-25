@@ -8,11 +8,11 @@ export const UpdateBoardSchema = z.object({
   /** Whether the board is closed */
   closed: z.boolean().optional(),
   /** Whether the acting user is subscribed to the board */
-  subscribed: z.unknown().optional(),
+  subscribed: z.string().optional(),
   /** The id of the Workspace the board should be moved to */
   idOrganization: z.string().optional(),
   /** One of: org, private, public */
-  'prefs/permissionLevel': z.string().optional(),
+  'prefs/permissionLevel': z.union([z.string(), z.enum(['org', 'private', 'public'])]).optional(),
   /** Whether Workspace members can join the board themselves */
   'prefs/selfJoin': z.boolean().optional(),
   /** Whether card covers should be displayed on this board */
@@ -20,18 +20,20 @@ export const UpdateBoardSchema = z.object({
   /** Determines whether the Voting Power-Up should hide who voted on cards or not. */
   'prefs/hideVotes': z.boolean().optional(),
   /** Who can invite people to this board. One of: admins, members */
-  'prefs/invitations': z.string().optional(),
+  'prefs/invitations': z.union([z.string(), z.enum(['admins', 'members'])]).optional(),
   /** Who can vote on this board. One of disabled, members, observers, org, public */
-  'prefs/voting': z.string().optional(),
+  'prefs/voting': z.union([z.string(), z.enum(['disabled', 'members', 'observers', 'org', 'public'])]).optional(),
   /** Who can comment on cards on this board. One of: disabled, members, observers, org, public */
-  'prefs/comments': z.string().optional(),
+  'prefs/comments': z.union([z.string(), z.enum(['disabled', 'members', 'observers', 'org', 'public'])]).optional(),
   /** The id of a custom background or one of: blue, orange, green, red, purple, pink, lime, sky, grey */
-  'prefs/background': z.string().optional(),
+  'prefs/background': z
+    .union([z.string(), z.enum(['blue', 'orange', 'green', 'red', 'purple', 'pink', 'lime', 'sky', 'grey'])])
+    .optional(),
   /** One of: pirate, regular */
-  'prefs/cardAging': z.string().optional(),
+  'prefs/cardAging': z.union([z.string(), z.enum(['pirate', 'regular'])]).optional(),
   /** Determines whether the calendar feed is enabled or not. */
   'prefs/calendarFeedEnabled': z.boolean().optional(),
-  id: z.unknown(),
+  id: z.string(),
 });
 
 export type UpdateBoard = z.input<typeof UpdateBoardSchema>;

@@ -1,6 +1,5 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const ClaimableOrganizationsSchema = apiObject({
   organizations: z
@@ -9,9 +8,9 @@ export const ClaimableOrganizationsSchema = apiObject({
         name: z.string().optional(),
         displayName: z.string().optional(),
         activeMembershipCount: z.number().optional(),
-        idActiveAdmins: z.array(TrelloIDSchema).optional(),
+        idActiveAdmins: z.array(z.string()).optional(),
         products: z.array(z.number()).optional(),
-        id: TrelloIDSchema,
+        id: z.string(),
         logoUrl: z.string().nullish(),
         /**
          * The date of the most recent activity on any of the boards in the workspace. If the workspace has no boards,

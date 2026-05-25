@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const EnableBoardPluginSchema = z.object({
   /** The ID of the Power-Up to enable */
-  idPlugin: z.unknown().optional(),
+  idPlugin: z.string().optional(),
   /** The ID of the Board */
-  id: z.unknown(),
+  id: z.string(),
 });
 
 export type EnableBoardPlugin = z.input<typeof EnableBoardPluginSchema>;

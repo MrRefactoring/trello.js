@@ -6,9 +6,9 @@ export const UpdateBoardMemberSchema = z.object({
   /** Optional param that allows organization admins to add multi-board guests onto a board. */
   allowBillableGuest: z.boolean().optional(),
   /** The id of the board to update */
-  id: z.unknown(),
+  id: z.string(),
   /** The id of the member to add to the board. */
-  idMember: z.unknown(),
+  idMember: z.string(),
 });
 
 export type UpdateBoardMember = z.input<typeof UpdateBoardMemberSchema>;

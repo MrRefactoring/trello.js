@@ -15,7 +15,7 @@ export const CreateCardStickerSchema = z.object({
   /** The rotation of the sticker */
   rotate: z.number().optional(),
   /** The ID of the Card */
-  id: z.unknown(),
+  id: z.string(),
 });
 
 export type CreateCardSticker = z.input<typeof CreateCardStickerSchema>;

@@ -6,7 +6,7 @@ export const UpdateLabelFieldSchema = z.object({
   /** The field on the Label to update. */
   field: z.enum(['color', 'name']),
   /** The new value for the field. */
-  value: z.unknown(),
+  value: z.string(),
 });
 
 export type UpdateLabelField = z.input<typeof UpdateLabelFieldSchema>;

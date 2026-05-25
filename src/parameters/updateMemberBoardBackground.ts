@@ -6,9 +6,9 @@ export const UpdateMemberBoardBackgroundSchema = z.object({
   /** Whether the background should be tiled */
   tile: z.boolean().optional(),
   /** The ID or username of the member */
-  id: z.unknown(),
+  id: z.string(),
   /** The ID of the board background */
-  idBackground: z.unknown(),
+  idBackground: z.string(),
 });
 
 export type UpdateMemberBoardBackground = z.input<typeof UpdateMemberBoardBackgroundSchema>;

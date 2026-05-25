@@ -42,11 +42,15 @@ export * from './checkItemState';
 
 export * from './checklist';
 
+export * from './checklistFields';
+
 export * from './claimableOrganizations';
 
 export * from './color';
 
 export * from './customEmoji';
+
+export * from './customEmojiFields';
 
 export * from './customField';
 
@@ -77,6 +81,8 @@ export * from './getEnterpriseSignUpUrl';
 export * from './imageDescriptor';
 
 export * from './label';
+
+export * from './labelFields';
 
 export * from './limitValue';
 
@@ -127,6 +133,8 @@ export * from './reactionSummary';
 export * from './savedSearch';
 
 export * from './searchResult';
+
+export * from './stickerFields';
 
 export * from './switcherView';
 

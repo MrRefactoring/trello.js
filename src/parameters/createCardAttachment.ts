@@ -12,7 +12,7 @@ export const CreateCardAttachmentSchema = z.object({
   /** Determines whether to use the new attachment as a cover for the Card. */
   setCover: z.boolean().optional(),
   /** The ID of the Card */
-  id: z.unknown(),
+  id: z.string(),
 });
 
 export type CreateCardAttachment = z.input<typeof CreateCardAttachmentSchema>;

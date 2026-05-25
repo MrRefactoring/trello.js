@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 export const GetEnterpriseClaimableOrganizationsSchema = z.object({
   /** ID of the enterprise to retrieve */
-  id: z.unknown(),
+  id: z.string(),
   /** Limits the number of workspaces to be sorted */
   limit: z.number().optional(),
   /** Specifies the sort order to return matching documents */

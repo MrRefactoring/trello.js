@@ -2,7 +2,6 @@ import { z } from 'zod';
 import { apiObject } from '#/core';
 import { CardSchema } from '#/models/card';
 import { BoardSchema } from '#/models/board';
-import { TrelloIDSchema } from '#/models/trelloID';
 import { ReactionSchema } from '#/models/reaction';
 
 export const NotificationSchema = apiObject({
@@ -14,8 +13,8 @@ export const NotificationSchema = apiObject({
   data: z.string().optional(),
   card: CardSchema.optional(),
   board: BoardSchema.optional(),
-  idMemberCreator: TrelloIDSchema.nullish(),
-  idAction: TrelloIDSchema.nullish(),
+  idMemberCreator: z.string().nullish(),
+  idAction: z.string().nullish(),
   reactions: z.array(ReactionSchema).optional(),
 });
 

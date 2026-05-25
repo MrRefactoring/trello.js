@@ -4,9 +4,9 @@ export const CreateBoardListSchema = z.object({
   /** The name of the list to be created. 1 to 16384 characters long. */
   name: z.string(),
   /** Determines the position of the list. Valid values: `top`, `bottom`, or a positive number. */
-  pos: z.string().optional(),
+  pos: z.union([z.string(), z.number(), z.enum(['top', 'bottom'])]).optional(),
   /** The ID of the board */
-  id: z.unknown(),
+  id: z.string(),
 });
 
 export type CreateBoardList = z.input<typeof CreateBoardListSchema>;

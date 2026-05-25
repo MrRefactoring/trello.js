@@ -6,7 +6,7 @@ export const CreateWebhookSchema = z.object({
   /** A valid URL that is reachable with a `HEAD` and `POST` request. */
   callbackURL: z.string(),
   /** ID of the model to be monitored */
-  idModel: z.unknown(),
+  idModel: z.string(),
   /** Determines whether the webhook is active and sending `POST` requests. */
   active: z.boolean().optional(),
 });

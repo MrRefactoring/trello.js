@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const UpdatePluginListingSchema = z.object({
   /** The ID of the Power-Up whose listing is being updated. */
-  idPlugin: z.unknown(),
+  idPlugin: z.string(),
   /** The ID of the existing listing for the Power-Up that is being updated. */
-  idListing: z.unknown(),
+  idListing: z.string(),
   /** The description to show for the given locale */
   description: z.string().optional(),
   /** The locale that this listing should be displayed for. */

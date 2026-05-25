@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const GetCustomFieldOptionSchema = z.object({
   /** ID of the customfielditem. */
-  id: z.unknown(),
+  id: z.string(),
   /** ID of the customfieldoption to retrieve. */
-  idCustomFieldOption: z.unknown(),
+  idCustomFieldOption: z.string(),
 });
 
 export type GetCustomFieldOption = z.input<typeof GetCustomFieldOptionSchema>;

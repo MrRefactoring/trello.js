@@ -1,12 +1,11 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const PendingOrganizationsSchema = apiObject({
-  id: TrelloIDSchema,
-  idMember: TrelloIDSchema.optional(),
+  id: z.string(),
+  idMember: z.string().optional(),
   memberRequestor: apiObject({
-    id: TrelloIDSchema,
+    id: z.string(),
     fullName: z.string().optional(),
   }).optional(),
   date: z.coerce.date().optional(),
@@ -18,7 +17,7 @@ export const PendingOrganizationsSchema = apiObject({
     newBillableMembers: z
       .array(
         apiObject({
-          id: TrelloIDSchema,
+          id: z.string(),
           fullName: z.string().optional(),
           username: z.string().optional(),
           initials: z.string().optional(),
@@ -29,7 +28,7 @@ export const PendingOrganizationsSchema = apiObject({
     restrictedMembers: z
       .array(
         apiObject({
-          id: TrelloIDSchema,
+          id: z.string(),
           fullName: z.string().optional(),
           username: z.string().optional(),
           initials: z.string().optional(),

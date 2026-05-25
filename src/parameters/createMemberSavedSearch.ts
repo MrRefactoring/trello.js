@@ -6,9 +6,9 @@ export const CreateMemberSavedSearchSchema = z.object({
   /** The search query */
   query: z.string(),
   /** The position of the saved search. `top`, `bottom`, or a positive float. */
-  pos: z.unknown(),
+  pos: z.union([z.string(), z.number(), z.enum(['top', 'bottom'])]),
   /** The ID or username of the member */
-  id: z.unknown(),
+  id: z.string(),
 });
 
 export type CreateMemberSavedSearch = z.input<typeof CreateMemberSavedSearchSchema>;

@@ -2,9 +2,9 @@ import { z } from 'zod';
 
 export const GetEnterpriseMemberSchema = z.object({
   /** ID of the enterprise to retrieve. */
-  id: z.unknown(),
+  id: z.string(),
   /** An ID of a member resource. */
-  idMember: z.unknown(),
+  idMember: z.string(),
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
   fields: z.string().optional(),
   /**

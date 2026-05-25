@@ -1,9 +1,8 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
-import { TrelloIDSchema } from '#/models/trelloID';
 
 export const CustomFieldSchema = apiObject({
-  id: TrelloIDSchema,
+  id: z.string(),
   idModel: z.string().optional(),
   modelType: z.enum(['card', 'board', 'member']).optional(),
   fieldGroup: z.string().optional(),
@@ -14,8 +13,8 @@ export const CustomFieldSchema = apiObject({
     options: z
       .array(
         apiObject({
-          id: TrelloIDSchema,
-          idCustomField: TrelloIDSchema.optional(),
+          id: z.string(),
+          idCustomField: z.string().optional(),
           value: apiObject({
             text: z.string().optional(),
           }).optional(),
