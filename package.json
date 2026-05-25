@@ -4,7 +4,7 @@
   "imports": {
     "#/*": "./src/*"
   },
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Type-safe Trello REST API client for TypeScript and JavaScript. ESM-only, tree-shakable, runtime-validated by Zod 4. Full coverage of boards, cards, lists, checklists, members, webhooks, organizations. Atlassian Trello SDK for Node.js 22+ and modern browsers.",
   "author": "Vladislav Tupikin <vladislav.tupikin@icloud.com>",
   "license": "MIT",

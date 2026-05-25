@@ -1,6 +1,6 @@
 # Trello.js changelog
 
-## Unreleased
+## v2.1.0 (2026-05-25)
 
 ### Added
 
