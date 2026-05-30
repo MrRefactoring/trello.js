@@ -80,6 +80,30 @@ describe('Lists', () => {
     });
   });
 
+  // ─── creation breadth: minimal vs maximal ────────────────────────────────────
+  // A list with only the required fields vs one that also sets the optional
+  // position, then re-fetch both to validate the response schema either way.
+
+  describe('creation breadth', () => {
+    it('creates and re-fetches a list with only required fields', async () => {
+      const list = await trello.lists.createList({ name: testName('list-min'), idBoard: boardId });
+      const fetched = await trello.lists.getList({ id: list.id });
+      expect(fetched.id).toBe(list.id);
+      expect(fetched.name).toContain('list-min');
+    });
+
+    it('creates and re-fetches a list with all optional parameters', async () => {
+      const list = await trello.lists.createList({
+        name: testName('list-max'),
+        idBoard: boardId,
+        pos: 'top',
+      });
+      const fetched = await trello.lists.getList({ id: list.id });
+      expect(fetched.id).toBe(list.id);
+      expect(fetched.idBoard).toBe(boardId);
+    });
+  });
+
   // ─── mutation ──────────────────────────────────────────────────────────────
 
   describe('mutation', () => {

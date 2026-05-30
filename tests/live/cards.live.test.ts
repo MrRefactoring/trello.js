@@ -80,6 +80,40 @@ describe('Cards', () => {
 
       expect(card.desc).toBe(desc);
     });
+
+    // ─── creation breadth: minimal vs maximal ──────────────────────────────────
+    // createCard requires only idList (name is optional). Create the thinnest
+    // possible card and the richest one, then re-fetch both so the Card response
+    // schema is exercised against both shapes.
+
+    it('creates and re-fetches a card with only the required idList', async () => {
+      const created = await trello.cards.createCard({ idList: listAId });
+      const card = await trello.cards.getCard({ id: created.id });
+      expect(card.id).toBe(created.id);
+      expect(card.idList).toBe(listAId);
+    });
+
+    it('creates and re-fetches a card with all optional parameters', async () => {
+      const created = await trello.cards.createCard({
+        idList: listAId,
+        name: testName('card-max'),
+        desc: 'maximal card',
+        pos: 'top',
+        due: '2030-01-01T00:00:00.000Z',
+        start: '2029-12-01T00:00:00.000Z',
+        dueComplete: false,
+        address: '1 Infinite Loop',
+        locationName: 'HQ',
+        coordinates: '37.331,-122.031',
+      });
+
+      // The goal is that the rich card parses on re-fetch; getCard's default
+      // field set doesn't echo every optional we sent, so we assert identity
+      // rather than each field's content.
+      const card = await trello.cards.getCard({ id: created.id });
+      expect(card.id).toBe(created.id);
+      expect(card.idList).toBe(listAId);
+    });
   });
 
   // ─── retrieval ─────────────────────────────────────────────────────────────
