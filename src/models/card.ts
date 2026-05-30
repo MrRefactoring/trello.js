@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { apiObject } from '#/core';
+import { CheckItemStateSchema } from '#/models/checkItemState';
 import { ChecklistSchema } from '#/models/checklist';
 import { LabelSchema } from '#/models/label';
 import { LimitsSchema } from '#/models/limits';
@@ -34,7 +35,7 @@ export const CardSchema = apiObject({
     maliciousAttachments: z.number().optional(),
   }).optional(),
   cardRole: z.enum(['separator', 'board', 'mirror', 'link']).nullish(),
-  checkItemStates: z.array(z.string()).optional(),
+  checkItemStates: z.array(CheckItemStateSchema).optional(),
   closed: z.boolean().optional(),
   coordinates: z.string().nullish(),
   creationMethod: z.string().nullish(),
@@ -77,7 +78,7 @@ export const CardSchema = apiObject({
   agent: apiObject({
     name: z.string().nullish(),
     conversationId: z.string().nullish(),
-  }).optional(),
+  }).nullish(),
   dueComplete: z.boolean().optional(),
   email: z.string().nullish(),
   isTemplate: z.boolean().optional(),

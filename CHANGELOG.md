@@ -1,5 +1,16 @@
 # Trello.js changelog
 
+## v2.1.1 (2026-05-30)
+
+### Added
+
+- `skipValidation` client option. When `true`, successful responses are returned as-is without Zod validation — no `schema.parse()`, no `ZodError`, and no schema transforms (date strings stay strings). Defaults to `false`. Use it as an escape hatch against schema drift or to skip validation overhead on large responses.
+
+### Fixed
+
+- `Card.agent` is now nullable in the response schema. The live API returns `agent: null`, which previously raised `ZodError: expected object, received null` on every endpoint that returns a `Card` or `Card[]` — including `getListCards` and `getBoardCards`, where it surfaced as `path [0, "agent"]`. Closes [#42](https://github.com/MrRefactoring/trello.js/issues/42) — thanks to [@Phyroks](https://github.com/Phyroks) for the detailed report.
+- `Card.checkItemStates` is now typed as `CheckItemState[]` (objects with `idCheckItem` and `state`) instead of `string[]`. The live API returns objects here, so `getBoardCards` / `getListCards` could reject with `ZodError: expected string, received object`. Surfaced while adding regression tests for #42.
+
 ## v2.1.0 (2026-05-25)
 
 ### Added

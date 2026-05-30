@@ -143,6 +143,12 @@ import { BoardSchema, type Board } from 'trello.js';
 const board: Board = BoardSchema.parse(payload);
 ```
 
+Нужно полностью отключить валидацию? Передайте `skipValidation: true` при создании клиента. Тогда ответы возвращаются как есть — без `schema.parse()`, без `ZodError` и без трансформаций схемы (строки-даты остаются строками). Это размен рантайм-типобезопасности на скорость и устойчивость к дрейфу схем; оставляйте `false` (значение по умолчанию), если нет причин менять.
+
+```ts
+const trello = createTrelloClient({ apiKey, apiToken, skipValidation: true });
+```
+
 ## Обработка ошибок
 
 Non-2xx ответы бросают `Error('Request failed: <status> <statusText> - <body>')`. Несовпадения схемы — `ZodError`. Rate-limit 429 ретраятся автоматически (2 с, 4 с, 8 с).

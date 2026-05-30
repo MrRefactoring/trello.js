@@ -143,6 +143,12 @@ import { BoardSchema, type Board } from 'trello.js/models';
 const board: Board = BoardSchema.parse(payload);
 ```
 
+Need to bypass validation entirely? Pass `skipValidation: true` when creating the client. Responses are then returned as-is — no `schema.parse()`, no `ZodError`, and no schema transforms (date strings stay strings). This trades runtime type-safety for speed and resilience against schema drift; leave it `false` (the default) unless you have a reason.
+
+```ts
+const trello = createTrelloClient({ apiKey, apiToken, skipValidation: true });
+```
+
 ## Error handling
 
 Non-2xx responses throw `Error('Request failed: <status> <statusText> - <body>')`. Schema mismatches throw `ZodError`. Rate-limit 429s retry automatically (2 s, 4 s, 8 s).

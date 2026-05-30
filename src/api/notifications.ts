@@ -17,7 +17,7 @@ import { type GetNotificationMember } from '#/parameters/getNotificationMember';
 import { type GetNotificationCreator } from '#/parameters/getNotificationCreator';
 import { type GetNotificationOrganization } from '#/parameters/getNotificationOrganization';
 import { type Client, type SendRequestOptions } from '#/core';
-import type { z } from 'zod';
+import { z } from 'zod';
 
 export async function getNotification(client: Client, parameters: GetNotification): Promise<Notification> {
   const config: SendRequestOptions<Notification> = {
