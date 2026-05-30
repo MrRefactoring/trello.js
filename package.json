@@ -168,7 +168,7 @@
     "provenance": true
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.18.2",
+    "@arethetypeswrong/cli": "^0.18.3",
     "@eslint/js": "^10.0.1",
     "@resvg/resvg-js": "^2.6.2",
     "@stylistic/eslint-plugin": "^5.10.0",
@@ -176,12 +176,12 @@
     "@types/node": "^22.19.19",
     "@vitest/coverage-v8": "^4.1.7",
     "dotenv": "^17.4.2",
-    "eslint": "^10.4.0",
+    "eslint": "^10.4.1",
     "globals": "^17.6.0",
     "jiti": "^2.7.0",
     "jscodeshift": "^17.3.0",
     "prettier": "^3.8.3",
-    "prettier-plugin-jsdoc": "^1.8.0",
+    "prettier-plugin-jsdoc": "^1.8.1",
     "sitemap": "^9.0.1",
     "tsc-alias": "^1.8.17",
     "tsx": "^4.22.3",
@@ -189,7 +189,7 @@
     "typedoc-plugin-markdown": "^4.11.0",
     "typedoc-vitepress-theme": "^1.1.2",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.4",
+    "typescript-eslint": "^8.60.0",
     "vitepress": "^1.6.4",
     "vitest": "^4.1.7"
   },
@@ -199,5 +199,5 @@
   "engines": {
     "node": ">=22"
   },
-  "packageManager": "pnpm@11.2.2"
+  "packageManager": "pnpm@11.5.0"
 }

@@ -3,9 +3,9 @@ import { z } from 'zod';
 export const GetCardSchema = z.object({
   /**
    * `all` or a comma-separated list of
-   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/). **Defaults**:
-   * `badges, checkItemStates, closed, dateLastActivity, desc, descData, due, start, idBoard, idChecklists, idLabels,
-   * idList, idMembers, idShort, idAttachmentCover, manualCoverAttachment, labels, name, pos, shortUrl, url`
+   * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/). **Defaults**: `badges,
+   * checkItemStates, closed, dateLastActivity, desc, descData, due, start, idBoard, idChecklists, idLabels, idList,
+   * idMembers, idShort, idAttachmentCover, manualCoverAttachment, labels, name, pos, shortUrl, url`
    */
   fields: z
     .union([

@@ -71,8 +71,8 @@ export const GetMemberSchema = z.object({
   boardStars: z.boolean().optional(),
   /**
    * See the [Cards Nested
-   * Resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/#cards-nested-resource)
-   * for additional options
+   * Resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/#cards-nested-resource) for
+   * additional options
    */
   cards: z.string().optional(),
   /** `all` or `none` */

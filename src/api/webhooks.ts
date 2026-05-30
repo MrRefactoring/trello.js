@@ -6,7 +6,7 @@ import { type UpdateWebhook } from '#/parameters/updateWebhook';
 import { type DeleteWebhook } from '#/parameters/deleteWebhook';
 import { type GetWebhookField } from '#/parameters/getWebhookField';
 import { type Client, type SendRequestOptions } from '#/core';
-import { z } from 'zod';
+import type { z } from 'zod';
 
 /** Create a new webhook. */
 export async function createWebhook(client: Client, parameters: CreateWebhook): Promise<Webhook> {
