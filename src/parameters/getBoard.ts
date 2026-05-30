@@ -26,11 +26,63 @@ export const GetBoardSchema = z.object({
    */
   customFields: z.boolean().optional(),
   /**
-   * The fields of the board to be included in the response. Valid values: all or a comma-separated list of: closed,
-   * dateLastActivity, dateLastView, desc, descData, idMemberCreator, idOrganization, invitations, invited, labelNames,
-   * memberships, name, pinned, powerUps, prefs, shortLink, shortUrl, starred, subscribed, url
+   * The fields of the board to be included in the response. Valid values: all or a comma-separated list of: `closed`,
+   * `dateLastActivity`, `dateLastView`, `desc`, `descData`, `idMemberCreator`, `idOrganization`, `invitations`,
+   * `invited`, `labelNames`, `memberships`, `name`, `pinned`, `powerUps`, `prefs`, `shortLink`, `shortUrl`, `starred`,
+   * `subscribed`, `url`
    */
-  fields: z.union([z.string(), z.array(z.string())]).optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'closed',
+        'dateLastActivity',
+        'dateLastView',
+        'desc',
+        'descData',
+        'idMemberCreator',
+        'idOrganization',
+        'invitations',
+        'invited',
+        'labelNames',
+        'memberships',
+        'name',
+        'pinned',
+        'powerUps',
+        'prefs',
+        'shortLink',
+        'shortUrl',
+        'starred',
+        'subscribed',
+        'url',
+      ]),
+      z.array(
+        z.enum([
+          'closed',
+          'dateLastActivity',
+          'dateLastView',
+          'desc',
+          'descData',
+          'idMemberCreator',
+          'idOrganization',
+          'invitations',
+          'invited',
+          'labelNames',
+          'memberships',
+          'name',
+          'pinned',
+          'powerUps',
+          'prefs',
+          'shortLink',
+          'shortUrl',
+          'starred',
+          'subscribed',
+          'url',
+        ]),
+      ),
+    ])
+    .optional(),
   /**
    * This is a nested resource. Read more about labels as nested resources
    * [here](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/).

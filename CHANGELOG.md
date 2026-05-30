@@ -5,6 +5,7 @@
 ### Added
 
 - `skipValidation` client option. When `true`, successful responses are returned as-is without Zod validation — no `schema.parse()`, no `ZodError`, and no schema transforms (date strings stay strings). Defaults to `false`. Use it as an escape hatch against schema drift or to skip validation overhead on large responses.
+- Typed enum literals for params whose valid values were listed inline as plain prose — no backticks and no `[fields](...)` doc link — so the previous heuristics skipped them. The colon after `comma-separated list of` is now optional, covering bare-prose descriptions such as `search.organizationFields` ("All or a comma-separated list of billableMemberCount, desc…"). `getBoard.fields` and `search.organizationFields` now accept `z.enum([...])` or an array thereof alongside the free-form `string | string[]`, and their JSDoc renders each valid value as inline code. Loose string branches retained — non-breaking.
 
 ### Fixed
 
