@@ -6,4 +6,4 @@ export { createBatchRun } from './batchRun';
 
 export { createClient } from './createClient';
 
-export type { Client, ClientConfig, SendRequestOptions } from './types';
+export type { Client, ClientConfig, SendRequestOptions } from './interfaces';

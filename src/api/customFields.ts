@@ -1,14 +1,14 @@
 import { CustomFieldSchema, type CustomField } from '#/models/customField';
 import { CustomFieldOptionSchema, type CustomFieldOption } from '#/models/customFieldOption';
-import { type CreateCustomField } from '#/parameters/createCustomField';
-import { type GetCustomField } from '#/parameters/getCustomField';
-import { type UpdateCustomField } from '#/parameters/updateCustomField';
-import { type DeleteCustomField } from '#/parameters/deleteCustomField';
-import { type GetCustomFieldOptions } from '#/parameters/getCustomFieldOptions';
-import { type CreateCustomFieldOption } from '#/parameters/createCustomFieldOption';
-import { type GetCustomFieldOption } from '#/parameters/getCustomFieldOption';
-import { type DeleteCustomFieldOption } from '#/parameters/deleteCustomFieldOption';
-import { type Client, type SendRequestOptions } from '#/core';
+import type { CreateCustomField } from '#/parameters/createCustomField';
+import type { GetCustomField } from '#/parameters/getCustomField';
+import type { UpdateCustomField } from '#/parameters/updateCustomField';
+import type { DeleteCustomField } from '#/parameters/deleteCustomField';
+import type { GetCustomFieldOptions } from '#/parameters/getCustomFieldOptions';
+import type { CreateCustomFieldOption } from '#/parameters/createCustomFieldOption';
+import type { GetCustomFieldOption } from '#/parameters/getCustomFieldOption';
+import type { DeleteCustomFieldOption } from '#/parameters/deleteCustomFieldOption';
+import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Create a new Custom Field on a board. */

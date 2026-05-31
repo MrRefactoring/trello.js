@@ -1,10 +1,10 @@
 import { LabelSchema, type Label } from '#/models/label';
-import { type GetLabel } from '#/parameters/getLabel';
-import { type UpdateLabel } from '#/parameters/updateLabel';
-import { type DeleteLabel } from '#/parameters/deleteLabel';
-import { type UpdateLabelField } from '#/parameters/updateLabelField';
-import { type CreateLabel } from '#/parameters/createLabel';
-import { type Client, type SendRequestOptions } from '#/core';
+import type { GetLabel } from '#/parameters/getLabel';
+import type { UpdateLabel } from '#/parameters/updateLabel';
+import type { DeleteLabel } from '#/parameters/deleteLabel';
+import type { UpdateLabelField } from '#/parameters/updateLabelField';
+import type { CreateLabel } from '#/parameters/createLabel';
+import type { Client, SendRequestOptions } from '#/core';
 
 /** Get information about a single Label. */
 export async function getLabel(client: Client, parameters: GetLabel): Promise<Label> {

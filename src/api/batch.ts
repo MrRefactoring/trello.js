@@ -1,5 +1,5 @@
-import { type Run } from '#/parameters/run';
-import { type Client, type SendRequestOptions } from '#/core';
+import type { Run } from '#/parameters/run';
+import type { Client, SendRequestOptions } from '#/core';
 
 /** Make up to 10 GET requests in a single, batched API call. */
 export async function run(client: Client, parameters: Run): Promise<unknown> {

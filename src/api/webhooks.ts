@@ -1,11 +1,11 @@
 import { WebhookSchema, type Webhook } from '#/models/webhook';
 import { FieldValueSchema, type FieldValue } from '#/models/fieldValue';
-import { type CreateWebhook } from '#/parameters/createWebhook';
-import { type GetWebhook } from '#/parameters/getWebhook';
-import { type UpdateWebhook } from '#/parameters/updateWebhook';
-import { type DeleteWebhook } from '#/parameters/deleteWebhook';
-import { type GetWebhookField } from '#/parameters/getWebhookField';
-import { type Client, type SendRequestOptions } from '#/core';
+import type { CreateWebhook } from '#/parameters/createWebhook';
+import type { GetWebhook } from '#/parameters/getWebhook';
+import type { UpdateWebhook } from '#/parameters/updateWebhook';
+import type { DeleteWebhook } from '#/parameters/deleteWebhook';
+import type { GetWebhookField } from '#/parameters/getWebhookField';
+import type { Client, SendRequestOptions } from '#/core';
 import type { z } from 'zod';
 
 /** Create a new webhook. */

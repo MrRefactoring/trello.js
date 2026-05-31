@@ -1,15 +1,15 @@
 import { TokenSchema, type Token } from '#/models/token';
 import { MemberSchema, type Member } from '#/models/member';
 import { WebhookSchema, type Webhook } from '#/models/webhook';
-import { type GetToken } from '#/parameters/getToken';
-import { type GetTokenMember } from '#/parameters/getTokenMember';
-import { type GetTokenWebhooks } from '#/parameters/getTokenWebhooks';
-import { type CreateTokenWebhook } from '#/parameters/createTokenWebhook';
-import { type GetTokenWebhook } from '#/parameters/getTokenWebhook';
-import { type UpdateTokenWebhook } from '#/parameters/updateTokenWebhook';
-import { type DeleteTokenWebhook } from '#/parameters/deleteTokenWebhook';
-import { type DeleteToken } from '#/parameters/deleteToken';
-import { type Client, type SendRequestOptions } from '#/core';
+import type { GetToken } from '#/parameters/getToken';
+import type { GetTokenMember } from '#/parameters/getTokenMember';
+import type { GetTokenWebhooks } from '#/parameters/getTokenWebhooks';
+import type { CreateTokenWebhook } from '#/parameters/createTokenWebhook';
+import type { GetTokenWebhook } from '#/parameters/getTokenWebhook';
+import type { UpdateTokenWebhook } from '#/parameters/updateTokenWebhook';
+import type { DeleteTokenWebhook } from '#/parameters/deleteTokenWebhook';
+import type { DeleteToken } from '#/parameters/deleteToken';
+import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Retrieve information about a token. */

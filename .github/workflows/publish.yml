@@ -1,16 +1,54 @@
-name: NPM publish
+name: Release
 
 on:
-  workflow_dispatch:
-  release:
-    types: [published]
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
 
 permissions:
-  contents: read
-  id-token: write # required for npm provenance via OIDC
+  contents: write  # create / update GitHub release
+  id-token: write  # npm provenance via OIDC
 
 jobs:
+  # ── 1. Create a draft release populated from CHANGELOG.md ──────────────────
+  create-release:
+    runs-on: ubuntu-latest
+    outputs:
+      release-id: ${{ steps.create.outputs.result }}
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Create draft release with changelog body
+        id: create
+        uses: actions/github-script@v9
+        with:
+          result-encoding: string
+          script: |
+            const fs = require('fs')
+            const tag = context.ref.replace('refs/tags/', '')
+            const version = tag.replace(/^v/, '')
+            const changelog = fs.readFileSync('CHANGELOG.md', 'utf8')
+
+            const escaped = version.replace(/\./g, '\\.')
+            const match = changelog.match(
+              new RegExp(`## v${escaped}[^\\n]*\\n([\\s\\S]*?)(?=\\n## v|$)`)
+            )
+            const body = match ? match[1].trim() : '<!-- changelog section not found -->'
+
+            const { data } = await github.rest.repos.createRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              tag_name: tag,
+              name: tag,
+              body,
+              draft: true,
+              prerelease: false
+            })
+            return data.id
+
+  # ── 2. Build, test, publish to npm, then make the release public ────────────
   publish:
+    needs: create-release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -42,3 +80,16 @@ jobs:
         run: pnpm publish --provenance --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish GitHub release
+        uses: actions/github-script@v9
+        env:
+          RELEASE_ID: ${{ needs.create-release.outputs.release-id }}
+        with:
+          script: |
+            await github.rest.repos.updateRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              release_id: parseInt(process.env.RELEASE_ID),
+              draft: false
+            })

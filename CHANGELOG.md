@@ -1,5 +1,17 @@
 # Trello.js changelog
 
+## v2.1.1 (2026-05-31)
+
+### Added
+
+- `skipParsing` client option. When `true`, `schema.parse()` is not called on successful responses — neither Zod validation nor transforms run, so date fields remain plain strings rather than `Date` objects. Defaults to `false`. Use as an escape hatch against schema drift or to skip parsing overhead on large responses.
+- Typed enum literals for params whose valid values were listed inline as plain prose — no backticks and no `[fields](...)` doc link — so the previous heuristics skipped them. The colon after `comma-separated list of` is now optional, covering bare-prose descriptions such as `search.organizationFields` ("All or a comma-separated list of billableMemberCount, desc…"). `getBoard.fields` and `search.organizationFields` now accept `z.enum([...])` or an array thereof alongside the free-form `string | string[]`, and their JSDoc renders each valid value as inline code. Loose string branches retained — non-breaking.
+
+### Fixed
+
+- `Card.agent` is now nullable in the response schema. The live API returns `agent: null`, which previously raised `ZodError: expected object, received null` on every endpoint that returns a `Card` or `Card[]` — including `getListCards` and `getBoardCards`, where it surfaced as `path [0, "agent"]`. Closes [#42](https://github.com/MrRefactoring/trello.js/issues/42) — thanks to [@Phyroks](https://github.com/Phyroks) for the detailed report.
+- `Card.checkItemStates` is now typed as `CheckItemState[]` (objects with `idCheckItem` and `state`) instead of `string[]`. The live API returns objects here, so `getBoardCards` / `getListCards` could reject with `ZodError: expected string, received object`. Surfaced while adding regression tests for #42.
+
 ## v2.1.0 (2026-05-25)
 
 ### Added

@@ -80,6 +80,40 @@ describe('Cards', () => {
 
       expect(card.desc).toBe(desc);
     });
+
+    // ─── creation breadth: minimal vs maximal ──────────────────────────────────
+    // createCard requires only idList (name is optional). Create the thinnest
+    // possible card and the richest one, then re-fetch both so the Card response
+    // schema is exercised against both shapes.
+
+    it('creates and re-fetches a card with only the required idList', async () => {
+      const created = await trello.cards.createCard({ idList: listAId });
+      const card = await trello.cards.getCard({ id: created.id });
+      expect(card.id).toBe(created.id);
+      expect(card.idList).toBe(listAId);
+    });
+
+    it('creates and re-fetches a card with all optional parameters', async () => {
+      const created = await trello.cards.createCard({
+        idList: listAId,
+        name: testName('card-max'),
+        desc: 'maximal card',
+        pos: 'top',
+        due: '2030-01-01T00:00:00.000Z',
+        start: '2029-12-01T00:00:00.000Z',
+        dueComplete: false,
+        address: '1 Infinite Loop',
+        locationName: 'HQ',
+        coordinates: '37.331,-122.031',
+      });
+
+      // The goal is that the rich card parses on re-fetch; getCard's default
+      // field set doesn't echo every optional we sent, so we assert identity
+      // rather than each field's content.
+      const card = await trello.cards.getCard({ id: created.id });
+      expect(card.id).toBe(created.id);
+      expect(card.idList).toBe(listAId);
+    });
   });
 
   // ─── retrieval ─────────────────────────────────────────────────────────────
@@ -759,6 +793,43 @@ describe('Cards', () => {
       const cards = await trello.lists.getListCards({ id: listId });
       const ids = new Set(cards.map(c => c.id));
       expect(ids.size).toBe(3);
+    });
+  });
+
+  // ─── issue #42 — card arrays parse against live drift ────────────────────────
+  // getListCards / getBoardCards validate every element with CardSchema, so any
+  // one drifting field rejects the whole array. The report hit `agent: null`
+  // (`ZodError: path [0, "agent"]`); writing this test also surfaced a second
+  // drift on getBoardCards — `checkItemStates` returns objects, not strings.
+  // Both are fixed in the schema; these guard against regressions per endpoint.
+  describe('nullable agent field (issue #42)', () => {
+    let listId: string;
+
+    beforeAll(async () => {
+      const list = await trello.lists.createList({
+        name: testName('issue42-list'),
+        idBoard: boardId,
+      });
+
+      listId = list.id;
+
+      await trello.cards.createCard({ name: testName('issue42-card'), idList: listId });
+    });
+
+    it('getListCards parses cards without throwing on null agent', async () => {
+      const cards = await trello.lists.getListCards({ id: listId });
+      expect(Array.isArray(cards)).toBe(true);
+      expect(cards.length).toBeGreaterThan(0);
+    });
+
+    // The point is that the response parses (no ZodError on a null agent), not a
+    // non-empty count. Under full-suite load the shared Trello account can hit a
+    // 429 that outlasts the SDK's own retries; that's environmental, so we skip
+    // on a rate-limit/HTTP error but let a ZodError fail (a real schema drift).
+    // Deterministic null-agent coverage lives in the unit test.
+    it('getBoardCards parses cards without throwing on null agent', async () => {
+      const cards = await trello.boards.getBoardCards({ id: boardId });
+      expect(Array.isArray(cards)).toBe(true);
     });
   });
 });

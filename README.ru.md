@@ -143,6 +143,12 @@ import { BoardSchema, type Board } from 'trello.js';
 const board: Board = BoardSchema.parse(payload);
 ```
 
+Нужно полностью отключить парсинг? Передайте `skipParsing: true` при создании клиента. Тогда `schema.parse()` не вызывается — нет `ZodError`, нет валидации и нет трансформаций схемы (даты остаются строками, а не объектами `Date`). Это размен рантайм-типобезопасности на скорость и устойчивость к дрейфу схем; оставляйте `false` (значение по умолчанию), если нет причин менять.
+
+```ts
+const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
+```
+
 ## Обработка ошибок
 
 Non-2xx ответы бросают `Error('Request failed: <status> <statusText> - <body>')`. Несовпадения схемы — `ZodError`. Rate-limit 429 ретраятся автоматически (2 с, 4 с, 8 с).

@@ -161,17 +161,96 @@ export const SearchSchema = z.object({
    */
   cardAttachments: z.string().optional(),
   /**
-   * All or a comma-separated list of billableMemberCount, desc, descData, displayName, idBoards, invitations, invited,
-   * logoHash, memberships, name, powerUps, prefs, premiumFeatures, products, url, website
+   * All or a comma-separated list of `billableMemberCount`, `desc`, `descData`, `displayName`, `idBoards`,
+   * `invitations`, `invited`, `logoHash`, `memberships`, `name`, `powerUps`, `prefs`, `premiumFeatures`, `products`,
+   * `url`, `website`
    */
-  organizationFields: z.union([z.string(), z.array(z.string())]).optional(),
+  organizationFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'billableMemberCount',
+        'desc',
+        'descData',
+        'displayName',
+        'idBoards',
+        'invitations',
+        'invited',
+        'logoHash',
+        'memberships',
+        'name',
+        'powerUps',
+        'prefs',
+        'premiumFeatures',
+        'products',
+        'url',
+        'website',
+      ]),
+      z.array(
+        z.enum([
+          'billableMemberCount',
+          'desc',
+          'descData',
+          'displayName',
+          'idBoards',
+          'invitations',
+          'invited',
+          'logoHash',
+          'memberships',
+          'name',
+          'powerUps',
+          'prefs',
+          'premiumFeatures',
+          'products',
+          'url',
+          'website',
+        ]),
+      ),
+    ])
+    .optional(),
   /** The maximum number of Workspaces to return. Maximum 1000 */
   organizationsLimit: z.number().optional(),
   /**
-   * All or a comma-separated list of: avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials,
-   * memberType, products, status, url, username
+   * All or a comma-separated list of: `avatarHash`, `bio`, `bioData`, `confirmed`, `fullName`, `idPremOrgsAdmin`,
+   * `initials`, `memberType`, `products`, `status`, `url`, `username`
    */
-  memberFields: z.union([z.string(), z.array(z.string())]).optional(),
+  memberFields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      z.enum([
+        'avatarHash',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'products',
+        'status',
+        'url',
+        'username',
+      ]),
+      z.array(
+        z.enum([
+          'avatarHash',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'products',
+          'status',
+          'url',
+          'username',
+        ]),
+      ),
+    ])
+    .optional(),
   /** The maximum number of members to return. Maximum 1000 */
   membersLimit: z.number().optional(),
   /**

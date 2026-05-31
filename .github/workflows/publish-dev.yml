@@ -1,0 +1,122 @@
+name: Publish dev package
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write      # create GitHub pre-release
+  id-token: write      # npm provenance via OIDC
+  pull-requests: write # comment on PR
+
+jobs:
+  publish-dev:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 # full history for git describe
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org/
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Test (unit)
+        run: pnpm vitest run
+
+      - name: Check published types (attw)
+        run: pnpm run check:attw
+
+      - name: Compute dev version
+        id: version
+        run: |
+          BASE=$(node -p "require('./package.json').version")
+          NEXT=$(npm view trello.js versions --json 2>/dev/null | \
+            jq --arg base "$BASE" \
+            '[.[] | select(startswith($base+"-dev.")) | ltrimstr($base+"-dev.") | tonumber] | if length > 0 then max+1 else 0 end' \
+            2>/dev/null || echo 0)
+          DEV_VERSION="${BASE}-dev.${NEXT}"
+          echo "version=$DEV_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Bump version in package.json (CI only, no commit)
+        run: npm version "${{ steps.version.outputs.version }}" --no-git-tag-version
+
+      - name: Publish to npm with dev tag
+        run: pnpm publish --provenance --access public --no-git-checks --tag dev
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Create GitHub pre-release
+        id: release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          BRANCH="${GITHUB_REF_NAME}"
+          LAST_TAG=$(git describe --tags --abbrev=0 --match "v[0-9]*.[0-9]*.[0-9]" 2>/dev/null || echo "")
+          if [ -n "$LAST_TAG" ]; then
+            COMMITS=$(git log --pretty=format:"- %s" "${LAST_TAG}..HEAD")
+            SINCE="since \`${LAST_TAG}\`"
+          else
+            COMMITS=$(git log --pretty=format:"- %s" -20)
+            SINCE="(last 20 commits)"
+          fi
+
+          {
+            echo "## Dev release \`${VERSION}\`"
+            echo ""
+            echo "Published from branch \`${BRANCH}\`."
+            echo ""
+            echo "### Install"
+            echo ""
+            echo '```sh'
+            echo "npm install trello.js@${VERSION}"
+            echo '```'
+            echo ""
+            echo "### Changes ${SINCE}"
+            echo ""
+            echo "${COMMITS}"
+          } > /tmp/release-notes.md
+
+          gh release create "v${VERSION}" \
+            --title "v${VERSION} (dev)" \
+            --notes-file /tmp/release-notes.md \
+            --prerelease \
+            --target "$GITHUB_SHA"
+
+          RELEASE_URL=$(gh release view "v${VERSION}" --json url -q .url)
+          echo "url=$RELEASE_URL" >> "$GITHUB_OUTPUT"
+
+      - name: Comment on PR (if exists)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ steps.version.outputs.version }}
+          RELEASE_URL: ${{ steps.release.outputs.url }}
+        run: |
+          PR=$(gh pr list --head "$GITHUB_REF_NAME" --json number -q '.[0].number' 2>/dev/null || echo "")
+          if [ -n "$PR" ]; then
+            {
+              echo "### 📦 Dev package published"
+              echo ""
+              echo "**Version:** \`${VERSION}\`"
+              echo "**npm tag:** \`dev\`"
+              echo "**Release:** ${RELEASE_URL}"
+              echo ""
+              echo '```sh'
+              echo "npm install trello.js@${VERSION}"
+              echo '```'
+            } > /tmp/pr-comment.md
+            gh pr comment "$PR" --body-file /tmp/pr-comment.md
+          fi

@@ -1,5 +1,5 @@
 import { buildUrl } from './buildUrl';
-import { type Client, type ClientConfig, type SendRequestOptions } from './types';
+import type { Client, ClientConfig, SendRequestOptions } from './interfaces';
 
 const DEFAULT_HOST = 'https://api.trello.com/1';
 const MAX_RETRY_ATTEMPTS = 4;
@@ -7,6 +7,7 @@ const MAX_RETRY_ATTEMPTS = 4;
 export function createClient(config: ClientConfig): Client {
   const baseUrl = (config.host ?? DEFAULT_HOST).replace(/\/$/, '');
   const defaultHeaders = config.headers ?? {};
+  const skipParsing = config.skipParsing ?? false;
 
   return {
     async sendRequest<T>(options: SendRequestOptions<T>): Promise<T> {
@@ -26,7 +27,7 @@ export function createClient(config: ClientConfig): Client {
         body,
       });
 
-      return parseResponse(response, options.schema);
+      return parseResponse(response, options.schema, skipParsing);
     },
   };
 }
@@ -64,7 +65,11 @@ async function fetchWithRetry(url: string, init: RequestInit): Promise<Response>
   return response;
 }
 
-async function parseResponse<T>(response: Response, schema: SendRequestOptions<T>['schema']): Promise<T> {
+async function parseResponse<T>(
+  response: Response,
+  schema: SendRequestOptions<T>['schema'],
+  skipParsing: boolean,
+): Promise<T> {
   if (!response.ok) {
     const text = await response.text();
     throw new Error(`Request failed: ${response.status} ${response.statusText}${text ? ` - ${text}` : ''}`);
@@ -78,5 +83,5 @@ async function parseResponse<T>(response: Response, schema: SendRequestOptions<T
 
   const data = (await response.json()) as unknown;
 
-  return schema ? (schema.parse(data) as T) : (data as T);
+  return schema && !skipParsing ? (schema.parse(data) as T) : (data as T);
 }

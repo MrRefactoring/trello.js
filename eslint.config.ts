@@ -46,6 +46,7 @@ export default defineConfig([
       '@stylistic/no-extra-semi': 'error',
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/semi': ['error', 'always'],
+      '@typescript-eslint/no-import-type-side-effects': 'error',
       '@typescript-eslint/consistent-type-imports': [
         'error',
         {

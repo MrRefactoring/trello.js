@@ -203,6 +203,30 @@ describe('createClient', () => {
     await expect(client.sendRequest({ url: '/boards/123', schema })).rejects.toThrow();
   });
 
+  it('skips validation and returns raw data when skipParsing is true', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
+    const schema = z.object({ id: z.string() });
+    const client = createClient({ ...BASE_CONFIG, skipParsing: true });
+    const result = await client.sendRequest({ url: '/boards/123', schema });
+    expect(result).toEqual({ notId: 123 });
+  });
+
+  it('still validates when skipParsing is explicitly false', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
+    const schema = z.object({ id: z.string() });
+    const client = createClient({ ...BASE_CONFIG, skipParsing: false });
+    await expect(client.sendRequest({ url: '/boards/123', schema })).rejects.toThrow();
+  });
+
+  it('returns raw values without schema transforms when skipParsing is true', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, { when: '2026-05-30T00:00:00.000Z' }));
+    const schema = z.object({ when: z.coerce.date() });
+    const client = createClient({ ...BASE_CONFIG, skipParsing: true });
+    const result = await client.sendRequest({ url: '/boards/123', schema });
+    // No coercion: the raw ISO string is returned as-is, not a Date instance.
+    expect(result).toEqual({ when: '2026-05-30T00:00:00.000Z' });
+  });
+
   it('returns undefined for 204 No Content', async () => {
     vi.stubGlobal('fetch', mockFetch(204, '', 'text/plain'));
     const client = createClient(BASE_CONFIG);
