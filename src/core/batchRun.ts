@@ -1,5 +1,5 @@
 import { buildUrl } from './buildUrl';
-import type { Client, SendRequestOptions } from './types';
+import type { Client, SendRequestOptions } from './interfaces';
 
 type CapturedRequest = {
   url: string;

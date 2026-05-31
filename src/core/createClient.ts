@@ -1,5 +1,5 @@
 import { buildUrl } from './buildUrl';
-import type { Client, ClientConfig, SendRequestOptions } from './types';
+import type { Client, ClientConfig, SendRequestOptions } from './interfaces';
 
 const DEFAULT_HOST = 'https://api.trello.com/1';
 const MAX_RETRY_ATTEMPTS = 4;
