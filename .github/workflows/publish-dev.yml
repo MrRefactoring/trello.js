@@ -74,25 +74,25 @@ jobs:
             SINCE="(last 20 commits)"
           fi
 
-          NOTES="## Dev release \`${VERSION}\`
-
-Published from branch \`${BRANCH}\`.
-
-### Install
-
-\`\`\`sh
-npm install trello.js@${VERSION}
-# or pin to this exact version:
-npm install trello.js@dev
-\`\`\`
-
-### Changes ${SINCE}
-
-${COMMITS}"
+          {
+            echo "## Dev release \`${VERSION}\`"
+            echo ""
+            echo "Published from branch \`${BRANCH}\`."
+            echo ""
+            echo "### Install"
+            echo ""
+            echo '```sh'
+            echo "npm install trello.js@${VERSION}"
+            echo '```'
+            echo ""
+            echo "### Changes ${SINCE}"
+            echo ""
+            echo "${COMMITS}"
+          } > /tmp/release-notes.md
 
           gh release create "v${VERSION}" \
             --title "v${VERSION} (dev)" \
-            --notes "$NOTES" \
+            --notes-file /tmp/release-notes.md \
             --prerelease \
             --target "$GITHUB_SHA"
 
@@ -107,13 +107,16 @@ ${COMMITS}"
         run: |
           PR=$(gh pr list --head "$GITHUB_REF_NAME" --json number -q '.[0].number' 2>/dev/null || echo "")
           if [ -n "$PR" ]; then
-            gh pr comment "$PR" --body "### 📦 Dev package published
-
-**Version:** \`${VERSION}\`
-**npm tag:** \`dev\`
-**Release:** ${RELEASE_URL}
-
-\`\`\`sh
-npm install trello.js@${VERSION}
-\`\`\`"
+            {
+              echo "### 📦 Dev package published"
+              echo ""
+              echo "**Version:** \`${VERSION}\`"
+              echo "**npm tag:** \`dev\`"
+              echo "**Release:** ${RELEASE_URL}"
+              echo ""
+              echo '```sh'
+              echo "npm install trello.js@${VERSION}"
+              echo '```'
+            } > /tmp/pr-comment.md
+            gh pr comment "$PR" --body-file /tmp/pr-comment.md
           fi
