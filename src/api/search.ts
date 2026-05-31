@@ -1,8 +1,8 @@
 import { SearchResultSchema, type SearchResult } from '#/models/searchResult';
 import { MemberSchema, type Member } from '#/models/member';
-import { type Search } from '#/parameters/search';
-import { type SearchMembers } from '#/parameters/searchMembers';
-import { type Client, type SendRequestOptions } from '#/core';
+import type { Search } from '#/parameters/search';
+import type { SearchMembers } from '#/parameters/searchMembers';
+import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Find what you're looking for in Trello */

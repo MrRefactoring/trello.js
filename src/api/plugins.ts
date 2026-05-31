@@ -1,11 +1,11 @@
 import { PluginSchema, type Plugin } from '#/models/plugin';
 import { PluginListingSchema, type PluginListing } from '#/models/pluginListing';
-import { type GetPlugin } from '#/parameters/getPlugin';
-import { type UpdatePlugin } from '#/parameters/updatePlugin';
-import { type CreatePluginListing } from '#/parameters/createPluginListing';
-import { type GetPluginMemberPrivacyCompliance } from '#/parameters/getPluginMemberPrivacyCompliance';
-import { type UpdatePluginListing } from '#/parameters/updatePluginListing';
-import { type Client, type SendRequestOptions } from '#/core';
+import type { GetPlugin } from '#/parameters/getPlugin';
+import type { UpdatePlugin } from '#/parameters/updatePlugin';
+import type { CreatePluginListing } from '#/parameters/createPluginListing';
+import type { GetPluginMemberPrivacyCompliance } from '#/parameters/getPluginMemberPrivacyCompliance';
+import type { UpdatePluginListing } from '#/parameters/updatePluginListing';
+import type { Client, SendRequestOptions } from '#/core';
 
 /** Get plugins */
 export async function getPlugin(client: Client, parameters: GetPlugin): Promise<Plugin> {

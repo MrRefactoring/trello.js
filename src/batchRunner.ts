@@ -1,4 +1,4 @@
-import { type Client, type SendRequestOptions } from '#/core';
+import type { Client, SendRequestOptions } from '#/core';
 import * as actionsNs from '#/api/actions';
 import * as boardsNs from '#/api/boards';
 import * as cardsNs from '#/api/cards';
