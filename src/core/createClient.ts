@@ -1,5 +1,5 @@
 import { buildUrl } from './buildUrl';
-import { type Client, type ClientConfig, type SendRequestOptions } from './types';
+import type { Client, ClientConfig, SendRequestOptions } from './types';
 
 const DEFAULT_HOST = 'https://api.trello.com/1';
 const MAX_RETRY_ATTEMPTS = 4;
@@ -7,7 +7,7 @@ const MAX_RETRY_ATTEMPTS = 4;
 export function createClient(config: ClientConfig): Client {
   const baseUrl = (config.host ?? DEFAULT_HOST).replace(/\/$/, '');
   const defaultHeaders = config.headers ?? {};
-  const skipValidation = config.skipValidation ?? false;
+  const skipParsing = config.skipParsing ?? false;
 
   return {
     async sendRequest<T>(options: SendRequestOptions<T>): Promise<T> {
@@ -27,7 +27,7 @@ export function createClient(config: ClientConfig): Client {
         body,
       });
 
-      return parseResponse(response, options.schema, skipValidation);
+      return parseResponse(response, options.schema, skipParsing);
     },
   };
 }
@@ -68,7 +68,7 @@ async function fetchWithRetry(url: string, init: RequestInit): Promise<Response>
 async function parseResponse<T>(
   response: Response,
   schema: SendRequestOptions<T>['schema'],
-  skipValidation: boolean,
+  skipParsing: boolean,
 ): Promise<T> {
   if (!response.ok) {
     const text = await response.text();
@@ -83,5 +83,5 @@ async function parseResponse<T>(
 
   const data = (await response.json()) as unknown;
 
-  return schema && !skipValidation ? (schema.parse(data) as T) : (data as T);
+  return schema && !skipParsing ? (schema.parse(data) as T) : (data as T);
 }

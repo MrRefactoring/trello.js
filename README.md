@@ -143,10 +143,10 @@ import { BoardSchema, type Board } from 'trello.js/models';
 const board: Board = BoardSchema.parse(payload);
 ```
 
-Need to bypass validation entirely? Pass `skipValidation: true` when creating the client. Responses are then returned as-is — no `schema.parse()`, no `ZodError`, and no schema transforms (date strings stay strings). This trades runtime type-safety for speed and resilience against schema drift; leave it `false` (the default) unless you have a reason.
+Need to bypass parsing entirely? Pass `skipParsing: true` when creating the client. `schema.parse()` is then skipped — no `ZodError`, no validation, and no schema transforms (date fields stay strings rather than `Date` objects). This trades runtime type-safety for speed and resilience against schema drift; leave it `false` (the default) unless you have a reason.
 
 ```ts
-const trello = createTrelloClient({ apiKey, apiToken, skipValidation: true });
+const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
 ```
 
 ## Error handling

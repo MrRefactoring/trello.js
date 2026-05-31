@@ -1,4 +1,4 @@
-import { type ZodType } from 'zod';
+import type { ZodType } from 'zod';
 
 export interface SendRequestOptions<T = unknown> {
   url: string;
@@ -15,10 +15,11 @@ export interface ClientConfig {
   apiToken: string;
   headers?: Record<string, string>;
   /**
-   * When `true`, successful responses are returned as-is without Zod schema validation. Trades runtime type-safety (and
-   * schema transforms such as `z.coerce.date()`) for speed and resilience against schema drift. Defaults to `false`.
+   * When `true`, `schema.parse()` is not called on successful responses — neither Zod validation nor schema transforms
+   * (e.g. `z.coerce.date()`) run. Date fields remain plain strings. Use as an escape hatch against schema drift or to
+   * skip parsing overhead on large responses. Defaults to `false`.
    */
-  skipValidation?: boolean;
+  skipParsing?: boolean;
 }
 
 export interface Client {

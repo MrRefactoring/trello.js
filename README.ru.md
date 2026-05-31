@@ -143,10 +143,10 @@ import { BoardSchema, type Board } from 'trello.js';
 const board: Board = BoardSchema.parse(payload);
 ```
 
-Нужно полностью отключить валидацию? Передайте `skipValidation: true` при создании клиента. Тогда ответы возвращаются как есть — без `schema.parse()`, без `ZodError` и без трансформаций схемы (строки-даты остаются строками). Это размен рантайм-типобезопасности на скорость и устойчивость к дрейфу схем; оставляйте `false` (значение по умолчанию), если нет причин менять.
+Нужно полностью отключить парсинг? Передайте `skipParsing: true` при создании клиента. Тогда `schema.parse()` не вызывается — нет `ZodError`, нет валидации и нет трансформаций схемы (даты остаются строками, а не объектами `Date`). Это размен рантайм-типобезопасности на скорость и устойчивость к дрейфу схем; оставляйте `false` (значение по умолчанию), если нет причин менять.
 
 ```ts
-const trello = createTrelloClient({ apiKey, apiToken, skipValidation: true });
+const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
 ```
 
 ## Обработка ошибок
