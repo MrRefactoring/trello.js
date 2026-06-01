@@ -320,7 +320,6 @@ import type {
   SearchResult,
   Webhook,
 } from '#/models';
-
 export interface BatchNamespace {
   run<const T extends readonly Promise<unknown>[]>(
     builder: (b: BatchClient) => T,
@@ -328,10 +327,8 @@ export interface BatchNamespace {
     -readonly [K in keyof T]: Awaited<T[K]>;
   }>;
 }
-
 export function createTrelloClient(clientConfig: ClientConfig) {
   const client = createClient(clientConfig);
-
   return {
     actions: {
       getAction: (parameters: GetAction): Promise<Action> => actions.getAction(client, parameters),
@@ -806,5 +803,4 @@ export function createTrelloClient(clientConfig: ClientConfig) {
     },
   };
 }
-
 export type TrelloClient = ReturnType<typeof createTrelloClient>;

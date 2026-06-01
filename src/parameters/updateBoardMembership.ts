@@ -8,8 +8,8 @@ export const UpdateBoardMembershipSchema = z.object({
   /** One of: admin, normal, observer. Determines the type of member that this membership will be to this board. */
   type: z.enum(['admin', 'normal', 'observer']),
   /**
-   * Valid values: all, avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials, memberType, products,
-   * status, url, username
+   * Valid values: all, avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials, memberType,
+   * products, status, url, username
    */
   memberFields: z
     .enum([

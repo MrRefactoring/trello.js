@@ -8,8 +8,8 @@ export const UpdateMemberSchema = z.object({
   /** New initials for the member. 1-4 characters long. */
   initials: z.string().max(4, 'initials must be at most 4 characters').optional(),
   /**
-   * New username for the member. At least 3 characters long, only lowercase letters, underscores, and numbers. Must be
-   * unique.
+   * New username for the member. At least 3 characters long, only lowercase letters, underscores, and numbers. Must
+   * be unique.
    */
   username: z.string().optional(),
   bio: z.string().optional(),

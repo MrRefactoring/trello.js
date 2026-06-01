@@ -1,4 +1,4 @@
-import type { z } from 'zod';
+import { z } from 'zod';
 import { apiObject } from '#/core';
 import { LimitValueSchema } from '#/models/limitValue';
 
