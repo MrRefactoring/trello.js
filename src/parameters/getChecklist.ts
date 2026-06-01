@@ -10,8 +10,8 @@ export const GetChecklistSchema = z.object({
   /** The check items on the list to return. One of: `all`, `none`. */
   checkItems: z.enum(['all', 'none']).optional(),
   /**
-   * The fields on the checkItem to return if checkItems are being returned. `all` or a comma-separated list of:
-   * `name`, `nameData`, `pos`, `state`, `type`, `due`, `dueReminder`, `idMember`
+   * The fields on the checkItem to return if checkItems are being returned. `all` or a comma-separated list of: `name`,
+   * `nameData`, `pos`, `state`, `type`, `due`, `dueReminder`, `idMember`
    */
   checkItemFields: z
     .enum(['all', 'name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember'])
