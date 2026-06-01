@@ -162,8 +162,7 @@
     "docs:og": "tsx scripts/build-og-image.ts",
     "docs:dev": "pnpm run docs:api && vitepress dev docs",
     "docs:build": "pnpm run docs:api && vitepress build docs",
-    "docs:preview": "vitepress preview docs",
-    "prepare": "husky"
+    "docs:preview": "vitepress preview docs"
   },
   "publishConfig": {
     "access": "public",

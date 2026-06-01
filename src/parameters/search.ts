@@ -255,9 +255,9 @@ export const SearchSchema = z.object({
   membersLimit: z.number().optional(),
   /**
    * By default, Trello searches for each word in your query against exactly matching words within Member content.
-   * Specifying partial to be true means that we will look for content that starts with any of the words in your
-   * query. If you are looking for a Card titled "My Development Status Report", by default you would need to search
-   * for "Development". If you have partial enabled, you will be able to search for "dev" but not "velopment".
+   * Specifying partial to be true means that we will look for content that starts with any of the words in your query.
+   * If you are looking for a Card titled "My Development Status Report", by default you would need to search for
+   * "Development". If you have partial enabled, you will be able to search for "dev" but not "velopment".
    */
   partial: z.boolean().optional(),
 });

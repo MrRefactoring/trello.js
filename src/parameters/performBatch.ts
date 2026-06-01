@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 /**
- * @deprecated Use `client.batch.run(builder)` instead.
- * This type was never used by the generated client and will be removed in the next major version.
+ * @deprecated Use `client.batch.run(builder)` instead. This type was never used by the generated client and will be
+ *   removed in the next major version.
  */
 export const PerformBatchSchema = z.object({
   /**
@@ -13,7 +13,7 @@ export const PerformBatchSchema = z.object({
 });
 
 /**
- * @deprecated Use `client.batch.run(builder)` instead.
- * This type was never used by the generated client and will be removed in the next major version.
+ * @deprecated Use `client.batch.run(builder)` instead. This type was never used by the generated client and will be
+ *   removed in the next major version.
  */
 export type PerformBatch = z.input<typeof PerformBatchSchema>;
