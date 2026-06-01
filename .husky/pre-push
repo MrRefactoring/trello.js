@@ -1,2 +1,4 @@
+prettier --check src &&
+pnpm run lint &&
 pnpm vitest run &&
 pnpm run build

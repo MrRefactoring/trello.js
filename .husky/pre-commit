@@ -1,2 +1,2 @@
-pnpm exec prettier --check src &&
+prettier --check src &&
 pnpm run lint
