@@ -154,7 +154,7 @@
     "test:watch": "vitest",
     "test:live": "vitest run --config vitest.config.live.ts",
     "test:live:watch": "vitest --config vitest.config.live.ts",
-    "audit:schemas": "vitest run --config vitest.config.audit.ts",
+    "audit:schemas": "vitest run --config vitest.config.live.ts",
     "test:coverage": "vitest run --config vitest.config.coverage.ts --coverage",
     "codemod:v1-to-v2": "jscodeshift -t tools/codemod/v1-to-v2.ts --parser tsx --extensions ts,tsx,js,jsx",
     "docs:api": "typedoc && tsx scripts/copy-api-to-ru.ts",
