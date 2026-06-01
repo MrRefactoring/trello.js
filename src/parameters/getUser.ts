@@ -14,14 +14,14 @@ export const GetUserSchema = z.object({
    */
   deactivated: z.boolean().optional(),
   /**
-   * When true, returns members who are guests on one or more boards in the corresponding Trello Enterprise (but do
-   * not possess a license); when false, returns members who are not. If unspecified, both guests and non-guests will
-   * be returned.
+   * When true, returns members who are guests on one or more boards in the corresponding Trello Enterprise (but do not
+   * possess a license); when false, returns members who are not. If unspecified, both guests and non-guests will be
+   * returned.
    */
   collaborator: z.boolean().optional(),
   /**
-   * When true, returns members who are managed by the corresponding Trello Enterprise; when false, returns members
-   * who are not. If unspecified, both managed and unmanaged members will be returned.
+   * When true, returns members who are managed by the corresponding Trello Enterprise; when false, returns members who
+   * are not. If unspecified, both managed and unmanaged members will be returned.
    */
   managed: z.boolean().optional(),
   /**
