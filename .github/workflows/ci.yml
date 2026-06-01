@@ -22,7 +22,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile --trust-lockfile
 
       - run: pnpm run build
 
@@ -43,7 +43,7 @@ jobs:
           node-version: 22.x
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile --trust-lockfile
 
       - run: pnpm run lint
         env:
@@ -68,6 +68,6 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile --trust-lockfile
 
       - run: pnpm vitest run

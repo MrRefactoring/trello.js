@@ -23,7 +23,7 @@ jobs:
           node-version: 22
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install --frozen-lockfile --trust-lockfile
 
       - name: Run live tests
         run: pnpm test:live
