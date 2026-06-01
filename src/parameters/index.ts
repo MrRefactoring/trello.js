@@ -507,3 +507,5 @@ export * from './uploadMemberCustomSticker';
 export * from './uploadOrganizationLogo';
 
 export * from './voteOnCard';
+
+export * from './performBatch';

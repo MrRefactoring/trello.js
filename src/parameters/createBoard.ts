@@ -32,7 +32,10 @@ export const CreateBoardSchema = z.object({
   prefsSelfJoin: z.boolean().optional(),
   /** Determines whether card covers are enabled. */
   prefsCardCovers: z.boolean().optional(),
-  /** The id of a custom background or one of: `blue`, `orange`, `green`, `red`, `purple`, `pink`, `lime`, `sky`, `grey`. */
+  /**
+   * The id of a custom background or one of: `blue`, `orange`, `green`, `red`, `purple`, `pink`, `lime`, `sky`,
+   * `grey`.
+   */
   prefsBackground: z.enum(['blue', 'orange', 'green', 'red', 'purple', 'pink', 'lime', 'sky', 'grey']).optional(),
   /**
    * Determines the type of card aging that should take place on the board if card aging is enabled. One of: `pirate`,
