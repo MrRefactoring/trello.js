@@ -13,6 +13,8 @@ export const LabelSchema = apiObject({
   /** The color of the label. Null means no color and the label will not be shown on the front of Cards. */
   color: ColorSchema.optional(),
   uses: z.number().optional(),
+  idOrganization: z.string().nullish(),
+  nodeId: z.string().optional(),
   limits: LimitsSchema.optional(),
 });
 

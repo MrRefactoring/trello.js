@@ -382,8 +382,6 @@ export * from './moveAllListCards';
 
 export * from './moveListToBoard';
 
-export * from './performBatch';
-
 export * from './removeBoardMember';
 
 export * from './removeCardChecklist';
@@ -509,3 +507,5 @@ export * from './uploadMemberCustomSticker';
 export * from './uploadOrganizationLogo';
 
 export * from './voteOnCard';
+
+export * from './performBatch';

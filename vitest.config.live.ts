@@ -9,6 +9,7 @@ export default defineConfig({
     testTimeout: 30_000,
     hookTimeout: 30_000,
     reporters: ['verbose'],
+    env: { TRELLO_STRICT_SCHEMAS: 'true' },
     coverage: {
       provider: 'v8',
       exclude: ['tests/**'],

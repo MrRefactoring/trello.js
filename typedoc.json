@@ -22,5 +22,5 @@
   "parametersFormat": "table",
   "sidebar": { "autoConfiguration": true, "format": "vitepress" },
   "docsRoot": "docs",
-  "intentionallyNotExported": ["ActionFieldValue", "CardFieldValue", "BatchClient"]
+  "intentionallyNotExported": ["BatchClient"]
 }
