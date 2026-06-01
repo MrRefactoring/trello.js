@@ -144,6 +144,7 @@
   ],
   "scripts": {
     "build": "tsc && tsc-alias --resolve-full-paths",
+    "prepare": "husky",
     "check:attw": "attw --pack . --profile=esm-only",
     "prepublishOnly": "pnpm run build && pnpm run lint && pnpm run check:attw",
     "prettier": "prettier --write src",
@@ -161,7 +162,8 @@
     "docs:og": "tsx scripts/build-og-image.ts",
     "docs:dev": "pnpm run docs:api && vitepress dev docs",
     "docs:build": "pnpm run docs:api && vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "docs:preview": "vitepress preview docs",
+    "prepare": "husky"
   },
   "publishConfig": {
     "access": "public",
@@ -178,6 +180,7 @@
     "dotenv": "^17.4.2",
     "eslint": "^10.4.1",
     "globals": "^17.6.0",
+    "husky": "^9.1.7",
     "jiti": "^2.7.0",
     "jscodeshift": "^17.3.0",
     "prettier": "^3.8.3",
