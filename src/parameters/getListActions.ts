@@ -32,8 +32,8 @@ export const GetListActionsSchema = z.object({
   memberCreator: z.boolean().optional(),
   /**
    * The fields of the
-   * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) creator to
-   * return
+   * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) creator
+   * to return
    */
   memberCreatorFields: z.string().optional(),
   /** The page of results for actions. */
@@ -41,8 +41,8 @@ export const GetListActionsSchema = z.object({
   /** Whether to show reactions on comments or not. */
   reactions: z.boolean().optional(),
   /**
-   * A date string in the form of YYYY-MM-DDThh:mm:ssZ or a mongo object ID. Only objects created before this date will
-   * be returned.
+   * A date string in the form of YYYY-MM-DDThh:mm:ssZ or a mongo object ID. Only objects created before this date
+   * will be returned.
    */
   before: z.string().optional(),
   /**

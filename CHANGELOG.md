@@ -1,5 +1,19 @@
 # Trello.js changelog
 
+## v2.1.2 (2026-06-01)
+
+### Fixed
+
+- `Label.idOrganization` and `Label.nodeId` added to `LabelSchema`. The live Trello API returns both fields on every `Label` object; they were silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`).
+
+### Internal
+
+- Live tests (`pnpm test:live`) now always run with `TRELLO_STRICT_SCHEMAS=true`. Previously strict validation was only applied in the daily `pnpm audit:schemas` run, meaning new undocumented API fields could go undetected until the nightly workflow.
+- `vite` added as a direct dev dependency at `^8.0.0`. `vitest@4` dropped support for vite 5; without an explicit `vite@8` entry the startup error `ERR_PACKAGE_PATH_NOT_EXPORTED: Package subpath './module-runner' is not defined` blocked all test runs.
+- `batch` namespace wiring (`createBatchRunner`) is now emitted directly by `apis-code-gen` via a new `namespaceOverrides` mechanism in the generator config — no manual post-sync patch required.
+- `ActionFieldValue` and `CardFieldValue` are now included in the generated API reference (previously suppressed via `intentionallyNotExported` in `typedoc.json`).
+- Regenerated `src/api`, `src/models`, `src/parameters` from the latest Trello OpenAPI spec (JSDoc line-wrapping only — no functional changes).
+
 ## v2.1.1 (2026-05-31)
 
 ### Added

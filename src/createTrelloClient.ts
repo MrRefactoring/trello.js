@@ -1,6 +1,6 @@
 import { type ClientConfig, createClient } from '#/core';
-import { createBatchRunner, type BatchClient } from '#/batchRunner';
 import * as actions from '#/api/actions';
+import { createBatchRunner, type BatchClient } from '#/batchRunner';
 import * as boards from '#/api/boards';
 import * as cards from '#/api/cards';
 import * as checklists from '#/api/checklists';
@@ -324,7 +324,9 @@ import type {
 export interface BatchNamespace {
   run<const T extends readonly Promise<unknown>[]>(
     builder: (b: BatchClient) => T,
-  ): Promise<{ -readonly [K in keyof T]: Awaited<T[K]> }>;
+  ): Promise<{
+    -readonly [K in keyof T]: Awaited<T[K]>;
+  }>;
 }
 
 export function createTrelloClient(clientConfig: ClientConfig) {
@@ -356,9 +358,7 @@ export function createTrelloClient(clientConfig: ClientConfig) {
       getActionReactionSummary: (parameters: GetActionReactionSummary): Promise<ReactionSummary[]> =>
         actions.getActionReactionSummary(client, parameters),
     },
-    batch: {
-      run: createBatchRunner(client),
-    } satisfies BatchNamespace,
+    batch: { run: createBatchRunner(client) } satisfies BatchNamespace,
     boards: {
       getBoardMemberships: (parameters: GetBoardMemberships): Promise<Memberships[]> =>
         boards.getBoardMemberships(client, parameters),
@@ -724,7 +724,7 @@ export function createTrelloClient(clientConfig: ClientConfig) {
       deleteOrganization: (parameters: DeleteOrganization): Promise<void> =>
         organizations.deleteOrganization(client, parameters),
       getOrganizationField: <T = unknown>(parameters: GetOrganizationField): Promise<FieldValue<T>> =>
-        organizations.getOrganizationField(client, parameters),
+        organizations.getOrganizationField<T>(client, parameters),
       getOrganizationActions: (parameters: GetOrganizationActions): Promise<Action[]> =>
         organizations.getOrganizationActions(client, parameters),
       getOrganizationBoards: (parameters: GetOrganizationBoards): Promise<Board[]> =>

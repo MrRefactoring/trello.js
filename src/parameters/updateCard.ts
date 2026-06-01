@@ -36,13 +36,10 @@ export const UpdateCardSchema = z.object({
   /**
    * Updates the card's cover | Option | Values | About | |--------|--------|-------| | color | `pink`, `yellow`,
    * `lime`, `blue`, `black`, `orange`, `red`, `purple`, `sky`, `green` | Makes the cover a solid color . | |
-   * brightness
-   *
-   * | `dark`, `light` | Determines whether the text on the cover should be dark or light. | url | An unsplash URL:
-   *
-   * https://images.unsplash.com | Used if making an image the cover. Only Unsplash URLs work. | idAttachment | ID of an
-   * attachment on the card | Used if setting an attached image as the cover. | | size | `normal`, `full` | Determines
-   * whether to show the card name on the cover, or below it. |
+   * brightness | `dark`, `light` | Determines whether the text on the cover should be dark or light. | url | An
+   * unsplash URL: https://images.unsplash.com | Used if making an image the cover. Only Unsplash URLs work. |
+   * idAttachment | ID of an attachment on the card | Used if setting an attached image as the cover. | | size |
+   * `normal`, `full` | Determines whether to show the card name on the cover, or below it. |
    *
    * `brightness` can be sent alongside any of the other parameters, but all of the other parameters are mutually
    * exclusive; you can not have the cover be a `color` and an `idAttachment` at the same time.
@@ -56,9 +53,9 @@ export const UpdateCardSchema = z.object({
   cover: z
     .object({
       /**
-       * An object containing information regarding the card's cover `brightness` can be sent alongside any of the other
-       * parameters, but all of the other parameters are mutually exclusive; you can not have the cover be a color and
-       * an `idAttachment` at the same time.
+       * An object containing information regarding the card's cover `brightness` can be sent alongside any of the
+       * other parameters, but all of the other parameters are mutually exclusive; you can not have the cover be a
+       * color and an `idAttachment` at the same time.
        */
       value: z
         .object({
@@ -67,8 +64,9 @@ export const UpdateCardSchema = z.object({
             .enum(['pink', 'yellow', 'lime', 'blue', 'black', 'orange', 'red', 'purple', 'sky', 'green'])
             .optional(),
           /**
-           * Determines whether the text on the cover should be dark or light. Setting it to `light` will make the text
-           * on the card cover dark. And vice versa, setting it to dark will make the text on the card cover light
+           * Determines whether the text on the cover should be dark or light. Setting it to `light` will make the
+           * text on the card cover dark. And vice versa, setting it to dark will make the text on the card cover
+           * light
            */
           brightness: z.enum(['dark', 'light']).optional(),
           /** Used if making an image the cover. Only Unsplash URLs (https://images.unsplash.com/) work. */
