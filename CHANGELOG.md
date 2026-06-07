@@ -1,5 +1,11 @@
 # Trello.js changelog
 
+## v2.1.3 (2026-06-07)
+
+### Fixed
+
+- `Action.agenticIdentity` added to `ActionSchema`. The live Trello API now returns this field on `Action` objects; it was silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking the action-returning endpoints `getCardActions`, `getListActions`, `getMemberActions`, `getOrganizationActions`, and `createCardComment`.
+
 ## v2.1.2 (2026-06-01)
 
 ### Fixed
