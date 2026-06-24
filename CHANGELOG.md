@@ -1,5 +1,15 @@
 # Trello.js changelog
 
+## v2.1.4 (2026-06-24)
+
+### Fixed
+
+- `BoardMyPrefs.aiGoogleChatEnabled` added to `BoardMyPrefsSchema`. The live Trello API now returns this field on `BoardMyPrefs` objects; it was silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking the `myPrefs`-returning board endpoints `updateBoardShowSidebar`, `updateBoardShowSidebarMembers`, `updateBoardShowSidebarBoardActions`, `updateBoardShowSidebarActivity`, `updateBoardEmailPosition`, `updateBoardEmailList`, and `generateBoardEmailKey`.
+
+### Internal
+
+- Dev dependencies bumped: `eslint` 10.4.1 → 10.5.0, `typescript-eslint` 8.60.1 → 8.62.0, `vite` 8.0.16 → 8.1.0, `vitest` / `@vitest/coverage-v8` 4.1.8 → 4.1.9, `prettier` 3.8.3 → 3.8.4, `globals` 17.6.0 → 17.7.0, `@arethetypeswrong/cli` 0.18.3 → 0.18.4, `@types/node` 22.19.20 → 22.20.0.
+
 ## v2.1.3 (2026-06-07)
 
 ### Fixed
