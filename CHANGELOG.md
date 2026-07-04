@@ -1,5 +1,15 @@
 # Trello.js changelog
 
+## v2.1.5 (2026-07-04)
+
+### Fixed
+
+- `Card.aiMetadata` added to `CardSchema`. The live Trello API now returns this field on `Card` objects (present when a card is created or modified by an agent rather than a human member); it was silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking every card-returning endpoint — `getCard`, `getActionCard`, `getNotificationCard`, `createCard`, `updateCard`, `getBoardCards`, `getBoardCardsByFilter`, `getListCards`, `getMemberCards`, and `getChecklistCards`.
+
+### Internal
+
+- Dev dependencies bumped: `eslint` 10.5.0 → 10.6.0, `prettier` 3.8.4 → 3.9.4, `tsx` 4.22.4 → 4.22.5, `typescript-eslint` 8.62.0 → 8.62.1, `vite` 8.1.0 → 8.1.3.
+
 ## v2.1.4 (2026-06-24)
 
 ### Fixed
