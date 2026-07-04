@@ -85,6 +85,8 @@ export const CardSchema = apiObject({
   nodeId: z.string().optional(),
   pinned: z.boolean().optional(),
   start: z.coerce.date().nullish(),
+  /** Metadata attached to the card when it was created or modified by an agent rather than a human member. */
+  aiMetadata: z.unknown().optional(),
   attachments: z.array(z.unknown()).optional(),
   creationMethodError: z.unknown().optional(),
   creationMethodLoadingStartedAt: z.unknown().optional(),
