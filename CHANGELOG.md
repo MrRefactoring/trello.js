@@ -1,5 +1,12 @@
 # Trello.js changelog
 
+## v2.1.6 (2026-07-05)
+
+### Fixed
+
+- `Card.dueReminder` is now typed as `number` instead of `string`. The live Trello API returns this field as a number (minutes before the due date), so every card-returning endpoint could reject with `ZodError: expected string, received number` — surfaced on `getBoardCards` / `getListCards` as `path [n, "dueReminder"]`. Now matches the already-correct `CheckItem.dueReminder`.
+- `ColorSchema` now accepts the `_light` / `_dark` shade variants (e.g. `sky_dark`, `green_light`). The documented palette is 10 base colors, but the live API also returns the shade variants introduced in the May 2023 label redesign (30 values total); a label using one raised `ZodError: invalid_value` on `labels[].color`, breaking `getBoardCards` / `getListCards`. Closes [#48](https://github.com/MrRefactoring/trello.js/issues/48) — thanks to [@sampgoes97-ux](https://github.com/sampgoes97-ux) for the detailed report.
+
 ## v2.1.5 (2026-07-04)
 
 ### Fixed
