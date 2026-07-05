@@ -60,7 +60,7 @@ describe('response schema breadth — minimal vs maximal', () => {
         desc: 'a description',
         descData: { emoji: {} },
         due: ISO,
-        dueReminder: '1440',
+        dueReminder: 1440,
         idBoard: ID,
         idChecklists: [ID],
         idLabels: [ID],
