@@ -54,3 +54,40 @@ describe('CardSchema — checkItemStates objects', () => {
     ).toThrow();
   });
 });
+
+// Drift surfaced in issue #48 (ZodError on getBoardCards). The API returns
+// `dueReminder` as a number (minutes before the due date), not a string, and
+// labels can carry the undocumented `_light` / `_dark` shade colors.
+describe('CardSchema — dueReminder is a number (issue #48)', () => {
+  const baseCard = { id: 'a'.repeat(24) };
+
+  it('accepts dueReminder as a number', () => {
+    expect(() => CardSchema.parse({ ...baseCard, dueReminder: 1440 })).not.toThrow();
+  });
+
+  it('accepts dueReminder as null', () => {
+    expect(() => CardSchema.parse({ ...baseCard, dueReminder: null })).not.toThrow();
+  });
+
+  it('rejects dueReminder as a string (the old, wrong shape)', () => {
+    expect(() => CardSchema.parse({ ...baseCard, dueReminder: '1440' })).toThrow();
+  });
+});
+
+describe('CardSchema — label shade colors (issue #48)', () => {
+  const baseCard = { id: 'a'.repeat(24) };
+  const label = (color: string) => ({ id: 'l'.repeat(24), color });
+
+  it('accepts the new `_dark` / `_light` shade variants on labels', () => {
+    expect(() =>
+      CardSchema.parse({
+        ...baseCard,
+        labels: [label('sky_dark'), label('green_light'), label('blue')],
+      }),
+    ).not.toThrow();
+  });
+
+  it('rejects an unknown color that is not part of the palette', () => {
+    expect(() => CardSchema.parse({ ...baseCard, labels: [label('teal')] })).toThrow();
+  });
+});

@@ -45,7 +45,7 @@ export const CardSchema = apiObject({
     emoji: z.record(z.string(), z.any()).optional(),
   }).optional(),
   due: z.coerce.date().nullish(),
-  dueReminder: z.string().nullish(),
+  dueReminder: z.number().nullish(),
   idBoard: z.string().optional(),
   idChecklists: z.array(z.union([ChecklistSchema, z.string()])).optional(),
   idLabels: z.array(z.union([LabelSchema, z.string()])).optional(),
