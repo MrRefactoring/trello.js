@@ -143,7 +143,7 @@ import { BoardSchema, type Board } from 'trello.js';
 const board: Board = BoardSchema.parse(payload);
 ```
 
-Нужно полностью отключить парсинг? Передайте `skipParsing: true` при создании клиента. Тогда `schema.parse()` не вызывается — нет `ZodError`, нет валидации и нет трансформаций схемы (даты остаются строками, а не объектами `Date`). Это размен рантайм-типобезопасности на скорость и устойчивость к дрейфу схем; оставляйте `false` (значение по умолчанию), если нет причин менять.
+Нужно полностью отключить парсинг? Передайте `skipParsing: true` при создании клиента. Тогда схемы не запускаются вообще — нет ни валидации, ни трансформаций схемы (даты остаются строками, а не объектами `Date`). Это размен рантайм-типобезопасности на скорость; оставляйте `false` (значение по умолчанию), если нет причин менять.
 
 ```ts
 const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
@@ -151,7 +151,7 @@ const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
 
 ## Обработка ошибок
 
-Non-2xx ответы бросают `Error('Request failed: <status> <statusText> - <body>')`. Несовпадения схемы — `ZodError`. Rate-limit 429 ретраятся автоматически (2 с, 4 с, 8 с).
+Non-2xx ответы бросают `Error('Request failed: <status> <statusText> - <body>')`. Rate-limit 429 ретраятся автоматически (2 с, 4 с, 8 с).
 
 ```ts
 try {
@@ -162,6 +162,15 @@ try {
   }
 }
 ```
+
+Ответ, не сошедшийся со своей схемой, **не бросает исключение**. Trello выкатывает новые поля и значения энумов раньше, чем их описывает спека, поэтому о несовпадении сообщается один раз в stderr, а тело возвращается невалидированным — дрейф в чужом API не должен останавливать вашу программу. Поменять это можно через `onSchemaMismatch`:
+
+```ts
+// 'warn' (по умолчанию) · 'silent' · 'throw' · (report) => void
+const trello = createTrelloClient({ apiKey, apiToken, onSchemaMismatch: 'throw' });
+```
+
+При `'throw'` прилетает `SchemaMismatchError`, в `report` которого перечислены пути и типы разошедшихся полей — и никогда значения в них, поэтому его можно отправить в баг-репорт или в лог, не утащив с собой содержимое ваших карточек.
 
 Подробности — в [гайде по обработке ошибок](https://mrrefactoring.github.io/trello.js/ru/guide/error-handling).
 

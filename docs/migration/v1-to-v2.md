@@ -96,6 +96,8 @@ The `BaseClient` class, `Boards`/`Members`/etc. classes, and `trello.js/out/api`
 
 `v2` parses every successful response through a Zod 4 schema. If Trello returns an unexpected shape, you get a `ZodError` instead of silently corrupted data.
 
+> Changed in **v3**: a mismatch no longer throws by default — it is reported once and the body comes back unvalidated. See [v2 → v3](/migration/v2-to-v3).
+
 If you import `zod` directly and used `ZodTypeDef`, it was removed in Zod 4 — use `ZodType<Output, Input>` instead.
 
 ## Removed `applications` namespace

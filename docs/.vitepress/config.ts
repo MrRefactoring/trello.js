@@ -69,6 +69,7 @@ const guideSidebar = (prefix = '') => [
   {
     text: prefix ? 'Миграция' : 'Migration',
     items: [
+      { text: 'v2 → v3', link: `${prefix}/migration/v2-to-v3` },
       { text: 'v1 → v2', link: `${prefix}/migration/v1-to-v2` },
     ],
   },
@@ -192,7 +193,7 @@ export default defineConfig({
           { text: 'Guide', link: '/guide/getting-started' },
           { text: 'Recipes', link: '/recipes/boards' },
           { text: 'API', link: '/api/' },
-          { text: 'Migration', link: '/migration/v1-to-v2' },
+          { text: 'Migration', link: '/migration/v2-to-v3' },
         ],
         sidebar: {
           '/guide/': guideSidebar(),
@@ -218,7 +219,7 @@ export default defineConfig({
           { text: 'Руководство', link: '/ru/guide/getting-started' },
           { text: 'Рецепты', link: '/ru/recipes/boards' },
           { text: 'API', link: '/api/' },
-          { text: 'Миграция', link: '/ru/migration/v1-to-v2' },
+          { text: 'Миграция', link: '/ru/migration/v2-to-v3' },
         ],
         sidebar: {
           '/ru/guide/': guideSidebar('/ru'),

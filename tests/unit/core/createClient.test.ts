@@ -1,6 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { z } from 'zod';
 import { createClient } from '../../../src/core/createClient';
+import { resetSchemaMismatchReporting } from '../../../src/core/schemaMismatch';
+import { SchemaMismatchError } from '../../../src/core/schemaMismatchError';
 
 function mockFetch(status: number, body: unknown, contentType = 'application/json') {
   const text = typeof body === 'string' ? body : JSON.stringify(body);
@@ -19,11 +21,14 @@ const BASE_CONFIG = { apiKey: 'key', apiToken: 'token' };
 describe('createClient', () => {
   beforeEach(() => {
     vi.stubGlobal('fetch', mockFetch(200, { id: 'abc' }));
+    // Mismatch reporting dedupes for the life of the process, so it has to be cleared between cases.
+    resetSchemaMismatchReporting();
   });
 
   afterEach(() => {
     vi.unstubAllGlobals();
     vi.useRealTimers();
+    vi.restoreAllMocks();
   });
 
   // ─── URL construction ────────────────────────────────────────────────────
@@ -196,13 +201,6 @@ describe('createClient', () => {
     expect(result).toEqual({ id: 'abc' });
   });
 
-  it('throws ZodError when response does not match schema', async () => {
-    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
-    const schema = z.object({ id: z.string() });
-    const client = createClient(BASE_CONFIG);
-    await expect(client.sendRequest({ url: '/boards/123', schema })).rejects.toThrow();
-  });
-
   it('skips validation and returns raw data when skipParsing is true', async () => {
     vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
     const schema = z.object({ id: z.string() });
@@ -214,8 +212,111 @@ describe('createClient', () => {
   it('still validates when skipParsing is explicitly false', async () => {
     vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
     const schema = z.object({ id: z.string() });
-    const client = createClient({ ...BASE_CONFIG, skipParsing: false });
-    await expect(client.sendRequest({ url: '/boards/123', schema })).rejects.toThrow();
+    const client = createClient({ ...BASE_CONFIG, skipParsing: false, onSchemaMismatch: 'throw' });
+    await expect(client.sendRequest({ url: '/boards/123', schema })).rejects.toThrow(SchemaMismatchError);
+  });
+
+  // ─── Schema mismatch behaviour ────────────────────────────────────────────
+
+  it('warns and returns the unvalidated body by default', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
+    const schema = z.object({ id: z.string() });
+    const client = createClient(BASE_CONFIG);
+    const result = await client.sendRequest({ url: '/boards/123', schema });
+    expect(result).toEqual({ notId: 123 });
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn.mock.calls[0][0]).toContain('GET /boards/123');
+  });
+
+  it('reports each distinct problem once across repeated requests', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
+    const schema = z.object({ id: z.string() });
+    const client = createClient(BASE_CONFIG);
+    await client.sendRequest({ url: '/boards/123', schema });
+    await client.sendRequest({ url: '/boards/123', schema });
+    await client.sendRequest({ url: '/boards/123', schema });
+    expect(warn).toHaveBeenCalledTimes(1);
+  });
+
+  it('says nothing and returns the unvalidated body when silent', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
+    const schema = z.object({ id: z.string() });
+    const client = createClient({ ...BASE_CONFIG, onSchemaMismatch: 'silent' });
+    const result = await client.sendRequest({ url: '/boards/123', schema });
+    expect(result).toEqual({ notId: 123 });
+    expect(warn).not.toHaveBeenCalled();
+  });
+
+  it('throws SchemaMismatchError carrying the report and the ZodError cause when throw', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
+    const schema = z.object({ id: z.string() });
+    const client = createClient({ ...BASE_CONFIG, onSchemaMismatch: 'throw' });
+    const error = await client
+      .sendRequest({ url: '/boards/123', method: 'GET', schema })
+      .catch((err: unknown) => err as SchemaMismatchError);
+
+    expect(error).toBeInstanceOf(SchemaMismatchError);
+    expect(error.report.endpoint).toBe('GET /boards/123');
+    expect(error.report.issues).toEqual([{ path: 'id', expected: 'string', received: 'nothing' }]);
+    expect(error.cause).toBeInstanceOf(z.ZodError);
+  });
+
+  it('never puts the response body on the thrown error', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, { id: 42, secret: 'card name nobody should log' }));
+    const schema = z.object({ id: z.string() });
+    const client = createClient({ ...BASE_CONFIG, onSchemaMismatch: 'throw' });
+    const error = await client
+      .sendRequest({ url: '/boards/123', schema })
+      .catch((err: unknown) => err as SchemaMismatchError);
+
+    expect(JSON.stringify(error.report)).not.toContain('card name nobody should log');
+    expect(error.message).not.toContain('card name nobody should log');
+  });
+
+  it('hands the report to a custom function and returns the unvalidated body', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
+    const schema = z.object({ id: z.string() });
+    const onSchemaMismatch = vi.fn();
+    const client = createClient({ ...BASE_CONFIG, onSchemaMismatch });
+    const result = await client.sendRequest({ url: '/boards/123', schema });
+
+    expect(result).toEqual({ notId: 123 });
+    expect(warn).not.toHaveBeenCalled();
+    expect(onSchemaMismatch).toHaveBeenCalledTimes(1);
+    expect(onSchemaMismatch.mock.calls[0][0]).toEqual({
+      endpoint: 'GET /boards/123',
+      issues: [{ path: 'id', expected: 'string', received: 'nothing' }],
+    });
+  });
+
+  it('names the request method in the reported endpoint', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
+    const schema = z.object({ id: z.string() });
+    const onSchemaMismatch = vi.fn();
+    const client = createClient({ ...BASE_CONFIG, onSchemaMismatch });
+    await client.sendRequest({ url: '/boards', method: 'POST', schema });
+    expect(onSchemaMismatch.mock.calls[0][0].endpoint).toBe('POST /boards');
+  });
+
+  it('forces throwing under TRELLO_STRICT_SCHEMAS regardless of the configured behaviour', async () => {
+    vi.stubEnv('TRELLO_STRICT_SCHEMAS', 'true');
+    vi.stubGlobal('fetch', mockFetch(200, { notId: 123 }));
+    const schema = z.object({ id: z.string() });
+    const client = createClient({ ...BASE_CONFIG, onSchemaMismatch: 'silent' });
+    await expect(client.sendRequest({ url: '/boards/123', schema })).rejects.toThrow(SchemaMismatchError);
+    vi.unstubAllEnvs();
+  });
+
+  it('applies schema transforms as before when the response does match', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, { when: '2026-05-30T00:00:00.000Z' }));
+    const schema = z.object({ when: z.coerce.date() });
+    const client = createClient(BASE_CONFIG);
+    const result = await client.sendRequest({ url: '/boards/123', schema });
+    expect(result.when).toBeInstanceOf(Date);
   });
 
   it('returns raw values without schema transforms when skipParsing is true', async () => {

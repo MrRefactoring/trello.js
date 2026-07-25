@@ -143,7 +143,7 @@ import { BoardSchema, type Board } from 'trello.js/models';
 const board: Board = BoardSchema.parse(payload);
 ```
 
-Need to bypass parsing entirely? Pass `skipParsing: true` when creating the client. `schema.parse()` is then skipped — no `ZodError`, no validation, and no schema transforms (date fields stay strings rather than `Date` objects). This trades runtime type-safety for speed and resilience against schema drift; leave it `false` (the default) unless you have a reason.
+Need to bypass parsing entirely? Pass `skipParsing: true` when creating the client. Schemas are then not run at all — no validation and no schema transforms (date fields stay strings rather than `Date` objects). This trades runtime type-safety for speed; leave it `false` (the default) unless you have a reason.
 
 ```ts
 const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
@@ -151,7 +151,7 @@ const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
 
 ## Error handling
 
-Non-2xx responses throw `Error('Request failed: <status> <statusText> - <body>')`. Schema mismatches throw `ZodError`. Rate-limit 429s retry automatically (2 s, 4 s, 8 s).
+Non-2xx responses throw `Error('Request failed: <status> <statusText> - <body>')`. Rate-limit 429s retry automatically (2 s, 4 s, 8 s).
 
 ```ts
 try {
@@ -162,6 +162,15 @@ try {
   }
 }
 ```
+
+A response that doesn't match its schema **does not throw**. Trello ships new fields and enum values ahead of the spec that describes them, so the mismatch is reported once on stderr and the body comes back unvalidated — drift in someone else's API shouldn't end your program. Change that with `onSchemaMismatch`:
+
+```ts
+// 'warn' (default) · 'silent' · 'throw' · (report) => void
+const trello = createTrelloClient({ apiKey, apiToken, onSchemaMismatch: 'throw' });
+```
+
+Under `'throw'` you get a `SchemaMismatchError` whose `report` names the field paths and types that disagreed — and never the values at them, so it can go into a bug report or a log line without carrying your card contents with it.
 
 See the [error handling guide](https://mrrefactoring.github.io/trello.js/guide/error-handling) for details.
 

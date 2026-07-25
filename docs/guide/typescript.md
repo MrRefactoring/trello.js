@@ -7,6 +7,8 @@ description: Every Trello endpoint, parameter, and response is fully typed. Impo
 
 Types are the headline feature. Every endpoint, parameter, and response is typed at compile time, and validated by Zod at runtime.
 
+A response that fails validation does not throw by default — it is reported once and handed back unvalidated, so drift in the Trello API cannot take down your integration. See [`onSchemaMismatch`](/guide/error-handling#schema-mismatches) to change that.
+
 ## Inferred types
 
 You rarely need to import types — they flow from the methods:

@@ -1,18 +1,27 @@
 # Trello.js changelog
 
-## Unreleased
+## v3.0.0 (unreleased)
 
-### Removed
+### Breaking
 
-- **`PerformBatch` / `PerformBatchSchema` removed from `trello.js/parameters`.** An orphan: nothing referenced it, and the batch endpoint takes `Run`.
+- **A schema mismatch no longer stops the request.** A response that does not match its schema is now reported once on stderr and handed back unvalidated, instead of raising a `ZodError` and ending the call. Every patch release of `v2.1` was a schema fix, and two of them ([#42](https://github.com/MrRefactoring/trello.js/issues/42), [#48](https://github.com/MrRefactoring/trello.js/issues/48)) arrived as reports from users whose integrations had stopped working: Trello ships new fields and new enum values to its cloud ahead of the spec that describes them — a label colour from the 2023 palette redesign, a `dueReminder` that became a number, an `agent` that is now `null`. None of that is the caller's bug, and none of it should end their program. Pass `onSchemaMismatch: 'throw'` to restore the previous behaviour.
+- **`SchemaMismatchError` replaces `ZodError`** as what `onSchemaMismatch: 'throw'` raises. Its `report` names the field paths and types that disagreed and never the values at them, so it can be pasted into a bug report or a log line without carrying card names, comment text or custom field contents with it. The underlying `ZodError` is preserved on `cause`.
+- **`createBatchRun` removed from `trello.js/core`.** It was dead code — the batch runner in use is `createBatchRunner`, reached through `trello.batch.run(...)`, which is unchanged.
+- **`PerformBatch` / `PerformBatchSchema` removed from `trello.js/parameters`.** Another orphan: nothing referenced it, and the batch endpoint takes `Run`.
 
 ### Added
 
 - **Board exports** — five endpoints the spec documents and this client did not expose: `createBoardExport`, `getBoardExport`, `getBoardMostRecentExport`, `downloadBoardExport` and `deleteBoardExport`, with matching parameter types.
 
+- `onSchemaMismatch` client option: `'warn'` (default), `'silent'`, `'throw'`, or a function receiving the report. Reporting is deduplicated for the life of the process, so one bad field across a 500-card board is one line rather than five hundred.
+- `SchemaMismatchError`, `SchemaMismatchBehavior`, `SchemaMismatchReport`, `SchemaMismatchIssue` and `resetSchemaMismatchReporting` are exported from `trello.js/core`.
+- [Migration guide v2 → v3](https://mrrefactoring.github.io/trello.js/migration/v2-to-v3).
+
 ### Changed
 
-- `createTrelloClient` and `createClient` now also accept an already-built `Client`, handed straight back. One client can drive both the namespaced facade and the flat tree-shaken functions instead of two that could disagree about the host or `skipParsing`. Passing a `ClientConfig` works exactly as before.
+- `TRELLO_STRICT_SCHEMAS=true` now forces `onSchemaMismatch` to `'throw'` in addition to switching response schemas to strict mode. An audit run that warned and carried on would otherwise report a clean sweep over a schema the live API had already outgrown.
+- `skipParsing` is unchanged in behaviour, but is now the blunter of the two escape hatches: it turns schemas off entirely, including transforms such as `z.coerce.date()`, whereas `onSchemaMismatch` only gives up on the responses that actually failed. Documentation now says so.
+- `createTrelloClient` and `createClient` now also accept an already-built `Client`, handed straight back. One client can drive both the namespaced facade and the flat tree-shaken functions instead of two that could disagree about the host or `onSchemaMismatch`. Passing a `ClientConfig` works exactly as before.
 
 ### Internal
 

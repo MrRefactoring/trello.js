@@ -1,8 +1,23 @@
 import { buildUrl } from './buildUrl';
 import type { Client, ClientConfig, SendRequestOptions } from './interfaces';
+import { describeIssues, reportSchemaMismatch } from './schemaMismatch';
+import type { SchemaMismatchBehavior, SchemaMismatchReport } from './schemaMismatch';
+import { SchemaMismatchError } from './schemaMismatchError';
 
 const DEFAULT_HOST = 'https://api.trello.com/1';
 const MAX_RETRY_ATTEMPTS = 4;
+
+/**
+ * Whether `TRELLO_STRICT_SCHEMAS` is on, which is what `apiObject` reads to switch response schemas to strict mode.
+ *
+ * Strict mode exists to fail on exactly this, so it forces `onSchemaMismatch` back to `'throw'`: a run that warned and
+ * carried on would report a clean sweep over a schema the live API had already outgrown.
+ */
+function isStrictSchemaMode(): boolean {
+  const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env;
+
+  return env?.TRELLO_STRICT_SCHEMAS === 'true';
+}
 
 function isClient(value: ClientConfig | Client): value is Client {
   return typeof (value as Client).sendRequest === 'function';
@@ -11,12 +26,13 @@ function isClient(value: ClientConfig | Client): value is Client {
 export function createClient(config: ClientConfig | Client): Client {
   // Already a client: hand it straight back. This is what lets a client built once for the flat,
   // tree-shaken functions also drive `createTrelloClient` — one instance, one configuration, rather
-  // than two that could disagree about the host or `skipParsing`.
+  // than two that could disagree about `onSchemaMismatch` or the host.
   if (isClient(config)) return config;
 
   const baseUrl = (config.host ?? DEFAULT_HOST).replace(/\/$/, '');
   const defaultHeaders = config.headers ?? {};
   const skipParsing = config.skipParsing ?? false;
+  const onSchemaMismatch = config.onSchemaMismatch ?? 'warn';
 
   return {
     async sendRequest<T>(options: SendRequestOptions<T>): Promise<T> {
@@ -36,7 +52,7 @@ export function createClient(config: ClientConfig | Client): Client {
         body,
       });
 
-      return parseResponse(response, options.schema, skipParsing);
+      return parseResponse(response, options, skipParsing, onSchemaMismatch);
     },
   };
 }
@@ -76,8 +92,9 @@ async function fetchWithRetry(url: string, init: RequestInit): Promise<Response>
 
 async function parseResponse<T>(
   response: Response,
-  schema: SendRequestOptions<T>['schema'],
+  options: SendRequestOptions<T>,
   skipParsing: boolean,
+  onSchemaMismatch: SchemaMismatchBehavior,
 ): Promise<T> {
   if (!response.ok) {
     const text = await response.text();
@@ -92,5 +109,24 @@ async function parseResponse<T>(
 
   const data = (await response.json()) as unknown;
 
-  return schema && !skipParsing ? (schema.parse(data) as T) : (data as T);
+  if (!options.schema || skipParsing) return data as T;
+
+  const parsed = options.schema.safeParse(data);
+
+  if (parsed.success) return parsed.data;
+
+  // The response parsed as JSON but is not the shape the endpoint promises. What happens next is the caller's choice:
+  // by default the body comes back unvalidated and the problem is reported once, because Trello ships fields and enum
+  // values ahead of the spec that describes them and none of that is the caller's bug to be stopped by.
+  const endpoint = `${options.method ?? 'GET'} ${options.url}`;
+  const report: SchemaMismatchReport = { endpoint, issues: describeIssues(parsed.error.issues, data) };
+  const behavior = isStrictSchemaMode() ? 'throw' : onSchemaMismatch;
+
+  if (reportSchemaMismatch(behavior, report)) {
+    throw new SchemaMismatchError(`Response did not match the schema for ${endpoint}`, report, {
+      cause: parsed.error,
+    });
+  }
+
+  return data as T;
 }
