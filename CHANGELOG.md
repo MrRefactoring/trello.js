@@ -62,7 +62,7 @@
 
 - Live tests (`pnpm test:live`) now always run with `TRELLO_STRICT_SCHEMAS=true`. Previously strict validation was only applied in the daily `pnpm audit:schemas` run, meaning new undocumented API fields could go undetected until the nightly workflow.
 - `vite` added as a direct dev dependency at `^8.0.0`. `vitest@4` dropped support for vite 5; without an explicit `vite@8` entry the startup error `ERR_PACKAGE_PATH_NOT_EXPORTED: Package subpath './module-runner' is not defined` blocked all test runs.
-- `batch` namespace wiring (`createBatchRunner`) is now emitted directly by `apis-code-gen` via a new `namespaceOverrides` mechanism in the generator config — no manual post-sync patch required.
+- `batch` namespace wiring (`createBatchRunner`) is now emitted directly by the code generator — no manual post-sync patch required.
 - `ActionFieldValue` and `CardFieldValue` are now included in the generated API reference (previously suppressed via `intentionallyNotExported` in `typedoc.json`).
 - Regenerated `src/api`, `src/models`, `src/parameters` from the latest Trello OpenAPI spec (JSDoc line-wrapping only — no functional changes).
 
@@ -82,7 +82,7 @@
 
 ### Added
 
-- The upstream codegen (`apis-code-gen`) now resolves `$ref` schemas in parameter and request-body positions natively — they emit `${X}Schema` references (and imports) instead of falling through to `z.unknown()`. Closes the root cause across the spec; each consumer no longer needs a per-config inlining patch. As a result:
+- The code generator now resolves `$ref` schemas in parameter and request-body positions natively — they emit `${X}Schema` references (and imports) instead of falling through to `z.unknown()`. Closes the root cause across the spec. As a result:
   - **Path-level `id` parameters**: every operation that takes a `{id}` now generates `id: TrelloIDSchema` (imported from `../models`) rather than `id: z.unknown()`. Affects 200+ parameter files.
   - **Top-level `oneOf` schemas** (e.g. `posStringOrNumber: oneOf:[{string,enum:['top','bottom']}, {number}]`) are emitted as proper `z.union([...])` schemas in the models directory. The Trello-specific workaround that flattened `posStringOrNumber` to `z.number()` has been removed.
   - **Path-level shared parameters** are merged into operation-level parameters via the `mergePathParameters` transform so they participate in the normal generation pipeline.
@@ -101,7 +101,7 @@
 - Build scripts (`scripts/build-og-image`, `scripts/copy-api-to-ru`) migrated from `.mjs` to TypeScript, executed via `tsx`. `tsx` added as a dev dependency.
 - `repository.url` switched to the canonical `git+https://` form so the npm package page can auto-link Issues and Pull Requests against the GitHub repo.
 - npm `description` and `keywords` reworked for discoverability: leads with "type-safe", names Zod 4 explicitly, mentions checklists, and adds high-intent keywords (`javascript`, `nodejs`, `browser`, `atlassian-trello`, `trello-board`, `trello-card`). GitHub repo description and topics aligned to match.
-- Regenerated `src/api`, `src/models`, `src/parameters` from the latest Trello OpenAPI spec via `apis-code-gen`. No public-API changes.
+- Regenerated `src/api`, `src/models`, `src/parameters` from the latest Trello OpenAPI spec. No public-API changes.
 - `apiObject` re-exported from `#/core` so generated modules can import it from the barrel.
 - JSDoc links to the Trello developer docs rewritten from site-relative (`/cloud/trello/...`) to absolute (`https://developer.atlassian.com/cloud/trello/...`) so they're clickable from IDEs and typedoc.
 
