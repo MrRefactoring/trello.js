@@ -1,5 +1,24 @@
 # Trello.js changelog
 
+## Unreleased
+
+### Removed
+
+- **`PerformBatch` / `PerformBatchSchema` removed from `trello.js/parameters`.** An orphan: nothing referenced it, and the batch endpoint takes `Run`.
+
+### Added
+
+- **Board exports** — five endpoints the spec documents and this client did not expose: `createBoardExport`, `getBoardExport`, `getBoardMostRecentExport`, `downloadBoardExport` and `deleteBoardExport`, with matching parameter types.
+
+### Changed
+
+- `createTrelloClient` and `createClient` now also accept an already-built `Client`, handed straight back. One client can drive both the namespaced facade and the flat tree-shaken functions instead of two that could disagree about the host or `skipParsing`. Passing a `ClientConfig` works exactly as before.
+
+### Internal
+
+- Regenerated `src/api`, `src/models`, `src/parameters` from the Trello OpenAPI spec. Beyond the board exports above, the visible changes are `Prefs.backgroundImage` moving to the Zod 4 `z.url()` spelling and JSDoc rewrapping.
+- Model files whose names begin with an acronym are now spelled `apiKey.ts`, `apiToken.ts` and `cfValue.ts` rather than `aPIKey.ts`, `aPIToken.ts` and `cFValue.ts`. Internal only — the exported `APIKey`, `APIToken` and `CFValue` names are unchanged, and neither file was ever reachable as a subpath import.
+
 ## v2.1.6 (2026-07-05)
 
 ### Fixed

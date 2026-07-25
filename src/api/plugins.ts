@@ -8,6 +8,7 @@ import type { UpdatePluginListing } from '#/parameters/updatePluginListing';
 import type { Client, SendRequestOptions } from '#/core';
 
 /** Get plugins */
+
 export async function getPlugin(client: Client, parameters: GetPlugin): Promise<Plugin> {
   const config: SendRequestOptions<Plugin> = {
     url: `/plugins/${parameters.id}/`,
@@ -19,6 +20,7 @@ export async function getPlugin(client: Client, parameters: GetPlugin): Promise<
 }
 
 /** Update a Plugin */
+
 export async function updatePlugin(client: Client, parameters: UpdatePlugin): Promise<Plugin> {
   const config: SendRequestOptions<Plugin> = {
     url: `/plugins/${parameters.id}/`,
@@ -30,6 +32,7 @@ export async function updatePlugin(client: Client, parameters: UpdatePlugin): Pr
 }
 
 /** Create a new listing for a given locale for your Power-Up */
+
 export async function createPluginListing(client: Client, parameters: CreatePluginListing): Promise<PluginListing> {
   const config: SendRequestOptions<PluginListing> = {
     url: `/plugins/${parameters.idPlugin}/listing`,
@@ -59,6 +62,7 @@ export async function getPluginMemberPrivacyCompliance(
 }
 
 /** Update an existing listing for your Power-Up */
+
 export async function updatePluginListing(client: Client, parameters: UpdatePluginListing): Promise<PluginListing> {
   const config: SendRequestOptions<PluginListing> = {
     url: `/plugins/${parameters.idPlugin}/listings/${parameters.idListing}`,

@@ -50,11 +50,11 @@ export const ActionSchema = apiObject({
     nonPublic: z.record(z.string(), z.any()).optional(),
     nonPublicAvailable: z.boolean().optional(),
   }).optional(),
+  /** Agentic identity associated with the action, present when it was performed by an agent rather than a human member. */
+  agenticIdentity: z.unknown().optional(),
   appCreator: z.record(z.string(), z.any()).nullish(),
   entities: z.array(z.unknown()).optional(),
   member: MemberSchema.nullish(),
-  /** Agentic identity associated with the action, present when it was performed by an agent rather than a human member. */
-  agenticIdentity: z.unknown().optional(),
 });
 
 export type Action = z.infer<typeof ActionSchema>;

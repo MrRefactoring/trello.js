@@ -1,4 +1,4 @@
-import { type ClientConfig, createClient } from '#/core';
+import { type ClientConfig, type Client, createClient } from '#/core';
 import * as actions from '#/api/actions';
 import { createBatchRunner, type BatchClient } from '#/batchRunner';
 import * as boards from '#/api/boards';
@@ -69,6 +69,11 @@ import type {
   EnableBoardPlugin,
   DisableBoardPlugin,
   GetBoardPowerUps,
+  CreateBoardExport,
+  GetBoardExport,
+  DeleteBoardExport,
+  DownloadBoardExport,
+  GetBoardMostRecentExport,
   CreateCard,
   GetCard,
   UpdateCard,
@@ -291,6 +296,7 @@ import type {
   BoardMyPrefs,
   Tag,
   Plugin,
+  Export,
   Attachment,
   CheckItemState,
   CheckItem,
@@ -315,7 +321,6 @@ import type {
   SavedSearch,
   Token,
   NotificationChannelSettings,
-  Export,
   PluginListing,
   SearchResult,
   Webhook,
@@ -329,7 +334,7 @@ export interface BatchNamespace {
   }>;
 }
 
-export function createTrelloClient(clientConfig: ClientConfig) {
+export function createTrelloClient(clientConfig: ClientConfig | Client) {
   const client = createClient(clientConfig);
 
   return {
@@ -417,6 +422,14 @@ export function createTrelloClient(clientConfig: ClientConfig) {
         boards.disableBoardPlugin(client, parameters),
       getBoardPowerUps: (parameters: GetBoardPowerUps): Promise<Plugin[]> =>
         boards.getBoardPowerUps(client, parameters),
+      createBoardExport: (parameters: CreateBoardExport): Promise<Export> =>
+        boards.createBoardExport(client, parameters),
+      getBoardExport: (parameters: GetBoardExport): Promise<Export> => boards.getBoardExport(client, parameters),
+      deleteBoardExport: (parameters: DeleteBoardExport): Promise<void> => boards.deleteBoardExport(client, parameters),
+      downloadBoardExport: (parameters: DownloadBoardExport): Promise<unknown> =>
+        boards.downloadBoardExport(client, parameters),
+      getBoardMostRecentExport: (parameters: GetBoardMostRecentExport): Promise<Export> =>
+        boards.getBoardMostRecentExport(client, parameters),
     },
     cards: {
       createCard: (parameters: CreateCard): Promise<Card> => cards.createCard(client, parameters),

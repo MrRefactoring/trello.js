@@ -1,10 +1,10 @@
-export * from './aPIKey';
-
-export * from './aPIToken';
-
 export * from './action';
 
 export * from './actionFields';
+
+export * from './apiKey';
+
+export * from './apiToken';
 
 export * from './attachment';
 
@@ -24,8 +24,6 @@ export * from './boardMyPrefs';
 
 export * from './boardStars';
 
-export * from './cFValue';
-
 export * from './card';
 
 export * from './cardAging';
@@ -33,6 +31,8 @@ export * from './cardAging';
 export * from './cardFields';
 
 export * from './cardSticker';
+
+export * from './cfValue';
 
 export * from './channel';
 

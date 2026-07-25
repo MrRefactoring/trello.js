@@ -3,6 +3,7 @@ import type { GetEmoji } from '#/parameters/getEmoji';
 import type { Client, SendRequestOptions } from '#/core';
 
 /** List available Emoji */
+
 export async function getEmoji(client: Client, parameters?: GetEmoji): Promise<Emoji> {
   const config: SendRequestOptions<Emoji> = {
     url: '/emoji',

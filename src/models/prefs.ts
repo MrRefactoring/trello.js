@@ -16,7 +16,7 @@ export const PrefsSchema = apiObject({
   cardAging: CardAgingSchema.optional(),
   calendarFeedEnabled: z.boolean().optional(),
   background: z.string().optional(),
-  backgroundImage: z.string().url().nullish(),
+  backgroundImage: z.url().nullish(),
   backgroundImageScaled: z.array(ImageDescriptorSchema).nullish(),
   backgroundTile: z.boolean().optional(),
   backgroundBrightness: z.string().optional(),

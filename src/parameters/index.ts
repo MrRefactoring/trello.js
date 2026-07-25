@@ -16,6 +16,8 @@ export * from './createActionReaction';
 
 export * from './createBoard';
 
+export * from './createBoardExport';
+
 export * from './createBoardLabel';
 
 export * from './createBoardList';
@@ -74,6 +76,8 @@ export * from './deleteActionReaction';
 
 export * from './deleteBoard';
 
+export * from './deleteBoardExport';
+
 export * from './deleteCard';
 
 export * from './deleteCardAttachment';
@@ -122,6 +126,8 @@ export * from './disableBoardPlugin';
 
 export * from './dismissMemberOneTimeMessage';
 
+export * from './downloadBoardExport';
+
 export * from './enableBoardPlugin';
 
 export * from './generateBoardCalendarKey';
@@ -162,6 +168,8 @@ export * from './getBoardChecklists';
 
 export * from './getBoardCustomFields';
 
+export * from './getBoardExport';
+
 export * from './getBoardField';
 
 export * from './getBoardLabels';
@@ -173,6 +181,8 @@ export * from './getBoardListsByFilter';
 export * from './getBoardMembers';
 
 export * from './getBoardMemberships';
+
+export * from './getBoardMostRecentExport';
 
 export * from './getBoardPlugins';
 
@@ -507,5 +517,3 @@ export * from './uploadMemberCustomSticker';
 export * from './uploadOrganizationLogo';
 
 export * from './voteOnCard';
-
-export * from './performBatch';

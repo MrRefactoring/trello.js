@@ -4,7 +4,16 @@ import type { Client, ClientConfig, SendRequestOptions } from './interfaces';
 const DEFAULT_HOST = 'https://api.trello.com/1';
 const MAX_RETRY_ATTEMPTS = 4;
 
-export function createClient(config: ClientConfig): Client {
+function isClient(value: ClientConfig | Client): value is Client {
+  return typeof (value as Client).sendRequest === 'function';
+}
+
+export function createClient(config: ClientConfig | Client): Client {
+  // Already a client: hand it straight back. This is what lets a client built once for the flat,
+  // tree-shaken functions also drive `createTrelloClient` — one instance, one configuration, rather
+  // than two that could disagree about the host or `skipParsing`.
+  if (isClient(config)) return config;
+
   const baseUrl = (config.host ?? DEFAULT_HOST).replace(/\/$/, '');
   const defaultHeaders = config.headers ?? {};
   const skipParsing = config.skipParsing ?? false;
