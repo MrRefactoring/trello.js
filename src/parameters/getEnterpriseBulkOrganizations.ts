@@ -4,7 +4,7 @@ export const GetEnterpriseBulkOrganizationsSchema = z.object({
   /** ID of the enterprise to retrieve. */
   id: z.string(),
   /** An array of IDs of the organizations to be removed from the enterprise. */
-  idOrganizations: z.array(z.unknown()),
+  idOrganizations: z.array(z.string()),
 });
 
 export type GetEnterpriseBulkOrganizations = z.input<typeof GetEnterpriseBulkOrganizationsSchema>;
