@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetMemberNotificationsSchema = z.object({
   /** The ID or username of the member */
@@ -7,7 +8,7 @@ export const GetMemberNotificationsSchema = z.object({
   display: z.boolean().optional(),
   filter: z.string().optional(),
   /** One of: `all`, `read`, `unread` */
-  readFilter: z.union([z.string(), z.enum(['all', 'read', 'unread'])]).optional(),
+  readFilter: z.union([z.string(), openEnum(['all', 'read', 'unread'])]).optional(),
   /**
    * `all` or a comma-separated list of notification
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -16,7 +17,7 @@ export const GetMemberNotificationsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'unread',
         'type',
@@ -30,7 +31,7 @@ export const GetMemberNotificationsSchema = z.object({
         'reactions',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'unread',
           'type',
@@ -63,7 +64,7 @@ export const GetMemberNotificationsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -87,7 +88,7 @@ export const GetMemberNotificationsSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',

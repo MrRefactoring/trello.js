@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetEnterpriseMembersSchema = z.object({
   /** ID of the Enterprise to retrieve. */
@@ -11,7 +12,7 @@ export const GetEnterpriseMembersSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -35,7 +36,7 @@ export const GetEnterpriseMembersSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',
@@ -81,7 +82,7 @@ export const GetEnterpriseMembersSchema = z.object({
    */
   sortBy: z.string().optional(),
   /** Deprecated: Please use `sort` instead. One of: `ascending`, `descending`, `asc`, `desc`. */
-  sortOrder: z.enum(['ascending', 'descending', 'asc', 'desc', 'null']).optional(),
+  sortOrder: openEnum(['ascending', 'descending', 'asc', 'desc', 'null']).optional(),
   /** Any integer between 0 and 9999. */
   startIndex: z.number().optional(),
   /** SCIM-style filter. */

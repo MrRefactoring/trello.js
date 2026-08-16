@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetNotificationFieldSchema = z.object({
   /** The ID of the notification */
@@ -6,7 +7,7 @@ export const GetNotificationFieldSchema = z.object({
   /** A notification [field](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/) */
   field: z.union([
     z.string(),
-    z.enum([
+    openEnum([
       'id',
       'unread',
       'type',

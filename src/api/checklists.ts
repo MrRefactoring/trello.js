@@ -51,7 +51,6 @@ export async function getChecklist(client: Client, parameters: GetChecklist): Pr
 }
 
 /** Update an existing checklist. */
-
 export async function updateChecklist(client: Client, parameters: UpdateChecklist): Promise<Checklist> {
   const config: SendRequestOptions<Checklist> = {
     url: `/checklists/${parameters.id}`,
@@ -67,7 +66,6 @@ export async function updateChecklist(client: Client, parameters: UpdateChecklis
 }
 
 /** Delete a checklist */
-
 export async function deleteChecklist(client: Client, parameters: DeleteChecklist): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/checklists/${parameters.id}`,
@@ -172,7 +170,6 @@ export async function getChecklistItem(client: Client, parameters: GetChecklistI
 }
 
 /** Remove an item from a checklist */
-
 export async function deleteChecklistItem(client: Client, parameters: DeleteChecklistItem): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/checklists/${parameters.id}/checkItems/${parameters.idCheckItem}`,

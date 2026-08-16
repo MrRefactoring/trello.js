@@ -1,6 +1,7 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import { openEnum } from '#/core';
 
-export const BlockedKeySchema = z.enum([
+export const BlockedKeySchema = openEnum([
   'notification_comment_card',
   'notification_added_a_due_date',
   'notification_changed_due_date',

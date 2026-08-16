@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetBoardListsSchema = z.object({
   /** Filter to apply to Cards. */
-  cards: z.union([z.string(), z.enum(['all', 'closed', 'none', 'open'])]).optional(),
+  cards: z.union([z.string(), openEnum(['all', 'closed', 'none', 'open'])]).optional(),
   /**
    * `all` or a comma-separated list of card
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#card-object)
@@ -11,7 +12,7 @@ export const GetBoardListsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'address',
         'badges',
@@ -47,7 +48,7 @@ export const GetBoardListsSchema = z.object({
         'isTemplate',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'address',
           'badges',
@@ -86,7 +87,7 @@ export const GetBoardListsSchema = z.object({
     ])
     .optional(),
   /** Filter to apply to Lists */
-  filter: z.union([z.string(), z.enum(['all', 'closed', 'none', 'open'])]).optional(),
+  filter: z.union([z.string(), openEnum(['all', 'closed', 'none', 'open'])]).optional(),
   /**
    * `all` or a comma-separated list of list
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -95,7 +96,7 @@ export const GetBoardListsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'closed',
@@ -111,7 +112,7 @@ export const GetBoardListsSchema = z.object({
         'idOrganization',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'closed',

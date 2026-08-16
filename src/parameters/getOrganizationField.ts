@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetOrganizationFieldSchema = z.object({
   /** The ID or name of the organization */
@@ -6,7 +7,7 @@ export const GetOrganizationFieldSchema = z.object({
   /** An organization [field](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/) */
   field: z.union([
     z.string(),
-    z.enum([
+    openEnum([
       'id',
       'billableMemberCount',
       'desc',

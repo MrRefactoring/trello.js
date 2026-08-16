@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const InviteBoardMemberSchema = z.object({
   /** The email address of a user to add as a member of the board. */
   email: z.string(),
   /** Valid values: admin, normal, observer. Determines what type of member the user being added should be of the board. */
-  type: z.enum(['admin', 'normal', 'observer']).optional(),
+  type: openEnum(['admin', 'normal', 'observer']).optional(),
   /** The ID of the board */
   id: z.string(),
   /**

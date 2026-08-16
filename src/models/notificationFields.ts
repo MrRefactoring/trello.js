@@ -1,6 +1,7 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import { openEnum } from '#/core';
 
-export const NotificationFieldsSchema = z.enum([
+export const NotificationFieldsSchema = openEnum([
   'id',
   'unread',
   'type',

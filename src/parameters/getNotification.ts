@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetNotificationSchema = z.object({
   /** The ID of the notification */
@@ -13,7 +14,7 @@ export const GetNotificationSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'desc',
@@ -32,7 +33,7 @@ export const GetNotificationSchema = z.object({
         'enterpriseOwned',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'desc',
@@ -63,7 +64,7 @@ export const GetNotificationSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'address',
         'badges',
@@ -99,7 +100,7 @@ export const GetNotificationSchema = z.object({
         'isTemplate',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'address',
           'badges',
@@ -149,7 +150,7 @@ export const GetNotificationSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'unread',
         'type',
@@ -163,7 +164,7 @@ export const GetNotificationSchema = z.object({
         'reactions',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'unread',
           'type',
@@ -191,7 +192,7 @@ export const GetNotificationSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -215,7 +216,7 @@ export const GetNotificationSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',
@@ -251,7 +252,7 @@ export const GetNotificationSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -275,7 +276,7 @@ export const GetNotificationSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',
@@ -311,7 +312,7 @@ export const GetNotificationSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'billableMemberCount',
         'desc',
@@ -331,7 +332,7 @@ export const GetNotificationSchema = z.object({
         'website',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'billableMemberCount',
           'desc',

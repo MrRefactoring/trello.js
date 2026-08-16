@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 import { posStringOrNumberSchema } from '../models';
 
 export const UpdateChecklistFieldSchema = z.object({
@@ -7,7 +8,7 @@ export const UpdateChecklistFieldSchema = z.object({
   /** ID of a checklist. */
   id: z.string(),
   /** Field to update. */
-  field: z.enum(['name', 'pos']),
+  field: openEnum(['name', 'pos']),
 });
 
 export type UpdateChecklistField = z.input<typeof UpdateChecklistFieldSchema>;

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 import { CardSchema } from '#/models/card';
 import { BoardSchema } from '#/models/board';
 import { ReactionSchema } from '#/models/reaction';
@@ -7,7 +7,7 @@ import { ReactionSchema } from '#/models/reaction';
 export const NotificationSchema = apiObject({
   id: z.string(),
   unread: z.boolean().optional(),
-  type: z.enum(['cardDueSoon']).optional(),
+  type: openEnum(['cardDueSoon']).optional(),
   date: z.coerce.date().optional(),
   dateRead: z.coerce.date().optional(),
   data: z.string().optional(),

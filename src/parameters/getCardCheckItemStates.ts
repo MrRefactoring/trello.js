@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetCardCheckItemStatesSchema = z.object({
   /** The ID of the Card */
@@ -8,8 +9,8 @@ export const GetCardCheckItemStatesSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['idCheckItem', 'state']),
-      z.array(z.enum(['idCheckItem', 'state'])),
+      openEnum(['idCheckItem', 'state']),
+      z.array(openEnum(['idCheckItem', 'state'])),
     ])
     .optional(),
 });

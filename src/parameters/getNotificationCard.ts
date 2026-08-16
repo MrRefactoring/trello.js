@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetNotificationCardSchema = z.object({
   /** The ID of the notification */
@@ -11,7 +12,7 @@ export const GetNotificationCardSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'address',
         'badges',
@@ -47,7 +48,7 @@ export const GetNotificationCardSchema = z.object({
         'isTemplate',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'address',
           'badges',

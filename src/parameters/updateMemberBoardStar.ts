@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const UpdateMemberBoardStarSchema = z.object({
   /** New position for the starred board. `top`, `bottom`, or a positive float. */
-  pos: z.union([z.string(), z.number(), z.enum(['top', 'bottom'])]).optional(),
+  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]).optional(),
   /** The ID or username of the member */
   id: z.string(),
   /** The ID of the board star */

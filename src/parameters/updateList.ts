@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const UpdateListSchema = z.object({
   /** New name for the list */
@@ -8,7 +9,7 @@ export const UpdateListSchema = z.object({
   /** ID of a board the list should be moved to */
   idBoard: z.string().optional(),
   /** New position for the list: `top`, `bottom`, or a positive floating point number */
-  pos: z.union([z.number(), z.enum(['top', 'bottom'])]).optional(),
+  pos: z.union([z.number(), openEnum(['top', 'bottom'])]).optional(),
   /** Whether the active member is subscribed to this list */
   subscribed: z.boolean().optional(),
   /** The ID of the list */

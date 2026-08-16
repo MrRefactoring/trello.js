@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const SearchSchema = z.object({
   /** The search query with a length of 1 to 16384 characters */
   query: z.string().max(16834, 'query must be at most 16834 characters'),
   /** `mine` or a comma-separated list of Board IDs */
-  idBoards: z.union([z.enum(['mine']), z.string()]).optional(),
+  idBoards: z.union([openEnum(['mine']), z.string()]).optional(),
   /** A comma-separated list of Organization IDs */
   idOrganizations: z.union([z.string(), z.array(z.string())]).optional(),
   /** A comma-separated list of Card IDs */
@@ -17,8 +18,8 @@ export const SearchSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['actions', 'boards', 'cards', 'members', 'organizations']),
-      z.array(z.enum(['actions', 'boards', 'cards', 'members', 'organizations'])),
+      openEnum(['actions', 'boards', 'cards', 'members', 'organizations']),
+      z.array(openEnum(['actions', 'boards', 'cards', 'members', 'organizations'])),
     ])
     .optional(),
   /**
@@ -30,7 +31,7 @@ export const SearchSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'closed',
         'dateLastActivity',
         'dateLastView',
@@ -52,7 +53,7 @@ export const SearchSchema = z.object({
         'url',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'closed',
           'dateLastActivity',
           'dateLastView',
@@ -89,7 +90,7 @@ export const SearchSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'badges',
         'checkItemStates',
         'closed',
@@ -115,7 +116,7 @@ export const SearchSchema = z.object({
         'url',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'badges',
           'checkItemStates',
           'closed',
@@ -169,7 +170,7 @@ export const SearchSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'billableMemberCount',
         'desc',
         'descData',
@@ -188,7 +189,7 @@ export const SearchSchema = z.object({
         'website',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'billableMemberCount',
           'desc',
           'descData',
@@ -219,7 +220,7 @@ export const SearchSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'avatarHash',
         'bio',
         'bioData',
@@ -234,7 +235,7 @@ export const SearchSchema = z.object({
         'username',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'avatarHash',
           'bio',
           'bioData',

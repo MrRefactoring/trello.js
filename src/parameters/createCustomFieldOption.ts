@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const CreateCustomFieldOptionSchema = z.object({
   /** ID of the customfield. */
@@ -9,7 +10,7 @@ export const CreateCustomFieldOptionSchema = z.object({
     })
     .optional(),
   color: z.string().optional(),
-  pos: z.union([z.string(), z.number(), z.enum(['top', 'bottom'])]).optional(),
+  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]).optional(),
 });
 
 export type CreateCustomFieldOption = z.input<typeof CreateCustomFieldOptionSchema>;

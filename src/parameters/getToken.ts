@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetTokenSchema = z.object({
   token: z.string(),
@@ -7,8 +8,8 @@ export const GetTokenSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['identifier', 'idMember', 'dateCreated', 'dateExpires', 'permissions']),
-      z.array(z.enum(['identifier', 'idMember', 'dateCreated', 'dateExpires', 'permissions'])),
+      openEnum(['identifier', 'idMember', 'dateCreated', 'dateExpires', 'permissions']),
+      z.array(openEnum(['identifier', 'idMember', 'dateCreated', 'dateExpires', 'permissions'])),
     ])
     .optional(),
   /** Determines whether to include webhooks. */

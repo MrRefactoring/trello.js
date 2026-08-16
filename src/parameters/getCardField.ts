@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetCardFieldSchema = z.object({
   /** The ID of the Card */
@@ -6,7 +7,7 @@ export const GetCardFieldSchema = z.object({
   /** The desired field. */
   field: z.union([
     z.string(),
-    z.enum([
+    openEnum([
       'id',
       'address',
       'badges',

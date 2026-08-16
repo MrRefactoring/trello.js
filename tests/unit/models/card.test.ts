@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { z } from 'zod';
 import { CardSchema } from '../../../src/models/card';
 
@@ -87,7 +87,21 @@ describe('CardSchema — label shade colors (issue #48)', () => {
     ).not.toThrow();
   });
 
-  it('rejects an unknown color that is not part of the palette', () => {
-    expect(() => CardSchema.parse({ ...baseCard, labels: [label('teal')] })).toThrow();
+  it('accepts a color the documented palette does not list', () => {
+    expect(() => CardSchema.parse({ ...baseCard, labels: [label('teal')] })).not.toThrow();
+  });
+
+  it('rejects that color under TRELLO_STRICT_SCHEMAS, which is how the audit sees the drift', async () => {
+    vi.stubEnv('TRELLO_STRICT_SCHEMAS', 'true');
+    vi.resetModules();
+
+    try {
+      const { CardSchema: StrictCardSchema } = await import('../../../src/models/card');
+
+      expect(() => StrictCardSchema.parse({ ...baseCard, labels: [label('teal')] })).toThrow();
+    } finally {
+      vi.unstubAllEnvs();
+      vi.resetModules();
+    }
   });
 });

@@ -1,6 +1,7 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import { openEnum } from '#/core';
 
-export const BoardFieldsSchema = z.enum([
+export const BoardFieldsSchema = openEnum([
   'id',
   'name',
   'desc',

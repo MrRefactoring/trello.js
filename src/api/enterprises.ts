@@ -34,7 +34,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Get an enterprise by its ID. */
-
 export async function getEnterprise(client: Client, parameters: GetEnterprise): Promise<Enterprise> {
   const config: SendRequestOptions<Enterprise> = {
     url: `/enterprises/${parameters.id}`,
@@ -68,7 +67,6 @@ export async function getEnterprise(client: Client, parameters: GetEnterprise): 
  * NOTE: For enterprises that have opted in to user management via AdminHub, the auditlog will will contain actions
  * taken in AdminHub, but may not contain the source for those actions.
  */
-
 export async function getEnterpriseAuditLog(
   client: Client,
   parameters: GetEnterpriseAuditLog,
@@ -83,7 +81,6 @@ export async function getEnterpriseAuditLog(
 }
 
 /** Get an enterprise's admin members. */
-
 export async function getEnterpriseAdmins(client: Client, parameters: GetEnterpriseAdmins): Promise<EnterpriseAdmin> {
   const config: SendRequestOptions<EnterpriseAdmin> = {
     url: `/enterprises/${parameters.id}/admins`,
@@ -98,7 +95,6 @@ export async function getEnterpriseAdmins(client: Client, parameters: GetEnterpr
 }
 
 /** Get the signup URL for an enterprise. */
-
 export async function getEnterpriseSignUpUrl(
   client: Client,
   parameters: GetEnterpriseSignUpUrlParameters,
@@ -122,7 +118,6 @@ export async function getEnterpriseSignUpUrl(
  * Get an enterprise's users. You can choose to retrieve licensed members, board guests, etc. The response is paginated
  * and will return 100 users at a time.
  */
-
 export async function getUser(client: Client, parameters: GetUser): Promise<Membership[]> {
   const config: SendRequestOptions<Membership[]> = {
     url: `/enterprises/${parameters.id}/members/query`,
@@ -145,7 +140,6 @@ export async function getUser(client: Client, parameters: GetUser): Promise<Memb
 }
 
 /** Get the members of an enterprise. */
-
 export async function getEnterpriseMembers(client: Client, parameters: GetEnterpriseMembers): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/enterprises/${parameters.id}/members`,
@@ -168,7 +162,6 @@ export async function getEnterpriseMembers(client: Client, parameters: GetEnterp
 }
 
 /** Get a specific member of an enterprise by ID. */
-
 export async function getEnterpriseMember(client: Client, parameters: GetEnterpriseMember): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/enterprises/${parameters.id}/members/${parameters.idMember}`,
@@ -185,7 +178,6 @@ export async function getEnterpriseMember(client: Client, parameters: GetEnterpr
 }
 
 /** Get whether an organization can be transferred to an enterprise. */
-
 export async function getEnterpriseTransferrableOrganization(
   client: Client,
   parameters: GetEnterpriseTransferrableOrganization,
@@ -200,7 +192,6 @@ export async function getEnterpriseTransferrableOrganization(
 }
 
 /** Get a list of organizations that can be transferred to an enterprise when given a bulk list of organizations. */
-
 export async function getEnterpriseBulkTransferrableOrganizations(
   client: Client,
   parameters: GetEnterpriseBulkTransferrableOrganizations,
@@ -215,7 +206,6 @@ export async function getEnterpriseBulkTransferrableOrganizations(
 }
 
 /** Decline enterpriseJoinRequests from one organization or bulk amount of organizations */
-
 export async function updateEnterpriseJoinRequests(
   client: Client,
   parameters: UpdateEnterpriseJoinRequests,
@@ -235,7 +225,6 @@ export async function updateEnterpriseJoinRequests(
  * Get the Workspaces that are claimable by the enterprise by ID. Can optionally query for workspaces based on
  * activeness/ inactiveness.
  */
-
 export async function getEnterpriseClaimableOrganizations(
   client: Client,
   parameters: GetEnterpriseClaimableOrganizations,
@@ -257,7 +246,6 @@ export async function getEnterpriseClaimableOrganizations(
 }
 
 /** Get the Workspaces that are pending for the enterprise by ID. */
-
 export async function getEnterprisePendingOrganizations(
   client: Client,
   parameters: GetEnterprisePendingOrganizations,
@@ -276,7 +264,6 @@ export async function getEnterprisePendingOrganizations(
 }
 
 /** Create an auth Token for an Enterprise. */
-
 export async function createEnterpriseToken(client: Client, parameters: CreateEnterpriseToken): Promise<APIToken> {
   const config: SendRequestOptions<APIToken> = {
     url: `/enterprises/${parameters.id}/tokens`,
@@ -291,7 +278,6 @@ export async function createEnterpriseToken(client: Client, parameters: CreateEn
 }
 
 /** Get the organizations of an enterprise. */
-
 export async function getEnterpriseOrganizations(
   client: Client,
   parameters: GetEnterpriseOrganizations,
@@ -318,7 +304,6 @@ export async function getEnterpriseOrganizations(
  * organization being added to the enterprise asynchronously. A 200 response only indicates receipt of the request, it
  * does not indicate successful addition to the enterprise.
  */
-
 export async function addEnterpriseOrganization(
   client: Client,
   parameters: AddEnterpriseOrganization,
@@ -341,7 +326,6 @@ export async function addEnterpriseOrganization(
  *
  * NOTE: Revoking of licenses is not possible for enterprises that have opted in to user management via AdminHub.
  */
-
 export async function updateEnterpriseMemberLicensed(
   client: Client,
   parameters: UpdateEnterpriseMemberLicensed,
@@ -363,7 +347,6 @@ export async function updateEnterpriseMemberLicensed(
  *
  * NOTE: Deactivation is not possible for enterprises that have opted in to user management via AdminHub.
  */
-
 export async function deactivateEnterpriseMember(
   client: Client,
   parameters: DeactivateEnterpriseMember,
@@ -388,7 +371,6 @@ export async function deactivateEnterpriseMember(
  *
  * NOTE: This endpoint is not available to enterprises that have opted in to user management via AdminHub.
  */
-
 export async function addEnterpriseAdmin(client: Client, parameters: AddEnterpriseAdmin): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
@@ -403,7 +385,6 @@ export async function addEnterpriseAdmin(client: Client, parameters: AddEnterpri
  *
  * NOTE: This endpoint is not available to enterprises that have opted in to user management via AdminHub.
  */
-
 export async function removeEnterpriseAdmin(client: Client, parameters: RemoveEnterpriseAdmin): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
@@ -414,7 +395,6 @@ export async function removeEnterpriseAdmin(client: Client, parameters: RemoveEn
 }
 
 /** Remove an organization from an enterprise. */
-
 export async function removeEnterpriseOrganization(
   client: Client,
   parameters: RemoveEnterpriseOrganization,
@@ -434,7 +414,6 @@ export async function removeEnterpriseOrganization(
  * being added to the enterprise asynchronously. A 200 response only indicates receipt of the request, it does not
  * indicate successful addition to the enterprise.
  */
-
 export async function getEnterpriseBulkOrganizations(
   client: Client,
   parameters: GetEnterpriseBulkOrganizations,

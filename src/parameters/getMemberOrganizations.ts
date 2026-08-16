@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetMemberOrganizationsSchema = z.object({
   /** The ID or username of the member */
   id: z.string(),
   /** One of: `all`, `members`, `none`, `public` (Note: `members` filters to only private Workspaces) */
-  filter: z.enum(['all', 'members', 'none', 'public']).optional(),
+  filter: openEnum(['all', 'members', 'none', 'public']).optional(),
   /**
    * `all` or a comma-separated list of organization
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -13,7 +14,7 @@ export const GetMemberOrganizationsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'billableMemberCount',
         'desc',
@@ -33,7 +34,7 @@ export const GetMemberOrganizationsSchema = z.object({
         'website',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'billableMemberCount',
           'desc',

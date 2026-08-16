@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const UpdateBoardMemberSchema = z.object({
   /** One of: admin, normal, observer. Determines the type of member this user will be on the board. */
-  type: z.enum(['admin', 'normal', 'observer']),
+  type: openEnum(['admin', 'normal', 'observer']),
   /** Optional param that allows organization admins to add multi-board guests onto a board. */
   allowBillableGuest: z.boolean().optional(),
   /** The id of the board to update */

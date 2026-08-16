@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetCardStickerSchema = z.object({
   /**
@@ -9,8 +10,8 @@ export const GetCardStickerSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled']),
-      z.array(z.enum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled'])),
+      openEnum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled']),
+      z.array(openEnum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled'])),
     ])
     .optional(),
   /** The ID of the Card */

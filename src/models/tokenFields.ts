@@ -1,5 +1,6 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import { openEnum } from '#/core';
 
-export const TokenFieldsSchema = z.enum(['identifier', 'idMember', 'dateCreated', 'dateExpires', 'permissions']);
+export const TokenFieldsSchema = openEnum(['identifier', 'idMember', 'dateCreated', 'dateExpires', 'permissions']);
 
 export type TokenFields = z.infer<typeof TokenFieldsSchema>;

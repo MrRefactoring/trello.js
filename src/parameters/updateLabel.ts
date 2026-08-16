@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const UpdateLabelSchema = z.object({
   /** The new name for the label */
@@ -8,7 +9,10 @@ export const UpdateLabelSchema = z.object({
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/) for color options
    */
   color: z
-    .union([z.string(), z.enum(['yellow', 'purple', 'blue', 'red', 'green', 'orange', 'black', 'sky', 'pink', 'lime'])])
+    .union([
+      z.string(),
+      openEnum(['yellow', 'purple', 'blue', 'red', 'green', 'orange', 'black', 'sky', 'pink', 'lime']),
+    ])
     .optional(),
   /** The ID of the Label */
   id: z.string(),

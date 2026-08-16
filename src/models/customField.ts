@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 
 export const CustomFieldSchema = apiObject({
   id: z.string(),
   idModel: z.string().optional(),
-  modelType: z.enum(['card', 'board', 'member']).optional(),
+  modelType: openEnum(['card', 'board', 'member']).optional(),
   fieldGroup: z.string().optional(),
   display: apiObject({
     cardFront: z.boolean().optional(),

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const UpdateCardSchema = z.object({
   /** The new name for the card */
@@ -18,7 +19,7 @@ export const UpdateCardSchema = z.object({
   /** The ID of the board the card should be on */
   idBoard: z.string().optional(),
   /** The position of the card in its list. `top`, `bottom`, or a positive float */
-  pos: z.union([z.enum(['top', 'bottom']), z.number()]).optional(),
+  pos: z.union([openEnum(['top', 'bottom']), z.number()]).optional(),
   /** When the card is due, or `null` */
   due: z.string().optional(),
   /** The start date of a card, or `null` */
@@ -63,14 +64,23 @@ export const UpdateCardSchema = z.object({
       value: z
         .object({
           /** One of: `pink, yellow, lime, blue, black, orange, red, purple, sky, green` */
-          color: z
-            .enum(['pink', 'yellow', 'lime', 'blue', 'black', 'orange', 'red', 'purple', 'sky', 'green'])
-            .optional(),
+          color: openEnum([
+            'pink',
+            'yellow',
+            'lime',
+            'blue',
+            'black',
+            'orange',
+            'red',
+            'purple',
+            'sky',
+            'green',
+          ]).optional(),
           /**
            * Determines whether the text on the cover should be dark or light. Setting it to `light` will make the text
            * on the card cover dark. And vice versa, setting it to dark will make the text on the card cover light
            */
-          brightness: z.enum(['dark', 'light']).optional(),
+          brightness: openEnum(['dark', 'light']).optional(),
           /** Used if making an image the cover. Only Unsplash URLs (https://images.unsplash.com/) work. */
           url: z.string().optional(),
         })

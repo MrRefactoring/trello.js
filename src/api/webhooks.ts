@@ -9,7 +9,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import type { z } from 'zod';
 
 /** Create a new webhook. */
-
 export async function createWebhook(client: Client, parameters: CreateWebhook): Promise<Webhook> {
   const config: SendRequestOptions<Webhook> = {
     url: '/webhooks/',
@@ -30,7 +29,6 @@ export async function createWebhook(client: Client, parameters: CreateWebhook): 
  * Get a webhook by ID. You must use the token query parameter and pass in the token the webhook was created under, or
  * else you will encounter a 'webhook does not belong to token' error.
  */
-
 export async function getWebhook(client: Client, parameters: GetWebhook): Promise<Webhook> {
   const config: SendRequestOptions<Webhook> = {
     url: `/webhooks/${parameters.id}`,
@@ -42,7 +40,6 @@ export async function getWebhook(client: Client, parameters: GetWebhook): Promis
 }
 
 /** Update a webhook by ID. */
-
 export async function updateWebhook(client: Client, parameters: UpdateWebhook): Promise<Webhook> {
   const config: SendRequestOptions<Webhook> = {
     url: `/webhooks/${parameters.id}`,
@@ -60,7 +57,6 @@ export async function updateWebhook(client: Client, parameters: UpdateWebhook): 
 }
 
 /** Delete a webhook by ID. */
-
 export async function deleteWebhook(client: Client, parameters: DeleteWebhook): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/webhooks/${parameters.id}`,
@@ -71,7 +67,6 @@ export async function deleteWebhook(client: Client, parameters: DeleteWebhook): 
 }
 
 /** Get a field on a Webhook */
-
 export async function getWebhookField<T = unknown>(
   client: Client,
   parameters: GetWebhookField,

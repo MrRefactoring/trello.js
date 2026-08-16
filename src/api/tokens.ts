@@ -13,7 +13,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Retrieve information about a token. */
-
 export async function getToken(client: Client, parameters: GetToken): Promise<Token> {
   const config: SendRequestOptions<Token> = {
     url: `/tokens/${parameters.token}`,
@@ -29,7 +28,6 @@ export async function getToken(client: Client, parameters: GetToken): Promise<To
 }
 
 /** Retrieve information about a token's owner by token. */
-
 export async function getTokenMember(client: Client, parameters: GetTokenMember): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/tokens/${parameters.token}/member`,
@@ -44,7 +42,6 @@ export async function getTokenMember(client: Client, parameters: GetTokenMember)
 }
 
 /** Retrieve all webhooks created with a Token. */
-
 export async function getTokenWebhooks(client: Client, parameters: GetTokenWebhooks): Promise<Webhook[]> {
   const config: SendRequestOptions<Webhook[]> = {
     url: `/tokens/${parameters.token}/webhooks`,
@@ -56,7 +53,6 @@ export async function getTokenWebhooks(client: Client, parameters: GetTokenWebho
 }
 
 /** Create a new webhook for a Token. */
-
 export async function createTokenWebhook(client: Client, parameters: CreateTokenWebhook): Promise<Webhook> {
   const config: SendRequestOptions<Webhook> = {
     url: `/tokens/${parameters.token}/webhooks`,
@@ -73,7 +69,6 @@ export async function createTokenWebhook(client: Client, parameters: CreateToken
 }
 
 /** Retrieve a webhook created with a Token. */
-
 export async function getTokenWebhook(client: Client, parameters: GetTokenWebhook): Promise<Webhook> {
   const config: SendRequestOptions<Webhook> = {
     url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
@@ -85,7 +80,6 @@ export async function getTokenWebhook(client: Client, parameters: GetTokenWebhoo
 }
 
 /** Update a Webhook created by Token */
-
 export async function updateTokenWebhook(client: Client, parameters: UpdateTokenWebhook): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
@@ -101,7 +95,6 @@ export async function updateTokenWebhook(client: Client, parameters: UpdateToken
 }
 
 /** Delete a webhook created with given token. */
-
 export async function deleteTokenWebhook(client: Client, parameters: DeleteTokenWebhook): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/tokens/${parameters.token}/webhooks/${parameters.idWebhook}`,
@@ -112,7 +105,6 @@ export async function deleteTokenWebhook(client: Client, parameters: DeleteToken
 }
 
 /** Delete a token. */
-
 export async function deleteToken(client: Client, parameters: DeleteToken): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/tokens/${parameters.token}/`,

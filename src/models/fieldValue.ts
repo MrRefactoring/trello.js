@@ -5,6 +5,6 @@ export const FieldValueSchema = apiObject({
   _value: z.unknown(),
 });
 
-export type FieldValue<T = unknown> = {
+export interface FieldValue<T = unknown> {
   _value: T;
-};
+}

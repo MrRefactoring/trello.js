@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetCardSchema = z.object({
   /**
@@ -11,7 +12,7 @@ export const GetCardSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'address',
         'badges',
@@ -47,7 +48,7 @@ export const GetCardSchema = z.object({
         'isTemplate',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'address',
           'badges',
@@ -91,7 +92,7 @@ export const GetCardSchema = z.object({
    */
   actions: z.string().optional(),
   /** `true`, `false`, or `cover` */
-  attachments: z.union([z.enum(['cover']), z.boolean()]).optional(),
+  attachments: z.union([openEnum(['cover']), z.boolean()]).optional(),
   /**
    * `all` or a comma-separated list of attachment
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -100,7 +101,7 @@ export const GetCardSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'bytes',
         'date',
@@ -114,7 +115,7 @@ export const GetCardSchema = z.object({
         'pos',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'bytes',
           'date',
@@ -141,7 +142,7 @@ export const GetCardSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -165,7 +166,7 @@ export const GetCardSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',
@@ -202,7 +203,7 @@ export const GetCardSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -226,7 +227,7 @@ export const GetCardSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',
@@ -260,8 +261,8 @@ export const GetCardSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['idBoard', 'idCard', 'name', 'pos']),
-      z.array(z.enum(['idBoard', 'idCard', 'name', 'pos'])),
+      openEnum(['idBoard', 'idCard', 'name', 'pos']),
+      z.array(openEnum(['idBoard', 'idCard', 'name', 'pos'])),
     ])
     .optional(),
   /** Whether to return the board object the card is on */
@@ -275,7 +276,7 @@ export const GetCardSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'desc',
@@ -294,7 +295,7 @@ export const GetCardSchema = z.object({
         'enterpriseOwned',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'desc',
@@ -329,8 +330,8 @@ export const GetCardSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled']),
-      z.array(z.enum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled'])),
+      openEnum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled']),
+      z.array(openEnum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled'])),
     ])
     .optional(),
   /** Whether to include the customFieldItems */
