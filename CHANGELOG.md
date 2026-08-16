@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+- `Organization` gained `iconEmoji`, `iconEmojiBackground` and `eligibleForTrial`. The live API returns all three on every workspace; they were silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking `getMemberOrganizations` and the organization-returning endpoints. `eligibleForTrial` is a boolean; the two icon fields are typed `unknown` because every workspace reachable from this account reports them as `null`, so their populated shape is still unobserved.
+
 ### Removed
 
 - **`PerformBatch` / `PerformBatchSchema` removed from `trello.js/parameters`.** An orphan: nothing referenced it, and the batch endpoint takes `Run`.
