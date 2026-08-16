@@ -13,11 +13,13 @@
 ### Changed
 
 - `createTrelloClient` and `createClient` now also accept an already-built `Client`, handed straight back. One client can drive both the namespaced facade and the flat tree-shaken functions instead of two that could disagree about the host or `skipParsing`. Passing a `ClientConfig` works exactly as before.
+- Four parameters the spec describes as arrays of objects, but the API takes as arrays of scalars, are typed as such instead of `unknown[]`: `fields` on `getCardAttachment` is now `AttachmentFields[]`, and `idOrganizations` on `getEnterpriseBulkOrganizations`, `getEnterpriseBulkTransferrableOrganizations` and `updateEnterpriseJoinRequests` is now `string[]`. Code that passed the right values keeps compiling; code that passed something else now fails at the call site rather than at the API.
 
 ### Internal
 
 - Regenerated `src/api`, `src/models`, `src/parameters` from the Trello OpenAPI spec. Beyond the board exports above, the visible changes are `Prefs.backgroundImage` moving to the Zod 4 `z.url()` spelling and JSDoc rewrapping.
 - Model files whose names begin with an acronym are now spelled `apiKey.ts`, `apiToken.ts` and `cfValue.ts` rather than `aPIKey.ts`, `aPIToken.ts` and `cFValue.ts`. Internal only — the exported `APIKey`, `APIToken` and `CFValue` names are unchanged, and neither file was ever reachable as a subpath import.
+- Dev dependencies bumped: `eslint` 10.6.0 → 10.8.0, `typescript-eslint` 8.62.1 → 8.65.0, `vitest` / `@vitest/coverage-v8` 4.1.9 → 4.1.10, `vite` 8.1.3 → 8.1.5, `prettier` 3.9.4 → 3.9.6, `tsx` 4.22.5 → 4.23.1, `tsc-alias` 1.8.17 → 1.9.1, `jscodeshift` 17.3.0 → 17.4.0, `typedoc` 0.28.19 → 0.28.20, `globals` 17.7.0 → 17.8.0, `@arethetypeswrong/cli` 0.18.4 → 0.18.5, `@types/node` 22.20.0 → 22.20.1, `pnpm` 11.5.2 → 11.17.0.
 
 ## v2.1.6 (2026-07-05)
 
