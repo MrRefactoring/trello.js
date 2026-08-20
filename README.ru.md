@@ -18,13 +18,13 @@
 
 ## Почему trello.js
 
-- 🔒 **Полностью типизирован** — каждый эндпоинт, параметр и ответ. Никаких `any`, никаких догадок.
-- ✅ **Runtime-валидация** через [Zod 4](https://zod.dev) — расхождения между документацией и реальностью ловятся на границе.
-- 🌳 **Tree-shakable** — subpath-экспорты на каждый namespace (`trello.js/boards`, `trello.js/cards`, …). Платите только за то, что импортируете.
-- 📦 **Только ESM**, современный Node.js (≥22), готов для браузера через любой сборщик.
-- 🧪 **Полное покрытие API** — 17 namespace, 250+ методов, генерируется из официального swagger Trello.
-- ⚡ **Встроенный retry** для 429-ответов с экспоненциальным backoff.
-- 📐 **Одна runtime-зависимость** — `zod`.
+- 🔒 **Полная типизация.** Тип есть у каждого эндпоинта, параметра и ответа, `any` не остаётся нигде.
+- ✅ **Runtime-валидация.** Ответы проверяются через [Zod 4](https://zod.dev): расхождение между документацией и тем, что реально присылает Trello, ловится там, где приходит ответ.
+- 🌳 **Tree-shakable.** Subpath-экспорты на каждый namespace (`trello.js/boards`, `trello.js/cards`, …), плюс `trello.js/models` и `trello.js/parameters`. Вы платите только за то, что импортируете.
+- 📦 **Только ESM.** Node.js 22 и новее, работает в браузере через любой сборщик.
+- 🧪 **Полное покрытие API.** 17 namespace и 250+ методов, генерируется из официального swagger Trello.
+- ⚡ **Встроенный retry.** 429-ответы ретраятся сами, с экспоненциальным backoff.
+- 📐 **Одна runtime-зависимость.** Только `zod`.
 
 ## Установка
 
@@ -58,8 +58,6 @@ const board = await trello.boards.createBoard({
 
 console.log(board.url);
 ```
-
-Всё.
 
 ## Рецепты
 
@@ -107,11 +105,11 @@ const webhook = await trello.webhooks.createWebhook({
 });
 ```
 
-> `callbackURL` должен отвечать `200` на `HEAD`-запрос — Trello проверяет в момент создания.
+> `callbackURL` должен отвечать `200` на `HEAD`-запрос. Trello проверяет это в момент создания.
 
 ## Tree-shaking-импорты
 
-Для минимального бандла импортируйте функции namespace'ов напрямую:
+Чтобы бандл был минимальным, импортируйте функции namespace'ов напрямую:
 
 ```ts
 import { createClient } from 'trello.js/core';
@@ -124,18 +122,18 @@ const board = await getBoard(client, { id });
 const card = await createCard(client, { idList: board.idLists?.[0], name: 'Hi' });
 ```
 
-Сборщики выкинут неиспользуемые namespace. 15+ namespace'ов, которые вы не импортируете, в бандл не попадут.
+Сборщики выкидывают неиспользуемые namespace. Те 15+ namespace'ов, которые вы не импортируете, в бандл не попадут.
 
 ## TypeScript и схемы
 
-Типы выводятся из методов автоматически:
+Типы возвращаемых значений приходят вместе с методами:
 
 ```ts
 const board = await trello.boards.getBoard({ id });
 //    ^? Board
 ```
 
-У каждой модели есть runtime Zod-схема:
+У каждой модели есть runtime Zod-схема. Импортировать её можно из корня или из отдельного subpath:
 
 ```ts
 import { BoardSchema, type Board } from 'trello.js';
@@ -143,7 +141,7 @@ import { BoardSchema, type Board } from 'trello.js';
 const board: Board = BoardSchema.parse(payload);
 ```
 
-Нужно полностью отключить парсинг? Передайте `skipParsing: true` при создании клиента. Тогда `schema.parse()` не вызывается — нет `ZodError`, нет валидации и нет трансформаций схемы (даты остаются строками, а не объектами `Date`). Это размен рантайм-типобезопасности на скорость и устойчивость к дрейфу схем; оставляйте `false` (значение по умолчанию), если нет причин менять.
+Чтобы полностью отключить парсинг, передайте `skipParsing: true` при создании клиента. Тогда `schema.parse()` не вызывается: `ZodError` не бросается, трансформации схемы тоже не применяются, поэтому даты остаются строками, а не становятся объектами `Date`. Это размен рантайм-типобезопасности на скорость и устойчивость к дрейфу схем, так что оставляйте `false` (значение по умолчанию), если нет причин менять.
 
 ```ts
 const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
@@ -151,7 +149,7 @@ const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
 
 ## Обработка ошибок
 
-Non-2xx ответы бросают `Error('Request failed: <status> <statusText> - <body>')`. Несовпадения схемы — `ZodError`. Rate-limit 429 ретраятся автоматически (2 с, 4 с, 8 с).
+Non-2xx ответы бросают `Error('Request failed: <status> <statusText> - <body>')`, несовпадения схемы — `ZodError`. Ответы 429 от рейт-лимита ретраятся автоматически: сначала пауза 2 с, потом 4 с, потом 8 с.
 
 ```ts
 try {
@@ -167,23 +165,23 @@ try {
 
 ## Документация
 
-📖 **[Полная документация](https://mrrefactoring.github.io/trello.js/ru/)** — гайды, рецепты, миграция  
-📚 **[API reference](https://mrrefactoring.github.io/trello.js/api/)** — каждый метод, генерируется из исходников (только на английском)  
-🇬🇧 **[English version](https://mrrefactoring.github.io/trello.js/)**
+- 📖 [Полная документация](https://mrrefactoring.github.io/trello.js/ru/): гайды, рецепты, миграция.
+- 📚 [API reference](https://mrrefactoring.github.io/trello.js/api/): каждый метод, генерируется из исходников (только на английском).
+- 🇬🇧 [English version](https://mrrefactoring.github.io/trello.js/).
 
 ## Совместимость
 
 - Node.js ≥ 22 (только ESM)
-- TypeScript ≥ 5.0 рекомендуется
+- TypeScript ≥ 6.0 рекомендуется
 - Современные сборщики: Vite, webpack 5+, Rollup, esbuild
 
 ## Мигрируете с v1?
 
-См. [гайд миграции v1 → v2](https://mrrefactoring.github.io/trello.js/ru/migration/v1-to-v2). Главные изменения: `new TrelloClient` → `createTrelloClient`, `key/token` → `apiKey/apiToken`, только ESM, Node 22+.
+См. [гайд миграции v1 → v2](https://mrrefactoring.github.io/trello.js/ru/migration/v1-to-v2). Главные изменения: `new TrelloClient` заменён на `createTrelloClient`, `key`/`token` — на `apiKey`/`apiToken`, пакет стал только-ESM и требует Node 22+.
 
 ## Contributing
 
-См. [CONTRIBUTING.md](./CONTRIBUTING.md). Большая часть `src/` генерируется из swagger Trello — пожалуйста, не редактируйте вручную `src/api/`, `src/models/`, `src/parameters/`.
+См. [CONTRIBUTING.md](./CONTRIBUTING.md). Большая часть `src/` генерируется из swagger Trello, поэтому, пожалуйста, не редактируйте вручную `src/api/`, `src/models/` и `src/parameters/`.
 
 ## Лицензия
 
