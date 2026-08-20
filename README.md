@@ -18,13 +18,13 @@
 
 ## Why trello.js
 
-- 🔒 **Fully typed** — every endpoint, parameter, and response. No `any`, no guessing.
-- ✅ **Runtime validation** powered by [Zod 4](https://zod.dev) — drift between docs and reality is caught at the boundary.
-- 🌳 **Tree-shakable** — subpath exports per namespace (`trello.js/boards`, `trello.js/cards`, …) plus `trello.js/models` and `trello.js/parameters`. Pay only for what you import.
-- 📦 **ESM-only**, modern Node.js (≥22), browser-ready via any bundler.
-- 🧪 **Full API coverage** — 17 namespaces, 250+ methods, auto-generated from the official Trello swagger.
-- ⚡ **Built-in retry** for 429 responses with exponential backoff.
-- 📐 **One runtime dependency** — `zod`.
+- 🔒 **Fully typed.** Every endpoint, parameter and response has a type, and none of them fall back to `any`.
+- ✅ **Runtime validation.** Responses are checked by [Zod 4](https://zod.dev), so a difference between what the docs describe and what Trello sends is caught where the response arrives.
+- 🌳 **Tree-shakable.** Subpath exports per namespace (`trello.js/boards`, `trello.js/cards`, …), plus `trello.js/models` and `trello.js/parameters`. You pay for what you import.
+- 📦 **ESM-only.** Node.js 22 and newer, browser-ready through any bundler.
+- 🧪 **Full API coverage.** 17 namespaces and 250+ methods, generated from the official Trello swagger.
+- ⚡ **Built-in retry.** 429 responses retry on their own, with exponential backoff.
+- 📐 **One runtime dependency.** Just `zod`.
 
 ## Installation
 
@@ -58,8 +58,6 @@ const board = await trello.boards.createBoard({
 
 console.log(board.url);
 ```
-
-That's it.
 
 ## Recipes
 
@@ -107,11 +105,11 @@ const webhook = await trello.webhooks.createWebhook({
 });
 ```
 
-> Your `callbackURL` must respond `200` to a `HEAD` request — Trello checks it at creation time.
+> Your `callbackURL` has to answer a `HEAD` request with `200`. Trello checks it at creation time.
 
 ## Tree-shakable imports
 
-For the smallest possible bundle, import the namespace functions directly:
+To keep the bundle as small as possible, import the namespace functions directly:
 
 ```ts
 import { createClient } from 'trello.js/core';
@@ -128,14 +126,14 @@ Bundlers strip out unused namespaces. The 15+ namespaces you don't import never 
 
 ## TypeScript & schemas
 
-Types flow from the methods automatically:
+Return types come with the methods:
 
 ```ts
 const board = await trello.boards.getBoard({ id });
 //    ^? Board
 ```
 
-Every model also has a runtime Zod schema. Import from the root or the dedicated subpath:
+Every model also has a runtime Zod schema. Import it from the root or from the dedicated subpath:
 
 ```ts
 import { BoardSchema, type Board } from 'trello.js/models';
@@ -143,7 +141,7 @@ import { BoardSchema, type Board } from 'trello.js/models';
 const board: Board = BoardSchema.parse(payload);
 ```
 
-Need to bypass parsing entirely? Pass `skipParsing: true` when creating the client. `schema.parse()` is then skipped — no `ZodError`, no validation, and no schema transforms (date fields stay strings rather than `Date` objects). This trades runtime type-safety for speed and resilience against schema drift; leave it `false` (the default) unless you have a reason.
+To bypass parsing entirely, pass `skipParsing: true` when creating the client. `schema.parse()` is then never called, so no response raises `ZodError` and the schema transforms are skipped as well: date fields stay strings instead of becoming `Date` objects. That trades runtime type safety for speed and for resilience against schema drift, so leave it `false` (the default) unless you have a reason.
 
 ```ts
 const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
@@ -151,7 +149,7 @@ const trello = createTrelloClient({ apiKey, apiToken, skipParsing: true });
 
 ## Error handling
 
-Non-2xx responses throw `Error('Request failed: <status> <statusText> - <body>')`. Schema mismatches throw `ZodError`. Rate-limit 429s retry automatically (2 s, 4 s, 8 s).
+Non-2xx responses throw `Error('Request failed: <status> <statusText> - <body>')`, and schema mismatches throw `ZodError`. Rate-limited 429s retry automatically, waiting 2 s, then 4 s, then 8 s.
 
 ```ts
 try {
@@ -167,9 +165,9 @@ See the [error handling guide](https://mrrefactoring.github.io/trello.js/guide/e
 
 ## Documentation
 
-📖 **[Full documentation](https://mrrefactoring.github.io/trello.js/)** — guides, recipes, migration  
-📚 **[API reference](https://mrrefactoring.github.io/trello.js/api/)** — every method, generated from source  
-🇷🇺 **[Русская версия](https://mrrefactoring.github.io/trello.js/ru/)**
+- 📖 [Full documentation](https://mrrefactoring.github.io/trello.js/): guides, recipes, migration.
+- 📚 [API reference](https://mrrefactoring.github.io/trello.js/api/): every method, generated from source.
+- 🇷🇺 [Русская версия](https://mrrefactoring.github.io/trello.js/ru/).
 
 ## Compatibility
 
@@ -179,11 +177,11 @@ See the [error handling guide](https://mrrefactoring.github.io/trello.js/guide/e
 
 ## Migrating from v1?
 
-See the [v1 → v2 migration guide](https://mrrefactoring.github.io/trello.js/migration/v1-to-v2). Headline changes: `new TrelloClient` → `createTrelloClient`, `key/token` → `apiKey/apiToken`, ESM-only, Node 22+.
+See the [v1 → v2 migration guide](https://mrrefactoring.github.io/trello.js/migration/v1-to-v2). The main changes: `new TrelloClient` becomes `createTrelloClient`, `key`/`token` become `apiKey`/`apiToken`, the package is ESM-only, and it needs Node 22+.
 
 ## Contributing
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md). Most of `src/` is auto-generated from the Trello swagger — please don't hand-edit `src/api/`, `src/models/`, or `src/parameters/`.
+See [CONTRIBUTING.md](./CONTRIBUTING.md). Most of `src/` is generated from the Trello swagger, so please don't hand-edit `src/api/`, `src/models/`, or `src/parameters/`.
 
 ## License
 
