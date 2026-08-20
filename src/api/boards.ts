@@ -59,7 +59,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Get information about the memberships users have to the board. */
-
 export async function getBoardMemberships(client: Client, parameters: GetBoardMemberships): Promise<Memberships[]> {
   const config: SendRequestOptions<Memberships[]> = {
     url: `/boards/${parameters.id}/memberships`,
@@ -78,7 +77,6 @@ export async function getBoardMemberships(client: Client, parameters: GetBoardMe
 }
 
 /** Request a single board. */
-
 export async function getBoard(client: Client, parameters: GetBoard): Promise<Board> {
   const config: SendRequestOptions<Board> = {
     url: `/boards/${parameters.id}`,
@@ -108,7 +106,6 @@ export async function getBoard(client: Client, parameters: GetBoard): Promise<Bo
 }
 
 /** Update an existing board by id */
-
 export async function updateBoard(client: Client, parameters: UpdateBoard): Promise<Board> {
   const config: SendRequestOptions<Board> = {
     url: `/boards/${parameters.id}`,
@@ -137,7 +134,6 @@ export async function updateBoard(client: Client, parameters: UpdateBoard): Prom
 }
 
 /** Delete a board. */
-
 export async function deleteBoard(client: Client, parameters: DeleteBoard): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/boards/${parameters.id}`,
@@ -148,7 +144,6 @@ export async function deleteBoard(client: Client, parameters: DeleteBoard): Prom
 }
 
 /** Get a single, specific field on a board */
-
 export async function getBoardField<T = unknown>(client: Client, parameters: GetBoardField): Promise<FieldValue<T>> {
   const config: SendRequestOptions<FieldValue<T>> = {
     url: `/boards/${parameters.id}/${parameters.field}`,
@@ -163,7 +158,6 @@ export async function getBoardField<T = unknown>(client: Client, parameters: Get
  * Get all of the actions of a Board. See [Nested
  * Resources](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) for more information.
  */
-
 export async function getBoardActions(client: Client, parameters: GetBoardActions): Promise<Action[]> {
   const config: SendRequestOptions<Action[]> = {
     url: `/boards/${parameters.boardId}/actions`,
@@ -203,7 +197,6 @@ export async function getBoardStars(client: Client, parameters: GetBoardStars): 
 }
 
 /** Get all of the checklists on a Board. */
-
 export async function getBoardChecklists(client: Client, parameters: GetBoardChecklists): Promise<Checklist[]> {
   const config: SendRequestOptions<Checklist[]> = {
     url: `/boards/${parameters.id}/checklists`,
@@ -218,7 +211,6 @@ export async function getBoardChecklists(client: Client, parameters: GetBoardChe
  * Get all of the open Cards on a Board. See [Nested
  * Resources](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) for more information.
  */
-
 export async function getBoardCards(client: Client, parameters: GetBoardCards): Promise<Card[]> {
   const config: SendRequestOptions<Card[]> = {
     url: `/boards/${parameters.id}/cards`,
@@ -233,7 +225,6 @@ export async function getBoardCards(client: Client, parameters: GetBoardCards): 
  * Get the Cards on a Board that match a given filter. See [Nested
  * Resources](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) for more information.
  */
-
 export async function getBoardCardsByFilter(client: Client, parameters: GetBoardCardsByFilter): Promise<Card[]> {
   const config: SendRequestOptions<Card[]> = {
     url: `/boards/${parameters.id}/cards/${parameters.filter}`,
@@ -245,7 +236,6 @@ export async function getBoardCardsByFilter(client: Client, parameters: GetBoard
 }
 
 /** Get the Custom Field Definitions that exist on a board. */
-
 export async function getBoardCustomFields(client: Client, parameters: GetBoardCustomFields): Promise<CustomField[]> {
   const config: SendRequestOptions<CustomField[]> = {
     url: `/boards/${parameters.id}/customFields`,
@@ -257,7 +247,6 @@ export async function getBoardCustomFields(client: Client, parameters: GetBoardC
 }
 
 /** Get all of the Labels on a Board. */
-
 export async function getBoardLabels(client: Client, parameters: GetBoardLabels): Promise<Label[]> {
   const config: SendRequestOptions<Label[]> = {
     url: `/boards/${parameters.id}/labels`,
@@ -273,7 +262,6 @@ export async function getBoardLabels(client: Client, parameters: GetBoardLabels)
 }
 
 /** Create a new Label on a Board. */
-
 export async function createBoardLabel(client: Client, parameters: CreateBoardLabel): Promise<Label> {
   const config: SendRequestOptions<Label> = {
     url: `/boards/${parameters.id}/labels`,
@@ -289,7 +277,6 @@ export async function createBoardLabel(client: Client, parameters: CreateBoardLa
 }
 
 /** Get the Lists on a Board */
-
 export async function getBoardLists(client: Client, parameters: GetBoardLists): Promise<TrelloList[]> {
   const config: SendRequestOptions<TrelloList[]> = {
     url: `/boards/${parameters.id}/lists`,
@@ -307,7 +294,6 @@ export async function getBoardLists(client: Client, parameters: GetBoardLists): 
 }
 
 /** Create a new List on a Board. */
-
 export async function createBoardList(client: Client, parameters: CreateBoardList): Promise<TrelloList> {
   const config: SendRequestOptions<TrelloList> = {
     url: `/boards/${parameters.id}/lists`,
@@ -333,7 +319,6 @@ export async function getBoardListsByFilter(client: Client, parameters: GetBoard
 }
 
 /** Get the Members for a board */
-
 export async function getBoardMembers(client: Client, parameters: GetBoardMembers): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/boards/${parameters.id}/members`,
@@ -345,7 +330,6 @@ export async function getBoardMembers(client: Client, parameters: GetBoardMember
 }
 
 /** Invite a Member to a Board via their email address. */
-
 export async function inviteBoardMember(client: Client, parameters: InviteBoardMember): Promise<BoardMembersResult> {
   const config: SendRequestOptions<BoardMembersResult> = {
     url: `/boards/${parameters.id}/members`,
@@ -364,7 +348,6 @@ export async function inviteBoardMember(client: Client, parameters: InviteBoardM
 }
 
 /** Add a member to the board. */
-
 export async function updateBoardMember(client: Client, parameters: UpdateBoardMember): Promise<BoardMembersResult> {
   const config: SendRequestOptions<BoardMembersResult> = {
     url: `/boards/${parameters.id}/members/${parameters.idMember}`,
@@ -389,7 +372,6 @@ export async function removeBoardMember(client: Client, parameters: RemoveBoardM
 }
 
 /** Update an existing board by id */
-
 export async function updateBoardMembership(client: Client, parameters: UpdateBoardMembership): Promise<Memberships> {
   const config: SendRequestOptions<Memberships> = {
     url: `/boards/${parameters.id}/memberships/${parameters.idMembership}`,
@@ -405,7 +387,6 @@ export async function updateBoardMembership(client: Client, parameters: UpdateBo
 }
 
 /** Update emailPosition Pref on a Board */
-
 export async function updateBoardEmailPosition(
   client: Client,
   parameters: UpdateBoardEmailPosition,
@@ -423,7 +404,6 @@ export async function updateBoardEmailPosition(
 }
 
 /** Change the default list that email-to-board cards are created in. */
-
 export async function updateBoardEmailList(client: Client, parameters: UpdateBoardEmailList): Promise<BoardMyPrefs> {
   const config: SendRequestOptions<BoardMyPrefs> = {
     url: `/boards/${parameters.id}/myPrefs/idEmailList`,
@@ -502,7 +482,6 @@ export async function updateBoardShowSidebarMembers(
 }
 
 /** Create a new board. */
-
 export async function createBoard(client: Client, parameters: CreateBoard): Promise<Board> {
   const config: SendRequestOptions<Board> = {
     url: '/boards/',
@@ -532,7 +511,6 @@ export async function createBoard(client: Client, parameters: CreateBoard): Prom
 }
 
 /** Create a new board. */
-
 export async function generateBoardCalendarKey(client: Client, parameters: GenerateBoardCalendarKey): Promise<Board> {
   const config: SendRequestOptions<Board> = {
     url: `/boards/${parameters.id}/calendarKey/generate`,
@@ -577,7 +555,6 @@ export async function markBoardAsViewed(client: Client, parameters: MarkBoardAsV
 }
 
 /** Get the enabled Power-Ups on a board */
-
 export async function getBoardPlugins(client: Client, parameters: GetBoardPlugins): Promise<Plugin[]> {
   const config: SendRequestOptions<Plugin[]> = {
     url: `/boards/${parameters.id}/boardPlugins`,
@@ -589,7 +566,6 @@ export async function getBoardPlugins(client: Client, parameters: GetBoardPlugin
 }
 
 /** Enable a Power-Up on a Board */
-
 export async function enableBoardPlugin(client: Client, parameters: EnableBoardPlugin): Promise<Plugin> {
   const config: SendRequestOptions<Plugin> = {
     url: `/boards/${parameters.id}/boardPlugins`,
@@ -604,7 +580,6 @@ export async function enableBoardPlugin(client: Client, parameters: EnableBoardP
 }
 
 /** Disable a Power-Up on a board */
-
 export async function disableBoardPlugin(client: Client, parameters: DisableBoardPlugin): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/boards/${parameters.id}/boardPlugins/${parameters.idPlugin}`,
@@ -615,7 +590,6 @@ export async function disableBoardPlugin(client: Client, parameters: DisableBoar
 }
 
 /** List the Power-Ups on a board */
-
 export async function getBoardPowerUps(client: Client, parameters: GetBoardPowerUps): Promise<Plugin[]> {
   const config: SendRequestOptions<Plugin[]> = {
     url: `/boards/${parameters.id}/plugins`,
@@ -630,7 +604,6 @@ export async function getBoardPowerUps(client: Client, parameters: GetBoardPower
 }
 
 /** Kick off an export of a board. Only one export may be in progress for a board at a time. */
-
 export async function createBoardExport(client: Client, parameters: CreateBoardExport): Promise<Export> {
   const config: SendRequestOptions<Export> = {
     url: `/boards/${parameters.id}/exports`,
@@ -646,7 +619,6 @@ export async function createBoardExport(client: Client, parameters: CreateBoardE
 }
 
 /** Get the status of a board export */
-
 export async function getBoardExport(client: Client, parameters: GetBoardExport): Promise<Export> {
   const config: SendRequestOptions<Export> = {
     url: `/boards/${parameters.id}/exports/${parameters.idExport}`,
@@ -658,7 +630,6 @@ export async function getBoardExport(client: Client, parameters: GetBoardExport)
 }
 
 /** Soft-delete a board export */
-
 export async function deleteBoardExport(client: Client, parameters: DeleteBoardExport): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/boards/${parameters.id}/exports/${parameters.idExport}`,
@@ -669,7 +640,6 @@ export async function deleteBoardExport(client: Client, parameters: DeleteBoardE
 }
 
 /** Download the exported file. Redirects to the file location if the export is ready, or errors if it is not. */
-
 export async function downloadBoardExport(client: Client, parameters: DownloadBoardExport): Promise<unknown> {
   const config: SendRequestOptions<unknown> = {
     url: `/boards/${parameters.id}/exports/${parameters.idExport}/download`,
@@ -680,7 +650,6 @@ export async function downloadBoardExport(client: Client, parameters: DownloadBo
 }
 
 /** Get the most recent successful export for a board */
-
 export async function getBoardMostRecentExport(client: Client, parameters: GetBoardMostRecentExport): Promise<Export> {
   const config: SendRequestOptions<Export> = {
     url: `/boards/${parameters.id}/exports/mostRecent`,

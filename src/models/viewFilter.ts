@@ -1,5 +1,6 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import { openEnum } from '#/core';
 
-export const ViewFilterSchema = z.enum(['all', 'closed', 'none', 'open']);
+export const ViewFilterSchema = openEnum(['all', 'closed', 'none', 'open']);
 
 export type ViewFilter = z.infer<typeof ViewFilterSchema>;

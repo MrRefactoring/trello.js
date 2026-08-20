@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 import { CardAgingSchema } from '#/models/cardAging';
 import { ImageDescriptorSchema } from '#/models/imageDescriptor';
 import { SwitcherViewSchema } from '#/models/switcherView';
 
 export const PrefsSchema = apiObject({
-  permissionLevel: z.enum(['private', 'org', 'board', 'public', 'enterprise']).optional(),
+  permissionLevel: openEnum(['private', 'org', 'board', 'public', 'enterprise']).optional(),
   hideVotes: z.boolean().optional(),
   voting: z.string().optional(),
   comments: z.string().optional(),

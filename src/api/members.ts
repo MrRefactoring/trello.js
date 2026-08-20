@@ -64,7 +64,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Get a member */
-
 export async function getMember(client: Client, parameters: GetMember): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/members/${parameters.id}`,
@@ -98,7 +97,6 @@ export async function getMember(client: Client, parameters: GetMember): Promise<
 }
 
 /** Update a Member */
-
 export async function updateMember(client: Client, parameters: UpdateMember): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/members/${parameters.id}`,
@@ -120,7 +118,6 @@ export async function updateMember(client: Client, parameters: UpdateMember): Pr
 }
 
 /** Get a particular property of a member */
-
 export async function getMemberField<T = unknown>(client: Client, parameters: GetMemberField): Promise<FieldValue<T>> {
   const config: SendRequestOptions<FieldValue<T>> = {
     url: `/members/${parameters.id}/${parameters.field}`,
@@ -132,7 +129,6 @@ export async function getMemberField<T = unknown>(client: Client, parameters: Ge
 }
 
 /** List the actions for a member */
-
 export async function getMemberActions(client: Client, parameters: GetMemberActions): Promise<Action[]> {
   const config: SendRequestOptions<Action[]> = {
     url: `/members/${parameters.id}/actions`,
@@ -159,7 +155,6 @@ export async function getMemberActions(client: Client, parameters: GetMemberActi
 }
 
 /** Get a member's custom board backgrounds */
-
 export async function getMemberBoardBackgrounds(
   client: Client,
   parameters: GetMemberBoardBackgrounds,
@@ -177,7 +172,6 @@ export async function getMemberBoardBackgrounds(
 }
 
 /** Upload a new boardBackground */
-
 export async function createMemberBoardBackground(
   client: Client,
   parameters: CreateMemberBoardBackground,
@@ -195,7 +189,6 @@ export async function createMemberBoardBackground(
 }
 
 /** Get a member's board background */
-
 export async function getMemberBoardBackground(
   client: Client,
   parameters: GetMemberBoardBackground,
@@ -213,7 +206,6 @@ export async function getMemberBoardBackground(
 }
 
 /** Update a board background */
-
 export async function updateMemberBoardBackground(
   client: Client,
   parameters: UpdateMemberBoardBackground,
@@ -232,7 +224,6 @@ export async function updateMemberBoardBackground(
 }
 
 /** Delete a board background */
-
 export async function deleteMemberBoardBackground(
   client: Client,
   parameters: DeleteMemberBoardBackground,
@@ -246,7 +237,6 @@ export async function deleteMemberBoardBackground(
 }
 
 /** List a member's board stars */
-
 export async function getMemberBoardStars(client: Client, parameters: GetMemberBoardStars): Promise<BoardStars[]> {
   const config: SendRequestOptions<BoardStars[]> = {
     url: `/members/${parameters.id}/boardStars`,
@@ -258,7 +248,6 @@ export async function getMemberBoardStars(client: Client, parameters: GetMemberB
 }
 
 /** Star a new board on behalf of a Member */
-
 export async function starBoard(client: Client, parameters: StarBoard): Promise<BoardStars> {
   const config: SendRequestOptions<BoardStars> = {
     url: `/members/${parameters.id}/boardStars`,
@@ -274,7 +263,6 @@ export async function starBoard(client: Client, parameters: StarBoard): Promise<
 }
 
 /** Get a specific boardStar */
-
 export async function getMemberBoardStar(client: Client, parameters: GetMemberBoardStar): Promise<BoardStars> {
   const config: SendRequestOptions<BoardStars> = {
     url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
@@ -286,7 +274,6 @@ export async function getMemberBoardStar(client: Client, parameters: GetMemberBo
 }
 
 /** Update the position of a starred board */
-
 export async function updateMemberBoardStar(client: Client, parameters: UpdateMemberBoardStar): Promise<BoardStars> {
   const config: SendRequestOptions<BoardStars> = {
     url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
@@ -301,7 +288,6 @@ export async function updateMemberBoardStar(client: Client, parameters: UpdateMe
 }
 
 /** Unstar a board */
-
 export async function unstarBoard(client: Client, parameters: UnstarBoard): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
@@ -312,7 +298,6 @@ export async function unstarBoard(client: Client, parameters: UnstarBoard): Prom
 }
 
 /** Lists the boards that the user is a member of. */
-
 export async function getMemberBoards(client: Client, parameters: GetMemberBoards): Promise<Board[]> {
   const config: SendRequestOptions<Board[]> = {
     url: `/members/${parameters.id}/boards`,
@@ -331,7 +316,6 @@ export async function getMemberBoards(client: Client, parameters: GetMemberBoard
 }
 
 /** Get the boards the member has been invited to */
-
 export async function getMemberInvitedBoards(client: Client, parameters: GetMemberInvitedBoards): Promise<Board[]> {
   const config: SendRequestOptions<Board[]> = {
     url: `/members/${parameters.id}/boardsInvited`,
@@ -346,7 +330,6 @@ export async function getMemberInvitedBoards(client: Client, parameters: GetMemb
 }
 
 /** Gets the cards a member is on */
-
 export async function getMemberCards(client: Client, parameters: GetMemberCards): Promise<Card[]> {
   const config: SendRequestOptions<Card[]> = {
     url: `/members/${parameters.id}/cards`,
@@ -361,7 +344,6 @@ export async function getMemberCards(client: Client, parameters: GetMemberCards)
 }
 
 /** Get a member's custom board backgrounds */
-
 export async function getMemberCustomBoardBackgrounds(
   client: Client,
   parameters: GetMemberCustomBoardBackgrounds,
@@ -376,7 +358,6 @@ export async function getMemberCustomBoardBackgrounds(
 }
 
 /** Upload a new custom board background */
-
 export async function createMemberCustomBoardBackground(
   client: Client,
   parameters: CreateMemberCustomBoardBackground,
@@ -394,7 +375,6 @@ export async function createMemberCustomBoardBackground(
 }
 
 /** Get a specific custom board background */
-
 export async function getMemberCustomBoardBackground(
   client: Client,
   parameters: GetMemberCustomBoardBackground,
@@ -409,7 +389,6 @@ export async function getMemberCustomBoardBackground(
 }
 
 /** Update a specific custom board background */
-
 export async function updateMemberCustomBoardBackground(
   client: Client,
   parameters: UpdateMemberCustomBoardBackground,
@@ -428,7 +407,6 @@ export async function updateMemberCustomBoardBackground(
 }
 
 /** Delete a specific custom board background */
-
 export async function deleteMemberCustomBoardBackground(
   client: Client,
   parameters: DeleteMemberCustomBoardBackground,
@@ -442,7 +420,6 @@ export async function deleteMemberCustomBoardBackground(
 }
 
 /** Get a Member's uploaded custom Emojis */
-
 export async function getMemberCustomEmojis(client: Client, parameters: GetMemberCustomEmojis): Promise<CustomEmoji[]> {
   const config: SendRequestOptions<CustomEmoji[]> = {
     url: `/members/${parameters.id}/customEmoji`,
@@ -454,7 +431,6 @@ export async function getMemberCustomEmojis(client: Client, parameters: GetMembe
 }
 
 /** Create a new custom Emoji */
-
 export async function uploadMemberCustomEmoji(
   client: Client,
   parameters: UploadMemberCustomEmoji,
@@ -473,7 +449,6 @@ export async function uploadMemberCustomEmoji(
 }
 
 /** Get a Member's custom Emoji */
-
 export async function getMemberCustomEmoji(client: Client, parameters: GetMemberCustomEmoji): Promise<CustomEmoji> {
   const config: SendRequestOptions<CustomEmoji> = {
     url: `/members/${parameters.id}/customEmoji/${parameters.idEmoji}`,
@@ -488,7 +463,6 @@ export async function getMemberCustomEmoji(client: Client, parameters: GetMember
 }
 
 /** Get a Member's uploaded stickers */
-
 export async function getMemberCustomStickers(
   client: Client,
   parameters: GetMemberCustomStickers,
@@ -503,7 +477,6 @@ export async function getMemberCustomStickers(
 }
 
 /** Upload a new custom sticker */
-
 export async function uploadMemberCustomSticker(
   client: Client,
   parameters: UploadMemberCustomSticker,
@@ -521,7 +494,6 @@ export async function uploadMemberCustomSticker(
 }
 
 /** Get a Member's custom Sticker */
-
 export async function getMemberCustomSticker(
   client: Client,
   parameters: GetMemberCustomSticker,
@@ -539,7 +511,6 @@ export async function getMemberCustomSticker(
 }
 
 /** Delete a Member's custom Sticker */
-
 export async function deleteMemberCustomSticker(client: Client, parameters: DeleteMemberCustomSticker): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
@@ -550,7 +521,6 @@ export async function deleteMemberCustomSticker(client: Client, parameters: Dele
 }
 
 /** Get a member's notifications */
-
 export async function getMemberNotifications(
   client: Client,
   parameters: GetMemberNotifications,
@@ -578,7 +548,6 @@ export async function getMemberNotifications(
 }
 
 /** Get a member's Workspaces */
-
 export async function getMemberOrganizations(
   client: Client,
   parameters: GetMemberOrganizations,
@@ -598,7 +567,6 @@ export async function getMemberOrganizations(
 }
 
 /** Get a member's Workspaces they have been invited to */
-
 export async function getMemberInvitedOrganizations(
   client: Client,
   parameters: GetMemberInvitedOrganizations,
@@ -616,7 +584,6 @@ export async function getMemberInvitedOrganizations(
 }
 
 /** List the saved searches of a Member */
-
 export async function getMemberSavedSearches(
   client: Client,
   parameters: GetMemberSavedSearches,
@@ -631,7 +598,6 @@ export async function getMemberSavedSearches(
 }
 
 /** Create a saved search */
-
 export async function createMemberSavedSearch(
   client: Client,
   parameters: CreateMemberSavedSearch,
@@ -651,7 +617,6 @@ export async function createMemberSavedSearch(
 }
 
 /** Get a saved search */
-
 export async function getMemberSavedSearch(client: Client, parameters: GetMemberSavedSearch): Promise<SavedSearch> {
   const config: SendRequestOptions<SavedSearch> = {
     url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
@@ -663,7 +628,6 @@ export async function getMemberSavedSearch(client: Client, parameters: GetMember
 }
 
 /** Update a saved search */
-
 export async function updateMemberSavedSearch(
   client: Client,
   parameters: UpdateMemberSavedSearch,
@@ -683,7 +647,6 @@ export async function updateMemberSavedSearch(
 }
 
 /** Delete a saved search */
-
 export async function deleteMemberSavedSearch(client: Client, parameters: DeleteMemberSavedSearch): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
@@ -694,7 +657,6 @@ export async function deleteMemberSavedSearch(client: Client, parameters: Delete
 }
 
 /** List a members app tokens */
-
 export async function getMemberTokens(client: Client, parameters: GetMemberTokens): Promise<Token[]> {
   const config: SendRequestOptions<Token[]> = {
     url: `/members/${parameters.id}/tokens`,
@@ -709,7 +671,6 @@ export async function getMemberTokens(client: Client, parameters: GetMemberToken
 }
 
 /** Create a new avatar for a member */
-
 export async function uploadMemberAvatar(client: Client, parameters: UploadMemberAvatar): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/avatar`,
@@ -723,7 +684,6 @@ export async function uploadMemberAvatar(client: Client, parameters: UploadMembe
 }
 
 /** Dismiss a message */
-
 export async function dismissMemberOneTimeMessage(
   client: Client,
   parameters: DismissMemberOneTimeMessage,
@@ -740,7 +700,6 @@ export async function dismissMemberOneTimeMessage(
 }
 
 /** Get a member's notification channel settings */
-
 export async function getMemberNotificationChannelSettings(
   client: Client,
   parameters: GetMemberNotificationChannelSettings,
@@ -755,7 +714,6 @@ export async function getMemberNotificationChannelSettings(
 }
 
 /** Update blocked notification keys of Member on a specific channel */
-
 export async function updateMemberNotificationChannelSettings(
   client: Client,
   parameters: UpdateMemberNotificationChannelSettings,
@@ -774,7 +732,6 @@ export async function updateMemberNotificationChannelSettings(
 }
 
 /** Get blocked notification keys of Member on a specific channel */
-
 export async function getMemberNotificationChannelSetting(
   client: Client,
   parameters: GetMemberNotificationChannelSetting,
@@ -789,7 +746,6 @@ export async function getMemberNotificationChannelSetting(
 }
 
 /** Update blocked notification keys of Member on a specific channel */
-
 export async function updateMemberNotificationChannelSetting(
   client: Client,
   parameters: UpdateMemberNotificationChannelSetting,
@@ -807,7 +763,6 @@ export async function updateMemberNotificationChannelSetting(
 }
 
 /** Update blocked notification keys of Member on a specific channel */
-
 export async function updateMemberNotificationChannelBlockedKey(
   client: Client,
   parameters: UpdateMemberNotificationChannelBlockedKey,

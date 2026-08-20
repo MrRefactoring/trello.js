@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetMemberFieldSchema = z.object({
   /** The ID or username of the member */
@@ -6,7 +7,7 @@ export const GetMemberFieldSchema = z.object({
   /** One of the member [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/) */
   field: z.union([
     z.string(),
-    z.enum([
+    openEnum([
       'id',
       'activityBlocked',
       'avatarHash',

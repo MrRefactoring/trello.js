@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetNotificationOrganizationSchema = z.object({
   /** The ID of the notification */
@@ -11,7 +12,7 @@ export const GetNotificationOrganizationSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'billableMemberCount',
         'desc',
@@ -31,7 +32,7 @@ export const GetNotificationOrganizationSchema = z.object({
         'website',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'billableMemberCount',
           'desc',

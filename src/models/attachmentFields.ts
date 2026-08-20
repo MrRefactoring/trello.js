@@ -1,6 +1,7 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import { openEnum } from '#/core';
 
-export const AttachmentFieldsSchema = z.enum([
+export const AttachmentFieldsSchema = openEnum([
   'id',
   'bytes',
   'date',

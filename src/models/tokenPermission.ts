@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 
 export const TokenPermissionSchema = apiObject({
-  idModel: z.union([z.string(), z.enum(['*'])]).optional(),
-  modelType: z.enum(['Board', 'Member', 'Organization', 'Enterprise']).optional(),
+  idModel: z.union([z.string(), openEnum(['*'])]).optional(),
+  modelType: openEnum(['Board', 'Member', 'Organization', 'Enterprise']).optional(),
   read: z.boolean().optional(),
   write: z.boolean().optional(),
 });

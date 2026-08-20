@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetMemberBoardsSchema = z.object({
   /** The ID or username of the member */
   id: z.string(),
   /** `all` or a comma-separated list of: `closed`, `members`, `open`, `organization`, `public`, `starred` */
-  filter: z.enum(['all', 'closed', 'members', 'open', 'organization', 'public', 'starred']).optional(),
+  filter: openEnum(['all', 'closed', 'members', 'open', 'organization', 'public', 'starred']).optional(),
   /**
    * `all` or a comma-separated list of board
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -13,7 +14,7 @@ export const GetMemberBoardsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'desc',
@@ -32,7 +33,7 @@ export const GetMemberBoardsSchema = z.object({
         'enterpriseOwned',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'desc',
@@ -54,7 +55,7 @@ export const GetMemberBoardsSchema = z.object({
     ])
     .optional(),
   /** Which lists to include with the boards. One of: `all`, `closed`, `none`, `open` */
-  lists: z.enum(['all', 'closed', 'none', 'open']).optional(),
+  lists: openEnum(['all', 'closed', 'none', 'open']).optional(),
   /** Whether to include the Organization object with the Boards */
   organization: z.boolean().optional(),
   /**
@@ -65,7 +66,7 @@ export const GetMemberBoardsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'billableMemberCount',
         'desc',
@@ -85,7 +86,7 @@ export const GetMemberBoardsSchema = z.object({
         'website',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'billableMemberCount',
           'desc',

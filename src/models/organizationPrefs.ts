@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 
 export const OrganizationPrefsSchema = apiObject({
   boardVisibilityRestrict: apiObject({
@@ -14,8 +14,10 @@ export const OrganizationPrefsSchema = apiObject({
     enterprise: z.string().optional(),
     public: z.string().optional(),
   }).optional(),
-  attachmentRestrictions: z.array(z.enum(['computer', 'trello', 'google-drive', 'box', 'onedrive', 'link'])).nullish(),
-  permissionLevel: z.enum(['org', 'private', 'public', 'enterprise', 'domain']).optional(),
+  attachmentRestrictions: z
+    .array(openEnum(['computer', 'trello', 'google-drive', 'box', 'onedrive', 'link']))
+    .nullish(),
+  permissionLevel: openEnum(['org', 'private', 'public', 'enterprise', 'domain']).optional(),
   archiveCleanupCutOff: z.unknown().optional(),
   associatedDomain: z.unknown().optional(),
   atlassianIntelligenceEnabled: z.boolean().optional(),

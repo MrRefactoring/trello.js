@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const UpdateMemberSchema = z.object({
   /** The ID or username of the member */
@@ -14,7 +15,7 @@ export const UpdateMemberSchema = z.object({
   username: z.string().optional(),
   bio: z.string().optional(),
   /** One of: `gravatar`, `none`, `upload` */
-  avatarSource: z.enum(['gravatar', 'none', 'upload']).optional(),
+  avatarSource: openEnum(['gravatar', 'none', 'upload']).optional(),
   'prefs/colorBlind': z.boolean().optional(),
   'prefs/locale': z.string().optional(),
   /** `-1` for disabled, `1`, or `60` */

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetLabelSchema = z.object({
   /**
@@ -9,8 +10,8 @@ export const GetLabelSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['id', 'idBoard', 'name', 'color', 'uses']),
-      z.array(z.enum(['id', 'idBoard', 'name', 'color', 'uses'])),
+      openEnum(['id', 'idBoard', 'name', 'color', 'uses']),
+      z.array(openEnum(['id', 'idBoard', 'name', 'color', 'uses'])),
     ])
     .optional(),
   /** The ID of the Label */

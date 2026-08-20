@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetTokenMemberSchema = z.object({
   token: z.string(),
@@ -10,7 +11,7 @@ export const GetTokenMemberSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -34,7 +35,7 @@ export const GetTokenMemberSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',

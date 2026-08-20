@@ -1,5 +1,6 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import { openEnum } from '#/core';
 
-export const ChannelSchema = z.enum(['email']);
+export const ChannelSchema = openEnum(['email']);
 
 export type Channel = z.infer<typeof ChannelSchema>;

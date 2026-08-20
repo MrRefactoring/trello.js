@@ -46,7 +46,6 @@ export async function getNotification(client: Client, parameters: GetNotificatio
 }
 
 /** Update the read status of a notification */
-
 export async function updateNotification(client: Client, parameters: UpdateNotification): Promise<Notification> {
   const config: SendRequestOptions<Notification> = {
     url: `/notifications/${parameters.id}`,
@@ -61,7 +60,6 @@ export async function updateNotification(client: Client, parameters: UpdateNotif
 }
 
 /** Get a specific property of a notification */
-
 export async function getNotificationField<T = unknown>(
   client: Client,
   parameters: GetNotificationField,
@@ -76,7 +74,6 @@ export async function getNotificationField<T = unknown>(
 }
 
 /** Mark all notifications as read */
-
 export async function markAllNotificationsRead(client: Client, parameters: MarkAllNotificationsRead): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: '/notifications/all/read',
@@ -91,7 +88,6 @@ export async function markAllNotificationsRead(client: Client, parameters: MarkA
 }
 
 /** Update Notification's read status */
-
 export async function updateNotificationUnreadStatus(
   client: Client,
   parameters: UpdateNotificationUnreadStatus,
@@ -109,7 +105,6 @@ export async function updateNotificationUnreadStatus(
 }
 
 /** Get the board a notification is associated with */
-
 export async function getNotificationBoard(client: Client, parameters: GetNotificationBoard): Promise<Board> {
   const config: SendRequestOptions<Board> = {
     url: `/notifications/${parameters.id}/board`,
@@ -124,7 +119,6 @@ export async function getNotificationBoard(client: Client, parameters: GetNotifi
 }
 
 /** Get the card a notification is associated with */
-
 export async function getNotificationCard(client: Client, parameters: GetNotificationCard): Promise<Card> {
   const config: SendRequestOptions<Card> = {
     url: `/notifications/${parameters.id}/card`,
@@ -139,7 +133,6 @@ export async function getNotificationCard(client: Client, parameters: GetNotific
 }
 
 /** Get the list a notification is associated with */
-
 export async function getNotificationList(client: Client, parameters: GetNotificationList): Promise<TrelloList> {
   const config: SendRequestOptions<TrelloList> = {
     url: `/notifications/${parameters.id}/list`,
@@ -154,7 +147,6 @@ export async function getNotificationList(client: Client, parameters: GetNotific
 }
 
 /** Get the member (not the creator) a notification is about */
-
 export async function getNotificationMember(client: Client, parameters: GetNotificationMember): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/notifications/${parameters.id}/member`,
@@ -169,7 +161,6 @@ export async function getNotificationMember(client: Client, parameters: GetNotif
 }
 
 /** Get the member who created the notification */
-
 export async function getNotificationCreator(client: Client, parameters: GetNotificationCreator): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/notifications/${parameters.id}/memberCreator`,
@@ -184,7 +175,6 @@ export async function getNotificationCreator(client: Client, parameters: GetNoti
 }
 
 /** Get the organization a notification is associated with */
-
 export async function getNotificationOrganization(
   client: Client,
   parameters: GetNotificationOrganization,

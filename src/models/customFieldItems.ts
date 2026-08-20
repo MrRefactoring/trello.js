@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 
 export const CustomFieldItemsSchema = apiObject({
   id: z.string(),
@@ -8,7 +8,7 @@ export const CustomFieldItemsSchema = apiObject({
   }).optional(),
   idCustomField: z.string().optional(),
   idModel: z.string().optional(),
-  modelType: z.enum(['card', 'board', 'member']).optional(),
+  modelType: openEnum(['card', 'board', 'member']).optional(),
 });
 
 export type CustomFieldItems = z.infer<typeof CustomFieldItemsSchema>;

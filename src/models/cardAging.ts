@@ -1,5 +1,6 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import { openEnum } from '#/core';
 
-export const CardAgingSchema = z.enum(['pirate', 'regular']);
+export const CardAgingSchema = openEnum(['pirate', 'regular']);
 
 export type CardAging = z.infer<typeof CardAgingSchema>;

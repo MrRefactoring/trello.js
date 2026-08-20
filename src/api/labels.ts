@@ -7,7 +7,6 @@ import type { CreateLabel } from '#/parameters/createLabel';
 import type { Client, SendRequestOptions } from '#/core';
 
 /** Get information about a single Label. */
-
 export async function getLabel(client: Client, parameters: GetLabel): Promise<Label> {
   const config: SendRequestOptions<Label> = {
     url: `/labels/${parameters.id}`,
@@ -22,7 +21,6 @@ export async function getLabel(client: Client, parameters: GetLabel): Promise<La
 }
 
 /** Update a label by ID. */
-
 export async function updateLabel(client: Client, parameters: UpdateLabel): Promise<Label> {
   const config: SendRequestOptions<Label> = {
     url: `/labels/${parameters.id}`,
@@ -38,7 +36,6 @@ export async function updateLabel(client: Client, parameters: UpdateLabel): Prom
 }
 
 /** Delete a label by ID. */
-
 export async function deleteLabel(client: Client, parameters: DeleteLabel): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/labels/${parameters.id}`,
@@ -49,7 +46,6 @@ export async function deleteLabel(client: Client, parameters: DeleteLabel): Prom
 }
 
 /** Update a field on a label. */
-
 export async function updateLabelField(client: Client, parameters: UpdateLabelField): Promise<Label> {
   const config: SendRequestOptions<Label> = {
     url: `/labels/${parameters.id}/${parameters.field}`,
@@ -64,7 +60,6 @@ export async function updateLabelField(client: Client, parameters: UpdateLabelFi
 }
 
 /** Create a new Label on a Board. */
-
 export async function createLabel(client: Client, parameters: CreateLabel): Promise<Label> {
   const config: SendRequestOptions<Label> = {
     url: '/labels',

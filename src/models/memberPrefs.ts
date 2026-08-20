@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 
 export const MemberPrefsSchema = apiObject({
   timezoneInfo: apiObject({
@@ -10,8 +10,8 @@ export const MemberPrefsSchema = apiObject({
     timezoneNext: z.string().optional(),
   }).optional(),
   privacy: apiObject({
-    fullName: z.enum(['public', 'private', 'collaborator']).optional(),
-    avatar: z.enum(['public', 'private', 'collaborator']).optional(),
+    fullName: openEnum(['public', 'private', 'collaborator']).optional(),
+    avatar: openEnum(['public', 'private', 'collaborator']).optional(),
   }).optional(),
   sendSummaries: z.boolean().optional(),
   minutesBetweenSummaries: z.number().optional(),

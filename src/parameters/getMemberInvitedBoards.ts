@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetMemberInvitedBoardsSchema = z.object({
   /** The ID or username of the member */
@@ -11,7 +12,7 @@ export const GetMemberInvitedBoardsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'desc',
@@ -30,7 +31,7 @@ export const GetMemberInvitedBoardsSchema = z.object({
         'enterpriseOwned',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'desc',

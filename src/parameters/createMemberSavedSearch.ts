@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const CreateMemberSavedSearchSchema = z.object({
   /** The name for the saved search */
@@ -6,7 +7,7 @@ export const CreateMemberSavedSearchSchema = z.object({
   /** The search query */
   query: z.string(),
   /** The position of the saved search. `top`, `bottom`, or a positive float. */
-  pos: z.union([z.string(), z.number(), z.enum(['top', 'bottom'])]),
+  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]),
   /** The ID or username of the member */
   id: z.string(),
 });

@@ -12,7 +12,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Create a new Custom Field on a board. */
-
 export async function createCustomField(client: Client, parameters: CreateCustomField): Promise<CustomField> {
   const config: SendRequestOptions<CustomField> = {
     url: '/customFields',
@@ -43,7 +42,6 @@ export async function getCustomField(client: Client, parameters: GetCustomField)
 }
 
 /** Update a Custom Field definition. */
-
 export async function updateCustomField(client: Client, parameters: UpdateCustomField): Promise<CustomField> {
   const config: SendRequestOptions<CustomField> = {
     url: `/customFields/${parameters.id}`,
@@ -60,7 +58,6 @@ export async function updateCustomField(client: Client, parameters: UpdateCustom
 }
 
 /** Delete a Custom Field from a board. */
-
 export async function deleteCustomField(client: Client, parameters: DeleteCustomField): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/customFields/${parameters.id}`,
@@ -71,7 +68,6 @@ export async function deleteCustomField(client: Client, parameters: DeleteCustom
 }
 
 /** Get the options of a drop down Custom Field */
-
 export async function getCustomFieldOptions(
   client: Client,
   parameters: GetCustomFieldOptions,
@@ -86,7 +82,6 @@ export async function getCustomFieldOptions(
 }
 
 /** Add an option to a dropdown Custom Field */
-
 export async function createCustomFieldOption(
   client: Client,
   parameters: CreateCustomFieldOption,
@@ -106,7 +101,6 @@ export async function createCustomFieldOption(
 }
 
 /** Retrieve a specific, existing Option on a given dropdown-type Custom Field */
-
 export async function getCustomFieldOption(
   client: Client,
   parameters: GetCustomFieldOption,
@@ -121,7 +115,6 @@ export async function getCustomFieldOption(
 }
 
 /** Delete an option from a Custom Field dropdown. */
-
 export async function deleteCustomFieldOption(client: Client, parameters: DeleteCustomFieldOption): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/customFields/${parameters.id}/options/${parameters.idCustomFieldOption}`,

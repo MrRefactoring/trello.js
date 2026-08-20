@@ -1,6 +1,7 @@
-import { z } from 'zod';
+import type { z } from 'zod';
+import { openEnum } from '#/core';
 
-export const OrganizationFieldsSchema = z.enum([
+export const OrganizationFieldsSchema = openEnum([
   'id',
   'billableMemberCount',
   'desc',

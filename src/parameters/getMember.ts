@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetMemberSchema = z.object({
   /** The ID or username of the member */
@@ -14,11 +15,18 @@ export const GetMemberSchema = z.object({
    */
   boards: z.string().optional(),
   /** One of: `all`, `custom`, `default`, `none`, `premium` */
-  boardBackgrounds: z.enum(['all', 'custom', 'default', 'none', 'premium']).optional(),
+  boardBackgrounds: openEnum(['all', 'custom', 'default', 'none', 'premium']).optional(),
   /** `all` or a comma-separated list of: closed, members, open, organization, pinned, public, starred, unpinned */
-  boardsInvited: z
-    .enum(['closed', 'members', 'open', 'organization', 'pinned', 'public', 'starred', 'unpinned'])
-    .optional(),
+  boardsInvited: openEnum([
+    'closed',
+    'members',
+    'open',
+    'organization',
+    'pinned',
+    'public',
+    'starred',
+    'unpinned',
+  ]).optional(),
   /**
    * `all` or a comma-separated list of board
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -27,7 +35,7 @@ export const GetMemberSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'desc',
@@ -46,7 +54,7 @@ export const GetMemberSchema = z.object({
         'enterpriseOwned',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'desc',
@@ -76,11 +84,11 @@ export const GetMemberSchema = z.object({
    */
   cards: z.string().optional(),
   /** `all` or `none` */
-  customBoardBackgrounds: z.enum(['all', 'none']).optional(),
+  customBoardBackgrounds: openEnum(['all', 'none']).optional(),
   /** `all` or `none` */
-  customEmoji: z.enum(['all', 'none']).optional(),
+  customEmoji: openEnum(['all', 'none']).optional(),
   /** `all` or `none` */
-  customStickers: z.enum(['all', 'none']).optional(),
+  customStickers: openEnum(['all', 'none']).optional(),
   /**
    * `all` or a comma-separated list of member
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -89,7 +97,7 @@ export const GetMemberSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -113,7 +121,7 @@ export const GetMemberSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',
@@ -145,7 +153,7 @@ export const GetMemberSchema = z.object({
    */
   notifications: z.string().optional(),
   /** One of: `all`, `members`, `none`, `public` */
-  organizations: z.enum(['all', 'members', 'none', 'public']).optional(),
+  organizations: openEnum(['all', 'members', 'none', 'public']).optional(),
   /**
    * `all` or a comma-separated list of organization
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -154,7 +162,7 @@ export const GetMemberSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'billableMemberCount',
         'desc',
@@ -174,7 +182,7 @@ export const GetMemberSchema = z.object({
         'website',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'billableMemberCount',
           'desc',
@@ -199,7 +207,7 @@ export const GetMemberSchema = z.object({
   /** Whether or not to include paid account information in the returned workspace object */
   organizationPaidAccount: z.boolean().optional(),
   /** One of: `all`, `members`, `none`, `public` */
-  organizationsInvited: z.enum(['all', 'members', 'none', 'public']).optional(),
+  organizationsInvited: openEnum(['all', 'members', 'none', 'public']).optional(),
   /**
    * `all` or a comma-separated list of organization
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -208,7 +216,7 @@ export const GetMemberSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'billableMemberCount',
         'desc',
@@ -228,7 +236,7 @@ export const GetMemberSchema = z.object({
         'website',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'billableMemberCount',
           'desc',
@@ -254,7 +262,7 @@ export const GetMemberSchema = z.object({
   paidAccount: z.boolean().optional(),
   savedSearches: z.boolean().optional(),
   /** `all` or `none` */
-  tokens: z.enum(['all', 'none']).optional(),
+  tokens: openEnum(['all', 'none']).optional(),
 });
 
 export type GetMember = z.input<typeof GetMemberSchema>;

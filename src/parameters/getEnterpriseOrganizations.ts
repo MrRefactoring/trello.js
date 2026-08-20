@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetEnterpriseOrganizationsSchema = z.object({
   /** ID of the Enterprise to retrieve. */
@@ -11,7 +12,7 @@ export const GetEnterpriseOrganizationsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'billableMemberCount',
         'desc',
@@ -31,7 +32,7 @@ export const GetEnterpriseOrganizationsSchema = z.object({
         'website',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'billableMemberCount',
           'desc',

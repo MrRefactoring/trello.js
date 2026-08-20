@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetCardCheckItemSchema = z.object({
   /** `all` or a comma-separated list of `name,nameData,pos,state,type,due,dueReminder,idMember` */
@@ -6,8 +7,8 @@ export const GetCardCheckItemSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember']),
-      z.array(z.enum(['name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember'])),
+      openEnum(['name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember']),
+      z.array(openEnum(['name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember'])),
     ])
     .optional(),
   /** The ID of the Card */

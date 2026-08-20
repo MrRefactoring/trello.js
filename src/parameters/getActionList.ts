@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetActionListSchema = z.object({
   /** The ID of the action */
@@ -8,7 +9,7 @@ export const GetActionListSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'closed',
@@ -24,7 +25,7 @@ export const GetActionListSchema = z.object({
         'idOrganization',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'closed',

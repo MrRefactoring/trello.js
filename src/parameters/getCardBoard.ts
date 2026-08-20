@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetCardBoardSchema = z.object({
   /** The ID of the Card */
@@ -11,7 +12,7 @@ export const GetCardBoardSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'desc',
@@ -30,7 +31,7 @@ export const GetCardBoardSchema = z.object({
         'enterpriseOwned',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'desc',

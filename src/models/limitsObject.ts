@@ -1,8 +1,8 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 
 export const LimitsObjectSchema = apiObject({
-  status: z.enum(['ok', 'warning']).optional(),
+  status: openEnum(['ok', 'warning']).optional(),
   disableAt: z.number().optional(),
   warnAt: z.number().optional(),
   boards: z.record(z.string(), z.any()).optional(),

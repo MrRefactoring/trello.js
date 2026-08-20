@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetChecklistSchema = z.object({
   /**
@@ -6,16 +7,24 @@ export const GetChecklistSchema = z.object({
    * available are documented at [Cards Nested
    * Resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/#cards-nested-resource).
    */
-  cards: z.enum(['all', 'closed', 'none', 'open', 'visible']).optional(),
+  cards: openEnum(['all', 'closed', 'none', 'open', 'visible']).optional(),
   /** The check items on the list to return. One of: `all`, `none`. */
-  checkItems: z.enum(['all', 'none']).optional(),
+  checkItems: openEnum(['all', 'none']).optional(),
   /**
    * The fields on the checkItem to return if checkItems are being returned. `all` or a comma-separated list of: `name`,
    * `nameData`, `pos`, `state`, `type`, `due`, `dueReminder`, `idMember`
    */
-  checkItemFields: z
-    .enum(['all', 'name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember'])
-    .optional(),
+  checkItemFields: openEnum([
+    'all',
+    'name',
+    'nameData',
+    'pos',
+    'state',
+    'type',
+    'due',
+    'dueReminder',
+    'idMember',
+  ]).optional(),
   /**
    * `all` or a comma-separated list of checklist
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
@@ -24,8 +33,8 @@ export const GetChecklistSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['id', 'name', 'idBoard', 'idCard', 'pos']),
-      z.array(z.enum(['id', 'name', 'idBoard', 'idCard', 'pos'])),
+      openEnum(['id', 'name', 'idBoard', 'idCard', 'pos']),
+      z.array(openEnum(['id', 'name', 'idBoard', 'idCard', 'pos'])),
     ])
     .optional(),
   /** ID of a checklist. */

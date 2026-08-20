@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 import { posStringOrNumberSchema } from '#/models/posStringOrNumber';
 import { LimitsSchema } from '#/models/limits';
 
 export const CheckItemSchema = apiObject({
   idChecklist: z.string().optional(),
-  state: z.enum(['complete', 'incomplete']).optional(),
+  state: openEnum(['complete', 'incomplete']).optional(),
   id: z.string(),
   name: z.string().optional(),
   nameData: z.record(z.string(), z.any()).optional(),

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 import { CheckItemStateSchema } from '#/models/checkItemState';
 import { ChecklistSchema } from '#/models/checklist';
 import { LabelSchema } from '#/models/label';
@@ -34,7 +34,7 @@ export const CardSchema = apiObject({
     lastUpdatedByAi: z.boolean().optional(),
     maliciousAttachments: z.number().optional(),
   }).optional(),
-  cardRole: z.enum(['separator', 'board', 'mirror', 'link']).nullish(),
+  cardRole: openEnum(['separator', 'board', 'mirror', 'link']).nullish(),
   checkItemStates: z.array(CheckItemStateSchema).optional(),
   closed: z.boolean().optional(),
   coordinates: z.string().nullish(),
@@ -69,8 +69,8 @@ export const CardSchema = apiObject({
     idAttachment: z.string().nullish(),
     color: ColorSchema.nullish(),
     idUploadedBackground: z.boolean().nullish(),
-    size: z.enum(['normal']).optional(),
-    brightness: z.enum(['light', 'dark']).optional(),
+    size: openEnum(['normal']).optional(),
+    brightness: openEnum(['light', 'dark']).optional(),
     isTemplate: z.boolean().optional(),
     idPlugin: z.string().nullish(),
     yPosition: z.number().optional(),

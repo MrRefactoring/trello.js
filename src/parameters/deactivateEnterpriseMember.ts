@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const DeactivateEnterpriseMemberSchema = z.object({
   /** ID of the enterprise to retrieve. */
@@ -12,7 +13,7 @@ export const DeactivateEnterpriseMemberSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -36,7 +37,7 @@ export const DeactivateEnterpriseMemberSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',
@@ -70,7 +71,7 @@ export const DeactivateEnterpriseMemberSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'billableMemberCount',
         'desc',
@@ -90,7 +91,7 @@ export const DeactivateEnterpriseMemberSchema = z.object({
         'website',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'billableMemberCount',
           'desc',
@@ -120,7 +121,7 @@ export const DeactivateEnterpriseMemberSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'desc',
@@ -139,7 +140,7 @@ export const DeactivateEnterpriseMemberSchema = z.object({
         'enterpriseOwned',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'desc',

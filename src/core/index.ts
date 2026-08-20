@@ -6,4 +6,6 @@ export { createBatchRun } from './batchRun';
 
 export { createClient } from './createClient';
 
+export { openEnum } from './openEnum';
+
 export type { Client, ClientConfig, SendRequestOptions } from './interfaces';

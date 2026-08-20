@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Fixed
+
+- `Organization` gained `iconEmoji`, `iconEmojiBackground` and `eligibleForTrial`. The live API returns all three on every workspace; they were silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking `getMemberOrganizations` and the organization-returning endpoints. `eligibleForTrial` is a boolean; the two icon fields are typed `unknown` because every workspace reachable from this account reports them as `null`, so their populated shape is still unobserved.
+
 ### Removed
 
 - **`PerformBatch` / `PerformBatchSchema` removed from `trello.js/parameters`.** An orphan: nothing referenced it, and the batch endpoint takes `Run`.
@@ -12,12 +16,19 @@
 
 ### Changed
 
+- **Enums generated from the spec are now open.** A string outside the documented list is accepted at runtime instead of raising `ZodError`, because Trello ships values ahead of the spec that names them — the `_light` / `_dark` label shades of the 2023 palette redesign broke `getBoardCards` for every consumer until v2.1.6 added them by hand. The documented values stay in the type, which is now `'green' | 'yellow' | … | (string & {})`, so editors still suggest all of them. Affects 31 model and 104 parameter files, `Color` and `CardAging` among them.
+
+  Consumers who `switch` exhaustively over one of these unions will need a `default` branch: the union is no longer closed.
+
+  `TRELLO_STRICT_SCHEMAS=true` still builds a real `z.enum`, which is how `pnpm audit:schemas` keeps catching a list that has gone stale. The gate matches `apiObject`: open for consumers, closed for the audit.
+- `openEnum` is exported from `trello.js/core`.
 - `createTrelloClient` and `createClient` now also accept an already-built `Client`, handed straight back. One client can drive both the namespaced facade and the flat tree-shaken functions instead of two that could disagree about the host or `skipParsing`. Passing a `ClientConfig` works exactly as before.
 - Four parameters the spec describes as arrays of objects, but the API takes as arrays of scalars, are typed as such instead of `unknown[]`: `fields` on `getCardAttachment` is now `AttachmentFields[]`, and `idOrganizations` on `getEnterpriseBulkOrganizations`, `getEnterpriseBulkTransferrableOrganizations` and `updateEnterpriseJoinRequests` is now `string[]`. Code that passed the right values keeps compiling; code that passed something else now fails at the call site rather than at the API.
 
 ### Internal
 
 - Regenerated `src/api`, `src/models`, `src/parameters` from the Trello OpenAPI spec. Beyond the board exports above, the visible changes are `Prefs.backgroundImage` moving to the Zod 4 `z.url()` spelling and JSDoc rewrapping.
+- The blank line the generator used to leave between a JSDoc block and the declaration it documents is gone, across all 17 `src/api` modules. It detached the comment from the symbol, so editors and typedoc showed those endpoints undocumented.
 - Model files whose names begin with an acronym are now spelled `apiKey.ts`, `apiToken.ts` and `cfValue.ts` rather than `aPIKey.ts`, `aPIToken.ts` and `cFValue.ts`. Internal only — the exported `APIKey`, `APIToken` and `CFValue` names are unchanged, and neither file was ever reachable as a subpath import.
 - Dev dependencies bumped: `eslint` 10.6.0 → 10.8.0, `typescript-eslint` 8.62.1 → 8.65.0, `vitest` / `@vitest/coverage-v8` 4.1.9 → 4.1.10, `vite` 8.1.3 → 8.1.5, `prettier` 3.9.4 → 3.9.6, `tsx` 4.22.5 → 4.23.1, `tsc-alias` 1.8.17 → 1.9.1, `jscodeshift` 17.3.0 → 17.4.0, `typedoc` 0.28.19 → 0.28.20, `globals` 17.7.0 → 17.8.0, `@arethetypeswrong/cli` 0.18.4 → 0.18.5, `@types/node` 22.20.0 → 22.20.1, `pnpm` 11.5.2 → 11.17.0.
 

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetListSchema = z.object({
   /** `all` or a comma separated list of List field names. */
@@ -6,7 +7,7 @@ export const GetListSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'name',
         'closed',
@@ -22,7 +23,7 @@ export const GetListSchema = z.object({
         'idOrganization',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'name',
           'closed',

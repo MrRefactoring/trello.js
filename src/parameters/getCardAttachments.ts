@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetCardAttachmentsSchema = z.object({
   /**
@@ -9,7 +10,7 @@ export const GetCardAttachmentsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'bytes',
         'date',
@@ -23,7 +24,7 @@ export const GetCardAttachmentsSchema = z.object({
         'pos',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'bytes',
           'date',

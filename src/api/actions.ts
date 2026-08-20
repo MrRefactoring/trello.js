@@ -27,7 +27,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Get an Action */
-
 export async function getAction(client: Client, parameters: GetAction): Promise<Action> {
   const config: SendRequestOptions<Action> = {
     url: `/actions/${parameters.id}`,
@@ -48,7 +47,6 @@ export async function getAction(client: Client, parameters: GetAction): Promise<
 }
 
 /** Update a specific Action. Only comment actions can be updated. Used to edit the content of a comment. */
-
 export async function updateAction(client: Client, parameters: UpdateAction): Promise<Action> {
   const config: SendRequestOptions<Action> = {
     url: `/actions/${parameters.id}`,
@@ -63,7 +61,6 @@ export async function updateAction(client: Client, parameters: UpdateAction): Pr
 }
 
 /** Delete a specific action. Only comment actions can be deleted. */
-
 export async function deleteAction(client: Client, parameters: DeleteAction): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/actions/${parameters.id}`,
@@ -74,7 +71,6 @@ export async function deleteAction(client: Client, parameters: DeleteAction): Pr
 }
 
 /** Get a specific property of an action */
-
 export async function getActionField<T = unknown>(client: Client, parameters: GetActionField): Promise<FieldValue<T>> {
   const config: SendRequestOptions<FieldValue<T>> = {
     url: `/actions/${parameters.id}/${parameters.field}`,
@@ -86,7 +82,6 @@ export async function getActionField<T = unknown>(client: Client, parameters: Ge
 }
 
 /** Get the Board for an Action */
-
 export async function getActionBoard(client: Client, parameters: GetActionBoard): Promise<Board> {
   const config: SendRequestOptions<Board> = {
     url: `/actions/${parameters.id}/board`,
@@ -101,7 +96,6 @@ export async function getActionBoard(client: Client, parameters: GetActionBoard)
 }
 
 /** Get the card for an action */
-
 export async function getActionCard(client: Client, parameters: GetActionCard): Promise<Card> {
   const config: SendRequestOptions<Card> = {
     url: `/actions/${parameters.id}/card`,
@@ -116,7 +110,6 @@ export async function getActionCard(client: Client, parameters: GetActionCard): 
 }
 
 /** Get the List for an Action */
-
 export async function getActionList(client: Client, parameters: GetActionList): Promise<TrelloList> {
   const config: SendRequestOptions<TrelloList> = {
     url: `/actions/${parameters.id}/list`,
@@ -131,7 +124,6 @@ export async function getActionList(client: Client, parameters: GetActionList): 
 }
 
 /** Gets the member of an action (not the creator) */
-
 export async function getActionMember(client: Client, parameters: GetActionMember): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/actions/${parameters.id}/member`,
@@ -146,7 +138,6 @@ export async function getActionMember(client: Client, parameters: GetActionMembe
 }
 
 /** Get the Member who created the Action */
-
 export async function getActionCreator(client: Client, parameters: GetActionCreator): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/actions/${parameters.id}/memberCreator`,
@@ -161,7 +152,6 @@ export async function getActionCreator(client: Client, parameters: GetActionCrea
 }
 
 /** Get the Organization of an Action */
-
 export async function getActionOrganization(client: Client, parameters: GetActionOrganization): Promise<Organization> {
   const config: SendRequestOptions<Organization> = {
     url: `/actions/${parameters.id}/organization`,
@@ -176,7 +166,6 @@ export async function getActionOrganization(client: Client, parameters: GetActio
 }
 
 /** Update a comment action */
-
 export async function updateActionText(client: Client, parameters: UpdateActionText): Promise<Action> {
   const config: SendRequestOptions<Action> = {
     url: `/actions/${parameters.id}/text`,
@@ -191,7 +180,6 @@ export async function updateActionText(client: Client, parameters: UpdateActionT
 }
 
 /** List reactions for an action */
-
 export async function getActionReactions(client: Client, parameters: GetActionReactions): Promise<Reaction[]> {
   const config: SendRequestOptions<Reaction[]> = {
     url: `/actions/${parameters.idAction}/reactions`,
@@ -207,7 +195,6 @@ export async function getActionReactions(client: Client, parameters: GetActionRe
 }
 
 /** Adds a new reaction to an action */
-
 export async function createActionReaction(client: Client, parameters: CreateActionReaction): Promise<Reaction> {
   const config: SendRequestOptions<Reaction> = {
     url: `/actions/${parameters.idAction}/reactions`,
@@ -225,7 +212,6 @@ export async function createActionReaction(client: Client, parameters: CreateAct
 }
 
 /** Get information for a reaction */
-
 export async function getActionReaction(client: Client, parameters: GetActionReaction): Promise<Reaction> {
   const config: SendRequestOptions<Reaction> = {
     url: `/actions/${parameters.idAction}/reactions/${parameters.id}`,
@@ -241,7 +227,6 @@ export async function getActionReaction(client: Client, parameters: GetActionRea
 }
 
 /** Deletes a reaction */
-
 export async function deleteActionReaction(client: Client, parameters: DeleteActionReaction): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/actions/${parameters.idAction}/reactions/${parameters.id}`,
@@ -252,7 +237,6 @@ export async function deleteActionReaction(client: Client, parameters: DeleteAct
 }
 
 /** List a summary of all reactions for an action */
-
 export async function getActionReactionSummary(
   client: Client,
   parameters: GetActionReactionSummary,

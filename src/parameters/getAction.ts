@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetActionSchema = z.object({
   display: z.boolean().optional(),
@@ -11,8 +12,8 @@ export const GetActionSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
-      z.array(z.enum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator'])),
+      openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
+      z.array(openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator'])),
     ])
     .optional(),
   member: z.boolean().optional(),
@@ -24,7 +25,7 @@ export const GetActionSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -48,7 +49,7 @@ export const GetActionSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',
@@ -84,7 +85,7 @@ export const GetActionSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -108,7 +109,7 @@ export const GetActionSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',

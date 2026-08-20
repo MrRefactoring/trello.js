@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
+import { apiObject, openEnum } from '#/core';
 import { LimitsSchema } from '#/models/limits';
 import { MemberPrefsSchema } from '#/models/memberPrefs';
 
@@ -19,7 +19,7 @@ export const MemberSchema = apiObject({
   idMemberReferrer: z.string().nullish(),
   idPremOrgsAdmin: z.array(z.string()).optional(),
   initials: z.string().optional(),
-  memberType: z.enum(['normal', 'ghost']).optional(),
+  memberType: openEnum(['normal', 'ghost']).optional(),
   /**
    * Profile data with restricted visibility. These fields are visible only to members of the same organization. The
    * values here (full name, for example) may differ from the values at the top level of the response.
@@ -36,11 +36,11 @@ export const MemberSchema = apiObject({
   products: z.array(z.number()).optional(),
   url: z.string().optional(),
   username: z.string().optional(),
-  status: z.enum(['disconnected']).optional(),
+  status: openEnum(['disconnected']).optional(),
   aaEmail: z.string().nullish(),
   aaEnrolledDate: z.coerce.date().nullish(),
   aaId: z.string().nullish(),
-  avatarSource: z.enum(['none', 'gravatar', 'upload']).optional(),
+  avatarSource: openEnum(['none', 'gravatar', 'upload']).optional(),
   email: z.string().optional(),
   gravatarHash: z.string().optional(),
   idBoards: z.array(z.string()).optional(),

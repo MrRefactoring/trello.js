@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 import { ChannelSchema } from '../models';
 
 export const UpdateMemberNotificationChannelBlockedKeySchema = z.object({
@@ -9,7 +10,7 @@ export const UpdateMemberNotificationChannelBlockedKeySchema = z.object({
   /** Singular key or comma-separated list of notification keys */
   blockedKeys: z.union([
     z.string(),
-    z.enum([
+    openEnum([
       'notification_comment_card',
       'notification_added_a_due_date',
       'notification_changed_due_date',

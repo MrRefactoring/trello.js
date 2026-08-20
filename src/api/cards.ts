@@ -58,7 +58,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Create a new card. Query parameters may also be replaced with a JSON request body instead. */
-
 export async function createCard(client: Client, parameters: CreateCard): Promise<Card> {
   const config: SendRequestOptions<Card> = {
     url: '/cards',
@@ -90,7 +89,6 @@ export async function createCard(client: Client, parameters: CreateCard): Promis
 }
 
 /** Get a card by its ID */
-
 export async function getCard(client: Client, parameters: GetCard): Promise<Card> {
   const config: SendRequestOptions<Card> = {
     url: `/cards/${parameters.id}`,
@@ -122,7 +120,6 @@ export async function getCard(client: Client, parameters: GetCard): Promise<Card
 }
 
 /** Update a card. Query parameters may also be replaced with a JSON request body instead. */
-
 export async function updateCard(client: Client, parameters: UpdateCard): Promise<Card> {
   const config: SendRequestOptions<Card> = {
     url: `/cards/${parameters.id}`,
@@ -153,7 +150,6 @@ export async function updateCard(client: Client, parameters: UpdateCard): Promis
 }
 
 /** Delete a Card */
-
 export async function deleteCard(client: Client, parameters: DeleteCard): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}`,
@@ -164,7 +160,6 @@ export async function deleteCard(client: Client, parameters: DeleteCard): Promis
 }
 
 /** Get a specific property of a card */
-
 export async function getCardField<T = unknown>(client: Client, parameters: GetCardField): Promise<FieldValue<T>> {
   const config: SendRequestOptions<FieldValue<T>> = {
     url: `/cards/${parameters.id}/${parameters.field}`,
@@ -179,7 +174,6 @@ export async function getCardField<T = unknown>(client: Client, parameters: GetC
  * List the Actions on a Card. See [Nested
  * Resources](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) for more information.
  */
-
 export async function getCardActions(client: Client, parameters: GetCardActions): Promise<Action[]> {
   const config: SendRequestOptions<Action[]> = {
     url: `/cards/${parameters.id}/actions`,
@@ -206,7 +200,6 @@ export async function getCardActions(client: Client, parameters: GetCardActions)
 }
 
 /** List the attachments on a card */
-
 export async function getCardAttachments(client: Client, parameters: GetCardAttachments): Promise<Attachment[]> {
   const config: SendRequestOptions<Attachment[]> = {
     url: `/cards/${parameters.id}/attachments`,
@@ -225,7 +218,6 @@ export async function getCardAttachments(client: Client, parameters: GetCardAtta
  * Create an Attachment to a Card. See https://glitch.com/~trello-attachments-api for code examples. You may need to
  * remix the project in order to view it.
  */
-
 export async function createCardAttachment(client: Client, parameters: CreateCardAttachment): Promise<Attachment> {
   const config: SendRequestOptions<Attachment> = {
     url: `/cards/${parameters.id}/attachments`,
@@ -244,7 +236,6 @@ export async function createCardAttachment(client: Client, parameters: CreateCar
 }
 
 /** Get a specific Attachment on a Card. */
-
 export async function getCardAttachment(client: Client, parameters: GetCardAttachment): Promise<Attachment> {
   const config: SendRequestOptions<Attachment> = {
     url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
@@ -259,7 +250,6 @@ export async function getCardAttachment(client: Client, parameters: GetCardAttac
 }
 
 /** Delete an Attachment */
-
 export async function deleteCardAttachment(client: Client, parameters: DeleteCardAttachment): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
@@ -270,7 +260,6 @@ export async function deleteCardAttachment(client: Client, parameters: DeleteCar
 }
 
 /** Get the board a card is on */
-
 export async function getCardBoard(client: Client, parameters: GetCardBoard): Promise<Board> {
   const config: SendRequestOptions<Board> = {
     url: `/cards/${parameters.id}/board`,
@@ -285,7 +274,6 @@ export async function getCardBoard(client: Client, parameters: GetCardBoard): Pr
 }
 
 /** Get the completed checklist items on a card */
-
 export async function getCardCheckItemStates(
   client: Client,
   parameters: GetCardCheckItemStates,
@@ -303,7 +291,6 @@ export async function getCardCheckItemStates(
 }
 
 /** Get the checklists on a card */
-
 export async function getCardChecklists(client: Client, parameters: GetCardChecklists): Promise<Checklist[]> {
   const config: SendRequestOptions<Checklist[]> = {
     url: `/cards/${parameters.id}/checklists`,
@@ -321,7 +308,6 @@ export async function getCardChecklists(client: Client, parameters: GetCardCheck
 }
 
 /** Create a new checklist on a card */
-
 export async function createCardChecklist(client: Client, parameters: CreateCardChecklist): Promise<Checklist> {
   const config: SendRequestOptions<Checklist> = {
     url: `/cards/${parameters.id}/checklists`,
@@ -338,7 +324,6 @@ export async function createCardChecklist(client: Client, parameters: CreateCard
 }
 
 /** Get a specific checkItem on a card */
-
 export async function getCardCheckItem(client: Client, parameters: GetCardCheckItem): Promise<CheckItem> {
   const config: SendRequestOptions<CheckItem> = {
     url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
@@ -353,7 +338,6 @@ export async function getCardCheckItem(client: Client, parameters: GetCardCheckI
 }
 
 /** Update an item in a checklist on a card. */
-
 export async function updateCardCheckItem(client: Client, parameters: UpdateCardCheckItem): Promise<CheckItem> {
   const config: SendRequestOptions<CheckItem> = {
     url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
@@ -374,7 +358,6 @@ export async function updateCardCheckItem(client: Client, parameters: UpdateCard
 }
 
 /** Delete a checklist item */
-
 export async function deleteCardCheckItem(client: Client, parameters: DeleteCardCheckItem): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
@@ -385,7 +368,6 @@ export async function deleteCardCheckItem(client: Client, parameters: DeleteCard
 }
 
 /** Get the list a card is in */
-
 export async function getCardList(client: Client, parameters: GetCardList): Promise<TrelloList> {
   const config: SendRequestOptions<TrelloList> = {
     url: `/cards/${parameters.id}/list`,
@@ -400,7 +382,6 @@ export async function getCardList(client: Client, parameters: GetCardList): Prom
 }
 
 /** Get the members on a card */
-
 export async function getCardMembers(client: Client, parameters: GetCardMembers): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/cards/${parameters.id}/members`,
@@ -415,7 +396,6 @@ export async function getCardMembers(client: Client, parameters: GetCardMembers)
 }
 
 /** Get the members who have voted on a card */
-
 export async function getCardMembersVoted(client: Client, parameters: GetCardMembersVoted): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/cards/${parameters.id}/membersVoted`,
@@ -430,7 +410,6 @@ export async function getCardMembersVoted(client: Client, parameters: GetCardMem
 }
 
 /** Vote on the card for a given member. */
-
 export async function voteOnCard(client: Client, parameters: VoteOnCard): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/membersVoted`,
@@ -444,7 +423,6 @@ export async function voteOnCard(client: Client, parameters: VoteOnCard): Promis
 }
 
 /** Get any shared pluginData on a card. */
-
 export async function getCardPluginData(client: Client, parameters: GetCardPluginData): Promise<PluginData[]> {
   const config: SendRequestOptions<PluginData[]> = {
     url: `/cards/${parameters.id}/pluginData`,
@@ -456,7 +434,6 @@ export async function getCardPluginData(client: Client, parameters: GetCardPlugi
 }
 
 /** Get the stickers on a card */
-
 export async function getCardStickers(client: Client, parameters: GetCardStickers): Promise<CardSticker[]> {
   const config: SendRequestOptions<CardSticker[]> = {
     url: `/cards/${parameters.id}/stickers`,
@@ -471,7 +448,6 @@ export async function getCardStickers(client: Client, parameters: GetCardSticker
 }
 
 /** Add a sticker to a card */
-
 export async function createCardSticker(client: Client, parameters: CreateCardSticker): Promise<CardSticker> {
   const config: SendRequestOptions<CardSticker> = {
     url: `/cards/${parameters.id}/stickers`,
@@ -490,7 +466,6 @@ export async function createCardSticker(client: Client, parameters: CreateCardSt
 }
 
 /** Get a specific sticker on a card */
-
 export async function getCardSticker(client: Client, parameters: GetCardSticker): Promise<CardSticker> {
   const config: SendRequestOptions<CardSticker> = {
     url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
@@ -505,7 +480,6 @@ export async function getCardSticker(client: Client, parameters: GetCardSticker)
 }
 
 /** Update a sticker on a card */
-
 export async function updateCardSticker(client: Client, parameters: UpdateCardSticker): Promise<CardSticker> {
   const config: SendRequestOptions<CardSticker> = {
     url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
@@ -523,7 +497,6 @@ export async function updateCardSticker(client: Client, parameters: UpdateCardSt
 }
 
 /** Remove a sticker from the card */
-
 export async function deleteCardSticker(client: Client, parameters: DeleteCardSticker): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
@@ -534,7 +507,6 @@ export async function deleteCardSticker(client: Client, parameters: DeleteCardSt
 }
 
 /** Update an existing comment */
-
 export async function updateCardComment(client: Client, parameters: UpdateCardComment): Promise<Action> {
   const config: SendRequestOptions<Action> = {
     url: `/cards/${parameters.id}/actions/${parameters.idAction}/comments`,
@@ -549,7 +521,6 @@ export async function updateCardComment(client: Client, parameters: UpdateCardCo
 }
 
 /** Delete a comment */
-
 export async function deleteCardComment(client: Client, parameters: DeleteCardComment): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/actions/${parameters.idAction}/comments`,
@@ -564,7 +535,6 @@ export async function deleteCardComment(client: Client, parameters: DeleteCardCo
  * check out the [Getting Started With Custom
  * Fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/getting-started-with-custom-fields/)
  */
-
 export async function updateCardCustomFieldItem(client: Client, parameters: UpdateCardCustomFieldItem): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.idCard}/customField/${parameters.idCustomField}/item`,
@@ -580,7 +550,6 @@ export async function updateCardCustomFieldItem(client: Client, parameters: Upda
  * fields check out the [Getting Started With Custom
  * Fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/getting-started-with-custom-fields/)
  */
-
 export async function updateCardCustomFields(client: Client, parameters: UpdateCardCustomFields): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.idCard}/customFields`,
@@ -594,7 +563,6 @@ export async function updateCardCustomFields(client: Client, parameters: UpdateC
 }
 
 /** Get the custom field items for a card. */
-
 export async function getCardCustomFieldItems(
   client: Client,
   parameters: GetCardCustomFieldItems,
@@ -609,7 +577,6 @@ export async function getCardCustomFieldItems(
 }
 
 /** Add a new comment to a card */
-
 export async function createCardComment(client: Client, parameters: CreateCardComment): Promise<Action> {
   const config: SendRequestOptions<Action> = {
     url: `/cards/${parameters.id}/actions/comments`,
@@ -624,7 +591,6 @@ export async function createCardComment(client: Client, parameters: CreateCardCo
 }
 
 /** Add a label to a card */
-
 export async function addCardLabel(client: Client, parameters: AddCardLabel): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/idLabels`,
@@ -638,7 +604,6 @@ export async function addCardLabel(client: Client, parameters: AddCardLabel): Pr
 }
 
 /** Add a member to a card */
-
 export async function addCardMember(client: Client, parameters: AddCardMember): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/cards/${parameters.id}/idMembers`,
@@ -653,7 +618,6 @@ export async function addCardMember(client: Client, parameters: AddCardMember): 
 }
 
 /** Create a new label for the board and add it to the given card. */
-
 export async function createCardLabel(client: Client, parameters: CreateCardLabel): Promise<Label> {
   const config: SendRequestOptions<Label> = {
     url: `/cards/${parameters.id}/labels`,
@@ -669,7 +633,6 @@ export async function createCardLabel(client: Client, parameters: CreateCardLabe
 }
 
 /** Mark notifications about this card as read */
-
 export async function markCardNotificationsRead(client: Client, parameters: MarkCardNotificationsRead): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/markAssociatedNotificationsRead`,
@@ -680,7 +643,6 @@ export async function markCardNotificationsRead(client: Client, parameters: Mark
 }
 
 /** Remove a label from a card */
-
 export async function removeCardLabel(client: Client, parameters: RemoveCardLabel): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/idLabels/${parameters.idLabel}`,
@@ -691,7 +653,6 @@ export async function removeCardLabel(client: Client, parameters: RemoveCardLabe
 }
 
 /** Remove a member from a card */
-
 export async function removeCardMember(client: Client, parameters: RemoveCardMember): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/idMembers/${parameters.idMember}`,
@@ -702,7 +663,6 @@ export async function removeCardMember(client: Client, parameters: RemoveCardMem
 }
 
 /** Remove a member's vote from a card */
-
 export async function removeCardMemberVote(client: Client, parameters: RemoveCardMemberVote): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/membersVoted/${parameters.idMember}`,
@@ -713,7 +673,6 @@ export async function removeCardMemberVote(client: Client, parameters: RemoveCar
 }
 
 /** Update an item in a checklist on a card. */
-
 export async function updateCardChecklistItem(client: Client, parameters: UpdateCardChecklistItem): Promise<CheckItem> {
   const config: SendRequestOptions<CheckItem> = {
     url: `/cards/${parameters.idCard}/checklist/${parameters.idChecklist}/checkItem/${parameters.idCheckItem}`,
@@ -728,7 +687,6 @@ export async function updateCardChecklistItem(client: Client, parameters: Update
 }
 
 /** Delete a checklist from a card */
-
 export async function removeCardChecklist(client: Client, parameters: RemoveCardChecklist): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/checklists/${parameters.idChecklist}`,

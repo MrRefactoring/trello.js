@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const CreateCardSchema = z.object({
   /** The name for the card */
@@ -6,7 +7,7 @@ export const CreateCardSchema = z.object({
   /** The description for the card */
   desc: z.string().optional(),
   /** The position of the new card. `top`, `bottom`, or a positive float */
-  pos: z.union([z.enum(['top', 'bottom']), z.number()]).optional(),
+  pos: z.union([openEnum(['top', 'bottom']), z.number()]).optional(),
   /** A due date for the card */
   due: z.string().optional(),
   /** The start date of a card, or `null` */
@@ -30,21 +31,19 @@ export const CreateCardSchema = z.object({
    * If using `idCardSource` you can specify which properties to copy over. `all` or comma-separated list of:
    * `attachments,checklists,customFields,comments,due,start,labels,members,start,stickers`
    */
-  keepFromSource: z
-    .enum([
-      'all',
-      'attachments',
-      'checklists',
-      'comments',
-      'customFields',
-      'due',
-      'start',
-      'labels',
-      'members',
-      'start',
-      'stickers',
-    ])
-    .optional(),
+  keepFromSource: openEnum([
+    'all',
+    'attachments',
+    'checklists',
+    'comments',
+    'customFields',
+    'due',
+    'start',
+    'labels',
+    'members',
+    'start',
+    'stickers',
+  ]).optional(),
   /** For use with/by the Map View */
   address: z.string().optional(),
   /** For use with/by the Map View */
@@ -55,7 +54,7 @@ export const CreateCardSchema = z.object({
    * For displaying cards in different ways based on the card name. Board cards must have a name that is a link to a
    * Trello board. Mirror cards must have a name that is a link to a Trello card.
    */
-  cardRole: z.enum(['separator', 'board', 'mirror', 'link']).optional(),
+  cardRole: openEnum(['separator', 'board', 'mirror', 'link']).optional(),
 });
 
 export type CreateCard = z.input<typeof CreateCardSchema>;

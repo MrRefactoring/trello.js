@@ -6,7 +6,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Find what you're looking for in Trello */
-
 export async function search(client: Client, parameters: Search): Promise<SearchResult> {
   const config: SendRequestOptions<SearchResult> = {
     url: '/search',
@@ -41,7 +40,6 @@ export async function search(client: Client, parameters: Search): Promise<Search
 }
 
 /** Search for Trello members. */
-
 export async function searchMembers(client: Client, parameters: SearchMembers): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: '/search/members/',

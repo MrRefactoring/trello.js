@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const CreateLabelSchema = z.object({
   /** Name for the label */
@@ -6,7 +7,7 @@ export const CreateLabelSchema = z.object({
   /** The color for the label. */
   color: z.union([
     z.string(),
-    z.enum(['yellow', 'purple', 'blue', 'red', 'green', 'orange', 'black', 'sky', 'pink', 'lime']),
+    openEnum(['yellow', 'purple', 'blue', 'red', 'green', 'orange', 'black', 'sky', 'pink', 'lime']),
   ]),
   /** The ID of the Board to create the Label on. */
   idBoard: z.string(),

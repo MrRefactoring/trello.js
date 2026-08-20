@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetBoardFieldSchema = z.object({
   /** The ID of the board. */
@@ -10,7 +11,7 @@ export const GetBoardFieldSchema = z.object({
    */
   field: z.union([
     z.string(),
-    z.enum([
+    openEnum([
       'closed',
       'dateLastActivity',
       'dateLastView',

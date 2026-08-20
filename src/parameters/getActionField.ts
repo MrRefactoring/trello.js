@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetActionFieldSchema = z.object({
   /** The ID of the Action */
@@ -6,7 +7,7 @@ export const GetActionFieldSchema = z.object({
   /** An action field */
   field: z.union([
     z.string(),
-    z.enum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
+    openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
   ]),
 });
 

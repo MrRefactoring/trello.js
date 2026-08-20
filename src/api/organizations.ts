@@ -37,7 +37,6 @@ import type { Client, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Create a new Workspace */
-
 export async function createOrganization(client: Client, parameters: CreateOrganization): Promise<Organization> {
   const config: SendRequestOptions<Organization> = {
     url: '/organizations',
@@ -65,7 +64,6 @@ export async function getOrganization(client: Client, parameters: GetOrganizatio
 }
 
 /** Update an organization */
-
 export async function updateOrganization(client: Client, parameters: UpdateOrganization): Promise<Organization> {
   const config: SendRequestOptions<Organization> = {
     url: `/organizations/${parameters.id}`,
@@ -91,7 +89,6 @@ export async function updateOrganization(client: Client, parameters: UpdateOrgan
 }
 
 /** Delete an Organization */
-
 export async function deleteOrganization(client: Client, parameters: DeleteOrganization): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}`,
@@ -115,7 +112,6 @@ export async function getOrganizationField<T = unknown>(
 }
 
 /** List the actions on a Workspace */
-
 export async function getOrganizationActions(client: Client, parameters: GetOrganizationActions): Promise<Action[]> {
   const config: SendRequestOptions<Action[]> = {
     url: `/organizations/${parameters.id}/actions`,
@@ -142,7 +138,6 @@ export async function getOrganizationActions(client: Client, parameters: GetOrga
 }
 
 /** List the boards in a Workspace */
-
 export async function getOrganizationBoards(client: Client, parameters: GetOrganizationBoards): Promise<Board[]> {
   const config: SendRequestOptions<Board[]> = {
     url: `/organizations/${parameters.id}/boards`,
@@ -158,7 +153,6 @@ export async function getOrganizationBoards(client: Client, parameters: GetOrgan
 }
 
 /** Retrieve the exports that exist for the given organization */
-
 export async function getOrganizationExports(client: Client, parameters: GetOrganizationExports): Promise<Export[]> {
   const config: SendRequestOptions<Export[]> = {
     url: `/organizations/${parameters.id}/exports`,
@@ -170,7 +164,6 @@ export async function getOrganizationExports(client: Client, parameters: GetOrga
 }
 
 /** Kick off CSV export for an organization */
-
 export async function createOrganizationExport(client: Client, parameters: CreateOrganizationExport): Promise<Export> {
   const config: SendRequestOptions<Export> = {
     url: `/organizations/${parameters.id}/exports`,
@@ -185,7 +178,6 @@ export async function createOrganizationExport(client: Client, parameters: Creat
 }
 
 /** List the members in a Workspace */
-
 export async function getOrganizationMembers(client: Client, parameters: GetOrganizationMembers): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/organizations/${parameters.id}/members`,
@@ -211,7 +203,6 @@ export async function updateOrganizationMembers(client: Client, parameters: Upda
 }
 
 /** List the memberships of a Workspace */
-
 export async function getOrganizationMemberships(
   client: Client,
   parameters: GetOrganizationMemberships,
@@ -230,7 +221,6 @@ export async function getOrganizationMemberships(
 }
 
 /** Get a single Membership for an Organization */
-
 export async function getOrganizationMembership(
   client: Client,
   parameters: GetOrganizationMembership,
@@ -248,7 +238,6 @@ export async function getOrganizationMembership(
 }
 
 /** Get organization scoped pluginData on this Workspace */
-
 export async function getOrganizationPluginData(
   client: Client,
   parameters: GetOrganizationPluginData,
@@ -263,7 +252,6 @@ export async function getOrganizationPluginData(
 }
 
 /** List the organization's collections */
-
 export async function getOrganizationTags(client: Client, parameters: GetOrganizationTags): Promise<Tag[]> {
   const config: SendRequestOptions<Tag[]> = {
     url: `/organizations/${parameters.id}/tags`,
@@ -275,7 +263,6 @@ export async function getOrganizationTags(client: Client, parameters: GetOrganiz
 }
 
 /** Create a Tag in an Organization */
-
 export async function createOrganizationTag(client: Client, parameters: CreateOrganizationTag): Promise<Tag> {
   const config: SendRequestOptions<Tag> = {
     url: `/organizations/${parameters.id}/tags`,
@@ -287,7 +274,6 @@ export async function createOrganizationTag(client: Client, parameters: CreateOr
 }
 
 /** Add a member to a Workspace or update their member type. */
-
 export async function updateOrganizationMember(client: Client, parameters: UpdateOrganizationMember): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
@@ -302,7 +288,6 @@ export async function updateOrganizationMember(client: Client, parameters: Updat
 }
 
 /** Remove a member from a Workspace */
-
 export async function removeOrganizationMember(client: Client, parameters: RemoveOrganizationMember): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
@@ -313,7 +298,6 @@ export async function removeOrganizationMember(client: Client, parameters: Remov
 }
 
 /** Deactivate or reactivate a member of a Workspace */
-
 export async function deactivateOrganizationMember(
   client: Client,
   parameters: DeactivateOrganizationMember,
@@ -330,7 +314,6 @@ export async function deactivateOrganizationMember(
 }
 
 /** Set the logo image for a Workspace */
-
 export async function uploadOrganizationLogo(
   client: Client,
   parameters: UploadOrganizationLogo,
@@ -348,7 +331,6 @@ export async function uploadOrganizationLogo(
 }
 
 /** Delete a the logo from a Workspace */
-
 export async function deleteOrganizationLogo(client: Client, parameters: DeleteOrganizationLogo): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/logo`,
@@ -359,7 +341,6 @@ export async function deleteOrganizationLogo(client: Client, parameters: DeleteO
 }
 
 /** Remove a member from a Workspace and from all Workspace boards */
-
 export async function removeOrganizationMemberFromAllBoards(
   client: Client,
   parameters: RemoveOrganizationMemberFromAllBoards,
@@ -373,7 +354,6 @@ export async function removeOrganizationMemberFromAllBoards(
 }
 
 /** Remove the associated Google Apps domain from a Workspace */
-
 export async function deleteOrganizationAssociatedDomain(
   client: Client,
   parameters: DeleteOrganizationAssociatedDomain,
@@ -387,7 +367,6 @@ export async function deleteOrganizationAssociatedDomain(
 }
 
 /** Remove the email domain restriction on who can be invited to the Workspace */
-
 export async function deleteOrganizationInviteRestriction(
   client: Client,
   parameters: DeleteOrganizationInviteRestriction,
@@ -401,7 +380,6 @@ export async function deleteOrganizationInviteRestriction(
 }
 
 /** Delete an organization's tag */
-
 export async function deleteOrganizationTag(client: Client, parameters: DeleteOrganizationTag): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/tags/${parameters.idTag}`,
@@ -412,7 +390,6 @@ export async function deleteOrganizationTag(client: Client, parameters: DeleteOr
 }
 
 /** Used to check whether the given board has new billable guests on it. */
-
 export async function getOrganizationNewBillableGuests(
   client: Client,
   parameters: GetOrganizationNewBillableGuests,

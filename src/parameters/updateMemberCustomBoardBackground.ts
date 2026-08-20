@@ -1,8 +1,9 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const UpdateMemberCustomBoardBackgroundSchema = z.object({
   /** One of: `dark`, `light`, `unknown` */
-  brightness: z.enum(['dark', 'light', 'unknown']).optional(),
+  brightness: openEnum(['dark', 'light', 'unknown']).optional(),
   /** Whether to tile the background */
   tile: z.boolean().optional(),
   /** The ID or username of the member */

@@ -1,10 +1,11 @@
 import { z } from 'zod';
+import { openEnum } from '#/core';
 
 export const GetBoardMembershipsSchema = z.object({
   /** The ID of the board */
   id: z.string(),
   /** One of `admins`, `all`, `none`, `normal` */
-  filter: z.enum(['admins', 'all', 'none', 'normal']).optional(),
+  filter: openEnum(['admins', 'all', 'none', 'normal']).optional(),
   /** Works for premium organizations only. */
   activity: z.boolean().optional(),
   /** Shows the type of member to the org the user is. For instance, an org admin will have a `orgMemberType` of `admin`. */
@@ -22,7 +23,7 @@ export const GetBoardMembershipsSchema = z.object({
     .union([
       z.string(),
       z.array(z.string()),
-      z.enum([
+      openEnum([
         'id',
         'activityBlocked',
         'avatarHash',
@@ -46,7 +47,7 @@ export const GetBoardMembershipsSchema = z.object({
         'idOrganizations',
       ]),
       z.array(
-        z.enum([
+        openEnum([
           'id',
           'activityBlocked',
           'avatarHash',
