@@ -392,6 +392,8 @@ export * from './moveAllListCards';
 
 export * from './moveListToBoard';
 
+export * from './performBatch';
+
 export * from './removeBoardMember';
 
 export * from './removeCardChecklist';

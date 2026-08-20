@@ -1,14 +1,16 @@
 # Trello.js changelog
 
-## Unreleased
+## v2.2.0 (2026-08-20)
+
+**Read this one if you `switch` exhaustively over a value this client returns.** The enum-shaped types are now open, `Color` and `CardAging` among them, so a `switch` with no `default` branch stops type-checking. That ships in a minor release on purpose: the values belong to Trello, not to this client. The `_light` / `_dark` label shades reached the live API long before the spec named them and broke `getBoardCards` for every consumer until v2.1.6 added the 30 values by hand, so a closed set was never a promise a wrapper could keep.
 
 ### Fixed
 
 - `Organization` gained `iconEmoji`, `iconEmojiBackground` and `eligibleForTrial`. The live API returns all three on every workspace; they were silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking `getMemberOrganizations` and the organization-returning endpoints. `eligibleForTrial` is a boolean; the two icon fields are typed `unknown` because every workspace reachable from this account reports them as `null`, so their populated shape is still unobserved.
 
-### Removed
+### Deprecated
 
-- **`PerformBatch` / `PerformBatchSchema` removed from `trello.js/parameters`.** An orphan: nothing referenced it, and the batch endpoint takes `Run`.
+- **`PerformBatch` / `PerformBatchSchema` in `trello.js/parameters` are now aliases of `Run` / `RunSchema`.** Both names describe the same `{ urls: string }` body, both keep the `@deprecated` mark they have carried since v2.1.2, and both go at the next major version. The batch endpoint takes `Run`.
 
 ### Added
 
