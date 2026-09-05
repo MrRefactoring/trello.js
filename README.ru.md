@@ -163,6 +163,27 @@ try {
 
 Подробности — в [гайде по обработке ошибок](https://mrrefactoring.github.io/trello.js/ru/guide/error-handling).
 
+## Отмена запросов
+
+Каждый метод эндпоинта принимает необязательный последний аргумент с `AbortSignal`. Он уходит прямо в `fetch`, поэтому отменённый запрос отклоняется с причиной сигнала, а незавершённая пауза бэкоффа после 429 обрывается, а не досиживается до конца.
+
+```ts
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 5_000);
+
+const board = await trello.boards.getBoard({ id }, { signal: controller.signal });
+```
+
+Если нужен только дедлайн, подойдёт и `AbortSignal.timeout(5_000)`.
+
+Плоские tree-shakable-функции принимают его в той же позиции:
+
+```ts
+const board = await getBoard(client, { id }, { signal: controller.signal });
+```
+
+Единственное исключение — `batch.run`: он принимает только билдер, а его запросы уезжают одним HTTP-вызовом.
+
 ## Документация
 
 - 📖 [Полная документация](https://mrrefactoring.github.io/trello.js/ru/): гайды, рецепты, миграция.

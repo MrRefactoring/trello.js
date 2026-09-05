@@ -60,11 +60,11 @@ import type { UpdateMemberNotificationChannelSettings } from '#/parameters/updat
 import type { GetMemberNotificationChannelSetting } from '#/parameters/getMemberNotificationChannelSetting';
 import type { UpdateMemberNotificationChannelSetting } from '#/parameters/updateMemberNotificationChannelSetting';
 import type { UpdateMemberNotificationChannelBlockedKey } from '#/parameters/updateMemberNotificationChannelBlockedKey';
-import type { Client, SendRequestOptions } from '#/core';
+import type { Client, RequestOptions, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Get a member */
-export async function getMember(client: Client, parameters: GetMember): Promise<Member> {
+export async function getMember(client: Client, parameters: GetMember, options?: RequestOptions): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/members/${parameters.id}`,
     method: 'GET',
@@ -91,13 +91,18 @@ export async function getMember(client: Client, parameters: GetMember): Promise<
       tokens: parameters.tokens,
     },
     schema: MemberSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update a Member */
-export async function updateMember(client: Client, parameters: UpdateMember): Promise<Member> {
+export async function updateMember(
+  client: Client,
+  parameters: UpdateMember,
+  options?: RequestOptions,
+): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/members/${parameters.id}`,
     method: 'PUT',
@@ -112,24 +117,34 @@ export async function updateMember(client: Client, parameters: UpdateMember): Pr
       'prefs/minutesBetweenSummaries': parameters['prefs/minutesBetweenSummaries'],
     },
     schema: MemberSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a particular property of a member */
-export async function getMemberField<T = unknown>(client: Client, parameters: GetMemberField): Promise<FieldValue<T>> {
+export async function getMemberField<T = unknown>(
+  client: Client,
+  parameters: GetMemberField,
+  options?: RequestOptions,
+): Promise<FieldValue<T>> {
   const config: SendRequestOptions<FieldValue<T>> = {
     url: `/members/${parameters.id}/${parameters.field}`,
     method: 'GET',
     schema: FieldValueSchema as z.ZodType<FieldValue<T>>,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** List the actions for a member */
-export async function getMemberActions(client: Client, parameters: GetMemberActions): Promise<Action[]> {
+export async function getMemberActions(
+  client: Client,
+  parameters: GetMemberActions,
+  options?: RequestOptions,
+): Promise<Action[]> {
   const config: SendRequestOptions<Action[]> = {
     url: `/members/${parameters.id}/actions`,
     method: 'GET',
@@ -149,6 +164,7 @@ export async function getMemberActions(client: Client, parameters: GetMemberActi
       since: parameters.since,
     },
     schema: z.array(ActionSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -158,6 +174,7 @@ export async function getMemberActions(client: Client, parameters: GetMemberActi
 export async function getMemberBoardBackgrounds(
   client: Client,
   parameters: GetMemberBoardBackgrounds,
+  options?: RequestOptions,
 ): Promise<BoardBackground[]> {
   const config: SendRequestOptions<BoardBackground[]> = {
     url: `/members/${parameters.id}/boardBackgrounds`,
@@ -166,6 +183,7 @@ export async function getMemberBoardBackgrounds(
       filter: parameters.filter,
     },
     schema: z.array(BoardBackgroundSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -175,6 +193,7 @@ export async function getMemberBoardBackgrounds(
 export async function createMemberBoardBackground(
   client: Client,
   parameters: CreateMemberBoardBackground,
+  options?: RequestOptions,
 ): Promise<BoardBackground[]> {
   const config: SendRequestOptions<BoardBackground[]> = {
     url: `/members/${parameters.id}/boardBackgrounds`,
@@ -183,6 +202,7 @@ export async function createMemberBoardBackground(
       file: parameters.file,
     },
     schema: z.array(BoardBackgroundSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -192,6 +212,7 @@ export async function createMemberBoardBackground(
 export async function getMemberBoardBackground(
   client: Client,
   parameters: GetMemberBoardBackground,
+  options?: RequestOptions,
 ): Promise<BoardBackground> {
   const config: SendRequestOptions<BoardBackground> = {
     url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
@@ -200,6 +221,7 @@ export async function getMemberBoardBackground(
       fields: parameters.fields,
     },
     schema: BoardBackgroundSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -209,6 +231,7 @@ export async function getMemberBoardBackground(
 export async function updateMemberBoardBackground(
   client: Client,
   parameters: UpdateMemberBoardBackground,
+  options?: RequestOptions,
 ): Promise<BoardBackground> {
   const config: SendRequestOptions<BoardBackground> = {
     url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
@@ -218,6 +241,7 @@ export async function updateMemberBoardBackground(
       tile: parameters.tile,
     },
     schema: BoardBackgroundSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -227,28 +251,35 @@ export async function updateMemberBoardBackground(
 export async function deleteMemberBoardBackground(
   client: Client,
   parameters: DeleteMemberBoardBackground,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/boardBackgrounds/${parameters.idBackground}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** List a member's board stars */
-export async function getMemberBoardStars(client: Client, parameters: GetMemberBoardStars): Promise<BoardStars[]> {
+export async function getMemberBoardStars(
+  client: Client,
+  parameters: GetMemberBoardStars,
+  options?: RequestOptions,
+): Promise<BoardStars[]> {
   const config: SendRequestOptions<BoardStars[]> = {
     url: `/members/${parameters.id}/boardStars`,
     method: 'GET',
     schema: z.array(BoardStarsSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Star a new board on behalf of a Member */
-export async function starBoard(client: Client, parameters: StarBoard): Promise<BoardStars> {
+export async function starBoard(client: Client, parameters: StarBoard, options?: RequestOptions): Promise<BoardStars> {
   const config: SendRequestOptions<BoardStars> = {
     url: `/members/${parameters.id}/boardStars`,
     method: 'POST',
@@ -257,24 +288,34 @@ export async function starBoard(client: Client, parameters: StarBoard): Promise<
       pos: parameters.pos,
     },
     schema: BoardStarsSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a specific boardStar */
-export async function getMemberBoardStar(client: Client, parameters: GetMemberBoardStar): Promise<BoardStars> {
+export async function getMemberBoardStar(
+  client: Client,
+  parameters: GetMemberBoardStar,
+  options?: RequestOptions,
+): Promise<BoardStars> {
   const config: SendRequestOptions<BoardStars> = {
     url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
     method: 'GET',
     schema: BoardStarsSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update the position of a starred board */
-export async function updateMemberBoardStar(client: Client, parameters: UpdateMemberBoardStar): Promise<BoardStars> {
+export async function updateMemberBoardStar(
+  client: Client,
+  parameters: UpdateMemberBoardStar,
+  options?: RequestOptions,
+): Promise<BoardStars> {
   const config: SendRequestOptions<BoardStars> = {
     url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
     method: 'PUT',
@@ -282,23 +323,29 @@ export async function updateMemberBoardStar(client: Client, parameters: UpdateMe
       pos: parameters.pos,
     },
     schema: BoardStarsSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Unstar a board */
-export async function unstarBoard(client: Client, parameters: UnstarBoard): Promise<void> {
+export async function unstarBoard(client: Client, parameters: UnstarBoard, options?: RequestOptions): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/boardStars/${parameters.idStar}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Lists the boards that the user is a member of. */
-export async function getMemberBoards(client: Client, parameters: GetMemberBoards): Promise<Board[]> {
+export async function getMemberBoards(
+  client: Client,
+  parameters: GetMemberBoards,
+  options?: RequestOptions,
+): Promise<Board[]> {
   const config: SendRequestOptions<Board[]> = {
     url: `/members/${parameters.id}/boards`,
     method: 'GET',
@@ -310,13 +357,18 @@ export async function getMemberBoards(client: Client, parameters: GetMemberBoard
       organization_fields: parameters.organizationFields,
     },
     schema: z.array(BoardSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get the boards the member has been invited to */
-export async function getMemberInvitedBoards(client: Client, parameters: GetMemberInvitedBoards): Promise<Board[]> {
+export async function getMemberInvitedBoards(
+  client: Client,
+  parameters: GetMemberInvitedBoards,
+  options?: RequestOptions,
+): Promise<Board[]> {
   const config: SendRequestOptions<Board[]> = {
     url: `/members/${parameters.id}/boardsInvited`,
     method: 'GET',
@@ -324,13 +376,18 @@ export async function getMemberInvitedBoards(client: Client, parameters: GetMemb
       fields: parameters.fields,
     },
     schema: z.array(BoardSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Gets the cards a member is on */
-export async function getMemberCards(client: Client, parameters: GetMemberCards): Promise<Card[]> {
+export async function getMemberCards(
+  client: Client,
+  parameters: GetMemberCards,
+  options?: RequestOptions,
+): Promise<Card[]> {
   const config: SendRequestOptions<Card[]> = {
     url: `/members/${parameters.id}/cards`,
     method: 'GET',
@@ -338,6 +395,7 @@ export async function getMemberCards(client: Client, parameters: GetMemberCards)
       filter: parameters.filter,
     },
     schema: z.array(CardSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -347,11 +405,13 @@ export async function getMemberCards(client: Client, parameters: GetMemberCards)
 export async function getMemberCustomBoardBackgrounds(
   client: Client,
   parameters: GetMemberCustomBoardBackgrounds,
+  options?: RequestOptions,
 ): Promise<BoardBackground[]> {
   const config: SendRequestOptions<BoardBackground[]> = {
     url: `/members/${parameters.id}/customBoardBackgrounds`,
     method: 'GET',
     schema: z.array(BoardBackgroundSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -361,6 +421,7 @@ export async function getMemberCustomBoardBackgrounds(
 export async function createMemberCustomBoardBackground(
   client: Client,
   parameters: CreateMemberCustomBoardBackground,
+  options?: RequestOptions,
 ): Promise<BoardBackground> {
   const config: SendRequestOptions<BoardBackground> = {
     url: `/members/${parameters.id}/customBoardBackgrounds`,
@@ -369,6 +430,7 @@ export async function createMemberCustomBoardBackground(
       file: parameters.file,
     },
     schema: BoardBackgroundSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -378,11 +440,13 @@ export async function createMemberCustomBoardBackground(
 export async function getMemberCustomBoardBackground(
   client: Client,
   parameters: GetMemberCustomBoardBackground,
+  options?: RequestOptions,
 ): Promise<BoardBackground> {
   const config: SendRequestOptions<BoardBackground> = {
     url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
     method: 'GET',
     schema: BoardBackgroundSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -392,6 +456,7 @@ export async function getMemberCustomBoardBackground(
 export async function updateMemberCustomBoardBackground(
   client: Client,
   parameters: UpdateMemberCustomBoardBackground,
+  options?: RequestOptions,
 ): Promise<BoardBackground> {
   const config: SendRequestOptions<BoardBackground> = {
     url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
@@ -401,6 +466,7 @@ export async function updateMemberCustomBoardBackground(
       tile: parameters.tile,
     },
     schema: BoardBackgroundSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -410,21 +476,28 @@ export async function updateMemberCustomBoardBackground(
 export async function deleteMemberCustomBoardBackground(
   client: Client,
   parameters: DeleteMemberCustomBoardBackground,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/customBoardBackgrounds/${parameters.idBackground}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a Member's uploaded custom Emojis */
-export async function getMemberCustomEmojis(client: Client, parameters: GetMemberCustomEmojis): Promise<CustomEmoji[]> {
+export async function getMemberCustomEmojis(
+  client: Client,
+  parameters: GetMemberCustomEmojis,
+  options?: RequestOptions,
+): Promise<CustomEmoji[]> {
   const config: SendRequestOptions<CustomEmoji[]> = {
     url: `/members/${parameters.id}/customEmoji`,
     method: 'GET',
     schema: z.array(CustomEmojiSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -434,6 +507,7 @@ export async function getMemberCustomEmojis(client: Client, parameters: GetMembe
 export async function uploadMemberCustomEmoji(
   client: Client,
   parameters: UploadMemberCustomEmoji,
+  options?: RequestOptions,
 ): Promise<CustomEmoji> {
   const config: SendRequestOptions<CustomEmoji> = {
     url: `/members/${parameters.id}/customEmoji`,
@@ -443,13 +517,18 @@ export async function uploadMemberCustomEmoji(
       name: parameters.name,
     },
     schema: CustomEmojiSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a Member's custom Emoji */
-export async function getMemberCustomEmoji(client: Client, parameters: GetMemberCustomEmoji): Promise<CustomEmoji> {
+export async function getMemberCustomEmoji(
+  client: Client,
+  parameters: GetMemberCustomEmoji,
+  options?: RequestOptions,
+): Promise<CustomEmoji> {
   const config: SendRequestOptions<CustomEmoji> = {
     url: `/members/${parameters.id}/customEmoji/${parameters.idEmoji}`,
     method: 'GET',
@@ -457,6 +536,7 @@ export async function getMemberCustomEmoji(client: Client, parameters: GetMember
       fields: parameters.fields,
     },
     schema: CustomEmojiSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -466,11 +546,13 @@ export async function getMemberCustomEmoji(client: Client, parameters: GetMember
 export async function getMemberCustomStickers(
   client: Client,
   parameters: GetMemberCustomStickers,
+  options?: RequestOptions,
 ): Promise<CustomSticker[]> {
   const config: SendRequestOptions<CustomSticker[]> = {
     url: `/members/${parameters.id}/customStickers`,
     method: 'GET',
     schema: z.array(CustomStickerSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -480,6 +562,7 @@ export async function getMemberCustomStickers(
 export async function uploadMemberCustomSticker(
   client: Client,
   parameters: UploadMemberCustomSticker,
+  options?: RequestOptions,
 ): Promise<CustomSticker> {
   const config: SendRequestOptions<CustomSticker> = {
     url: `/members/${parameters.id}/customStickers`,
@@ -488,6 +571,7 @@ export async function uploadMemberCustomSticker(
       file: parameters.file,
     },
     schema: CustomStickerSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -497,6 +581,7 @@ export async function uploadMemberCustomSticker(
 export async function getMemberCustomSticker(
   client: Client,
   parameters: GetMemberCustomSticker,
+  options?: RequestOptions,
 ): Promise<CustomSticker> {
   const config: SendRequestOptions<CustomSticker> = {
     url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
@@ -505,16 +590,22 @@ export async function getMemberCustomSticker(
       fields: parameters.fields,
     },
     schema: CustomStickerSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete a Member's custom Sticker */
-export async function deleteMemberCustomSticker(client: Client, parameters: DeleteMemberCustomSticker): Promise<void> {
+export async function deleteMemberCustomSticker(
+  client: Client,
+  parameters: DeleteMemberCustomSticker,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -524,6 +615,7 @@ export async function deleteMemberCustomSticker(client: Client, parameters: Dele
 export async function getMemberNotifications(
   client: Client,
   parameters: GetMemberNotifications,
+  options?: RequestOptions,
 ): Promise<Notification[]> {
   const config: SendRequestOptions<Notification[]> = {
     url: `/members/${parameters.id}/notifications`,
@@ -542,6 +634,7 @@ export async function getMemberNotifications(
       memberCreator_fields: parameters.memberCreatorFields,
     },
     schema: z.array(NotificationSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -551,6 +644,7 @@ export async function getMemberNotifications(
 export async function getMemberOrganizations(
   client: Client,
   parameters: GetMemberOrganizations,
+  options?: RequestOptions,
 ): Promise<Organization[]> {
   const config: SendRequestOptions<Organization[]> = {
     url: `/members/${parameters.id}/organizations`,
@@ -561,6 +655,7 @@ export async function getMemberOrganizations(
       paid_account: parameters.paidAccount,
     },
     schema: z.array(OrganizationSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -570,6 +665,7 @@ export async function getMemberOrganizations(
 export async function getMemberInvitedOrganizations(
   client: Client,
   parameters: GetMemberInvitedOrganizations,
+  options?: RequestOptions,
 ): Promise<Organization[]> {
   const config: SendRequestOptions<Organization[]> = {
     url: `/members/${parameters.id}/organizationsInvited`,
@@ -578,6 +674,7 @@ export async function getMemberInvitedOrganizations(
       fields: parameters.fields,
     },
     schema: z.array(OrganizationSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -587,11 +684,13 @@ export async function getMemberInvitedOrganizations(
 export async function getMemberSavedSearches(
   client: Client,
   parameters: GetMemberSavedSearches,
+  options?: RequestOptions,
 ): Promise<SavedSearch[]> {
   const config: SendRequestOptions<SavedSearch[]> = {
     url: `/members/${parameters.id}/savedSearches`,
     method: 'GET',
     schema: z.array(SavedSearchSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -601,6 +700,7 @@ export async function getMemberSavedSearches(
 export async function createMemberSavedSearch(
   client: Client,
   parameters: CreateMemberSavedSearch,
+  options?: RequestOptions,
 ): Promise<SavedSearch> {
   const config: SendRequestOptions<SavedSearch> = {
     url: `/members/${parameters.id}/savedSearches`,
@@ -611,17 +711,23 @@ export async function createMemberSavedSearch(
       pos: parameters.pos,
     },
     schema: SavedSearchSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a saved search */
-export async function getMemberSavedSearch(client: Client, parameters: GetMemberSavedSearch): Promise<SavedSearch> {
+export async function getMemberSavedSearch(
+  client: Client,
+  parameters: GetMemberSavedSearch,
+  options?: RequestOptions,
+): Promise<SavedSearch> {
   const config: SendRequestOptions<SavedSearch> = {
     url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
     method: 'GET',
     schema: SavedSearchSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -631,6 +737,7 @@ export async function getMemberSavedSearch(client: Client, parameters: GetMember
 export async function updateMemberSavedSearch(
   client: Client,
   parameters: UpdateMemberSavedSearch,
+  options?: RequestOptions,
 ): Promise<SavedSearch> {
   const config: SendRequestOptions<SavedSearch> = {
     url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
@@ -641,23 +748,33 @@ export async function updateMemberSavedSearch(
       pos: parameters.pos,
     },
     schema: SavedSearchSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete a saved search */
-export async function deleteMemberSavedSearch(client: Client, parameters: DeleteMemberSavedSearch): Promise<void> {
+export async function deleteMemberSavedSearch(
+  client: Client,
+  parameters: DeleteMemberSavedSearch,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/savedSearches/${parameters.idSearch}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** List a members app tokens */
-export async function getMemberTokens(client: Client, parameters: GetMemberTokens): Promise<Token[]> {
+export async function getMemberTokens(
+  client: Client,
+  parameters: GetMemberTokens,
+  options?: RequestOptions,
+): Promise<Token[]> {
   const config: SendRequestOptions<Token[]> = {
     url: `/members/${parameters.id}/tokens`,
     method: 'GET',
@@ -665,19 +782,25 @@ export async function getMemberTokens(client: Client, parameters: GetMemberToken
       webhooks: parameters.webhooks,
     },
     schema: z.array(TokenSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Create a new avatar for a member */
-export async function uploadMemberAvatar(client: Client, parameters: UploadMemberAvatar): Promise<void> {
+export async function uploadMemberAvatar(
+  client: Client,
+  parameters: UploadMemberAvatar,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/avatar`,
     method: 'POST',
     searchParams: {
       file: parameters.file,
     },
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -687,6 +810,7 @@ export async function uploadMemberAvatar(client: Client, parameters: UploadMembe
 export async function dismissMemberOneTimeMessage(
   client: Client,
   parameters: DismissMemberOneTimeMessage,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/members/${parameters.id}/oneTimeMessagesDismissed`,
@@ -694,6 +818,7 @@ export async function dismissMemberOneTimeMessage(
     searchParams: {
       value: parameters.value,
     },
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -703,11 +828,13 @@ export async function dismissMemberOneTimeMessage(
 export async function getMemberNotificationChannelSettings(
   client: Client,
   parameters: GetMemberNotificationChannelSettings,
+  options?: RequestOptions,
 ): Promise<NotificationChannelSettings[]> {
   const config: SendRequestOptions<NotificationChannelSettings[]> = {
     url: `/members/${parameters.id}/notificationsChannelSettings`,
     method: 'GET',
     schema: z.array(NotificationChannelSettingsSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -717,6 +844,7 @@ export async function getMemberNotificationChannelSettings(
 export async function updateMemberNotificationChannelSettings(
   client: Client,
   parameters: UpdateMemberNotificationChannelSettings,
+  options?: RequestOptions,
 ): Promise<NotificationChannelSettings> {
   const config: SendRequestOptions<NotificationChannelSettings> = {
     url: `/members/${parameters.id}/notificationsChannelSettings`,
@@ -726,6 +854,7 @@ export async function updateMemberNotificationChannelSettings(
       blockedKeys: parameters.blockedKeys,
     },
     schema: NotificationChannelSettingsSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -735,11 +864,13 @@ export async function updateMemberNotificationChannelSettings(
 export async function getMemberNotificationChannelSetting(
   client: Client,
   parameters: GetMemberNotificationChannelSetting,
+  options?: RequestOptions,
 ): Promise<NotificationChannelSettings> {
   const config: SendRequestOptions<NotificationChannelSettings> = {
     url: `/members/${parameters.id}/notificationsChannelSettings/${parameters.channel}`,
     method: 'GET',
     schema: NotificationChannelSettingsSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -749,6 +880,7 @@ export async function getMemberNotificationChannelSetting(
 export async function updateMemberNotificationChannelSetting(
   client: Client,
   parameters: UpdateMemberNotificationChannelSetting,
+  options?: RequestOptions,
 ): Promise<NotificationChannelSettings> {
   const config: SendRequestOptions<NotificationChannelSettings> = {
     url: `/members/${parameters.id}/notificationsChannelSettings/${parameters.channel}`,
@@ -757,6 +889,7 @@ export async function updateMemberNotificationChannelSetting(
       blockedKeys: parameters.blockedKeys,
     },
     schema: NotificationChannelSettingsSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -766,11 +899,13 @@ export async function updateMemberNotificationChannelSetting(
 export async function updateMemberNotificationChannelBlockedKey(
   client: Client,
   parameters: UpdateMemberNotificationChannelBlockedKey,
+  options?: RequestOptions,
 ): Promise<NotificationChannelSettings> {
   const config: SendRequestOptions<NotificationChannelSettings> = {
     url: `/members/${parameters.id}/notificationsChannelSettings/${parameters.channel}/${parameters.blockedKeys}`,
     method: 'PUT',
     schema: NotificationChannelSettingsSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);

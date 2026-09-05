@@ -59,6 +59,17 @@ Rate-limit responses (`HTTP 429 Too Many Requests`) are retried automatically wi
 
 You don't need to wrap calls in retry loops. If you find yourself getting 429s a lot, slow down your call rate or use the [batch endpoint](/recipes/boards#batch).
 
+## Cancellation
+
+Every endpoint method takes an optional last argument carrying an `AbortSignal`:
+
+```ts
+const controller = new AbortController();
+const board = await trello.boards.getBoard({ id }, { signal: controller.signal });
+```
+
+The signal goes straight to `fetch`, so the rejection is whatever the signal carries — the default `AbortError`, or the reason handed to `controller.abort(reason)`. A 429 backoff that is still counting down is cut short too, so a cancelled request does not sit out the remaining wait. `AbortSignal.timeout(5_000)` covers the case where all you want is a deadline.
+
 ## Pattern: typed handler
 
 ```ts

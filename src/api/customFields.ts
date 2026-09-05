@@ -8,11 +8,15 @@ import type { GetCustomFieldOptions } from '#/parameters/getCustomFieldOptions';
 import type { CreateCustomFieldOption } from '#/parameters/createCustomFieldOption';
 import type { GetCustomFieldOption } from '#/parameters/getCustomFieldOption';
 import type { DeleteCustomFieldOption } from '#/parameters/deleteCustomFieldOption';
-import type { Client, SendRequestOptions } from '#/core';
+import type { Client, RequestOptions, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Create a new Custom Field on a board. */
-export async function createCustomField(client: Client, parameters: CreateCustomField): Promise<CustomField> {
+export async function createCustomField(
+  client: Client,
+  parameters: CreateCustomField,
+  options?: RequestOptions,
+): Promise<CustomField> {
   const config: SendRequestOptions<CustomField> = {
     url: '/customFields',
     method: 'POST',
@@ -26,23 +30,33 @@ export async function createCustomField(client: Client, parameters: CreateCustom
       display_cardFront: parameters.display_cardFront,
     },
     schema: CustomFieldSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
-export async function getCustomField(client: Client, parameters: GetCustomField): Promise<CustomField> {
+export async function getCustomField(
+  client: Client,
+  parameters: GetCustomField,
+  options?: RequestOptions,
+): Promise<CustomField> {
   const config: SendRequestOptions<CustomField> = {
     url: `/customFields/${parameters.id}`,
     method: 'GET',
     schema: CustomFieldSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update a Custom Field definition. */
-export async function updateCustomField(client: Client, parameters: UpdateCustomField): Promise<CustomField> {
+export async function updateCustomField(
+  client: Client,
+  parameters: UpdateCustomField,
+  options?: RequestOptions,
+): Promise<CustomField> {
   const config: SendRequestOptions<CustomField> = {
     url: `/customFields/${parameters.id}`,
     method: 'PUT',
@@ -52,16 +66,22 @@ export async function updateCustomField(client: Client, parameters: UpdateCustom
       'display/cardFront': parameters['display/cardFront'],
     },
     schema: CustomFieldSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete a Custom Field from a board. */
-export async function deleteCustomField(client: Client, parameters: DeleteCustomField): Promise<void> {
+export async function deleteCustomField(
+  client: Client,
+  parameters: DeleteCustomField,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/customFields/${parameters.id}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -71,11 +91,13 @@ export async function deleteCustomField(client: Client, parameters: DeleteCustom
 export async function getCustomFieldOptions(
   client: Client,
   parameters: GetCustomFieldOptions,
+  options?: RequestOptions,
 ): Promise<CustomFieldOption[]> {
   const config: SendRequestOptions<CustomFieldOption[]> = {
     url: `/customFields/${parameters.id}/options`,
     method: 'GET',
     schema: z.array(CustomFieldOptionSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -85,6 +107,7 @@ export async function getCustomFieldOptions(
 export async function createCustomFieldOption(
   client: Client,
   parameters: CreateCustomFieldOption,
+  options?: RequestOptions,
 ): Promise<CustomFieldOption> {
   const config: SendRequestOptions<CustomFieldOption> = {
     url: `/customFields/${parameters.id}/options`,
@@ -95,6 +118,7 @@ export async function createCustomFieldOption(
       pos: parameters.pos,
     },
     schema: CustomFieldOptionSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -104,21 +128,28 @@ export async function createCustomFieldOption(
 export async function getCustomFieldOption(
   client: Client,
   parameters: GetCustomFieldOption,
+  options?: RequestOptions,
 ): Promise<CustomFieldOption> {
   const config: SendRequestOptions<CustomFieldOption> = {
     url: `/customFields/${parameters.id}/options/${parameters.idCustomFieldOption}`,
     method: 'GET',
     schema: CustomFieldOptionSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete an option from a Custom Field dropdown. */
-export async function deleteCustomFieldOption(client: Client, parameters: DeleteCustomFieldOption): Promise<void> {
+export async function deleteCustomFieldOption(
+  client: Client,
+  parameters: DeleteCustomFieldOption,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/customFields/${parameters.id}/options/${parameters.idCustomFieldOption}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);

@@ -34,6 +34,7 @@ export function createClient(config: ClientConfig | Client): Client {
         method: options.method ?? 'GET',
         headers: Object.keys(headers).length > 0 ? headers : undefined,
         body,
+        signal: options.signal,
       });
 
       return parseResponse(response, options.schema, skipParsing);
@@ -67,11 +68,37 @@ async function fetchWithRetry(url: string, init: RequestInit): Promise<Response>
     if (response.status !== 429) break;
 
     if (attempt < MAX_RETRY_ATTEMPTS - 1) {
-      await new Promise(r => setTimeout(r, 2000 * 2 ** attempt));
+      await delay(2000 * 2 ** attempt, init.signal);
     }
   }
 
   return response;
+}
+
+function delay(ms: number, signal?: AbortSignal | null): Promise<void> {
+  return new Promise((resolve, reject) => {
+    if (signal?.aborted) {
+      reject(signal.reason);
+
+      return;
+    }
+
+    const settled = new AbortController();
+
+    const timer = setTimeout(() => {
+      settled.abort();
+      resolve();
+    }, ms);
+
+    signal?.addEventListener(
+      'abort',
+      () => {
+        clearTimeout(timer);
+        reject(signal.reason);
+      },
+      { once: true, signal: settled.signal },
+    );
+  });
 }
 
 async function parseResponse<T>(

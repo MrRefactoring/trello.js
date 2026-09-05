@@ -2,11 +2,11 @@ import { SearchResultSchema, type SearchResult } from '#/models/searchResult';
 import { MemberSchema, type Member } from '#/models/member';
 import type { Search } from '#/parameters/search';
 import type { SearchMembers } from '#/parameters/searchMembers';
-import type { Client, SendRequestOptions } from '#/core';
+import type { Client, RequestOptions, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Find what you're looking for in Trello */
-export async function search(client: Client, parameters: Search): Promise<SearchResult> {
+export async function search(client: Client, parameters: Search, options?: RequestOptions): Promise<SearchResult> {
   const config: SendRequestOptions<SearchResult> = {
     url: '/search',
     method: 'GET',
@@ -34,13 +34,18 @@ export async function search(client: Client, parameters: Search): Promise<Search
       partial: parameters.partial,
     },
     schema: SearchResultSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Search for Trello members. */
-export async function searchMembers(client: Client, parameters: SearchMembers): Promise<Member[]> {
+export async function searchMembers(
+  client: Client,
+  parameters: SearchMembers,
+  options?: RequestOptions,
+): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: '/search/members/',
     method: 'GET',
@@ -52,6 +57,7 @@ export async function searchMembers(client: Client, parameters: SearchMembers): 
       onlyOrgMembers: parameters.onlyOrgMembers,
     },
     schema: z.array(MemberSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);

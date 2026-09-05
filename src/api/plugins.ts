@@ -5,32 +5,42 @@ import type { UpdatePlugin } from '#/parameters/updatePlugin';
 import type { CreatePluginListing } from '#/parameters/createPluginListing';
 import type { GetPluginMemberPrivacyCompliance } from '#/parameters/getPluginMemberPrivacyCompliance';
 import type { UpdatePluginListing } from '#/parameters/updatePluginListing';
-import type { Client, SendRequestOptions } from '#/core';
+import type { Client, RequestOptions, SendRequestOptions } from '#/core';
 
 /** Get plugins */
-export async function getPlugin(client: Client, parameters: GetPlugin): Promise<Plugin> {
+export async function getPlugin(client: Client, parameters: GetPlugin, options?: RequestOptions): Promise<Plugin> {
   const config: SendRequestOptions<Plugin> = {
     url: `/plugins/${parameters.id}/`,
     method: 'GET',
     schema: PluginSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update a Plugin */
-export async function updatePlugin(client: Client, parameters: UpdatePlugin): Promise<Plugin> {
+export async function updatePlugin(
+  client: Client,
+  parameters: UpdatePlugin,
+  options?: RequestOptions,
+): Promise<Plugin> {
   const config: SendRequestOptions<Plugin> = {
     url: `/plugins/${parameters.id}/`,
     method: 'PUT',
     schema: PluginSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Create a new listing for a given locale for your Power-Up */
-export async function createPluginListing(client: Client, parameters: CreatePluginListing): Promise<PluginListing> {
+export async function createPluginListing(
+  client: Client,
+  parameters: CreatePluginListing,
+  options?: RequestOptions,
+): Promise<PluginListing> {
   const config: SendRequestOptions<PluginListing> = {
     url: `/plugins/${parameters.idPlugin}/listing`,
     method: 'POST',
@@ -41,6 +51,7 @@ export async function createPluginListing(client: Client, parameters: CreatePlug
       name: parameters.name,
     },
     schema: PluginListingSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -49,17 +60,23 @@ export async function createPluginListing(client: Client, parameters: CreatePlug
 export async function getPluginMemberPrivacyCompliance(
   client: Client,
   parameters: GetPluginMemberPrivacyCompliance,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/plugins/${parameters.id}/compliance/memberPrivacy`,
     method: 'GET',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update an existing listing for your Power-Up */
-export async function updatePluginListing(client: Client, parameters: UpdatePluginListing): Promise<PluginListing> {
+export async function updatePluginListing(
+  client: Client,
+  parameters: UpdatePluginListing,
+  options?: RequestOptions,
+): Promise<PluginListing> {
   const config: SendRequestOptions<PluginListing> = {
     url: `/plugins/${parameters.idPlugin}/listings/${parameters.idListing}`,
     method: 'PUT',
@@ -70,6 +87,7 @@ export async function updatePluginListing(client: Client, parameters: UpdatePlug
       name: parameters.name,
     },
     schema: PluginListingSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);

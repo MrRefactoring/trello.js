@@ -163,6 +163,27 @@ try {
 
 See the [error handling guide](https://mrrefactoring.github.io/trello.js/guide/error-handling) for details.
 
+## Cancelling requests
+
+Every endpoint method takes an optional last argument carrying an `AbortSignal`. It goes straight to `fetch`, so an aborted request rejects with the signal's reason, and a 429 backoff that is still counting down is cut short rather than run to its end.
+
+```ts
+const controller = new AbortController();
+setTimeout(() => controller.abort(), 5_000);
+
+const board = await trello.boards.getBoard({ id }, { signal: controller.signal });
+```
+
+`AbortSignal.timeout(5_000)` works just as well when the only thing you need is a deadline.
+
+The flat, tree-shakable functions take it in the same position:
+
+```ts
+const board = await getBoard(client, { id }, { signal: controller.signal });
+```
+
+`batch.run` is the one exception: it takes only its builder, and its requests share a single HTTP call.
+
 ## Documentation
 
 - 📖 [Full documentation](https://mrrefactoring.github.io/trello.js/): guides, recipes, migration.
