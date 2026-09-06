@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import type { TrelloClient } from '../../src/createTrelloClient';
-import { getLiveClient } from './setup/client';
+import { getLiveClient, getRawLiveClient } from './setup/client';
 import { ResourceTracker } from './setup/resources';
 import { testName } from './helpers/naming';
 
@@ -245,6 +245,42 @@ describe('Members', () => {
     it('getMemberInvitedOrganizations returns an array', async () => {
       const orgs = await trello.members.getMemberInvitedOrganizations({ id: 'me' });
       expect(Array.isArray(orgs)).toBe(true);
+    });
+
+    it('sends trial with both keys, eligible always a boolean', async () => {
+      const raw = (await getRawLiveClient().members.getMemberOrganizations({ id: 'me' })) as unknown as Array<{
+        trial?: Record<string, unknown> | null;
+      }>;
+
+      const trials = raw.map((org) => org.trial).filter((trial) => trial !== null && trial !== undefined);
+
+      expect(trials.length).toBeGreaterThan(0);
+
+      for (const trial of trials) {
+        expect(Object.keys(trial).sort()).toEqual(['eligible', 'endDate']);
+        expect(typeof trial.eligible).toBe('boolean');
+      }
+    });
+
+    it('sends trial.endDate as null or an ISO-8601 string', async ({ skip }) => {
+      const raw = (await getRawLiveClient().members.getMemberOrganizations({ id: 'me' })) as unknown as Array<{
+        trial?: { endDate?: unknown } | null;
+      }>;
+
+      const endDates = raw
+        .map((org) => org.trial)
+        .filter((trial) => trial !== null && trial !== undefined)
+        .map((trial) => trial.endDate)
+        .filter((endDate) => endDate !== null && endDate !== undefined);
+
+      if (endDates.length === 0) {
+        skip('no workspace on this account is in a trial, so endDate is unobserved');
+      }
+
+      for (const endDate of endDates) {
+        expect(typeof endDate).toBe('string');
+        expect(endDate).toMatch(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/);
+      }
     });
   });
 

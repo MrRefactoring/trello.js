@@ -1,5 +1,15 @@
 # Trello.js changelog
 
+## Unreleased
+
+### Fixed
+
+- `Organization` gained `trial`, the object Trello now returns on every workspace: `{ eligible: boolean, endDate: Date | null }`. It was silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking `getMemberOrganizations`. `endDate` reads as `null` on every workspace reachable from this account, so its populated shape is still unobserved.
+
+### Deprecated
+
+- **`Organization.eligibleForTrial`.** Trello stopped sending it, and `trial.eligible` replaces it. The field stays optional so reading it still compiles, and goes at the next major version.
+
 ## v2.2.0 (2026-08-20)
 
 **Read this one if you `switch` exhaustively over a value this client returns.** The enum-shaped types are now open, `Color` and `CardAging` among them, so a `switch` with no `default` branch stops type-checking. That ships in a minor release on purpose: the values belong to Trello, not to this client. The `_light` / `_dark` label shades reached the live API long before the spec named them and broke `getBoardCards` for every consumer until v2.1.6 added the 30 values by hand, so a closed set was never a promise a wrapper could keep.
