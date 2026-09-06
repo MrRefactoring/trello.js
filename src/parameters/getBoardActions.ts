@@ -49,6 +49,8 @@ export const GetBoardActionsSchema = z.object({
    * be returned.
    */
   since: z.string().optional(),
+  /** Whether to return the entities of each action. */
+  entities: z.boolean().optional(),
 });
 
 export type GetBoardActions = z.input<typeof GetBoardActionsSchema>;

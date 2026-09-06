@@ -190,6 +190,7 @@ export async function getListActions(
       reactions: parameters.reactions,
       before: parameters.before,
       since: parameters.since,
+      entities: parameters.entities,
     },
     schema: z.array(ActionSchema),
     signal: options?.signal,

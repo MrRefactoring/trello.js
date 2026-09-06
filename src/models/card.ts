@@ -5,6 +5,9 @@ import { ChecklistSchema } from '#/models/checklist';
 import { LabelSchema } from '#/models/label';
 import { LimitsSchema } from '#/models/limits';
 import { ColorSchema } from '#/models/color';
+import { AttachmentSchema } from '#/models/attachment';
+import { MemberSchema } from '#/models/member';
+import { CardStickerSchema } from '#/models/cardSticker';
 
 export const CardSchema = apiObject({
   id: z.string(),
@@ -87,20 +90,20 @@ export const CardSchema = apiObject({
   start: z.coerce.date().nullish(),
   /** Metadata attached to the card when it was created or modified by an agent rather than a human member. */
   aiMetadata: z.unknown().optional(),
-  attachments: z.array(z.unknown()).optional(),
+  attachments: z.array(AttachmentSchema).optional(),
   creationMethodError: z.unknown().optional(),
   creationMethodLoadingStartedAt: z.unknown().optional(),
   customFieldItems: z.array(z.unknown()).optional(),
-  dateClosed: z.unknown().optional(),
-  dateCompleted: z.unknown().optional(),
+  dateClosed: z.coerce.date().nullish(),
+  dateCompleted: z.coerce.date().nullish(),
   dateViewedByCreator: z.unknown().optional(),
   externalSource: z.unknown().optional(),
   faviconUrl: z.unknown().optional(),
   idMemberCreator: z.string().nullish(),
   idOrganization: z.string().nullish(),
   manifest: z.unknown().optional(),
-  members: z.array(z.unknown()).optional(),
-  membersVoted: z.array(z.unknown()).optional(),
+  members: z.array(MemberSchema).optional(),
+  membersVoted: z.array(MemberSchema).optional(),
   mirrorSourceNodeId: z.unknown().optional(),
   originalDesc: z.string().nullish(),
   originalName: z.string().nullish(),
@@ -109,8 +112,8 @@ export const CardSchema = apiObject({
   singleInstrumentationId: z.unknown().optional(),
   sourceEmail: z.unknown().optional(),
   staticMapUrl: z.unknown().optional(),
-  stickers: z.array(z.unknown()).optional(),
-  urlSource: z.unknown().optional(),
+  stickers: z.array(CardStickerSchema).optional(),
+  urlSource: z.string().nullish(),
   urlSourceText: z.unknown().optional(),
 });
 

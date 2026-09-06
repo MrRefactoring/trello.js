@@ -17,7 +17,9 @@ export const OrganizationSchema = apiObject({
   memberships: z.array(MembershipsSchema).optional(),
   premiumFeatures: z.array(z.string()).optional(),
   desc: z.string().optional(),
-  descData: z.record(z.string(), z.any()).nullish(),
+  descData: apiObject({
+    emoji: z.record(z.string(), z.any()),
+  }).nullish(),
   logoHash: z.string().nullish(),
   logoUrl: z.string().nullish(),
   powerUps: z.array(z.unknown()).optional(),
@@ -30,9 +32,27 @@ export const OrganizationSchema = apiObject({
   billableCollaboratorCount: z.number().optional(),
   billableMemberCount: z.number().optional(),
   billingLocked: z.boolean().optional(),
-  boardCounts: z.array(z.unknown()).optional(),
+  boardCounts: z
+    .array(
+      apiObject({
+        idMember: z.string(),
+        boardCount: z.number(),
+      }),
+    )
+    .optional(),
   creationMethod: z.unknown().optional(),
-  credits: z.array(z.unknown()).optional(),
+  credits: z
+    .array(
+      apiObject({
+        id: z.string(),
+        applied: z.boolean(),
+        reward: z.string(),
+        type: z.string(),
+        count: z.number(),
+        via: z.string(),
+      }),
+    )
+    .optional(),
   domainName: z.unknown().optional(),
   /**
    * @deprecated Trello stopped sending this field; it is replaced by `trial.eligible`. Kept as an optional field so

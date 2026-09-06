@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import type { TrelloClient } from '../../src/createTrelloClient';
-import { getLiveClient } from './setup/client';
+import { getLiveClient, getRawLiveClient } from './setup/client';
 import { ResourceTracker } from './setup/resources';
 import { testName } from './helpers/naming';
 
@@ -176,6 +176,69 @@ describe('Actions', () => {
 
     // getActionOrganization is not tested: it requires an action on a board that belongs
     // to an organization (workspace). Personal-board actions return 404 for this endpoint.
+  });
+
+  describe('entities and appCreator', () => {
+    it('getBoardActions returns entities when asked for them', async () => {
+      const actions = await trello.boards.getBoardActions({ boardId, entities: true, limit: 50 });
+      const entities = actions.flatMap(action => action.entities ?? []);
+
+      expect(entities.length).toBeGreaterThan(0);
+      expect(entities.every(entity => typeof entity.type === 'string')).toBe(true);
+      expect(entities.some(entity => entity.type === 'card' && typeof entity.shortLink === 'string')).toBe(true);
+      expect(entities.some(entity => entity.type === 'member' && typeof entity.username === 'string')).toBe(true);
+    });
+
+    it('getBoardActions omits entities when they are not asked for', async () => {
+      const actions = await trello.boards.getBoardActions({ boardId, limit: 50 });
+
+      expect(actions.every(action => action.entities === undefined)).toBe(true);
+    });
+
+    it('appCreator identifies the key the action was made with', async () => {
+      const action = await trello.actions.getAction({ id: commentActionId });
+
+      expect(typeof action.appCreator?.id).toBe('string');
+      expect(typeof action.appCreator?.authType).toBe('string');
+    });
+
+    it('raw response keeps the shapes the schema now claims', async () => {
+      const raw = (await getRawLiveClient().boards.getBoardActions({
+        boardId,
+        entities: true,
+        limit: 50,
+      })) as unknown as Array<{
+        appCreator?: { id?: unknown; authType?: unknown } | null;
+        entities?: Array<Record<string, unknown>>;
+      }>;
+
+      const entities = raw.flatMap(action => action.entities ?? []);
+      const known = new Set([
+        'type',
+        'id',
+        'text',
+        'username',
+        'shortLink',
+        'hideIfContext',
+        'idContext',
+        'closed',
+        'due',
+        'dueComplete',
+        'date',
+        'link',
+        'url',
+        'originalUrl',
+      ]);
+
+      expect(entities.length).toBeGreaterThan(0);
+      expect(entities.every(entity => typeof entity.type === 'string')).toBe(true);
+      expect(entities.flatMap(Object.keys).filter(key => !known.has(key))).toEqual([]);
+
+      const appCreator = raw.find(action => action.appCreator)?.appCreator;
+
+      expect(typeof appCreator?.id).toBe('string');
+      expect(typeof appCreator?.authType).toBe('string');
+    });
   });
 
   describe('deletion', () => {
