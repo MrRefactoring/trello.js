@@ -408,10 +408,20 @@ describe('response schema breadth — minimal vs maximal', () => {
         activeMembershipCount: null,
         idMemberCreator: null,
         membersCount: 5,
+        trial: { eligible: false, endDate: null },
       });
 
       expect(org.products).toEqual([110]);
       expect(org.memberships?.[0].id).toBe(ID);
+      expect(org.trial?.eligible).toBe(false);
+      expect(org.trial?.endDate).toBeNull();
+    });
+
+    it('coerces a populated trial.endDate to a Date', () => {
+      const org = OrganizationSchema.parse({ id: ID, trial: { eligible: true, endDate: ISO } });
+
+      expect(org.trial?.endDate).toBeInstanceOf(Date);
+      expect((org.trial?.endDate as Date).toISOString()).toBe(ISO);
     });
   });
 });

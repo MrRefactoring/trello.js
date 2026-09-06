@@ -34,6 +34,10 @@ export const OrganizationSchema = apiObject({
   creationMethod: z.unknown().optional(),
   credits: z.array(z.unknown()).optional(),
   domainName: z.unknown().optional(),
+  /**
+   * @deprecated Trello stopped sending this field; it is replaced by `trial.eligible`. Kept as an optional field so
+   *   reading it still compiles, and removed at the next major version.
+   */
   eligibleForTrial: z.boolean().optional(),
   enterpriseJoinRequest: z.record(z.string(), z.any()).nullish(),
   iconEmoji: z.unknown().optional(),
@@ -51,6 +55,10 @@ export const OrganizationSchema = apiObject({
   nodeId: z.string().optional(),
   promotions: z.array(z.unknown()).optional(),
   standardVariation: z.unknown().optional(),
+  trial: apiObject({
+    eligible: z.boolean(),
+    endDate: z.coerce.date().nullable(),
+  }).nullish(),
   type: z.unknown().optional(),
 });
 

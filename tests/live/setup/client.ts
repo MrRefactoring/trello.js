@@ -7,6 +7,7 @@ import { requireLiveEnv } from './env';
 config({ path: resolve(process.cwd(), '.env'), override: false });
 
 let _client: TrelloClient | null = null;
+let _rawClient: TrelloClient | null = null;
 let _env: ReturnType<typeof requireLiveEnv> | null = null;
 
 function getEnv() {
@@ -21,6 +22,15 @@ export function getLiveClient(): TrelloClient {
   }
 
   return _client;
+}
+
+export function getRawLiveClient(): TrelloClient {
+  if (!_rawClient) {
+    const { apiKey, apiToken } = getEnv();
+    _rawClient = createTrelloClient({ apiKey, apiToken, skipParsing: true });
+  }
+
+  return _rawClient;
 }
 
 export function getMember2Id(): string {
