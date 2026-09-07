@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import type { TrelloClient } from '../../src/createTrelloClient';
-import { getLiveClient } from './setup/client';
+import { getLiveClient, getRawLiveClient } from './setup/client';
 import { ResourceTracker } from './setup/resources';
 import { testName } from './helpers/naming';
 
@@ -181,6 +181,61 @@ describe('Organizations', () => {
       const tags = await trello.organizations.getOrganizationTags({ id: orgId });
       expect(tags.some(t => t.id === tagId)).toBe(false);
       tagsAvailable = false;
+    });
+  });
+
+  // ─── expanded workspace fields ─────────────────────────────────────────────
+
+  describe('expanded workspace fields', () => {
+    it('descData carries the emoji map', async () => {
+      const org = await trello.organizations.getOrganization({ id: orgId });
+
+      expect(org.descData?.emoji).toBeDefined();
+    });
+
+    it('boardCounts counts boards per member', async ({ skip }) => {
+      const orgs = await trello.members.getMemberOrganizations({ id: 'me', fields: 'all' });
+      const counts = orgs.flatMap(org => org.boardCounts ?? []);
+
+      if (counts.length === 0) skip('no workspace on this account reports board counts');
+
+      expect(counts.every(count => typeof count.idMember === 'string')).toBe(true);
+      expect(counts.every(count => typeof count.boardCount === 'number')).toBe(true);
+    });
+
+    it('credits describe the rewards applied to a workspace', async ({ skip }) => {
+      const orgs = await trello.members.getMemberOrganizations({ id: 'me', fields: 'all' });
+      const credits = orgs.flatMap(org => org.credits ?? []);
+
+      if (credits.length === 0) skip('no workspace on this account carries credits');
+
+      expect(credits.every(credit => typeof credit.id === 'string')).toBe(true);
+      expect(credits.every(credit => typeof credit.applied === 'boolean')).toBe(true);
+      expect(credits.every(credit => typeof credit.count === 'number')).toBe(true);
+    });
+
+    it('raw response keeps the shapes the schema now claims', async () => {
+      const raw = (await getRawLiveClient().members.getMemberOrganizations({
+        id: 'me',
+        fields: 'all',
+      })) as unknown as Array<{
+        descData?: { emoji?: unknown } | null;
+        boardCounts?: Array<Record<string, unknown>>;
+        credits?: Array<Record<string, unknown>>;
+      }>;
+
+      const described = raw.filter(org => org.descData);
+
+      expect(described.length).toBeGreaterThan(0);
+      expect(described.every(org => typeof org.descData?.emoji === 'object')).toBe(true);
+
+      for (const count of raw.flatMap(org => org.boardCounts ?? [])) {
+        expect(Object.keys(count).sort()).toEqual(['boardCount', 'idMember']);
+      }
+
+      for (const credit of raw.flatMap(org => org.credits ?? [])) {
+        expect(Object.keys(credit).sort()).toEqual(['applied', 'count', 'id', 'reward', 'type', 'via']);
+      }
     });
   });
 

@@ -52,8 +52,30 @@ export const ActionSchema = apiObject({
   }).optional(),
   /** Agentic identity associated with the action, present when it was performed by an agent rather than a human member. */
   agenticIdentity: z.unknown().optional(),
-  appCreator: z.record(z.string(), z.any()).nullish(),
-  entities: z.array(z.unknown()).optional(),
+  appCreator: apiObject({
+    id: z.string(),
+    authType: z.string(),
+  }).nullish(),
+  entities: z
+    .array(
+      apiObject({
+        type: z.string(),
+        id: z.string().optional(),
+        text: z.string().optional(),
+        username: z.string().optional(),
+        shortLink: z.string().optional(),
+        hideIfContext: z.boolean().optional(),
+        idContext: z.string().optional(),
+        closed: z.boolean().optional(),
+        due: z.coerce.date().optional(),
+        dueComplete: z.boolean().optional(),
+        date: z.coerce.date().optional(),
+        link: z.boolean().optional(),
+        url: z.string().optional(),
+        originalUrl: z.string().optional(),
+      }),
+    )
+    .optional(),
   member: MemberSchema.nullish(),
 });
 

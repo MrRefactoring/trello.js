@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import type { TrelloClient } from '../../src/createTrelloClient';
-import { getLiveClient } from './setup/client';
+import { getLiveClient, getRawLiveClient } from './setup/client';
 import { ResourceTracker } from './setup/resources';
 import { testName } from './helpers/naming';
 
@@ -102,6 +102,42 @@ describe('Search', () => {
     it('members result contains the authenticated user', async () => {
       const result = await trello.search.search({ query: myUsername, modelTypes: 'members' });
       expect(result.members!.some(m => m.username === myUsername)).toBe(true);
+    });
+  });
+
+  // ─── options ───────────────────────────────────────────────────────────────
+
+  describe('options', () => {
+    it('echoes the parsed query back', async () => {
+      const result = await trello.search.search({ query: boardName, modelTypes: 'boards' });
+
+      expect(result.options?.modelTypes).toEqual(['boards']);
+      expect(typeof result.options?.partial).toBe('boolean');
+      expect(result.options?.terms.every(term => typeof term.text === 'string')).toBe(true);
+      expect(Array.isArray(result.options?.modifiers)).toBe(true);
+    });
+
+    it('raw response keeps the shapes the schema now claims', async () => {
+      const raw = (await getRawLiveClient().search.search({
+        query: boardName,
+        modelTypes: 'boards',
+      })) as unknown as {
+        options?: {
+          terms?: Array<Record<string, unknown>>;
+          modifiers?: unknown;
+          modelTypes?: unknown;
+          partial?: unknown;
+        };
+      };
+
+      expect(Object.keys(raw.options ?? {}).sort()).toEqual(['modelTypes', 'modifiers', 'partial', 'terms']);
+      expect(Array.isArray(raw.options?.modifiers)).toBe(true);
+      expect(raw.options?.modelTypes).toEqual(['boards']);
+      expect(typeof raw.options?.partial).toBe('boolean');
+
+      for (const term of raw.options?.terms ?? []) {
+        expect(typeof term.text).toBe('string');
+      }
     });
   });
 });

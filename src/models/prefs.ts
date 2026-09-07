@@ -9,7 +9,7 @@ export const PrefsSchema = apiObject({
   hideVotes: z.boolean().optional(),
   voting: z.string().optional(),
   comments: z.string().optional(),
-  invitations: z.unknown().optional(),
+  invitations: z.string().optional(),
   selfJoin: z.boolean().optional(),
   cardCovers: z.boolean().optional(),
   isTemplate: z.boolean().optional(),

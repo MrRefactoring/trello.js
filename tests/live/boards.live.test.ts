@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import type { TrelloClient } from '../../src/createTrelloClient';
-import { getLiveClient, getMember2Id, getMember2Email } from './setup/client';
+import { getLiveClient, getRawLiveClient, getMember2Id, getMember2Email } from './setup/client';
 import { ResourceTracker } from './setup/resources';
 import { testName } from './helpers/naming';
 
@@ -309,6 +309,75 @@ describe('Boards', () => {
       const prefs = await trello.boards.updateBoardEmailList({ id: boardId, value: listId });
       expect(typeof prefs.idEmailList).toBe('string');
       expect(prefs.idEmailList).toBe(listId);
+    });
+  });
+
+  // ─── expanded board fields ─────────────────────────────────────────────────
+
+  describe('expanded board fields', () => {
+    let copiedId: string;
+    let closedId: string;
+
+    beforeAll(async () => {
+      const copy = await trello.boards.createBoard({
+        name: testName('board-copy'),
+        idBoardSource: boardId,
+        prefsPermissionLevel: 'private',
+      });
+
+      copiedId = copy.id;
+      tracker.defer(async () => {
+        await trello.boards.deleteBoard({ id: copiedId });
+      });
+
+      const closed = await trello.boards.createBoard({
+        name: testName('board-closed'),
+        defaultLists: false,
+        prefsPermissionLevel: 'private',
+      });
+
+      closedId = closed.id;
+      tracker.defer(async () => {
+        await trello.boards.deleteBoard({ id: closedId });
+      });
+
+      await trello.boards.updateBoard({ id: closedId, closed: true });
+    });
+
+    it('idBoardSource names the board that was copied', async () => {
+      const board = await trello.boards.getBoard({ id: copiedId, fields: 'all' });
+
+      expect(board.idBoardSource).toBe(boardId);
+    });
+
+    it('dateClosed is a date once the board is closed', async () => {
+      const board = await trello.boards.getBoard({ id: closedId, fields: 'all' });
+
+      expect(board.closed).toBe(true);
+      expect(board.dateClosed).toBeInstanceOf(Date);
+    });
+
+    it('prefs.invitations is a string', async () => {
+      const board = await trello.boards.getBoard({ id: boardId, fields: 'all' });
+
+      expect(typeof board.prefs?.invitations).toBe('string');
+    });
+
+    it('raw response keeps the shapes the schema now claims', async () => {
+      const rawClient = getRawLiveClient();
+
+      const [copied, closed] = (await Promise.all([
+        rawClient.boards.getBoard({ id: copiedId, fields: 'all' }),
+        rawClient.boards.getBoard({ id: closedId, fields: 'all' }),
+      ])) as unknown as Array<{
+        idBoardSource?: unknown;
+        dateClosed?: unknown;
+        prefs?: { invitations?: unknown };
+      }>;
+
+      expect(typeof copied.idBoardSource).toBe('string');
+      expect(typeof copied.prefs?.invitations).toBe('string');
+      expect(typeof closed.dateClosed).toBe('string');
     });
   });
 

@@ -5,6 +5,7 @@
 ### Fixed
 
 - `Organization` gained `trial`, the object Trello now returns on every workspace: `{ eligible: boolean, endDate: Date | null }`. It was silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking `getMemberOrganizations`. `endDate` reads as `null` on every workspace reachable from this account, so its populated shape is still unobserved.
+- `Prefs.invitations` is now `string` instead of `unknown`, which it was typed on the assumption the name implied a list. Trello sends `"members"` on every board reachable from this account, so the value was there all along and unusable without a cast.
 
 ### Deprecated
 
@@ -19,6 +20,29 @@
   ```
 
 - `SendRequestOptions` gained `signal`, so a custom `Client` implementation receives it too.
+- **`entities` on the five actions-list endpoints.** `getBoardActions`, `getCardActions`, `getListActions`, `getMemberActions` and `getOrganizationActions` take `entities: boolean`. Trello sends `Action.entities` only when it is asked for, so the field the schema declared was unreachable through this client.
+
+### Changed
+
+- **Fifteen fields that were typed `unknown`, `unknown[]` or `Record<string, any>` now carry the shape the live API sends.** The shapes are observations rather than readings of the spec: only fields the live suites could populate were typed. Everything still unobservable from this account (`Organization.powerUps`, `Card.customFieldItems`, `Token.webhooks`, the enterprise and licence fields) is left exactly as it was.
+
+  | Model | Field | Was | Now |
+  | --- | --- | --- | --- |
+  | `Card` | `attachments` | `unknown[]` | `Attachment[]` |
+  | `Card` | `members`, `membersVoted` | `unknown[]` | `Member[]` |
+  | `Card` | `stickers` | `unknown[]` | `CardSticker[]` |
+  | `Card` | `dateClosed`, `dateCompleted` | `unknown` | `Date \| null` |
+  | `Card` | `urlSource` | `unknown` | `string \| null` |
+  | `Board` | `dateClosed` | `unknown` | `Date \| null` |
+  | `Board` | `idBoardSource` | `unknown` | `string \| null` |
+  | `Action` | `appCreator` | `Record<string, any>` | `{ id, authType } \| null` |
+  | `Action` | `entities` | `unknown[]` | array of `{ type, … }` |
+  | `Organization` | `descData` | `Record<string, any>` | `{ emoji }` |
+  | `Organization` | `boardCounts` | `unknown[]` | `{ idMember, boardCount }[]` |
+  | `Organization` | `credits` | `unknown[]` | `{ id, applied, reward, type, count, via }[]` |
+  | `SearchResult` | `options` | `Record<string, any>` | `{ terms, modifiers, modelTypes, partial }` |
+
+  Nothing at the top level became required, because Trello's `fields` parameter prunes it and nothing but `id` survives `?fields=name`. Nested properties are not pruned, so ones present in every sample are typed as required, `Action.entities[].type` and `Organization.credits[].applied` among them. That is the one risk here: should Trello stop sending one, the response raises `ZodError` instead of parsing without it.
 
 ## v2.2.0 (2026-08-20)
 

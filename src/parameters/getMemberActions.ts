@@ -50,6 +50,8 @@ export const GetMemberActionsSchema = z.object({
    * be returned.
    */
   since: z.string().optional(),
+  /** Whether to return the entities of each action. */
+  entities: z.boolean().optional(),
 });
 
 export type GetMemberActions = z.input<typeof GetMemberActionsSchema>;

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import type { TrelloClient } from '../../src/createTrelloClient';
-import { getLiveClient, getMember2Id } from './setup/client';
+import { getLiveClient, getRawLiveClient, getMember2Id } from './setup/client';
 import { ResourceTracker } from './setup/resources';
 import { testName } from './helpers/naming';
 
@@ -793,6 +793,173 @@ describe('Cards', () => {
       const cards = await trello.lists.getListCards({ id: listId });
       const ids = new Set(cards.map(c => c.id));
       expect(ids.size).toBe(3);
+    });
+  });
+
+  // ─── expanded card fields ──────────────────────────────────────────────────
+
+  describe('expanded card fields', () => {
+    let expandedId: string;
+    let archivedId: string;
+    let urlSourceId: string;
+    let votingAvailable = false;
+    let myMemberId: string;
+
+    beforeAll(async () => {
+      const me = await trello.members.getMember({ id: 'me' });
+
+      myMemberId = me.id;
+
+      const card = await trello.cards.createCard({
+        name: testName('expanded'),
+        idList: listAId,
+        due: new Date(Date.now() + 86_400_000).toISOString(),
+        dueComplete: true,
+      });
+
+      expandedId = card.id;
+
+      await trello.cards.createCardAttachment({
+        id: expandedId,
+        url: 'https://trello.com',
+        name: testName('expanded-attach'),
+      });
+
+      await trello.cards.createCardSticker({
+        id: expandedId,
+        image: 'thumbsup',
+        top: 10,
+        left: 10,
+        zIndex: 1,
+      });
+
+      await trello.cards.addCardMember({ id: expandedId, value: myMemberId });
+
+      try {
+        await trello.boards.updateBoard({ id: boardId, 'prefs/voting': 'members' });
+        await trello.cards.voteOnCard({ id: expandedId, value: myMemberId });
+        votingAvailable = true;
+      } catch {
+        votingAvailable = false;
+      }
+
+      const archived = await trello.cards.createCard({ name: testName('archived'), idList: listAId });
+
+      await trello.cards.updateCard({ id: archived.id, closed: true });
+
+      archivedId = archived.id;
+
+      const fromUrl = await trello.cards.createCard({
+        name: testName('url-source'),
+        idList: listAId,
+        urlSource: 'https://trello.com',
+      });
+
+      urlSourceId = fromUrl.id;
+    });
+
+    const expand = {
+      attachments: true,
+      members: true,
+      membersVoted: true,
+      stickers: true,
+      fields: 'all',
+    } as const;
+
+    it('getCard parses the expanded card', async () => {
+      const card = await trello.cards.getCard({ id: expandedId, ...expand });
+
+      expect(card.id).toBe(expandedId);
+      expect(card.attachments?.length).toBeGreaterThan(0);
+      expect(card.stickers?.length).toBeGreaterThan(0);
+      expect(card.members?.some(m => m.id === myMemberId)).toBe(true);
+    });
+
+    it('attachments carry the Attachment shape', async () => {
+      const card = await trello.cards.getCard({ id: expandedId, ...expand });
+      const [attachment] = card.attachments ?? [];
+
+      expect(typeof attachment?.id).toBe('string');
+      expect(typeof attachment?.url).toBe('string');
+      expect(attachment?.date).toBeInstanceOf(Date);
+    });
+
+    it('stickers carry the CardSticker shape', async () => {
+      const card = await trello.cards.getCard({ id: expandedId, ...expand });
+      const [sticker] = card.stickers ?? [];
+
+      expect(typeof sticker?.id).toBe('string');
+      expect(typeof sticker?.image).toBe('string');
+      expect(typeof sticker?.top).toBe('number');
+    });
+
+    it('membersVoted carry the Member shape', async ({ skip }) => {
+      if (!votingAvailable) skip();
+
+      const card = await trello.cards.getCard({ id: expandedId, ...expand });
+      const voter = card.membersVoted?.find(m => m.id === myMemberId);
+
+      expect(typeof voter?.username).toBe('string');
+    });
+
+    it('dateCompleted is a date once the card is due-complete', async () => {
+      const card = await trello.cards.getCard({ id: expandedId, fields: 'all' });
+
+      expect(card.dueComplete).toBe(true);
+      expect(card.dateCompleted).toBeInstanceOf(Date);
+    });
+
+    it('dateClosed is a date once the card is archived', async () => {
+      const archived = await trello.cards.getCard({ id: archivedId, fields: 'all' });
+
+      expect(archived.closed).toBe(true);
+      expect(archived.dateClosed).toBeInstanceOf(Date);
+    });
+
+    it('urlSource is a string on a card created from a URL', async () => {
+      const card = await trello.cards.getCard({ id: urlSourceId, fields: 'all' });
+
+      expect(typeof card.urlSource).toBe('string');
+    });
+
+    it('raw response keeps the shapes the schema now claims', async ({ skip }) => {
+      const raw = (await getRawLiveClient().cards.getCard({
+        id: expandedId,
+        ...expand,
+      })) as unknown as {
+        attachments?: Array<{ id?: unknown; url?: unknown; date?: unknown }>;
+        stickers?: Array<{ id?: unknown; image?: unknown; top?: unknown; zIndex?: unknown }>;
+        members?: Array<{ id?: unknown; username?: unknown }>;
+        membersVoted?: Array<{ id?: unknown; username?: unknown }>;
+        dateCompleted?: unknown;
+      };
+
+      expect(typeof raw.attachments?.[0]?.id).toBe('string');
+      expect(typeof raw.attachments?.[0]?.url).toBe('string');
+      expect(typeof raw.attachments?.[0]?.date).toBe('string');
+
+      expect(typeof raw.stickers?.[0]?.id).toBe('string');
+      expect(typeof raw.stickers?.[0]?.image).toBe('string');
+      expect(typeof raw.stickers?.[0]?.top).toBe('number');
+
+      expect(typeof raw.members?.[0]?.username).toBe('string');
+      expect(typeof raw.dateCompleted).toBe('string');
+
+      if (!votingAvailable) skip();
+
+      expect(typeof raw.membersVoted?.[0]?.username).toBe('string');
+    });
+
+    it('raw response types dateClosed and urlSource as strings', async () => {
+      const rawClient = getRawLiveClient();
+
+      const [archived, fromUrl] = (await Promise.all([
+        rawClient.cards.getCard({ id: archivedId, fields: 'all' }),
+        rawClient.cards.getCard({ id: urlSourceId, fields: 'all' }),
+      ])) as unknown as Array<{ dateClosed?: unknown; urlSource?: unknown }>;
+
+      expect(typeof archived.dateClosed).toBe('string');
+      expect(typeof fromUrl.urlSource).toBe('string');
     });
   });
 
