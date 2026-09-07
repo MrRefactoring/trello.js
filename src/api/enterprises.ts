@@ -30,11 +30,15 @@ import type { AddEnterpriseAdmin } from '#/parameters/addEnterpriseAdmin';
 import type { RemoveEnterpriseAdmin } from '#/parameters/removeEnterpriseAdmin';
 import type { RemoveEnterpriseOrganization } from '#/parameters/removeEnterpriseOrganization';
 import type { GetEnterpriseBulkOrganizations } from '#/parameters/getEnterpriseBulkOrganizations';
-import type { Client, SendRequestOptions } from '#/core';
+import type { Client, RequestOptions, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Get an enterprise by its ID. */
-export async function getEnterprise(client: Client, parameters: GetEnterprise): Promise<Enterprise> {
+export async function getEnterprise(
+  client: Client,
+  parameters: GetEnterprise,
+  options?: RequestOptions,
+): Promise<Enterprise> {
   const config: SendRequestOptions<Enterprise> = {
     url: `/enterprises/${parameters.id}`,
     method: 'GET',
@@ -54,6 +58,7 @@ export async function getEnterprise(client: Client, parameters: GetEnterprise): 
       organization_memberships: parameters.organizationMemberships,
     },
     schema: EnterpriseSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -70,18 +75,24 @@ export async function getEnterprise(client: Client, parameters: GetEnterprise): 
 export async function getEnterpriseAuditLog(
   client: Client,
   parameters: GetEnterpriseAuditLog,
+  options?: RequestOptions,
 ): Promise<EnterpriseAuditLog[]> {
   const config: SendRequestOptions<EnterpriseAuditLog[]> = {
     url: `/enterprises/${parameters.id}/auditlog`,
     method: 'GET',
     schema: z.array(EnterpriseAuditLogSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get an enterprise's admin members. */
-export async function getEnterpriseAdmins(client: Client, parameters: GetEnterpriseAdmins): Promise<EnterpriseAdmin> {
+export async function getEnterpriseAdmins(
+  client: Client,
+  parameters: GetEnterpriseAdmins,
+  options?: RequestOptions,
+): Promise<EnterpriseAdmin> {
   const config: SendRequestOptions<EnterpriseAdmin> = {
     url: `/enterprises/${parameters.id}/admins`,
     method: 'GET',
@@ -89,6 +100,7 @@ export async function getEnterpriseAdmins(client: Client, parameters: GetEnterpr
       fields: parameters.fields,
     },
     schema: EnterpriseAdminSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -98,6 +110,7 @@ export async function getEnterpriseAdmins(client: Client, parameters: GetEnterpr
 export async function getEnterpriseSignUpUrl(
   client: Client,
   parameters: GetEnterpriseSignUpUrlParameters,
+  options?: RequestOptions,
 ): Promise<GetEnterpriseSignUpUrl> {
   const config: SendRequestOptions<GetEnterpriseSignUpUrl> = {
     url: `/enterprises/${parameters.id}/signupUrl`,
@@ -109,6 +122,7 @@ export async function getEnterpriseSignUpUrl(
       tosAccepted: parameters.tosAccepted,
     },
     schema: GetEnterpriseSignUpUrlSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -118,7 +132,7 @@ export async function getEnterpriseSignUpUrl(
  * Get an enterprise's users. You can choose to retrieve licensed members, board guests, etc. The response is paginated
  * and will return 100 users at a time.
  */
-export async function getUser(client: Client, parameters: GetUser): Promise<Membership[]> {
+export async function getUser(client: Client, parameters: GetUser, options?: RequestOptions): Promise<Membership[]> {
   const config: SendRequestOptions<Membership[]> = {
     url: `/enterprises/${parameters.id}/members/query`,
     method: 'GET',
@@ -134,13 +148,18 @@ export async function getUser(client: Client, parameters: GetUser): Promise<Memb
       cursor: parameters.cursor,
     },
     schema: z.array(MembershipSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get the members of an enterprise. */
-export async function getEnterpriseMembers(client: Client, parameters: GetEnterpriseMembers): Promise<Member[]> {
+export async function getEnterpriseMembers(
+  client: Client,
+  parameters: GetEnterpriseMembers,
+  options?: RequestOptions,
+): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/enterprises/${parameters.id}/members`,
     method: 'GET',
@@ -156,13 +175,18 @@ export async function getEnterpriseMembers(client: Client, parameters: GetEnterp
       board_fields: parameters.boardFields,
     },
     schema: z.array(MemberSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a specific member of an enterprise by ID. */
-export async function getEnterpriseMember(client: Client, parameters: GetEnterpriseMember): Promise<Member> {
+export async function getEnterpriseMember(
+  client: Client,
+  parameters: GetEnterpriseMember,
+  options?: RequestOptions,
+): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/enterprises/${parameters.id}/members/${parameters.idMember}`,
     method: 'GET',
@@ -172,6 +196,7 @@ export async function getEnterpriseMember(client: Client, parameters: GetEnterpr
       board_fields: parameters.boardFields,
     },
     schema: MemberSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -181,11 +206,13 @@ export async function getEnterpriseMember(client: Client, parameters: GetEnterpr
 export async function getEnterpriseTransferrableOrganization(
   client: Client,
   parameters: GetEnterpriseTransferrableOrganization,
+  options?: RequestOptions,
 ): Promise<TransferrableOrganization> {
   const config: SendRequestOptions<TransferrableOrganization> = {
     url: `/enterprises/${parameters.id}/transferrable/organization/${parameters.idOrganization}`,
     method: 'GET',
     schema: TransferrableOrganizationSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -195,11 +222,13 @@ export async function getEnterpriseTransferrableOrganization(
 export async function getEnterpriseBulkTransferrableOrganizations(
   client: Client,
   parameters: GetEnterpriseBulkTransferrableOrganizations,
+  options?: RequestOptions,
 ): Promise<TransferrableOrganization[]> {
   const config: SendRequestOptions<TransferrableOrganization[]> = {
     url: `/enterprises/${parameters.id}/transferrable/bulk/${parameters.idOrganizations}`,
     method: 'GET',
     schema: z.array(TransferrableOrganizationSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -209,6 +238,7 @@ export async function getEnterpriseBulkTransferrableOrganizations(
 export async function updateEnterpriseJoinRequests(
   client: Client,
   parameters: UpdateEnterpriseJoinRequests,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/enterprises/$${parameters.id}/enterpriseJoinRequest/bulk`,
@@ -216,6 +246,7 @@ export async function updateEnterpriseJoinRequests(
     searchParams: {
       idOrganizations: parameters.idOrganizations,
     },
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -228,6 +259,7 @@ export async function updateEnterpriseJoinRequests(
 export async function getEnterpriseClaimableOrganizations(
   client: Client,
   parameters: GetEnterpriseClaimableOrganizations,
+  options?: RequestOptions,
 ): Promise<ClaimableOrganizations> {
   const config: SendRequestOptions<ClaimableOrganizations> = {
     url: `/enterprises/${parameters.id}/claimableOrganizations`,
@@ -240,6 +272,7 @@ export async function getEnterpriseClaimableOrganizations(
       inactiveSince: parameters.inactiveSince,
     },
     schema: ClaimableOrganizationsSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -249,6 +282,7 @@ export async function getEnterpriseClaimableOrganizations(
 export async function getEnterprisePendingOrganizations(
   client: Client,
   parameters: GetEnterprisePendingOrganizations,
+  options?: RequestOptions,
 ): Promise<PendingOrganizations[]> {
   const config: SendRequestOptions<PendingOrganizations[]> = {
     url: `/enterprises/${parameters.id}/pendingOrganizations`,
@@ -258,13 +292,18 @@ export async function getEnterprisePendingOrganizations(
       inactiveSince: parameters.inactiveSince,
     },
     schema: z.array(PendingOrganizationsSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Create an auth Token for an Enterprise. */
-export async function createEnterpriseToken(client: Client, parameters: CreateEnterpriseToken): Promise<APIToken> {
+export async function createEnterpriseToken(
+  client: Client,
+  parameters: CreateEnterpriseToken,
+  options?: RequestOptions,
+): Promise<APIToken> {
   const config: SendRequestOptions<APIToken> = {
     url: `/enterprises/${parameters.id}/tokens`,
     method: 'POST',
@@ -272,6 +311,7 @@ export async function createEnterpriseToken(client: Client, parameters: CreateEn
       expiration: parameters.expiration,
     },
     schema: APITokenSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -281,6 +321,7 @@ export async function createEnterpriseToken(client: Client, parameters: CreateEn
 export async function getEnterpriseOrganizations(
   client: Client,
   parameters: GetEnterpriseOrganizations,
+  options?: RequestOptions,
 ): Promise<Organization[]> {
   const config: SendRequestOptions<Organization[]> = {
     url: `/enterprises/${parameters.id}/organizations`,
@@ -292,6 +333,7 @@ export async function getEnterpriseOrganizations(
       count: parameters.count,
     },
     schema: z.array(OrganizationSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -307,6 +349,7 @@ export async function getEnterpriseOrganizations(
 export async function addEnterpriseOrganization(
   client: Client,
   parameters: AddEnterpriseOrganization,
+  options?: RequestOptions,
 ): Promise<Organization[]> {
   const config: SendRequestOptions<Organization[]> = {
     url: `/enterprises/${parameters.id}/organizations`,
@@ -315,6 +358,7 @@ export async function addEnterpriseOrganization(
       idOrganization: parameters.idOrganization,
     },
     schema: z.array(OrganizationSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -329,6 +373,7 @@ export async function addEnterpriseOrganization(
 export async function updateEnterpriseMemberLicensed(
   client: Client,
   parameters: UpdateEnterpriseMemberLicensed,
+  options?: RequestOptions,
 ): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/enterprises/${parameters.id}/members/${parameters.idMember}/licensed`,
@@ -337,6 +382,7 @@ export async function updateEnterpriseMemberLicensed(
       value: parameters.value,
     },
     schema: MemberSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -350,6 +396,7 @@ export async function updateEnterpriseMemberLicensed(
 export async function deactivateEnterpriseMember(
   client: Client,
   parameters: DeactivateEnterpriseMember,
+  options?: RequestOptions,
 ): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/enterprises/${parameters.id}/members/${parameters.idMember}/deactivated`,
@@ -361,6 +408,7 @@ export async function deactivateEnterpriseMember(
       board_fields: parameters.boardFields,
     },
     schema: MemberSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -371,10 +419,15 @@ export async function deactivateEnterpriseMember(
  *
  * NOTE: This endpoint is not available to enterprises that have opted in to user management via AdminHub.
  */
-export async function addEnterpriseAdmin(client: Client, parameters: AddEnterpriseAdmin): Promise<void> {
+export async function addEnterpriseAdmin(
+  client: Client,
+  parameters: AddEnterpriseAdmin,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
     method: 'PUT',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -385,10 +438,15 @@ export async function addEnterpriseAdmin(client: Client, parameters: AddEnterpri
  *
  * NOTE: This endpoint is not available to enterprises that have opted in to user management via AdminHub.
  */
-export async function removeEnterpriseAdmin(client: Client, parameters: RemoveEnterpriseAdmin): Promise<void> {
+export async function removeEnterpriseAdmin(
+  client: Client,
+  parameters: RemoveEnterpriseAdmin,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/enterprises/${parameters.id}/admins/${parameters.idMember}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -398,10 +456,12 @@ export async function removeEnterpriseAdmin(client: Client, parameters: RemoveEn
 export async function removeEnterpriseOrganization(
   client: Client,
   parameters: RemoveEnterpriseOrganization,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/enterprises/${parameters.id}/organizations/${parameters.idOrg}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -417,11 +477,13 @@ export async function removeEnterpriseOrganization(
 export async function getEnterpriseBulkOrganizations(
   client: Client,
   parameters: GetEnterpriseBulkOrganizations,
+  options?: RequestOptions,
 ): Promise<Organization[]> {
   const config: SendRequestOptions<Organization[]> = {
     url: `/enterprises/${parameters.id}/organizations/bulk/${parameters.idOrganizations}`,
     method: 'GET',
     schema: z.array(OrganizationSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);

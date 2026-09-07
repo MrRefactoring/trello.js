@@ -54,11 +54,11 @@ import type { RemoveCardMember } from '#/parameters/removeCardMember';
 import type { RemoveCardMemberVote } from '#/parameters/removeCardMemberVote';
 import type { UpdateCardChecklistItem } from '#/parameters/updateCardChecklistItem';
 import type { RemoveCardChecklist } from '#/parameters/removeCardChecklist';
-import type { Client, SendRequestOptions } from '#/core';
+import type { Client, RequestOptions, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Create a new card. Query parameters may also be replaced with a JSON request body instead. */
-export async function createCard(client: Client, parameters: CreateCard): Promise<Card> {
+export async function createCard(client: Client, parameters: CreateCard, options?: RequestOptions): Promise<Card> {
   const config: SendRequestOptions<Card> = {
     url: '/cards',
     method: 'POST',
@@ -83,13 +83,14 @@ export async function createCard(client: Client, parameters: CreateCard): Promis
       cardRole: parameters.cardRole,
     },
     schema: CardSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a card by its ID */
-export async function getCard(client: Client, parameters: GetCard): Promise<Card> {
+export async function getCard(client: Client, parameters: GetCard, options?: RequestOptions): Promise<Card> {
   const config: SendRequestOptions<Card> = {
     url: `/cards/${parameters.id}`,
     method: 'GET',
@@ -114,13 +115,14 @@ export async function getCard(client: Client, parameters: GetCard): Promise<Card
       customFieldItems: parameters.customFieldItems,
     },
     schema: CardSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update a card. Query parameters may also be replaced with a JSON request body instead. */
-export async function updateCard(client: Client, parameters: UpdateCard): Promise<Card> {
+export async function updateCard(client: Client, parameters: UpdateCard, options?: RequestOptions): Promise<Card> {
   const config: SendRequestOptions<Card> = {
     url: `/cards/${parameters.id}`,
     method: 'PUT',
@@ -144,27 +146,34 @@ export async function updateCard(client: Client, parameters: UpdateCard): Promis
       cover: parameters.cover,
     },
     schema: CardSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete a Card */
-export async function deleteCard(client: Client, parameters: DeleteCard): Promise<void> {
+export async function deleteCard(client: Client, parameters: DeleteCard, options?: RequestOptions): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a specific property of a card */
-export async function getCardField<T = unknown>(client: Client, parameters: GetCardField): Promise<FieldValue<T>> {
+export async function getCardField<T = unknown>(
+  client: Client,
+  parameters: GetCardField,
+  options?: RequestOptions,
+): Promise<FieldValue<T>> {
   const config: SendRequestOptions<FieldValue<T>> = {
     url: `/cards/${parameters.id}/${parameters.field}`,
     method: 'GET',
     schema: FieldValueSchema as z.ZodType<FieldValue<T>>,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -174,7 +183,11 @@ export async function getCardField<T = unknown>(client: Client, parameters: GetC
  * List the Actions on a Card. See [Nested
  * Resources](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) for more information.
  */
-export async function getCardActions(client: Client, parameters: GetCardActions): Promise<Action[]> {
+export async function getCardActions(
+  client: Client,
+  parameters: GetCardActions,
+  options?: RequestOptions,
+): Promise<Action[]> {
   const config: SendRequestOptions<Action[]> = {
     url: `/cards/${parameters.id}/actions`,
     method: 'GET',
@@ -194,13 +207,18 @@ export async function getCardActions(client: Client, parameters: GetCardActions)
       since: parameters.since,
     },
     schema: z.array(ActionSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** List the attachments on a card */
-export async function getCardAttachments(client: Client, parameters: GetCardAttachments): Promise<Attachment[]> {
+export async function getCardAttachments(
+  client: Client,
+  parameters: GetCardAttachments,
+  options?: RequestOptions,
+): Promise<Attachment[]> {
   const config: SendRequestOptions<Attachment[]> = {
     url: `/cards/${parameters.id}/attachments`,
     method: 'GET',
@@ -209,6 +227,7 @@ export async function getCardAttachments(client: Client, parameters: GetCardAtta
       filter: parameters.filter,
     },
     schema: z.array(AttachmentSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -218,7 +237,11 @@ export async function getCardAttachments(client: Client, parameters: GetCardAtta
  * Create an Attachment to a Card. See https://glitch.com/~trello-attachments-api for code examples. You may need to
  * remix the project in order to view it.
  */
-export async function createCardAttachment(client: Client, parameters: CreateCardAttachment): Promise<Attachment> {
+export async function createCardAttachment(
+  client: Client,
+  parameters: CreateCardAttachment,
+  options?: RequestOptions,
+): Promise<Attachment> {
   const config: SendRequestOptions<Attachment> = {
     url: `/cards/${parameters.id}/attachments`,
     method: 'POST',
@@ -230,13 +253,18 @@ export async function createCardAttachment(client: Client, parameters: CreateCar
       setCover: parameters.setCover,
     },
     schema: AttachmentSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a specific Attachment on a Card. */
-export async function getCardAttachment(client: Client, parameters: GetCardAttachment): Promise<Attachment> {
+export async function getCardAttachment(
+  client: Client,
+  parameters: GetCardAttachment,
+  options?: RequestOptions,
+): Promise<Attachment> {
   const config: SendRequestOptions<Attachment> = {
     url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
     method: 'GET',
@@ -244,23 +272,29 @@ export async function getCardAttachment(client: Client, parameters: GetCardAttac
       fields: parameters.fields,
     },
     schema: AttachmentSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete an Attachment */
-export async function deleteCardAttachment(client: Client, parameters: DeleteCardAttachment): Promise<void> {
+export async function deleteCardAttachment(
+  client: Client,
+  parameters: DeleteCardAttachment,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get the board a card is on */
-export async function getCardBoard(client: Client, parameters: GetCardBoard): Promise<Board> {
+export async function getCardBoard(client: Client, parameters: GetCardBoard, options?: RequestOptions): Promise<Board> {
   const config: SendRequestOptions<Board> = {
     url: `/cards/${parameters.id}/board`,
     method: 'GET',
@@ -268,6 +302,7 @@ export async function getCardBoard(client: Client, parameters: GetCardBoard): Pr
       fields: parameters.fields,
     },
     schema: BoardSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -277,6 +312,7 @@ export async function getCardBoard(client: Client, parameters: GetCardBoard): Pr
 export async function getCardCheckItemStates(
   client: Client,
   parameters: GetCardCheckItemStates,
+  options?: RequestOptions,
 ): Promise<CheckItemState[]> {
   const config: SendRequestOptions<CheckItemState[]> = {
     url: `/cards/${parameters.id}/checkItemStates`,
@@ -285,13 +321,18 @@ export async function getCardCheckItemStates(
       fields: parameters.fields,
     },
     schema: z.array(CheckItemStateSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get the checklists on a card */
-export async function getCardChecklists(client: Client, parameters: GetCardChecklists): Promise<Checklist[]> {
+export async function getCardChecklists(
+  client: Client,
+  parameters: GetCardChecklists,
+  options?: RequestOptions,
+): Promise<Checklist[]> {
   const config: SendRequestOptions<Checklist[]> = {
     url: `/cards/${parameters.id}/checklists`,
     method: 'GET',
@@ -302,13 +343,18 @@ export async function getCardChecklists(client: Client, parameters: GetCardCheck
       fields: parameters.fields,
     },
     schema: z.array(ChecklistSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Create a new checklist on a card */
-export async function createCardChecklist(client: Client, parameters: CreateCardChecklist): Promise<Checklist> {
+export async function createCardChecklist(
+  client: Client,
+  parameters: CreateCardChecklist,
+  options?: RequestOptions,
+): Promise<Checklist> {
   const config: SendRequestOptions<Checklist> = {
     url: `/cards/${parameters.id}/checklists`,
     method: 'POST',
@@ -318,13 +364,18 @@ export async function createCardChecklist(client: Client, parameters: CreateCard
       pos: parameters.pos,
     },
     schema: ChecklistSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a specific checkItem on a card */
-export async function getCardCheckItem(client: Client, parameters: GetCardCheckItem): Promise<CheckItem> {
+export async function getCardCheckItem(
+  client: Client,
+  parameters: GetCardCheckItem,
+  options?: RequestOptions,
+): Promise<CheckItem> {
   const config: SendRequestOptions<CheckItem> = {
     url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
     method: 'GET',
@@ -332,13 +383,18 @@ export async function getCardCheckItem(client: Client, parameters: GetCardCheckI
       fields: parameters.fields,
     },
     schema: CheckItemSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update an item in a checklist on a card. */
-export async function updateCardCheckItem(client: Client, parameters: UpdateCardCheckItem): Promise<CheckItem> {
+export async function updateCardCheckItem(
+  client: Client,
+  parameters: UpdateCardCheckItem,
+  options?: RequestOptions,
+): Promise<CheckItem> {
   const config: SendRequestOptions<CheckItem> = {
     url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
     method: 'PUT',
@@ -352,23 +408,33 @@ export async function updateCardCheckItem(client: Client, parameters: UpdateCard
       idMember: parameters.idMember,
     },
     schema: CheckItemSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete a checklist item */
-export async function deleteCardCheckItem(client: Client, parameters: DeleteCardCheckItem): Promise<void> {
+export async function deleteCardCheckItem(
+  client: Client,
+  parameters: DeleteCardCheckItem,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/checkItem/${parameters.idCheckItem}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get the list a card is in */
-export async function getCardList(client: Client, parameters: GetCardList): Promise<TrelloList> {
+export async function getCardList(
+  client: Client,
+  parameters: GetCardList,
+  options?: RequestOptions,
+): Promise<TrelloList> {
   const config: SendRequestOptions<TrelloList> = {
     url: `/cards/${parameters.id}/list`,
     method: 'GET',
@@ -376,13 +442,18 @@ export async function getCardList(client: Client, parameters: GetCardList): Prom
       fields: parameters.fields,
     },
     schema: TrelloListSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get the members on a card */
-export async function getCardMembers(client: Client, parameters: GetCardMembers): Promise<Member[]> {
+export async function getCardMembers(
+  client: Client,
+  parameters: GetCardMembers,
+  options?: RequestOptions,
+): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/cards/${parameters.id}/members`,
     method: 'GET',
@@ -390,13 +461,18 @@ export async function getCardMembers(client: Client, parameters: GetCardMembers)
       fields: parameters.fields,
     },
     schema: z.array(MemberSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get the members who have voted on a card */
-export async function getCardMembersVoted(client: Client, parameters: GetCardMembersVoted): Promise<Member[]> {
+export async function getCardMembersVoted(
+  client: Client,
+  parameters: GetCardMembersVoted,
+  options?: RequestOptions,
+): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/cards/${parameters.id}/membersVoted`,
     method: 'GET',
@@ -404,37 +480,48 @@ export async function getCardMembersVoted(client: Client, parameters: GetCardMem
       fields: parameters.fields,
     },
     schema: z.array(MemberSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Vote on the card for a given member. */
-export async function voteOnCard(client: Client, parameters: VoteOnCard): Promise<void> {
+export async function voteOnCard(client: Client, parameters: VoteOnCard, options?: RequestOptions): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/membersVoted`,
     method: 'POST',
     searchParams: {
       value: parameters.value,
     },
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get any shared pluginData on a card. */
-export async function getCardPluginData(client: Client, parameters: GetCardPluginData): Promise<PluginData[]> {
+export async function getCardPluginData(
+  client: Client,
+  parameters: GetCardPluginData,
+  options?: RequestOptions,
+): Promise<PluginData[]> {
   const config: SendRequestOptions<PluginData[]> = {
     url: `/cards/${parameters.id}/pluginData`,
     method: 'GET',
     schema: z.array(PluginDataSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get the stickers on a card */
-export async function getCardStickers(client: Client, parameters: GetCardStickers): Promise<CardSticker[]> {
+export async function getCardStickers(
+  client: Client,
+  parameters: GetCardStickers,
+  options?: RequestOptions,
+): Promise<CardSticker[]> {
   const config: SendRequestOptions<CardSticker[]> = {
     url: `/cards/${parameters.id}/stickers`,
     method: 'GET',
@@ -442,13 +529,18 @@ export async function getCardStickers(client: Client, parameters: GetCardSticker
       fields: parameters.fields,
     },
     schema: z.array(CardStickerSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Add a sticker to a card */
-export async function createCardSticker(client: Client, parameters: CreateCardSticker): Promise<CardSticker> {
+export async function createCardSticker(
+  client: Client,
+  parameters: CreateCardSticker,
+  options?: RequestOptions,
+): Promise<CardSticker> {
   const config: SendRequestOptions<CardSticker> = {
     url: `/cards/${parameters.id}/stickers`,
     method: 'POST',
@@ -460,13 +552,18 @@ export async function createCardSticker(client: Client, parameters: CreateCardSt
       rotate: parameters.rotate,
     },
     schema: CardStickerSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Get a specific sticker on a card */
-export async function getCardSticker(client: Client, parameters: GetCardSticker): Promise<CardSticker> {
+export async function getCardSticker(
+  client: Client,
+  parameters: GetCardSticker,
+  options?: RequestOptions,
+): Promise<CardSticker> {
   const config: SendRequestOptions<CardSticker> = {
     url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
     method: 'GET',
@@ -474,13 +571,18 @@ export async function getCardSticker(client: Client, parameters: GetCardSticker)
       fields: parameters.fields,
     },
     schema: CardStickerSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update a sticker on a card */
-export async function updateCardSticker(client: Client, parameters: UpdateCardSticker): Promise<CardSticker> {
+export async function updateCardSticker(
+  client: Client,
+  parameters: UpdateCardSticker,
+  options?: RequestOptions,
+): Promise<CardSticker> {
   const config: SendRequestOptions<CardSticker> = {
     url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
     method: 'PUT',
@@ -491,23 +593,33 @@ export async function updateCardSticker(client: Client, parameters: UpdateCardSt
       rotate: parameters.rotate,
     },
     schema: CardStickerSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Remove a sticker from the card */
-export async function deleteCardSticker(client: Client, parameters: DeleteCardSticker): Promise<void> {
+export async function deleteCardSticker(
+  client: Client,
+  parameters: DeleteCardSticker,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/stickers/${parameters.idSticker}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update an existing comment */
-export async function updateCardComment(client: Client, parameters: UpdateCardComment): Promise<Action> {
+export async function updateCardComment(
+  client: Client,
+  parameters: UpdateCardComment,
+  options?: RequestOptions,
+): Promise<Action> {
   const config: SendRequestOptions<Action> = {
     url: `/cards/${parameters.id}/actions/${parameters.idAction}/comments`,
     method: 'PUT',
@@ -515,16 +627,22 @@ export async function updateCardComment(client: Client, parameters: UpdateCardCo
       text: parameters.text,
     },
     schema: ActionSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete a comment */
-export async function deleteCardComment(client: Client, parameters: DeleteCardComment): Promise<void> {
+export async function deleteCardComment(
+  client: Client,
+  parameters: DeleteCardComment,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/actions/${parameters.idAction}/comments`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -535,11 +653,16 @@ export async function deleteCardComment(client: Client, parameters: DeleteCardCo
  * check out the [Getting Started With Custom
  * Fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/getting-started-with-custom-fields/)
  */
-export async function updateCardCustomFieldItem(client: Client, parameters: UpdateCardCustomFieldItem): Promise<void> {
+export async function updateCardCustomFieldItem(
+  client: Client,
+  parameters: UpdateCardCustomFieldItem,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.idCard}/customField/${parameters.idCustomField}/item`,
     method: 'PUT',
     body: parameters.body,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -550,13 +673,18 @@ export async function updateCardCustomFieldItem(client: Client, parameters: Upda
  * fields check out the [Getting Started With Custom
  * Fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/getting-started-with-custom-fields/)
  */
-export async function updateCardCustomFields(client: Client, parameters: UpdateCardCustomFields): Promise<void> {
+export async function updateCardCustomFields(
+  client: Client,
+  parameters: UpdateCardCustomFields,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.idCard}/customFields`,
     method: 'PUT',
     body: {
       customFieldItems: parameters.customFieldItems,
     },
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -566,18 +694,24 @@ export async function updateCardCustomFields(client: Client, parameters: UpdateC
 export async function getCardCustomFieldItems(
   client: Client,
   parameters: GetCardCustomFieldItems,
+  options?: RequestOptions,
 ): Promise<CustomFieldItems[]> {
   const config: SendRequestOptions<CustomFieldItems[]> = {
     url: `/cards/${parameters.id}/customFieldItems`,
     method: 'GET',
     schema: z.array(CustomFieldItemsSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Add a new comment to a card */
-export async function createCardComment(client: Client, parameters: CreateCardComment): Promise<Action> {
+export async function createCardComment(
+  client: Client,
+  parameters: CreateCardComment,
+  options?: RequestOptions,
+): Promise<Action> {
   const config: SendRequestOptions<Action> = {
     url: `/cards/${parameters.id}/actions/comments`,
     method: 'POST',
@@ -585,26 +719,32 @@ export async function createCardComment(client: Client, parameters: CreateCardCo
       text: parameters.text,
     },
     schema: ActionSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Add a label to a card */
-export async function addCardLabel(client: Client, parameters: AddCardLabel): Promise<void> {
+export async function addCardLabel(client: Client, parameters: AddCardLabel, options?: RequestOptions): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/idLabels`,
     method: 'POST',
     searchParams: {
       value: parameters.value,
     },
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Add a member to a card */
-export async function addCardMember(client: Client, parameters: AddCardMember): Promise<Member[]> {
+export async function addCardMember(
+  client: Client,
+  parameters: AddCardMember,
+  options?: RequestOptions,
+): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/cards/${parameters.id}/idMembers`,
     method: 'POST',
@@ -612,13 +752,18 @@ export async function addCardMember(client: Client, parameters: AddCardMember): 
       value: parameters.value,
     },
     schema: z.array(MemberSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Create a new label for the board and add it to the given card. */
-export async function createCardLabel(client: Client, parameters: CreateCardLabel): Promise<Label> {
+export async function createCardLabel(
+  client: Client,
+  parameters: CreateCardLabel,
+  options?: RequestOptions,
+): Promise<Label> {
   const config: SendRequestOptions<Label> = {
     url: `/cards/${parameters.id}/labels`,
     method: 'POST',
@@ -627,53 +772,78 @@ export async function createCardLabel(client: Client, parameters: CreateCardLabe
       name: parameters.name,
     },
     schema: LabelSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Mark notifications about this card as read */
-export async function markCardNotificationsRead(client: Client, parameters: MarkCardNotificationsRead): Promise<void> {
+export async function markCardNotificationsRead(
+  client: Client,
+  parameters: MarkCardNotificationsRead,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/markAssociatedNotificationsRead`,
     method: 'POST',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Remove a label from a card */
-export async function removeCardLabel(client: Client, parameters: RemoveCardLabel): Promise<void> {
+export async function removeCardLabel(
+  client: Client,
+  parameters: RemoveCardLabel,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/idLabels/${parameters.idLabel}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Remove a member from a card */
-export async function removeCardMember(client: Client, parameters: RemoveCardMember): Promise<void> {
+export async function removeCardMember(
+  client: Client,
+  parameters: RemoveCardMember,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/idMembers/${parameters.idMember}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Remove a member's vote from a card */
-export async function removeCardMemberVote(client: Client, parameters: RemoveCardMemberVote): Promise<void> {
+export async function removeCardMemberVote(
+  client: Client,
+  parameters: RemoveCardMemberVote,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/membersVoted/${parameters.idMember}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update an item in a checklist on a card. */
-export async function updateCardChecklistItem(client: Client, parameters: UpdateCardChecklistItem): Promise<CheckItem> {
+export async function updateCardChecklistItem(
+  client: Client,
+  parameters: UpdateCardChecklistItem,
+  options?: RequestOptions,
+): Promise<CheckItem> {
   const config: SendRequestOptions<CheckItem> = {
     url: `/cards/${parameters.idCard}/checklist/${parameters.idChecklist}/checkItem/${parameters.idCheckItem}`,
     method: 'PUT',
@@ -681,16 +851,22 @@ export async function updateCardChecklistItem(client: Client, parameters: Update
       pos: parameters.pos,
     },
     schema: CheckItemSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete a checklist from a card */
-export async function removeCardChecklist(client: Client, parameters: RemoveCardChecklist): Promise<void> {
+export async function removeCardChecklist(
+  client: Client,
+  parameters: RemoveCardChecklist,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/cards/${parameters.id}/checklists/${parameters.idChecklist}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);

@@ -33,11 +33,15 @@ import type { DeleteOrganizationAssociatedDomain } from '#/parameters/deleteOrga
 import type { DeleteOrganizationInviteRestriction } from '#/parameters/deleteOrganizationInviteRestriction';
 import type { DeleteOrganizationTag } from '#/parameters/deleteOrganizationTag';
 import type { GetOrganizationNewBillableGuests } from '#/parameters/getOrganizationNewBillableGuests';
-import type { Client, SendRequestOptions } from '#/core';
+import type { Client, RequestOptions, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
 /** Create a new Workspace */
-export async function createOrganization(client: Client, parameters: CreateOrganization): Promise<Organization> {
+export async function createOrganization(
+  client: Client,
+  parameters: CreateOrganization,
+  options?: RequestOptions,
+): Promise<Organization> {
   const config: SendRequestOptions<Organization> = {
     url: '/organizations',
     method: 'POST',
@@ -48,23 +52,33 @@ export async function createOrganization(client: Client, parameters: CreateOrgan
       website: parameters.website,
     },
     schema: OrganizationSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
-export async function getOrganization(client: Client, parameters: GetOrganization): Promise<Organization> {
+export async function getOrganization(
+  client: Client,
+  parameters: GetOrganization,
+  options?: RequestOptions,
+): Promise<Organization> {
   const config: SendRequestOptions<Organization> = {
     url: `/organizations/${parameters.id}`,
     method: 'GET',
     schema: OrganizationSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Update an organization */
-export async function updateOrganization(client: Client, parameters: UpdateOrganization): Promise<Organization> {
+export async function updateOrganization(
+  client: Client,
+  parameters: UpdateOrganization,
+  options?: RequestOptions,
+): Promise<Organization> {
   const config: SendRequestOptions<Organization> = {
     url: `/organizations/${parameters.id}`,
     method: 'PUT',
@@ -83,16 +97,22 @@ export async function updateOrganization(client: Client, parameters: UpdateOrgan
       'prefs/permissionLevel': parameters['prefs/permissionLevel'],
     },
     schema: OrganizationSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete an Organization */
-export async function deleteOrganization(client: Client, parameters: DeleteOrganization): Promise<void> {
+export async function deleteOrganization(
+  client: Client,
+  parameters: DeleteOrganization,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -101,18 +121,24 @@ export async function deleteOrganization(client: Client, parameters: DeleteOrgan
 export async function getOrganizationField<T = unknown>(
   client: Client,
   parameters: GetOrganizationField,
+  options?: RequestOptions,
 ): Promise<FieldValue<T>> {
   const config: SendRequestOptions<FieldValue<T>> = {
     url: `/organizations/${parameters.id}/${parameters.field}`,
     method: 'GET',
     schema: FieldValueSchema as z.ZodType<FieldValue<T>>,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** List the actions on a Workspace */
-export async function getOrganizationActions(client: Client, parameters: GetOrganizationActions): Promise<Action[]> {
+export async function getOrganizationActions(
+  client: Client,
+  parameters: GetOrganizationActions,
+  options?: RequestOptions,
+): Promise<Action[]> {
   const config: SendRequestOptions<Action[]> = {
     url: `/organizations/${parameters.id}/actions`,
     method: 'GET',
@@ -132,13 +158,18 @@ export async function getOrganizationActions(client: Client, parameters: GetOrga
       since: parameters.since,
     },
     schema: z.array(ActionSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** List the boards in a Workspace */
-export async function getOrganizationBoards(client: Client, parameters: GetOrganizationBoards): Promise<Board[]> {
+export async function getOrganizationBoards(
+  client: Client,
+  parameters: GetOrganizationBoards,
+  options?: RequestOptions,
+): Promise<Board[]> {
   const config: SendRequestOptions<Board[]> = {
     url: `/organizations/${parameters.id}/boards`,
     method: 'GET',
@@ -147,24 +178,34 @@ export async function getOrganizationBoards(client: Client, parameters: GetOrgan
       fields: parameters.fields,
     },
     schema: z.array(BoardSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Retrieve the exports that exist for the given organization */
-export async function getOrganizationExports(client: Client, parameters: GetOrganizationExports): Promise<Export[]> {
+export async function getOrganizationExports(
+  client: Client,
+  parameters: GetOrganizationExports,
+  options?: RequestOptions,
+): Promise<Export[]> {
   const config: SendRequestOptions<Export[]> = {
     url: `/organizations/${parameters.id}/exports`,
     method: 'GET',
     schema: z.array(ExportSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Kick off CSV export for an organization */
-export async function createOrganizationExport(client: Client, parameters: CreateOrganizationExport): Promise<Export> {
+export async function createOrganizationExport(
+  client: Client,
+  parameters: CreateOrganizationExport,
+  options?: RequestOptions,
+): Promise<Export> {
   const config: SendRequestOptions<Export> = {
     url: `/organizations/${parameters.id}/exports`,
     method: 'POST',
@@ -172,23 +213,33 @@ export async function createOrganizationExport(client: Client, parameters: Creat
       attachments: parameters.attachments,
     },
     schema: ExportSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** List the members in a Workspace */
-export async function getOrganizationMembers(client: Client, parameters: GetOrganizationMembers): Promise<Member[]> {
+export async function getOrganizationMembers(
+  client: Client,
+  parameters: GetOrganizationMembers,
+  options?: RequestOptions,
+): Promise<Member[]> {
   const config: SendRequestOptions<Member[]> = {
     url: `/organizations/${parameters.id}/members`,
     method: 'GET',
     schema: z.array(MemberSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
-export async function updateOrganizationMembers(client: Client, parameters: UpdateOrganizationMembers): Promise<void> {
+export async function updateOrganizationMembers(
+  client: Client,
+  parameters: UpdateOrganizationMembers,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/members`,
     method: 'PUT',
@@ -197,6 +248,7 @@ export async function updateOrganizationMembers(client: Client, parameters: Upda
       fullName: parameters.fullName,
       type: parameters.type,
     },
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -206,6 +258,7 @@ export async function updateOrganizationMembers(client: Client, parameters: Upda
 export async function getOrganizationMemberships(
   client: Client,
   parameters: GetOrganizationMemberships,
+  options?: RequestOptions,
 ): Promise<Memberships[]> {
   const config: SendRequestOptions<Memberships[]> = {
     url: `/organizations/${parameters.id}/memberships`,
@@ -215,6 +268,7 @@ export async function getOrganizationMemberships(
       member: parameters.member,
     },
     schema: z.array(MembershipsSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -224,6 +278,7 @@ export async function getOrganizationMemberships(
 export async function getOrganizationMembership(
   client: Client,
   parameters: GetOrganizationMembership,
+  options?: RequestOptions,
 ): Promise<Memberships> {
   const config: SendRequestOptions<Memberships> = {
     url: `/organizations/${parameters.id}/memberships/${parameters.idMembership}`,
@@ -232,6 +287,7 @@ export async function getOrganizationMembership(
       member: parameters.member,
     },
     schema: MembershipsSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -241,40 +297,56 @@ export async function getOrganizationMembership(
 export async function getOrganizationPluginData(
   client: Client,
   parameters: GetOrganizationPluginData,
+  options?: RequestOptions,
 ): Promise<PluginData[]> {
   const config: SendRequestOptions<PluginData[]> = {
     url: `/organizations/${parameters.id}/pluginData`,
     method: 'GET',
     schema: z.array(PluginDataSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** List the organization's collections */
-export async function getOrganizationTags(client: Client, parameters: GetOrganizationTags): Promise<Tag[]> {
+export async function getOrganizationTags(
+  client: Client,
+  parameters: GetOrganizationTags,
+  options?: RequestOptions,
+): Promise<Tag[]> {
   const config: SendRequestOptions<Tag[]> = {
     url: `/organizations/${parameters.id}/tags`,
     method: 'GET',
     schema: z.array(TagSchema),
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Create a Tag in an Organization */
-export async function createOrganizationTag(client: Client, parameters: CreateOrganizationTag): Promise<Tag> {
+export async function createOrganizationTag(
+  client: Client,
+  parameters: CreateOrganizationTag,
+  options?: RequestOptions,
+): Promise<Tag> {
   const config: SendRequestOptions<Tag> = {
     url: `/organizations/${parameters.id}/tags`,
     method: 'POST',
     schema: TagSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Add a member to a Workspace or update their member type. */
-export async function updateOrganizationMember(client: Client, parameters: UpdateOrganizationMember): Promise<Member> {
+export async function updateOrganizationMember(
+  client: Client,
+  parameters: UpdateOrganizationMember,
+  options?: RequestOptions,
+): Promise<Member> {
   const config: SendRequestOptions<Member> = {
     url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
     method: 'PUT',
@@ -282,16 +354,22 @@ export async function updateOrganizationMember(client: Client, parameters: Updat
       type: parameters.type,
     },
     schema: MemberSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Remove a member from a Workspace */
-export async function removeOrganizationMember(client: Client, parameters: RemoveOrganizationMember): Promise<void> {
+export async function removeOrganizationMember(
+  client: Client,
+  parameters: RemoveOrganizationMember,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/members/${parameters.idMember}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -301,6 +379,7 @@ export async function removeOrganizationMember(client: Client, parameters: Remov
 export async function deactivateOrganizationMember(
   client: Client,
   parameters: DeactivateOrganizationMember,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/members/${parameters.idMember}/deactivated`,
@@ -308,6 +387,7 @@ export async function deactivateOrganizationMember(
     searchParams: {
       value: parameters.value,
     },
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -317,6 +397,7 @@ export async function deactivateOrganizationMember(
 export async function uploadOrganizationLogo(
   client: Client,
   parameters: UploadOrganizationLogo,
+  options?: RequestOptions,
 ): Promise<Organization> {
   const config: SendRequestOptions<Organization> = {
     url: `/organizations/${parameters.id}/logo`,
@@ -325,16 +406,22 @@ export async function uploadOrganizationLogo(
       file: parameters.file,
     },
     schema: OrganizationSchema,
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete a the logo from a Workspace */
-export async function deleteOrganizationLogo(client: Client, parameters: DeleteOrganizationLogo): Promise<void> {
+export async function deleteOrganizationLogo(
+  client: Client,
+  parameters: DeleteOrganizationLogo,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/logo`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -344,10 +431,12 @@ export async function deleteOrganizationLogo(client: Client, parameters: DeleteO
 export async function removeOrganizationMemberFromAllBoards(
   client: Client,
   parameters: RemoveOrganizationMemberFromAllBoards,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/members/${parameters.idMember}/all`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -357,10 +446,12 @@ export async function removeOrganizationMemberFromAllBoards(
 export async function deleteOrganizationAssociatedDomain(
   client: Client,
   parameters: DeleteOrganizationAssociatedDomain,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/prefs/associatedDomain`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -370,20 +461,27 @@ export async function deleteOrganizationAssociatedDomain(
 export async function deleteOrganizationInviteRestriction(
   client: Client,
   parameters: DeleteOrganizationInviteRestriction,
+  options?: RequestOptions,
 ): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/prefs/orgInviteRestrict`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
 }
 
 /** Delete an organization's tag */
-export async function deleteOrganizationTag(client: Client, parameters: DeleteOrganizationTag): Promise<void> {
+export async function deleteOrganizationTag(
+  client: Client,
+  parameters: DeleteOrganizationTag,
+  options?: RequestOptions,
+): Promise<void> {
   const config: SendRequestOptions<void> = {
     url: `/organizations/${parameters.id}/tags/${parameters.idTag}`,
     method: 'DELETE',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);
@@ -393,10 +491,12 @@ export async function deleteOrganizationTag(client: Client, parameters: DeleteOr
 export async function getOrganizationNewBillableGuests(
   client: Client,
   parameters: GetOrganizationNewBillableGuests,
+  options?: RequestOptions,
 ): Promise<unknown> {
   const config: SendRequestOptions<unknown> = {
     url: `/organizations/${parameters.id}/newBillableGuests/${parameters.idBoard}`,
     method: 'GET',
+    signal: options?.signal,
   };
 
   return await client.sendRequest(config);

@@ -59,6 +59,17 @@ Rate-limit-ответы (`HTTP 429 Too Many Requests`) автоматическ�
 
 Оборачивать вызовы в retry-цикл не нужно. Если 429 случаются часто — снижайте частоту запросов или используйте [batch-эндпоинт](/ru/recipes/boards#batch).
 
+## Отмена
+
+Каждый метод эндпоинта принимает необязательный последний аргумент с `AbortSignal`:
+
+```ts
+const controller = new AbortController();
+const board = await trello.boards.getBoard({ id }, { signal: controller.signal });
+```
+
+Сигнал уходит прямо в `fetch`, поэтому промис отклоняется тем, что несёт сигнал: `AbortError` по умолчанию или причиной, переданной в `controller.abort(reason)`. Незавершённая пауза бэкоффа после 429 тоже обрывается — отменённый запрос не досиживает остаток ожидания. Если нужен только дедлайн, подойдёт `AbortSignal.timeout(5_000)`.
+
 ## Паттерн: типизированный handler
 
 ```ts

@@ -1,5 +1,7 @@
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { createTrelloClient } from '../../src/createTrelloClient';
+import { createClient } from '../../src/core/createClient';
+import { getBoard } from '../../src/api/boards';
 
 function mockFetch(status: number, body: unknown, contentType = 'application/json') {
   const text = typeof body === 'string' ? body : JSON.stringify(body);
@@ -148,5 +150,46 @@ describe('actions list endpoints — before/since (issue #25)', () => {
     const url = lastUrl();
     expect(url).toContain(`since=${encodeURIComponent(SINCE)}`);
     expect(url).toContain(`before=${encodeURIComponent(BEFORE)}`);
+  });
+});
+
+// ─── request options: signal ────────────────────────────────────────────────
+
+describe('request options — signal', () => {
+  afterEach(() => vi.unstubAllGlobals());
+
+  function lastInit(): RequestInit {
+    return ((fetch as ReturnType<typeof vi.fn>).mock.calls[0] as [string, RequestInit])[1];
+  }
+
+  it('a namespace method forwards the signal to fetch', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, BOARD_DATA));
+    const controller = new AbortController();
+    const client = createTrelloClient(BASE_CONFIG);
+    await client.boards.getBoard({ id: 'b1' }, { signal: controller.signal });
+    expect(lastInit().signal).toBe(controller.signal);
+  });
+
+  it('a flat namespace function forwards the signal to fetch', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, BOARD_DATA));
+    const controller = new AbortController();
+    const client = createClient(BASE_CONFIG);
+    await getBoard(client, { id: 'b1' }, { signal: controller.signal });
+    expect(lastInit().signal).toBe(controller.signal);
+  });
+
+  it('a method called without options sends no signal', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, BOARD_DATA));
+    const client = createTrelloClient(BASE_CONFIG);
+    await client.boards.getBoard({ id: 'b1' });
+    expect(lastInit().signal).toBeUndefined();
+  });
+
+  it('a method with optional parameters still accepts options', async () => {
+    vi.stubGlobal('fetch', mockFetch(200, {}));
+    const controller = new AbortController();
+    const client = createTrelloClient(BASE_CONFIG);
+    await client.emoji.getEmoji(undefined, { signal: controller.signal });
+    expect(lastInit().signal).toBe(controller.signal);
   });
 });

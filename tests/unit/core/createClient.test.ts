@@ -259,6 +259,64 @@ describe('createClient', () => {
     await expect(client.sendRequest({ url: '/boards/bad' })).rejects.toThrow('Request failed: 500 500');
   });
 
+  // ─── Cancellation ────────────────────────────────────────────────────────
+
+  it('forwards the abort signal to fetch', async () => {
+    const controller = new AbortController();
+    const client = createClient(BASE_CONFIG);
+    await client.sendRequest({ url: '/boards/123', signal: controller.signal });
+    const [, init] = (fetch as ReturnType<typeof vi.fn>).mock.calls[0] as [string, RequestInit];
+    expect(init.signal).toBe(controller.signal);
+  });
+
+  it('sends signal: undefined when no signal is given', async () => {
+    const client = createClient(BASE_CONFIG);
+    await client.sendRequest({ url: '/boards/123' });
+    const [, init] = (fetch as ReturnType<typeof vi.fn>).mock.calls[0] as [string, RequestInit];
+    expect(init.signal).toBeUndefined();
+  });
+
+  it('cuts the 429 backoff short instead of waiting it out', async () => {
+    const rateLimited = {
+      ok: false, status: 429, statusText: '429',
+      headers: { get: () => 'application/json' },
+      json: () => Promise.resolve({}),
+      text: () => Promise.resolve(''),
+    };
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(rateLimited));
+    vi.useFakeTimers();
+    const controller = new AbortController();
+    const client = createClient(BASE_CONFIG);
+    const promise = client.sendRequest({ url: '/boards/123', signal: controller.signal });
+    const assertion = expect(promise).rejects.toThrow('caller gave up');
+
+    await vi.advanceTimersByTimeAsync(100);
+    expect(fetch).toHaveBeenCalledTimes(1);
+
+    controller.abort(new Error('caller gave up'));
+    await assertion;
+
+    await vi.runAllTimersAsync();
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
+  it('does not enter the backoff when the signal is already aborted', async () => {
+    const rateLimited = {
+      ok: false, status: 429, statusText: '429',
+      headers: { get: () => 'application/json' },
+      json: () => Promise.resolve({}),
+      text: () => Promise.resolve(''),
+    };
+    vi.stubGlobal('fetch', vi.fn().mockResolvedValue(rateLimited));
+    const controller = new AbortController();
+    const client = createClient(BASE_CONFIG);
+    const promise = client.sendRequest({ url: '/boards/123', signal: controller.signal });
+    controller.abort(new Error('caller gave up'));
+
+    await expect(promise).rejects.toThrow('caller gave up');
+    expect(fetch).toHaveBeenCalledTimes(1);
+  });
+
   // ─── Retry logic ─────────────────────────────────────────────────────────
 
   it('retries on 429 and succeeds on next attempt', async () => {

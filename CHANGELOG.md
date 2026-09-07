@@ -10,6 +10,16 @@
 
 - **`Organization.eligibleForTrial`.** Trello stopped sending it, and `trial.eligible` replaces it. The field stays optional so reading it still compiles, and goes at the next major version.
 
+### Added
+
+- **Request cancellation.** Every endpoint method takes an optional last argument, `{ signal }`, typed by the new `RequestOptions` exported from `trello.js/core`. The signal reaches `fetch` unchanged, and it also cuts short a 429 backoff still counting down instead of letting it run its full 2/4/8 seconds. The argument is optional everywhere, so existing calls are unaffected; `batch.run` is the one exception, since its requests share a single HTTP call.
+
+  ```ts
+  const board = await trello.boards.getBoard({ id }, { signal: AbortSignal.timeout(5_000) });
+  ```
+
+- `SendRequestOptions` gained `signal`, so a custom `Client` implementation receives it too.
+
 ## v2.2.0 (2026-08-20)
 
 **Read this one if you `switch` exhaustively over a value this client returns.** The enum-shaped types are now open, `Color` and `CardAging` among them, so a `switch` with no `default` branch stops type-checking. That ships in a minor release on purpose: the values belong to Trello, not to this client. The `_light` / `_dark` label shades reached the live API long before the spec named them and broke `getBoardCards` for every consumer until v2.1.6 added the 30 values by hand, so a closed set was never a promise a wrapper could keep.

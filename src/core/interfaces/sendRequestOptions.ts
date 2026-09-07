@@ -7,4 +7,5 @@ export interface SendRequestOptions<T = unknown> {
   body?: unknown;
   searchParams?: Record<string, unknown>;
   schema?: ZodType<T>;
+  signal?: AbortSignal;
 }

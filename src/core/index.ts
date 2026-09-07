@@ -8,4 +8,4 @@ export { createClient } from './createClient';
 
 export { openEnum } from './openEnum';
 
-export type { Client, ClientConfig, SendRequestOptions } from './interfaces';
+export type { Client, ClientConfig, RequestOptions, SendRequestOptions } from './interfaces';

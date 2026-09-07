@@ -1,4 +1,4 @@
-import { type ClientConfig, type Client, createClient } from '#/core';
+import { type ClientConfig, type Client, type RequestOptions, createClient } from '#/core';
 import * as actions from '#/api/actions';
 import { createBatchRunner, type BatchClient } from '#/batchRunner';
 import * as boards from '#/api/boards';
@@ -329,9 +329,7 @@ import type {
 export interface BatchNamespace {
   run<const T extends readonly Promise<unknown>[]>(
     builder: (b: BatchClient) => T,
-  ): Promise<{
-    -readonly [K in keyof T]: Awaited<T[K]>;
-  }>;
+  ): Promise<{ -readonly [K in keyof T]: Awaited<T[K]> }>;
 }
 
 export function createTrelloClient(clientConfig: ClientConfig | Client) {
@@ -339,483 +337,667 @@ export function createTrelloClient(clientConfig: ClientConfig | Client) {
 
   return {
     actions: {
-      getAction: (parameters: GetAction): Promise<Action> => actions.getAction(client, parameters),
-      updateAction: (parameters: UpdateAction): Promise<Action> => actions.updateAction(client, parameters),
-      deleteAction: (parameters: DeleteAction): Promise<void> => actions.deleteAction(client, parameters),
-      getActionField: <T = unknown>(parameters: GetActionField): Promise<FieldValue<T>> =>
-        actions.getActionField<T>(client, parameters),
-      getActionBoard: (parameters: GetActionBoard): Promise<Board> => actions.getActionBoard(client, parameters),
-      getActionCard: (parameters: GetActionCard): Promise<Card> => actions.getActionCard(client, parameters),
-      getActionList: (parameters: GetActionList): Promise<TrelloList> => actions.getActionList(client, parameters),
-      getActionMember: (parameters: GetActionMember): Promise<Member> => actions.getActionMember(client, parameters),
-      getActionCreator: (parameters: GetActionCreator): Promise<Member> => actions.getActionCreator(client, parameters),
-      getActionOrganization: (parameters: GetActionOrganization): Promise<Organization> =>
-        actions.getActionOrganization(client, parameters),
-      updateActionText: (parameters: UpdateActionText): Promise<Action> => actions.updateActionText(client, parameters),
-      getActionReactions: (parameters: GetActionReactions): Promise<Reaction[]> =>
-        actions.getActionReactions(client, parameters),
-      createActionReaction: (parameters: CreateActionReaction): Promise<Reaction> =>
-        actions.createActionReaction(client, parameters),
-      getActionReaction: (parameters: GetActionReaction): Promise<Reaction> =>
-        actions.getActionReaction(client, parameters),
-      deleteActionReaction: (parameters: DeleteActionReaction): Promise<void> =>
-        actions.deleteActionReaction(client, parameters),
-      getActionReactionSummary: (parameters: GetActionReactionSummary): Promise<ReactionSummary[]> =>
-        actions.getActionReactionSummary(client, parameters),
+      getAction: (parameters: GetAction, options?: RequestOptions): Promise<Action> =>
+        actions.getAction(client, parameters, options),
+      updateAction: (parameters: UpdateAction, options?: RequestOptions): Promise<Action> =>
+        actions.updateAction(client, parameters, options),
+      deleteAction: (parameters: DeleteAction, options?: RequestOptions): Promise<void> =>
+        actions.deleteAction(client, parameters, options),
+      getActionField: <T = unknown>(parameters: GetActionField, options?: RequestOptions): Promise<FieldValue<T>> =>
+        actions.getActionField<T>(client, parameters, options),
+      getActionBoard: (parameters: GetActionBoard, options?: RequestOptions): Promise<Board> =>
+        actions.getActionBoard(client, parameters, options),
+      getActionCard: (parameters: GetActionCard, options?: RequestOptions): Promise<Card> =>
+        actions.getActionCard(client, parameters, options),
+      getActionList: (parameters: GetActionList, options?: RequestOptions): Promise<TrelloList> =>
+        actions.getActionList(client, parameters, options),
+      getActionMember: (parameters: GetActionMember, options?: RequestOptions): Promise<Member> =>
+        actions.getActionMember(client, parameters, options),
+      getActionCreator: (parameters: GetActionCreator, options?: RequestOptions): Promise<Member> =>
+        actions.getActionCreator(client, parameters, options),
+      getActionOrganization: (parameters: GetActionOrganization, options?: RequestOptions): Promise<Organization> =>
+        actions.getActionOrganization(client, parameters, options),
+      updateActionText: (parameters: UpdateActionText, options?: RequestOptions): Promise<Action> =>
+        actions.updateActionText(client, parameters, options),
+      getActionReactions: (parameters: GetActionReactions, options?: RequestOptions): Promise<Reaction[]> =>
+        actions.getActionReactions(client, parameters, options),
+      createActionReaction: (parameters: CreateActionReaction, options?: RequestOptions): Promise<Reaction> =>
+        actions.createActionReaction(client, parameters, options),
+      getActionReaction: (parameters: GetActionReaction, options?: RequestOptions): Promise<Reaction> =>
+        actions.getActionReaction(client, parameters, options),
+      deleteActionReaction: (parameters: DeleteActionReaction, options?: RequestOptions): Promise<void> =>
+        actions.deleteActionReaction(client, parameters, options),
+      getActionReactionSummary: (
+        parameters: GetActionReactionSummary,
+        options?: RequestOptions,
+      ): Promise<ReactionSummary[]> => actions.getActionReactionSummary(client, parameters, options),
     },
     batch: { run: createBatchRunner(client) } satisfies BatchNamespace,
     boards: {
-      getBoardMemberships: (parameters: GetBoardMemberships): Promise<Memberships[]> =>
-        boards.getBoardMemberships(client, parameters),
-      getBoard: (parameters: GetBoard): Promise<Board> => boards.getBoard(client, parameters),
-      updateBoard: (parameters: UpdateBoard): Promise<Board> => boards.updateBoard(client, parameters),
-      deleteBoard: (parameters: DeleteBoard): Promise<void> => boards.deleteBoard(client, parameters),
-      getBoardField: <T = unknown>(parameters: GetBoardField): Promise<FieldValue<T>> =>
-        boards.getBoardField<T>(client, parameters),
-      getBoardActions: (parameters: GetBoardActions): Promise<Action[]> => boards.getBoardActions(client, parameters),
-      getBoardStars: (parameters: GetBoardStars): Promise<BoardStars[]> => boards.getBoardStars(client, parameters),
-      getBoardChecklists: (parameters: GetBoardChecklists): Promise<Checklist[]> =>
-        boards.getBoardChecklists(client, parameters),
-      getBoardCards: (parameters: GetBoardCards): Promise<Card[]> => boards.getBoardCards(client, parameters),
-      getBoardCardsByFilter: (parameters: GetBoardCardsByFilter): Promise<Card[]> =>
-        boards.getBoardCardsByFilter(client, parameters),
-      getBoardCustomFields: (parameters: GetBoardCustomFields): Promise<CustomField[]> =>
-        boards.getBoardCustomFields(client, parameters),
-      getBoardLabels: (parameters: GetBoardLabels): Promise<Label[]> => boards.getBoardLabels(client, parameters),
-      createBoardLabel: (parameters: CreateBoardLabel): Promise<Label> => boards.createBoardLabel(client, parameters),
-      getBoardLists: (parameters: GetBoardLists): Promise<TrelloList[]> => boards.getBoardLists(client, parameters),
-      createBoardList: (parameters: CreateBoardList): Promise<TrelloList> => boards.createBoardList(client, parameters),
-      getBoardListsByFilter: (parameters: GetBoardListsByFilter): Promise<TrelloList[]> =>
-        boards.getBoardListsByFilter(client, parameters),
-      getBoardMembers: (parameters: GetBoardMembers): Promise<Member[]> => boards.getBoardMembers(client, parameters),
-      inviteBoardMember: (parameters: InviteBoardMember): Promise<BoardMembersResult> =>
-        boards.inviteBoardMember(client, parameters),
-      updateBoardMember: (parameters: UpdateBoardMember): Promise<BoardMembersResult> =>
-        boards.updateBoardMember(client, parameters),
-      removeBoardMember: (parameters: RemoveBoardMember): Promise<void> => boards.removeBoardMember(client, parameters),
-      updateBoardMembership: (parameters: UpdateBoardMembership): Promise<Memberships> =>
-        boards.updateBoardMembership(client, parameters),
-      updateBoardEmailPosition: (parameters: UpdateBoardEmailPosition): Promise<BoardMyPrefs> =>
-        boards.updateBoardEmailPosition(client, parameters),
-      updateBoardEmailList: (parameters: UpdateBoardEmailList): Promise<BoardMyPrefs> =>
-        boards.updateBoardEmailList(client, parameters),
-      updateBoardShowSidebar: (parameters: UpdateBoardShowSidebar): Promise<BoardMyPrefs> =>
-        boards.updateBoardShowSidebar(client, parameters),
-      updateBoardShowSidebarActivity: (parameters: UpdateBoardShowSidebarActivity): Promise<BoardMyPrefs> =>
-        boards.updateBoardShowSidebarActivity(client, parameters),
-      updateBoardShowSidebarBoardActions: (parameters: UpdateBoardShowSidebarBoardActions): Promise<BoardMyPrefs> =>
-        boards.updateBoardShowSidebarBoardActions(client, parameters),
-      updateBoardShowSidebarMembers: (parameters: UpdateBoardShowSidebarMembers): Promise<BoardMyPrefs> =>
-        boards.updateBoardShowSidebarMembers(client, parameters),
-      createBoard: (parameters: CreateBoard): Promise<Board> => boards.createBoard(client, parameters),
-      generateBoardCalendarKey: (parameters: GenerateBoardCalendarKey): Promise<Board> =>
-        boards.generateBoardCalendarKey(client, parameters),
-      generateBoardEmailKey: (parameters: GenerateBoardEmailKey): Promise<Board> =>
-        boards.generateBoardEmailKey(client, parameters),
-      addBoardTag: (parameters: AddBoardTag): Promise<Tag> => boards.addBoardTag(client, parameters),
-      markBoardAsViewed: (parameters: MarkBoardAsViewed): Promise<Board> =>
-        boards.markBoardAsViewed(client, parameters),
-      getBoardPlugins: (parameters: GetBoardPlugins): Promise<Plugin[]> => boards.getBoardPlugins(client, parameters),
-      enableBoardPlugin: (parameters: EnableBoardPlugin): Promise<Plugin> =>
-        boards.enableBoardPlugin(client, parameters),
-      disableBoardPlugin: (parameters: DisableBoardPlugin): Promise<void> =>
-        boards.disableBoardPlugin(client, parameters),
-      getBoardPowerUps: (parameters: GetBoardPowerUps): Promise<Plugin[]> =>
-        boards.getBoardPowerUps(client, parameters),
-      createBoardExport: (parameters: CreateBoardExport): Promise<Export> =>
-        boards.createBoardExport(client, parameters),
-      getBoardExport: (parameters: GetBoardExport): Promise<Export> => boards.getBoardExport(client, parameters),
-      deleteBoardExport: (parameters: DeleteBoardExport): Promise<void> => boards.deleteBoardExport(client, parameters),
-      downloadBoardExport: (parameters: DownloadBoardExport): Promise<unknown> =>
-        boards.downloadBoardExport(client, parameters),
-      getBoardMostRecentExport: (parameters: GetBoardMostRecentExport): Promise<Export> =>
-        boards.getBoardMostRecentExport(client, parameters),
+      getBoardMemberships: (parameters: GetBoardMemberships, options?: RequestOptions): Promise<Memberships[]> =>
+        boards.getBoardMemberships(client, parameters, options),
+      getBoard: (parameters: GetBoard, options?: RequestOptions): Promise<Board> =>
+        boards.getBoard(client, parameters, options),
+      updateBoard: (parameters: UpdateBoard, options?: RequestOptions): Promise<Board> =>
+        boards.updateBoard(client, parameters, options),
+      deleteBoard: (parameters: DeleteBoard, options?: RequestOptions): Promise<void> =>
+        boards.deleteBoard(client, parameters, options),
+      getBoardField: <T = unknown>(parameters: GetBoardField, options?: RequestOptions): Promise<FieldValue<T>> =>
+        boards.getBoardField<T>(client, parameters, options),
+      getBoardActions: (parameters: GetBoardActions, options?: RequestOptions): Promise<Action[]> =>
+        boards.getBoardActions(client, parameters, options),
+      getBoardStars: (parameters: GetBoardStars, options?: RequestOptions): Promise<BoardStars[]> =>
+        boards.getBoardStars(client, parameters, options),
+      getBoardChecklists: (parameters: GetBoardChecklists, options?: RequestOptions): Promise<Checklist[]> =>
+        boards.getBoardChecklists(client, parameters, options),
+      getBoardCards: (parameters: GetBoardCards, options?: RequestOptions): Promise<Card[]> =>
+        boards.getBoardCards(client, parameters, options),
+      getBoardCardsByFilter: (parameters: GetBoardCardsByFilter, options?: RequestOptions): Promise<Card[]> =>
+        boards.getBoardCardsByFilter(client, parameters, options),
+      getBoardCustomFields: (parameters: GetBoardCustomFields, options?: RequestOptions): Promise<CustomField[]> =>
+        boards.getBoardCustomFields(client, parameters, options),
+      getBoardLabels: (parameters: GetBoardLabels, options?: RequestOptions): Promise<Label[]> =>
+        boards.getBoardLabels(client, parameters, options),
+      createBoardLabel: (parameters: CreateBoardLabel, options?: RequestOptions): Promise<Label> =>
+        boards.createBoardLabel(client, parameters, options),
+      getBoardLists: (parameters: GetBoardLists, options?: RequestOptions): Promise<TrelloList[]> =>
+        boards.getBoardLists(client, parameters, options),
+      createBoardList: (parameters: CreateBoardList, options?: RequestOptions): Promise<TrelloList> =>
+        boards.createBoardList(client, parameters, options),
+      getBoardListsByFilter: (parameters: GetBoardListsByFilter, options?: RequestOptions): Promise<TrelloList[]> =>
+        boards.getBoardListsByFilter(client, parameters, options),
+      getBoardMembers: (parameters: GetBoardMembers, options?: RequestOptions): Promise<Member[]> =>
+        boards.getBoardMembers(client, parameters, options),
+      inviteBoardMember: (parameters: InviteBoardMember, options?: RequestOptions): Promise<BoardMembersResult> =>
+        boards.inviteBoardMember(client, parameters, options),
+      updateBoardMember: (parameters: UpdateBoardMember, options?: RequestOptions): Promise<BoardMembersResult> =>
+        boards.updateBoardMember(client, parameters, options),
+      removeBoardMember: (parameters: RemoveBoardMember, options?: RequestOptions): Promise<void> =>
+        boards.removeBoardMember(client, parameters, options),
+      updateBoardMembership: (parameters: UpdateBoardMembership, options?: RequestOptions): Promise<Memberships> =>
+        boards.updateBoardMembership(client, parameters, options),
+      updateBoardEmailPosition: (
+        parameters: UpdateBoardEmailPosition,
+        options?: RequestOptions,
+      ): Promise<BoardMyPrefs> => boards.updateBoardEmailPosition(client, parameters, options),
+      updateBoardEmailList: (parameters: UpdateBoardEmailList, options?: RequestOptions): Promise<BoardMyPrefs> =>
+        boards.updateBoardEmailList(client, parameters, options),
+      updateBoardShowSidebar: (parameters: UpdateBoardShowSidebar, options?: RequestOptions): Promise<BoardMyPrefs> =>
+        boards.updateBoardShowSidebar(client, parameters, options),
+      updateBoardShowSidebarActivity: (
+        parameters: UpdateBoardShowSidebarActivity,
+        options?: RequestOptions,
+      ): Promise<BoardMyPrefs> => boards.updateBoardShowSidebarActivity(client, parameters, options),
+      updateBoardShowSidebarBoardActions: (
+        parameters: UpdateBoardShowSidebarBoardActions,
+        options?: RequestOptions,
+      ): Promise<BoardMyPrefs> => boards.updateBoardShowSidebarBoardActions(client, parameters, options),
+      updateBoardShowSidebarMembers: (
+        parameters: UpdateBoardShowSidebarMembers,
+        options?: RequestOptions,
+      ): Promise<BoardMyPrefs> => boards.updateBoardShowSidebarMembers(client, parameters, options),
+      createBoard: (parameters: CreateBoard, options?: RequestOptions): Promise<Board> =>
+        boards.createBoard(client, parameters, options),
+      generateBoardCalendarKey: (parameters: GenerateBoardCalendarKey, options?: RequestOptions): Promise<Board> =>
+        boards.generateBoardCalendarKey(client, parameters, options),
+      generateBoardEmailKey: (parameters: GenerateBoardEmailKey, options?: RequestOptions): Promise<Board> =>
+        boards.generateBoardEmailKey(client, parameters, options),
+      addBoardTag: (parameters: AddBoardTag, options?: RequestOptions): Promise<Tag> =>
+        boards.addBoardTag(client, parameters, options),
+      markBoardAsViewed: (parameters: MarkBoardAsViewed, options?: RequestOptions): Promise<Board> =>
+        boards.markBoardAsViewed(client, parameters, options),
+      getBoardPlugins: (parameters: GetBoardPlugins, options?: RequestOptions): Promise<Plugin[]> =>
+        boards.getBoardPlugins(client, parameters, options),
+      enableBoardPlugin: (parameters: EnableBoardPlugin, options?: RequestOptions): Promise<Plugin> =>
+        boards.enableBoardPlugin(client, parameters, options),
+      disableBoardPlugin: (parameters: DisableBoardPlugin, options?: RequestOptions): Promise<void> =>
+        boards.disableBoardPlugin(client, parameters, options),
+      getBoardPowerUps: (parameters: GetBoardPowerUps, options?: RequestOptions): Promise<Plugin[]> =>
+        boards.getBoardPowerUps(client, parameters, options),
+      createBoardExport: (parameters: CreateBoardExport, options?: RequestOptions): Promise<Export> =>
+        boards.createBoardExport(client, parameters, options),
+      getBoardExport: (parameters: GetBoardExport, options?: RequestOptions): Promise<Export> =>
+        boards.getBoardExport(client, parameters, options),
+      deleteBoardExport: (parameters: DeleteBoardExport, options?: RequestOptions): Promise<void> =>
+        boards.deleteBoardExport(client, parameters, options),
+      downloadBoardExport: (parameters: DownloadBoardExport, options?: RequestOptions): Promise<unknown> =>
+        boards.downloadBoardExport(client, parameters, options),
+      getBoardMostRecentExport: (parameters: GetBoardMostRecentExport, options?: RequestOptions): Promise<Export> =>
+        boards.getBoardMostRecentExport(client, parameters, options),
     },
     cards: {
-      createCard: (parameters: CreateCard): Promise<Card> => cards.createCard(client, parameters),
-      getCard: (parameters: GetCard): Promise<Card> => cards.getCard(client, parameters),
-      updateCard: (parameters: UpdateCard): Promise<Card> => cards.updateCard(client, parameters),
-      deleteCard: (parameters: DeleteCard): Promise<void> => cards.deleteCard(client, parameters),
-      getCardField: <T = unknown>(parameters: GetCardField): Promise<FieldValue<T>> =>
-        cards.getCardField<T>(client, parameters),
-      getCardActions: (parameters: GetCardActions): Promise<Action[]> => cards.getCardActions(client, parameters),
-      getCardAttachments: (parameters: GetCardAttachments): Promise<Attachment[]> =>
-        cards.getCardAttachments(client, parameters),
-      createCardAttachment: (parameters: CreateCardAttachment): Promise<Attachment> =>
-        cards.createCardAttachment(client, parameters),
-      getCardAttachment: (parameters: GetCardAttachment): Promise<Attachment> =>
-        cards.getCardAttachment(client, parameters),
-      deleteCardAttachment: (parameters: DeleteCardAttachment): Promise<void> =>
-        cards.deleteCardAttachment(client, parameters),
-      getCardBoard: (parameters: GetCardBoard): Promise<Board> => cards.getCardBoard(client, parameters),
-      getCardCheckItemStates: (parameters: GetCardCheckItemStates): Promise<CheckItemState[]> =>
-        cards.getCardCheckItemStates(client, parameters),
-      getCardChecklists: (parameters: GetCardChecklists): Promise<Checklist[]> =>
-        cards.getCardChecklists(client, parameters),
-      createCardChecklist: (parameters: CreateCardChecklist): Promise<Checklist> =>
-        cards.createCardChecklist(client, parameters),
-      getCardCheckItem: (parameters: GetCardCheckItem): Promise<CheckItem> =>
-        cards.getCardCheckItem(client, parameters),
-      updateCardCheckItem: (parameters: UpdateCardCheckItem): Promise<CheckItem> =>
-        cards.updateCardCheckItem(client, parameters),
-      deleteCardCheckItem: (parameters: DeleteCardCheckItem): Promise<void> =>
-        cards.deleteCardCheckItem(client, parameters),
-      getCardList: (parameters: GetCardList): Promise<TrelloList> => cards.getCardList(client, parameters),
-      getCardMembers: (parameters: GetCardMembers): Promise<Member[]> => cards.getCardMembers(client, parameters),
-      getCardMembersVoted: (parameters: GetCardMembersVoted): Promise<Member[]> =>
-        cards.getCardMembersVoted(client, parameters),
-      voteOnCard: (parameters: VoteOnCard): Promise<void> => cards.voteOnCard(client, parameters),
-      getCardPluginData: (parameters: GetCardPluginData): Promise<PluginData[]> =>
-        cards.getCardPluginData(client, parameters),
-      getCardStickers: (parameters: GetCardStickers): Promise<CardSticker[]> =>
-        cards.getCardStickers(client, parameters),
-      createCardSticker: (parameters: CreateCardSticker): Promise<CardSticker> =>
-        cards.createCardSticker(client, parameters),
-      getCardSticker: (parameters: GetCardSticker): Promise<CardSticker> => cards.getCardSticker(client, parameters),
-      updateCardSticker: (parameters: UpdateCardSticker): Promise<CardSticker> =>
-        cards.updateCardSticker(client, parameters),
-      deleteCardSticker: (parameters: DeleteCardSticker): Promise<void> => cards.deleteCardSticker(client, parameters),
-      updateCardComment: (parameters: UpdateCardComment): Promise<Action> =>
-        cards.updateCardComment(client, parameters),
-      deleteCardComment: (parameters: DeleteCardComment): Promise<void> => cards.deleteCardComment(client, parameters),
-      updateCardCustomFieldItem: (parameters: UpdateCardCustomFieldItem): Promise<void> =>
-        cards.updateCardCustomFieldItem(client, parameters),
-      updateCardCustomFields: (parameters: UpdateCardCustomFields): Promise<void> =>
-        cards.updateCardCustomFields(client, parameters),
-      getCardCustomFieldItems: (parameters: GetCardCustomFieldItems): Promise<CustomFieldItems[]> =>
-        cards.getCardCustomFieldItems(client, parameters),
-      createCardComment: (parameters: CreateCardComment): Promise<Action> =>
-        cards.createCardComment(client, parameters),
-      addCardLabel: (parameters: AddCardLabel): Promise<void> => cards.addCardLabel(client, parameters),
-      addCardMember: (parameters: AddCardMember): Promise<Member[]> => cards.addCardMember(client, parameters),
-      createCardLabel: (parameters: CreateCardLabel): Promise<Label> => cards.createCardLabel(client, parameters),
-      markCardNotificationsRead: (parameters: MarkCardNotificationsRead): Promise<void> =>
-        cards.markCardNotificationsRead(client, parameters),
-      removeCardLabel: (parameters: RemoveCardLabel): Promise<void> => cards.removeCardLabel(client, parameters),
-      removeCardMember: (parameters: RemoveCardMember): Promise<void> => cards.removeCardMember(client, parameters),
-      removeCardMemberVote: (parameters: RemoveCardMemberVote): Promise<void> =>
-        cards.removeCardMemberVote(client, parameters),
-      updateCardChecklistItem: (parameters: UpdateCardChecklistItem): Promise<CheckItem> =>
-        cards.updateCardChecklistItem(client, parameters),
-      removeCardChecklist: (parameters: RemoveCardChecklist): Promise<void> =>
-        cards.removeCardChecklist(client, parameters),
+      createCard: (parameters: CreateCard, options?: RequestOptions): Promise<Card> =>
+        cards.createCard(client, parameters, options),
+      getCard: (parameters: GetCard, options?: RequestOptions): Promise<Card> =>
+        cards.getCard(client, parameters, options),
+      updateCard: (parameters: UpdateCard, options?: RequestOptions): Promise<Card> =>
+        cards.updateCard(client, parameters, options),
+      deleteCard: (parameters: DeleteCard, options?: RequestOptions): Promise<void> =>
+        cards.deleteCard(client, parameters, options),
+      getCardField: <T = unknown>(parameters: GetCardField, options?: RequestOptions): Promise<FieldValue<T>> =>
+        cards.getCardField<T>(client, parameters, options),
+      getCardActions: (parameters: GetCardActions, options?: RequestOptions): Promise<Action[]> =>
+        cards.getCardActions(client, parameters, options),
+      getCardAttachments: (parameters: GetCardAttachments, options?: RequestOptions): Promise<Attachment[]> =>
+        cards.getCardAttachments(client, parameters, options),
+      createCardAttachment: (parameters: CreateCardAttachment, options?: RequestOptions): Promise<Attachment> =>
+        cards.createCardAttachment(client, parameters, options),
+      getCardAttachment: (parameters: GetCardAttachment, options?: RequestOptions): Promise<Attachment> =>
+        cards.getCardAttachment(client, parameters, options),
+      deleteCardAttachment: (parameters: DeleteCardAttachment, options?: RequestOptions): Promise<void> =>
+        cards.deleteCardAttachment(client, parameters, options),
+      getCardBoard: (parameters: GetCardBoard, options?: RequestOptions): Promise<Board> =>
+        cards.getCardBoard(client, parameters, options),
+      getCardCheckItemStates: (
+        parameters: GetCardCheckItemStates,
+        options?: RequestOptions,
+      ): Promise<CheckItemState[]> => cards.getCardCheckItemStates(client, parameters, options),
+      getCardChecklists: (parameters: GetCardChecklists, options?: RequestOptions): Promise<Checklist[]> =>
+        cards.getCardChecklists(client, parameters, options),
+      createCardChecklist: (parameters: CreateCardChecklist, options?: RequestOptions): Promise<Checklist> =>
+        cards.createCardChecklist(client, parameters, options),
+      getCardCheckItem: (parameters: GetCardCheckItem, options?: RequestOptions): Promise<CheckItem> =>
+        cards.getCardCheckItem(client, parameters, options),
+      updateCardCheckItem: (parameters: UpdateCardCheckItem, options?: RequestOptions): Promise<CheckItem> =>
+        cards.updateCardCheckItem(client, parameters, options),
+      deleteCardCheckItem: (parameters: DeleteCardCheckItem, options?: RequestOptions): Promise<void> =>
+        cards.deleteCardCheckItem(client, parameters, options),
+      getCardList: (parameters: GetCardList, options?: RequestOptions): Promise<TrelloList> =>
+        cards.getCardList(client, parameters, options),
+      getCardMembers: (parameters: GetCardMembers, options?: RequestOptions): Promise<Member[]> =>
+        cards.getCardMembers(client, parameters, options),
+      getCardMembersVoted: (parameters: GetCardMembersVoted, options?: RequestOptions): Promise<Member[]> =>
+        cards.getCardMembersVoted(client, parameters, options),
+      voteOnCard: (parameters: VoteOnCard, options?: RequestOptions): Promise<void> =>
+        cards.voteOnCard(client, parameters, options),
+      getCardPluginData: (parameters: GetCardPluginData, options?: RequestOptions): Promise<PluginData[]> =>
+        cards.getCardPluginData(client, parameters, options),
+      getCardStickers: (parameters: GetCardStickers, options?: RequestOptions): Promise<CardSticker[]> =>
+        cards.getCardStickers(client, parameters, options),
+      createCardSticker: (parameters: CreateCardSticker, options?: RequestOptions): Promise<CardSticker> =>
+        cards.createCardSticker(client, parameters, options),
+      getCardSticker: (parameters: GetCardSticker, options?: RequestOptions): Promise<CardSticker> =>
+        cards.getCardSticker(client, parameters, options),
+      updateCardSticker: (parameters: UpdateCardSticker, options?: RequestOptions): Promise<CardSticker> =>
+        cards.updateCardSticker(client, parameters, options),
+      deleteCardSticker: (parameters: DeleteCardSticker, options?: RequestOptions): Promise<void> =>
+        cards.deleteCardSticker(client, parameters, options),
+      updateCardComment: (parameters: UpdateCardComment, options?: RequestOptions): Promise<Action> =>
+        cards.updateCardComment(client, parameters, options),
+      deleteCardComment: (parameters: DeleteCardComment, options?: RequestOptions): Promise<void> =>
+        cards.deleteCardComment(client, parameters, options),
+      updateCardCustomFieldItem: (parameters: UpdateCardCustomFieldItem, options?: RequestOptions): Promise<void> =>
+        cards.updateCardCustomFieldItem(client, parameters, options),
+      updateCardCustomFields: (parameters: UpdateCardCustomFields, options?: RequestOptions): Promise<void> =>
+        cards.updateCardCustomFields(client, parameters, options),
+      getCardCustomFieldItems: (
+        parameters: GetCardCustomFieldItems,
+        options?: RequestOptions,
+      ): Promise<CustomFieldItems[]> => cards.getCardCustomFieldItems(client, parameters, options),
+      createCardComment: (parameters: CreateCardComment, options?: RequestOptions): Promise<Action> =>
+        cards.createCardComment(client, parameters, options),
+      addCardLabel: (parameters: AddCardLabel, options?: RequestOptions): Promise<void> =>
+        cards.addCardLabel(client, parameters, options),
+      addCardMember: (parameters: AddCardMember, options?: RequestOptions): Promise<Member[]> =>
+        cards.addCardMember(client, parameters, options),
+      createCardLabel: (parameters: CreateCardLabel, options?: RequestOptions): Promise<Label> =>
+        cards.createCardLabel(client, parameters, options),
+      markCardNotificationsRead: (parameters: MarkCardNotificationsRead, options?: RequestOptions): Promise<void> =>
+        cards.markCardNotificationsRead(client, parameters, options),
+      removeCardLabel: (parameters: RemoveCardLabel, options?: RequestOptions): Promise<void> =>
+        cards.removeCardLabel(client, parameters, options),
+      removeCardMember: (parameters: RemoveCardMember, options?: RequestOptions): Promise<void> =>
+        cards.removeCardMember(client, parameters, options),
+      removeCardMemberVote: (parameters: RemoveCardMemberVote, options?: RequestOptions): Promise<void> =>
+        cards.removeCardMemberVote(client, parameters, options),
+      updateCardChecklistItem: (parameters: UpdateCardChecklistItem, options?: RequestOptions): Promise<CheckItem> =>
+        cards.updateCardChecklistItem(client, parameters, options),
+      removeCardChecklist: (parameters: RemoveCardChecklist, options?: RequestOptions): Promise<void> =>
+        cards.removeCardChecklist(client, parameters, options),
     },
     checklists: {
-      createChecklist: (parameters: CreateChecklist): Promise<Checklist> =>
-        checklists.createChecklist(client, parameters),
-      getChecklist: (parameters: GetChecklist): Promise<Checklist> => checklists.getChecklist(client, parameters),
-      updateChecklist: (parameters: UpdateChecklist): Promise<Checklist> =>
-        checklists.updateChecklist(client, parameters),
-      deleteChecklist: (parameters: DeleteChecklist): Promise<void> => checklists.deleteChecklist(client, parameters),
-      getChecklistField: <T = unknown>(parameters: GetChecklistField): Promise<FieldValue<T>> =>
-        checklists.getChecklistField<T>(client, parameters),
-      updateChecklistField: (parameters: UpdateChecklistField): Promise<Checklist> =>
-        checklists.updateChecklistField(client, parameters),
-      getChecklistBoard: (parameters: GetChecklistBoard): Promise<Board> =>
-        checklists.getChecklistBoard(client, parameters),
-      getChecklistCards: (parameters: GetChecklistCards): Promise<Card[]> =>
-        checklists.getChecklistCards(client, parameters),
-      getChecklistItems: (parameters: GetChecklistItems): Promise<CheckItem[]> =>
-        checklists.getChecklistItems(client, parameters),
-      createChecklistItem: (parameters: CreateChecklistItem): Promise<CheckItem> =>
-        checklists.createChecklistItem(client, parameters),
-      getChecklistItem: (parameters: GetChecklistItem): Promise<CheckItem> =>
-        checklists.getChecklistItem(client, parameters),
-      deleteChecklistItem: (parameters: DeleteChecklistItem): Promise<void> =>
-        checklists.deleteChecklistItem(client, parameters),
+      createChecklist: (parameters: CreateChecklist, options?: RequestOptions): Promise<Checklist> =>
+        checklists.createChecklist(client, parameters, options),
+      getChecklist: (parameters: GetChecklist, options?: RequestOptions): Promise<Checklist> =>
+        checklists.getChecklist(client, parameters, options),
+      updateChecklist: (parameters: UpdateChecklist, options?: RequestOptions): Promise<Checklist> =>
+        checklists.updateChecklist(client, parameters, options),
+      deleteChecklist: (parameters: DeleteChecklist, options?: RequestOptions): Promise<void> =>
+        checklists.deleteChecklist(client, parameters, options),
+      getChecklistField: <T = unknown>(
+        parameters: GetChecklistField,
+        options?: RequestOptions,
+      ): Promise<FieldValue<T>> => checklists.getChecklistField<T>(client, parameters, options),
+      updateChecklistField: (parameters: UpdateChecklistField, options?: RequestOptions): Promise<Checklist> =>
+        checklists.updateChecklistField(client, parameters, options),
+      getChecklistBoard: (parameters: GetChecklistBoard, options?: RequestOptions): Promise<Board> =>
+        checklists.getChecklistBoard(client, parameters, options),
+      getChecklistCards: (parameters: GetChecklistCards, options?: RequestOptions): Promise<Card[]> =>
+        checklists.getChecklistCards(client, parameters, options),
+      getChecklistItems: (parameters: GetChecklistItems, options?: RequestOptions): Promise<CheckItem[]> =>
+        checklists.getChecklistItems(client, parameters, options),
+      createChecklistItem: (parameters: CreateChecklistItem, options?: RequestOptions): Promise<CheckItem> =>
+        checklists.createChecklistItem(client, parameters, options),
+      getChecklistItem: (parameters: GetChecklistItem, options?: RequestOptions): Promise<CheckItem> =>
+        checklists.getChecklistItem(client, parameters, options),
+      deleteChecklistItem: (parameters: DeleteChecklistItem, options?: RequestOptions): Promise<void> =>
+        checklists.deleteChecklistItem(client, parameters, options),
     },
     customFields: {
-      createCustomField: (parameters: CreateCustomField): Promise<CustomField> =>
-        customFields.createCustomField(client, parameters),
-      getCustomField: (parameters: GetCustomField): Promise<CustomField> =>
-        customFields.getCustomField(client, parameters),
-      updateCustomField: (parameters: UpdateCustomField): Promise<CustomField> =>
-        customFields.updateCustomField(client, parameters),
-      deleteCustomField: (parameters: DeleteCustomField): Promise<void> =>
-        customFields.deleteCustomField(client, parameters),
-      getCustomFieldOptions: (parameters: GetCustomFieldOptions): Promise<CustomFieldOption[]> =>
-        customFields.getCustomFieldOptions(client, parameters),
-      createCustomFieldOption: (parameters: CreateCustomFieldOption): Promise<CustomFieldOption> =>
-        customFields.createCustomFieldOption(client, parameters),
-      getCustomFieldOption: (parameters: GetCustomFieldOption): Promise<CustomFieldOption> =>
-        customFields.getCustomFieldOption(client, parameters),
-      deleteCustomFieldOption: (parameters: DeleteCustomFieldOption): Promise<void> =>
-        customFields.deleteCustomFieldOption(client, parameters),
+      createCustomField: (parameters: CreateCustomField, options?: RequestOptions): Promise<CustomField> =>
+        customFields.createCustomField(client, parameters, options),
+      getCustomField: (parameters: GetCustomField, options?: RequestOptions): Promise<CustomField> =>
+        customFields.getCustomField(client, parameters, options),
+      updateCustomField: (parameters: UpdateCustomField, options?: RequestOptions): Promise<CustomField> =>
+        customFields.updateCustomField(client, parameters, options),
+      deleteCustomField: (parameters: DeleteCustomField, options?: RequestOptions): Promise<void> =>
+        customFields.deleteCustomField(client, parameters, options),
+      getCustomFieldOptions: (
+        parameters: GetCustomFieldOptions,
+        options?: RequestOptions,
+      ): Promise<CustomFieldOption[]> => customFields.getCustomFieldOptions(client, parameters, options),
+      createCustomFieldOption: (
+        parameters: CreateCustomFieldOption,
+        options?: RequestOptions,
+      ): Promise<CustomFieldOption> => customFields.createCustomFieldOption(client, parameters, options),
+      getCustomFieldOption: (parameters: GetCustomFieldOption, options?: RequestOptions): Promise<CustomFieldOption> =>
+        customFields.getCustomFieldOption(client, parameters, options),
+      deleteCustomFieldOption: (parameters: DeleteCustomFieldOption, options?: RequestOptions): Promise<void> =>
+        customFields.deleteCustomFieldOption(client, parameters, options),
     },
     emoji: {
-      getEmoji: (parameters?: GetEmoji): Promise<Emoji> => emoji.getEmoji(client, parameters),
+      getEmoji: (parameters?: GetEmoji, options?: RequestOptions): Promise<Emoji> =>
+        emoji.getEmoji(client, parameters, options),
     },
     enterprises: {
-      getEnterprise: (parameters: GetEnterprise): Promise<Enterprise> => enterprises.getEnterprise(client, parameters),
-      getEnterpriseAuditLog: (parameters: GetEnterpriseAuditLog): Promise<EnterpriseAuditLog[]> =>
-        enterprises.getEnterpriseAuditLog(client, parameters),
-      getEnterpriseAdmins: (parameters: GetEnterpriseAdmins): Promise<EnterpriseAdmin> =>
-        enterprises.getEnterpriseAdmins(client, parameters),
-      getEnterpriseSignUpUrl: (parameters: GetEnterpriseSignUpUrl): Promise<GetEnterpriseSignUpUrlModel> =>
-        enterprises.getEnterpriseSignUpUrl(client, parameters),
-      getUser: (parameters: GetUser): Promise<Membership[]> => enterprises.getUser(client, parameters),
-      getEnterpriseMembers: (parameters: GetEnterpriseMembers): Promise<Member[]> =>
-        enterprises.getEnterpriseMembers(client, parameters),
-      getEnterpriseMember: (parameters: GetEnterpriseMember): Promise<Member> =>
-        enterprises.getEnterpriseMember(client, parameters),
+      getEnterprise: (parameters: GetEnterprise, options?: RequestOptions): Promise<Enterprise> =>
+        enterprises.getEnterprise(client, parameters, options),
+      getEnterpriseAuditLog: (
+        parameters: GetEnterpriseAuditLog,
+        options?: RequestOptions,
+      ): Promise<EnterpriseAuditLog[]> => enterprises.getEnterpriseAuditLog(client, parameters, options),
+      getEnterpriseAdmins: (parameters: GetEnterpriseAdmins, options?: RequestOptions): Promise<EnterpriseAdmin> =>
+        enterprises.getEnterpriseAdmins(client, parameters, options),
+      getEnterpriseSignUpUrl: (
+        parameters: GetEnterpriseSignUpUrl,
+        options?: RequestOptions,
+      ): Promise<GetEnterpriseSignUpUrlModel> => enterprises.getEnterpriseSignUpUrl(client, parameters, options),
+      getUser: (parameters: GetUser, options?: RequestOptions): Promise<Membership[]> =>
+        enterprises.getUser(client, parameters, options),
+      getEnterpriseMembers: (parameters: GetEnterpriseMembers, options?: RequestOptions): Promise<Member[]> =>
+        enterprises.getEnterpriseMembers(client, parameters, options),
+      getEnterpriseMember: (parameters: GetEnterpriseMember, options?: RequestOptions): Promise<Member> =>
+        enterprises.getEnterpriseMember(client, parameters, options),
       getEnterpriseTransferrableOrganization: (
         parameters: GetEnterpriseTransferrableOrganization,
-      ): Promise<TransferrableOrganization> => enterprises.getEnterpriseTransferrableOrganization(client, parameters),
+        options?: RequestOptions,
+      ): Promise<TransferrableOrganization> =>
+        enterprises.getEnterpriseTransferrableOrganization(client, parameters, options),
       getEnterpriseBulkTransferrableOrganizations: (
         parameters: GetEnterpriseBulkTransferrableOrganizations,
+        options?: RequestOptions,
       ): Promise<TransferrableOrganization[]> =>
-        enterprises.getEnterpriseBulkTransferrableOrganizations(client, parameters),
-      updateEnterpriseJoinRequests: (parameters: UpdateEnterpriseJoinRequests): Promise<void> =>
-        enterprises.updateEnterpriseJoinRequests(client, parameters),
+        enterprises.getEnterpriseBulkTransferrableOrganizations(client, parameters, options),
+      updateEnterpriseJoinRequests: (
+        parameters: UpdateEnterpriseJoinRequests,
+        options?: RequestOptions,
+      ): Promise<void> => enterprises.updateEnterpriseJoinRequests(client, parameters, options),
       getEnterpriseClaimableOrganizations: (
         parameters: GetEnterpriseClaimableOrganizations,
-      ): Promise<ClaimableOrganizations> => enterprises.getEnterpriseClaimableOrganizations(client, parameters),
+        options?: RequestOptions,
+      ): Promise<ClaimableOrganizations> =>
+        enterprises.getEnterpriseClaimableOrganizations(client, parameters, options),
       getEnterprisePendingOrganizations: (
         parameters: GetEnterprisePendingOrganizations,
-      ): Promise<PendingOrganizations[]> => enterprises.getEnterprisePendingOrganizations(client, parameters),
-      createEnterpriseToken: (parameters: CreateEnterpriseToken): Promise<APIToken> =>
-        enterprises.createEnterpriseToken(client, parameters),
-      getEnterpriseOrganizations: (parameters: GetEnterpriseOrganizations): Promise<Organization[]> =>
-        enterprises.getEnterpriseOrganizations(client, parameters),
-      addEnterpriseOrganization: (parameters: AddEnterpriseOrganization): Promise<Organization[]> =>
-        enterprises.addEnterpriseOrganization(client, parameters),
-      updateEnterpriseMemberLicensed: (parameters: UpdateEnterpriseMemberLicensed): Promise<Member> =>
-        enterprises.updateEnterpriseMemberLicensed(client, parameters),
-      deactivateEnterpriseMember: (parameters: DeactivateEnterpriseMember): Promise<Member> =>
-        enterprises.deactivateEnterpriseMember(client, parameters),
-      addEnterpriseAdmin: (parameters: AddEnterpriseAdmin): Promise<void> =>
-        enterprises.addEnterpriseAdmin(client, parameters),
-      removeEnterpriseAdmin: (parameters: RemoveEnterpriseAdmin): Promise<void> =>
-        enterprises.removeEnterpriseAdmin(client, parameters),
-      removeEnterpriseOrganization: (parameters: RemoveEnterpriseOrganization): Promise<void> =>
-        enterprises.removeEnterpriseOrganization(client, parameters),
-      getEnterpriseBulkOrganizations: (parameters: GetEnterpriseBulkOrganizations): Promise<Organization[]> =>
-        enterprises.getEnterpriseBulkOrganizations(client, parameters),
+        options?: RequestOptions,
+      ): Promise<PendingOrganizations[]> => enterprises.getEnterprisePendingOrganizations(client, parameters, options),
+      createEnterpriseToken: (parameters: CreateEnterpriseToken, options?: RequestOptions): Promise<APIToken> =>
+        enterprises.createEnterpriseToken(client, parameters, options),
+      getEnterpriseOrganizations: (
+        parameters: GetEnterpriseOrganizations,
+        options?: RequestOptions,
+      ): Promise<Organization[]> => enterprises.getEnterpriseOrganizations(client, parameters, options),
+      addEnterpriseOrganization: (
+        parameters: AddEnterpriseOrganization,
+        options?: RequestOptions,
+      ): Promise<Organization[]> => enterprises.addEnterpriseOrganization(client, parameters, options),
+      updateEnterpriseMemberLicensed: (
+        parameters: UpdateEnterpriseMemberLicensed,
+        options?: RequestOptions,
+      ): Promise<Member> => enterprises.updateEnterpriseMemberLicensed(client, parameters, options),
+      deactivateEnterpriseMember: (parameters: DeactivateEnterpriseMember, options?: RequestOptions): Promise<Member> =>
+        enterprises.deactivateEnterpriseMember(client, parameters, options),
+      addEnterpriseAdmin: (parameters: AddEnterpriseAdmin, options?: RequestOptions): Promise<void> =>
+        enterprises.addEnterpriseAdmin(client, parameters, options),
+      removeEnterpriseAdmin: (parameters: RemoveEnterpriseAdmin, options?: RequestOptions): Promise<void> =>
+        enterprises.removeEnterpriseAdmin(client, parameters, options),
+      removeEnterpriseOrganization: (
+        parameters: RemoveEnterpriseOrganization,
+        options?: RequestOptions,
+      ): Promise<void> => enterprises.removeEnterpriseOrganization(client, parameters, options),
+      getEnterpriseBulkOrganizations: (
+        parameters: GetEnterpriseBulkOrganizations,
+        options?: RequestOptions,
+      ): Promise<Organization[]> => enterprises.getEnterpriseBulkOrganizations(client, parameters, options),
     },
     labels: {
-      getLabel: (parameters: GetLabel): Promise<Label> => labels.getLabel(client, parameters),
-      updateLabel: (parameters: UpdateLabel): Promise<Label> => labels.updateLabel(client, parameters),
-      deleteLabel: (parameters: DeleteLabel): Promise<void> => labels.deleteLabel(client, parameters),
-      updateLabelField: (parameters: UpdateLabelField): Promise<Label> => labels.updateLabelField(client, parameters),
-      createLabel: (parameters: CreateLabel): Promise<Label> => labels.createLabel(client, parameters),
+      getLabel: (parameters: GetLabel, options?: RequestOptions): Promise<Label> =>
+        labels.getLabel(client, parameters, options),
+      updateLabel: (parameters: UpdateLabel, options?: RequestOptions): Promise<Label> =>
+        labels.updateLabel(client, parameters, options),
+      deleteLabel: (parameters: DeleteLabel, options?: RequestOptions): Promise<void> =>
+        labels.deleteLabel(client, parameters, options),
+      updateLabelField: (parameters: UpdateLabelField, options?: RequestOptions): Promise<Label> =>
+        labels.updateLabelField(client, parameters, options),
+      createLabel: (parameters: CreateLabel, options?: RequestOptions): Promise<Label> =>
+        labels.createLabel(client, parameters, options),
     },
     lists: {
-      getList: (parameters: GetList): Promise<TrelloList> => lists.getList(client, parameters),
-      updateList: (parameters: UpdateList): Promise<TrelloList> => lists.updateList(client, parameters),
-      createList: (parameters: CreateList): Promise<TrelloList> => lists.createList(client, parameters),
-      archiveAllListCards: (parameters: ArchiveAllListCards): Promise<void> =>
-        lists.archiveAllListCards(client, parameters),
-      moveAllListCards: (parameters: MoveAllListCards): Promise<void> => lists.moveAllListCards(client, parameters),
-      archiveList: (parameters: ArchiveList): Promise<TrelloList> => lists.archiveList(client, parameters),
-      moveListToBoard: (parameters: MoveListToBoard): Promise<TrelloList> => lists.moveListToBoard(client, parameters),
-      updateListField: (parameters: UpdateListField): Promise<TrelloList> => lists.updateListField(client, parameters),
-      getListActions: (parameters: GetListActions): Promise<Action[]> => lists.getListActions(client, parameters),
-      getListBoard: (parameters: GetListBoard): Promise<Board> => lists.getListBoard(client, parameters),
-      getListCards: (parameters: GetListCards): Promise<Card[]> => lists.getListCards(client, parameters),
+      getList: (parameters: GetList, options?: RequestOptions): Promise<TrelloList> =>
+        lists.getList(client, parameters, options),
+      updateList: (parameters: UpdateList, options?: RequestOptions): Promise<TrelloList> =>
+        lists.updateList(client, parameters, options),
+      createList: (parameters: CreateList, options?: RequestOptions): Promise<TrelloList> =>
+        lists.createList(client, parameters, options),
+      archiveAllListCards: (parameters: ArchiveAllListCards, options?: RequestOptions): Promise<void> =>
+        lists.archiveAllListCards(client, parameters, options),
+      moveAllListCards: (parameters: MoveAllListCards, options?: RequestOptions): Promise<void> =>
+        lists.moveAllListCards(client, parameters, options),
+      archiveList: (parameters: ArchiveList, options?: RequestOptions): Promise<TrelloList> =>
+        lists.archiveList(client, parameters, options),
+      moveListToBoard: (parameters: MoveListToBoard, options?: RequestOptions): Promise<TrelloList> =>
+        lists.moveListToBoard(client, parameters, options),
+      updateListField: (parameters: UpdateListField, options?: RequestOptions): Promise<TrelloList> =>
+        lists.updateListField(client, parameters, options),
+      getListActions: (parameters: GetListActions, options?: RequestOptions): Promise<Action[]> =>
+        lists.getListActions(client, parameters, options),
+      getListBoard: (parameters: GetListBoard, options?: RequestOptions): Promise<Board> =>
+        lists.getListBoard(client, parameters, options),
+      getListCards: (parameters: GetListCards, options?: RequestOptions): Promise<Card[]> =>
+        lists.getListCards(client, parameters, options),
     },
     members: {
-      getMember: (parameters: GetMember): Promise<Member> => members.getMember(client, parameters),
-      updateMember: (parameters: UpdateMember): Promise<Member> => members.updateMember(client, parameters),
-      getMemberField: <T = unknown>(parameters: GetMemberField): Promise<FieldValue<T>> =>
-        members.getMemberField<T>(client, parameters),
-      getMemberActions: (parameters: GetMemberActions): Promise<Action[]> =>
-        members.getMemberActions(client, parameters),
-      getMemberBoardBackgrounds: (parameters: GetMemberBoardBackgrounds): Promise<BoardBackground[]> =>
-        members.getMemberBoardBackgrounds(client, parameters),
-      createMemberBoardBackground: (parameters: CreateMemberBoardBackground): Promise<BoardBackground[]> =>
-        members.createMemberBoardBackground(client, parameters),
-      getMemberBoardBackground: (parameters: GetMemberBoardBackground): Promise<BoardBackground> =>
-        members.getMemberBoardBackground(client, parameters),
-      updateMemberBoardBackground: (parameters: UpdateMemberBoardBackground): Promise<BoardBackground> =>
-        members.updateMemberBoardBackground(client, parameters),
-      deleteMemberBoardBackground: (parameters: DeleteMemberBoardBackground): Promise<void> =>
-        members.deleteMemberBoardBackground(client, parameters),
-      getMemberBoardStars: (parameters: GetMemberBoardStars): Promise<BoardStars[]> =>
-        members.getMemberBoardStars(client, parameters),
-      starBoard: (parameters: StarBoard): Promise<BoardStars> => members.starBoard(client, parameters),
-      getMemberBoardStar: (parameters: GetMemberBoardStar): Promise<BoardStars> =>
-        members.getMemberBoardStar(client, parameters),
-      updateMemberBoardStar: (parameters: UpdateMemberBoardStar): Promise<BoardStars> =>
-        members.updateMemberBoardStar(client, parameters),
-      unstarBoard: (parameters: UnstarBoard): Promise<void> => members.unstarBoard(client, parameters),
-      getMemberBoards: (parameters: GetMemberBoards): Promise<Board[]> => members.getMemberBoards(client, parameters),
-      getMemberInvitedBoards: (parameters: GetMemberInvitedBoards): Promise<Board[]> =>
-        members.getMemberInvitedBoards(client, parameters),
-      getMemberCards: (parameters: GetMemberCards): Promise<Card[]> => members.getMemberCards(client, parameters),
-      getMemberCustomBoardBackgrounds: (parameters: GetMemberCustomBoardBackgrounds): Promise<BoardBackground[]> =>
-        members.getMemberCustomBoardBackgrounds(client, parameters),
-      createMemberCustomBoardBackground: (parameters: CreateMemberCustomBoardBackground): Promise<BoardBackground> =>
-        members.createMemberCustomBoardBackground(client, parameters),
-      getMemberCustomBoardBackground: (parameters: GetMemberCustomBoardBackground): Promise<BoardBackground> =>
-        members.getMemberCustomBoardBackground(client, parameters),
-      updateMemberCustomBoardBackground: (parameters: UpdateMemberCustomBoardBackground): Promise<BoardBackground> =>
-        members.updateMemberCustomBoardBackground(client, parameters),
-      deleteMemberCustomBoardBackground: (parameters: DeleteMemberCustomBoardBackground): Promise<void> =>
-        members.deleteMemberCustomBoardBackground(client, parameters),
-      getMemberCustomEmojis: (parameters: GetMemberCustomEmojis): Promise<CustomEmoji[]> =>
-        members.getMemberCustomEmojis(client, parameters),
-      uploadMemberCustomEmoji: (parameters: UploadMemberCustomEmoji): Promise<CustomEmoji> =>
-        members.uploadMemberCustomEmoji(client, parameters),
-      getMemberCustomEmoji: (parameters: GetMemberCustomEmoji): Promise<CustomEmoji> =>
-        members.getMemberCustomEmoji(client, parameters),
-      getMemberCustomStickers: (parameters: GetMemberCustomStickers): Promise<CustomSticker[]> =>
-        members.getMemberCustomStickers(client, parameters),
-      uploadMemberCustomSticker: (parameters: UploadMemberCustomSticker): Promise<CustomSticker> =>
-        members.uploadMemberCustomSticker(client, parameters),
-      getMemberCustomSticker: (parameters: GetMemberCustomSticker): Promise<CustomSticker> =>
-        members.getMemberCustomSticker(client, parameters),
-      deleteMemberCustomSticker: (parameters: DeleteMemberCustomSticker): Promise<void> =>
-        members.deleteMemberCustomSticker(client, parameters),
-      getMemberNotifications: (parameters: GetMemberNotifications): Promise<Notification[]> =>
-        members.getMemberNotifications(client, parameters),
-      getMemberOrganizations: (parameters: GetMemberOrganizations): Promise<Organization[]> =>
-        members.getMemberOrganizations(client, parameters),
-      getMemberInvitedOrganizations: (parameters: GetMemberInvitedOrganizations): Promise<Organization[]> =>
-        members.getMemberInvitedOrganizations(client, parameters),
-      getMemberSavedSearches: (parameters: GetMemberSavedSearches): Promise<SavedSearch[]> =>
-        members.getMemberSavedSearches(client, parameters),
-      createMemberSavedSearch: (parameters: CreateMemberSavedSearch): Promise<SavedSearch> =>
-        members.createMemberSavedSearch(client, parameters),
-      getMemberSavedSearch: (parameters: GetMemberSavedSearch): Promise<SavedSearch> =>
-        members.getMemberSavedSearch(client, parameters),
-      updateMemberSavedSearch: (parameters: UpdateMemberSavedSearch): Promise<SavedSearch> =>
-        members.updateMemberSavedSearch(client, parameters),
-      deleteMemberSavedSearch: (parameters: DeleteMemberSavedSearch): Promise<void> =>
-        members.deleteMemberSavedSearch(client, parameters),
-      getMemberTokens: (parameters: GetMemberTokens): Promise<Token[]> => members.getMemberTokens(client, parameters),
-      uploadMemberAvatar: (parameters: UploadMemberAvatar): Promise<void> =>
-        members.uploadMemberAvatar(client, parameters),
-      dismissMemberOneTimeMessage: (parameters: DismissMemberOneTimeMessage): Promise<void> =>
-        members.dismissMemberOneTimeMessage(client, parameters),
+      getMember: (parameters: GetMember, options?: RequestOptions): Promise<Member> =>
+        members.getMember(client, parameters, options),
+      updateMember: (parameters: UpdateMember, options?: RequestOptions): Promise<Member> =>
+        members.updateMember(client, parameters, options),
+      getMemberField: <T = unknown>(parameters: GetMemberField, options?: RequestOptions): Promise<FieldValue<T>> =>
+        members.getMemberField<T>(client, parameters, options),
+      getMemberActions: (parameters: GetMemberActions, options?: RequestOptions): Promise<Action[]> =>
+        members.getMemberActions(client, parameters, options),
+      getMemberBoardBackgrounds: (
+        parameters: GetMemberBoardBackgrounds,
+        options?: RequestOptions,
+      ): Promise<BoardBackground[]> => members.getMemberBoardBackgrounds(client, parameters, options),
+      createMemberBoardBackground: (
+        parameters: CreateMemberBoardBackground,
+        options?: RequestOptions,
+      ): Promise<BoardBackground[]> => members.createMemberBoardBackground(client, parameters, options),
+      getMemberBoardBackground: (
+        parameters: GetMemberBoardBackground,
+        options?: RequestOptions,
+      ): Promise<BoardBackground> => members.getMemberBoardBackground(client, parameters, options),
+      updateMemberBoardBackground: (
+        parameters: UpdateMemberBoardBackground,
+        options?: RequestOptions,
+      ): Promise<BoardBackground> => members.updateMemberBoardBackground(client, parameters, options),
+      deleteMemberBoardBackground: (parameters: DeleteMemberBoardBackground, options?: RequestOptions): Promise<void> =>
+        members.deleteMemberBoardBackground(client, parameters, options),
+      getMemberBoardStars: (parameters: GetMemberBoardStars, options?: RequestOptions): Promise<BoardStars[]> =>
+        members.getMemberBoardStars(client, parameters, options),
+      starBoard: (parameters: StarBoard, options?: RequestOptions): Promise<BoardStars> =>
+        members.starBoard(client, parameters, options),
+      getMemberBoardStar: (parameters: GetMemberBoardStar, options?: RequestOptions): Promise<BoardStars> =>
+        members.getMemberBoardStar(client, parameters, options),
+      updateMemberBoardStar: (parameters: UpdateMemberBoardStar, options?: RequestOptions): Promise<BoardStars> =>
+        members.updateMemberBoardStar(client, parameters, options),
+      unstarBoard: (parameters: UnstarBoard, options?: RequestOptions): Promise<void> =>
+        members.unstarBoard(client, parameters, options),
+      getMemberBoards: (parameters: GetMemberBoards, options?: RequestOptions): Promise<Board[]> =>
+        members.getMemberBoards(client, parameters, options),
+      getMemberInvitedBoards: (parameters: GetMemberInvitedBoards, options?: RequestOptions): Promise<Board[]> =>
+        members.getMemberInvitedBoards(client, parameters, options),
+      getMemberCards: (parameters: GetMemberCards, options?: RequestOptions): Promise<Card[]> =>
+        members.getMemberCards(client, parameters, options),
+      getMemberCustomBoardBackgrounds: (
+        parameters: GetMemberCustomBoardBackgrounds,
+        options?: RequestOptions,
+      ): Promise<BoardBackground[]> => members.getMemberCustomBoardBackgrounds(client, parameters, options),
+      createMemberCustomBoardBackground: (
+        parameters: CreateMemberCustomBoardBackground,
+        options?: RequestOptions,
+      ): Promise<BoardBackground> => members.createMemberCustomBoardBackground(client, parameters, options),
+      getMemberCustomBoardBackground: (
+        parameters: GetMemberCustomBoardBackground,
+        options?: RequestOptions,
+      ): Promise<BoardBackground> => members.getMemberCustomBoardBackground(client, parameters, options),
+      updateMemberCustomBoardBackground: (
+        parameters: UpdateMemberCustomBoardBackground,
+        options?: RequestOptions,
+      ): Promise<BoardBackground> => members.updateMemberCustomBoardBackground(client, parameters, options),
+      deleteMemberCustomBoardBackground: (
+        parameters: DeleteMemberCustomBoardBackground,
+        options?: RequestOptions,
+      ): Promise<void> => members.deleteMemberCustomBoardBackground(client, parameters, options),
+      getMemberCustomEmojis: (parameters: GetMemberCustomEmojis, options?: RequestOptions): Promise<CustomEmoji[]> =>
+        members.getMemberCustomEmojis(client, parameters, options),
+      uploadMemberCustomEmoji: (parameters: UploadMemberCustomEmoji, options?: RequestOptions): Promise<CustomEmoji> =>
+        members.uploadMemberCustomEmoji(client, parameters, options),
+      getMemberCustomEmoji: (parameters: GetMemberCustomEmoji, options?: RequestOptions): Promise<CustomEmoji> =>
+        members.getMemberCustomEmoji(client, parameters, options),
+      getMemberCustomStickers: (
+        parameters: GetMemberCustomStickers,
+        options?: RequestOptions,
+      ): Promise<CustomSticker[]> => members.getMemberCustomStickers(client, parameters, options),
+      uploadMemberCustomSticker: (
+        parameters: UploadMemberCustomSticker,
+        options?: RequestOptions,
+      ): Promise<CustomSticker> => members.uploadMemberCustomSticker(client, parameters, options),
+      getMemberCustomSticker: (parameters: GetMemberCustomSticker, options?: RequestOptions): Promise<CustomSticker> =>
+        members.getMemberCustomSticker(client, parameters, options),
+      deleteMemberCustomSticker: (parameters: DeleteMemberCustomSticker, options?: RequestOptions): Promise<void> =>
+        members.deleteMemberCustomSticker(client, parameters, options),
+      getMemberNotifications: (parameters: GetMemberNotifications, options?: RequestOptions): Promise<Notification[]> =>
+        members.getMemberNotifications(client, parameters, options),
+      getMemberOrganizations: (parameters: GetMemberOrganizations, options?: RequestOptions): Promise<Organization[]> =>
+        members.getMemberOrganizations(client, parameters, options),
+      getMemberInvitedOrganizations: (
+        parameters: GetMemberInvitedOrganizations,
+        options?: RequestOptions,
+      ): Promise<Organization[]> => members.getMemberInvitedOrganizations(client, parameters, options),
+      getMemberSavedSearches: (parameters: GetMemberSavedSearches, options?: RequestOptions): Promise<SavedSearch[]> =>
+        members.getMemberSavedSearches(client, parameters, options),
+      createMemberSavedSearch: (parameters: CreateMemberSavedSearch, options?: RequestOptions): Promise<SavedSearch> =>
+        members.createMemberSavedSearch(client, parameters, options),
+      getMemberSavedSearch: (parameters: GetMemberSavedSearch, options?: RequestOptions): Promise<SavedSearch> =>
+        members.getMemberSavedSearch(client, parameters, options),
+      updateMemberSavedSearch: (parameters: UpdateMemberSavedSearch, options?: RequestOptions): Promise<SavedSearch> =>
+        members.updateMemberSavedSearch(client, parameters, options),
+      deleteMemberSavedSearch: (parameters: DeleteMemberSavedSearch, options?: RequestOptions): Promise<void> =>
+        members.deleteMemberSavedSearch(client, parameters, options),
+      getMemberTokens: (parameters: GetMemberTokens, options?: RequestOptions): Promise<Token[]> =>
+        members.getMemberTokens(client, parameters, options),
+      uploadMemberAvatar: (parameters: UploadMemberAvatar, options?: RequestOptions): Promise<void> =>
+        members.uploadMemberAvatar(client, parameters, options),
+      dismissMemberOneTimeMessage: (parameters: DismissMemberOneTimeMessage, options?: RequestOptions): Promise<void> =>
+        members.dismissMemberOneTimeMessage(client, parameters, options),
       getMemberNotificationChannelSettings: (
         parameters: GetMemberNotificationChannelSettings,
-      ): Promise<NotificationChannelSettings[]> => members.getMemberNotificationChannelSettings(client, parameters),
+        options?: RequestOptions,
+      ): Promise<NotificationChannelSettings[]> =>
+        members.getMemberNotificationChannelSettings(client, parameters, options),
       updateMemberNotificationChannelSettings: (
         parameters: UpdateMemberNotificationChannelSettings,
-      ): Promise<NotificationChannelSettings> => members.updateMemberNotificationChannelSettings(client, parameters),
+        options?: RequestOptions,
+      ): Promise<NotificationChannelSettings> =>
+        members.updateMemberNotificationChannelSettings(client, parameters, options),
       getMemberNotificationChannelSetting: (
         parameters: GetMemberNotificationChannelSetting,
-      ): Promise<NotificationChannelSettings> => members.getMemberNotificationChannelSetting(client, parameters),
+        options?: RequestOptions,
+      ): Promise<NotificationChannelSettings> =>
+        members.getMemberNotificationChannelSetting(client, parameters, options),
       updateMemberNotificationChannelSetting: (
         parameters: UpdateMemberNotificationChannelSetting,
-      ): Promise<NotificationChannelSettings> => members.updateMemberNotificationChannelSetting(client, parameters),
+        options?: RequestOptions,
+      ): Promise<NotificationChannelSettings> =>
+        members.updateMemberNotificationChannelSetting(client, parameters, options),
       updateMemberNotificationChannelBlockedKey: (
         parameters: UpdateMemberNotificationChannelBlockedKey,
-      ): Promise<NotificationChannelSettings> => members.updateMemberNotificationChannelBlockedKey(client, parameters),
+        options?: RequestOptions,
+      ): Promise<NotificationChannelSettings> =>
+        members.updateMemberNotificationChannelBlockedKey(client, parameters, options),
     },
     notifications: {
-      getNotification: (parameters: GetNotification): Promise<Notification> =>
-        notifications.getNotification(client, parameters),
-      updateNotification: (parameters: UpdateNotification): Promise<Notification> =>
-        notifications.updateNotification(client, parameters),
-      getNotificationField: <T = unknown>(parameters: GetNotificationField): Promise<FieldValue<T>> =>
-        notifications.getNotificationField<T>(client, parameters),
-      markAllNotificationsRead: (parameters: MarkAllNotificationsRead): Promise<void> =>
-        notifications.markAllNotificationsRead(client, parameters),
-      updateNotificationUnreadStatus: (parameters: UpdateNotificationUnreadStatus): Promise<Notification> =>
-        notifications.updateNotificationUnreadStatus(client, parameters),
-      getNotificationBoard: (parameters: GetNotificationBoard): Promise<Board> =>
-        notifications.getNotificationBoard(client, parameters),
-      getNotificationCard: (parameters: GetNotificationCard): Promise<Card> =>
-        notifications.getNotificationCard(client, parameters),
-      getNotificationList: (parameters: GetNotificationList): Promise<TrelloList> =>
-        notifications.getNotificationList(client, parameters),
-      getNotificationMember: (parameters: GetNotificationMember): Promise<Member> =>
-        notifications.getNotificationMember(client, parameters),
-      getNotificationCreator: (parameters: GetNotificationCreator): Promise<Member> =>
-        notifications.getNotificationCreator(client, parameters),
-      getNotificationOrganization: (parameters: GetNotificationOrganization): Promise<Organization> =>
-        notifications.getNotificationOrganization(client, parameters),
+      getNotification: (parameters: GetNotification, options?: RequestOptions): Promise<Notification> =>
+        notifications.getNotification(client, parameters, options),
+      updateNotification: (parameters: UpdateNotification, options?: RequestOptions): Promise<Notification> =>
+        notifications.updateNotification(client, parameters, options),
+      getNotificationField: <T = unknown>(
+        parameters: GetNotificationField,
+        options?: RequestOptions,
+      ): Promise<FieldValue<T>> => notifications.getNotificationField<T>(client, parameters, options),
+      markAllNotificationsRead: (parameters: MarkAllNotificationsRead, options?: RequestOptions): Promise<void> =>
+        notifications.markAllNotificationsRead(client, parameters, options),
+      updateNotificationUnreadStatus: (
+        parameters: UpdateNotificationUnreadStatus,
+        options?: RequestOptions,
+      ): Promise<Notification> => notifications.updateNotificationUnreadStatus(client, parameters, options),
+      getNotificationBoard: (parameters: GetNotificationBoard, options?: RequestOptions): Promise<Board> =>
+        notifications.getNotificationBoard(client, parameters, options),
+      getNotificationCard: (parameters: GetNotificationCard, options?: RequestOptions): Promise<Card> =>
+        notifications.getNotificationCard(client, parameters, options),
+      getNotificationList: (parameters: GetNotificationList, options?: RequestOptions): Promise<TrelloList> =>
+        notifications.getNotificationList(client, parameters, options),
+      getNotificationMember: (parameters: GetNotificationMember, options?: RequestOptions): Promise<Member> =>
+        notifications.getNotificationMember(client, parameters, options),
+      getNotificationCreator: (parameters: GetNotificationCreator, options?: RequestOptions): Promise<Member> =>
+        notifications.getNotificationCreator(client, parameters, options),
+      getNotificationOrganization: (
+        parameters: GetNotificationOrganization,
+        options?: RequestOptions,
+      ): Promise<Organization> => notifications.getNotificationOrganization(client, parameters, options),
     },
     organizations: {
-      createOrganization: (parameters: CreateOrganization): Promise<Organization> =>
-        organizations.createOrganization(client, parameters),
-      getOrganization: (parameters: GetOrganization): Promise<Organization> =>
-        organizations.getOrganization(client, parameters),
-      updateOrganization: (parameters: UpdateOrganization): Promise<Organization> =>
-        organizations.updateOrganization(client, parameters),
-      deleteOrganization: (parameters: DeleteOrganization): Promise<void> =>
-        organizations.deleteOrganization(client, parameters),
-      getOrganizationField: <T = unknown>(parameters: GetOrganizationField): Promise<FieldValue<T>> =>
-        organizations.getOrganizationField<T>(client, parameters),
-      getOrganizationActions: (parameters: GetOrganizationActions): Promise<Action[]> =>
-        organizations.getOrganizationActions(client, parameters),
-      getOrganizationBoards: (parameters: GetOrganizationBoards): Promise<Board[]> =>
-        organizations.getOrganizationBoards(client, parameters),
-      getOrganizationExports: (parameters: GetOrganizationExports): Promise<Export[]> =>
-        organizations.getOrganizationExports(client, parameters),
-      createOrganizationExport: (parameters: CreateOrganizationExport): Promise<Export> =>
-        organizations.createOrganizationExport(client, parameters),
-      getOrganizationMembers: (parameters: GetOrganizationMembers): Promise<Member[]> =>
-        organizations.getOrganizationMembers(client, parameters),
-      updateOrganizationMembers: (parameters: UpdateOrganizationMembers): Promise<void> =>
-        organizations.updateOrganizationMembers(client, parameters),
-      getOrganizationMemberships: (parameters: GetOrganizationMemberships): Promise<Memberships[]> =>
-        organizations.getOrganizationMemberships(client, parameters),
-      getOrganizationMembership: (parameters: GetOrganizationMembership): Promise<Memberships> =>
-        organizations.getOrganizationMembership(client, parameters),
-      getOrganizationPluginData: (parameters: GetOrganizationPluginData): Promise<PluginData[]> =>
-        organizations.getOrganizationPluginData(client, parameters),
-      getOrganizationTags: (parameters: GetOrganizationTags): Promise<Tag[]> =>
-        organizations.getOrganizationTags(client, parameters),
-      createOrganizationTag: (parameters: CreateOrganizationTag): Promise<Tag> =>
-        organizations.createOrganizationTag(client, parameters),
-      updateOrganizationMember: (parameters: UpdateOrganizationMember): Promise<Member> =>
-        organizations.updateOrganizationMember(client, parameters),
-      removeOrganizationMember: (parameters: RemoveOrganizationMember): Promise<void> =>
-        organizations.removeOrganizationMember(client, parameters),
-      deactivateOrganizationMember: (parameters: DeactivateOrganizationMember): Promise<void> =>
-        organizations.deactivateOrganizationMember(client, parameters),
-      uploadOrganizationLogo: (parameters: UploadOrganizationLogo): Promise<Organization> =>
-        organizations.uploadOrganizationLogo(client, parameters),
-      deleteOrganizationLogo: (parameters: DeleteOrganizationLogo): Promise<void> =>
-        organizations.deleteOrganizationLogo(client, parameters),
-      removeOrganizationMemberFromAllBoards: (parameters: RemoveOrganizationMemberFromAllBoards): Promise<void> =>
-        organizations.removeOrganizationMemberFromAllBoards(client, parameters),
-      deleteOrganizationAssociatedDomain: (parameters: DeleteOrganizationAssociatedDomain): Promise<void> =>
-        organizations.deleteOrganizationAssociatedDomain(client, parameters),
-      deleteOrganizationInviteRestriction: (parameters: DeleteOrganizationInviteRestriction): Promise<void> =>
-        organizations.deleteOrganizationInviteRestriction(client, parameters),
-      deleteOrganizationTag: (parameters: DeleteOrganizationTag): Promise<void> =>
-        organizations.deleteOrganizationTag(client, parameters),
-      getOrganizationNewBillableGuests: (parameters: GetOrganizationNewBillableGuests): Promise<unknown> =>
-        organizations.getOrganizationNewBillableGuests(client, parameters),
+      createOrganization: (parameters: CreateOrganization, options?: RequestOptions): Promise<Organization> =>
+        organizations.createOrganization(client, parameters, options),
+      getOrganization: (parameters: GetOrganization, options?: RequestOptions): Promise<Organization> =>
+        organizations.getOrganization(client, parameters, options),
+      updateOrganization: (parameters: UpdateOrganization, options?: RequestOptions): Promise<Organization> =>
+        organizations.updateOrganization(client, parameters, options),
+      deleteOrganization: (parameters: DeleteOrganization, options?: RequestOptions): Promise<void> =>
+        organizations.deleteOrganization(client, parameters, options),
+      getOrganizationField: <T = unknown>(
+        parameters: GetOrganizationField,
+        options?: RequestOptions,
+      ): Promise<FieldValue<T>> => organizations.getOrganizationField<T>(client, parameters, options),
+      getOrganizationActions: (parameters: GetOrganizationActions, options?: RequestOptions): Promise<Action[]> =>
+        organizations.getOrganizationActions(client, parameters, options),
+      getOrganizationBoards: (parameters: GetOrganizationBoards, options?: RequestOptions): Promise<Board[]> =>
+        organizations.getOrganizationBoards(client, parameters, options),
+      getOrganizationExports: (parameters: GetOrganizationExports, options?: RequestOptions): Promise<Export[]> =>
+        organizations.getOrganizationExports(client, parameters, options),
+      createOrganizationExport: (parameters: CreateOrganizationExport, options?: RequestOptions): Promise<Export> =>
+        organizations.createOrganizationExport(client, parameters, options),
+      getOrganizationMembers: (parameters: GetOrganizationMembers, options?: RequestOptions): Promise<Member[]> =>
+        organizations.getOrganizationMembers(client, parameters, options),
+      updateOrganizationMembers: (parameters: UpdateOrganizationMembers, options?: RequestOptions): Promise<void> =>
+        organizations.updateOrganizationMembers(client, parameters, options),
+      getOrganizationMemberships: (
+        parameters: GetOrganizationMemberships,
+        options?: RequestOptions,
+      ): Promise<Memberships[]> => organizations.getOrganizationMemberships(client, parameters, options),
+      getOrganizationMembership: (
+        parameters: GetOrganizationMembership,
+        options?: RequestOptions,
+      ): Promise<Memberships> => organizations.getOrganizationMembership(client, parameters, options),
+      getOrganizationPluginData: (
+        parameters: GetOrganizationPluginData,
+        options?: RequestOptions,
+      ): Promise<PluginData[]> => organizations.getOrganizationPluginData(client, parameters, options),
+      getOrganizationTags: (parameters: GetOrganizationTags, options?: RequestOptions): Promise<Tag[]> =>
+        organizations.getOrganizationTags(client, parameters, options),
+      createOrganizationTag: (parameters: CreateOrganizationTag, options?: RequestOptions): Promise<Tag> =>
+        organizations.createOrganizationTag(client, parameters, options),
+      updateOrganizationMember: (parameters: UpdateOrganizationMember, options?: RequestOptions): Promise<Member> =>
+        organizations.updateOrganizationMember(client, parameters, options),
+      removeOrganizationMember: (parameters: RemoveOrganizationMember, options?: RequestOptions): Promise<void> =>
+        organizations.removeOrganizationMember(client, parameters, options),
+      deactivateOrganizationMember: (
+        parameters: DeactivateOrganizationMember,
+        options?: RequestOptions,
+      ): Promise<void> => organizations.deactivateOrganizationMember(client, parameters, options),
+      uploadOrganizationLogo: (parameters: UploadOrganizationLogo, options?: RequestOptions): Promise<Organization> =>
+        organizations.uploadOrganizationLogo(client, parameters, options),
+      deleteOrganizationLogo: (parameters: DeleteOrganizationLogo, options?: RequestOptions): Promise<void> =>
+        organizations.deleteOrganizationLogo(client, parameters, options),
+      removeOrganizationMemberFromAllBoards: (
+        parameters: RemoveOrganizationMemberFromAllBoards,
+        options?: RequestOptions,
+      ): Promise<void> => organizations.removeOrganizationMemberFromAllBoards(client, parameters, options),
+      deleteOrganizationAssociatedDomain: (
+        parameters: DeleteOrganizationAssociatedDomain,
+        options?: RequestOptions,
+      ): Promise<void> => organizations.deleteOrganizationAssociatedDomain(client, parameters, options),
+      deleteOrganizationInviteRestriction: (
+        parameters: DeleteOrganizationInviteRestriction,
+        options?: RequestOptions,
+      ): Promise<void> => organizations.deleteOrganizationInviteRestriction(client, parameters, options),
+      deleteOrganizationTag: (parameters: DeleteOrganizationTag, options?: RequestOptions): Promise<void> =>
+        organizations.deleteOrganizationTag(client, parameters, options),
+      getOrganizationNewBillableGuests: (
+        parameters: GetOrganizationNewBillableGuests,
+        options?: RequestOptions,
+      ): Promise<unknown> => organizations.getOrganizationNewBillableGuests(client, parameters, options),
     },
     plugins: {
-      getPlugin: (parameters: GetPlugin): Promise<Plugin> => plugins.getPlugin(client, parameters),
-      updatePlugin: (parameters: UpdatePlugin): Promise<Plugin> => plugins.updatePlugin(client, parameters),
-      createPluginListing: (parameters: CreatePluginListing): Promise<PluginListing> =>
-        plugins.createPluginListing(client, parameters),
-      getPluginMemberPrivacyCompliance: (parameters: GetPluginMemberPrivacyCompliance): Promise<void> =>
-        plugins.getPluginMemberPrivacyCompliance(client, parameters),
-      updatePluginListing: (parameters: UpdatePluginListing): Promise<PluginListing> =>
-        plugins.updatePluginListing(client, parameters),
+      getPlugin: (parameters: GetPlugin, options?: RequestOptions): Promise<Plugin> =>
+        plugins.getPlugin(client, parameters, options),
+      updatePlugin: (parameters: UpdatePlugin, options?: RequestOptions): Promise<Plugin> =>
+        plugins.updatePlugin(client, parameters, options),
+      createPluginListing: (parameters: CreatePluginListing, options?: RequestOptions): Promise<PluginListing> =>
+        plugins.createPluginListing(client, parameters, options),
+      getPluginMemberPrivacyCompliance: (
+        parameters: GetPluginMemberPrivacyCompliance,
+        options?: RequestOptions,
+      ): Promise<void> => plugins.getPluginMemberPrivacyCompliance(client, parameters, options),
+      updatePluginListing: (parameters: UpdatePluginListing, options?: RequestOptions): Promise<PluginListing> =>
+        plugins.updatePluginListing(client, parameters, options),
     },
     search: {
-      search: (parameters: Search): Promise<SearchResult> => search.search(client, parameters),
-      searchMembers: (parameters: SearchMembers): Promise<Member[]> => search.searchMembers(client, parameters),
+      search: (parameters: Search, options?: RequestOptions): Promise<SearchResult> =>
+        search.search(client, parameters, options),
+      searchMembers: (parameters: SearchMembers, options?: RequestOptions): Promise<Member[]> =>
+        search.searchMembers(client, parameters, options),
     },
     tokens: {
-      getToken: (parameters: GetToken): Promise<Token> => tokens.getToken(client, parameters),
-      getTokenMember: (parameters: GetTokenMember): Promise<Member> => tokens.getTokenMember(client, parameters),
-      getTokenWebhooks: (parameters: GetTokenWebhooks): Promise<Webhook[]> =>
-        tokens.getTokenWebhooks(client, parameters),
-      createTokenWebhook: (parameters: CreateTokenWebhook): Promise<Webhook> =>
-        tokens.createTokenWebhook(client, parameters),
-      getTokenWebhook: (parameters: GetTokenWebhook): Promise<Webhook> => tokens.getTokenWebhook(client, parameters),
-      updateTokenWebhook: (parameters: UpdateTokenWebhook): Promise<void> =>
-        tokens.updateTokenWebhook(client, parameters),
-      deleteTokenWebhook: (parameters: DeleteTokenWebhook): Promise<void> =>
-        tokens.deleteTokenWebhook(client, parameters),
-      deleteToken: (parameters: DeleteToken): Promise<void> => tokens.deleteToken(client, parameters),
+      getToken: (parameters: GetToken, options?: RequestOptions): Promise<Token> =>
+        tokens.getToken(client, parameters, options),
+      getTokenMember: (parameters: GetTokenMember, options?: RequestOptions): Promise<Member> =>
+        tokens.getTokenMember(client, parameters, options),
+      getTokenWebhooks: (parameters: GetTokenWebhooks, options?: RequestOptions): Promise<Webhook[]> =>
+        tokens.getTokenWebhooks(client, parameters, options),
+      createTokenWebhook: (parameters: CreateTokenWebhook, options?: RequestOptions): Promise<Webhook> =>
+        tokens.createTokenWebhook(client, parameters, options),
+      getTokenWebhook: (parameters: GetTokenWebhook, options?: RequestOptions): Promise<Webhook> =>
+        tokens.getTokenWebhook(client, parameters, options),
+      updateTokenWebhook: (parameters: UpdateTokenWebhook, options?: RequestOptions): Promise<void> =>
+        tokens.updateTokenWebhook(client, parameters, options),
+      deleteTokenWebhook: (parameters: DeleteTokenWebhook, options?: RequestOptions): Promise<void> =>
+        tokens.deleteTokenWebhook(client, parameters, options),
+      deleteToken: (parameters: DeleteToken, options?: RequestOptions): Promise<void> =>
+        tokens.deleteToken(client, parameters, options),
     },
     webhooks: {
-      createWebhook: (parameters: CreateWebhook): Promise<Webhook> => webhooks.createWebhook(client, parameters),
-      getWebhook: (parameters: GetWebhook): Promise<Webhook> => webhooks.getWebhook(client, parameters),
-      updateWebhook: (parameters: UpdateWebhook): Promise<Webhook> => webhooks.updateWebhook(client, parameters),
-      deleteWebhook: (parameters: DeleteWebhook): Promise<void> => webhooks.deleteWebhook(client, parameters),
-      getWebhookField: <T = unknown>(parameters: GetWebhookField): Promise<FieldValue<T>> =>
-        webhooks.getWebhookField<T>(client, parameters),
+      createWebhook: (parameters: CreateWebhook, options?: RequestOptions): Promise<Webhook> =>
+        webhooks.createWebhook(client, parameters, options),
+      getWebhook: (parameters: GetWebhook, options?: RequestOptions): Promise<Webhook> =>
+        webhooks.getWebhook(client, parameters, options),
+      updateWebhook: (parameters: UpdateWebhook, options?: RequestOptions): Promise<Webhook> =>
+        webhooks.updateWebhook(client, parameters, options),
+      deleteWebhook: (parameters: DeleteWebhook, options?: RequestOptions): Promise<void> =>
+        webhooks.deleteWebhook(client, parameters, options),
+      getWebhookField: <T = unknown>(parameters: GetWebhookField, options?: RequestOptions): Promise<FieldValue<T>> =>
+        webhooks.getWebhookField<T>(client, parameters, options),
     },
   };
 }
