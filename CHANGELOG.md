@@ -24,6 +24,24 @@
 
 ### Changed
 
+- **`Action` is now a union discriminated on `type`.** Twenty-nine action types carry their own `data` shape, so `action.data.text` on a `commentCard` is a `string` rather than `any`, and reading a field that type does not have is a compile error instead of `undefined` at runtime.
+
+  ```ts
+  const action = await trello.actions.getAction({ id });
+
+  if (action.type === 'commentCard') {
+    console.log(action.data.text);
+  }
+  ```
+
+  This breaks code that reads `action.data.<field>` without narrowing first: `data` no longer has an index signature on the branched types. Narrowing on `type` is the fix, and it is the only one, because the field genuinely is not there on the other twenty-eight.
+
+  Each branch is its own exported model and schema, `ActionCommentCard` with `ActionCommentCardSchema` and so on for all twenty-nine, built over the shared `ActionDataBoard`, `ActionDataCard`, `ActionDataList`, `ActionDataOrganization`, `ActionDataMember`, `ActionDataChecklist`, `ActionDataCustomField`, `ActionDataAttachment` and `ActionDataCheckItem` shapes. The branched types are `addAttachmentToCard`, `addChecklistToCard`, `addMemberToBoard`, `addMemberToCard`, `addToOrganizationBoard`, `commentCard`, `convertToCardFromCheckItem`, `copyCard`, `copyCommentCard`, `createBoard`, `createCard`, `createCustomField`, `createList`, `createOrganization`, `deleteAttachmentFromCard`, `deleteCard`, `makeAdminOfBoard`, `makeNormalMemberOfBoard`, `moveCardFromBoard`, `moveCardToBoard`, `moveListFromBoard`, `moveListToBoard`, `removeChecklistFromCard`, `removeMemberFromCard`, `updateBoard`, `updateCard`, `updateCheckItemStateOnCard`, `updateList` and `updateOrganization`.
+
+  The union ends in an open branch, `ActionUnknown`, whose `data` stays `Record<string, any>`. An action type Trello adds tomorrow still parses, and an account whose history holds a type this list does not name still reads without a `ZodError`. The cost is that the schema cannot itself report drift inside a branched type, so a live test does that instead: it builds a workspace that produces most of the twenty-nine types, reads the account history as well, parses every action against its own branch, and prints the types it saw that no branch covers.
+
+  The shapes are observations, not readings of the spec, which documents `data` as a free-form object. A key present in every sample of its type is required and everything else is optional, on 249 actions from a purpose-built fixture and from this account's history. Adding or removing a label is not its own type, for one: it arrives as `updateCard` carrying `old.idLabels`.
+
 - **Fifteen fields that were typed `unknown`, `unknown[]` or `Record<string, any>` now carry the shape the live API sends.** The shapes are observations rather than readings of the spec: only fields the live suites could populate were typed. Everything still unobservable from this account (`Organization.powerUps`, `Card.customFieldItems`, `Token.webhooks`, the enterprise and licence fields) is left exactly as it was.
 
   | Model | Field | Was | Now |

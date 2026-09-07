@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, assert } from 'vitest';
 import type { TrelloClient } from '../../src/createTrelloClient';
 import { getLiveClient, getRawLiveClient } from './setup/client';
 import { ResourceTracker } from './setup/resources';
@@ -112,12 +112,14 @@ describe('Actions', () => {
       const updated = await trello.actions.updateAction({ id: commentActionId, text: newText });
       expect(updated.id).toBe(commentActionId);
       expect(updated.type).toBe('commentCard');
+      assert(updated.type === 'commentCard');
       expect(updated.data.text).toBe(newText);
     });
 
     it('updateActionText also updates the comment text', async () => {
       const newText = testName('text-updated-comment');
       const updated = await trello.actions.updateActionText({ id: commentActionId, value: newText });
+      assert(updated.type === 'commentCard');
       expect(updated.data.text).toBe(newText);
     });
   });
