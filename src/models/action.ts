@@ -1,82 +1,68 @@
 import { z } from 'zod';
-import { apiObject } from '#/core';
-import { LimitsSchema } from '#/models/limits';
-import { MemberSchema } from '#/models/member';
+import { ActionUpdateCardSchema } from '#/models/actionUpdateCard';
+import { ActionCreateCardSchema } from '#/models/actionCreateCard';
+import { ActionCreateOrganizationSchema } from '#/models/actionCreateOrganization';
+import { ActionCreateListSchema } from '#/models/actionCreateList';
+import { ActionCommentCardSchema } from '#/models/actionCommentCard';
+import { ActionUpdateListSchema } from '#/models/actionUpdateList';
+import { ActionAddToOrganizationBoardSchema } from '#/models/actionAddToOrganizationBoard';
+import { ActionCreateBoardSchema } from '#/models/actionCreateBoard';
+import { ActionUpdateBoardSchema } from '#/models/actionUpdateBoard';
+import { ActionAddAttachmentToCardSchema } from '#/models/actionAddAttachmentToCard';
+import { ActionCreateCustomFieldSchema } from '#/models/actionCreateCustomField';
+import { ActionAddChecklistToCardSchema } from '#/models/actionAddChecklistToCard';
+import { ActionRemoveChecklistFromCardSchema } from '#/models/actionRemoveChecklistFromCard';
+import { ActionUpdateOrganizationSchema } from '#/models/actionUpdateOrganization';
+import { ActionDeleteAttachmentFromCardSchema } from '#/models/actionDeleteAttachmentFromCard';
+import { ActionConvertToCardFromCheckItemSchema } from '#/models/actionConvertToCardFromCheckItem';
+import { ActionUpdateCheckItemStateOnCardSchema } from '#/models/actionUpdateCheckItemStateOnCard';
+import { ActionAddMemberToCardSchema } from '#/models/actionAddMemberToCard';
+import { ActionRemoveMemberFromCardSchema } from '#/models/actionRemoveMemberFromCard';
+import { ActionMoveCardToBoardSchema } from '#/models/actionMoveCardToBoard';
+import { ActionMoveCardFromBoardSchema } from '#/models/actionMoveCardFromBoard';
+import { ActionMoveListToBoardSchema } from '#/models/actionMoveListToBoard';
+import { ActionMoveListFromBoardSchema } from '#/models/actionMoveListFromBoard';
+import { ActionCopyCardSchema } from '#/models/actionCopyCard';
+import { ActionCopyCommentCardSchema } from '#/models/actionCopyCommentCard';
+import { ActionDeleteCardSchema } from '#/models/actionDeleteCard';
+import { ActionAddMemberToBoardSchema } from '#/models/actionAddMemberToBoard';
+import { ActionMakeAdminOfBoardSchema } from '#/models/actionMakeAdminOfBoard';
+import { ActionMakeNormalMemberOfBoardSchema } from '#/models/actionMakeNormalMemberOfBoard';
+import { ActionUnknownSchema } from '#/models/actionUnknown';
 
-export const ActionSchema = apiObject({
-  id: z.string(),
-  idMemberCreator: z.string(),
-  data: z.record(z.string(), z.any()),
-  type: z.string(),
-  date: z.coerce.date(),
-  limits: LimitsSchema.nullish(),
-  display: apiObject({
-    translationKey: z.string().optional(),
-    entities: apiObject({
-      contextOn: apiObject({
-        type: z.string().optional(),
-        translationKey: z.string().optional(),
-        hideIfContext: z.boolean().optional(),
-        idContext: z.string().optional(),
-      }).optional(),
-      card: apiObject({
-        type: z.string().optional(),
-        hideIfContext: z.boolean().optional(),
-        id: z.string(),
-        shortLink: z.string().optional(),
-        text: z.string().optional(),
-      }).optional(),
-      comment: apiObject({
-        type: z.string().optional(),
-        text: z.string().optional(),
-      }).optional(),
-      memberCreator: apiObject({
-        type: z.string().optional(),
-        id: z.string(),
-        username: z.string().optional(),
-        text: z.string().optional(),
-      }).optional(),
-    }).optional(),
-  }).optional(),
-  memberCreator: apiObject({
-    id: z.string(),
-    activityBlocked: z.boolean().optional(),
-    avatarHash: z.string().optional(),
-    avatarUrl: z.string().optional(),
-    fullName: z.string().optional(),
-    idMemberReferrer: z.string().nullish(),
-    initials: z.string().optional(),
-    username: z.string().optional(),
-    nonPublic: z.record(z.string(), z.any()).optional(),
-    nonPublicAvailable: z.boolean().optional(),
-  }).optional(),
-  /** Agentic identity associated with the action, present when it was performed by an agent rather than a human member. */
-  agenticIdentity: z.unknown().optional(),
-  appCreator: apiObject({
-    id: z.string(),
-    authType: z.string(),
-  }).nullish(),
-  entities: z
-    .array(
-      apiObject({
-        type: z.string(),
-        id: z.string().optional(),
-        text: z.string().optional(),
-        username: z.string().optional(),
-        shortLink: z.string().optional(),
-        hideIfContext: z.boolean().optional(),
-        idContext: z.string().optional(),
-        closed: z.boolean().optional(),
-        due: z.coerce.date().optional(),
-        dueComplete: z.boolean().optional(),
-        date: z.coerce.date().optional(),
-        link: z.boolean().optional(),
-        url: z.string().optional(),
-        originalUrl: z.string().optional(),
-      }),
-    )
-    .optional(),
-  member: MemberSchema.nullish(),
-});
+export const ActionSchema = z.union([
+  z.discriminatedUnion('type', [
+    ActionUpdateCardSchema,
+    ActionCreateCardSchema,
+    ActionCreateOrganizationSchema,
+    ActionCreateListSchema,
+    ActionCommentCardSchema,
+    ActionUpdateListSchema,
+    ActionAddToOrganizationBoardSchema,
+    ActionCreateBoardSchema,
+    ActionUpdateBoardSchema,
+    ActionAddAttachmentToCardSchema,
+    ActionCreateCustomFieldSchema,
+    ActionAddChecklistToCardSchema,
+    ActionRemoveChecklistFromCardSchema,
+    ActionUpdateOrganizationSchema,
+    ActionDeleteAttachmentFromCardSchema,
+    ActionConvertToCardFromCheckItemSchema,
+    ActionUpdateCheckItemStateOnCardSchema,
+    ActionAddMemberToCardSchema,
+    ActionRemoveMemberFromCardSchema,
+    ActionMoveCardToBoardSchema,
+    ActionMoveCardFromBoardSchema,
+    ActionMoveListToBoardSchema,
+    ActionMoveListFromBoardSchema,
+    ActionCopyCardSchema,
+    ActionCopyCommentCardSchema,
+    ActionDeleteCardSchema,
+    ActionAddMemberToBoardSchema,
+    ActionMakeAdminOfBoardSchema,
+    ActionMakeNormalMemberOfBoardSchema,
+  ]),
+  ActionUnknownSchema,
+]);
 
 export type Action = z.infer<typeof ActionSchema>;
