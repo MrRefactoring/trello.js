@@ -1,30 +1,12 @@
 # Trello.js changelog
 
-## Unreleased
+## v2.3.0 (2026-09-08)
 
-### Fixed
-
-- `Organization` gained `trial`, the object Trello now returns on every workspace: `{ eligible: boolean, endDate: Date | null }`. It was silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking `getMemberOrganizations`. `endDate` reads as `null` on every workspace reachable from this account, so its populated shape is still unobserved.
-- `Prefs.invitations` is now `string` instead of `unknown`, which it was typed on the assumption the name implied a list. Trello sends `"members"` on every board reachable from this account, so the value was there all along and unusable without a cast.
-
-### Deprecated
-
-- **`Organization.eligibleForTrial`.** Trello stopped sending it, and `trial.eligible` replaces it. The field stays optional so reading it still compiles, and goes at the next major version.
-
-### Added
-
-- **Request cancellation.** Every endpoint method takes an optional last argument, `{ signal }`, typed by the new `RequestOptions` exported from `trello.js/core`. The signal reaches `fetch` unchanged, and it also cuts short a 429 backoff still counting down instead of letting it run its full 2/4/8 seconds. The argument is optional everywhere, so existing calls are unaffected; `batch.run` is the one exception, since its requests share a single HTTP call.
-
-  ```ts
-  const board = await trello.boards.getBoard({ id }, { signal: AbortSignal.timeout(5_000) });
-  ```
-
-- `SendRequestOptions` gained `signal`, so a custom `Client` implementation receives it too.
-- **`entities` on the five actions-list endpoints.** `getBoardActions`, `getCardActions`, `getListActions`, `getMemberActions` and `getOrganizationActions` take `entities: boolean`. Trello sends `Action.entities` only when it is asked for, so the field the schema declared was unreachable through this client.
+**Read this one if you touch `action.data` anywhere.** `Action` is now a union discriminated on `type`, so `data` carries the shape its type actually sends instead of `Record<string, any>`, and reading a field off it without narrowing on `type` first stops compiling. That is a compile break in a minor release, which is worth naming rather than burying: nothing changes at runtime, every response that parsed before still parses, and the fix is an `if` on `type`. If the deadline is today, `ActionUnknown` is exported and `(action as ActionUnknown).data.text` reads `any` again. It hands back exactly the blindness this release removes, so treat it as a bookmark rather than a fix.
 
 ### Changed
 
-- **`Action` is now a union discriminated on `type`.** Twenty-nine action types carry their own `data` shape, so `action.data.text` on a `commentCard` is a `string` rather than `any`, and reading a field that type does not have is a compile error instead of `undefined` at runtime.
+- **`Action` is a union discriminated on `type`.** Twenty-nine action types carry their own `data` shape, so `action.data.text` on a `commentCard` is a `string`, and reading a field that type does not have is a compile error instead of `undefined` at runtime.
 
   ```ts
   const action = await trello.actions.getAction({ id });
@@ -34,15 +16,15 @@
   }
   ```
 
-  This breaks code that reads `action.data.<field>` without narrowing first: `data` no longer has an index signature on the branched types. Narrowing on `type` is the fix, and it is the only one, because the field genuinely is not there on the other twenty-eight.
+  A branched type's `data` no longer carries an index signature, so narrowing is the fix and the only honest one: on the other twenty-eight types the field genuinely is not there.
 
-  Each branch is its own exported model and schema, `ActionCommentCard` with `ActionCommentCardSchema` and so on for all twenty-nine, built over the shared `ActionDataBoard`, `ActionDataCard`, `ActionDataList`, `ActionDataOrganization`, `ActionDataMember`, `ActionDataChecklist`, `ActionDataCustomField`, `ActionDataAttachment` and `ActionDataCheckItem` shapes. The branched types are `addAttachmentToCard`, `addChecklistToCard`, `addMemberToBoard`, `addMemberToCard`, `addToOrganizationBoard`, `commentCard`, `convertToCardFromCheckItem`, `copyCard`, `copyCommentCard`, `createBoard`, `createCard`, `createCustomField`, `createList`, `createOrganization`, `deleteAttachmentFromCard`, `deleteCard`, `makeAdminOfBoard`, `makeNormalMemberOfBoard`, `moveCardFromBoard`, `moveCardToBoard`, `moveListFromBoard`, `moveListToBoard`, `removeChecklistFromCard`, `removeMemberFromCard`, `updateBoard`, `updateCard`, `updateCheckItemStateOnCard`, `updateList` and `updateOrganization`.
+  Each branch is an exported model and schema of its own, `ActionCommentCard` with `ActionCommentCardSchema` and so on for all twenty-nine, built over the shared `ActionDataBoard`, `ActionDataCard`, `ActionDataList`, `ActionDataOrganization`, `ActionDataMember`, `ActionDataChecklist`, `ActionDataCustomField`, `ActionDataAttachment` and `ActionDataCheckItem` shapes. The branched types are `addAttachmentToCard`, `addChecklistToCard`, `addMemberToBoard`, `addMemberToCard`, `addToOrganizationBoard`, `commentCard`, `convertToCardFromCheckItem`, `copyCard`, `copyCommentCard`, `createBoard`, `createCard`, `createCustomField`, `createList`, `createOrganization`, `deleteAttachmentFromCard`, `deleteCard`, `makeAdminOfBoard`, `makeNormalMemberOfBoard`, `moveCardFromBoard`, `moveCardToBoard`, `moveListFromBoard`, `moveListToBoard`, `removeChecklistFromCard`, `removeMemberFromCard`, `updateBoard`, `updateCard`, `updateCheckItemStateOnCard`, `updateList` and `updateOrganization`.
 
-  The union ends in an open branch, `ActionUnknown`, whose `data` stays `Record<string, any>`. An action type Trello adds tomorrow still parses, and an account whose history holds a type this list does not name still reads without a `ZodError`. The cost is that the schema cannot itself report drift inside a branched type, so a live test does that instead: it builds a workspace that produces most of the twenty-nine types, reads the account history as well, parses every action against its own branch, and prints the types it saw that no branch covers.
+  The union ends in an open branch, `ActionUnknown`, whose `data` stays `Record<string, any>`. An action type Trello ships next month parses, and so does an account whose history holds one of the many types this list does not name. The cost is that the schema can no longer report drift inside a branched type, so a live suite does that instead: it builds a workspace that produces most of the twenty-nine, reads the account history as well, parses every action against its own branch, and prints the types no branch covers without failing on them.
 
-  The shapes are observations, not readings of the spec, which documents `data` as a free-form object. A key present in every sample of its type is required and everything else is optional, on 249 actions from a purpose-built fixture and from this account's history. Adding or removing a label is not its own type, for one: it arrives as `updateCard` carrying `old.idLabels`.
+  The shapes are observations, not readings of the spec, which documents `data` as a free-form object. A key present in every sample of its type is required and everything else optional, across 249 actions from a purpose-built fixture and from account history. Adding or removing a label is not its own action type, for one: it arrives as `updateCard` carrying `old.idLabels`.
 
-- **Fifteen fields that were typed `unknown`, `unknown[]` or `Record<string, any>` now carry the shape the live API sends.** The shapes are observations rather than readings of the spec: only fields the live suites could populate were typed. Everything still unobservable from this account (`Organization.powerUps`, `Card.customFieldItems`, `Token.webhooks`, the enterprise and licence fields) is left exactly as it was.
+- **Fifteen fields that were typed `unknown`, `unknown[]` or `Record<string, any>` now carry the shape the live API sends.** These are observations rather than readings of the spec: only fields the live suites could populate were typed. Everything still unobservable from this account (`Organization.powerUps`, `Card.customFieldItems`, `Token.webhooks`, the enterprise and licence fields) is left exactly as it was.
 
   | Model | Field | Was | Now |
   | --- | --- | --- | --- |
@@ -61,6 +43,26 @@
   | `SearchResult` | `options` | `Record<string, any>` | `{ terms, modifiers, modelTypes, partial }` |
 
   Nothing at the top level became required, because Trello's `fields` parameter prunes it and nothing but `id` survives `?fields=name`. Nested properties are not pruned, so ones present in every sample are typed as required, `Action.entities[].type` and `Organization.credits[].applied` among them. That is the one risk here: should Trello stop sending one, the response raises `ZodError` instead of parsing without it.
+
+### Added
+
+- **Request cancellation.** Every endpoint method takes an optional last argument, `{ signal }`, typed by the new `RequestOptions` exported from `trello.js/core`. The signal reaches `fetch` unchanged, and it also cuts short a 429 backoff still counting down instead of letting it run its full 2/4/8 seconds. The argument is optional everywhere, so existing calls are unaffected; `batch.run` is the one exception, since its requests share a single HTTP call.
+
+  ```ts
+  const board = await trello.boards.getBoard({ id }, { signal: AbortSignal.timeout(5_000) });
+  ```
+
+- `SendRequestOptions` gained `signal`, so a custom `Client` implementation receives it too.
+- **`entities` on the five actions-list endpoints.** `getBoardActions`, `getCardActions`, `getListActions`, `getMemberActions` and `getOrganizationActions` take `entities: boolean`. Trello sends `Action.entities` only when it is asked for, so the field the schema declared was unreachable through this client.
+
+### Fixed
+
+- `Organization` gained `trial`, the object Trello now returns on every workspace: `{ eligible: boolean, endDate: Date | null }`. It was silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking `getMemberOrganizations`. `endDate` reads as `null` on every workspace reachable from this account, so its populated shape is still unobserved.
+- `Prefs.invitations` is now `string` rather than `unknown`, which it was typed on the assumption the name implied a list. Trello sends `"members"` on every board reachable from this account, so the value was there all along and unusable without a cast.
+
+### Deprecated
+
+- **`Organization.eligibleForTrial`.** Trello stopped sending it, and `trial.eligible` replaces it. The field stays optional so reading it still compiles, and goes at the next major version.
 
 ## v2.2.0 (2026-08-20)
 
