@@ -111,7 +111,6 @@ describe('Actions', () => {
       const newText = testName('updated-comment');
       const updated = await trello.actions.updateAction({ id: commentActionId, text: newText });
       expect(updated.id).toBe(commentActionId);
-      expect(updated.type).toBe('commentCard');
       assert(updated.type === 'commentCard');
       expect(updated.data.text).toBe(newText);
     });
