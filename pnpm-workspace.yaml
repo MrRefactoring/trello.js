@@ -1,2 +1,4 @@
 allowBuilds:
   esbuild: true
+patchedDependencies:
+  typedoc@0.28.20: patches/typedoc@0.28.20.patch
