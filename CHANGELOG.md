@@ -1,6 +1,6 @@
 # Trello.js changelog
 
-## v2.3.0 (2026-09-08)
+## v2.3.0 (2026-09-10)
 
 **Read this one if you touch `action.data` anywhere.** `Action` is now a union discriminated on `type`, so `data` carries the shape its type actually sends instead of `Record<string, any>`, and reading a field off it without narrowing on `type` first stops compiling. That is a compile break in a minor release, which is worth naming rather than burying: nothing changes at runtime, every response that parsed before still parses, and the fix is an `if` on `type`. If the deadline is today, `ActionUnknown` is exported and `(action as ActionUnknown).data.text` reads `any` again. It hands back exactly the blindness this release removes, so treat it as a bookmark rather than a fix.
 
@@ -57,6 +57,7 @@
 
 ### Fixed
 
+- **`fields` on six endpoints asked for a whole object instead of a list of field names.** `getBoardActions`, `getCardActions`, `getListActions`, `getMemberActions` and `getOrganizationActions` typed it as `Action`; `getBoardLabels` typed it as `Label`. Trello's spec is the source: it points those parameters at the object schema rather than at the matching `ActionFields` and `LabelFields` enums. All six now take the shape the other thirty-five `fields` parameters in this client already had, `string | string[]` widened with the documented names for autocomplete, so `fields: 'id,name'` and `fields: ['id', 'name']` both work. Code that passed an `Action` or a `Label` object stops compiling, which is the point: the request it produced was never one the API could answer.
 - `Organization` gained `trial`, the object Trello now returns on every workspace: `{ eligible: boolean, endDate: Date | null }`. It was silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking `getMemberOrganizations`. `endDate` reads as `null` on every workspace reachable from this account, so its populated shape is still unobserved.
 - `Prefs.invitations` is now `string` rather than `unknown`, which it was typed on the assumption the name implied a list. Trello sends `"members"` on every board reachable from this account, so the value was there all along and unusable without a cast.
 

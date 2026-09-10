@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ActionSchema } from '../models';
+import { openEnum } from '#/core';
 
 export const GetListActionsSchema = z.object({
   /** The ID of the list */
@@ -13,7 +13,14 @@ export const GetListActionsSchema = z.object({
    * The fields to be returned for the Actions. [See Action fields
    * here](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#action-object).
    */
-  fields: ActionSchema.optional(),
+  fields: z
+    .union([
+      z.string(),
+      z.array(z.string()),
+      openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
+      z.array(openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator'])),
+    ])
+    .optional(),
   /** The format of the returned Actions. Either list or count. */
   format: z.string().optional(),
   /** A comma-separated list of idModels. Only actions related to these models will be returned. */
