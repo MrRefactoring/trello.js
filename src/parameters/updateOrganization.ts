@@ -17,15 +17,15 @@ export const UpdateOrganizationSchema = z.object({
   /** `1` or `2` */
   'prefs/googleAppsVersion': z.number().optional(),
   /** Who on the Workspace can make Workspace visible boards. One of `admin`, `none`, `org` */
-  'prefs/boardVisibilityRestrict/org': z.union([z.string(), openEnum(['admin', 'none', 'org'])]).optional(),
+  'prefs/boardVisibilityRestrict/org': openEnum(['admin', 'none', 'org']).optional(),
   /** Who can make private boards. One of: `admin`, `none`, `org` */
-  'prefs/boardVisibilityRestrict/private': z.union([z.string(), openEnum(['admin', 'none', 'org'])]).optional(),
+  'prefs/boardVisibilityRestrict/private': openEnum(['admin', 'none', 'org']).optional(),
   /** Who on the Workspace can make public boards. One of: `admin`, `none`, `org` */
-  'prefs/boardVisibilityRestrict/public': z.union([z.string(), openEnum(['admin', 'none', 'org'])]).optional(),
+  'prefs/boardVisibilityRestrict/public': openEnum(['admin', 'none', 'org']).optional(),
   /** An email address with optional wildcard characters. (E.g. `subdomain.*.trello.com`) */
   'prefs/orgInviteRestrict': z.string().optional(),
   /** Whether the Workspace page is publicly visible. One of: `private`, `public` */
-  'prefs/permissionLevel': z.union([z.string(), openEnum(['private', 'public'])]).optional(),
+  'prefs/permissionLevel': openEnum(['private', 'public']).optional(),
   /** The ID or name of the Organization */
   id: z.string(),
 });

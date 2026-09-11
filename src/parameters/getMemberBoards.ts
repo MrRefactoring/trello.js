@@ -12,8 +12,6 @@ export const GetMemberBoardsSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',
@@ -64,8 +62,6 @@ export const GetMemberBoardsSchema = z.object({
    */
   organizationFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'billableMemberCount',

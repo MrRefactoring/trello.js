@@ -5,8 +5,6 @@ export const GetListSchema = z.object({
   /** `all` or a comma separated list of List field names. */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',

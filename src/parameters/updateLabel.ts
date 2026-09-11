@@ -8,12 +8,7 @@ export const UpdateLabelSchema = z.object({
    * The new color for the label. See:
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/) for color options
    */
-  color: z
-    .union([
-      z.string(),
-      openEnum(['yellow', 'purple', 'blue', 'red', 'green', 'orange', 'black', 'sky', 'pink', 'lime']),
-    ])
-    .optional(),
+  color: openEnum(['yellow', 'purple', 'blue', 'red', 'green', 'orange', 'black', 'sky', 'pink', 'lime']).optional(),
   /** The ID of the Label */
   id: z.string(),
 });

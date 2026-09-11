@@ -9,8 +9,6 @@ export const GetBoardActionsSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
       z.array(openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator'])),
     ])

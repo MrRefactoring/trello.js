@@ -12,8 +12,6 @@ export const GetEnterpriseSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',
@@ -43,9 +41,9 @@ export const GetEnterpriseSchema = z.object({
     ])
     .optional(),
   /** One of: `none`, `normal`, `admins`, `owners`, `all` */
-  members: z.union([z.string(), openEnum(['none', 'normal', 'admins', 'owners', 'all'])]).optional(),
+  members: openEnum(['none', 'normal', 'admins', 'owners', 'all']).optional(),
   /** One of: `avatarHash`, `fullName`, `initials`, `username` */
-  memberFields: z.union([z.string(), openEnum(['avatarHash', 'fullName', 'initials', 'username'])]).optional(),
+  memberFields: openEnum(['avatarHash', 'fullName', 'initials', 'username']).optional(),
   /**
    * Pass a SCIM-style query to filter members. This takes precedence over the all/normal/admins value of members. If
    * any of the member_* args are set, the member array will be paginated.
@@ -65,13 +63,13 @@ export const GetEnterpriseSchema = z.object({
    */
   memberSortBy: z.string().optional(),
   /** Deprecated: Please use member_sort. One of: `ascending`, `descending`, `asc`, `desc` */
-  memberSortOrder: z.union([z.string(), openEnum(['ascending', 'descending', 'asc', 'desc'])]).optional(),
+  memberSortOrder: openEnum(['ascending', 'descending', 'asc', 'desc']).optional(),
   /** Any integer between 0 and 100. */
   memberStartIndex: z.number().optional(),
   /** 0 to 100 */
   memberCount: z.number().optional(),
   /** One of: `none`, `members`, `public`, `all` */
-  organizations: z.union([z.string(), openEnum(['none', 'members', 'public', 'all'])]).optional(),
+  organizations: openEnum(['none', 'members', 'public', 'all']).optional(),
   /** Any valid value that the [nested organization field resource]() accepts. */
   organizationFields: z.string().optional(),
   /** Whether or not to include paid account information in the returned workspace objects */

@@ -7,7 +7,7 @@ export const CreateChecklistSchema = z.object({
   /** The name of the checklist. Should be a string of length 1 to 16384. **Defaults**: `Checklist` */
   name: z.string().max(16384, 'name must be at most 16384 characters').optional(),
   /** The position of the checklist on the card. One of: `top`, `bottom`, or a positive number. */
-  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]).optional(),
+  pos: z.union([z.number(), openEnum(['top', 'bottom'])]).optional(),
   /** The ID of a checklist to copy into the new checklist. */
   idChecklistSource: z.string().optional(),
 });

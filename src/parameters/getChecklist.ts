@@ -31,8 +31,6 @@ export const GetChecklistSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['id', 'name', 'idBoard', 'idCard', 'pos']),
       z.array(openEnum(['id', 'name', 'idBoard', 'idCard', 'pos'])),
     ])

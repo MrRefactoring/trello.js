@@ -7,8 +7,6 @@ export const GetBoardLabelsSchema = z.object({
   /** The fields to be returned for the Labels. */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['id', 'idBoard', 'name', 'color', 'uses']),
       z.array(openEnum(['id', 'idBoard', 'name', 'color', 'uses'])),
     ])
