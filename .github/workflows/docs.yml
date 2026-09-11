@@ -9,6 +9,8 @@ on:
       - 'typedoc.json'
       - 'package.json'
       - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - 'patches/**'
       - '.github/workflows/docs.yml'
   workflow_dispatch:
 

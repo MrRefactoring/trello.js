@@ -70,7 +70,7 @@ importers:
         specifier: ^4.23.12
         version: 4.23.12
       typedoc:
-        specifier: ^0.28.20
+        specifier: 0.28.20
         version: 0.28.20(patch_hash=cfd112fe03b6081c8a9fb7de8d2c6dff89101e8367c0d7560981cb749ffcc2ed)(typescript@6.0.3)
       typedoc-plugin-markdown:
         specifier: ^4.12.0
