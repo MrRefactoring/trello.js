@@ -8,8 +8,6 @@ export const GetLabelSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['id', 'idBoard', 'name', 'color', 'uses']),
       z.array(openEnum(['id', 'idBoard', 'name', 'color', 'uses'])),
     ])

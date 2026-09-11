@@ -5,14 +5,7 @@ export const GetCardCheckItemStatesSchema = z.object({
   /** The ID of the Card */
   id: z.string(),
   /** `all` or a comma-separated list of: `idCheckItem`, `state` */
-  fields: z
-    .union([
-      z.string(),
-      z.array(z.string()),
-      openEnum(['idCheckItem', 'state']),
-      z.array(openEnum(['idCheckItem', 'state'])),
-    ])
-    .optional(),
+  fields: z.union([openEnum(['idCheckItem', 'state']), z.array(openEnum(['idCheckItem', 'state']))]).optional(),
 });
 
 export type GetCardCheckItemStates = z.input<typeof GetCardCheckItemStatesSchema>;

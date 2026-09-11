@@ -7,8 +7,6 @@ export const GetActionBoardSchema = z.object({
   /** `all` or a comma-separated list of board fields */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',

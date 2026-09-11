@@ -7,8 +7,6 @@ export const GetActionOrganizationSchema = z.object({
   /** `all` or a comma-separated list of organization fields */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'billableMemberCount',

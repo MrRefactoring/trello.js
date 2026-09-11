@@ -6,8 +6,6 @@ export const GetTokenSchema = z.object({
   /** `all` or a comma-separated list of `dateCreated`, `dateExpires`, `idMember`, `identifier`, `permissions` */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['identifier', 'idMember', 'dateCreated', 'dateExpires', 'permissions']),
       z.array(openEnum(['identifier', 'idMember', 'dateCreated', 'dateExpires', 'permissions'])),
     ])

@@ -7,8 +7,6 @@ export const GetActionMemberSchema = z.object({
   /** `all` or a comma-separated list of member fields */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',

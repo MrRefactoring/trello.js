@@ -9,7 +9,7 @@ export const UpdateCardCheckItemSchema = z.object({
   /** The ID of the checklist this item is in */
   idChecklist: z.string().optional(),
   /** `top`, `bottom`, or a positive float */
-  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]).optional(),
+  pos: z.union([z.number(), openEnum(['top', 'bottom'])]).optional(),
   /** A due date for the checkitem */
   due: z.string().optional(),
   /** A dueReminder for the due date on the checkitem */
