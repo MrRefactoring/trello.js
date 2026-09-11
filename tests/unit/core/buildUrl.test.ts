@@ -42,6 +42,16 @@ describe('buildUrl', () => {
     });
   });
 
+  describe('array values', () => {
+    it('joins an array into one comma-separated value', () => {
+      expect(buildUrl('/boards/123/labels', { fields: ['id', 'name'] })).toBe('/boards/123/labels?fields=id%2Cname');
+    });
+
+    it('sends a single-element array without a trailing comma', () => {
+      expect(buildUrl('/boards/123/labels', { fields: ['id'] })).toBe('/boards/123/labels?fields=id');
+    });
+  });
+
   describe('multiple params', () => {
     it('appends all non-null params', () => {
       const url = buildUrl('/cards', { limit: 10, filter: 'open' });
