@@ -12,7 +12,7 @@ export const CreateCustomFieldSchema = z.object({
   type: openEnum(['checkbox', 'list', 'number', 'text', 'date']),
   /** If the type is `checkbox` */
   options: z.string().optional(),
-  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]),
+  pos: z.union([z.number(), openEnum(['top', 'bottom'])]),
   /** Whether this Custom Field should be shown on the front of Cards */
   display_cardFront: z.boolean().optional(),
 });

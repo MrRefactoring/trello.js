@@ -1,0 +1,24 @@
+diff --git a/dist/index.js b/dist/index.js
+index daa82424664dcf1236746613e27a3e79abf96bdd..ff2c2e8cdc21f1c31a8299c315d700077e78f9fb 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -5371,6 +5371,19 @@ function convertType(context, typeOrNode, maybeNode) {
+     }
+     return requestBugReport(context, typeOrNode);
+   }
++  if (maybeNode && ts13.isTypeReferenceNode(maybeNode) && ts13.isIdentifier(maybeNode.typeName)) {
++    try {
++      const writtenSymbol = context.expectSymbolAtLocation(maybeNode.typeName);
++      const writtenName = maybeNode.typeName.text;
++      if (writtenSymbol && !context.shouldInline(writtenSymbol, writtenName)) {
++        ++typeConversionDepth;
++        const written = referenceConverter.convert(context, maybeNode);
++        --typeConversionDepth;
++        return written;
++      }
++    } catch {
++    }
++  }
+   if (typeOrNode.isUnion() && typeOrNode.origin && !typeOrNode.aliasSymbol) {
+     return convertType(context, typeOrNode.origin);
+   }

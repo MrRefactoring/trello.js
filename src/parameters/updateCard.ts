@@ -21,9 +21,9 @@ export const UpdateCardSchema = z.object({
   /** The position of the card in its list. `top`, `bottom`, or a positive float */
   pos: z.union([openEnum(['top', 'bottom']), z.number()]).optional(),
   /** When the card is due, or `null` */
-  due: z.string().optional(),
+  due: z.string().nullish(),
   /** The start date of a card, or `null` */
-  start: z.string().optional(),
+  start: z.string().nullish(),
   /** Whether the status of the card is complete */
   dueComplete: z.boolean().optional(),
   /** Whether the member is should be subscribed to the card */

@@ -7,7 +7,7 @@ export const UpdateListFieldSchema = z.object({
   /** The field on the List to be updated */
   field: openEnum(['name', 'pos', 'subscribed']),
   /** The new value for the field */
-  value: z.union([z.string(), z.number(), openEnum(['top', 'bottom']), z.boolean()]).optional(),
+  value: z.union([z.number(), openEnum(['top', 'bottom']), z.boolean()]).optional(),
 });
 
 export type UpdateListField = z.input<typeof UpdateListFieldSchema>;

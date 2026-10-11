@@ -7,11 +7,21 @@ export const GetCardChecklistsSchema = z.object({
   /** `all` or `none` */
   checkItems: openEnum(['all', 'none']).optional(),
   /** `all` or a comma-separated list of: `name,nameData,pos,state,type,due,dueReminder,idMember` */
-  checkItemFields: openEnum(['name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember']).optional(),
+  checkItemFields: z
+    .union([
+      openEnum(['name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember']),
+      z.array(openEnum(['name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember'])),
+    ])
+    .optional(),
   /** `all` or `none` */
   filter: openEnum(['all', 'none']).optional(),
   /** `all` or a comma-separated list of: `idBoard,idCard,name,pos` */
-  fields: openEnum(['all', 'name', 'nameData', 'pos', 'state', 'type']).optional(),
+  fields: z
+    .union([
+      openEnum(['all', 'name', 'nameData', 'pos', 'state', 'type']),
+      z.array(openEnum(['all', 'name', 'nameData', 'pos', 'state', 'type'])),
+    ])
+    .optional(),
 });
 
 export type GetCardChecklists = z.input<typeof GetCardChecklistsSchema>;

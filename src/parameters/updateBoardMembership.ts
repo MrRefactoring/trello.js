@@ -12,21 +12,42 @@ export const UpdateBoardMembershipSchema = z.object({
    * Valid values: all, avatarHash, bio, bioData, confirmed, fullName, idPremOrgsAdmin, initials, memberType, products,
    * status, url, username
    */
-  memberFields: openEnum([
-    'all',
-    'avatarHash',
-    'bio',
-    'bioData',
-    'confirmed',
-    'fullName',
-    'idPremOrgsAdmin',
-    'initials',
-    'memberType',
-    'products',
-    'status',
-    'url',
-    'username',
-  ]).optional(),
+  memberFields: z
+    .union([
+      openEnum([
+        'all',
+        'avatarHash',
+        'bio',
+        'bioData',
+        'confirmed',
+        'fullName',
+        'idPremOrgsAdmin',
+        'initials',
+        'memberType',
+        'products',
+        'status',
+        'url',
+        'username',
+      ]),
+      z.array(
+        openEnum([
+          'all',
+          'avatarHash',
+          'bio',
+          'bioData',
+          'confirmed',
+          'fullName',
+          'idPremOrgsAdmin',
+          'initials',
+          'memberType',
+          'products',
+          'status',
+          'url',
+          'username',
+        ]),
+      ),
+    ])
+    .optional(),
 });
 
 export type UpdateBoardMembership = z.input<typeof UpdateBoardMembershipSchema>;

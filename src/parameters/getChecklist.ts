@@ -14,25 +14,18 @@ export const GetChecklistSchema = z.object({
    * The fields on the checkItem to return if checkItems are being returned. `all` or a comma-separated list of: `name`,
    * `nameData`, `pos`, `state`, `type`, `due`, `dueReminder`, `idMember`
    */
-  checkItemFields: openEnum([
-    'all',
-    'name',
-    'nameData',
-    'pos',
-    'state',
-    'type',
-    'due',
-    'dueReminder',
-    'idMember',
-  ]).optional(),
+  checkItemFields: z
+    .union([
+      openEnum(['all', 'name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember']),
+      z.array(openEnum(['all', 'name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember'])),
+    ])
+    .optional(),
   /**
    * `all` or a comma-separated list of checklist
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['id', 'name', 'idBoard', 'idCard', 'pos']),
       z.array(openEnum(['id', 'name', 'idBoard', 'idCard', 'pos'])),
     ])

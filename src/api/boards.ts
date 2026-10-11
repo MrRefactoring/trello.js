@@ -72,7 +72,9 @@ export async function getBoardMemberships(
       activity: parameters.activity,
       orgMemberType: parameters.orgMemberType,
       member: parameters.member,
-      member_fields: parameters.memberFields,
+      member_fields: Array.isArray(parameters.memberFields)
+        ? parameters.memberFields.join(',')
+        : parameters.memberFields,
     },
     schema: z.array(MembershipsSchema),
     signal: options?.signal,
@@ -471,7 +473,9 @@ export async function updateBoardMembership(
     method: 'PUT',
     searchParams: {
       type: parameters.type,
-      member_fields: parameters.memberFields,
+      member_fields: Array.isArray(parameters.memberFields)
+        ? parameters.memberFields.join(',')
+        : parameters.memberFields,
     },
     schema: MembershipsSchema,
     signal: options?.signal,
@@ -671,7 +675,7 @@ export async function markBoardAsViewed(
   options?: RequestOptions,
 ): Promise<Board> {
   const config: SendRequestOptions<Board> = {
-    url: `/boards/${parameters.id}/markedAsViewed`,
+    url: `/boards/${parameters.id}/markAsViewed`,
     method: 'POST',
     schema: BoardSchema,
     signal: options?.signal,

@@ -10,8 +10,6 @@ export const GetActionSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
       z.array(openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator'])),
     ])
@@ -23,8 +21,6 @@ export const GetActionSchema = z.object({
    */
   memberFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',
@@ -83,8 +79,6 @@ export const GetActionSchema = z.object({
    */
   memberCreatorFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',

@@ -11,8 +11,6 @@ export const DeactivateEnterpriseMemberSchema = z.object({
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',
@@ -69,8 +67,6 @@ export const DeactivateEnterpriseMemberSchema = z.object({
    */
   organizationFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'billableMemberCount',
@@ -119,8 +115,6 @@ export const DeactivateEnterpriseMemberSchema = z.object({
    */
   boardFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',

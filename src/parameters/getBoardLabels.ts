@@ -1,11 +1,16 @@
 import { z } from 'zod';
-import { LabelSchema } from '../models';
+import { openEnum } from '#/core';
 
 export const GetBoardLabelsSchema = z.object({
   /** The ID of the Board. */
   id: z.string(),
   /** The fields to be returned for the Labels. */
-  fields: LabelSchema.optional(),
+  fields: z
+    .union([
+      openEnum(['id', 'idBoard', 'name', 'color', 'uses']),
+      z.array(openEnum(['id', 'idBoard', 'name', 'color', 'uses'])),
+    ])
+    .optional(),
   /** The number of Labels to be returned. */
   limit: z.number().optional(),
 });

@@ -8,7 +8,7 @@ export const GetChecklistBoardSchema = z.object({
    * `all` or a comma-separated list of board
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
-  fields: openEnum(['all', 'name']).optional(),
+  fields: z.union([openEnum(['all', 'name']), z.array(openEnum(['all', 'name']))]).optional(),
 });
 
 export type GetChecklistBoard = z.input<typeof GetChecklistBoardSchema>;

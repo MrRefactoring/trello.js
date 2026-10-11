@@ -26,7 +26,12 @@ import type { GetActionReactionSummary } from '#/parameters/getActionReactionSum
 import type { Client, RequestOptions, SendRequestOptions } from '#/core';
 import { z } from 'zod';
 
-/** Get an Action */
+/**
+ * Get an Action
+ *
+ * _Note: An action can live on a board or a workspace, so accessing it needs `read:board:trello` or
+ * `read:organization:trello`._
+ */
 export async function getAction(client: Client, parameters: GetAction, options?: RequestOptions): Promise<Action> {
   const config: SendRequestOptions<Action> = {
     url: `/actions/${parameters.id}`,
@@ -77,7 +82,12 @@ export async function deleteAction(client: Client, parameters: DeleteAction, opt
   return await client.sendRequest(config);
 }
 
-/** Get a specific property of an action */
+/**
+ * Get a specific property of an action
+ *
+ * _Note: An action can live on a board or a workspace, so accessing it needs `read:board:trello` or
+ * `read:organization:trello`._
+ */
 export async function getActionField<T = unknown>(
   client: Client,
   parameters: GetActionField,
@@ -150,7 +160,12 @@ export async function getActionList(
   return await client.sendRequest(config);
 }
 
-/** Gets the member of an action (not the creator) */
+/**
+ * Gets the member of an action (not the creator)
+ *
+ * _Note: An action can live on a board or a workspace, so accessing it needs `read:board:trello` or
+ * `read:organization:trello`._
+ */
 export async function getActionMember(
   client: Client,
   parameters: GetActionMember,
@@ -169,7 +184,12 @@ export async function getActionMember(
   return await client.sendRequest(config);
 }
 
-/** Get the Member who created the Action */
+/**
+ * Get the Member who created the Action
+ *
+ * _Note: An action can live on a board or a workspace, so accessing it needs `read:board:trello` or
+ * `read:organization:trello`._
+ */
 export async function getActionCreator(
   client: Client,
   parameters: GetActionCreator,

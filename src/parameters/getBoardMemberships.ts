@@ -21,8 +21,6 @@ export const GetBoardMembershipsSchema = z.object({
    */
   memberFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',

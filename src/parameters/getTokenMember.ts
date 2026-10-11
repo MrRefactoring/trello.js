@@ -9,8 +9,6 @@ export const GetTokenMemberSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',

@@ -8,7 +8,7 @@ export const GetBoardSchema = z.object({
    */
   actions: z.string().optional(),
   /** Valid values are one of: `mine` or `none`. */
-  boardStars: z.union([z.string(), openEnum(['mine', 'none'])]).optional(),
+  boardStars: openEnum(['mine', 'none']).optional(),
   /**
    * This is a nested resource. Read more about cards as nested resources
    * [here](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/).
@@ -34,8 +34,6 @@ export const GetBoardSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'closed',
         'dateLastActivity',

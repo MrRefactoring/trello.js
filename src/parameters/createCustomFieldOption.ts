@@ -10,7 +10,7 @@ export const CreateCustomFieldOptionSchema = z.object({
     })
     .optional(),
   color: z.string().optional(),
-  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]).optional(),
+  pos: z.union([z.number(), openEnum(['top', 'bottom'])]).optional(),
 });
 
 export type CreateCustomFieldOption = z.input<typeof CreateCustomFieldOptionSchema>;

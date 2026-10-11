@@ -7,8 +7,6 @@ export const GetActionListSchema = z.object({
   /** `all` or a comma-separated list of list fields */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',

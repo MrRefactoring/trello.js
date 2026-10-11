@@ -7,7 +7,7 @@ export const UpdateCardChecklistItemSchema = z.object({
   /** The ID of the checklist item to update */
   idCheckItem: z.string(),
   /** `top`, `bottom`, or a positive float */
-  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]).optional(),
+  pos: z.union([z.number(), openEnum(['top', 'bottom'])]).optional(),
   /** The ID of the item to update. */
   idChecklist: z.string(),
 });

@@ -8,15 +8,13 @@ export const GetMemberNotificationsSchema = z.object({
   display: z.boolean().optional(),
   filter: z.string().optional(),
   /** One of: `all`, `read`, `unread` */
-  readFilter: z.union([z.string(), openEnum(['all', 'read', 'unread'])]).optional(),
+  readFilter: openEnum(['all', 'read', 'unread']).optional(),
   /**
    * `all` or a comma-separated list of notification
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'unread',
@@ -62,8 +60,6 @@ export const GetMemberNotificationsSchema = z.object({
    */
   memberCreatorFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',

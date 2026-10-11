@@ -10,8 +10,6 @@ export const GetNotificationBoardSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',

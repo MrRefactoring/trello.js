@@ -14,6 +14,23 @@ const action = await trello.actions.getAction({ id: actionId });
 console.log(action.type, action.date, action.memberCreator?.fullName);
 ```
 
+## Чтение типизированных данных действия
+
+`Action` включает открытую ветку, у которой `data` имеет тип `unknown`. Проверка `action.type` сама по себе не исключает эту ветку. Перед чтением данных известного действия проверьте его соответствующей схемой:
+
+```ts
+import { ActionCommentCardSchema } from 'trello.js/models';
+
+const action = await trello.actions.getAction({ id: actionId });
+
+if (action.type === 'commentCard') {
+  const comment = ActionCommentCardSchema.parse(action);
+  console.log(comment.data.text);
+}
+```
+
+`parse` проверяет тип действия и форму данных, возвращает `ActionCommentCard` и выбрасывает `ZodError`, если ответ не соответствует схеме. Каждая из двадцати девяти типизированных веток экспортирует свою модель и схему. `ActionUnknown.data` остаётся `unknown` и требует проверки перед использованием.
+
 ## Список действий на доске / карточке / списке / участнике
 
 ```ts

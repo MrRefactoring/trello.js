@@ -278,6 +278,17 @@ describe('Boards', () => {
   // ─── preferences ───────────────────────────────────────────────────────────
 
   describe('preferences', () => {
+    it('raw board preferences include boolean Gmail and list guide flags', async () => {
+      const board = (await getRawLiveClient().boards.getBoard({
+        id: boardId,
+        myPrefs: true,
+        fields: 'all',
+      })) as unknown as { myPrefs?: { aiGoogleGmailEnabled?: unknown; showListGuide?: unknown } };
+
+      expect(typeof board.myPrefs?.aiGoogleGmailEnabled).toBe('boolean');
+      expect(typeof board.myPrefs?.showListGuide).toBe('boolean');
+    });
+
     it('updateBoardShowSidebar returns BoardMyPrefs', async () => {
       const prefs = await trello.boards.updateBoardShowSidebar({ id: boardId, value: true });
       expect(typeof prefs.showSidebar).toBe('boolean');

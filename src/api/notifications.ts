@@ -29,15 +29,17 @@ export async function getNotification(
     method: 'GET',
     searchParams: {
       board: parameters.board,
-      board_fields: parameters.boardFields,
+      board_fields: Array.isArray(parameters.boardFields) ? parameters.boardFields.join(',') : parameters.boardFields,
       card: parameters.card,
-      card_fields: parameters.cardFields,
+      card_fields: Array.isArray(parameters.cardFields) ? parameters.cardFields.join(',') : parameters.cardFields,
       display: parameters.display,
       entities: parameters.entities,
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
       list: parameters.list,
       member: parameters.member,
-      member_fields: parameters.memberFields,
+      member_fields: Array.isArray(parameters.memberFields)
+        ? parameters.memberFields.join(',')
+        : parameters.memberFields,
       memberCreator: parameters.memberCreator,
       memberCreator_fields: parameters.memberCreatorFields,
       organization: parameters.organization,
@@ -96,7 +98,7 @@ export async function markAllNotificationsRead(
     method: 'POST',
     searchParams: {
       read: parameters.read,
-      ids: parameters.ids,
+      ids: Array.isArray(parameters.ids) ? parameters.ids.join(',') : parameters.ids,
     },
     signal: options?.signal,
   };
@@ -133,7 +135,7 @@ export async function getNotificationBoard(
     url: `/notifications/${parameters.id}/board`,
     method: 'GET',
     searchParams: {
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: BoardSchema,
     signal: options?.signal,
@@ -152,7 +154,7 @@ export async function getNotificationCard(
     url: `/notifications/${parameters.id}/card`,
     method: 'GET',
     searchParams: {
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: CardSchema,
     signal: options?.signal,
@@ -209,7 +211,7 @@ export async function getNotificationCreator(
     url: `/notifications/${parameters.id}/memberCreator`,
     method: 'GET',
     searchParams: {
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: MemberSchema,
     signal: options?.signal,
@@ -228,7 +230,7 @@ export async function getNotificationOrganization(
     url: `/notifications/${parameters.id}/organization`,
     method: 'GET',
     searchParams: {
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: OrganizationSchema,
     signal: options?.signal,

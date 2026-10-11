@@ -403,8 +403,10 @@ export async function deactivateEnterpriseMember(
     method: 'PUT',
     searchParams: {
       value: parameters.value,
-      fields: parameters.fields,
-      organization_fields: parameters.organizationFields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
+      organization_fields: Array.isArray(parameters.organizationFields)
+        ? parameters.organizationFields.join(',')
+        : parameters.organizationFields,
       board_fields: parameters.boardFields,
     },
     schema: MemberSchema,

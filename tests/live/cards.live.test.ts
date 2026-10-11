@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { z } from 'zod';
 import type { TrelloClient } from '../../src/createTrelloClient';
 import { getLiveClient, getRawLiveClient, getMember2Id } from './setup/client';
 import { ResourceTracker } from './setup/resources';
@@ -138,6 +139,17 @@ describe('Cards', () => {
     it('retrieved card matches created name', async () => {
       const card = await trello.cards.getCard({ id: cardId });
       expect(card.name).toContain('retrieval-target');
+    });
+
+    it('raw summary timestamp is null or an ISO date string', async () => {
+      const raw = (await getRawLiveClient().cards.getCard({
+        id: cardId,
+        fields: 'all',
+      })) as unknown as { lastSummaryChangeEventAt?: unknown };
+
+      expect(raw).toHaveProperty('lastSummaryChangeEventAt');
+      const timestamp = raw.lastSummaryChangeEventAt;
+      expect(timestamp === null || z.iso.datetime({ offset: true }).safeParse(timestamp).success).toBe(true);
     });
 
     it('getCardField returns _value for name field', async () => {
@@ -507,6 +519,7 @@ describe('Cards', () => {
 
       expect(typeof attachment.id).toBe('string');
       expect(typeof attachment.url).toBe('string');
+      expect(attachment).toHaveProperty('aiSummary');
       attachmentId = attachment.id;
     });
 
@@ -522,6 +535,21 @@ describe('Cards', () => {
       });
 
       expect(attachment.id).toBe(attachmentId);
+    });
+
+    it.each([
+      { fields: 'id,name' },
+      { fields: ['id', 'name'] },
+    ])('getCardAttachment selects fields with $fields', async ({ fields }) => {
+      const attachment = await trello.cards.getCardAttachment({
+        id: cardId,
+        idAttachment: attachmentId,
+        fields,
+      });
+
+      expect(attachment.id).toBe(attachmentId);
+      expect(attachment.name).toContain('attach');
+      expect(attachment.url).toBeUndefined();
     });
 
     it('deleteCardAttachment removes the attachment', async () => {

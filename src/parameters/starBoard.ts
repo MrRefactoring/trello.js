@@ -7,7 +7,7 @@ export const StarBoardSchema = z.object({
   /** The ID of the board to star */
   idBoard: z.string(),
   /** The position of the newly starred board. `top`, `bottom`, or a positive float. */
-  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]),
+  pos: z.union([z.number(), openEnum(['top', 'bottom'])]),
 });
 
 export type StarBoard = z.input<typeof StarBoardSchema>;

@@ -7,8 +7,6 @@ export const GetActionCardSchema = z.object({
   /** `all` or a comma-separated list of card fields */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'address',

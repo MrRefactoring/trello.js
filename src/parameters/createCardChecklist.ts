@@ -9,7 +9,7 @@ export const CreateCardChecklistSchema = z.object({
   /** The ID of a source checklist to copy into the new one */
   idChecklistSource: z.string().optional(),
   /** The position of the checklist on the card. One of: `top`, `bottom`, or a positive number. */
-  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]).optional(),
+  pos: z.union([z.number(), openEnum(['top', 'bottom'])]).optional(),
 });
 
 export type CreateCardChecklist = z.input<typeof CreateCardChecklistSchema>;

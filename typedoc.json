@@ -11,7 +11,7 @@
   "exclude": ["**/*.test.ts", "**/index.ts"],
   "tsconfig": "tsconfig.json",
   "out": "docs/api",
-  "plugin": ["typedoc-plugin-markdown", "typedoc-vitepress-theme"],
+  "plugin": ["typedoc-plugin-zod", "typedoc-plugin-markdown", "typedoc-vitepress-theme"],
   "hidePageHeader": true,
   "hideBreadcrumbs": true,
   "readme": "none",

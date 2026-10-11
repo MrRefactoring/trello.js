@@ -3,15 +3,13 @@ import { openEnum } from '#/core';
 
 export const GetBoardListsSchema = z.object({
   /** Filter to apply to Cards. */
-  cards: z.union([z.string(), openEnum(['all', 'closed', 'none', 'open'])]).optional(),
+  cards: openEnum(['all', 'closed', 'none', 'open']).optional(),
   /**
    * `all` or a comma-separated list of card
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#card-object)
    */
   cardFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'address',
@@ -87,15 +85,13 @@ export const GetBoardListsSchema = z.object({
     ])
     .optional(),
   /** Filter to apply to Lists */
-  filter: z.union([z.string(), openEnum(['all', 'closed', 'none', 'open'])]).optional(),
+  filter: openEnum(['all', 'closed', 'none', 'open']).optional(),
   /**
    * `all` or a comma-separated list of list
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',

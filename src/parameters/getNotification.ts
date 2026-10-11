@@ -12,8 +12,6 @@ export const GetNotificationSchema = z.object({
    */
   boardFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',
@@ -62,8 +60,6 @@ export const GetNotificationSchema = z.object({
    */
   cardFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'address',
@@ -148,8 +144,6 @@ export const GetNotificationSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'unread',
@@ -190,8 +184,6 @@ export const GetNotificationSchema = z.object({
    */
   memberFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',
@@ -250,8 +242,6 @@ export const GetNotificationSchema = z.object({
    */
   memberCreatorFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',
@@ -310,8 +300,6 @@ export const GetNotificationSchema = z.object({
    */
   organizationFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'billableMemberCount',

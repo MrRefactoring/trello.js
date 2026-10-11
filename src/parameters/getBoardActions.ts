@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ActionSchema } from '../models';
+import { openEnum } from '#/core';
 
 export const GetBoardActionsSchema = z.object({
   boardId: z.string(),
@@ -7,7 +7,12 @@ export const GetBoardActionsSchema = z.object({
    * The fields to be returned for the Actions. [See Action fields
    * here](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#action-object).
    */
-  fields: ActionSchema.optional(),
+  fields: z
+    .union([
+      openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
+      z.array(openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator'])),
+    ])
+    .optional(),
   /**
    * A comma-separated list of [action
    * types](https://developer.atlassian.com/cloud/trello/guides/rest-api/action-types/).
@@ -26,7 +31,7 @@ export const GetBoardActionsSchema = z.object({
    * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) to
    * return.
    */
-  memberFields: z.string().optional(),
+  memberFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** Whether to return the memberCreator object for each action. */
   memberCreator: z.boolean().optional(),
   /**
@@ -34,7 +39,7 @@ export const GetBoardActionsSchema = z.object({
    * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) creator to
    * return
    */
-  memberCreatorFields: z.string().optional(),
+  memberCreatorFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** The page of results for actions. */
   page: z.number().optional(),
   /** Whether to show reactions on comments or not. */

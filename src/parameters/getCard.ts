@@ -10,8 +10,6 @@ export const GetCardSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'address',
@@ -99,8 +97,6 @@ export const GetCardSchema = z.object({
    */
   attachmentFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'bytes',
@@ -140,8 +136,6 @@ export const GetCardSchema = z.object({
    */
   memberFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',
@@ -201,8 +195,6 @@ export const GetCardSchema = z.object({
    */
   memberVotedFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',
@@ -258,12 +250,7 @@ export const GetCardSchema = z.object({
   checklists: z.string().optional(),
   /** `all` or a comma-separated list of `idBoard,idCard,name,pos` */
   checklistFields: z
-    .union([
-      z.string(),
-      z.array(z.string()),
-      openEnum(['idBoard', 'idCard', 'name', 'pos']),
-      z.array(openEnum(['idBoard', 'idCard', 'name', 'pos'])),
-    ])
+    .union([openEnum(['idBoard', 'idCard', 'name', 'pos']), z.array(openEnum(['idBoard', 'idCard', 'name', 'pos']))])
     .optional(),
   /** Whether to return the board object the card is on */
   board: z.boolean().optional(),
@@ -274,8 +261,6 @@ export const GetCardSchema = z.object({
    */
   boardFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',
@@ -328,8 +313,6 @@ export const GetCardSchema = z.object({
    */
   stickerFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled']),
       z.array(openEnum(['id', 'top', 'left', 'zIndex', 'rotate', 'image', 'imageUrl', 'imageScaled'])),
     ])

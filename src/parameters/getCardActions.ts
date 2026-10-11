@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { ActionSchema } from '../models';
+import { openEnum } from '#/core';
 
 export const GetCardActionsSchema = z.object({
   /** The ID of the Card */
@@ -15,7 +15,12 @@ export const GetCardActionsSchema = z.object({
    * The fields to be returned for the Actions. [See Action fields
    * here](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#action-object).
    */
-  fields: ActionSchema.optional(),
+  fields: z
+    .union([
+      openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator']),
+      z.array(openEnum(['id', 'idMemberCreator', 'data', 'type', 'date', 'limits', 'display', 'memberCreator'])),
+    ])
+    .optional(),
   /** The format of the returned Actions. Either list or count. */
   format: z.string().optional(),
   /** A comma-separated list of idModels. Only actions related to these models will be returned. */
@@ -29,7 +34,7 @@ export const GetCardActionsSchema = z.object({
    * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) to
    * return.
    */
-  memberFields: z.string().optional(),
+  memberFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** Whether to return the memberCreator object for each action. */
   memberCreator: z.boolean().optional(),
   /**
@@ -37,7 +42,7 @@ export const GetCardActionsSchema = z.object({
    * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) creator to
    * return
    */
-  memberCreatorFields: z.string().optional(),
+  memberCreatorFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** Whether to show reactions on comments or not. */
   reactions: z.boolean().optional(),
   /**

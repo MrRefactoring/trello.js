@@ -11,7 +11,7 @@ export const CreateCardSchema = z.object({
   /** A due date for the card */
   due: z.string().optional(),
   /** The start date of a card, or `null` */
-  start: z.string().optional(),
+  start: z.string().nullish(),
   /** Whether the status of the card is complete */
   dueComplete: z.boolean().optional(),
   /** The ID of the list the card should be created in */
@@ -54,7 +54,7 @@ export const CreateCardSchema = z.object({
    * For displaying cards in different ways based on the card name. Board cards must have a name that is a link to a
    * Trello board. Mirror cards must have a name that is a link to a Trello card.
    */
-  cardRole: openEnum(['separator', 'board', 'mirror', 'link']).optional(),
+  cardRole: openEnum(['separator', 'board', 'mirror', 'link']).nullish(),
 });
 
 export type CreateCard = z.input<typeof CreateCardSchema>;

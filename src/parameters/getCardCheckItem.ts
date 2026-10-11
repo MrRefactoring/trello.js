@@ -5,8 +5,6 @@ export const GetCardCheckItemSchema = z.object({
   /** `all` or a comma-separated list of `name,nameData,pos,state,type,due,dueReminder,idMember` */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember']),
       z.array(openEnum(['name', 'nameData', 'pos', 'state', 'type', 'due', 'dueReminder', 'idMember'])),
     ])

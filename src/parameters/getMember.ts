@@ -33,8 +33,6 @@ export const GetMemberSchema = z.object({
    */
   boardsInvitedFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'name',
@@ -95,8 +93,6 @@ export const GetMemberSchema = z.object({
    */
   fields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'activityBlocked',
@@ -160,8 +156,6 @@ export const GetMemberSchema = z.object({
    */
   organizationFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'billableMemberCount',
@@ -214,8 +208,6 @@ export const GetMemberSchema = z.object({
    */
   organizationsInvitedFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'id',
         'billableMemberCount',

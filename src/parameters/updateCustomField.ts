@@ -6,7 +6,7 @@ export const UpdateCustomFieldSchema = z.object({
   id: z.string(),
   /** The name of the Custom Field */
   name: z.string().optional(),
-  pos: z.union([z.string(), z.number(), openEnum(['top', 'bottom'])]).optional(),
+  pos: z.union([z.number(), openEnum(['top', 'bottom'])]).optional(),
   /** Whether to display this custom field on the front of cards */
   'display/cardFront': z.boolean().optional(),
 });

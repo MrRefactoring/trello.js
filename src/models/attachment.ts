@@ -15,6 +15,7 @@ export const AttachmentSchema = apiObject({
   previews: z.array(z.string()).optional(),
   url: z.string().optional(),
   pos: z.number().optional(),
+  aiSummary: z.unknown().optional(),
   fileName: z.string().nullish(),
   isMalicious: z.boolean().optional(),
   limits: LimitsSchema.optional(),

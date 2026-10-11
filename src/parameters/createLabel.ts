@@ -5,10 +5,7 @@ export const CreateLabelSchema = z.object({
   /** Name for the label */
   name: z.string(),
   /** The color for the label. */
-  color: z.union([
-    z.string(),
-    openEnum(['yellow', 'purple', 'blue', 'red', 'green', 'orange', 'black', 'sky', 'pink', 'lime']),
-  ]),
+  color: openEnum(['yellow', 'purple', 'blue', 'red', 'green', 'orange', 'black', 'sky', 'pink', 'lime']),
   /** The ID of the Board to create the Label on. */
   idBoard: z.string(),
 });

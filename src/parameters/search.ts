@@ -5,7 +5,7 @@ export const SearchSchema = z.object({
   /** The search query with a length of 1 to 16384 characters */
   query: z.string().max(16834, 'query must be at most 16834 characters'),
   /** `mine` or a comma-separated list of Board IDs */
-  idBoards: z.union([openEnum(['mine']), z.string()]).optional(),
+  idBoards: openEnum(['mine']).optional(),
   /** A comma-separated list of Organization IDs */
   idOrganizations: z.union([z.string(), z.array(z.string())]).optional(),
   /** A comma-separated list of Card IDs */
@@ -16,8 +16,6 @@ export const SearchSchema = z.object({
    */
   modelTypes: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum(['actions', 'boards', 'cards', 'members', 'organizations']),
       z.array(openEnum(['actions', 'boards', 'cards', 'members', 'organizations'])),
     ])
@@ -29,8 +27,6 @@ export const SearchSchema = z.object({
    */
   boardFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'closed',
         'dateLastActivity',
@@ -88,8 +84,6 @@ export const SearchSchema = z.object({
    */
   cardFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'badges',
         'checkItemStates',
@@ -168,8 +162,6 @@ export const SearchSchema = z.object({
    */
   organizationFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'billableMemberCount',
         'desc',
@@ -218,8 +210,6 @@ export const SearchSchema = z.object({
    */
   memberFields: z
     .union([
-      z.string(),
-      z.array(z.string()),
       openEnum([
         'avatarHash',
         'bio',

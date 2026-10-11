@@ -42,7 +42,7 @@ export async function createPluginListing(
   options?: RequestOptions,
 ): Promise<PluginListing> {
   const config: SendRequestOptions<PluginListing> = {
-    url: `/plugins/${parameters.idPlugin}/listing`,
+    url: `/plugins/${parameters.idPlugin}/listings`,
     method: 'POST',
     body: {
       description: parameters.description,
