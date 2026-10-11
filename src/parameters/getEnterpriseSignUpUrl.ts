@@ -6,7 +6,7 @@ export const GetEnterpriseSignUpUrlSchema = z.object({
   authenticate: z.boolean().optional(),
   confirmationAccepted: z.boolean().optional(),
   /** Any valid URL. */
-  returnUrl: z.string().optional(),
+  returnUrl: z.string().nullish(),
   /**
    * Designates whether the user has seen/consented to the Trello ToS prior to being redirected to the enterprise signup
    * page/their IdP.

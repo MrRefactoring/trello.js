@@ -1,5 +1,6 @@
-import { describe, it, expect, beforeAll, afterAll, assert } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import type { TrelloClient } from '../../src/createTrelloClient';
+import { ActionCommentCardSchema } from '../../src/models/actionCommentCard';
 import { getLiveClient, getRawLiveClient } from './setup/client';
 import { ResourceTracker } from './setup/resources';
 import { testName } from './helpers/naming';
@@ -111,15 +112,15 @@ describe('Actions', () => {
       const newText = testName('updated-comment');
       const updated = await trello.actions.updateAction({ id: commentActionId, text: newText });
       expect(updated.id).toBe(commentActionId);
-      assert(updated.type === 'commentCard');
-      expect(updated.data.text).toBe(newText);
+      const comment = ActionCommentCardSchema.parse(updated);
+      expect(comment.data.text).toBe(newText);
     });
 
     it('updateActionText also updates the comment text', async () => {
       const newText = testName('text-updated-comment');
       const updated = await trello.actions.updateActionText({ id: commentActionId, value: newText });
-      assert(updated.type === 'commentCard');
-      expect(updated.data.text).toBe(newText);
+      const comment = ActionCommentCardSchema.parse(updated);
+      expect(comment.data.text).toBe(newText);
     });
   });
 

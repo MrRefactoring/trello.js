@@ -54,7 +54,7 @@ describe('plugins API (wire shape)', () => {
       name: 'name',
     });
     const opts = sendRequest.mock.calls[0][0] as { url: string; method: string; body: Record<string, string> };
-    expect(opts.url).toBe('/plugins/p1/listing');
+    expect(opts.url).toBe('/plugins/p1/listings');
     expect(opts.method).toBe('POST');
     expect(opts.body).toEqual({
       description: 'desc',

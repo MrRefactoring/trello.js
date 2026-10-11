@@ -101,6 +101,7 @@ export const CardSchema = apiObject({
   faviconUrl: z.unknown().optional(),
   idMemberCreator: z.string().nullish(),
   idOrganization: z.string().nullish(),
+  lastSummaryChangeEventAt: z.coerce.date().nullish(),
   manifest: z.unknown().optional(),
   members: z.array(MemberSchema).optional(),
   membersVoted: z.array(MemberSchema).optional(),

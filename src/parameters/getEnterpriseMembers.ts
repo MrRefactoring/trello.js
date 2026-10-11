@@ -64,7 +64,7 @@ export const GetEnterpriseMembersSchema = z.object({
    * Pass a SCIM-style query to filter members. This takes precedence over the all/normal/admins value of members. If
    * any of the below member_* args are set, the member array will be paginated.
    */
-  filter: z.string().optional(),
+  filter: z.string().nullish(),
   /**
    * This parameter expects a SCIM-style sorting value prefixed by a `-` to sort descending. If no `-` is prefixed, it
    * will be sorted ascending. Note that the members array returned will be paginated if `members` is 'normal' or
@@ -80,7 +80,7 @@ export const GetEnterpriseMembersSchema = z.object({
    */
   sortBy: z.string().optional(),
   /** Deprecated: Please use `sort` instead. One of: `ascending`, `descending`, `asc`, `desc`. */
-  sortOrder: openEnum(['ascending', 'descending', 'asc', 'desc', 'null']).optional(),
+  sortOrder: openEnum(['ascending', 'descending', 'asc', 'desc', 'null']).nullish(),
   /** Any integer between 0 and 9999. */
   startIndex: z.number().optional(),
   /** SCIM-style filter. */

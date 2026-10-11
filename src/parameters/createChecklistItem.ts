@@ -11,7 +11,7 @@ export const CreateChecklistItemSchema = z.object({
   /** A due date for the checkitem */
   due: z.string().optional(),
   /** A dueReminder for the due date on the checkitem */
-  dueReminder: z.number().optional(),
+  dueReminder: z.number().nullish(),
   /** An ID of a member resource. */
   idMember: z.string().optional(),
   /** ID of a checklist. */

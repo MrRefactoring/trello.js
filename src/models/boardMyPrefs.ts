@@ -15,6 +15,8 @@ export const BoardMyPrefsSchema = apiObject({
   aiMSTeamsEnabled: z.boolean().optional(),
   aiConfluenceEnabled: z.boolean().optional(),
   aiGoogleChatEnabled: z.boolean().optional(),
+  aiGoogleGmailEnabled: z.boolean().optional(),
+  showListGuide: z.boolean().optional(),
 });
 
 export type BoardMyPrefs = z.infer<typeof BoardMyPrefsSchema>;

@@ -13,13 +13,15 @@ export async function search(client: Client, parameters: Search, options?: Reque
     searchParams: {
       query: parameters.query,
       idBoards: parameters.idBoards,
-      idOrganizations: parameters.idOrganizations,
-      idCards: parameters.idCards,
+      idOrganizations: Array.isArray(parameters.idOrganizations)
+        ? parameters.idOrganizations.join(',')
+        : parameters.idOrganizations,
+      idCards: Array.isArray(parameters.idCards) ? parameters.idCards.join(',') : parameters.idCards,
       modelTypes: parameters.modelTypes,
-      board_fields: parameters.boardFields,
+      board_fields: Array.isArray(parameters.boardFields) ? parameters.boardFields.join(',') : parameters.boardFields,
       boards_limit: parameters.boardsLimit,
       board_organization: parameters.boardOrganization,
-      card_fields: parameters.cardFields,
+      card_fields: Array.isArray(parameters.cardFields) ? parameters.cardFields.join(',') : parameters.cardFields,
       cards_limit: parameters.cardsLimit,
       cards_page: parameters.cardsPage,
       card_board: parameters.cardBoard,

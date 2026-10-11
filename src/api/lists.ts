@@ -22,7 +22,7 @@ export async function getList(client: Client, parameters: GetList, options?: Req
     url: `/lists/${parameters.id}`,
     method: 'GET',
     searchParams: {
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: TrelloListSchema,
     signal: options?.signal,

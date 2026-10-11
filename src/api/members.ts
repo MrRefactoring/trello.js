@@ -73,7 +73,9 @@ export async function getMember(client: Client, parameters: GetMember, options?:
       boards: parameters.boards,
       boardBackgrounds: parameters.boardBackgrounds,
       boardsInvited: parameters.boardsInvited,
-      boardsInvited_fields: parameters.boardsInvitedFields,
+      boardsInvited_fields: Array.isArray(parameters.boardsInvitedFields)
+        ? parameters.boardsInvitedFields.join(',')
+        : parameters.boardsInvitedFields,
       boardStars: parameters.boardStars,
       cards: parameters.cards,
       customBoardBackgrounds: parameters.customBoardBackgrounds,
@@ -355,7 +357,9 @@ export async function getMemberBoards(
       fields: parameters.fields,
       lists: parameters.lists,
       organization: parameters.organization,
-      organization_fields: parameters.organizationFields,
+      organization_fields: Array.isArray(parameters.organizationFields)
+        ? parameters.organizationFields.join(',')
+        : parameters.organizationFields,
     },
     schema: z.array(BoardSchema),
     signal: options?.signal,
@@ -652,7 +656,7 @@ export async function getMemberOrganizations(
     method: 'GET',
     searchParams: {
       filter: parameters.filter,
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
       paid_account: parameters.paidAccount,
     },
     schema: z.array(OrganizationSchema),
@@ -832,7 +836,7 @@ export async function getMemberNotificationChannelSettings(
   options?: RequestOptions,
 ): Promise<NotificationChannelSettings[]> {
   const config: SendRequestOptions<NotificationChannelSettings[]> = {
-    url: `/members/${parameters.id}/notificationsChannelSettings`,
+    url: `/members/${parameters.id}/notificationChannelSettings`,
     method: 'GET',
     schema: z.array(NotificationChannelSettingsSchema),
     signal: options?.signal,
@@ -848,7 +852,7 @@ export async function updateMemberNotificationChannelSettings(
   options?: RequestOptions,
 ): Promise<NotificationChannelSettings> {
   const config: SendRequestOptions<NotificationChannelSettings> = {
-    url: `/members/${parameters.id}/notificationsChannelSettings`,
+    url: `/members/${parameters.id}/notificationChannelSettings`,
     method: 'PUT',
     body: {
       channel: parameters.channel,
@@ -868,7 +872,7 @@ export async function getMemberNotificationChannelSetting(
   options?: RequestOptions,
 ): Promise<NotificationChannelSettings> {
   const config: SendRequestOptions<NotificationChannelSettings> = {
-    url: `/members/${parameters.id}/notificationsChannelSettings/${parameters.channel}`,
+    url: `/members/${parameters.id}/notificationChannelSettings/${parameters.channel}`,
     method: 'GET',
     schema: NotificationChannelSettingsSchema,
     signal: options?.signal,
@@ -884,7 +888,7 @@ export async function updateMemberNotificationChannelSetting(
   options?: RequestOptions,
 ): Promise<NotificationChannelSettings> {
   const config: SendRequestOptions<NotificationChannelSettings> = {
-    url: `/members/${parameters.id}/notificationsChannelSettings/${parameters.channel}`,
+    url: `/members/${parameters.id}/notificationChannelSettings/${parameters.channel}`,
     method: 'PUT',
     body: {
       blockedKeys: parameters.blockedKeys,
@@ -903,7 +907,7 @@ export async function updateMemberNotificationChannelBlockedKey(
   options?: RequestOptions,
 ): Promise<NotificationChannelSettings> {
   const config: SendRequestOptions<NotificationChannelSettings> = {
-    url: `/members/${parameters.id}/notificationsChannelSettings/${parameters.channel}/${parameters.blockedKeys}`,
+    url: `/members/${parameters.id}/notificationChannelSettings/${parameters.channel}/${parameters.blockedKeys}`,
     method: 'PUT',
     schema: NotificationChannelSettingsSchema,
     signal: options?.signal,

@@ -1,26 +1,29 @@
 # Trello.js changelog
 
-## v2.3.0 (2026-09-10)
+## v2.3.0 (2026-10-11)
 
-**Read this one if you touch `action.data` anywhere.** `Action` is now a union discriminated on `type`, so `data` carries the shape its type actually sends instead of `Record<string, any>`, and reading a field off it without narrowing on `type` first stops compiling. That is a compile break in a minor release, which is worth naming rather than burying: nothing changes at runtime, every response that parsed before still parses, and the fix is an `if` on `type`. If the deadline is today, `ActionUnknown` is exported and `(action as ActionUnknown).data.text` reads `any` again. It hands back exactly the blindness this release removes, so treat it as a bookmark rather than a fix.
+**Read this one if you touch `action.data` anywhere.** `Action` now combines twenty-nine typed action branches with an open fallback, `ActionUnknown`, whose `data` is `unknown`. Reading `action.data.text` directly stops compiling. This is a compile break in a minor release: validate an action with its exported branch schema, such as `ActionCommentCardSchema.parse(action)`, before reading its data. Checking `action.type` alone is insufficient because the fallback accepts any action type, including known ones. Casting to `ActionUnknown` keeps `data` unknown.
 
 ### Changed
 
-- **`Action` is a union discriminated on `type`.** Twenty-nine action types carry their own `data` shape, so `action.data.text` on a `commentCard` is a `string`, and reading a field that type does not have is a compile error instead of `undefined` at runtime.
+- **Twenty-nine action types have dedicated `data` schemas.** Parsing a comment with `ActionCommentCardSchema` returns an `ActionCommentCard`, whose `data.text` is a `string`. Reading a field that this branch does not have is a compile error.
 
   ```ts
+  import { ActionCommentCardSchema } from 'trello.js/models';
+
   const action = await trello.actions.getAction({ id });
 
   if (action.type === 'commentCard') {
-    console.log(action.data.text);
+    const comment = ActionCommentCardSchema.parse(action);
+    console.log(comment.data.text);
   }
   ```
 
-  A branched type's `data` no longer carries an index signature, so narrowing is the fix and the only honest one: on the other twenty-eight types the field genuinely is not there.
+  A branch's `data` has no index signature. Its schema checks both the action type and the data shape, and throws `ZodError` when either does not match. The open fallback has `type: string`, so an `if` on `type` cannot exclude it from the `Action` union; the branch schema provides the validated type.
 
   Each branch is an exported model and schema of its own, `ActionCommentCard` with `ActionCommentCardSchema` and so on for all twenty-nine, built over the shared `ActionDataBoard`, `ActionDataCard`, `ActionDataList`, `ActionDataOrganization`, `ActionDataMember`, `ActionDataChecklist`, `ActionDataCustomField`, `ActionDataAttachment` and `ActionDataCheckItem` shapes. The branched types are `addAttachmentToCard`, `addChecklistToCard`, `addMemberToBoard`, `addMemberToCard`, `addToOrganizationBoard`, `commentCard`, `convertToCardFromCheckItem`, `copyCard`, `copyCommentCard`, `createBoard`, `createCard`, `createCustomField`, `createList`, `createOrganization`, `deleteAttachmentFromCard`, `deleteCard`, `makeAdminOfBoard`, `makeNormalMemberOfBoard`, `moveCardFromBoard`, `moveCardToBoard`, `moveListFromBoard`, `moveListToBoard`, `removeChecklistFromCard`, `removeMemberFromCard`, `updateBoard`, `updateCard`, `updateCheckItemStateOnCard`, `updateList` and `updateOrganization`.
 
-  The union ends in an open branch, `ActionUnknown`, whose `data` stays `Record<string, any>`. An action type Trello ships next month parses, and so does an account whose history holds one of the many types this list does not name. The cost is that the schema can no longer report drift inside a branched type, so a live suite does that instead: it builds a workspace that produces most of the twenty-nine, reads the account history as well, parses every action against its own branch, and prints the types no branch covers without failing on them.
+  The union ends in an open branch, `ActionUnknown`, whose `data` is `unknown`. An action type Trello ships next month parses, and so does an account whose history holds one of the many types this list does not name. The fallback also accepts a known type whose data no longer matches its branch, so `ActionSchema` alone does not report that drift. Parsing with the branch schema does. A live suite builds a workspace that produces most of the twenty-nine types, reads the account history as well, parses every action against its own branch, and prints the types no branch covers without failing on them.
 
   The shapes are observations, not readings of the spec, which documents `data` as a free-form object. A key present in every sample of its type is required and everything else optional, across 249 actions from a purpose-built fixture and from account history. Adding or removing a label is not its own action type, for one: it arrives as `updateCard` carrying `old.idLabels`.
 
@@ -57,11 +60,14 @@
 
 ### Fixed
 
+- `Attachment` gained optional `aiSummary`, typed as `unknown` because only null has been observed. `BoardMyPrefs` gained optional boolean fields `aiGoogleGmailEnabled` and `showListGuide`, matching live responses. These new fields previously caused strict/audit mode to reject attachment and board preference responses.
+- `Card` gained optional `lastSummaryChangeEventAt`, parsed as `Date | null`. Trello now sends the field, which was stripped in normal mode and rejected in strict/audit mode. Null is preserved and date strings are coerced to `Date`. Only null has been observed on this account; a raw-response live check guards the expected null-or-ISO-string shape before coercion can hide a different runtime type.
+- **`TokenPermission.idModel` is a string.** Trello returns either `"*"` or a concrete resource ID. The spec describes a union of a Trello ID and `"*"`, but the generated open enum became a closed `"*"` enum in strict schema mode and rejected real token permissions. The schema now accepts both forms and checks that the value is a string.
 - **`fields` on six endpoints asked for a whole object instead of a list of field names.** `getBoardActions`, `getCardActions`, `getListActions`, `getMemberActions` and `getOrganizationActions` typed it as `Action`; `getBoardLabels` typed it as `Label`. Trello's spec is the source: it points those parameters at the object schema rather than at the matching `ActionFields` and `LabelFields` enums. All six now take the shape the other thirty-five `fields` parameters in this client already had, `string | string[]` widened with the documented names for autocomplete, so `fields: 'id,name'` and `fields: ['id', 'name']` both work. Code that passed an `Action` or a `Label` object stops compiling, which is the point: the request it produced was never one the API could answer.
 - **The documented values were missing from the suggestions on every parameter that lists them.** Eighty schemas paired an `openEnum` with a plain `z.string()` branch in the same union, and one model did the same. The branch accepted nothing the open enum did not already accept, and in the type a bare `string` swallowed the literal names next to it, so an editor offered nothing for `fields: '…'`, `filter: '…'` or `pos: '…'` — only the array form still suggested anything. The branch is gone. Any string is still accepted, which is the whole point of an open enum, and nothing that compiled before stops compiling.
 - `Organization` gained `trial`, the object Trello now returns on every workspace: `{ eligible: boolean, endDate: Date | null }`. It was silently stripped in normal mode and raised `ZodError: unrecognized_keys` in strict/audit mode (`pnpm audit:schemas`), breaking `getMemberOrganizations`. `endDate` reads as `null` on every workspace reachable from this account, so its populated shape is still unobserved.
 - `Prefs.invitations` is now `string` rather than `unknown`, which it was typed on the assumption the name implied a list. Trello sends `"members"` on every board reachable from this account, so the value was there all along and unusable without a cast.
-- **The published API reference did not build.** Every parameter and model type was expanded inline on the endpoint pages instead of linked, which put `docs/api` at 22 MB and pushed VitePress past an 8 GB heap. Types are references now, and `typedoc-plugin-zod` fills the pages they point at with the fields and descriptions the schemas already carried. The reference is 9.0 MB and builds under 2.4 GB. The fix behind it is a local patch to typedoc, which drops the written name of a type alias whenever that alias resolves through a conditional type.
+- **The published API reference did not build.** Every parameter and model type was expanded inline on the endpoint pages instead of linked, which put `docs/api` at 22 MB and pushed VitePress past an 8 GB heap. Types are references now, and `typedoc-plugin-zod` fills the pages they point at with the fields and descriptions the schemas already carried. The reference is 9.0 MB and builds with the same 8 GB heap setting as the Docs workflow. The fix behind it is a local patch to typedoc, which drops the written name of a type alias whenever that alias resolves through a conditional type.
 
 ### Deprecated
 

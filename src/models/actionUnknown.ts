@@ -6,7 +6,7 @@ import { MemberSchema } from '#/models/member';
 export const ActionUnknownSchema = apiObject({
   id: z.string(),
   idMemberCreator: z.string(),
-  data: z.record(z.string(), z.any()),
+  data: z.unknown(),
   type: z.string(),
   date: z.coerce.date(),
   limits: LimitsSchema.nullish(),

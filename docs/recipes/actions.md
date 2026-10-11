@@ -14,6 +14,23 @@ const action = await trello.actions.getAction({ id: actionId });
 console.log(action.type, action.date, action.memberCreator?.fullName);
 ```
 
+## Read typed action data
+
+`Action` includes an open fallback whose `data` is `unknown`. Checking `action.type` alone does not exclude that fallback. Validate a known action with its branch schema before reading its data:
+
+```ts
+import { ActionCommentCardSchema } from 'trello.js/models';
+
+const action = await trello.actions.getAction({ id: actionId });
+
+if (action.type === 'commentCard') {
+  const comment = ActionCommentCardSchema.parse(action);
+  console.log(comment.data.text);
+}
+```
+
+`parse` checks the action type and data shape, returns an `ActionCommentCard`, and throws `ZodError` if the payload does not match. Each of the twenty-nine typed branches exports its own model and schema. `ActionUnknown.data` remains `unknown` and requires validation before use.
+
 ## List actions on a board / card / list / member
 
 ```ts

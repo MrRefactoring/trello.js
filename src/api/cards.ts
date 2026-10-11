@@ -270,7 +270,7 @@ export async function getCardAttachment(
     url: `/cards/${parameters.id}/attachments/${parameters.idAttachment}`,
     method: 'GET',
     searchParams: {
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: AttachmentSchema,
     signal: options?.signal,

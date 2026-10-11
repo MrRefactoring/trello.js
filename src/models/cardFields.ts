@@ -1,7 +1,7 @@
 import type { z } from 'zod';
 import { openEnum } from '#/core';
-/** The fields on a Card. */
 
+/** The fields on a Card. */
 export const CardFieldsSchema = openEnum([
   'id',
   'address',
