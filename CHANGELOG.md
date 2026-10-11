@@ -60,6 +60,7 @@
 
 ### Fixed
 
+- **All field selectors accept a string or an array of strings.** `getCardAttachment.fields` previously accepted only an array, while twenty-eight other `fields` / `*Fields` parameters accepted only a string. All 104 selectors now accept both a comma-separated string and an array, retaining documented field-name suggestions. Boolean flags such as `customFields` are unchanged.
 - `Attachment` gained optional `aiSummary`, typed as `unknown` because only null has been observed. `BoardMyPrefs` gained optional boolean fields `aiGoogleGmailEnabled` and `showListGuide`, matching live responses. These new fields previously caused strict/audit mode to reject attachment and board preference responses.
 - `Card` gained optional `lastSummaryChangeEventAt`, parsed as `Date | null`. Trello now sends the field, which was stripped in normal mode and rejected in strict/audit mode. Null is preserved and date strings are coerced to `Date`. Only null has been observed on this account; a raw-response live check guards the expected null-or-ISO-string shape before coercion can hide a different runtime type.
 - **`TokenPermission.idModel` is a string.** Trello returns either `"*"` or a concrete resource ID. The spec describes a union of a Trello ID and `"*"`, but the generated open enum became a closed `"*"` enum in strict schema mode and rejected real token permissions. The schema now accepts both forms and checks that the value is a string.

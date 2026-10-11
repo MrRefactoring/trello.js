@@ -339,9 +339,11 @@ export async function getCardChecklists(
     method: 'GET',
     searchParams: {
       checkItems: parameters.checkItems,
-      checkItem_fields: parameters.checkItemFields,
+      checkItem_fields: Array.isArray(parameters.checkItemFields)
+        ? parameters.checkItemFields.join(',')
+        : parameters.checkItemFields,
       filter: parameters.filter,
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: z.array(ChecklistSchema),
     signal: options?.signal,

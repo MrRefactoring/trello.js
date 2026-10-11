@@ -43,7 +43,12 @@ export const GetEnterpriseSchema = z.object({
   /** One of: `none`, `normal`, `admins`, `owners`, `all` */
   members: openEnum(['none', 'normal', 'admins', 'owners', 'all']).optional(),
   /** One of: `avatarHash`, `fullName`, `initials`, `username` */
-  memberFields: openEnum(['avatarHash', 'fullName', 'initials', 'username']).optional(),
+  memberFields: z
+    .union([
+      openEnum(['avatarHash', 'fullName', 'initials', 'username']),
+      z.array(openEnum(['avatarHash', 'fullName', 'initials', 'username'])),
+    ])
+    .optional(),
   /**
    * Pass a SCIM-style query to filter members. This takes precedence over the all/normal/admins value of members. If
    * any of the member_* args are set, the member array will be paginated.
@@ -71,7 +76,7 @@ export const GetEnterpriseSchema = z.object({
   /** One of: `none`, `members`, `public`, `all` */
   organizations: openEnum(['none', 'members', 'public', 'all']).optional(),
   /** Any valid value that the [nested organization field resource]() accepts. */
-  organizationFields: z.string().optional(),
+  organizationFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** Whether or not to include paid account information in the returned workspace objects */
   organizationPaidAccounts: z.boolean().optional(),
   /** Comma-seperated list of: `me`, `normal`, `admin`, `active`, `deactivated` */

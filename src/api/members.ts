@@ -538,7 +538,7 @@ export async function getMemberCustomEmoji(
     url: `/members/${parameters.id}/customEmoji/${parameters.idEmoji}`,
     method: 'GET',
     searchParams: {
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: CustomEmojiSchema,
     signal: options?.signal,
@@ -592,7 +592,7 @@ export async function getMemberCustomSticker(
     url: `/members/${parameters.id}/customStickers/${parameters.idSticker}`,
     method: 'GET',
     searchParams: {
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: CustomStickerSchema,
     signal: options?.signal,

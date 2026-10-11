@@ -473,7 +473,9 @@ export async function updateBoardMembership(
     method: 'PUT',
     searchParams: {
       type: parameters.type,
-      member_fields: parameters.memberFields,
+      member_fields: Array.isArray(parameters.memberFields)
+        ? parameters.memberFields.join(',')
+        : parameters.memberFields,
     },
     schema: MembershipsSchema,
     signal: options?.signal,

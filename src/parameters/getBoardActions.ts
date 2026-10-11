@@ -31,7 +31,7 @@ export const GetBoardActionsSchema = z.object({
    * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) to
    * return.
    */
-  memberFields: z.string().optional(),
+  memberFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** Whether to return the memberCreator object for each action. */
   memberCreator: z.boolean().optional(),
   /**
@@ -39,7 +39,7 @@ export const GetBoardActionsSchema = z.object({
    * [member](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/#member-object) creator to
    * return
    */
-  memberCreatorFields: z.string().optional(),
+  memberCreatorFields: z.union([z.string(), z.array(z.string())]).optional(),
   /** The page of results for actions. */
   page: z.number().optional(),
   /** Whether to show reactions on comments or not. */

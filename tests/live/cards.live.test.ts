@@ -537,6 +537,21 @@ describe('Cards', () => {
       expect(attachment.id).toBe(attachmentId);
     });
 
+    it.each([
+      { fields: 'id,name' },
+      { fields: ['id', 'name'] },
+    ])('getCardAttachment selects fields with $fields', async ({ fields }) => {
+      const attachment = await trello.cards.getCardAttachment({
+        id: cardId,
+        idAttachment: attachmentId,
+        fields,
+      });
+
+      expect(attachment.id).toBe(attachmentId);
+      expect(attachment.name).toContain('attach');
+      expect(attachment.url).toBeUndefined();
+    });
+
     it('deleteCardAttachment removes the attachment', async () => {
       await expect(
         trello.cards.deleteCardAttachment({ id: cardId, idAttachment: attachmentId }),

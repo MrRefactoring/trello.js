@@ -6,17 +6,17 @@ export const GetEnterpriseMemberSchema = z.object({
   /** An ID of a member resource. */
   idMember: z.string(),
   /** A comma separated list of any valid values that the [nested member field resource]() accepts. */
-  fields: z.string().optional(),
+  fields: z.union([z.string(), z.array(z.string())]).optional(),
   /**
    * Any valid value that the [nested organization field
    * resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts.
    */
-  organizationFields: z.string().optional(),
+  organizationFields: z.union([z.string(), z.array(z.string())]).optional(),
   /**
    * Any valid value that the [nested board
    * resource](https://developer.atlassian.com/cloud/trello/guides/rest-api/nested-resources/) accepts.
    */
-  boardFields: z.string().optional(),
+  boardFields: z.union([z.string(), z.array(z.string())]).optional(),
 });
 
 export type GetEnterpriseMember = z.input<typeof GetEnterpriseMemberSchema>;

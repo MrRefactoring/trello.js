@@ -171,7 +171,7 @@ export async function getChecklistItems(
     method: 'GET',
     searchParams: {
       filter: parameters.filter,
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: z.array(CheckItemSchema),
     signal: options?.signal,
@@ -212,7 +212,7 @@ export async function getChecklistItem(
     url: `/checklists/${parameters.id}/checkItems/${parameters.idCheckItem}`,
     method: 'GET',
     searchParams: {
-      fields: parameters.fields,
+      fields: Array.isArray(parameters.fields) ? parameters.fields.join(',') : parameters.fields,
     },
     schema: CheckItemSchema,
     signal: options?.signal,

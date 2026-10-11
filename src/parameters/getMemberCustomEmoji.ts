@@ -7,7 +7,7 @@ export const GetMemberCustomEmojiSchema = z.object({
   /** The ID of the custom emoji */
   idEmoji: z.string(),
   /** `all` or a comma-separated list of `name`, `url` */
-  fields: openEnum(['name', 'url', 'all']).optional(),
+  fields: z.union([openEnum(['name', 'url', 'all']), z.array(openEnum(['name', 'url', 'all']))]).optional(),
 });
 
 export type GetMemberCustomEmoji = z.input<typeof GetMemberCustomEmojiSchema>;
