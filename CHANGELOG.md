@@ -1,5 +1,26 @@
 # Trello.js changelog
 
+## v2.3.1 (2026-11-19)
+
+### Fixed
+
+- `trello.batch.run` now keeps the query parameters for each request in the batch. [#58](https://github.com/MrRefactoring/trello.js/issues/58)
+
+### Changed
+
+You can use an array or a comma-separated string for these parameters.
+
+| Method | Parameters |
+| --- | --- |
+| `createCard` | `idMembers`, `idLabels`, `keepFromSource` |
+| `updateCard` | `idMembers`, `idLabels` |
+| `getMember` | `boardsInvited` |
+| `getMemberBoards` | `filter` |
+| `getOrganizationBoards` | `filter` |
+| `getOrganizationMemberships` | `filter` |
+| `markAllNotificationsRead` | `ids` |
+| `search` | `idBoards` |
+
 ## v2.3.0 (2026-10-11)
 
 **Read this one if you touch `action.data` anywhere.** `Action` now combines twenty-nine typed action branches with an open fallback, `ActionUnknown`, whose `data` is `unknown`. Reading `action.data.text` directly stops compiling. This is a compile break in a minor release: validate an action with its exported branch schema, such as `ActionCommentCardSchema.parse(action)`, before reading its data. Checking `action.type` alone is insufficient because the fallback accepts any action type, including known ones. Casting to `ActionUnknown` keeps `data` unknown.
