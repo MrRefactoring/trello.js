@@ -17,9 +17,9 @@ export const CreateCardSchema = z.object({
   /** The ID of the list the card should be created in */
   idList: z.string(),
   /** Comma-separated list of member IDs to add to the card */
-  idMembers: z.array(z.string()).optional(),
+  idMembers: z.union([z.array(z.string()).optional(), z.string(), z.array(z.string())]).optional(),
   /** Comma-separated list of label IDs to add to the card */
-  idLabels: z.array(z.string()).optional(),
+  idLabels: z.union([z.array(z.string()).optional(), z.string(), z.array(z.string())]).optional(),
   /** A URL starting with `http://` or `https://`. The URL will be attached to the card upon creation. */
   urlSource: z.string().optional(),
   fileSource: z.string().optional(),
@@ -31,19 +31,38 @@ export const CreateCardSchema = z.object({
    * If using `idCardSource` you can specify which properties to copy over. `all` or comma-separated list of:
    * `attachments,checklists,customFields,comments,due,start,labels,members,start,stickers`
    */
-  keepFromSource: openEnum([
-    'all',
-    'attachments',
-    'checklists',
-    'comments',
-    'customFields',
-    'due',
-    'start',
-    'labels',
-    'members',
-    'start',
-    'stickers',
-  ]).optional(),
+  keepFromSource: z
+    .union([
+      openEnum([
+        'all',
+        'attachments',
+        'checklists',
+        'comments',
+        'customFields',
+        'due',
+        'start',
+        'labels',
+        'members',
+        'start',
+        'stickers',
+      ]).optional(),
+      z.array(
+        openEnum([
+          'all',
+          'attachments',
+          'checklists',
+          'comments',
+          'customFields',
+          'due',
+          'start',
+          'labels',
+          'members',
+          'start',
+          'stickers',
+        ]),
+      ),
+    ])
+    .optional(),
   /** For use with/by the Map View */
   address: z.string().optional(),
   /** For use with/by the Map View */

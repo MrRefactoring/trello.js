@@ -5,7 +5,7 @@ export const SearchSchema = z.object({
   /** The search query with a length of 1 to 16384 characters */
   query: z.string().max(16834, 'query must be at most 16834 characters'),
   /** `mine` or a comma-separated list of Board IDs */
-  idBoards: openEnum(['mine']).optional(),
+  idBoards: z.union([openEnum(['mine']), z.array(openEnum(['mine']))]).optional(),
   /** A comma-separated list of Organization IDs */
   idOrganizations: z.union([z.string(), z.array(z.string())]).optional(),
   /** A comma-separated list of Card IDs */

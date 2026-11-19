@@ -175,7 +175,7 @@ export async function getOrganizationBoards(
     url: `/organizations/${parameters.id}/boards`,
     method: 'GET',
     searchParams: {
-      filter: parameters.filter,
+      filter: Array.isArray(parameters.filter) ? parameters.filter.join(',') : parameters.filter,
       fields: parameters.fields,
     },
     schema: z.array(BoardSchema),
@@ -265,7 +265,7 @@ export async function getOrganizationMemberships(
     url: `/organizations/${parameters.id}/memberships`,
     method: 'GET',
     searchParams: {
-      filter: parameters.filter,
+      filter: Array.isArray(parameters.filter) ? parameters.filter.join(',') : parameters.filter,
       member: parameters.member,
     },
     schema: z.array(MembershipsSchema),

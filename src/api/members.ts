@@ -72,7 +72,9 @@ export async function getMember(client: Client, parameters: GetMember, options?:
       actions: parameters.actions,
       boards: parameters.boards,
       boardBackgrounds: parameters.boardBackgrounds,
-      boardsInvited: parameters.boardsInvited,
+      boardsInvited: Array.isArray(parameters.boardsInvited)
+        ? parameters.boardsInvited.join(',')
+        : parameters.boardsInvited,
       boardsInvited_fields: Array.isArray(parameters.boardsInvitedFields)
         ? parameters.boardsInvitedFields.join(',')
         : parameters.boardsInvitedFields,
@@ -353,7 +355,7 @@ export async function getMemberBoards(
     url: `/members/${parameters.id}/boards`,
     method: 'GET',
     searchParams: {
-      filter: parameters.filter,
+      filter: Array.isArray(parameters.filter) ? parameters.filter.join(',') : parameters.filter,
       fields: parameters.fields,
       lists: parameters.lists,
       organization: parameters.organization,
