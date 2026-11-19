@@ -76,7 +76,9 @@ export async function createCard(client: Client, parameters: CreateCard, options
       fileSource: parameters.fileSource,
       mimeType: parameters.mimeType,
       idCardSource: parameters.idCardSource,
-      keepFromSource: parameters.keepFromSource,
+      keepFromSource: Array.isArray(parameters.keepFromSource)
+        ? parameters.keepFromSource.join(',')
+        : parameters.keepFromSource,
       address: parameters.address,
       locationName: parameters.locationName,
       coordinates: parameters.coordinates,
@@ -130,10 +132,10 @@ export async function updateCard(client: Client, parameters: UpdateCard, options
       name: parameters.name,
       desc: parameters.desc,
       closed: parameters.closed,
-      idMembers: parameters.idMembers,
+      idMembers: Array.isArray(parameters.idMembers) ? parameters.idMembers.join(',') : parameters.idMembers,
       idAttachmentCover: parameters.idAttachmentCover,
       idList: parameters.idList,
-      idLabels: parameters.idLabels,
+      idLabels: Array.isArray(parameters.idLabels) ? parameters.idLabels.join(',') : parameters.idLabels,
       idBoard: parameters.idBoard,
       pos: parameters.pos,
       due: parameters.due,

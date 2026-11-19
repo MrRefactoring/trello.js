@@ -1,4 +1,4 @@
-import type { Client, SendRequestOptions } from '#/core';
+import { buildUrl, type Client, type SendRequestOptions } from '#/core';
 import * as actionsNs from '#/api/actions';
 import * as boardsNs from '#/api/boards';
 import * as cardsNs from '#/api/cards';
@@ -64,7 +64,7 @@ export function createBatchRunner(realClient: Client) {
     const capturingClient: Client = {
       sendRequest<R>(opts: SendRequestOptions<R>): Promise<R> {
         const p = new Promise<R>((resolve, reject) => {
-          urls.push(opts.url);
+          urls.push(buildUrl(opts.url, opts.searchParams));
           resolvers.push({ resolve: resolve as (v: unknown) => void, reject });
         });
         innerPromises.push(p as Promise<unknown>);

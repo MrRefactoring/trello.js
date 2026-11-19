@@ -67,16 +67,22 @@ const BOARD_DATA_2 = { id: 'b2', name: 'Board 2', desc: '', closed: false, url: 
 describe('batch.run', () => {
   afterEach(() => vi.unstubAllGlobals());
 
-  it('sends a single batch request with comma-joined URLs', async () => {
-    vi.stubGlobal('fetch', mockFetch(200, [{ '200': BOARD_DATA }, { '200': BOARD_DATA_2 }]));
+  it('preserves query parameters in a single batch request with comma-joined URLs', async () => {
+    const fetchMock = mockFetch(200, [{ '200': BOARD_DATA }, { '200': BOARD_DATA_2 }]);
+    vi.stubGlobal('fetch', fetchMock);
     const client = createTrelloClient(BASE_CONFIG);
     await client.batch.run(b => [
-      b.boards.getBoard({ id: 'b1' }),
+      b.boards.getBoard({ id: 'b1', fields: ['name', 'url'], lists: 'open' }),
       b.boards.getBoard({ id: 'b2' }),
     ] as const);
-    const [url] = (fetch as ReturnType<typeof vi.fn>).mock.calls[0] as [string];
-    expect(url).toContain('/batch');
-    expect(url).toContain('urls=');
+    expect(fetchMock).toHaveBeenCalledOnce();
+    const [requestUrl] = fetchMock.mock.calls[0] as [string];
+    const url = new URL(requestUrl);
+    expect(url.pathname).toBe('/1/batch');
+    expect(url.searchParams.get('urls')?.split(',')).toEqual([
+      '/boards/b1?fields=name%2Curl&lists=open',
+      '/boards/b2',
+    ]);
   });
 
   it('resolves each promise with its batch result', async () => {

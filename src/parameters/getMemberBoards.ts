@@ -5,7 +5,12 @@ export const GetMemberBoardsSchema = z.object({
   /** The ID or username of the member */
   id: z.string(),
   /** `all` or a comma-separated list of: `closed`, `members`, `open`, `organization`, `public`, `starred` */
-  filter: openEnum(['all', 'closed', 'members', 'open', 'organization', 'public', 'starred']).optional(),
+  filter: z
+    .union([
+      openEnum(['all', 'closed', 'members', 'open', 'organization', 'public', 'starred']).optional(),
+      z.array(openEnum(['all', 'closed', 'members', 'open', 'organization', 'public', 'starred'])),
+    ])
+    .optional(),
   /**
    * `all` or a comma-separated list of board
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)

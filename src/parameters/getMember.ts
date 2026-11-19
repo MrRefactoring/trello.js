@@ -17,16 +17,12 @@ export const GetMemberSchema = z.object({
   /** One of: `all`, `custom`, `default`, `none`, `premium` */
   boardBackgrounds: openEnum(['all', 'custom', 'default', 'none', 'premium']).optional(),
   /** `all` or a comma-separated list of: closed, members, open, organization, pinned, public, starred, unpinned */
-  boardsInvited: openEnum([
-    'closed',
-    'members',
-    'open',
-    'organization',
-    'pinned',
-    'public',
-    'starred',
-    'unpinned',
-  ]).optional(),
+  boardsInvited: z
+    .union([
+      openEnum(['closed', 'members', 'open', 'organization', 'pinned', 'public', 'starred', 'unpinned']).optional(),
+      z.array(openEnum(['closed', 'members', 'open', 'organization', 'pinned', 'public', 'starred', 'unpinned'])),
+    ])
+    .optional(),
   /**
    * `all` or a comma-separated list of board
    * [fields](https://developer.atlassian.com/cloud/trello/guides/rest-api/object-definitions/)

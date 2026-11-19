@@ -5,7 +5,12 @@ export const GetOrganizationMembershipsSchema = z.object({
   /** The ID or name of the organization */
   id: z.string(),
   /** `all` or a comma-separated list of: `active`, `admin`, `deactivated`, `me`, `normal` */
-  filter: openEnum(['all', 'active', 'admin', 'deactivated', 'me', 'normal']).optional(),
+  filter: z
+    .union([
+      openEnum(['all', 'active', 'admin', 'deactivated', 'me', 'normal']).optional(),
+      z.array(openEnum(['all', 'active', 'admin', 'deactivated', 'me', 'normal'])),
+    ])
+    .optional(),
   /** Whether to include the Member objects with the Memberships */
   member: z.boolean().optional(),
 });

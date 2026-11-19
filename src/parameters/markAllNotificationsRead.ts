@@ -8,7 +8,7 @@ export const MarkAllNotificationsReadSchema = z.object({
    * will become useful as we add grouping of notifications to the UI, with a single button to mark all notifications in
    * the group as read/unread.
    */
-  ids: z.array(z.string()).optional(),
+  ids: z.union([z.array(z.string()).optional(), z.string()]).optional(),
 });
 
 export type MarkAllNotificationsRead = z.input<typeof MarkAllNotificationsReadSchema>;
